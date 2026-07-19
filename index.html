@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M5 — Interior Design, Renovation & Construction Studio in Miami</title>
+
 <meta name="description" content="M5 — interior design, turnkey renovation, decorative plaster & fit-out in Miami. One accountable team, transparent budgets, written warranty. EN · ES · UK.">
 <link rel="canonical" href="https://m5miami.com/">
 <meta property="og:type" content="website">
@@ -23,9 +24,7 @@
 "areaServed":["Miami","Miami Beach","Brickell","Edgewater","Coral Gables","Sunny Isles Beach","Wynwood"],
 "priceRange":"$$$","knowsLanguage":["en","es","uk"]}
 </script>
-<!-- GA4: создать property в analytics.google.com, вставить G-ID и раскомментировать -->
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
+
 <script>window.m5track=function(n,p){try{if(window.gtag)gtag('event',n,p||{})}catch(e){}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -202,7 +201,7 @@
   .rev-person img{width:48px;height:48px;border-radius:50%;object-fit:cover}
   .rev-person b{font-family:var(--serif);font-weight:700;font-size:16px;display:block}
   .rev-person span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#B9AE9A;text-transform:uppercase}
-  /* reviews rotator  */
+  /* reviews rotator (по референсу) */
   .rev-rotator{position:relative;margin:44px 0 10px;min-height:300px}
   @media(max-width:600px){.rev-rotator{min-height:400px}}
   .rev-slide{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;max-width:62ch}
@@ -284,10 +283,13 @@
   .ba-cap{margin-top:16px;font-family:var(--serif);font-size:20px;font-weight:600}
   @media(max-width:820px){.ba2-grid{grid-template-columns:1fr;gap:34px}}
 
-  /* editorial gallery — асимметричная сетка интерьеров  */
+  /* editorial gallery — «весь дом, один стандарт»: фото с подписями-пространствами */
   .gallery{background:var(--bone)}
-  .gal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:56px;align-items:start}
-  .gal-item{background:center/cover no-repeat;overflow:hidden}
+  .gal-sub{max-width:60ch;color:var(--soft);margin-top:20px;font-size:16.5px}
+  .gal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:52px;align-items:start}
+  .gal-item{position:relative;background:center/cover no-repeat;overflow:hidden}
+  .gal-item::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,15,0) 52%,rgba(20,18,15,.62) 100%)}
+  .gal-cap{position:absolute;left:15px;right:12px;bottom:14px;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#fff}
   .gal-item:nth-child(1){aspect-ratio:3/4.1;margin-top:38px}
   .gal-item:nth-child(2){aspect-ratio:3/4.7}
   .gal-item:nth-child(3){aspect-ratio:3/3.4;margin-top:72px}
@@ -295,7 +297,7 @@
   .gal-item:nth-child(5){aspect-ratio:3/4.1;margin-top:58px}
   @media(max-width:800px){.gal-grid{grid-template-columns:1fr 1fr;gap:14px}.gal-item{margin-top:0!important;aspect-ratio:3/3.6!important}}
 
-  /* scroll-reveal — плавное появление секций */
+  /* scroll-reveal — плавное появление секций по референсу */
   @media (prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
     .reveal.in{opacity:1;transform:none}
@@ -322,7 +324,6 @@
   </div>
 </header>
 
-<!-- HERO · тёмный, стиль . Фото: hero_dark.jpg (интерьер люкс, приглушённый) -->
 <section class="hero">
   <div class="hero-img" id="heroImg"></div>
   <div class="wrap">
@@ -339,7 +340,6 @@
   </div>
 </section>
 
-<!-- STATS -->
 <section class="stats">
   <div class="wrap">
     <div class="label" data-i18n="stats.label">Who we are</div>
@@ -353,7 +353,6 @@
   </div>
 </section>
 
-<!-- SERVICES · нумерованные карточки, 5 услуг M5 -->
 <section id="services" style="padding-top:20px">
   <div class="wrap">
     <div class="label" data-i18n="svc.label">M5 Services</div>
@@ -390,7 +389,6 @@
   </div>
 </section>
 
-<!-- DECORATIVE PLASTER · сигнатурный блок с мастером + призыв на бесплатный замер -->
 <section id="plaster" class="plaster">
   <div class="wrap">
     <div class="label" style="color:#D9B87C" data-i18n="plaster.label">Our signature</div>
@@ -419,7 +417,6 @@
   </div>
 </section>
 
-<!-- BEFORE & AFTER -->
 <section id="projects" class="ba">
   <div class="wrap">
     <div class="ba-head">
@@ -437,7 +434,6 @@
   </div>
 </section>
 
-<!-- TRANSFORMATIONS · before/after слайдеры (пары Nano, реальные кейсы позже) -->
 <section class="transform">
   <div class="wrap">
     <div class="label" data-i18n="ba.label">Transformations</div>
@@ -469,22 +465,21 @@
   </div>
 </section>
 
-<!-- EDITORIAL GALLERY · асимметричная сетка интерьеров -->
 <section class="gallery">
   <div class="wrap">
-    <div class="label" data-i18n="gal.label">Textures &amp; details</div>
-    <h2 style="margin-top:14px" data-i18n="gal.h2">The M5 look</h2>
+    <div class="label" data-i18n="gal.label">One standard · every room</div>
+    <h2 style="margin-top:14px" data-i18n="gal.h2">One team for your whole home</h2>
+    <p class="gal-sub" data-i18n="gal.sub">Living rooms, kitchens, signature plaster and bathrooms — designed, built and finished by one accountable team, to the same standard from the first room to the last.</p>
     <div class="gal-grid">
-      <div class="gal-item" style="background-image:url('img/svc1_interior.jpg')"></div>
-      <div class="gal-item" style="background-image:url('img/case2_kitchen.jpg')"></div>
-      <div class="gal-item" style="background-image:url('img/svc3_plaster.jpg')"></div>
-      <div class="gal-item" style="background-image:url('img/case5_loft.jpg')"></div>
-      <div class="gal-item" style="background-image:url('img/case3_bath.jpg')"></div>
+      <div class="gal-item" style="background-image:url('img/svc1_interior.jpg')"><span class="gal-cap" data-i18n="gal.c1">Living rooms</span></div>
+      <div class="gal-item" style="background-image:url('img/case2_kitchen.jpg')"><span class="gal-cap" data-i18n="gal.c2">Kitchens</span></div>
+      <div class="gal-item" style="background-image:url('img/ba_plaster_after.jpg')"><span class="gal-cap" data-i18n="gal.c3">Signature plaster</span></div>
+      <div class="gal-item" style="background-image:url('img/case5_loft.jpg')"><span class="gal-cap" data-i18n="gal.c4">Full-home interiors</span></div>
+      <div class="gal-item" style="background-image:url('img/case3_bath.jpg')"><span class="gal-cap" data-i18n="gal.c5">Spa bathrooms</span></div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER · -->
 <section class="cta">
   <div class="wrap">
     <h2 data-i18n="cta.h2">Get your estimate<br>in 48 hours.</h2>
@@ -496,7 +491,6 @@
   </div>
 </section>
 
-<!-- MONEY PROTECTION · дифференциатор M5 -->
 <section>
   <div class="wrap">
     <div class="label" data-i18n="money.label">Transparency</div>
@@ -512,7 +506,6 @@
   </div>
 </section>
 
-<!-- PROCESS · с описаниями -->
 <section class="proc">
   <div class="wrap">
     <div class="label" data-i18n="proc.label">Our process</div>
@@ -526,7 +519,6 @@
   </div>
 </section>
 
-<!-- TRUST / ABOUT -->
 <section id="about">
   <div class="wrap">
     <div class="label" data-i18n="about.label">About us</div>
@@ -548,10 +540,39 @@
   </div>
 </section>
 
-<!-- REVIEWS -->
-<!-- reviews: скрыто до реальных отзывов -->
+<section class="rev">
+  <div class="wrap">
+    <div class="label" data-i18n="rev.label">Client stories</div>
+    <h2 style="color:var(--bone);margin:14px 0 0" data-i18n="rev.h2">What clients say</h2>
+    <div class="rev-rotator">
+      <div class="rev-slide on">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote" data-i18n="rev1.p">The estimate we signed stayed unchanged to the very end. Everything was done beautifully, down to the smallest detail.</p>
+        <div class="rev-person"><div><b data-i18n="rev.client">Client</b><span data-i18n="rev1.s">Brickell · 2BR renovation</span></div></div>
+      </div>
+      <div class="rev-slide">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote" data-i18n="rev2.p">One team from design to handover. Weekly photo updates and no surprise costs — exactly what they promised.</p>
+        <div class="rev-person"><div><b data-i18n="rev.client">Client</b><span data-i18n="rev2.s">Coral Gables · full villa</span></div></div>
+      </div>
+      <div class="rev-slide">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote" data-i18n="rev3.p">The decorative plaster is stunning. They handled the condo board and permits so we didn't have to worry about anything.</p>
+        <div class="rev-person"><div><b data-i18n="rev.client">Client</b><span data-i18n="rev3.s">Edgewater · kitchen &amp; living</span></div></div>
+      </div>
+    </div>
+    <div class="rev-nav">
+      <span class="rev-count">01 / 03</span>
+      <div class="rev-dots">
+        <button class="rev-dot on" data-i="0" aria-label="1"></button>
+        <button class="rev-dot" data-i="1" aria-label="2"></button>
+        <button class="rev-dot" data-i="2" aria-label="3"></button>
+      </div>
+    </div>
+    <div class="rev-score"><span data-i18n="rev.score1">EXAMPLE LAYOUT · REAL GOOGLE REVIEWS FROM LAUNCH</span><span data-i18n="rev.score2">★ 5.0 GOOGLE</span></div>
+  </div>
+</section>
 
-<!-- FAQ -->
 <section id="faq" class="faq">
   <div class="wrap">
     <div class="label" data-i18n="faq.label">FAQ</div>
@@ -564,7 +585,6 @@
   </div>
 </section>
 
-<!-- LEAD FORM -->
 <section id="contact" class="lead-sec">
   <div class="wrap lead-box">
     <div>
@@ -589,8 +609,6 @@
   </div>
 </section>
 
-
-<!-- CASE MODAL -->
 <div class="cm-overlay" id="cmOverlay" onclick="closeCase()"></div>
 <div class="cm" id="caseModal" role="dialog" aria-modal="true">
   <div class="cm-hero" id="cmHero"><button class="cm-close" onclick="closeCase()" aria-label="Close">✕</button></div>
@@ -659,7 +677,7 @@
       "plaster.li1":"Venetian plaster · microcement · limewash · travertine effects","plaster.li2":"Own sample library & Wynwood showroom","plaster.li3":"Feature walls, ceilings, wet areas & full interiors",
       "plaster.ctab":"Free on-site measurement & estimate","plaster.ctas":"We come to you, measure the space and prepare a detailed quote — at no cost.","plaster.ctabtn":"Book a free estimate",
       "proj.label":"Selected work","proj.h2":"Recent Miami projects","proj.viewall":"View all projects",
-      "gal.label":"Textures & details","gal.h2":"The M5 look",
+      "gal.label":"One standard · every room","gal.h2":"One team for your whole home","gal.sub":"Living rooms, kitchens, signature plaster and bathrooms — designed, built and finished by one accountable team, to the same standard from the first room to the last.","gal.c1":"Living rooms","gal.c2":"Kitchens","gal.c3":"Signature plaster","gal.c4":"Full-home interiors","gal.c5":"Spa bathrooms",
       "ba.label":"Transformations","ba.h2":"Before & after","ba.before":"BEFORE","ba.after":"AFTER","ba.hint":"Drag to compare","ba.c1":"Decorative plaster · feature wall","ba.c2":"Turnkey apartment renovation",
       "case1.tag":"RENOVATION","case1.h4":"Brickell 2BR Residence","case1.m2":"12 WEEKS",
       "case2.tag":"KITCHEN","case2.h4":"Edgewater Kitchen","case2.m2":"8 WEEKS",
@@ -725,7 +743,7 @@
       "plaster.li1":"Estuco veneciano · microcemento · cal · efecto travertino","plaster.li2":"Muestrario propio y showroom en Wynwood","plaster.li3":"Paredes destacadas, techos, zonas húmedas e interiores completos",
       "plaster.ctab":"Medición y presupuesto gratis a domicilio","plaster.ctas":"Vamos a su espacio, tomamos medidas y preparamos un presupuesto detallado — sin coste.","plaster.ctabtn":"Reservar presupuesto gratis",
       "proj.label":"Trabajos seleccionados","proj.h2":"Proyectos recientes en Miami","proj.viewall":"Ver todos los proyectos",
-      "gal.label":"Texturas y detalles","gal.h2":"El estilo M5",
+      "gal.label":"Un estándar · cada estancia","gal.h2":"Un solo equipo para toda su casa","gal.sub":"Salones, cocinas, estuco decorativo y baños — diseñados, construidos y terminados por un solo equipo responsable, con el mismo estándar de la primera estancia a la última.","gal.c1":"Salones","gal.c2":"Cocinas","gal.c3":"Estuco decorativo","gal.c4":"Interiores completos","gal.c5":"Baños tipo spa",
       "ba.label":"Transformaciones","ba.h2":"Antes y después","ba.before":"ANTES","ba.after":"DESPUÉS","ba.hint":"Arrastra para comparar","ba.c1":"Estuco decorativo · pared destacada","ba.c2":"Reforma integral de apartamento",
       "case1.tag":"REFORMA","case1.h4":"Residencia de 2 dorm. en Brickell","case1.m2":"12 SEMANAS",
       "case2.tag":"COCINA","case2.h4":"Cocina en Edgewater","case2.m2":"8 SEMANAS",
@@ -791,7 +809,7 @@
       "plaster.li1":"Венеційська штукатурка · мікроцемент · вапно · ефект травертину","plaster.li2":"Власна бібліотека зразків і шоурум у Wynwood","plaster.li3":"Акцентні стіни, стелі, вологі зони та інтер'єри повністю",
       "plaster.ctab":"Безкоштовний замір і кошторис на об'єкті","plaster.ctas":"Приїдемо до вас, зробимо заміри й підготуємо докладний кошторис — безкоштовно.","plaster.ctabtn":"Замовити безкоштовний кошторис",
       "proj.label":"Вибрані роботи","proj.h2":"Нещодавні проєкти в Маямі","proj.viewall":"Усі проєкти",
-      "gal.label":"Текстури й деталі","gal.h2":"Стиль M5",
+      "gal.label":"Один стандарт · кожна кімната","gal.h2":"Одна команда на весь дім","gal.sub":"Вітальні, кухні, декоративна штукатурка та ванні — спроєктовано, збудовано й оздоблено однією відповідальною командою в єдиному стандарті від першої кімнати до останньої.","gal.c1":"Вітальні","gal.c2":"Кухні","gal.c3":"Декоративна штукатурка","gal.c4":"Інтер'єри під ключ","gal.c5":"Ванні кімнати",
       "ba.label":"Трансформації","ba.h2":"До та після","ba.before":"ДО","ba.after":"ПІСЛЯ","ba.hint":"Тягніть для порівняння","ba.c1":"Декоративна штукатурка · акцентна стіна","ba.c2":"Ремонт квартири під ключ",
       "case1.tag":"РЕМОНТ","case1.h4":"Резиденція 2 спальні, Brickell","case1.m2":"12 ТИЖНІВ",
       "case2.tag":"КУХНЯ","case2.h4":"Кухня, Edgewater","case2.m2":"8 ТИЖНІВ",
@@ -860,7 +878,7 @@
     applyLang(saved || (I18N[sys] ? sys : 'en'));
   })();
 
-  /* ===== scroll-reveal (появление секций при скролле,) ===== */
+  /* ===== scroll-reveal (появление секций при скролле, по референсу) ===== */
   (function(){
     if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var sel='.hero-badge,.hero h1,.hero-sub,.hero-ctas,.label,h2,.stats .lead,.stat,.svc,.plaster-txt,.plaster-img,.gal-item,.case,.m-item,.money-note,.p-row,.t-card,.tm,.rev-card,.rev-score,.faq details,.lead-box>div,.form';
