@@ -187,6 +187,19 @@
   .cm ul li{font-size:15px;color:var(--ink2);padding-left:18px;position:relative}
   .cm ul li:before{content:"—";position:absolute;left:0;color:var(--gold)}
   .cm-cta{margin-top:32px}
+  /* service modal (заявка + WhatsApp) */
+  .sm-desc{font-size:16px;line-height:1.7;color:var(--soft);margin:2px 0 20px}
+  .sm-list{list-style:none;display:grid;gap:9px;margin-bottom:22px}
+  .sm-list li{font-size:15px;color:var(--ink2);padding-left:18px;position:relative}
+  .sm-list li:before{content:"—";position:absolute;left:0;color:var(--gold)}
+  .sm-price{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .sm-form{display:grid;gap:12px}
+  .sm-form input{background:var(--white);border:1px solid var(--line);padding:15px 16px;font-size:15px;font-family:var(--sans);color:var(--ink)}
+  .sm-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+  .sm-actions .btn{flex:1;min-width:190px}
+  .btn-wa2{background:#25D366;color:#fff;border-color:#25D366}
+  .btn-wa2:hover{background:#1faa52;color:#fff}
+  .sm-mail{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--gold-d)}
   /* reviews */
   .rev{background:linear-gradient(rgba(18,16,13,.88),rgba(18,16,13,.93)),url('img/svc3_plaster.jpg') center/cover;color:var(--bone)}
   .rev .label{color:#D9B87C}
@@ -424,12 +437,12 @@
       <a class="btn btn-line" href="#" data-i18n="proj.viewall">View all projects</a>
     </div>
     <div class="ba-grid">
-      <div class="case" data-case="1" onclick="openCase(1)" style="background:url('img/case1_brickell.jpg') center/cover"><span class="tag" data-i18n="case1.tag">RENOVATION</span><div class="case-cap"><h4 data-i18n="case1.h4">Brickell 2BR Residence</h4><div class="case-meta"><span>900 SQ FT</span><span data-i18n="case1.m2">12 WEEKS</span></div></div></div>
-      <div class="case" data-case="2" onclick="openCase(2)" style="background:url('img/case2_kitchen.jpg') center/cover"><span class="tag" data-i18n="case2.tag">KITCHEN</span><div class="case-cap"><h4 data-i18n="case2.h4">Edgewater Kitchen</h4><div class="case-meta"><span>345 SQ FT</span><span data-i18n="case2.m2">8 WEEKS</span></div></div></div>
-      <div class="case" data-case="3" onclick="openCase(3)" style="background:url('img/case3_bath.jpg') center/cover"><span class="tag" data-i18n="case3.tag">BATHROOM</span><div class="case-cap"><h4 data-i18n="case3.h4">Sunny Isles Master Bath</h4><div class="case-meta"><span>195 SQ FT</span><span data-i18n="case3.m2">6 WEEKS</span></div></div></div>
-      <div class="case" data-case="4" onclick="openCase(4)" style="background:url('img/case4_villa.jpg') center/cover"><span class="tag" data-i18n="case4.tag">FULL VILLA</span><div class="case-cap"><h4 data-i18n="case4.h4">Coral Gables Villa</h4><div class="case-meta"><span>2,580 SQ FT</span><span data-i18n="case4.m2">16 WEEKS</span></div></div></div>
-      <div class="case" data-case="5" onclick="openCase(5)" style="background:url('img/case5_loft.jpg') center/cover"><span class="tag" data-i18n="case5.tag">FIT-OUT</span><div class="case-cap"><h4 data-i18n="case5.h4">South Beach Loft</h4><div class="case-meta"><span>1,030 SQ FT</span><span data-i18n="case5.m2">10 WEEKS</span></div></div></div>
-      <div class="case" data-case="6" onclick="openCase(6)" style="background:url('img/case6_showroom.jpg') center/cover"><span class="tag" data-i18n="case6.tag">OUR SHOWROOM</span><div class="case-cap"><h4 data-i18n="case6.h4">Wynwood Studio Showroom</h4><div class="case-meta"><span data-i18n="case6.m1">OUR OWN SPACE</span><span data-i18n="case6.m2">COME SEE IT</span></div></div></div>
+      <a class="case" href="projects/brickell-2br-residence.html" data-case="1" onclick="openCase(1)" style="background:url('img/case1_brickell.jpg') center/cover"><span class="tag" data-i18n="case1.tag">RENOVATION</span><div class="case-cap"><h4 data-i18n="case1.h4">Brickell 2BR Residence</h4><div class="case-meta"><span>900 SQ FT</span><span data-i18n="case1.m2">12 WEEKS</span></div></div></a>
+      <a class="case" href="projects/edgewater-kitchen.html" data-case="2" onclick="openCase(2)" style="background:url('img/case2_kitchen.jpg') center/cover"><span class="tag" data-i18n="case2.tag">KITCHEN</span><div class="case-cap"><h4 data-i18n="case2.h4">Edgewater Kitchen</h4><div class="case-meta"><span>345 SQ FT</span><span data-i18n="case2.m2">8 WEEKS</span></div></div></a>
+      <a class="case" href="projects/sunny-isles-master-bath.html" data-case="3" onclick="openCase(3)" style="background:url('img/case3_bath.jpg') center/cover"><span class="tag" data-i18n="case3.tag">BATHROOM</span><div class="case-cap"><h4 data-i18n="case3.h4">Sunny Isles Master Bath</h4><div class="case-meta"><span>195 SQ FT</span><span data-i18n="case3.m2">6 WEEKS</span></div></div></a>
+      <a class="case" href="projects/coral-gables-villa.html" data-case="4" onclick="openCase(4)" style="background:url('img/case4_villa.jpg') center/cover"><span class="tag" data-i18n="case4.tag">FULL VILLA</span><div class="case-cap"><h4 data-i18n="case4.h4">Coral Gables Villa</h4><div class="case-meta"><span>2,580 SQ FT</span><span data-i18n="case4.m2">16 WEEKS</span></div></div></a>
+      <a class="case" href="projects/south-beach-loft.html" data-case="5" onclick="openCase(5)" style="background:url('img/case5_loft.jpg') center/cover"><span class="tag" data-i18n="case5.tag">FIT-OUT</span><div class="case-cap"><h4 data-i18n="case5.h4">South Beach Loft</h4><div class="case-meta"><span>1,030 SQ FT</span><span data-i18n="case5.m2">10 WEEKS</span></div></div></a>
+      <a class="case" href="projects/wynwood-showroom.html" data-case="6" onclick="openCase(6)" style="background:url('img/case6_showroom.jpg') center/cover"><span class="tag" data-i18n="case6.tag">OUR SHOWROOM</span><div class="case-cap"><h4 data-i18n="case6.h4">Wynwood Studio Showroom</h4><div class="case-meta"><span data-i18n="case6.m1">OUR OWN SPACE</span><span data-i18n="case6.m2">COME SEE IT</span></div></div></a>
     </div>
   </div>
 </section>
@@ -486,7 +499,7 @@
     <div class="sub"><span data-i18n="cta.s1">FREE ON-SITE CONSULTATION</span><span data-i18n="cta.s2">RESPONSE WITHIN 1 HOUR</span></div>
     <div class="btns">
       <a class="btn btn-bone" href="#contact" data-i18n="cta.btn1">Get a quote</a>
-      <a class="btn btn-wa" href="https://wa.me/13050000000" data-i18n="cta.btn2">WhatsApp us</a>
+      <a class="btn btn-wa" href="https://wa.me/971585814215" data-i18n="cta.btn2">WhatsApp us</a>
     </div>
   </div>
 </section>
@@ -623,6 +636,28 @@
   </div>
 </div>
 
+<div class="cm-overlay" id="svcOverlay" onclick="closeService()"></div>
+<div class="cm" id="serviceModal" role="dialog" aria-modal="true">
+  <div class="cm-hero" id="smHero"><button class="cm-close" onclick="closeService()" aria-label="Close">✕</button></div>
+  <div class="cm-body">
+    <div class="cm-tag" id="smTag"></div>
+    <h3 id="smH"></h3>
+    <p class="sm-desc" id="smDesc"></p>
+    <ul class="sm-list" id="smList"></ul>
+    <div class="sm-price" id="smPrice"></div>
+    <h5 id="smFormH"></h5>
+    <form class="sm-form" onsubmit="return smSubmit(event)">
+      <input type="text" id="smName" placeholder="" required>
+      <input type="tel" id="smPhone" placeholder="" required>
+      <div class="sm-actions">
+        <button class="btn btn-ink" type="submit" id="smSend"></button>
+        <a class="btn btn-wa2" id="smWa" target="_blank" rel="noopener"></a>
+      </div>
+    </form>
+    <a class="sm-mail" id="smMail" href="mailto:hello@m5miami.com">hello@m5miami.com</a>
+  </div>
+</div>
+
 <footer>
   <div class="wrap">
     <div class="f-grid">
@@ -641,7 +676,7 @@
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/13050000000" aria-label="WhatsApp">
+<a class="wa-float" href="https://wa.me/971585814215" aria-label="WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.9.8 2 .1.1.1.3 0 .5s-.2.3-.3.5l-.5.6c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1l2 .9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg>
 </a>
 
@@ -1099,6 +1134,69 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCase()}
 
 document.querySelectorAll('a[href^="tel:"]').forEach(function(a){a.addEventListener('click',function(){if(window.m5track)m5track('phone_click')})});
 document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){a.addEventListener('click',function(){if(window.m5track)m5track('whatsapp_click')})});
+
+/* ===== service modal (описание + заявка + WhatsApp) ===== */
+var SM_WA='971585814215';
+var SM_L={
+  en:{tag:"M5 service",formH:"Request this service",name:"Your name",phone:"Phone / WhatsApp",send:"Send request",wa:"WhatsApp us",waText:"Hi M5! I'm interested in: ",thanks:"Thank you! We'll reply within the hour.",sig:"Signature"},
+  es:{tag:"Servicio M5",formH:"Solicitar este servicio",name:"Su nombre",phone:"Teléfono / WhatsApp",send:"Enviar solicitud",wa:"Escríbanos por WhatsApp",waText:"¡Hola M5! Me interesa: ",thanks:"¡Gracias! Le respondemos en menos de una hora.",sig:"Destacado"},
+  uk:{tag:"Послуга M5",formH:"Замовити цю послугу",name:"Ваше ім'я",phone:"Телефон / WhatsApp",send:"Надіслати запит",wa:"Написати у WhatsApp",waText:"Вітаю, M5! Мене цікавить: ",thanks:"Дякуємо! Відповімо протягом години.",sig:"Фірмове"}
+};
+var SM_DESC={
+  en:["A full design concept with photoreal 3D — you see the exact result, materials and furniture before anything is built.",
+      "Demolition to décor under one contract and one team — fixed scope, weekly photo updates and no surprise costs.",
+      "Venetian plaster, microcement and limewash by our own masters — architectural surfaces you see and touch in our showroom first.",
+      "Full-cycle construction with a licensed Florida GC — permits, HVHZ impact standards and homes built to last.",
+      "Independent on-site quality control at every stage — contractor oversight, inspections and punch-list, done right."],
+  es:["Un concepto de diseño completo con 3D fotorrealista — ve el resultado exacto, materiales y mobiliario antes de construir nada.",
+      "De la demolición al detalle con un solo contrato y un solo equipo — alcance cerrado, fotos semanales y sin costes sorpresa.",
+      "Estuco veneciano, microcemento y cal por nuestros propios maestros — superficies que ve y toca antes en nuestro showroom.",
+      "Construcción de ciclo completo con un GC de Florida con licencia — permisos, normas de impacto HVHZ y casas hechas para durar.",
+      "Control de calidad independiente en obra en cada etapa — supervisión de contratistas, inspecciones y punch-list, bien hecho."],
+  uk:["Повна концепція дизайну з фотореалістичним 3D — ви бачите точний результат, матеріали й меблі ще до початку робіт.",
+      "Від демонтажу до декору за одним договором і однією командою — фіксований обсяг, щотижневі фото й без несподіваних витрат.",
+      "Венеційська штукатурка, мікроцемент і вапно від наших майстрів — архітектурні поверхні, які ви бачите й торкаєтесь у шоурумі.",
+      "Повний цикл будівництва з ліцензованим GC Флориди — дозволи, стандарти HVHZ і будинки, збудовані надовго.",
+      "Незалежний контроль якості на об'єкті на кожному етапі — нагляд за підрядниками, інспекції та усунення недоліків."]
+};
+function smLang(){ var l=null; try{l=localStorage.getItem('m5lang')}catch(e){}; return SM_L[l]?l:'en'; }
+function openService(n){
+  var card=document.querySelectorAll('#services .svc')[n-1]; if(!card) return;
+  var l=smLang(), t=SM_L[l], d=SM_DESC[l][n-1]||'';
+  var h3=card.querySelector('h3'), h=h3?h3.textContent:'';
+  var lis=[].map.call(card.querySelectorAll('ul li'),function(x){return x.textContent;});
+  var pe=card.querySelector('.svc-price'), price=pe?pe.textContent:'';
+  var ph=card.querySelector('.svc-photo'), bg=ph?getComputedStyle(ph).backgroundImage:'';
+  document.getElementById('smHero').style.backgroundImage=bg;
+  document.getElementById('smTag').textContent=card.classList.contains('sig')?t.sig:t.tag;
+  document.getElementById('smH').textContent=h;
+  document.getElementById('smDesc').textContent=d;
+  document.getElementById('smList').innerHTML=lis.map(function(x){return '<li>'+x+'</li>';}).join('');
+  document.getElementById('smPrice').textContent=price;
+  document.getElementById('smFormH').textContent=t.formH;
+  var nm=document.getElementById('smName'), phn=document.getElementById('smPhone');
+  nm.placeholder=t.name; phn.placeholder=t.phone; nm.value=''; phn.value='';
+  document.getElementById('smSend').textContent=t.send;
+  var wa=document.getElementById('smWa'); wa.textContent=t.wa;
+  wa.href='https://wa.me/'+SM_WA+'?text='+encodeURIComponent(t.waText+h);
+  document.getElementById('svcOverlay').classList.add('on');
+  document.getElementById('serviceModal').classList.add('on');
+  document.body.style.overflow='hidden';
+  if(window.m5track)m5track('service_open',{service_id:n});
+}
+function closeService(){
+  document.getElementById('svcOverlay').classList.remove('on');
+  document.getElementById('serviceModal').classList.remove('on');
+  document.body.style.overflow='';
+}
+function smSubmit(e){ e.preventDefault(); if(window.m5track)m5track('service_lead'); alert(SM_L[smLang()].thanks); closeService(); return false; }
+document.querySelectorAll('#services .svc').forEach(function(card,i){
+  if(i>=5) return;
+  card.style.cursor='pointer'; card.setAttribute('role','button'); card.setAttribute('tabindex','0');
+  card.addEventListener('click',function(){ openService(i+1); });
+  card.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openService(i+1); } });
+});
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeService(); });
 </script>
 </body>
 </html>
