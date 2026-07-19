@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M5 — Interior Design, Renovation & Construction Studio in Miami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14120F; --ink2:#1E1B16; --bone:#F4EEE4; --bone2:#ECE4D4; --white:#FFFFFF;
+    --gold:#B0894F; --gold-d:#96703B; --soft:#5A5142; --soft-l:#B9AE9A; --line:#E0D6C2; --line-d:rgba(244,238,228,.16);
+    --serif:'Manrope',-apple-system,sans-serif; --sans:'Inter',-apple-system,sans-serif; --mono:'Space Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bone);color:var(--ink);line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+  .label{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-d)}
+  h2{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;font-size:clamp(34px,4.6vw,56px);line-height:1.08}
+  section{padding:96px 0}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:18px 34px;cursor:pointer;transition:.25s;border:1px solid transparent}
+  .btn-ink{background:var(--ink);color:var(--bone)}
+  .btn-ink:hover{background:var(--gold-d);color:#fff}
+  .btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+  .btn-line:hover{background:var(--ink);color:var(--bone)}
+  .btn-bone{background:var(--bone);color:var(--ink)}
+  .btn-bone:hover{background:var(--gold);color:#fff}
+  .btn-wa{border-color:#25D366;color:#1faa52}
+  .btn-wa:hover{background:#25D366;color:#fff}
+
+  /* header */
+  header{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:90;width:min(820px,94vw);
+    background:rgba(20,18,15,.82);backdrop-filter:blur(14px);color:var(--bone);border-radius:6px;padding:12px 18px;
+    display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--serif);font-weight:800;font-size:23px;letter-spacing:-.01em}
+  .logo span{color:var(--gold)}
+  .h-nav{display:flex;gap:26px;font-family:var(--mono);font-size:11.5px;letter-spacing:.18em}
+  .h-nav a{opacity:.75}.h-nav a:hover{opacity:1;color:#D9B87C}
+  .h-right{display:flex;align-items:center;gap:14px}
+  .lang-sw{display:flex;align-items:center;gap:2px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;padding-right:14px;border-right:1px solid rgba(244,238,228,.2)}
+  .lang-sw button{background:none;border:none;color:var(--bone);opacity:.6;cursor:pointer;padding:4px 4px;font:inherit;transition:.2s;line-height:1}
+  .lang-sw button:hover{opacity:.9}
+  .lang-sw button.on{opacity:1;color:#D9B87C;font-weight:700}
+  .h-cta{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;background:var(--bone);color:var(--ink);padding:10px 16px;border-radius:3px;white-space:nowrap}
+  .h-cta:hover{background:var(--gold);color:#fff}
+  @media(max-width:900px){.h-nav{display:none}}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+    background:radial-gradient(70% 60% at 70% 35%,#3A332A 0%,#241F19 55%,#14120F 100%);
+    color:var(--bone);padding:120px 0 0}
+  .hero-img{position:absolute;inset:0;z-index:0;
+    background:
+      linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
+      linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%),
+      url('img/hero.jpg') center/cover no-repeat;
+    opacity:1}
+  .hero .wrap{position:relative;z-index:2;padding-bottom:90px}
+  .hero-badge{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:#D9B87C;margin-bottom:26px}
+  .hero h1{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;font-size:clamp(36px,4.7vw,58px);line-height:1.12;max-width:18ch;text-wrap:balance}
+  .hero-sub{font-size:17px;color:#CFC5B2;margin:24px 0 40px;max-width:52ch;line-height:1.65}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-strip{position:relative;z-index:2;border-top:1px solid var(--line-d);margin-top:70px}
+  .hero-strip .wrap{display:flex;gap:44px;padding-top:22px;padding-bottom:26px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:#B9AE9A;flex-wrap:wrap}
+
+  /* stats */
+  .stats{background:var(--bone);text-align:center}
+  .stats .lead{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:500;max-width:30ch;margin:18px auto 64px;line-height:1.35}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{padding:44px 20px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat b{font-family:var(--serif);font-weight:800;letter-spacing:-.03em;font-size:64px;line-height:1;display:block}
+  .stat b i{font-style:normal;color:var(--gold)}
+  .stat span{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);display:block;margin-top:14px}
+  @media(max-width:900px){.stat-row{grid-template-columns:1fr 1fr}.stat{border-bottom:1px solid var(--line)}}
+
+  /* services */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px}
+  .svc{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column;min-height:520px;position:relative}
+  .svc-top{padding:30px 30px 0;flex:1}
+  .svc-num{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bone);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;margin-bottom:26px}
+  .svc h3{font-family:var(--serif);font-weight:700;font-size:29px;line-height:1.1;letter-spacing:-.02em;max-width:12ch}
+  .svc-photo{height:150px;margin:26px -1px 0;background:linear-gradient(160deg,#D8CBB2,#B9A98C)}
+  .svc ul{list-style:none}
+  .svc li{border-top:1px solid var(--line);padding:15px 30px;font-size:14.5px;color:var(--soft)}
+  .svc.sig{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+  .svc.sig .svc-num{background:var(--gold);color:#fff}
+  .svc.sig li{border-top:1px solid var(--line-d);color:#CFC5B2}
+  .svc.sig .svc-photo{background:linear-gradient(160deg,#8A7250,#4C3D2A)}
+  .sig-flag{position:absolute;top:30px;right:30px;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:#D9B87C;border:1px solid rgba(217,184,124,.5);padding:7px 12px}
+  @media(max-width:1000px){.svc-grid{grid-template-columns:1fr}}
+
+  /* before/after */
+  .ba{background:var(--bone2)}
+  .ba-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:56px}
+  .ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .case{position:relative;aspect-ratio:4/4.4;overflow:hidden;cursor:pointer;background:linear-gradient(180deg,#CDBFA6,#8F7E63)}
+  .case::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,15,0) 45%,rgba(20,18,15,.72) 100%)}
+  .case .after{position:absolute;inset:0;opacity:0;transition:.45s;background:linear-gradient(180deg,#6E5B41,#2E2418)}
+  .case:hover .after{opacity:1}
+  .tag{position:absolute;top:16px;left:16px;z-index:3;background:var(--ink);color:var(--bone);font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;padding:7px 12px}
+  .case:hover .tag{background:var(--gold-d)}
+  .case-cap{position:absolute;left:22px;right:22px;bottom:20px;z-index:3;color:#fff}
+  .case-cap h4{font-family:var(--serif);font-size:22px;font-weight:600}
+  .case-meta{display:flex;gap:18px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#D8CBB2;margin-top:8px}
+  @media(max-width:900px){.ba-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.ba-grid{grid-template-columns:1fr}}
+
+  /* CTA banner */
+  .cta{background:linear-gradient(rgba(18,16,13,.82),rgba(18,16,13,.90)),url('img/case4_villa.jpg') center 30%/cover;color:var(--bone);text-align:center;padding:110px 0}
+  .cta h2{color:var(--bone);font-size:clamp(38px,5vw,64px)}
+  .cta .sub{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#D9B87C;margin:26px 0 44px;display:flex;gap:34px;justify-content:center;flex-wrap:wrap}
+  .cta .btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+  /* money */
+  .money-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);background:var(--white);margin-top:64px}
+  .m-item{padding:38px 26px;border-right:1px solid var(--line)}
+  .m-item:last-child{border-right:none}
+  .m-item b{font-family:var(--serif);font-size:30px;color:var(--gold);display:block;margin-bottom:16px}
+  .m-item p{font-size:14.5px;color:var(--soft);line-height:1.55;font-weight:500}
+  .money-note{text-align:center;margin-top:44px}
+  @media(max-width:1000px){.money-grid{grid-template-columns:1fr;}.m-item{border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* process */
+  .proc{background:var(--bone2)}
+  .p-row{border-top:1px solid var(--line);display:grid;grid-template-columns:120px 1fr 1.4fr;gap:30px;padding:34px 0;align-items:baseline}
+  .p-row:last-child{border-bottom:1px solid var(--line)}
+  .p-num{font-family:var(--serif);font-size:40px;color:var(--gold)}
+  .p-name{font-family:var(--serif);font-size:28px;font-weight:600}
+  .p-desc{font-size:15.5px;color:var(--soft)}
+  .p-side{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--soft);margin-top:8px;text-transform:uppercase}
+  @media(max-width:800px){.p-row{grid-template-columns:60px 1fr}.p-desc{grid-column:2}}
+
+  /* trust */
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:60px}
+  .t-card{background:var(--white);border:1px solid var(--line);padding:40px 34px}
+  .t-card h4{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:12px}
+  .t-card .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d)}
+  .t-card p{font-size:14.5px;color:var(--soft);margin-top:14px}
+  @media(max-width:900px){.trust-grid{grid-template-columns:1fr}}
+
+  /* reviews */
+  .rev{background:linear-gradient(rgba(18,16,13,.88),rgba(18,16,13,.93)),url('img/svc3_plaster.jpg') center/cover;color:var(--bone)}
+  .rev .label{color:#D9B87C}
+  .rev-q{font-family:var(--serif);font-weight:600;font-size:clamp(24px,2.8vw,34px);line-height:1.45;letter-spacing:-.01em;max-width:34ch;margin:44px 0 34px}
+  .rev-a{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#B9AE9A}
+  .rev-score{margin-top:56px;padding-top:26px;border-top:1px solid var(--line-d);font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:#D9B87C;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:44px 0 40px}
+  .rev-card{background:rgba(244,238,228,.05);border:1px solid var(--line-d);padding:32px 30px;display:flex;flex-direction:column}
+  .stars{color:#E0B368;font-size:17px;letter-spacing:3px;margin-bottom:18px}
+  .rev-card p{font-size:16px;color:#E4DDCE;line-height:1.6;flex:1}
+  .rev-person{display:flex;align-items:center;gap:14px;margin-top:24px;padding-top:22px;border-top:1px solid var(--line-d)}
+  .rev-person img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+  .rev-person b{font-family:var(--serif);font-weight:700;font-size:16px;display:block}
+  .rev-person span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#B9AE9A;text-transform:uppercase}
+
+  /* plaster signature feature */
+  .plaster{background:var(--ink);color:var(--bone)}
+  .plaster-box{display:grid;grid-template-columns:1fr 1.05fr;gap:0;align-items:stretch;background:var(--ink2);border:1px solid var(--line-d)}
+  .plaster-img{position:relative;min-height:560px;background:center/cover no-repeat}
+  .plaster-flag{position:absolute;top:26px;left:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:#0f0d0a;background:var(--gold);padding:8px 14px}
+  .plaster-txt{padding:64px 58px;display:flex;flex-direction:column;justify-content:center}
+  .plaster-txt h2{color:var(--bone)}
+  .plaster-txt .lead2{font-size:17px;color:#CFC5B2;line-height:1.7;margin:22px 0 30px;max-width:46ch}
+  .plaster-list{list-style:none;margin-bottom:34px}
+  .plaster-list li{font-size:15px;color:#CFC5B2;padding:12px 0;border-top:1px solid var(--line-d);display:flex;gap:12px}
+  .plaster-list li::before{content:'—';color:var(--gold)}
+  .plaster-cta{background:rgba(176,137,79,.12);border:1px solid rgba(217,184,124,.4);padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+  .plaster-cta div b{font-family:var(--serif);font-weight:700;font-size:19px;display:block}
+  .plaster-cta div span{font-size:14px;color:#CFC5B2}
+  @media(max-width:900px){.plaster-box{grid-template-columns:1fr}.plaster-img{min-height:340px}.plaster-txt{padding:44px 34px}}
+
+  /* team */
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+  .tm{background:var(--white);border:1px solid var(--line)}
+  .tm-photo{aspect-ratio:3/3.5;background:center/cover no-repeat}
+  .tm-info{padding:22px 22px 26px}
+  .tm-info b{font-family:var(--serif);font-weight:700;font-size:20px;display:block}
+  .tm-info span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);display:block;margin-top:6px}
+  @media(max-width:900px){.team-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.rev-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}}
+
+  /* FAQ */
+  .faq details{border-top:1px solid var(--line);padding:26px 6px}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{font-family:var(--serif);font-size:23px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  .faq summary::after{content:'+';font-family:var(--mono);color:var(--gold);font-size:24px}
+  .faq details[open] summary::after{content:'–'}
+  .faq p{margin-top:16px;color:var(--soft);font-size:15.5px;max-width:75ch}
+
+  /* form */
+  .lead-sec{background:var(--bone2)}
+  .lead-box{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
+  .lead-box h2{max-width:14ch}
+  .lead-feats{display:flex;gap:30px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d);margin-top:26px;flex-wrap:wrap}
+  .form{display:grid;gap:14px}
+  .form input,.form select{background:var(--white);border:1px solid var(--line);padding:17px 18px;font-size:15px;font-family:var(--sans);color:var(--ink)}
+  .form button{margin-top:8px}
+  @media(max-width:900px){.lead-box{grid-template-columns:1fr;gap:40px}}
+
+  /* footer */
+  footer{background:var(--ink);color:#B9AE9A;padding:80px 0 40px;font-size:14px}
+  .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:44px;margin-bottom:60px}
+  .f-grid h5{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:#D9B87C;text-transform:uppercase;margin-bottom:18px}
+  .f-grid ul{list-style:none;display:grid;gap:10px}
+  .f-grid a:hover{color:var(--bone)}
+  .f-about{max-width:30ch;line-height:1.7;margin-top:16px}
+  .f-bottom{border-top:1px solid var(--line-d);padding-top:26px;display:flex;justify-content:space-between;gap:16px;font-size:12.5px;flex-wrap:wrap}
+  @media(max-width:900px){.f-grid{grid-template-columns:1fr 1fr}}
+
+  .wa-float{position:fixed;right:26px;bottom:26px;z-index:95;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.28);transition:.25s}
+  .wa-float:hover{transform:translateY(-3px)}
+
+  /* scroll-reveal — плавное появление секций */
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
+    .reveal.in{opacity:1;transform:none}
+    .case,.svc,.t-card,.tm,.rev-card,.m-item{transition:transform .35s ease,box-shadow .35s ease,background .25s,color .25s,opacity .8s cubic-bezier(.22,.61,.36,1)}
+    .case:hover,.tm:hover{transform:translateY(-4px)}
+    .t-card:hover,.rev-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(20,18,15,.10)}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">M<span>5</span></a>
+  <nav class="h-nav">
+    <a href="#services" data-i18n="nav.services">SERVICES</a><a href="#projects" data-i18n="nav.portfolio">PORTFOLIO</a><a href="#plaster" data-i18n="nav.plaster">PLASTER</a><a href="#about" data-i18n="nav.about">ABOUT</a><a href="#faq" data-i18n="nav.faq">FAQ</a>
+  </nav>
+  <div class="h-right">
+    <div class="lang-sw" role="group" aria-label="Language">
+      <button type="button" data-l="en" onclick="applyLang('en')">EN</button>
+      <button type="button" data-l="es" onclick="applyLang('es')">ES</button>
+      <button type="button" data-l="uk" onclick="applyLang('uk')">UK</button>
+    </div>
+    <a class="h-cta" href="#contact" data-i18n="nav.quote">GET A QUOTE</a>
+  </div>
+</header>
+
+<!-- HERO · тёмный. Фото: hero_dark.jpg (интерьер люкс, приглушённый) -->
+<section class="hero">
+  <div class="hero-img" id="heroImg"></div>
+  <div class="wrap">
+    <div class="hero-badge" data-i18n="hero.badge">FULLY INSURED · MIAMI-DADE PERMITS</div>
+    <h1 data-i18n="hero.h1">We design, build and renovate homes in Miami.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Interior design · turnkey renovation · decorative plaster · fit-out — designed and built by one accountable team.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-bone" href="#contact" data-i18n="hero.cta1">Get a quote</a>
+      <a class="btn btn-line" style="border-color:rgba(244,238,228,.4);color:var(--bone)" href="#projects" data-i18n="hero.cta2">See our works</a>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="wrap"><span data-i18n="hero.strip1">FULL CYCLE STUDIO</span><span data-i18n="hero.strip2">DESIGN · BUILD · DEVELOP</span><span data-i18n="hero.strip3">ENGLISH · SPANISH · UKRAINIAN</span></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="label" data-i18n="stats.label">Who we are</div>
+    <p class="lead" data-i18n="stats.lead">An international studio, now building in Miami — one accountable team from first sketch to final handover.</p>
+    <div class="stat-row">
+      <div class="stat"><b>14</b><span data-i18n="stats.s1">years of experience</span></div>
+      <div class="stat"><b>15</b><span data-i18n="stats.s2">projects delivered in the USA</span></div>
+      <div class="stat"><b>2<i>yr</i></b><span data-i18n="stats.s3">written warranty on every build</span></div>
+      <div class="stat"><b>100<i>%</i></b><span data-i18n="stats.s4">insured · permits pulled</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES · нумерованные карточки, 5 услуг M5 -->
+<section id="services" style="padding-top:20px">
+  <div class="wrap">
+    <div class="label" data-i18n="svc.label">M5 Services</div>
+    <h2 style="margin-top:14px" data-i18n="svc.h2">What we do</h2>
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="svc-top"><div class="svc-num">1</div><h3 data-i18n="svc1.h3">Interior Design &amp; 3D</h3><div class="svc-photo" style="background:url('img/svc1_interior.jpg') center/cover"></div></div>
+        <ul><li data-i18n="svc1.li1">Concept, layouts &amp; space planning</li><li data-i18n="svc1.li2">Photoreal 3D visualization</li><li data-i18n="svc1.li3">Materials, FF&amp;E &amp; documentation</li></ul>
+      </div>
+      <div class="svc">
+        <div class="svc-top"><div class="svc-num">2</div><h3 data-i18n="svc2.h3">Turnkey Renovation</h3><div class="svc-photo" style="background:url('img/svc2_renovation.jpg') center/cover"></div></div>
+        <ul><li data-i18n="svc2.li1">Demolition to décor — one contract</li><li data-i18n="svc2.li2">Fixed-scope pricing, no surprise costs</li><li data-i18n="svc2.li3">Weekly photo updates through handover</li></ul>
+      </div>
+      <div class="svc sig">
+        <span class="sig-flag" data-i18n="svc.sig">SIGNATURE</span>
+        <div class="svc-top"><div class="svc-num">3</div><h3 data-i18n="svc3.h3">Decorative Plaster</h3><div class="svc-photo" style="background:url('img/svc3_plaster.jpg') center/cover"></div></div>
+        <ul><li data-i18n="svc3.li1">Venetian plaster · microcement · limewash</li><li data-i18n="svc3.li2">Own sample library &amp; showroom</li><li data-i18n="svc3.li3">Architectural surfaces, not finishes</li></ul>
+      </div>
+      <div class="svc">
+        <div class="svc-top"><div class="svc-num">4</div><h3 data-i18n="svc4.h3">Construction &amp; Villas</h3><div class="svc-photo" style="background:url('img/svc4_construction.jpg') center/cover"></div></div>
+        <ul><li data-i18n="svc4.li1">Full-cycle build with licensed FL GC</li><li data-i18n="svc4.li2">Permits &amp; HVHZ impact standards</li><li data-i18n="svc4.li3">Homes and villas as we grow</li></ul>
+      </div>
+      <div class="svc">
+        <div class="svc-top"><div class="svc-num">5</div><h3 data-i18n="svc5.h3">Technical Supervision</h3><div class="svc-photo" style="background:url('img/svc5_supervision.jpg') center/cover"></div></div>
+        <ul><li data-i18n="svc5.li1">On-site quality checks at every stage</li><li data-i18n="svc5.li2">Contractor &amp; subcontractor oversight</li><li data-i18n="svc5.li3">Inspections &amp; punch-list control</li></ul>
+      </div>
+      <div class="svc" style="background:var(--bone2);display:flex;align-items:center;justify-content:center;min-height:520px">
+        <div style="text-align:center;padding:30px">
+          <div class="label" style="margin-bottom:18px" data-i18n="svc.cta.label">Not sure where to start?</div>
+          <a class="btn btn-ink" href="#contact" data-i18n="svc.cta.btn">Free consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECORATIVE PLASTER · сигнатурный блок с мастером + призыв на бесплатный замер -->
+<section id="plaster" class="plaster">
+  <div class="wrap">
+    <div class="label" style="color:#D9B87C" data-i18n="plaster.label">Our signature</div>
+    <h2 style="color:var(--bone);margin:14px 0 40px" data-i18n="plaster.h2">Decorative plaster, done by our own masters</h2>
+    <div class="plaster-box">
+      <div class="plaster-img" style="background-image:url('img/plaster_master.jpg')">
+        <span class="plaster-flag" data-i18n="plaster.flag">M5 IN-HOUSE MASTER</span>
+      </div>
+      <div class="plaster-txt">
+        <h2 style="font-size:clamp(28px,3vw,40px)" data-i18n="plaster.h2b">Architectural surfaces,<br>not just a finish.</h2>
+        <p class="lead2" data-i18n="plaster.lead">Venetian plaster, microcement and limewash applied by our own trained team — not a random subcontractor. We keep a full sample library and our own showroom, so you see and touch the exact texture before we start.</p>
+        <ul class="plaster-list">
+          <li data-i18n="plaster.li1">Venetian plaster · microcement · limewash · travertine effects</li>
+          <li data-i18n="plaster.li2">Own sample library &amp; Wynwood showroom</li>
+          <li data-i18n="plaster.li3">Feature walls, ceilings, wet areas &amp; full interiors</li>
+        </ul>
+        <div class="plaster-cta">
+          <div>
+            <b data-i18n="plaster.ctab">Free on-site measurement &amp; estimate</b>
+            <span data-i18n="plaster.ctas">We come to you, measure the space and prepare a detailed quote — at no cost.</span>
+          </div>
+          <a class="btn btn-bone" href="#contact" data-i18n="plaster.ctabtn">Book a free estimate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE & AFTER -->
+<section id="projects" class="ba">
+  <div class="wrap">
+    <div class="ba-head">
+      <div><div class="label" data-i18n="proj.label">Selected work</div><h2 style="margin-top:14px" data-i18n="proj.h2">Recent Miami projects</h2></div>
+      <a class="btn btn-line" href="#" data-i18n="proj.viewall">View all projects</a>
+    </div>
+    <div class="ba-grid">
+      <div class="case" style="background:url('img/case1_brickell.jpg') center/cover"><span class="tag" data-i18n="case1.tag">RENOVATION</span><div class="case-cap"><h4 data-i18n="case1.h4">Brickell 2BR Residence</h4><div class="case-meta"><span>84 M²</span><span data-i18n="case1.m2">12 WEEKS</span></div></div></div>
+      <div class="case" style="background:url('img/case2_kitchen.jpg') center/cover"><span class="tag" data-i18n="case2.tag">KITCHEN</span><div class="case-cap"><h4 data-i18n="case2.h4">Edgewater Kitchen</h4><div class="case-meta"><span>32 M²</span><span data-i18n="case2.m2">8 WEEKS</span></div></div></div>
+      <div class="case" style="background:url('img/case3_bath.jpg') center/cover"><span class="tag" data-i18n="case3.tag">BATHROOM</span><div class="case-cap"><h4 data-i18n="case3.h4">Sunny Isles Master Bath</h4><div class="case-meta"><span>18 M²</span><span data-i18n="case3.m2">6 WEEKS</span></div></div></div>
+      <div class="case" style="background:url('img/case4_villa.jpg') center/cover"><span class="tag" data-i18n="case4.tag">FULL VILLA</span><div class="case-cap"><h4 data-i18n="case4.h4">Coral Gables Villa</h4><div class="case-meta"><span>240 M²</span><span data-i18n="case4.m2">16 WEEKS</span></div></div></div>
+      <div class="case" style="background:url('img/case5_loft.jpg') center/cover"><span class="tag" data-i18n="case5.tag">FIT-OUT</span><div class="case-cap"><h4 data-i18n="case5.h4">South Beach Loft</h4><div class="case-meta"><span>96 M²</span><span data-i18n="case5.m2">10 WEEKS</span></div></div></div>
+      <div class="case" style="background:url('img/case6_showroom.jpg') center/cover"><span class="tag" data-i18n="case6.tag">OUR SHOWROOM</span><div class="case-cap"><h4 data-i18n="case6.h4">Wynwood Studio Showroom</h4><div class="case-meta"><span data-i18n="case6.m1">OUR OWN SPACE</span><span data-i18n="case6.m2">COME SEE IT</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER · -->
+<section class="cta">
+  <div class="wrap">
+    <h2 data-i18n="cta.h2">Get your estimate<br>in 48 hours.</h2>
+    <div class="sub"><span data-i18n="cta.s1">FREE ON-SITE CONSULTATION</span><span data-i18n="cta.s2">RESPONSE WITHIN 1 HOUR</span></div>
+    <div class="btns">
+      <a class="btn btn-bone" href="#contact" data-i18n="cta.btn1">Get a quote</a>
+      <a class="btn btn-wa" href="https://wa.me/13050000000" data-i18n="cta.btn2">WhatsApp us</a>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY PROTECTION · дифференциатор M5 -->
+<section>
+  <div class="wrap">
+    <div class="label" data-i18n="money.label">Transparency</div>
+    <h2 style="margin-top:14px" data-i18n="money.h2">How we protect your money</h2>
+    <div class="money-grid">
+      <div class="m-item"><b>01</b><p data-i18n="money.m1">Itemized estimate before the contract</p></div>
+      <div class="m-item"><b>02</b><p data-i18n="money.m2">Payments by milestone, no large upfront</p></div>
+      <div class="m-item"><b>03</b><p data-i18n="money.m3">Change orders signed by you first</p></div>
+      <div class="m-item"><b>04</b><p data-i18n="money.m4">Lien releases from every subcontractor</p></div>
+      <div class="m-item"><b>05</b><p data-i18n="money.m5">Contract &amp; insurance on request</p></div>
+    </div>
+    <div class="money-note"><a class="btn btn-ink" href="#contact" data-i18n="money.btn">2-Year Written Warranty</a></div>
+  </div>
+</section>
+
+<!-- PROCESS · с описаниями -->
+<section class="proc">
+  <div class="wrap">
+    <div class="label" data-i18n="proc.label">Our process</div>
+    <h2 style="margin:14px 0 60px" data-i18n="proc.h2">Clear process. Straight timelines.</h2>
+    <div class="p-row"><div class="p-num">01</div><div><div class="p-name" data-i18n="proc1.name">Consultation &amp; needs</div><div class="p-side" data-i18n="proc1.side">≈ 1 week</div></div><p class="p-desc" data-i18n="proc1.desc">We meet at your space, discuss goals and budget, and agree on what success looks like — before any contract.</p></div>
+    <div class="p-row"><div class="p-num">02</div><div><div class="p-name" data-i18n="proc2.name">Concept</div><div class="p-side" data-i18n="proc2.side">≈ 1–2 weeks</div></div><p class="p-desc" data-i18n="proc2.desc">Several conceptual directions to choose the style, layout logic and budget frame of the project.</p></div>
+    <div class="p-row"><div class="p-num">03</div><div><div class="p-name" data-i18n="proc3.name">Design &amp; 3D</div><div class="p-side" data-i18n="proc3.side">≈ 2–3 weeks</div></div><p class="p-desc" data-i18n="proc3.desc">Layouts, photoreal 3D, materials and an itemized budget — you sign knowing exactly what you get.</p></div>
+    <div class="p-row"><div class="p-num">04</div><div><div class="p-name" data-i18n="proc4.name">Build &amp; fit-out</div><div class="p-side" data-i18n="proc4.side">per estimate</div></div><p class="p-desc" data-i18n="proc4.desc">Permitted, insured construction with weekly photo updates. Milestone payments — never a large upfront.</p></div>
+    <div class="p-row"><div class="p-num">05</div><div><div class="p-name" data-i18n="proc5.name">Handover &amp; warranty</div><div class="p-side" data-i18n="proc5.side">final week</div></div><p class="p-desc" data-i18n="proc5.desc">Final cleaning, walkthrough and a 2-year written warranty backed by the same team that built it.</p></div>
+    <p style="text-align:center;margin-top:50px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--soft)" data-i18n="proc.foot">PROJECTS FROM ~$200K · TYPICAL TIMELINE UP TO 3 MONTHS</p>
+  </div>
+</section>
+
+<!-- TRUST / ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="label" data-i18n="about.label">About us</div>
+    <h2 style="margin-top:14px" data-i18n="about.h2">Why clients trust M5</h2>
+    <p style="max-width:66ch;color:var(--soft);margin-top:24px;font-size:16.5px" data-i18n="about.p">Behind M5 is one in-house team — designers, project managers and site crews — not a chain of anonymous subcontractors. We put our names and faces to every project, from first sketch to final handover.</p>
+    <div class="trust-grid">
+      <div class="t-card"><div class="mono" data-i18n="trust1.mono">Insured</div><h4 data-i18n="trust1.h4">General Liability from day one</h4><p data-i18n="trust1.p">Certificates available on request — for you and your building.</p></div>
+      <div class="t-card"><div class="mono" data-i18n="trust2.mono">Permitted</div><h4 data-i18n="trust2.h4">Built with licensed FL GC</h4><p data-i18n="trust2.p">Miami-Dade permits &amp; HVHZ impact standards on every build.</p></div>
+      <div class="t-card"><div class="mono" data-i18n="trust3.mono">Local</div><h4 data-i18n="trust3.h4">English &amp; Spanish team</h4><p data-i18n="trust3.p">Condo-board experience: COI, elevator bookings, noise hours.</p></div>
+    </div>
+    <div class="label" style="margin-top:80px" data-i18n="about.plabel">The people behind M5</div>
+    <h2 style="margin:14px 0 0" data-i18n="about.ph2">Names and faces on every project</h2>
+    <div class="team-grid">
+      <div class="tm"><div class="tm-photo" style="background-image:url('img/team1.jpg')"></div><div class="tm-info"><b data-i18n="team1.b">Project Director</b><span data-i18n="team1.s">Build &amp; site oversight</span></div></div>
+      <div class="tm"><div class="tm-photo" style="background-image:url('img/team2.jpg')"></div><div class="tm-info"><b data-i18n="team2.b">Lead Designer</b><span data-i18n="team2.s">Interior design &amp; 3D</span></div></div>
+      <div class="tm"><div class="tm-photo" style="background-image:url('img/team3.jpg')"></div><div class="tm-info"><b data-i18n="team3.b">Site Supervisor</b><span data-i18n="team3.s">Quality &amp; timelines</span></div></div>
+      <div class="tm"><div class="tm-photo" style="background-image:url('img/team4.jpg')"></div><div class="tm-info"><b data-i18n="team4.b">Client Manager</b><span data-i18n="team4.s">Your point of contact</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="rev">
+  <div class="wrap">
+    <div class="label" data-i18n="rev.label">Client stories</div>
+    <h2 style="color:var(--bone);margin:14px 0 0" data-i18n="rev.h2">What clients say</h2>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p data-i18n="rev1.p">The estimate we signed stayed unchanged to the very end. Everything was done beautifully, down to the smallest detail.</p>
+        <div class="rev-person"><img src="img/rev1.jpg" alt=""><div><b>Elena R.</b><span data-i18n="rev1.s">Brickell · 2BR renovation</span></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p data-i18n="rev2.p">One team from design to handover. Weekly photo updates and no surprise costs — exactly what they promised.</p>
+        <div class="rev-person"><img src="img/rev2.jpg" alt=""><div><b>Michael T.</b><span data-i18n="rev2.s">Coral Gables · full villa</span></div></div>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p data-i18n="rev3.p">The decorative plaster is stunning. They handled the condo board and permits so we didn't have to worry about anything.</p>
+        <div class="rev-person"><img src="img/rev3.jpg" alt=""><div><b>Carla M.</b><span data-i18n="rev3.s">Edgewater · kitchen &amp; living</span></div></div>
+      </div>
+    </div>
+    <div class="rev-score"><span data-i18n="rev.score1">EXAMPLE LAYOUT · REAL GOOGLE REVIEWS FROM LAUNCH</span><span data-i18n="rev.score2">★ 5.0 GOOGLE</span></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="label" data-i18n="faq.label">FAQ</div>
+    <h2 style="margin:14px 0 56px" data-i18n="faq.h2">Questions we hear first</h2>
+    <details open><summary data-i18n="faq1.q">Do you subcontract the work?</summary><p data-i18n="faq1.a">Design, project management and supervision are in-house. Construction runs with our licensed Florida GC partner and our own vetted crews — one team accountable for the result.</p></details>
+    <details><summary data-i18n="faq2.q">Who handles permits and the condo board?</summary><p data-i18n="faq2.a">We do. Miami-Dade permits, COI for your building, elevator bookings and noise-hour rules are part of our process — not your problem.</p></details>
+    <details><summary data-i18n="faq3.q">How much does a project cost?</summary><p data-i18n="faq3.a">Turnkey design + renovation projects start around $200K. You get a clear itemized budget before you sign — and it doesn't change without a change order you approve first.</p></details>
+    <details><summary data-i18n="faq4.q">How long does it take?</summary><p data-i18n="faq4.a">A typical renovation takes up to 3 months. You get the timeline upfront and weekly photo updates all the way through.</p></details>
+    <details><summary data-i18n="faq5.q">Is there a warranty?</summary><p data-i18n="faq5.a">Yes — a 2-year written warranty. Any issue after handover is fixed by the same team that built it.</p></details>
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section id="contact" class="lead-sec">
+  <div class="wrap lead-box">
+    <div>
+      <div class="label" data-i18n="lead.label">Get a quote</div>
+      <h2 style="margin-top:14px" data-i18n="lead.h2">Tell us about your space.</h2>
+      <div class="lead-feats"><span data-i18n="lead.f1">FREE CONSULTATION</span><span data-i18n="lead.f2">SITE VISIT INCLUDED</span><span data-i18n="lead.f3">REPLY WITHIN 1 HOUR</span></div>
+    </div>
+    <form class="form" onsubmit="alert('Prototype: form is not connected yet.');return false;">
+      <input type="text" placeholder="Your name" data-i18n-ph="form.name" required>
+      <input type="tel" placeholder="Phone / WhatsApp" data-i18n-ph="form.phone" required>
+      <input type="text" placeholder="Neighborhood / building" data-i18n-ph="form.hood">
+      <select><option data-i18n="form.budget">Project budget</option><option>$100–200K</option><option>$200–400K</option><option>$400K+</option><option data-i18n="form.b4">Not sure yet</option></select>
+      <button class="btn btn-ink" type="submit" data-i18n="form.btn">Send request</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a class="logo" style="color:var(--bone)" href="#">M<span>5</span></a>
+        <p class="f-about" data-i18n="foot.about">Interior design, renovation and construction studio — one accountable team, from first sketch to final handover. Miami, Florida.</p>
+      </div>
+      <div><h5 data-i18n="foot.h1">Main pages</h5><ul><li><a href="#" data-i18n="foot.l1">Home</a></li><li><a href="#about" data-i18n="foot.l2">About us</a></li><li><a href="#projects" data-i18n="foot.l3">Portfolio</a></li><li><a href="#contact" data-i18n="foot.l4">Contact</a></li></ul></div>
+      <div><h5 data-i18n="foot.h2">Services</h5><ul><li><a href="#services" data-i18n="svc1.h3">Interior Design &amp; 3D</a></li><li><a href="#services" data-i18n="svc2.h3">Turnkey Renovation</a></li><li><a href="#plaster" data-i18n="svc3.h3">Decorative Plaster</a></li><li><a href="#services" data-i18n="svc4.h3">Construction &amp; Villas</a></li><li><a href="#services" data-i18n="svc5.h3">Technical Supervision</a></li></ul></div>
+      <div><h5 data-i18n="foot.h3">Contact us</h5><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="tel:+13050000000">+1 (305) 000-0000</a></li><li>Wynwood, Miami, FL</li></ul></div>
+    </div>
+    <div class="f-bottom">
+      <span data-i18n="foot.copy">© M5 · 2026 · Fully insured · all work permitted with licensed Florida contractors</span>
+      <span>EN · ES · UK</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/13050000000" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.9.8 2 .1.1.1.3 0 .5s-.2.3-.3.5l-.5.6c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1l2 .9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg>
+</a>
+
+<script>
+  /* hero preload */
+  (function(){var i=new Image();i.onload=function(){document.getElementById('heroImg').classList.add('loaded')};i.src='img/hero.jpg'})();
+
+  /* ===== i18n · EN / ES / UK =====
+     Добавляешь текст на сайт → заводишь ключ здесь во всех трёх языках и вешаешь data-i18n="ключ"
+     (или data-i18n-ph="ключ" для placeholder) на элемент. Всё остальное происходит само. */
+  var I18N = {
+    en: {
+      "meta.title":"M5 — Interior Design, Renovation & Construction Studio in Miami",
+      "nav.services":"SERVICES","nav.portfolio":"PORTFOLIO","nav.plaster":"PLASTER","nav.about":"ABOUT","nav.faq":"FAQ","nav.quote":"GET A QUOTE",
+      "hero.badge":"FULLY INSURED · MIAMI-DADE PERMITS",
+      "hero.h1":"We design, build and renovate homes in Miami.",
+      "hero.sub":"Interior design · turnkey renovation · decorative plaster · fit-out — designed and built by one accountable team.",
+      "hero.cta1":"Get a quote","hero.cta2":"See our works",
+      "hero.strip1":"FULL CYCLE STUDIO","hero.strip2":"DESIGN · BUILD · DEVELOP","hero.strip3":"ENGLISH · SPANISH · UKRAINIAN",
+      "stats.label":"Who we are",
+      "stats.lead":"An international studio, now building in Miami — one accountable team from first sketch to final handover.",
+      "stats.s1":"years of experience","stats.s2":"projects delivered in the USA","stats.s3":"written warranty on every build","stats.s4":"insured · permits pulled",
+      "svc.label":"M5 Services","svc.h2":"What we do",
+      "svc1.h3":"Interior Design & 3D","svc1.li1":"Concept, layouts & space planning","svc1.li2":"Photoreal 3D visualization","svc1.li3":"Materials, FF&E & documentation",
+      "svc2.h3":"Turnkey Renovation","svc2.li1":"Demolition to décor — one contract","svc2.li2":"Fixed-scope pricing, no surprise costs","svc2.li3":"Weekly photo updates through handover",
+      "svc.sig":"SIGNATURE","svc3.h3":"Decorative Plaster","svc3.li1":"Venetian plaster · microcement · limewash","svc3.li2":"Own sample library & showroom","svc3.li3":"Architectural surfaces, not finishes",
+      "svc4.h3":"Construction & Villas","svc4.li1":"Full-cycle build with licensed FL GC","svc4.li2":"Permits & HVHZ impact standards","svc4.li3":"Homes and villas as we grow",
+      "svc5.h3":"Technical Supervision","svc5.li1":"On-site quality checks at every stage","svc5.li2":"Contractor & subcontractor oversight","svc5.li3":"Inspections & punch-list control",
+      "svc.cta.label":"Not sure where to start?","svc.cta.btn":"Free consultation",
+      "plaster.label":"Our signature","plaster.h2":"Decorative plaster, done by our own masters","plaster.flag":"M5 IN-HOUSE MASTER",
+      "plaster.h2b":"Architectural surfaces,<br>not just a finish.",
+      "plaster.lead":"Venetian plaster, microcement and limewash applied by our own trained team — not a random subcontractor. We keep a full sample library and our own showroom, so you see and touch the exact texture before we start.",
+      "plaster.li1":"Venetian plaster · microcement · limewash · travertine effects","plaster.li2":"Own sample library & Wynwood showroom","plaster.li3":"Feature walls, ceilings, wet areas & full interiors",
+      "plaster.ctab":"Free on-site measurement & estimate","plaster.ctas":"We come to you, measure the space and prepare a detailed quote — at no cost.","plaster.ctabtn":"Book a free estimate",
+      "proj.label":"Selected work","proj.h2":"Recent Miami projects","proj.viewall":"View all projects",
+      "case1.tag":"RENOVATION","case1.h4":"Brickell 2BR Residence","case1.m2":"12 WEEKS",
+      "case2.tag":"KITCHEN","case2.h4":"Edgewater Kitchen","case2.m2":"8 WEEKS",
+      "case3.tag":"BATHROOM","case3.h4":"Sunny Isles Master Bath","case3.m2":"6 WEEKS",
+      "case4.tag":"FULL VILLA","case4.h4":"Coral Gables Villa","case4.m2":"16 WEEKS",
+      "case5.tag":"FIT-OUT","case5.h4":"South Beach Loft","case5.m2":"10 WEEKS",
+      "case6.tag":"OUR SHOWROOM","case6.h4":"Wynwood Studio Showroom","case6.m1":"OUR OWN SPACE","case6.m2":"COME SEE IT",
+      "cta.h2":"Get your estimate<br>in 48 hours.","cta.s1":"FREE ON-SITE CONSULTATION","cta.s2":"RESPONSE WITHIN 1 HOUR","cta.btn1":"Get a quote","cta.btn2":"WhatsApp us",
+      "money.label":"Transparency","money.h2":"How we protect your money",
+      "money.m1":"Itemized estimate before the contract","money.m2":"Payments by milestone, no large upfront","money.m3":"Change orders signed by you first","money.m4":"Lien releases from every subcontractor","money.m5":"Contract & insurance on request","money.btn":"2-Year Written Warranty",
+      "proc.label":"Our process","proc.h2":"Clear process. Straight timelines.",
+      "proc1.name":"Consultation & needs","proc1.side":"≈ 1 week","proc1.desc":"We meet at your space, discuss goals and budget, and agree on what success looks like — before any contract.",
+      "proc2.name":"Concept","proc2.side":"≈ 1–2 weeks","proc2.desc":"Several conceptual directions to choose the style, layout logic and budget frame of the project.",
+      "proc3.name":"Design & 3D","proc3.side":"≈ 2–3 weeks","proc3.desc":"Layouts, photoreal 3D, materials and an itemized budget — you sign knowing exactly what you get.",
+      "proc4.name":"Build & fit-out","proc4.side":"per estimate","proc4.desc":"Permitted, insured construction with weekly photo updates. Milestone payments — never a large upfront.",
+      "proc5.name":"Handover & warranty","proc5.side":"final week","proc5.desc":"Final cleaning, walkthrough and a 2-year written warranty backed by the same team that built it.",
+      "proc.foot":"PROJECTS FROM ~$200K · TYPICAL TIMELINE UP TO 3 MONTHS",
+      "about.label":"About us","about.h2":"Why clients trust M5",
+      "about.p":"Behind M5 is one in-house team — designers, project managers and site crews — not a chain of anonymous subcontractors. We put our names and faces to every project, from first sketch to final handover.",
+      "trust1.mono":"Insured","trust1.h4":"General Liability from day one","trust1.p":"Certificates available on request — for you and your building.",
+      "trust2.mono":"Permitted","trust2.h4":"Built with licensed FL GC","trust2.p":"Miami-Dade permits & HVHZ impact standards on every build.",
+      "trust3.mono":"Local","trust3.h4":"English & Spanish team","trust3.p":"Condo-board experience: COI, elevator bookings, noise hours.",
+      "about.plabel":"The people behind M5","about.ph2":"Names and faces on every project",
+      "team1.b":"Project Director","team1.s":"Build & site oversight","team2.b":"Lead Designer","team2.s":"Interior design & 3D","team3.b":"Site Supervisor","team3.s":"Quality & timelines","team4.b":"Client Manager","team4.s":"Your point of contact",
+      "rev.label":"Client stories","rev.h2":"What clients say",
+      "rev1.p":"The estimate we signed stayed unchanged to the very end. Everything was done beautifully, down to the smallest detail.","rev1.s":"Brickell · 2BR renovation",
+      "rev2.p":"One team from design to handover. Weekly photo updates and no surprise costs — exactly what they promised.","rev2.s":"Coral Gables · full villa",
+      "rev3.p":"The decorative plaster is stunning. They handled the condo board and permits so we didn't have to worry about anything.","rev3.s":"Edgewater · kitchen & living",
+      "rev.score1":"EXAMPLE LAYOUT · REAL GOOGLE REVIEWS FROM LAUNCH","rev.score2":"★ 5.0 GOOGLE",
+      "faq.label":"FAQ","faq.h2":"Questions we hear first",
+      "faq1.q":"Do you subcontract the work?","faq1.a":"Design, project management and supervision are in-house. Construction runs with our licensed Florida GC partner and our own vetted crews — one team accountable for the result.",
+      "faq2.q":"Who handles permits and the condo board?","faq2.a":"We do. Miami-Dade permits, COI for your building, elevator bookings and noise-hour rules are part of our process — not your problem.",
+      "faq3.q":"How much does a project cost?","faq3.a":"Turnkey design + renovation projects start around $200K. You get a clear itemized budget before you sign — and it doesn't change without a change order you approve first.",
+      "faq4.q":"How long does it take?","faq4.a":"A typical renovation takes up to 3 months. You get the timeline upfront and weekly photo updates all the way through.",
+      "faq5.q":"Is there a warranty?","faq5.a":"Yes — a 2-year written warranty. Any issue after handover is fixed by the same team that built it.",
+      "lead.label":"Get a quote","lead.h2":"Tell us about your space.","lead.f1":"FREE CONSULTATION","lead.f2":"SITE VISIT INCLUDED","lead.f3":"REPLY WITHIN 1 HOUR",
+      "form.name":"Your name","form.phone":"Phone / WhatsApp","form.hood":"Neighborhood / building","form.budget":"Project budget","form.b4":"Not sure yet","form.btn":"Send request",
+      "foot.about":"Interior design, renovation and construction studio — one accountable team, from first sketch to final handover. Miami, Florida.",
+      "foot.h1":"Main pages","foot.l1":"Home","foot.l2":"About us","foot.l3":"Portfolio","foot.l4":"Contact","foot.h2":"Services","foot.h3":"Contact us",
+      "foot.copy":"© M5 · 2026 · Fully insured · all work permitted with licensed Florida contractors"
+    },
+    es: {
+      "meta.title":"M5 — Estudio de diseño interior, reformas y construcción en Miami",
+      "nav.services":"SERVICIOS","nav.portfolio":"PROYECTOS","nav.plaster":"ESTUCO","nav.about":"NOSOTROS","nav.faq":"FAQ","nav.quote":"PEDIR PRESUPUESTO",
+      "hero.badge":"TOTALMENTE ASEGURADOS · PERMISOS MIAMI-DADE",
+      "hero.h1":"Diseñamos, construimos y renovamos hogares en Miami.",
+      "hero.sub":"Diseño interior · reforma llave en mano · estuco decorativo · fit-out — diseñado y construido por un solo equipo responsable.",
+      "hero.cta1":"Pedir presupuesto","hero.cta2":"Ver nuestros trabajos",
+      "hero.strip1":"ESTUDIO DE CICLO COMPLETO","hero.strip2":"DISEÑO · CONSTRUCCIÓN · DESARROLLO","hero.strip3":"INGLÉS · ESPAÑOL · UCRANIANO",
+      "stats.label":"Quiénes somos",
+      "stats.lead":"Un estudio internacional, ahora construyendo en Miami — un solo equipo responsable, del primer boceto a la entrega final.",
+      "stats.s1":"años de experiencia","stats.s2":"proyectos entregados en EE. UU.","stats.s3":"de garantía escrita en cada obra","stats.s4":"asegurados · con permisos",
+      "svc.label":"Servicios M5","svc.h2":"Qué hacemos",
+      "svc1.h3":"Diseño interior y 3D","svc1.li1":"Concepto, distribución y planificación del espacio","svc1.li2":"Visualización 3D fotorrealista","svc1.li3":"Materiales, mobiliario y documentación",
+      "svc2.h3":"Reforma llave en mano","svc2.li1":"De la demolición al detalle — un solo contrato","svc2.li2":"Precio cerrado, sin costes sorpresa","svc2.li3":"Fotos de avance cada semana hasta la entrega",
+      "svc.sig":"DESTACADO","svc3.h3":"Estuco decorativo","svc3.li1":"Estuco veneciano · microcemento · cal","svc3.li2":"Muestrario y showroom propios","svc3.li3":"Superficies arquitectónicas, no simples acabados",
+      "svc4.h3":"Construcción y villas","svc4.li1":"Obra de ciclo completo con GC de Florida con licencia","svc4.li2":"Permisos y normas de impacto HVHZ","svc4.li3":"Casas y villas a medida que crecemos",
+      "svc5.h3":"Supervisión técnica","svc5.li1":"Control de calidad en obra en cada etapa","svc5.li2":"Supervisión de contratistas y subcontratistas","svc5.li3":"Inspecciones y control de punch-list",
+      "svc.cta.label":"¿No sabe por dónde empezar?","svc.cta.btn":"Consulta gratuita",
+      "plaster.label":"Nuestra especialidad","plaster.h2":"Estuco decorativo, aplicado por nuestros propios maestros","plaster.flag":"MAESTRO PROPIO M5",
+      "plaster.h2b":"Superficies arquitectónicas,<br>no un simple acabado.",
+      "plaster.lead":"Estuco veneciano, microcemento y cal aplicados por nuestro propio equipo formado — no un subcontratista cualquiera. Mantenemos un muestrario completo y showroom propio, para que vea y toque la textura exacta antes de empezar.",
+      "plaster.li1":"Estuco veneciano · microcemento · cal · efecto travertino","plaster.li2":"Muestrario propio y showroom en Wynwood","plaster.li3":"Paredes destacadas, techos, zonas húmedas e interiores completos",
+      "plaster.ctab":"Medición y presupuesto gratis a domicilio","plaster.ctas":"Vamos a su espacio, tomamos medidas y preparamos un presupuesto detallado — sin coste.","plaster.ctabtn":"Reservar presupuesto gratis",
+      "proj.label":"Trabajos seleccionados","proj.h2":"Proyectos recientes en Miami","proj.viewall":"Ver todos los proyectos",
+      "case1.tag":"REFORMA","case1.h4":"Residencia de 2 dorm. en Brickell","case1.m2":"12 SEMANAS",
+      "case2.tag":"COCINA","case2.h4":"Cocina en Edgewater","case2.m2":"8 SEMANAS",
+      "case3.tag":"BAÑO","case3.h4":"Baño principal en Sunny Isles","case3.m2":"6 SEMANAS",
+      "case4.tag":"VILLA COMPLETA","case4.h4":"Villa en Coral Gables","case4.m2":"16 SEMANAS",
+      "case5.tag":"FIT-OUT","case5.h4":"Loft en South Beach","case5.m2":"10 SEMANAS",
+      "case6.tag":"NUESTRO SHOWROOM","case6.h4":"Showroom del estudio en Wynwood","case6.m1":"ESPACIO PROPIO","case6.m2":"VENGA A VERLO",
+      "cta.h2":"Reciba su presupuesto<br>en 48 horas.","cta.s1":"CONSULTA GRATUITA A DOMICILIO","cta.s2":"RESPUESTA EN 1 HORA","cta.btn1":"Pedir presupuesto","cta.btn2":"Escríbanos por WhatsApp",
+      "money.label":"Transparencia","money.h2":"Cómo protegemos su dinero",
+      "money.m1":"Presupuesto detallado antes del contrato","money.m2":"Pagos por hitos, sin grandes anticipos","money.m3":"Los cambios los firma usted primero","money.m4":"Renuncia de gravamen de cada subcontratista","money.m5":"Contrato y seguro a petición","money.btn":"Garantía escrita de 2 años",
+      "proc.label":"Nuestro proceso","proc.h2":"Proceso claro. Plazos directos.",
+      "proc1.name":"Consulta y necesidades","proc1.side":"≈ 1 semana","proc1.desc":"Nos reunimos en su espacio, hablamos de objetivos y presupuesto, y acordamos qué es el éxito — antes de cualquier contrato.",
+      "proc2.name":"Concepto","proc2.side":"≈ 1–2 semanas","proc2.desc":"Varias direcciones conceptuales para elegir el estilo, la lógica de distribución y el marco de presupuesto del proyecto.",
+      "proc3.name":"Diseño y 3D","proc3.side":"≈ 2–3 semanas","proc3.desc":"Distribución, 3D fotorrealista, materiales y presupuesto detallado — firma sabiendo exactamente qué recibe.",
+      "proc4.name":"Obra y fit-out","proc4.side":"según presupuesto","proc4.desc":"Construcción con permisos y seguro, con fotos de avance cada semana. Pagos por hitos — nunca un gran anticipo.",
+      "proc5.name":"Entrega y garantía","proc5.side":"última semana","proc5.desc":"Limpieza final, recorrido y una garantía escrita de 2 años respaldada por el mismo equipo que la construyó.",
+      "proc.foot":"PROYECTOS DESDE ~$200K · PLAZO HABITUAL HASTA 3 MESES",
+      "about.label":"Nosotros","about.h2":"Por qué los clientes confían en M5",
+      "about.p":"Detrás de M5 hay un solo equipo propio — diseñadores, jefes de proyecto y cuadrillas de obra — no una cadena de subcontratistas anónimos. Ponemos nombre y cara a cada proyecto, del primer boceto a la entrega final.",
+      "trust1.mono":"Asegurados","trust1.h4":"Responsabilidad civil desde el primer día","trust1.p":"Certificados disponibles a petición — para usted y su edificio.",
+      "trust2.mono":"Con permisos","trust2.h4":"Construido con GC de Florida con licencia","trust2.p":"Permisos de Miami-Dade y normas de impacto HVHZ en cada obra.",
+      "trust3.mono":"Locales","trust3.h4":"Equipo en inglés y español","trust3.p":"Experiencia con juntas de condominio: COI, reservas de ascensor, horarios de ruido.",
+      "about.plabel":"Las personas detrás de M5","about.ph2":"Nombre y cara en cada proyecto",
+      "team1.b":"Director de proyecto","team1.s":"Obra y supervisión en sitio","team2.b":"Diseñadora principal","team2.s":"Diseño interior y 3D","team3.b":"Supervisor de obra","team3.s":"Calidad y plazos","team4.b":"Gestor de cliente","team4.s":"Su punto de contacto",
+      "rev.label":"Historias de clientes","rev.h2":"Lo que dicen los clientes",
+      "rev1.p":"El presupuesto que firmamos se mantuvo sin cambios hasta el final. Todo quedó precioso, hasta el más mínimo detalle.","rev1.s":"Brickell · reforma de 2 dorm.",
+      "rev2.p":"Un solo equipo del diseño a la entrega. Fotos de avance cada semana y sin costes sorpresa — justo lo que prometieron.","rev2.s":"Coral Gables · villa completa",
+      "rev3.p":"El estuco decorativo es espectacular. Se encargaron de la junta del condominio y de los permisos para que no tuviéramos que preocuparnos por nada.","rev3.s":"Edgewater · cocina y salón",
+      "rev.score1":"DISEÑO DE EJEMPLO · RESEÑAS REALES DE GOOGLE TRAS EL LANZAMIENTO","rev.score2":"★ 5.0 GOOGLE",
+      "faq.label":"FAQ","faq.h2":"Preguntas que nos hacen primero",
+      "faq1.q":"¿Subcontratan el trabajo?","faq1.a":"El diseño, la gestión de proyecto y la supervisión son propios. La construcción se ejecuta con nuestro GC de Florida con licencia y nuestras cuadrillas de confianza — un solo equipo responsable del resultado.",
+      "faq2.q":"¿Quién se encarga de los permisos y de la junta del condominio?","faq2.a":"Nosotros. Los permisos de Miami-Dade, el COI de su edificio, las reservas de ascensor y los horarios de ruido son parte de nuestro proceso — no su problema.",
+      "faq3.q":"¿Cuánto cuesta un proyecto?","faq3.a":"Los proyectos de diseño + reforma llave en mano parten de unos $200K. Recibe un presupuesto detallado antes de firmar — y no cambia sin una orden de cambio que usted apruebe primero.",
+      "faq4.q":"¿Cuánto tarda?","faq4.a":"Una reforma habitual tarda hasta 3 meses. Recibe el plazo por adelantado y fotos de avance cada semana durante todo el proceso.",
+      "faq5.q":"¿Hay garantía?","faq5.a":"Sí — una garantía escrita de 2 años. Cualquier incidencia tras la entrega la resuelve el mismo equipo que la construyó.",
+      "lead.label":"Pedir presupuesto","lead.h2":"Cuéntenos sobre su espacio.","lead.f1":"CONSULTA GRATUITA","lead.f2":"VISITA A DOMICILIO INCLUIDA","lead.f3":"RESPUESTA EN 1 HORA",
+      "form.name":"Su nombre","form.phone":"Teléfono / WhatsApp","form.hood":"Zona / edificio","form.budget":"Presupuesto del proyecto","form.b4":"Aún no lo sé","form.btn":"Enviar solicitud",
+      "foot.about":"Estudio de diseño interior, reformas y construcción — un solo equipo responsable, del primer boceto a la entrega final. Miami, Florida.",
+      "foot.h1":"Páginas principales","foot.l1":"Inicio","foot.l2":"Nosotros","foot.l3":"Proyectos","foot.l4":"Contacto","foot.h2":"Servicios","foot.h3":"Contáctenos",
+      "foot.copy":"© M5 · 2026 · Totalmente asegurados · toda la obra con permisos y contratistas de Florida con licencia"
+    },
+    uk: {
+      "meta.title":"M5 — студія дизайну інтер'єру, ремонту та будівництва в Маямі",
+      "nav.services":"ПОСЛУГИ","nav.portfolio":"ПОРТФОЛІО","nav.plaster":"ШТУКАТУРКА","nav.about":"ПРО НАС","nav.faq":"FAQ","nav.quote":"ОТРИМАТИ КОШТОРИС",
+      "hero.badge":"ПОВНЕ СТРАХУВАННЯ · ДОЗВОЛИ MIAMI-DADE",
+      "hero.h1":"Проєктуємо, будуємо й ремонтуємо оселі в Маямі.",
+      "hero.sub":"Дизайн інтер'єру · ремонт під ключ · декоративна штукатурка · fit-out — спроєктовано й збудовано однією командою, що відповідає за результат.",
+      "hero.cta1":"Отримати кошторис","hero.cta2":"Наші роботи",
+      "hero.strip1":"СТУДІЯ ПОВНОГО ЦИКЛУ","hero.strip2":"ДИЗАЙН · БУДІВНИЦТВО · РОЗВИТОК","hero.strip3":"АНГЛІЙСЬКА · ІСПАНСЬКА · УКРАЇНСЬКА",
+      "stats.label":"Хто ми",
+      "stats.lead":"Міжнародна студія, яка тепер будує в Маямі — одна відповідальна команда від першого ескізу до фінальної здачі.",
+      "stats.s1":"років досвіду","stats.s2":"проєктів здано в США","stats.s3":"письмова гарантія на кожен об'єкт","stats.s4":"застраховано · з дозволами",
+      "svc.label":"Послуги M5","svc.h2":"Що ми робимо",
+      "svc1.h3":"Дизайн інтер'єру та 3D","svc1.li1":"Концепція, планування та зонування","svc1.li2":"Фотореалістична 3D-візуалізація","svc1.li3":"Матеріали, меблі, обладнання та документація",
+      "svc2.h3":"Ремонт під ключ","svc2.li1":"Від демонтажу до декору — один договір","svc2.li2":"Фіксована ціна без несподіваних витрат","svc2.li3":"Щотижневі фотозвіти аж до здачі",
+      "svc.sig":"ФІРМОВЕ","svc3.h3":"Декоративна штукатурка","svc3.li1":"Венеційська штукатурка · мікроцемент · вапно","svc3.li2":"Власна бібліотека зразків і шоурум","svc3.li3":"Архітектурні поверхні, а не просто оздоблення",
+      "svc4.h3":"Будівництво та вілли","svc4.li1":"Повний цикл із ліцензованим GC Флориди","svc4.li2":"Дозволи та стандарти HVHZ","svc4.li3":"Будинки й вілли в міру зростання",
+      "svc5.h3":"Технічний нагляд","svc5.li1":"Контроль якості на об'єкті на кожному етапі","svc5.li2":"Нагляд за підрядниками й субпідрядниками","svc5.li3":"Інспекції та контроль недоліків",
+      "svc.cta.label":"Не знаєте, з чого почати?","svc.cta.btn":"Безкоштовна консультація",
+      "plaster.label":"Наша фішка","plaster.h2":"Декоративна штукатурка від наших власних майстрів","plaster.flag":"ВЛАСНИЙ МАЙСТЕР M5",
+      "plaster.h2b":"Архітектурні поверхні,<br>а не просто оздоблення.",
+      "plaster.lead":"Венеційська штукатурка, мікроцемент і вапно наносить наша власна навчена команда — а не випадковий субпідрядник. Ми маємо повну бібліотеку зразків і власний шоурум, тож ви бачите й торкаєтеся точної текстури ще до старту.",
+      "plaster.li1":"Венеційська штукатурка · мікроцемент · вапно · ефект травертину","plaster.li2":"Власна бібліотека зразків і шоурум у Wynwood","plaster.li3":"Акцентні стіни, стелі, вологі зони та інтер'єри повністю",
+      "plaster.ctab":"Безкоштовний замір і кошторис на об'єкті","plaster.ctas":"Приїдемо до вас, зробимо заміри й підготуємо докладний кошторис — безкоштовно.","plaster.ctabtn":"Замовити безкоштовний кошторис",
+      "proj.label":"Вибрані роботи","proj.h2":"Нещодавні проєкти в Маямі","proj.viewall":"Усі проєкти",
+      "case1.tag":"РЕМОНТ","case1.h4":"Резиденція 2 спальні, Brickell","case1.m2":"12 ТИЖНІВ",
+      "case2.tag":"КУХНЯ","case2.h4":"Кухня, Edgewater","case2.m2":"8 ТИЖНІВ",
+      "case3.tag":"ВАННА","case3.h4":"Ванна кімната, Sunny Isles","case3.m2":"6 ТИЖНІВ",
+      "case4.tag":"ВІЛЛА ПІД КЛЮЧ","case4.h4":"Вілла, Coral Gables","case4.m2":"16 ТИЖНІВ",
+      "case5.tag":"FIT-OUT","case5.h4":"Лофт, South Beach","case5.m2":"10 ТИЖНІВ",
+      "case6.tag":"НАШ ШОУРУМ","case6.h4":"Шоурум студії, Wynwood","case6.m1":"ВЛАСНИЙ ПРОСТІР","case6.m2":"ПРИХОДЬТЕ ПОДИВИТИСЬ",
+      "cta.h2":"Отримайте кошторис<br>за 48 годин.","cta.s1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ НА ОБ'ЄКТІ","cta.s2":"ВІДПОВІДЬ ПРОТЯГОМ 1 ГОДИНИ","cta.btn1":"Отримати кошторис","cta.btn2":"Напишіть у WhatsApp",
+      "money.label":"Прозорість","money.h2":"Як ми захищаємо ваші гроші",
+      "money.m1":"Деталізований кошторис до підписання договору","money.m2":"Оплата за етапами, без великих авансів","money.m3":"Зміни спершу підписуєте ви","money.m4":"Відмова від застави від кожного субпідрядника","money.m5":"Договір і страховка на запит","money.btn":"Письмова гарантія 2 роки",
+      "proc.label":"Наш процес","proc.h2":"Прозорий процес. Чіткі терміни.",
+      "proc1.name":"Консультація та потреби","proc1.side":"≈ 1 тиждень","proc1.desc":"Зустрічаємось на вашому об'єкті, обговорюємо цілі й бюджет і узгоджуємо, яким має бути результат — ще до будь-якого договору.",
+      "proc2.name":"Концепція","proc2.side":"≈ 1–2 тижні","proc2.desc":"Кілька концептуальних напрямів, щоб обрати стиль, логіку планування та бюджетні рамки проєкту.",
+      "proc3.name":"Дизайн і 3D","proc3.side":"≈ 2–3 тижні","proc3.desc":"Планування, фотореалістичне 3D, матеріали й деталізований бюджет — ви підписуєте, точно знаючи, що отримаєте.",
+      "proc4.name":"Будівництво та fit-out","proc4.side":"за кошторисом","proc4.desc":"Будівництво з дозволами й страховкою та щотижневими фотозвітами. Оплата за етапами — ніколи великий аванс.",
+      "proc5.name":"Здача та гарантія","proc5.side":"останній тиждень","proc5.desc":"Фінальне прибирання, огляд і письмова гарантія на 2 роки від тієї ж команди, що будувала.",
+      "proc.foot":"ПРОЄКТИ ВІД ~$200K · ЗВИЧАЙНИЙ ТЕРМІН ДО 3 МІСЯЦІВ",
+      "about.label":"Про нас","about.h2":"Чому клієнти довіряють M5",
+      "about.p":"За M5 стоїть одна власна команда — дизайнери, проєкт-менеджери та бригади на об'єкті, а не ланцюг анонімних субпідрядників. Ми ставимо свої імена й обличчя на кожен проєкт, від першого ескізу до фінальної здачі.",
+      "trust1.mono":"Застраховано","trust1.h4":"Страхування відповідальності з першого дня","trust1.p":"Сертифікати на запит — для вас і вашого будинку.",
+      "trust2.mono":"З дозволами","trust2.h4":"Будуємо з ліцензованим GC Флориди","trust2.p":"Дозволи Miami-Dade і стандарти HVHZ на кожному об'єкті.",
+      "trust3.mono":"Локальні","trust3.h4":"Команда з англійською та іспанською","trust3.p":"Досвід із радами кондомініумів: COI, бронювання ліфта, години тиші.",
+      "about.plabel":"Люди за M5","about.ph2":"Імена й обличчя на кожному проєкті",
+      "team1.b":"Директор проєкту","team1.s":"Будівництво та нагляд на об'єкті","team2.b":"Провідна дизайнерка","team2.s":"Дизайн інтер'єру та 3D","team3.b":"Керівник об'єкта","team3.s":"Якість і терміни","team4.b":"Клієнт-менеджер","team4.s":"Ваша точка контакту",
+      "rev.label":"Історії клієнтів","rev.h2":"Що кажуть клієнти",
+      "rev1.p":"Кошторис, який ми підписали, лишився незмінним до самого кінця. Усе зробили красиво, до найменшої деталі.","rev1.s":"Brickell · ремонт 2 спальні",
+      "rev2.p":"Одна команда від дизайну до здачі. Щотижневі фотозвіти й жодних несподіваних витрат — саме те, що обіцяли.","rev2.s":"Coral Gables · вілла під ключ",
+      "rev3.p":"Декоративна штукатурка приголомшлива. Вони владнали раду кондомініуму й дозволи, тож нам не довелося ні про що хвилюватися.","rev3.s":"Edgewater · кухня та вітальня",
+      "rev.score1":"ПРИКЛАД МАКЕТА · СПРАВЖНІ GOOGLE-ВІДГУКИ ПІСЛЯ ЗАПУСКУ","rev.score2":"★ 5.0 GOOGLE",
+      "faq.label":"FAQ","faq.h2":"Питання, які ставлять першими",
+      "faq1.q":"Ви віддаєте роботу на субпідряд?","faq1.a":"Дизайн, проєкт-менеджмент і нагляд — власні. Будівництво веде наш ліцензований GC-партнер у Флориді та наші перевірені бригади — одна команда, відповідальна за результат.",
+      "faq2.q":"Хто займається дозволами й радою кондомініуму?","faq2.a":"Ми. Дозволи Miami-Dade, COI для вашого будинку, бронювання ліфта й години тиші — частина нашого процесу, а не ваш клопіт.",
+      "faq3.q":"Скільки коштує проєкт?","faq3.a":"Проєкти «дизайн + ремонт під ключ» стартують приблизно від $200K. Ви отримуєте чіткий деталізований бюджет до підписання — і він не змінюється без зміни, яку ви спершу схвалюєте.",
+      "faq4.q":"Скільки це триває?","faq4.a":"Звичайний ремонт триває до 3 місяців. Ви отримуєте терміни наперед і щотижневі фотозвіти протягом усього процесу.",
+      "faq5.q":"Чи є гарантія?","faq5.a":"Так — письмова гарантія на 2 роки. Будь-яку проблему після здачі усуває та сама команда, що будувала.",
+      "lead.label":"Отримати кошторис","lead.h2":"Розкажіть про свій простір.","lead.f1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ","lead.f2":"ВИЇЗД НА ОБ'ЄКТ ВКЛЮЧЕНО","lead.f3":"ВІДПОВІДЬ ЗА 1 ГОДИНУ",
+      "form.name":"Ваше ім'я","form.phone":"Телефон / WhatsApp","form.hood":"Район / будинок","form.budget":"Бюджет проєкту","form.b4":"Ще не визначився","form.btn":"Надіслати запит",
+      "foot.about":"Студія дизайну інтер'єру, ремонту та будівництва — одна відповідальна команда, від першого ескізу до фінальної здачі. Маямі, Флорида.",
+      "foot.h1":"Головні сторінки","foot.l1":"Головна","foot.l2":"Про нас","foot.l3":"Портфоліо","foot.l4":"Контакти","foot.h2":"Послуги","foot.h3":"Зв'язатися з нами",
+      "foot.copy":"© M5 · 2026 · Повне страхування · усі роботи з дозволами та ліцензованими підрядниками Флориди"
+    }
+  };
+
+  function applyLang(l){
+    if(!I18N[l]) l='en';
+    document.documentElement.lang = l;
+    try{ localStorage.setItem('m5lang', l); }catch(e){}
+    var dict = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v = dict[el.getAttribute('data-i18n')];
+      if(v!==undefined) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var v = dict[el.getAttribute('data-i18n-ph')];
+      if(v!==undefined) el.setAttribute('placeholder', v);
+    });
+    document.querySelectorAll('.lang-sw button').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-l')===l);
+    });
+    if(dict['meta.title']) document.title = dict['meta.title'];
+  }
+
+  (function(){
+    var saved=null; try{ saved=localStorage.getItem('m5lang'); }catch(e){}
+    var sys=(navigator.language||'en').slice(0,2).toLowerCase();
+    applyLang(saved || (I18N[sys] ? sys : 'en'));
+  })();
+
+  /* ===== scroll-reveal (появление секций при скролле,) ===== */
+  (function(){
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var sel='.hero-badge,.hero h1,.hero-sub,.hero-ctas,.label,h2,.stats .lead,.stat,.svc,.plaster-txt,.plaster-img,.case,.m-item,.money-note,.p-row,.t-card,.tm,.rev-card,.rev-score,.faq details,.lead-box>div,.form';
+    var els=[].slice.call(document.querySelectorAll(sel));
+    els.forEach(function(el){ el.classList.add('reveal'); });
+    document.querySelectorAll('.svc-grid,.ba-grid,.money-grid,.team-grid,.rev-grid,.trust-grid').forEach(function(g){
+      [].slice.call(g.children).forEach(function(c,i){ if(c.classList.contains('reveal')) c.style.transitionDelay=((i%4)*0.09).toFixed(2)+'s'; });
+    });
+    if(!('IntersectionObserver' in window)){ els.forEach(function(el){el.classList.add('in')}); return; }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:0.12,rootMargin:'0px 0px -7% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>
