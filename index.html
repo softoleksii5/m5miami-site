@@ -314,6 +314,11 @@
   .gal-item:nth-child(5){aspect-ratio:3/4.1;margin-top:58px}
   @media(max-width:800px){.gal-grid{grid-template-columns:1fr 1fr;gap:14px}.gal-item{margin-top:0!important;aspect-ratio:3/3.6!important}}
 
+  /* тона штукатурки — чередование блоков (light ↔ warm greige) поверх текстуры */
+  .sec-light{background:linear-gradient(rgba(252,250,244,.52),rgba(252,250,244,.52))}
+  .sec-warm{background:linear-gradient(rgba(201,182,150,.38),rgba(199,180,148,.42));
+    border-top:1px solid rgba(120,95,55,.14);border-bottom:1px solid rgba(120,95,55,.14)}
+
   /* scroll-reveal — плавное появление секций по референсу */
   @media (prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
@@ -357,7 +362,7 @@
   </div>
 </section>
 
-<section class="stats">
+<section class="stats sec-light">
   <div class="wrap">
     <div class="label" data-i18n="stats.label">Who we are</div>
     <p class="lead" data-i18n="stats.lead">An international studio, now building in Miami — one accountable team from first sketch to final handover.</p>
@@ -370,7 +375,7 @@
   </div>
 </section>
 
-<section id="services" style="padding-top:20px">
+<section id="services" class="sec-warm" style="padding-top:76px">
   <div class="wrap">
     <div class="label" data-i18n="svc.label">M5 Services</div>
     <h2 style="margin-top:14px" data-i18n="svc.h2">What we do</h2>
@@ -434,7 +439,7 @@
   </div>
 </section>
 
-<section id="projects" class="ba">
+<section id="projects" class="ba sec-light">
   <div class="wrap">
     <div class="ba-head">
       <div><div class="label" data-i18n="proj.label">Selected work</div><h2 style="margin-top:14px" data-i18n="proj.h2">Recent Miami projects</h2></div>
@@ -451,7 +456,7 @@
   </div>
 </section>
 
-<section class="transform">
+<section class="transform sec-warm">
   <div class="wrap">
     <div class="label" data-i18n="ba.label">Transformations</div>
     <h2 style="margin-top:14px" data-i18n="ba.h2">Before &amp; after</h2>
@@ -482,7 +487,7 @@
   </div>
 </section>
 
-<section class="gallery">
+<section class="gallery sec-light">
   <div class="wrap">
     <div class="label" data-i18n="gal.label">One standard · every room</div>
     <h2 style="margin-top:14px" data-i18n="gal.h2">One team for your whole home</h2>
@@ -508,7 +513,7 @@
   </div>
 </section>
 
-<section>
+<section class="sec-light">
   <div class="wrap">
     <div class="label" data-i18n="money.label">Transparency</div>
     <h2 style="margin-top:14px" data-i18n="money.h2">How we protect your money</h2>
@@ -523,7 +528,7 @@
   </div>
 </section>
 
-<section class="proc">
+<section class="proc sec-warm">
   <div class="wrap">
     <div class="label" data-i18n="proc.label">Our process</div>
     <h2 style="margin:14px 0 60px" data-i18n="proc.h2">Clear process. Straight timelines.</h2>
@@ -536,7 +541,7 @@
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="sec-light">
   <div class="wrap">
     <div class="label" data-i18n="about.label">About us</div>
     <h2 style="margin-top:14px" data-i18n="about.h2">Why clients trust M5</h2>
@@ -590,7 +595,7 @@
   </div>
 </section>
 
-<section id="faq" class="faq">
+<section id="faq" class="faq sec-light">
   <div class="wrap">
     <div class="label" data-i18n="faq.label">FAQ</div>
     <h2 style="margin:14px 0 56px" data-i18n="faq.h2">Questions we hear first</h2>
@@ -602,7 +607,7 @@
   </div>
 </section>
 
-<section id="contact" class="lead-sec">
+<section id="contact" class="lead-sec sec-warm">
   <div class="wrap lead-box">
     <div>
       <div class="label" data-i18n="lead.label">Get a quote</div>
