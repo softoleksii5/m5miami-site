@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>M5 — Org Structure</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20242E; --soft:#6E6656; --line:#EBE3D4; --white:#fff; --gold:#B0894F; --gold-d:#96703B;
+    --serif:'Manrope',sans-serif; --sans:'Inter',sans-serif; --mono:'Space Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);color:var(--ink);min-height:100vh;
+    background:#F6F0E5 url('/img/vice_bg.jpg') top center/100% auto no-repeat}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:980px;margin:0 auto;padding:0 26px;position:relative;z-index:2}
+
+  .hbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .logo{font-family:var(--serif);font-weight:800;font-size:24px;color:var(--ink);text-shadow:0 1px 12px rgba(246,240,229,.85)}
+  .logo b{color:var(--gold)}
+  .logo small{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--soft);margin-left:8px}
+  .back{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;text-shadow:0 1px 10px rgba(246,240,229,.85)}
+  .back:hover{color:var(--ink)}
+
+  .hero{padding:30px 0 8px;text-align:center}
+  .hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(36px,6vw,60px);letter-spacing:-.03em;line-height:1;color:#232733}
+  .hero .k{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6E6656;margin-top:14px}
+
+  .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);text-align:center;margin:34px 0 14px}
+  .row{display:grid;gap:18px}
+  .row.founders{grid-template-columns:1fr 1fr}
+  .row.solo{grid-template-columns:minmax(0,560px);justify-content:center}
+  .row.team{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.row.founders{grid-template-columns:1fr}.row.team{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.row.team{grid-template-columns:1fr}}
+
+  .card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;position:relative;overflow:hidden;
+    box-shadow:0 20px 46px -28px rgba(32,36,46,.35)}
+  .card:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--bc,var(--gold))}
+  .who{display:flex;align-items:center;gap:15px}
+  .ava{width:54px;height:54px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:800;font-size:22px;color:#fff;background:linear-gradient(140deg,#C9A25E,#96703B)}
+  .ava.ink{background:linear-gradient(140deg,#3A4152,#20242E)}
+  .ava.coral{background:linear-gradient(140deg,#FF8A65,#F4673B)}
+  .who b{font-family:var(--serif);font-weight:800;font-size:20px;letter-spacing:-.01em;display:block}
+  .who span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d)}
+  .duty{list-style:none;margin:16px 0 0}
+  .duty li{font-size:13.5px;color:#54503F;padding:5px 0 5px 20px;position:relative}
+  .duty li:before{content:"—";position:absolute;left:0;color:var(--gold)}
+  .mail{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--soft);letter-spacing:.04em}
+  .mail:hover{color:var(--gold-d)}
+
+  .hire{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    color:#B4682F;background:#FCEFE2;border:1px solid #F3D9BE;padding:3px 8px;border-radius:20px}
+  .go{display:inline-block;margin-top:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d)}
+  .go:hover{color:var(--ink)}
+  .card.mini{padding:20px}
+  .card.mini .ava{width:44px;height:44px;font-size:17px;background:#F2ECE0;color:var(--gold-d)}
+  .card.mini .who b{font-size:16.5px}
+  .card.mini p{font-size:12.5px;color:#54503F;margin-top:12px;line-height:1.5}
+
+  .down{width:2px;height:32px;background:var(--gold);opacity:.45;margin:0 auto}
+  .rail{height:32px;position:relative;margin:0 auto;width:75%}
+  .rail:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--gold);opacity:.45}
+  .rail:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--gold);opacity:.45}
+  @media(max-width:860px){.down,.rail{display:none}.lvl{margin-top:26px}}
+
+  footer{padding:46px 0;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--soft);text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="hbar">
+    <a class="logo" href="/">M<b>5</b><small>TEAM</small></a>
+    <a class="back" href="/champion">← My workspace</a>
+  </div>
+
+  <div class="hero">
+    <h1>How M5 works.</h1>
+    <div class="k">Org structure · Who owns what</div>
+  </div>
+
+  <div class="lvl">Founders</div>
+  <div class="row founders">
+    <div class="card" style="--bc:#20242E">
+      <div class="who"><div class="ava ink">A</div>
+        <div><b>Alex</b><span>Co-Founder · Strategy &amp; Systems</span></div></div>
+      <ul class="duty">
+        <li>Vision, finance &amp; partnerships</li>
+        <li>Marketing engine &amp; growth</li>
+        <li>AI layer — processes &amp; automation</li>
+      </ul>
+      <a class="mail" href="mailto:alex@m5miami.com">alex@m5miami.com</a>
+    </div>
+    <div class="card" style="--bc:#F4673B">
+      <div class="who"><div class="ava coral">V</div>
+        <div><b>Vlad</b><span>Co-Founder · Face of the Brand</span></div></div>
+      <ul class="duty">
+        <li>Sales &amp; client relationships</li>
+        <li>Content &amp; media presence</li>
+        <li>Design direction &amp; taste</li>
+      </ul>
+      <a class="mail" href="mailto:vlad@m5miami.com">vlad@m5miami.com</a>
+    </div>
+  </div>
+
+  <div class="down"></div>
+
+  <div class="lvl" style="margin-top:0">Operations</div>
+  <div class="row solo">
+    <div class="card" style="--bc:#B0894F">
+      <div class="who"><div class="ava">V</div>
+        <div><b>Vadim</b><span>Director · Licensed Qualifier</span></div></div>
+      <ul class="duty">
+        <li>Operations &amp; production</li>
+        <li>Permits &amp; compliance — Miami-Dade</li>
+        <li>Crews, subcontractors &amp; quality control</li>
+      </ul>
+      <a class="mail" href="mailto:vadim@m5miami.com">vadim@m5miami.com</a>
+    </div>
+  </div>
+
+  <div class="rail"></div>
+
+  <div class="lvl" style="margin-top:0">Team — we are hiring</div>
+  <div class="row team">
+    <div class="card mini" style="--bc:#E6DECB">
+      <span class="hire">Hiring</span>
+      <div class="who"><div class="ava">S</div><div><b>SMM</b></div></div>
+      <p>Content, social growth, reels &amp; community.</p>
+      <a class="go" href="/championsmm">Workspace →</a>
+    </div>
+    <div class="card mini" style="--bc:#E6DECB">
+      <span class="hire">Hiring</span>
+      <div class="who"><div class="ava">S</div><div><b>Sales</b></div></div>
+      <p>Leads to contracts: calls, consults, follow-ups.</p>
+      <a class="go" href="/championsales">Workspace →</a>
+    </div>
+    <div class="card mini" style="--bc:#E6DECB">
+      <span class="hire">Hiring</span>
+      <div class="who"><div class="ava">D</div><div><b>Designer</b></div></div>
+      <p>Interiors, 3D &amp; material selections.</p>
+      <a class="go" href="/championdesigner">Workspace →</a>
+    </div>
+    <div class="card mini" style="--bc:#E6DECB">
+      <span class="hire">Hiring</span>
+      <div class="who"><div class="ava">P</div><div><b>Project Manager</b></div></div>
+      <p>Site execution, schedules &amp; supervision.</p>
+      <a class="go" href="/championpm">Workspace →</a>
+    </div>
+  </div>
+</div>
+
+<footer>M5 Interior Design &amp; Build · Miami · Private team page</footer>
+
+</body>
+</html>
