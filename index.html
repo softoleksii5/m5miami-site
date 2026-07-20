@@ -28,8 +28,12 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');</script>
-<script>window.m5track=function(n,p){try{if(window.gtag)gtag('event',n,p||{})}catch(e){}}</script>
+<script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.source)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}</script>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
+
+
+<script>window.M5_PIXEL='';/* ← сюда Pixel ID (15–16 цифр) из Meta Events Manager → активирует пиксель на всех страницах */
+if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',window.M5_PIXEL);fbq('track','PageView');}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -792,7 +796,7 @@
       <div><h5 data-i18n="foot.h3">Contact us</h5><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="https://wa.me/971585814215" target="_blank" rel="noopener">WhatsApp +971 58 581 4215</a></li><li>Wynwood, Miami, FL</li><li><a href="/privacy/" data-i18n="foot.privacy">Privacy Policy</a></li></ul></div>
     </div>
     <div class="f-bottom">
-      <span data-i18n="foot.copy">© M5 · 2026 · Fully insured · all work permitted with licensed Florida contractors</span>
+      <span data-i18n="foot.copy">© M5 · 2026 · Construction executed with licensed &amp; insured Florida contractor partners</span>
       <span style="display:flex;align-items:center;gap:22px">
         <a class="team-link" href="/welcomehero/" title="Team access — employees only"><svg width="11" height="13" viewBox="0 0 12 14" fill="none"><path d="M2 6V4a4 4 0 0 1 8 0v2" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="6" width="10" height="7" rx="1.5" fill="currentColor"/></svg>Team</a>
         <span>EN · ES · UK</span>
@@ -937,7 +941,7 @@
       "form.consent":"By submitting, you agree to be contacted about your project.","form.privacy":"Privacy Policy","form.name":"Your name","form.phone":"Phone / WhatsApp","form.hood":"Neighborhood / building","form.budget":"Project budget","form.b4":"Not sure yet","form.btn":"Send request",
       "foot.about":"Interior design, renovation and construction studio — one accountable team, from first sketch to final handover. Miami, Florida.",
       "foot.h1":"Main pages","foot.privacy":"Privacy Policy","foot.l1":"Home","foot.l2":"About us","foot.l3":"Portfolio","foot.l4":"Contact","foot.h2":"Services","foot.h3":"Contact us",
-      "foot.copy":"© M5 · 2026 · Fully insured · all work permitted with licensed Florida contractors"
+      "foot.copy":"© M5 · 2026 · Construction executed with licensed & insured Florida contractor partners"
     },
     es: {
       "meta.title":"M5 — Estudio de diseño interior, reformas y construcción en Miami",
@@ -1007,7 +1011,7 @@
       "form.consent":"Al enviar, acepta que le contactemos sobre su proyecto.","form.privacy":"Política de privacidad","form.name":"Su nombre","form.phone":"Teléfono / WhatsApp","form.hood":"Zona / edificio","form.budget":"Presupuesto del proyecto","form.b4":"Aún no lo sé","form.btn":"Enviar solicitud",
       "foot.about":"Estudio de diseño interior, reformas y construcción — un solo equipo responsable, del primer boceto a la entrega final. Miami, Florida.",
       "foot.h1":"Páginas principales","foot.privacy":"Política de privacidad","foot.l1":"Inicio","foot.l2":"Nosotros","foot.l3":"Proyectos","foot.l4":"Contacto","foot.h2":"Servicios","foot.h3":"Contáctenos",
-      "foot.copy":"© M5 · 2026 · Totalmente asegurados · toda la obra con permisos y contratistas de Florida con licencia"
+      "foot.copy":"© M5 · 2026 · Obra ejecutada con contratistas de Florida licenciados y asegurados"
     },
     uk: {
       "meta.title":"M5 — студія дизайну інтер'єру, ремонту та будівництва в Маямі",
@@ -1077,7 +1081,7 @@
       "form.consent":"Надсилаючи форму, ви погоджуєтесь, що ми зв'яжемось щодо вашого проєкту.","form.privacy":"Політика конфіденційності","form.name":"Ваше ім'я","form.phone":"Телефон / WhatsApp","form.hood":"Район / будинок","form.budget":"Бюджет проєкту","form.b4":"Ще не визначився","form.btn":"Надіслати запит",
       "foot.about":"Студія дизайну інтер'єру, ремонту та будівництва — одна відповідальна команда, від першого ескізу до фінальної здачі. Маямі, Флорида.",
       "foot.h1":"Головні сторінки","foot.privacy":"Політика конфіденційності","foot.l1":"Головна","foot.l2":"Про нас","foot.l3":"Портфоліо","foot.l4":"Контакти","foot.h2":"Послуги","foot.h3":"Зв'язатися з нами",
-      "foot.copy":"© M5 · 2026 · Повне страхування · усі роботи з дозволами та ліцензованими підрядниками Флориди"
+      "foot.copy":"© M5 · 2026 · Будівництво виконують ліцензовані та застраховані підрядники Флориди"
     }
   };
 
