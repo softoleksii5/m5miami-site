@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="#14120F"/><text x="32" y="44" font-family="Manrope,Helvetica,Arial,sans-serif" font-weight="800" font-size="27" fill="#F4EEE4" text-anchor="middle" letter-spacing="-1">M5</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<rect width="64" height="64" rx="10" fill="#14120F"/>
+<path d="M12 12h40v24.5L44.5 44H12z" stroke="#B0894F" stroke-width="3" fill="none"/>
+<text x="32" y="36" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="19" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
+</svg>

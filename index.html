@@ -290,6 +290,72 @@
 
   .wa-float{position:fixed;right:26px;bottom:26px;z-index:95;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.28);transition:.25s}
   .wa-float:hover{transform:translateY(-3px)}
+  @media(max-width:760px){.wa-float{bottom:86px}}
+
+  /* логотип-монограмма */
+  .logo svg{display:block}
+  .logo:hover .lg-stroke{stroke:#D9B87C}
+
+  /* ===== QUIZ · Instant Estimate ===== */
+  .qz-overlay{position:fixed;inset:0;background:rgba(15,13,10,.74);z-index:96;opacity:0;pointer-events:none;transition:.3s}
+  .qz-overlay.on{opacity:1;pointer-events:auto}
+  .qz{position:fixed;z-index:97;left:50%;top:50%;transform:translate(-50%,-46%) scale(.98);opacity:0;pointer-events:none;transition:.35s;
+    width:min(560px,94vw);max-height:92vh;overflow-y:auto;background:var(--bone);border-radius:6px}
+  .qz.on{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
+  .qz-head{background:var(--ink);color:var(--bone);padding:22px 28px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2}
+  .qz-head b{font-family:var(--serif);font-size:19px;font-weight:700}
+  .qz-head .mono{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:#D9B87C;display:block;margin-top:3px}
+  .qz-x{background:none;border:none;color:var(--bone);font-size:20px;cursor:pointer;padding:6px}
+  .qz-track{height:4px;background:#E4DBC8}
+  .qz-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-d));width:20%;transition:.35s}
+  .qz-body{padding:28px}
+  .qz-q{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:-.01em;margin-bottom:18px}
+  .qz-opts{display:grid;gap:10px}
+  .qz-opt{background:var(--white);border:1.5px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;transition:.18s;display:flex;align-items:center;gap:14px;font-size:15.5px;text-align:left;width:100%;font-family:var(--sans);color:var(--ink)}
+  .qz-opt:hover{border-color:var(--gold);transform:translateY(-1px)}
+  .qz-opt.sel{border-color:var(--gold-d);background:#FBF6EC}
+  .qz-opt .ic{font-size:20px}
+  .qz-opt small{display:block;color:var(--soft);font-size:12.5px;margin-top:2px}
+  .qz-slider{margin:8px 0 6px}
+  .qz-sqft{font-family:var(--serif);font-weight:800;font-size:44px;text-align:center;letter-spacing:-.02em}
+  .qz-sqft i{font-style:normal;font-family:var(--mono);font-size:13px;color:var(--gold-d);letter-spacing:.14em}
+  input[type=range].qzr{width:100%;accent-color:var(--gold-d);height:34px}
+  .qz-nav{display:flex;gap:12px;margin-top:22px}
+  .qz-nav .btn{flex:1;padding:15px 20px}
+  .qz-back{background:none;border:1px solid var(--line);color:var(--soft);border-radius:0;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:15px 20px}
+  .qz-form{display:grid;gap:12px}
+  .qz-form input{background:var(--white);border:1px solid var(--line);padding:15px 16px;font-size:15px;font-family:var(--sans);color:var(--ink);border-radius:8px}
+  .qz-note{font-size:12px;color:var(--soft);text-align:center;margin-top:10px}
+  .qz-result{text-align:center;padding:8px 0 4px}
+  .qz-result .label2{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d)}
+  .qz-price{font-family:var(--serif);font-weight:800;font-size:clamp(34px,7vw,46px);letter-spacing:-.02em;margin:10px 0 6px}
+  .qz-sub{color:var(--soft);font-size:14.5px;max-width:38ch;margin:0 auto 18px}
+  .qz-cta{display:grid;gap:10px}
+
+  /* ===== sticky mobile bar ===== */
+  .mbar{position:fixed;left:0;right:0;bottom:0;z-index:94;display:none;grid-template-columns:1fr 1fr 1.4fr;background:rgba(18,16,13,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(217,184,124,.25)}
+  .mbar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 6px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone)}
+  .mbar a+a{border-left:1px solid rgba(244,238,228,.12)}
+  .mbar .est{background:var(--gold-d);color:#fff;font-weight:700}
+  @media(max-width:760px){.mbar{display:grid}footer{padding-bottom:110px}}
+
+  /* ===== exit-intent ===== */
+  .xi-overlay{position:fixed;inset:0;background:rgba(15,13,10,.74);z-index:98;opacity:0;pointer-events:none;transition:.3s}
+  .xi-overlay.on{opacity:1;pointer-events:auto}
+  .xi{position:fixed;z-index:99;left:50%;top:50%;transform:translate(-50%,-46%);opacity:0;pointer-events:none;transition:.35s;
+    width:min(480px,94vw);background:var(--bone);border-radius:6px;overflow:hidden}
+  .xi.on{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}
+  .xi-img{height:150px;background:linear-gradient(rgba(18,16,13,.35),rgba(18,16,13,.55)),url('img/ba_plaster_after.jpg') center/cover;position:relative}
+  .xi-x{position:absolute;top:12px;right:12px;width:38px;height:38px;border:none;border-radius:50%;background:rgba(15,13,10,.6);color:#fff;font-size:17px;cursor:pointer}
+  .xi-body{padding:26px 28px 30px;text-align:center}
+  .xi-body h4{font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:-.01em;margin-bottom:8px}
+  .xi-body p{color:var(--soft);font-size:14.5px;margin-bottom:16px}
+  .xi-form{display:grid;gap:10px}
+  .xi-form input{background:var(--white);border:1px solid var(--line);padding:14px 16px;font-size:15px;border-radius:8px;font-family:var(--sans)}
+
+  /* CTA-строки после интерактивов */
+  .want-cta{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:36px;flex-wrap:wrap}
+  .want-cta span{font-family:var(--serif);font-weight:600;font-size:19px}
 
   /* before / after слайдеры (TRANSFORMATIONS) */
   .transform{background:transparent}
@@ -336,7 +402,12 @@
 <body>
 
 <header>
-  <a class="logo" href="#">M<span>5</span></a>
+  <a class="logo" href="#" aria-label="M5">
+    <svg width="46" height="38" viewBox="0 0 46 38" fill="none">
+      <path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
+      <text x="23" y="26" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
+    </svg>
+  </a>
   <nav class="h-nav">
     <a href="#services" data-i18n="nav.services">SERVICES</a><a href="#projects" data-i18n="nav.portfolio">PORTFOLIO</a><a href="#plaster" data-i18n="nav.plaster">PLASTER</a><a href="#about" data-i18n="nav.about">ABOUT</a><a href="#faq" data-i18n="nav.faq">FAQ</a>
   </nav>
@@ -357,7 +428,7 @@
     <h1 data-i18n="hero.h1">We design, build and renovate homes in Miami.</h1>
     <p class="hero-sub" data-i18n="hero.sub">Interior design · turnkey renovation · decorative plaster · fit-out — designed and built by one accountable team.</p>
     <div class="hero-ctas">
-      <a class="btn btn-bone" href="#contact" data-i18n="hero.cta1">Get a quote</a>
+      <a class="btn btn-bone" href="#" onclick="return openQuiz('hero')" data-i18n="qz.open">⚡ Get my instant estimate</a>
       <a class="btn btn-line" style="border-color:rgba(244,238,228,.4);color:var(--bone)" href="#projects" data-i18n="hero.cta2">See our works</a>
     </div>
   </div>
@@ -488,6 +559,10 @@
         <div class="ba-cap" data-i18n="ba.c2">Turnkey apartment renovation</div>
       </div>
     </div>
+    <div class="want-cta">
+      <span data-i18n="want.ba">Want this for your home?</span>
+      <a class="btn btn-ink" href="#" onclick="return openQuiz('ba')" data-i18n="want.btn">Get my estimate</a>
+    </div>
   </div>
 </section>
 
@@ -502,6 +577,10 @@
       <div class="gal-item" style="background-image:url('img/ba_plaster_after.jpg')"><span class="gal-cap" data-i18n="gal.c3">Signature plaster</span></div>
       <div class="gal-item" style="background-image:url('img/case5_loft.jpg')"><span class="gal-cap" data-i18n="gal.c4">Full-home interiors</span></div>
       <div class="gal-item" style="background-image:url('img/case3_bath.jpg')"><span class="gal-cap" data-i18n="gal.c5">Spa bathrooms</span></div>
+    </div>
+    <div class="want-cta">
+      <span data-i18n="want.gal">One team for all of it — see your numbers.</span>
+      <a class="btn btn-ink" href="#" onclick="return openQuiz('gallery')" data-i18n="want.btn">Get my estimate</a>
     </div>
   </div>
 </section>
@@ -675,7 +754,13 @@
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <a class="logo" style="color:var(--bone)" href="#">M<span>5</span></a>
+        <a class="logo" href="#" aria-label="M5" style="display:inline-flex;align-items:center;gap:14px;color:var(--bone)">
+          <svg width="52" height="43" viewBox="0 0 46 38" fill="none">
+            <path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
+            <text x="23" y="26" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
+          </svg>
+          <span style="font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:#B9AE9A;line-height:1.6">INTERIOR DESIGN<br>&amp; BUILD · MIAMI</span>
+        </a>
         <p class="f-about" data-i18n="foot.about">Interior design, renovation and construction studio — one accountable team, from first sketch to final handover. Miami, Florida.</p>
       </div>
       <div><h5 data-i18n="foot.h1">Main pages</h5><ul><li><a href="#" data-i18n="foot.l1">Home</a></li><li><a href="#about" data-i18n="foot.l2">About us</a></li><li><a href="#projects" data-i18n="foot.l3">Portfolio</a></li><li><a href="#contact" data-i18n="foot.l4">Contact</a></li></ul></div>
@@ -691,6 +776,36 @@
     </div>
   </div>
 </footer>
+
+<div class="qz-overlay" id="qzOverlay" onclick="closeQuiz()"></div>
+<div class="qz" id="qzModal" role="dialog" aria-modal="true">
+  <div class="qz-head">
+    <div><b data-i18n="qz.title">Instant Estimate</b><span class="mono" data-i18n="qz.sub">60 seconds · no obligation</span></div>
+    <button class="qz-x" onclick="closeQuiz()" aria-label="Close">✕</button>
+  </div>
+  <div class="qz-track"><div class="qz-fill" id="qzFill"></div></div>
+  <div class="qz-body" id="qzBody"></div>
+</div>
+
+<div class="mbar" id="mbar">
+  <a href="tel:+971585814215" onclick="if(window.m5track)m5track('phone_click')"><span>📞</span><span data-i18n="mb.call">Call</span></a>
+  <a href="https://wa.me/971585814215" target="_blank" rel="noopener"><span>💬</span>WhatsApp</a>
+  <a href="#" class="est" onclick="return openQuiz('mbar')"><span>⚡</span><span data-i18n="mb.est">Estimate</span></a>
+</div>
+
+<div class="xi-overlay" id="xiOverlay" onclick="closeXi()"></div>
+<div class="xi" id="xiModal" role="dialog" aria-modal="true">
+  <div class="xi-img"><button class="xi-x" onclick="closeXi()" aria-label="Close">✕</button></div>
+  <div class="xi-body">
+    <h4 data-i18n="xi.h">Wait — grab the 2026 Miami Renovation Cost Guide</h4>
+    <p data-i18n="xi.p">Real price ranges per sq ft, condo pitfalls, and a planning checklist — free PDF to your inbox.</p>
+    <form class="xi-form" onsubmit="return xiSubmit(event)">
+      <input type="email" id="xiEmail" placeholder="Your email" data-i18n-ph="xi.email" required>
+      <button class="btn btn-ink" type="submit" data-i18n="xi.btn">Send me the guide</button>
+    </form>
+    <div class="qz-note" data-i18n="xi.note">No spam — one useful PDF and occasional project insights.</div>
+  </div>
+</div>
 
 <a class="wa-float" href="https://wa.me/971585814215" aria-label="WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.9.8 2 .1.1.1.3 0 .5s-.2.3-.3.5l-.5.6c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1l2 .9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg>
@@ -728,6 +843,10 @@
       "plaster.li1":"Venetian plaster · microcement · limewash · travertine effects","plaster.li2":"Own sample library & Wynwood showroom","plaster.li3":"Feature walls, ceilings, wet areas & full interiors",
       "plaster.ctab":"Free on-site measurement & estimate","plaster.ctas":"We come to you, measure the space and prepare a detailed quote — at no cost.","plaster.ctabtn":"Book a free estimate",
       "proj.label":"Selected work","proj.h2":"Recent Miami projects","proj.viewall":"View all projects",
+      "qz.open":"⚡ Get my instant estimate","qz.title":"Instant Estimate","qz.sub":"60 seconds · no obligation",
+      "mb.call":"Call","mb.est":"Estimate",
+      "xi.h":"Wait — grab the 2026 Miami Renovation Cost Guide","xi.p":"Real price ranges per sq ft, condo pitfalls, and a planning checklist — free PDF to your inbox.","xi.email":"Your email","xi.btn":"Send me the guide","xi.note":"No spam — one useful PDF and occasional project insights.",
+      "want.ba":"Want this for your home?","want.gal":"One team for all of it — see your numbers.","want.btn":"Get my estimate",
       "gal.label":"One standard · every room","gal.h2":"One team for your whole home","gal.sub":"Living rooms, kitchens, signature plaster and bathrooms — designed, built and finished by one accountable team, to the same standard from the first room to the last.","gal.c1":"Living rooms","gal.c2":"Kitchens","gal.c3":"Signature plaster","gal.c4":"Full-home interiors","gal.c5":"Spa bathrooms",
       "ba.label":"Transformations","ba.h2":"Before & after","ba.before":"BEFORE","ba.after":"AFTER","ba.hint":"Drag to compare","ba.c1":"Decorative plaster · feature wall","ba.c2":"Turnkey apartment renovation",
       "case1.tag":"RENOVATION","case1.h4":"Brickell 2BR Residence","case1.m2":"12 WEEKS",
@@ -794,6 +913,10 @@
       "plaster.li1":"Estuco veneciano · microcemento · cal · efecto travertino","plaster.li2":"Muestrario propio y showroom en Wynwood","plaster.li3":"Paredes destacadas, techos, zonas húmedas e interiores completos",
       "plaster.ctab":"Medición y presupuesto gratis a domicilio","plaster.ctas":"Vamos a su espacio, tomamos medidas y preparamos un presupuesto detallado — sin coste.","plaster.ctabtn":"Reservar presupuesto gratis",
       "proj.label":"Trabajos seleccionados","proj.h2":"Proyectos recientes en Miami","proj.viewall":"Ver todos los proyectos",
+      "qz.open":"⚡ Estimación instantánea","qz.title":"Estimación instantánea","qz.sub":"60 segundos · sin compromiso",
+      "mb.call":"Llamar","mb.est":"Estimar",
+      "xi.h":"Espere — llévese la Guía de Costos de Reforma Miami 2026","xi.p":"Rangos reales de precios por sq ft, errores comunes en condos y checklist — PDF gratis a su correo.","xi.email":"Su email","xi.btn":"Enviarme la guía","xi.note":"Sin spam — un PDF útil y consejos ocasionales.",
+      "want.ba":"¿Lo quiere para su casa?","want.gal":"Un solo equipo para todo — vea sus números.","want.btn":"Mi estimación",
       "gal.label":"Un estándar · cada estancia","gal.h2":"Un solo equipo para toda su casa","gal.sub":"Salones, cocinas, estuco decorativo y baños — diseñados, construidos y terminados por un solo equipo responsable, con el mismo estándar de la primera estancia a la última.","gal.c1":"Salones","gal.c2":"Cocinas","gal.c3":"Estuco decorativo","gal.c4":"Interiores completos","gal.c5":"Baños tipo spa",
       "ba.label":"Transformaciones","ba.h2":"Antes y después","ba.before":"ANTES","ba.after":"DESPUÉS","ba.hint":"Arrastra para comparar","ba.c1":"Estuco decorativo · pared destacada","ba.c2":"Reforma integral de apartamento",
       "case1.tag":"REFORMA","case1.h4":"Residencia de 2 dorm. en Brickell","case1.m2":"12 SEMANAS",
@@ -860,6 +983,10 @@
       "plaster.li1":"Венеційська штукатурка · мікроцемент · вапно · ефект травертину","plaster.li2":"Власна бібліотека зразків і шоурум у Wynwood","plaster.li3":"Акцентні стіни, стелі, вологі зони та інтер'єри повністю",
       "plaster.ctab":"Безкоштовний замір і кошторис на об'єкті","plaster.ctas":"Приїдемо до вас, зробимо заміри й підготуємо докладний кошторис — безкоштовно.","plaster.ctabtn":"Замовити безкоштовний кошторис",
       "proj.label":"Вибрані роботи","proj.h2":"Нещодавні проєкти в Маямі","proj.viewall":"Усі проєкти",
+      "qz.open":"⚡ Миттєвий розрахунок","qz.title":"Миттєвий розрахунок","qz.sub":"60 секунд · без зобовʼязань",
+      "mb.call":"Дзвінок","mb.est":"Розрахунок",
+      "xi.h":"Зачекайте — заберіть Гайд цін на ремонт у Маямі 2026","xi.p":"Реальні вилки цін за sq ft, підводні камені кондо та чек-лист — безкоштовний PDF на пошту.","xi.email":"Ваш email","xi.btn":"Надіслати гайд","xi.note":"Без спаму — один корисний PDF та рідкісні поради.",
+      "want.ba":"Хочете так само у себе?","want.gal":"Одна команда на все — дізнайтесь свої цифри.","want.btn":"Мій розрахунок",
       "gal.label":"Один стандарт · кожна кімната","gal.h2":"Одна команда на весь дім","gal.sub":"Вітальні, кухні, декоративна штукатурка та ванні — спроєктовано, збудовано й оздоблено однією відповідальною командою в єдиному стандарті від першої кімнати до останньої.","gal.c1":"Вітальні","gal.c2":"Кухні","gal.c3":"Декоративна штукатурка","gal.c4":"Інтер'єри під ключ","gal.c5":"Ванні кімнати",
       "ba.label":"Трансформації","ba.h2":"До та після","ba.before":"ДО","ba.after":"ПІСЛЯ","ba.hint":"Тягніть для порівняння","ba.c1":"Декоративна штукатурка · акцентна стіна","ba.c2":"Ремонт квартири під ключ",
       "case1.tag":"РЕМОНТ","case1.h4":"Резиденція 2 спальні, Brickell","case1.m2":"12 ТИЖНІВ",
@@ -1213,7 +1340,8 @@ function smSubmit(e){
     phone:document.getElementById('smPhone').value.trim(),
     service:document.getElementById('smH').textContent,
     lang:smLang(), page:'service-modal',
-    _subject:'Service request — m5miami.com', _template:'table', _captcha:'false', _honey:''
+    _subject:'Service request — m5miami.com', _template:'table', _captcha:'false', _honey:'',
+    _autoresponse:(smLang()==='es'?'¡Gracias! Recibimos su solicitud de servicio y responderemos dentro de una hora. WhatsApp: https://wa.me/971585814215 — M5 Miami':smLang()==='uk'?'Дякуємо! Отримали ваш запит і відповімо протягом години. WhatsApp: https://wa.me/971585814215 — M5 Miami':'Thank you! We received your service request and will reply within the hour. WhatsApp: https://wa.me/971585814215 — M5 Miami')
   };
   btn.disabled=true; btn.style.opacity='.6';
   fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
@@ -1230,6 +1358,125 @@ document.querySelectorAll('#services .svc').forEach(function(card,i){
   card.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openService(i+1); } });
 });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeService(); });
+
+/* ================= QUIZ · Instant Estimate ================= */
+var QZ_EP='https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a';
+var QZL={
+ en:{types:[['🏠','Turnkey renovation','apartment or house, full scope',145],['📐','Design + renovation','concept, 3D and build',151],['🎨','Decorative plaster','walls & feature surfaces',14],['🏗','New construction / villa','ground-up build',390]],
+  q1:'What are we pricing?',q2:'Approximate area?',q2p:'For plaster — approx. wall area',sqft:'SQ FT',
+  q3:'Finish level?',levels:[['Standard','quality materials, clean design',1],['Premium','custom joinery, higher-end finishes',1.35],['Luxury','signature materials, full custom',1.7]],
+  q4:'When do you want to start?',times:['As soon as possible','In 1–3 months','In 3–6 months','Just exploring'],
+  q5:'Where do we send your estimate?',name:'Your name',phone:'Phone / WhatsApp',email:'Email (optional)',
+  see:'See my estimate →',back:'← Back',note:'Your range shows instantly on the next screen.',
+  resT:'Your estimated range',resSub:'Exact quote after a free on-site visit — we come to you, measure and confirm the numbers.',
+  resBook:'Book my free site visit',resWa:'Discuss in WhatsApp',
+  auto:'Thanks for using the M5 instant estimate! Your range is attached below. Next step — a free on-site visit: we measure and give you an exact itemized quote within 48 hours. Reply to this email or WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
+ es:{types:[['🏠','Reforma llave en mano','apartamento o casa, alcance completo',145],['📐','Diseño + reforma','concepto, 3D y obra',151],['🎨','Estuco decorativo','paredes y superficies destacadas',14],['🏗','Obra nueva / villa','construcción desde cero',390]],
+  q1:'¿Qué vamos a presupuestar?',q2:'¿Área aproximada?',q2p:'Para estuco — área aprox. de paredes',sqft:'SQ FT',
+  q3:'¿Nivel de acabados?',levels:[['Estándar','materiales de calidad, diseño limpio',1],['Premium','carpintería a medida, mejores acabados',1.35],['Lujo','materiales exclusivos, todo a medida',1.7]],
+  q4:'¿Cuándo quiere empezar?',times:['Lo antes posible','En 1–3 meses','En 3–6 meses','Solo explorando'],
+  q5:'¿Dónde enviamos su presupuesto?',name:'Su nombre',phone:'Teléfono / WhatsApp',email:'Email (opcional)',
+  see:'Ver mi estimación →',back:'← Atrás',note:'Su rango aparece al instante en la siguiente pantalla.',
+  resT:'Su rango estimado',resSub:'Presupuesto exacto tras una visita gratuita — vamos, medimos y confirmamos los números.',
+  resBook:'Reservar visita gratuita',resWa:'Hablar por WhatsApp',
+  auto:'¡Gracias por usar la estimación instantánea de M5! Su rango está abajo. Siguiente paso — visita gratuita a domicilio: medimos y le damos un presupuesto exacto en 48 horas. Responda a este correo o escríbanos por WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
+ uk:{types:[['🏠','Ремонт під ключ','квартира чи будинок, повний обсяг',145],['📐','Дизайн + ремонт','концепція, 3D і будівництво',151],['🎨','Декоративна штукатурка','стіни та акцентні поверхні',14],['🏗','Нове будівництво / вілла','з нуля',390]],
+  q1:'Що рахуємо?',q2:'Приблизна площа?',q2p:'Для штукатурки — приблизна площа стін',sqft:'SQ FT',
+  q3:'Рівень оздоблення?',levels:[['Стандарт','якісні матеріали, чистий дизайн',1],['Преміум','меблі на замовлення, кращі матеріали',1.35],['Люкс','ексклюзивні матеріали, повний кастом',1.7]],
+  q4:'Коли плануєте почати?',times:['Якнайшвидше','Через 1–3 місяці','Через 3–6 місяців','Поки що придивляюсь'],
+  q5:'Куди надіслати розрахунок?',name:"Ваше ім'я",phone:'Телефон / WhatsApp',email:'Email (необовʼязково)',
+  see:'Показати розрахунок →',back:'← Назад',note:'Вилка зʼявиться одразу на наступному екрані.',
+  resT:'Ваша орієнтовна вилка',resSub:'Точний кошторис — після безкоштовного виїзду: приїдемо, заміряємо й підтвердимо цифри.',
+  resBook:'Записатись на безкоштовний замір',resWa:'Обговорити у WhatsApp',
+  auto:'Дякуємо за розрахунок M5! Ваша вилка нижче. Наступний крок — безкоштовний виїзд: заміряємо та дамо точний кошторис за 48 годин. Відповідайте на цей лист або пишіть у WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'}
+};
+function qzLang(){var l=null;try{l=localStorage.getItem('m5lang')}catch(e){};return QZL[l]?l:'en';}
+var qz={step:1,type:null,sqft:900,level:null,time:null,src:''};
+function openQuiz(src){qz={step:1,type:null,sqft:900,level:null,time:null,src:src||''};
+  document.getElementById('qzOverlay').classList.add('on');document.getElementById('qzModal').classList.add('on');
+  document.body.style.overflow='hidden';qzRender();
+  if(window.m5track)m5track('quiz_open',{source:src||''});return false;}
+function closeQuiz(){document.getElementById('qzOverlay').classList.remove('on');document.getElementById('qzModal').classList.remove('on');document.body.style.overflow='';}
+function qzCalc(){var t=QZL[qzLang()],rate=qz.type[3],mult=qz.level[2];
+  var base=rate*qz.sqft*mult, lo=Math.round(base*0.9/1000)*1000, hi=Math.round(base*1.15/1000)*1000;
+  if(lo<1000)lo=Math.round(base*0.9/100)*100; if(hi<1000)hi=Math.round(base*1.15/100)*100;
+  return [lo,hi];}
+function qzFmt(n){return '$'+n.toLocaleString('en-US');}
+function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h='';
+  document.getElementById('qzFill').style.width=(qz.step*16.6)+'%';
+  if(qz.step===1){h='<div class="qz-q">'+t.q1+'</div><div class="qz-opts">'+t.types.map(function(x,i){
+    return '<button class="qz-opt" onclick="qz.type=QZL[qzLang()].types['+i+'];qz.step=2;qzRender()"><span class="ic">'+x[0]+'</span><span>'+x[1]+'<small>'+x[2]+'</small></span></button>';}).join('')+'</div>';}
+  else if(qz.step===2){h='<div class="qz-q">'+t.q2+'</div>'+(qz.type&&qz.type[3]===14?'<div class="qz-note" style="margin-bottom:10px">'+t.q2p+'</div>':'')+
+    '<div class="qz-sqft"><span id="qzSq">'+qz.sqft.toLocaleString()+'</span> <i>'+t.sqft+'</i></div>'+
+    '<div class="qz-slider"><input type="range" class="qzr" min="200" max="6000" step="50" value="'+qz.sqft+'" oninput="qz.sqft=+this.value;document.getElementById(\'qzSq\').textContent=qz.sqft.toLocaleString()"></div>'+
+    '<div class="qz-nav"><button class="qz-back" onclick="qz.step=1;qzRender()">'+t.back+'</button><a class="btn btn-ink" href="#" onclick="qz.step=3;qzRender();return false">→</a></div>';}
+  else if(qz.step===3){h='<div class="qz-q">'+t.q3+'</div><div class="qz-opts">'+t.levels.map(function(x,i){
+    return '<button class="qz-opt" onclick="qz.level=QZL[qzLang()].levels['+i+'];qz.step=4;qzRender()"><span>'+x[0]+'<small>'+x[1]+'</small></span></button>';}).join('')+'</div>'+
+    '<div class="qz-nav"><button class="qz-back" onclick="qz.step=2;qzRender()">'+t.back+'</button></div>';}
+  else if(qz.step===4){h='<div class="qz-q">'+t.q4+'</div><div class="qz-opts">'+t.times.map(function(x,i){
+    return '<button class="qz-opt" onclick="qz.time=QZL[qzLang()].times['+i+'];qz.step=5;qzRender()"><span>'+x+'</span></button>';}).join('')+'</div>'+
+    '<div class="qz-nav"><button class="qz-back" onclick="qz.step=3;qzRender()">'+t.back+'</button></div>';}
+  else if(qz.step===5){h='<div class="qz-q">'+t.q5+'</div><form class="qz-form" onsubmit="return qzSubmit(event)">'+
+    '<input type="text" id="qzName" placeholder="'+t.name+'" required>'+
+    '<input type="tel" id="qzPhone" placeholder="'+t.phone+'" required>'+
+    '<input type="email" id="qzEmail" placeholder="'+t.email+'">'+
+    '<div class="qz-nav"><button type="button" class="qz-back" onclick="qz.step=4;qzRender()">'+t.back+'</button>'+
+    '<button class="btn btn-ink" type="submit" id="qzGo">'+t.see+'</button></div>'+
+    '<div class="qz-note">'+t.note+'</div></form>';}
+  else if(qz.step===6){var r=qzCalc();
+    h='<div class="qz-result"><div class="label2">'+t.resT+'</div>'+
+    '<div class="qz-price">'+qzFmt(r[0])+' – '+qzFmt(r[1])+'</div>'+
+    '<div class="qz-sub">'+t.resSub+'</div>'+
+    '<div class="qz-cta"><a class="btn btn-ink" href="#contact" onclick="closeQuiz()">'+t.resBook+'</a>'+
+    '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/971585814215?text='+encodeURIComponent('Hi M5! My instant estimate: '+qz.type[1]+', '+qz.sqft+' sq ft, '+qz.level[0]+' → '+qzFmt(r[0])+'–'+qzFmt(r[1])+'. Let\'s talk!')+'">'+t.resWa+'</a></div></div>';}
+  b.innerHTML=h;}
+function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
+  var go=document.getElementById('qzGo');go.disabled=true;go.style.opacity='.6';
+  var email=document.getElementById('qzEmail').value.trim();
+  var payload={name:document.getElementById('qzName').value.trim(),phone:document.getElementById('qzPhone').value.trim(),
+    project:qz.type[1],area_sqft:qz.sqft,finish_level:qz.level[0],timeline:qz.time,
+    estimate:qzFmt(r[0])+' – '+qzFmt(r[1]),source:'quiz:'+qz.src,lang:qzLang(),
+    _subject:'🔥 QUIZ LEAD '+qzFmt(r[0])+'+ — m5miami.com',_template:'table',_captcha:'false',_honey:''};
+  if(email){payload.email=email;payload._autoresponse=t.auto+' | '+t.resT+': '+payload.estimate;}
+  fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+    .catch(function(){}).finally(function(){
+      if(window.m5track)m5track('quiz_lead',{value_low:r[0],project:qz.type[1]});
+      qz.step=6;qzRender();});
+  return false;}
+
+/* ================= EXIT INTENT ================= */
+function xiSeen(){try{var v=localStorage.getItem('m5_xi');return v && (Date.now()-(+v))<7*864e5;}catch(e){return false;}}
+function xiMark(){try{localStorage.setItem('m5_xi',''+Date.now());}catch(e){}}
+function openXi(){if(xiSeen())return;if(document.getElementById('qzModal').classList.contains('on'))return;
+  document.getElementById('xiOverlay').classList.add('on');document.getElementById('xiModal').classList.add('on');xiMark();
+  if(window.m5track)m5track('exit_intent_shown');}
+function closeXi(){document.getElementById('xiOverlay').classList.remove('on');document.getElementById('xiModal').classList.remove('on');}
+document.addEventListener('mouseout',function(e){if(!e.relatedTarget && e.clientY<=0)openXi();});
+setTimeout(function(){ // мобильный fallback: 45с на сайте + проскроллил половину
+  var fired=false;window.addEventListener('scroll',function(){
+    if(fired)return;var sc=window.scrollY/(document.body.scrollHeight-innerHeight);
+    if(sc>0.55 && matchMedia('(max-width:760px)').matches){fired=true;setTimeout(openXi,4000);}
+  },{passive:true});},45000);
+var XIL={en:{ok:'Sent! Check your inbox — the guide is on its way.',auto:'Here is your 2026 Miami Renovation Cost Guide: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Real $/sq ft ranges, condo pitfalls and a planning checklist. Questions? WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
+ es:{ok:'¡Enviado! Revise su correo — la guía va en camino.',auto:'Aquí está su Guía de Costos de Reforma en Miami 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Rangos reales de $/sq ft, errores comunes en condos y checklist. ¿Preguntas? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
+ uk:{ok:'Надіслано! Перевірте пошту — гайд уже летить.',auto:'Ваш гайд цін на ремонт у Маямі 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Реальні вилки $/sq ft, підводні камені кондо та чек-лист. Питання? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'}};
+function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
+  var em=document.getElementById('xiEmail').value.trim();
+  fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:em,lead_type:'cost-guide download',lang:l,_subject:'📗 Guide lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:t.auto})})
+    .catch(function(){}).finally(function(){
+      if(window.m5track)m5track('guide_lead');
+      document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0">✅ '+t.ok+'</h4>';
+      setTimeout(closeXi,2600);});
+  return false;}
+
+/* автоответ главной формы — подставляем текст на языке пользователя */
+(function(){var f=document.getElementById('leadForm');if(!f)return;
+  var A={en:'Thank you for contacting M5! We received your request and will reply within the hour (Mon–Sat). Faster? WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami',
+    es:'¡Gracias por contactar a M5! Recibimos su solicitud y responderemos dentro de una hora (lun–sáb). ¿Más rápido? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami',
+    uk:'Дякуємо за звернення до M5! Ми отримали ваш запит і відповімо протягом години (пн–сб). Швидше? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'};
+  var i=document.createElement('input');i.type='hidden';i.name='_autoresponse';f.appendChild(i);
+  f.addEventListener('submit',function(){i.value=A[qzLang()]||A.en;});})();
 </script>
 </body>
 </html>
