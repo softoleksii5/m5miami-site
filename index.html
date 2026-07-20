@@ -1427,7 +1427,7 @@ function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h=''
     h='<div class="qz-result"><div class="label2">'+t.resT+'</div>'+
     '<div class="qz-price">'+qzFmt(r[0])+' – '+qzFmt(r[1])+'</div>'+
     '<div class="qz-sub">'+t.resSub+'</div>'+
-    '<div class="qz-cta"><a class="btn btn-ink" href="#contact" onclick="closeQuiz()">'+t.resBook+'</a>'+
+    '<div class="qz-cta"><a class="btn btn-ink" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click')">'+t.resBook+'</a>'+
     '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/971585814215?text='+encodeURIComponent('Hi M5! My instant estimate: '+qz.type[1]+', '+qz.sqft+' sq ft, '+qz.level[0]+' → '+qzFmt(r[0])+'–'+qzFmt(r[1])+'. Let\'s talk!')+'">'+t.resWa+'</a></div></div>';}
   b.innerHTML=h;}
 function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
