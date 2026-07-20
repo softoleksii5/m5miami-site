@@ -467,7 +467,7 @@
       <div class="svc sig">
         <span class="sig-flag" data-i18n="svc.sig">SIGNATURE</span>
         <div class="svc-top"><div class="svc-num">3</div><h3 data-i18n="svc3.h3">Decorative Plaster</h3><div class="svc-photo" style="background:url('img/svc3_plaster.jpg') center/cover"></div></div>
-        <ul><li data-i18n="svc3.li1">Venetian plaster · microcement · limewash</li><li data-i18n="svc3.li2">Own sample library &amp; showroom</li><li data-i18n="svc3.li3">Architectural surfaces, not finishes</li></ul><div class="svc-price" data-i18n="svc3.price">from $14 / sq ft</div>
+        <ul><li data-i18n="svc3.li1">Venetian plaster · microcement · limewash</li><li data-i18n="svc3.li2">Own sample library &amp; showroom</li><li data-i18n="svc3.li3">Architectural surfaces, not finishes</li></ul><div class="svc-price" data-i18n="svc3.price">from $14 / sq ft · project min $10K</div>
       </div>
       <div class="svc">
         <div class="svc-top"><div class="svc-num">4</div><h3 data-i18n="svc4.h3">Construction &amp; Villas</h3><div class="svc-photo" style="background:url('img/svc4_construction.jpg') center/cover"></div></div>
@@ -788,6 +788,30 @@
   <div class="qz-body" id="qzBody"></div>
 </div>
 
+<div class="qz-overlay" id="ldOverlay" onclick="closeLead()"></div>
+<div class="qz" id="ldModal" role="dialog" aria-modal="true" style="width:min(480px,94vw)">
+  <div class="qz-head">
+    <div><b data-i18n="lead.label">Get a quote</b><span class="mono" data-i18n="lead.f3">REPLY WITHIN 1 HOUR</span></div>
+    <button class="qz-x" onclick="closeLead()" aria-label="Close">✕</button>
+  </div>
+  <div class="qz-body">
+    <div class="qz-q" style="font-size:20px" data-i18n="lead.h2">Tell us about your space.</div>
+    <form class="qz-form" onsubmit="return ldSubmit(event)">
+      <input type="text" id="ldName" placeholder="Your name" data-i18n-ph="form.name" required>
+      <input type="tel" id="ldPhone" placeholder="Phone / WhatsApp" data-i18n-ph="form.phone" required>
+      <input type="text" id="ldHood" placeholder="Neighborhood / building" data-i18n-ph="form.hood">
+      <select id="ldBudget" style="background:var(--white);border:1px solid var(--line);padding:15px 16px;font-size:15px;font-family:var(--sans);color:var(--ink);border-radius:8px">
+        <option value="" data-i18n="form.budget">Project budget</option>
+        <option>$100–200K</option><option>$200–400K</option><option>$400K+</option>
+        <option data-i18n="form.b4">Not sure yet</option>
+      </select>
+      <button class="btn btn-ink" type="submit" id="ldGo" data-i18n="form.btn">Send request</button>
+      <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/971585814215" style="text-align:center">WhatsApp</a>
+    </form>
+    <div class="qz-note" id="ldOk" style="display:none;color:#1faa52;font-size:14px"></div>
+  </div>
+</div>
+
 <div class="mbar" id="mbar">
   <a href="tel:+971585814215" onclick="if(window.m5track)m5track('phone_click')"><span>📞</span><span data-i18n="mb.call">Call</span></a>
   <a href="https://wa.me/971585814215" target="_blank" rel="noopener"><span>💬</span>WhatsApp</a>
@@ -830,7 +854,7 @@
       "hero.strip1":"FULL CYCLE STUDIO","hero.strip2":"DESIGN · BUILD · DEVELOP","hero.strip3":"ENGLISH · SPANISH · UKRAINIAN",
       "stats.label":"Who we are",
       "stats.lead":"An international studio, now building in Miami — one accountable team from first sketch to final handover.",
-      "stats.s1":"years of experience","stats.s2":"projects delivered in the USA","stats.s3":"written warranty on every build","stats.s4":"insured · permits pulled","form.ok":"Thank you — we received your request and will reply within one business hour (9am–6pm ET).","rev.client":"Client","svc1.price":"from $6 / sq ft","svc2.price":"from $145 / sq ft","svc3.price":"from $14 / sq ft","svc4.price":"from $390 / sq ft","svc5.price":"from 4% of budget",
+      "stats.s1":"years of experience","stats.s2":"projects delivered in the USA","stats.s3":"written warranty on every build","stats.s4":"insured · permits pulled","form.ok":"Thank you — we received your request and will reply within one business hour (9am–6pm ET).","rev.client":"Client","svc1.price":"from $6 / sq ft","svc2.price":"from $145 / sq ft","svc3.price":"from $14 / sq ft · project min $10K","svc4.price":"from $390 / sq ft","svc5.price":"from 4% of budget",
       "svc.label":"M5 Services","svc.h2":"What we do",
       "svc1.h3":"Interior Design & 3D","svc1.li1":"Concept, layouts & space planning","svc1.li2":"Photoreal 3D visualization","svc1.li3":"Materials, FF&E & documentation",
       "svc2.h3":"Turnkey Renovation","svc2.li1":"Demolition to décor — one contract","svc2.li2":"Fixed-scope pricing, no surprise costs","svc2.li3":"Weekly photo updates through handover",
@@ -900,7 +924,7 @@
       "hero.strip1":"ESTUDIO DE CICLO COMPLETO","hero.strip2":"DISEÑO · CONSTRUCCIÓN · DESARROLLO","hero.strip3":"INGLÉS · ESPAÑOL · UCRANIANO",
       "stats.label":"Quiénes somos",
       "stats.lead":"Un estudio internacional, ahora construyendo en Miami — un solo equipo responsable, del primer boceto a la entrega final.",
-      "stats.s1":"años de experiencia","stats.s2":"proyectos entregados en EE. UU.","stats.s3":"de garantía escrita en cada obra","stats.s4":"asegurados · con permisos","form.ok":"Gracias — recibimos su solicitud y responderemos dentro de una hora laboral (9am–6pm ET).","rev.client":"Cliente","svc1.price":"desde $6 / sq ft","svc2.price":"desde $145 / sq ft","svc3.price":"desde $14 / sq ft","svc4.price":"desde $390 / sq ft","svc5.price":"desde 4% del presupuesto",
+      "stats.s1":"años de experiencia","stats.s2":"proyectos entregados en EE. UU.","stats.s3":"de garantía escrita en cada obra","stats.s4":"asegurados · con permisos","form.ok":"Gracias — recibimos su solicitud y responderemos dentro de una hora laboral (9am–6pm ET).","rev.client":"Cliente","svc1.price":"desde $6 / sq ft","svc2.price":"desde $145 / sq ft","svc3.price":"desde $14 / sq ft · proyecto mín. $10K","svc4.price":"desde $390 / sq ft","svc5.price":"desde 4% del presupuesto",
       "svc.label":"Servicios M5","svc.h2":"Qué hacemos",
       "svc1.h3":"Diseño interior y 3D","svc1.li1":"Concepto, distribución y planificación del espacio","svc1.li2":"Visualización 3D fotorrealista","svc1.li3":"Materiales, mobiliario y documentación",
       "svc2.h3":"Reforma llave en mano","svc2.li1":"De la demolición al detalle — un solo contrato","svc2.li2":"Precio cerrado, sin costes sorpresa","svc2.li3":"Fotos de avance cada semana hasta la entrega",
@@ -970,7 +994,7 @@
       "hero.strip1":"СТУДІЯ ПОВНОГО ЦИКЛУ","hero.strip2":"ДИЗАЙН · БУДІВНИЦТВО · РОЗВИТОК","hero.strip3":"АНГЛІЙСЬКА · ІСПАНСЬКА · УКРАЇНСЬКА",
       "stats.label":"Хто ми",
       "stats.lead":"Міжнародна студія, яка тепер будує в Маямі — одна відповідальна команда від першого ескізу до фінальної здачі.",
-      "stats.s1":"років досвіду","stats.s2":"проєктів здано в США","stats.s3":"письмова гарантія на кожен об'єкт","stats.s4":"застраховано · з дозволами","form.ok":"Дякуємо — ми отримали вашу заявку і відповімо протягом робочої години (9:00–18:00 ET).","rev.client":"Клієнт","svc1.price":"від $6 / sq ft","svc2.price":"від $145 / sq ft","svc3.price":"від $14 / sq ft","svc4.price":"від $390 / sq ft","svc5.price":"від 4% бюджету",
+      "stats.s1":"років досвіду","stats.s2":"проєктів здано в США","stats.s3":"письмова гарантія на кожен об'єкт","stats.s4":"застраховано · з дозволами","form.ok":"Дякуємо — ми отримали вашу заявку і відповімо протягом робочої години (9:00–18:00 ET).","rev.client":"Клієнт","svc1.price":"від $6 / sq ft","svc2.price":"від $145 / sq ft","svc3.price":"від $14 / sq ft · проєкт від $10K","svc4.price":"від $390 / sq ft","svc5.price":"від 4% бюджету",
       "svc.label":"Послуги M5","svc.h2":"Що ми робимо",
       "svc1.h3":"Дизайн інтер'єру та 3D","svc1.li1":"Концепція, планування та зонування","svc1.li2":"Фотореалістична 3D-візуалізація","svc1.li3":"Матеріали, меблі, обладнання та документація",
       "svc2.h3":"Ремонт під ключ","svc2.li1":"Від демонтажу до декору — один договір","svc2.li2":"Фіксована ціна без несподіваних витрат","svc2.li3":"Щотижневі фотозвіти аж до здачі",
@@ -1401,6 +1425,7 @@ function closeQuiz(){document.getElementById('qzOverlay').classList.remove('on')
 function qzCalc(){var t=QZL[qzLang()],rate=qz.type[3],mult=qz.level[2];
   var base=rate*qz.sqft*mult, lo=Math.round(base*0.9/1000)*1000, hi=Math.round(base*1.15/1000)*1000;
   if(lo<1000)lo=Math.round(base*0.9/100)*100; if(hi<1000)hi=Math.round(base*1.15/100)*100;
+  if(rate===14){ lo=Math.max(lo,10000); hi=Math.max(hi,13000); } // декоративная штукатурка: минимальный проект $10K
   return [lo,hi];}
 function qzFmt(n){return '$'+n.toLocaleString('en-US');}
 function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h='';
@@ -1428,7 +1453,7 @@ function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h=''
     h='<div class="qz-result"><div class="label2">'+t.resT+'</div>'+
     '<div class="qz-price">'+qzFmt(r[0])+' – '+qzFmt(r[1])+'</div>'+
     '<div class="qz-sub">'+t.resSub+'</div>'+
-    '<div class="qz-cta"><a class="btn btn-ink" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click')">'+t.resBook+'</a>'+
+    '<div class="qz-cta"><a class="btn btn-ink" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track(\'booking_click\')">'+t.resBook+'</a>'+
     '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/971585814215?text='+encodeURIComponent('Hi M5! My instant estimate: '+qz.type[1]+', '+qz.sqft+' sq ft, '+qz.level[0]+' → '+qzFmt(r[0])+'–'+qzFmt(r[1])+'. Let\'s talk!')+'">'+t.resWa+'</a></div></div>';}
   b.innerHTML=h;}
 function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
@@ -1456,8 +1481,8 @@ document.addEventListener('mouseout',function(e){if(!e.relatedTarget && e.client
 setTimeout(function(){ // фолбэк без mouseleave (мобайл и десктоп): 20с на сайте + проскроллил 40%
   var fired=false;window.addEventListener('scroll',function(){
     if(fired)return;var sc=window.scrollY/(document.body.scrollHeight-innerHeight);
-    if(sc>0.4){fired=true;setTimeout(openXi,2000);}
-  },{passive:true});},20000);
+    if(sc>0.3){fired=true;setTimeout(openXi,1000);}
+  },{passive:true});},10000);
 var XIL={en:{ok:'Sent! Check your inbox — the guide is on its way.',auto:'Here is your 2026 Miami Renovation Cost Guide: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Real $/sq ft ranges, condo pitfalls and a planning checklist. Questions? WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
  es:{ok:'¡Enviado! Revise su correo — la guía va en camino.',auto:'Aquí está su Guía de Costos de Reforma en Miami 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Rangos reales de $/sq ft, errores comunes en condos y checklist. ¿Preguntas? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
  uk:{ok:'Надіслано! Перевірте пошту — гайд уже летить.',auto:'Ваш гайд цін на ремонт у Маямі 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Реальні вилки $/sq ft, підводні камені кондо та чек-лист. Питання? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'}};
@@ -1470,6 +1495,46 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
       document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0">✅ '+t.ok+'</h4>';
       setTimeout(closeXi,2600);});
   return false;}
+
+/* ===== LEAD MODAL: форма на месте клика ===== */
+function openLead(src){
+  document.getElementById('ldOverlay').classList.add('on');
+  document.getElementById('ldModal').classList.add('on');
+  document.body.style.overflow='hidden';
+  if(window.m5track)m5track('lead_modal_open',{source:src||''});
+  return false;}
+function closeLead(){
+  document.getElementById('ldOverlay').classList.remove('on');
+  document.getElementById('ldModal').classList.remove('on');
+  document.body.style.overflow='';}
+function ldSubmit(e){e.preventDefault();
+  var go=document.getElementById('ldGo');go.disabled=true;go.style.opacity='.6';
+  var A={en:'Thank you for contacting M5! We received your request and will reply within the hour (Mon–Sat). Faster? WhatsApp: https://wa.me/971585814215 — M5 Miami',
+    es:'¡Gracias por contactar a M5! Responderemos dentro de una hora (lun–sáb). ¿Más rápido? WhatsApp: https://wa.me/971585814215 — M5 Miami',
+    uk:'Дякуємо за звернення до M5! Відповімо протягом години (пн–сб). Швидше? WhatsApp: https://wa.me/971585814215 — M5 Miami'};
+  var OK={en:'✅ Sent! We will reply within the hour.',es:'✅ ¡Enviado! Responderemos dentro de una hora.',uk:'✅ Надіслано! Відповімо протягом години.'};
+  var l=qzLang();
+  fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({name:document.getElementById('ldName').value.trim(),
+      phone:document.getElementById('ldPhone').value.trim(),
+      neighborhood:document.getElementById('ldHood').value.trim(),
+      budget:document.getElementById('ldBudget').value,
+      source:'lead-modal',lang:l,_subject:'New lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:A[l]||A.en})})
+    .catch(function(){}).finally(function(){
+      if(window.m5track)m5track('lead_submit',{source:'modal'});
+      var ok=document.getElementById('ldOk');ok.textContent=OK[l]||OK.en;ok.style.display='block';
+      go.disabled=false;go.style.opacity='';
+      setTimeout(closeLead,2200);});
+  return false;}
+/* перехват всех ссылок на #contact → модалка на месте (нижняя форма остаётся для скролящих) */
+document.addEventListener('click',function(e){
+  var a=e.target.closest('a[href="#contact"]');
+  if(!a)return;
+  e.preventDefault();
+  if(typeof closeQuiz==='function')closeQuiz();
+  if(typeof closeService==='function')closeService();
+  openLead(a.textContent.trim().slice(0,30));
+});
 
 /* автоответ главной формы — подставляем текст на языке пользователя */
 (function(){var f=document.getElementById('leadForm');if(!f)return;
