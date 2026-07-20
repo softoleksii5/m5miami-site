@@ -221,7 +221,7 @@
   .rev-person img{width:48px;height:48px;border-radius:50%;object-fit:cover}
   .rev-person b{font-family:var(--serif);font-weight:700;font-size:16px;display:block}
   .rev-person span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#B9AE9A;text-transform:uppercase}
-  /* reviews rotator (по референсу) */
+  /* reviews rotator (как у ) */
   .rev-rotator{position:relative;margin:44px 0 10px;min-height:300px}
   @media(max-width:600px){.rev-rotator{min-height:400px}}
   .rev-slide{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;max-width:62ch}
@@ -390,7 +390,7 @@
   .sec-warm{background:linear-gradient(rgba(201,182,150,.38),rgba(199,180,148,.42));
     border-top:1px solid rgba(120,95,55,.14);border-bottom:1px solid rgba(120,95,55,.14)}
 
-  /* scroll-reveal — плавное появление секций по референсу */
+  /* scroll-reveal — плавное появление секций как у  */
   @media (prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);will-change:opacity,transform}
     .reveal.in{opacity:1;transform:none}
@@ -422,6 +422,7 @@
   </div>
 </header>
 
+
 <section class="hero">
   <div class="hero-img" id="heroImg"></div>
   <div class="wrap">
@@ -438,6 +439,7 @@
   </div>
 </section>
 
+
 <section class="stats sec-light">
   <div class="wrap">
     <div class="label" data-i18n="stats.label">Who we are</div>
@@ -450,6 +452,7 @@
     </div>
   </div>
 </section>
+
 
 <section id="services" class="sec-warm" style="padding-top:76px">
   <div class="wrap">
@@ -487,6 +490,7 @@
   </div>
 </section>
 
+
 <section id="plaster" class="plaster">
   <div class="wrap">
     <div class="label" style="color:#D9B87C" data-i18n="plaster.label">Our signature</div>
@@ -515,6 +519,7 @@
   </div>
 </section>
 
+
 <section id="projects" class="ba sec-light">
   <div class="wrap">
     <div class="ba-head">
@@ -531,6 +536,7 @@
     </div>
   </div>
 </section>
+
 
 <section class="transform sec-warm">
   <div class="wrap">
@@ -567,6 +573,7 @@
   </div>
 </section>
 
+
 <section class="gallery sec-light">
   <div class="wrap">
     <div class="label" data-i18n="gal.label">One standard · every room</div>
@@ -586,6 +593,7 @@
   </div>
 </section>
 
+
 <section class="cta">
   <div class="wrap">
     <h2 data-i18n="cta.h2">Get your estimate<br>in 48 hours.</h2>
@@ -597,6 +605,7 @@
     </div>
   </div>
 </section>
+
 
 <section class="sec-light">
   <div class="wrap">
@@ -613,6 +622,7 @@
   </div>
 </section>
 
+
 <section class="proc sec-warm">
   <div class="wrap">
     <div class="label" data-i18n="proc.label">Our process</div>
@@ -625,6 +635,7 @@
     <p style="text-align:center;margin-top:50px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--soft)" data-i18n="proc.foot">PROJECTS FROM ~$200K · TYPICAL TIMELINE UP TO 3 MONTHS</p>
   </div>
 </section>
+
 
 <section id="about" class="sec-light">
   <div class="wrap">
@@ -646,6 +657,8 @@
     </div>
   </div>
 </section>
+
+
 
 <section class="rev">
   <div class="wrap">
@@ -680,6 +693,8 @@
   </div>
 </section>
 
+
+
 <section id="faq" class="faq sec-light">
   <div class="wrap">
     <div class="label" data-i18n="faq.label">FAQ</div>
@@ -691,6 +706,7 @@
     <details><summary data-i18n="faq5.q">Is there a warranty?</summary><p data-i18n="faq5.a">Yes — a 1-year written warranty. Any issue after handover is fixed by the same team that built it.</p></details>
   </div>
 </section>
+
 
 <section id="contact" class="lead-sec sec-warm">
   <div class="wrap lead-box">
@@ -716,6 +732,8 @@
   </div>
 </section>
 
+
+
 <div class="cm-overlay" id="cmOverlay" onclick="closeCase()"></div>
 <div class="cm" id="caseModal" role="dialog" aria-modal="true">
   <div class="cm-hero" id="cmHero"><button class="cm-close" onclick="closeCase()" aria-label="Close">✕</button></div>
@@ -729,6 +747,7 @@
     <div class="cm-cta"><a class="btn btn-ink" href="#contact" onclick="closeCase()" id="cmCta"></a></div>
   </div>
 </div>
+
 
 <div class="cm-overlay" id="svcOverlay" onclick="closeService()"></div>
 <div class="cm" id="serviceModal" role="dialog" aria-modal="true">
@@ -779,6 +798,7 @@
   </div>
 </footer>
 
+
 <div class="qz-overlay" id="qzOverlay" onclick="closeQuiz()"></div>
 <div class="qz" id="qzModal" role="dialog" aria-modal="true">
   <div class="qz-head">
@@ -788,6 +808,7 @@
   <div class="qz-track"><div class="qz-fill" id="qzFill"></div></div>
   <div class="qz-body" id="qzBody"></div>
 </div>
+
 
 <div class="qz-overlay" id="ldOverlay" onclick="closeLead()"></div>
 <div class="qz" id="ldModal" role="dialog" aria-modal="true" style="width:min(480px,94vw)">
@@ -810,11 +831,13 @@
   </div>
 </div>
 
+
 <div class="mbar" id="mbar">
   <a href="tel:+971585814215" onclick="if(window.m5track)m5track('phone_click')"><span>📞</span><span data-i18n="mb.call">Call</span></a>
   <a href="https://wa.me/971585814215" target="_blank" rel="noopener"><span>💬</span>WhatsApp</a>
   <a href="#" class="est" onclick="return openQuiz('mbar')"><span>⚡</span><span data-i18n="mb.est">Estimate</span></a>
 </div>
+
 
 <div class="xi-overlay" id="xiOverlay" onclick="closeXi()"></div>
 <div class="xi" id="xiModal" role="dialog" aria-modal="true">
@@ -1079,7 +1102,7 @@
     applyLang(saved || (I18N[sys] ? sys : 'en'));
   })();
 
-  /* ===== scroll-reveal (появление секций при скролле, по референсу) ===== */
+  /* ===== scroll-reveal (появление секций при скролле, как у ) ===== */
   (function(){
     if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var sel='.hero-badge,.hero h1,.hero-sub,.hero-ctas,.label,h2,.stats .lead,.stat,.svc,.plaster-txt,.plaster-img,.gal-item,.case,.m-item,.money-note,.p-row,.t-card,.tm,.rev-card,.rev-score,.faq details,.lead-box>div,.form';
@@ -1483,17 +1506,19 @@ setTimeout(function(){ openXi(); }, 8000);
   if(fired)return;var sc=window.scrollY/(document.body.scrollHeight-innerHeight);
   if(sc>0.15){fired=true;setTimeout(openXi,400);}
 },{passive:true});})();
-var XIL={en:{ok:'Sent! Check your inbox — the guide is on its way.',auto:'Here is your 2026 Miami Renovation Cost Guide: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Real $/sq ft ranges, condo pitfalls and a planning checklist. Questions? WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
- es:{ok:'¡Enviado! Revise su correo — la guía va en camino.',auto:'Aquí está su Guía de Costos de Reforma en Miami 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Rangos reales de $/sq ft, errores comunes en condos y checklist. ¿Preguntas? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
- uk:{ok:'Надіслано! Перевірте пошту — гайд уже летить.',auto:'Ваш гайд цін на ремонт у Маямі 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Реальні вилки $/sq ft, підводні камені кондо та чек-лист. Питання? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'}};
+var XI_PDF='/guide/m5-miami-renovation-cost-guide-2026.pdf';
+var XIL={en:{ok:'Your guide is downloading',dl:"We've also emailed a copy so it's always handy.",lk:'Download the PDF',auto:'Here is your 2026 Miami Renovation & Interior Cost Guide: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Real $/sq ft ranges, the condo rules nobody warns you about, and a planning checklist. Questions? WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
+ es:{ok:'Su guía se está descargando',dl:'También le enviamos una copia por correo.',lk:'Descargar el PDF',auto:'Aquí está su Guía de Costos de Reforma en Miami 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Rangos reales de $/sq ft, las reglas de los condos que nadie le advierte y un checklist. ¿Preguntas? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
+ uk:{ok:'Ваш гайд завантажується',dl:'Ми також надіслали копію на пошту.',lk:'Завантажити PDF',auto:'Ваш гайд цін на ремонт у Маямі 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf — Реальні вилки $/sq ft, правила кондо, про які ніхто не попереджає, та чек-лист. Питання? WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'}};
+function xiDownload(){try{var a=document.createElement('a');a.href=XI_PDF;a.setAttribute('download','M5-Miami-Renovation-Cost-Guide-2026.pdf');document.body.appendChild(a);a.click();a.remove();}catch(_){}}
 function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
   var em=document.getElementById('xiEmail').value.trim();
   fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({email:em,lead_type:'cost-guide download',lang:l,_subject:'📗 Guide lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:t.auto})})
-    .catch(function(){}).finally(function(){
-      if(window.m5track)m5track('guide_lead');
-      document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0">✅ '+t.ok+'</h4>';
-      setTimeout(closeXi,2600);});
+    body:JSON.stringify({email:em,lead_type:'cost-guide download',lang:l,_subject:'📗 Guide lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:t.auto})}).catch(function(){});
+  if(window.m5track)m5track('guide_lead');
+  xiDownload();
+  document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0 6px">✅ '+t.ok+'</h4><p style="font-size:13px;color:#8a8272;margin-bottom:14px">'+t.dl+'</p><a href="'+XI_PDF+'" target="_blank" rel="noopener" download onclick="xiDownload();return false;" class="btn btn-ink" style="display:inline-flex;margin-top:2px">'+t.lk+' ↓</a>';
+  setTimeout(closeXi,6000);
   return false;}
 
 /* ===== LEAD MODAL: форма на месте клика ===== */
