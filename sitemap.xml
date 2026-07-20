@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://m5miami.com/</loc><lastmod>2026-07-19</lastmod><changefreq>weekly</changefreq></url>
+  <url><loc>https://m5miami.com/</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/portfolio/</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/projects/brickell-2br-residence.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/projects/edgewater-kitchen.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/projects/sunny-isles-master-bath.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/projects/coral-gables-villa.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/projects/south-beach-loft.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://m5miami.com/projects/wynwood-showroom.html</loc><changefreq>monthly</changefreq></url>
 </urlset>
