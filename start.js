@@ -6,7 +6,7 @@ var LINKS={
   clarity:'https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard',
   gcal:'https://calendar.google.com/',
   org:'/org/',
-  drive:'',        // папка «M5 Team» на Google Drive
+  drive:'https://drive.google.com/drive/folders/0AIS68-RBPjrTUk9PVA', // общий диск «M5 Team»
   telegram:'',     // invite-ссылка канала «M5 Пульс»
   monday:'',
   jobtread:'',

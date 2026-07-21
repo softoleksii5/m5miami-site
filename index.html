@@ -38,12 +38,12 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',window.M5_PIXEL);fbq('track','PageView');}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#14120F; --ink2:#1E1B16; --bone:#F4EEE4; --bone2:#ECE4D4; --white:#FFFFFF;
     --gold:#B0894F; --gold-d:#96703B; --soft:#5A5142; --soft-l:#B9AE9A; --line:#E0D6C2; --line-d:rgba(244,238,228,.16);
-    --serif:'Manrope',-apple-system,sans-serif; --sans:'Inter',-apple-system,sans-serif; --mono:'Space Mono',monospace;
+    --serif:'Fraunces',Georgia,serif; --sans:'Instrument Sans',-apple-system,sans-serif; --mono:'Space Mono',monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -415,7 +415,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
   <a class="logo" href="#" aria-label="M5">
     <svg width="46" height="38" viewBox="0 0 46 38" fill="none">
       <path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
-      <text x="23" y="26" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
+      <text x="23" y="26" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
     </svg>
   </a>
   <nav class="h-nav">
@@ -788,7 +788,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
         <a class="logo" href="#" aria-label="M5" style="display:inline-flex;align-items:center;gap:14px;color:var(--bone)">
           <svg width="52" height="43" viewBox="0 0 46 38" fill="none">
             <path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
-            <text x="23" y="26" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
+            <text x="23" y="26" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
           </svg>
           <span style="font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:#B9AE9A;line-height:1.6">INTERIOR DESIGN<br>&amp; BUILD · MIAMI</span>
         </a>
@@ -1514,8 +1514,8 @@ function openXi(){if(xiSeen())return;if(document.getElementById('qzModal').class
   if(window.m5track)m5track('exit_intent_shown');}
 function closeXi(){document.getElementById('xiOverlay').classList.remove('on');document.getElementById('xiModal').classList.remove('on');}
 document.addEventListener('mouseout',function(e){if(!e.relatedTarget && e.clientY<=0)openXi();});
-// гарантированно выскочит через 8с, даже если посетитель ничего не делает
-setTimeout(function(){ openXi(); }, 8000);
+// гарантированно выскочит через 15с, даже если посетитель ничего не делает (реш. Алекса 21.07)
+setTimeout(function(){ openXi(); }, 15000);
 // раньше — если проскроллил хотя бы 15%
 (function(){var fired=false;window.addEventListener('scroll',function(){
   if(fired)return;var sc=window.scrollY/(document.body.scrollHeight-innerHeight);
@@ -1540,7 +1540,7 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
 /* ===== LEAD MODAL: форма на месте клика ===== */
 var LD_BUDGETS={
   general:{en:['$50–100K','$100–250K','$250–500K','$500K+'],es:['$50–100K','$100–250K','$250–500K','$500K+'],uk:['$50–100K','$100–250K','$250–500K','$500K+']},
-  plaster:{en:['$10–25K','$25–50K','$50–100K','$100K+'],es:['$10–25K','$25–50K','$50–100K','$100K+'],uk:['$10–25K','$25–50K','$50–100K','$100K+']}
+  plaster:{en:['$2–10K','$10–25K','$25–50K','$50K+'],es:['$2–10K','$10–25K','$25–50K','$50K+'],uk:['$2–10K','$10–25K','$25–50K','$50K+']}
 };
 var LD_LBL={en:{budget:'Project budget',nsy:'Not sure yet'},es:{budget:'Presupuesto del proyecto',nsy:'Aún no lo sé'},uk:{budget:'Бюджет проєкту',nsy:'Ще не визначився'}};
 function ldFillBudget(mode){
