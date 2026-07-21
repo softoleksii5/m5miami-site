@@ -15,7 +15,7 @@ var LINKS={
   openphone:'',
   houzz:'',
   playbook:'',
-  video:''         // видео «Welcome from the founders»
+  video:'/media/m5_intro.mp4' // бренд-интро (Remotion, 24с)
 };
 
 /* фирменные логотипы сервисов (SVG со своими цветами) */
