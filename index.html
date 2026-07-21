@@ -28,7 +28,9 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');</script>
-<script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.source)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}</script>
+<script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.source)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}
+window.M5_HOOK='';/* URL вебхука Apps Script (лиды → Telegram + Sheet); пусто = выключено */
+window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)return;var s=JSON.stringify(p||{});if(navigator.sendBeacon){navigator.sendBeacon(M5_HOOK,s)}else{fetch(M5_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s})}}catch(e){}}</script>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
 
 
@@ -721,7 +723,8 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       <h2 style="margin-top:14px" data-i18n="lead.h2">Tell us about your space.</h2>
       <div class="lead-feats"><span data-i18n="lead.f1">FREE CONSULTATION</span><span data-i18n="lead.f2">SITE VISIT INCLUDED</span><span data-i18n="lead.f3">REPLY WITHIN 1 HOUR</span></div>
     </div>
-    <form class="form" id="leadForm" action="https://formsubmit.co/fa2b356d28577b1742e22a611a7e847a" method="POST" onsubmit="if(window.m5track)m5track('lead_submit')">
+    <form class="form" id="leadForm" action="https://formsubmit.co/fa2b356d28577b1742e22a611a7e847a" method="POST" onsubmit="if(window.m5track)m5track('lead_submit');if(window.m5hook)m5hook({type:'lead',name:this.name.value,phone:this.phone.value,details:(this.neighborhood.value+' '+this.budget.value).trim(),source:'main-form'})">
+      <input type="hidden" name="_cc" value="vlad@m5miami.com,vadim@m5miami.com">
       <input type="hidden" name="_subject" value="New lead — m5miami.com">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -1394,10 +1397,12 @@ function smSubmit(e){
     phone:document.getElementById('smPhone').value.trim(),
     service:document.getElementById('smH').textContent,
     lang:smLang(), page:'service-modal',
+    _cc:'vlad@m5miami.com,vadim@m5miami.com',
     _subject:'Service request — m5miami.com', _template:'table', _captcha:'false', _honey:'',
     _autoresponse:(smLang()==='es'?'¡Gracias! Recibimos su solicitud de servicio y responderemos dentro de una hora. WhatsApp: https://wa.me/971585814215 — M5 Miami':smLang()==='uk'?'Дякуємо! Отримали ваш запит і відповімо протягом години. WhatsApp: https://wa.me/971585814215 — M5 Miami':'Thank you! We received your service request and will reply within the hour. WhatsApp: https://wa.me/971585814215 — M5 Miami')
   };
   btn.disabled=true; btn.style.opacity='.6';
+  if(window.m5hook)m5hook({type:'service',name:payload.name,phone:payload.phone,service:payload.service,lang:payload.lang,source:'service-modal'});
   fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){return r.json();})
     .then(function(){ if(window.m5track)m5track('service_lead',{service:payload.service}); alert(t.thanks); closeService(); })
@@ -1491,8 +1496,10 @@ function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
   var payload={name:document.getElementById('qzName').value.trim(),phone:document.getElementById('qzPhone').value.trim(),
     project:qz.type[1],area_sqft:qz.sqft,finish_level:qz.level[0],timeline:qz.time,
     estimate:qzFmt(r[0])+' – '+qzFmt(r[1]),source:'quiz:'+qz.src,lang:qzLang(),
+    _cc:'vlad@m5miami.com,vadim@m5miami.com',
     _subject:'🔥 QUIZ LEAD '+qzFmt(r[0])+'+ — m5miami.com',_template:'table',_captcha:'false',_honey:''};
   if(email){payload.email=email;payload._autoresponse=t.auto+' | '+t.resT+': '+payload.estimate;}
+  if(window.m5hook)m5hook({type:'quiz',name:payload.name,phone:payload.phone,email:payload.email||'',service:payload.project,details:payload.area_sqft+' sqft, '+payload.finish_level+', '+payload.timeline+' → '+payload.estimate,lang:payload.lang,source:payload.source});
   fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
     .catch(function(){}).finally(function(){
       if(window.m5track)m5track('quiz_lead',{value_low:r[0],project:qz.type[1]});
@@ -1523,6 +1530,7 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
   var em=document.getElementById('xiEmail').value.trim();
   fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({email:em,lead_type:'cost-guide download',lang:l,_subject:'📗 Guide lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:t.auto})}).catch(function(){});
+  if(window.m5hook)m5hook({type:'guide',email:em,lang:l,source:'exit-popup'});
   if(window.m5track)m5track('guide_lead');
   xiDownload();
   document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0 6px">✅ '+t.ok+'</h4><p style="font-size:13px;color:#8a8272;margin-bottom:14px">'+t.dl+'</p><a href="'+XI_PDF+'" target="_blank" rel="noopener" download onclick="xiDownload();return false;" class="btn btn-ink" style="display:inline-flex;margin-top:2px">'+t.lk+' ↓</a>';
@@ -1560,12 +1568,13 @@ function ldSubmit(e){e.preventDefault();
     uk:'Дякуємо за звернення до M5! Відповімо протягом години (пн–сб). Швидше? WhatsApp: https://wa.me/971585814215 — M5 Miami'};
   var OK={en:'✅ Sent! We will reply within the hour.',es:'✅ ¡Enviado! Responderemos dentro de una hora.',uk:'✅ Надіслано! Відповімо протягом години.'};
   var l=qzLang();
+  if(window.m5hook)m5hook({type:'lead',name:document.getElementById('ldName').value.trim(),phone:document.getElementById('ldPhone').value.trim(),details:(document.getElementById('ldHood').value+' '+document.getElementById('ldBudget').value).trim(),lang:l,source:'lead-modal'});
   fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({name:document.getElementById('ldName').value.trim(),
       phone:document.getElementById('ldPhone').value.trim(),
       neighborhood:document.getElementById('ldHood').value.trim(),
       budget:document.getElementById('ldBudget').value,
-      source:'lead-modal',lang:l,_subject:'New lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:A[l]||A.en})})
+      source:'lead-modal',lang:l,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:A[l]||A.en})})
     .catch(function(){}).finally(function(){
       if(window.m5track)m5track('lead_submit',{source:'modal'});
       var ok=document.getElementById('ldOk');ok.textContent=OK[l]||OK.en;ok.style.display='block';
