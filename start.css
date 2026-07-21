@@ -1,7 +1,7 @@
 /* M5 Start — общий стиль всех кабинетов (/champion*) */
 :root{
   --ink:#20242E; --soft:#6E6656; --line:#EBE3D4; --white:#fff; --gold:#B0894F; --gold-d:#96703B;
-  --serif:'Fraunces',Georgia,serif; --sans:'Instrument Sans',sans-serif; --mono:'Space Mono',monospace;
+  --serif:'Geist',-apple-system,sans-serif; --sans:'Geist',sans-serif; --mono:'Space Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--sans);color:var(--ink);min-height:100vh;position:relative;
