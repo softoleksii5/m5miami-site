@@ -29,7 +29,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');</script>
 <script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.source)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}
-window.M5_HOOK='';/* URL вебхука Apps Script (лиды → Telegram + Sheet); пусто = выключено */
+window.M5_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';/* вебхук Apps Script «M5 Hub» (лиды → Telegram + Sheet) */
 window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)return;var s=JSON.stringify(p||{});if(navigator.sendBeacon){navigator.sendBeacon(M5_HOOK,s)}else{fetch(M5_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s})}}catch(e){}}</script>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
 
