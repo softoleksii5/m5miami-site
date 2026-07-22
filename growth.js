@@ -225,6 +225,7 @@ if(off){
   var atGate=false;
   body='<div class="sec">'+esc(sc.label)+' · metric: '+esc(sc.metric)+'</div>'+
     '<div class="gate-note">Discipline gate (required every month): '+esc(sc.gate)+' · Period: '+sc.period+'</div>'+
+    '<div class="m5note">15 rungs: A1 → A5, B1 → B5, M1 → <b>M5</b>. The top one carries the company’s name — reach M5 and you don’t just work at M5, you <b>are</b> M5. 💎</div>'+
     '<div class="ladder">';
   sc.rows.forEach(function(r){
     if(r.gate){ body+='<div class="grow"><span class="glock">🔒 Gate '+r.gate+'</span><span>'+esc(r.text)+'</span></div>'; return; }

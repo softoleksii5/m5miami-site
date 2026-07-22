@@ -59,3 +59,7 @@
 .ptab.on{background:var(--ink);color:#fff}
 .ppanel{display:none;margin-top:8px}
 .ppanel.on{display:block;animation:wvfade .3s ease}
+
+/* Подпись про вершину M5 — лестница заканчивается именем компании */
+.m5note{font-size:13.5px;line-height:1.55;color:var(--ink,#20242E);background:linear-gradient(90deg,rgba(176,137,79,.14),rgba(176,137,79,.04));border-left:3px solid var(--gold-d,#B0894F);border-radius:10px;padding:12px 15px;margin-bottom:16px}
+.m5note b{color:var(--gold-d,#B0894F)}
