@@ -43,6 +43,9 @@
     background:linear-gradient(180deg,var(--coral),var(--coral-d));transition:.2s;box-shadow:0 12px 24px -8px rgba(244,103,59,.55)}
   .enter:hover{filter:brightness(1.05);transform:translateY(-1px)}
   .note{text-align:center;font-size:12.5px;color:#AEA898;margin-top:16px}
+  .err{display:none;margin-top:14px;font-size:13px;line-height:1.5;color:#9E4A3A;background:#FBEFEA;
+    border-left:2px solid #D0765F;padding:9px 12px;border-radius:0 9px 9px 0}
+  .err.on{display:block}
   footer{text-align:center;padding:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--soft);text-transform:uppercase}
   @media(max-width:520px){header{padding:20px}.card{padding:32px 24px 28px}}
 </style>
@@ -75,6 +78,7 @@
       </select>
     </div>
     <button type="submit" class="enter">Enter M5</button>
+    <div class="err" id="werr">This email is not on the team list. Access is by invitation — ask in «M5 Team» and we’ll add you.</div>
     <div class="note">access by invitation only</div>
   </form>
 </main>
@@ -96,24 +100,29 @@
       return out;
     });
   }
+  /* Почта решает всё и вводится один раз:
+     — почта не из реестра → не пускаем (access by invitation only);
+     — фаундерская почта → роль из дропдауна (фаундеры смотрят любые кабинеты);
+     — остальные → роль принудительно из реестра, чужой кабинет не открыть.
+     Кабинет и онбординг дальше узнают человека сами — почту больше не спрашивают. */
   document.getElementById('joinForm').addEventListener('submit', function(e){
     e.preventDefault();
     var m = {
       name: document.getElementById('name').value.trim(),
-      email: document.getElementById('email').value.trim(),
+      email: document.getElementById('email').value.trim().toLowerCase(),
       phone: document.getElementById('phone').value.trim(),
       role: document.getElementById('role').value
     };
-    function go(){
+    sha256(m.email).then(function(h){
+      var reg = KNOWN_ROLE[h];
+      if (!reg) { document.getElementById('werr').classList.add('on'); return; }
+      if (reg !== 'founder') m.role = reg;
       try{ localStorage.setItem('m5_member', JSON.stringify(m)); }catch(err){}
       location.href = '/champion' + m.role;
-    }
-    if (window.crypto && crypto.subtle) {
-      sha256(m.email.toLowerCase()).then(function(h){
-        if (KNOWN_ROLE[h]) m.role = KNOWN_ROLE[h];
-        go();
-      }).catch(go);
-    } else go();
+    }).catch(function(){ document.getElementById('werr').classList.add('on'); });
+  });
+  document.getElementById('email').addEventListener('input', function(){
+    document.getElementById('werr').classList.remove('on');
   });
 </script>
 </body>
