@@ -94,7 +94,8 @@ var OFFSCALE={
  director:{label:'Director',head:'You’re off the ladder — you run it.',lines:[
    'Motivation: <b>30% of net profit per project</b> (not a level scale).',
    'You apply the A→B→M scale to <b>your team</b> (supervisors / PMs) and approve their moves with Alex.',
-   'Your path: growing authority → <b>General Manager</b>.']},
+   'Above you sits one future role — <b>General Director</b> (strategy · marketing · product). It is not reserved for anyone: it opens when M5 outgrows hands-on founders, and goes to whoever clears the bar.',
+   'The bar, in the open: production runs without founders in daily ops · a real team under you climbing A→B→M · project margin on plan several periods in a row · you bring strategy, not just execute it. See it on the <a href="/org">org page</a>.']},
  founder:{label:'Founder',head:'Owner — the scale is yours to run, not climb.',lines:[
    'You own the system and set the bar the whole team grows against.',
    'Your metals are the company’s: every teammate who hits Platinum «M5» is your win.']}

@@ -59,6 +59,16 @@
 
   .hire{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#B4682F;background:#FCEFE2;border:1px solid #F3D9BE;padding:3px 8px;border-radius:20px}
+
+  /* Будущая роль: пунктир = места ещё нет, но контур уже виден */
+  .card.person.future{background:linear-gradient(#fff,#FAFAFB);border-style:dashed;border-color:#C6CAD3;box-shadow:none}
+  .card.person.future:before{background:repeating-linear-gradient(90deg,#8A8F9C 0 10px,transparent 10px 18px)}
+  .card.person.future:hover{box-shadow:0 18px 40px -30px rgba(32,36,46,.4)}
+  .card.person.future .ava{background:linear-gradient(140deg,#A5AAB5,#8A8F9C);font-size:17px;letter-spacing:.02em}
+  .card.person.future .who span{color:#71767F}
+  .card.person.future .more{color:#71767F}
+  .soon{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1;padding:3px 8px;border-radius:20px}
   .card.mini{padding:20px}
   .card.mini .ava{width:44px;height:44px;font-size:15px;background:#F2ECE0;color:var(--gold-d)}
   .card.mini .who b{font-size:16.5px}
@@ -118,6 +128,11 @@
 
   <div class="lvl">Founders</div>
   <div class="row founders" id="rowFounders"></div>
+
+  <div class="down"></div>
+
+  <div class="lvl" style="margin-top:0">Leadership — not filled yet</div>
+  <div class="row solo" id="rowGD"></div>
 
   <div class="down"></div>
 
@@ -185,25 +200,48 @@ var TEAM=[
   duty:['Operations & production','Permits & compliance — Miami-Dade','Crews, subcontractors & quality','Production strategy & scaling'],
   value:'Runs the build: crews, sites, permits, quality. The licensed qualifier who makes every project legal and every handover clean.',
   ask:['Production & schedules','Permits & inspections','Subcontractors & crews','Hiring & team questions'],
-  email:'vadim@m5miami.com',tg:'mrShtempel',dob:'September — day TBC',start:'',end:'',contract:''}
+  email:'vadim@m5miami.com',tg:'mrShtempel',dob:'September — day TBC',start:'',end:'',contract:''},
+ /* Будущая роль. Намеренно НЕ закреплена ни за кем: планка публичная, дорастает тот, кто её берёт. */
+ {slug:'gd',name:'General Director',role:'Future role · opens as M5 scales',ava:'GD',avaClass:'',bc:'#8A8F9C',future:true,
+  duty:['Strategy — sets where M5 goes next','Marketing — owns demand and the brand engine','Product — owns what we build and how it feels','Runs the company day to day'],
+  value:'The role that takes M5 from founder-run to company-run. Today strategy and marketing sit with Alex, and product with the Director. When the machine outgrows hands-on founders, this role takes the wheel.',
+  bar:['Production runs without founders in daily operations','A real team underneath — supervisors and PMs climbing the A → B → M ladder','Owns the P&L: project margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
+  openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'}
 ];
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 
 function cardHtml(p){
-  return '<div class="card person" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
+  return '<div class="card person'+(p.future?' future':'')+'" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
+    (p.future?'<span class="soon">Future role</span>':'')+
     '<div class="who"><div class="ava '+p.avaClass+'">'+p.ava+'</div>'+
     '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
     '<ul class="duty">'+p.duty.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul>'+
-    '<span class="more">Profile →</span></div>';
+    '<span class="more">'+(p.future?'What it takes →':'Profile →')+'</span></div>';
 }
+function byslug(s){for(var i=0;i<TEAM.length;i++){if(TEAM[i].slug===s)return TEAM[i];}return null;}
 document.getElementById('rowFounders').innerHTML=cardHtml(TEAM[0])+cardHtml(TEAM[1]);
+document.getElementById('rowGD').innerHTML=cardHtml(byslug('gd'));
 document.getElementById('rowOps').innerHTML=cardHtml(TEAM[2]);
 
 function openP(slug){
   var p=null;
   for(var i=0;i<TEAM.length;i++){ if(TEAM[i].slug===slug){ p=TEAM[i]; break; } }
   if(!p)return;
+  if(p.future){
+    document.getElementById('pmBox').innerHTML=
+      '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
+      '<div class="who"><div class="ava" style="width:62px;height:62px;font-size:22px;background:#8A8F9C">'+p.ava+'</div>'+
+      '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
+      '<div class="pm-sec">What this role is</div><div class="pm-val">'+esc(p.value)+'</div>'+
+      '<div class="pm-sec">What it takes — the bar</div><ul class="pm-ask">'+p.bar.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
+      '<div class="pm-sec">Who can take it</div><div class="pm-val">'+esc(p.openTo)+'</div>'+
+      '<hr class="pm-hr">'+
+      '<div class="pm-priv">This role does not exist yet — it opens when M5 outgrows hands-on founders. Written down early so the bar is known in advance, not invented on the day.</div>';
+    document.getElementById('pmOv').classList.add('on');
+    document.getElementById('pmBox').classList.add('on');
+    return;
+  }
   var facts=
     '<div class="pm-fact"><i>Birthday</i><b>'+(p.dob?esc(p.dob):'—')+'</b></div>'+
     '<div class="pm-fact"><i>With M5 since</i><b>'+(p.start?esc(p.start):'—')+'</b></div>'+
