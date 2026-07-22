@@ -71,6 +71,7 @@
         <option value="designer">Designer</option>
         <option value="pm">Project Manager</option>
         <option value="director">Director</option>
+        <option value="founder">Founder</option>
       </select>
     </div>
     <button type="submit" class="enter">Enter M5</button>
@@ -81,6 +82,20 @@
 <footer>M5 Interior Design &amp; Build · Miami</footer>
 
 <script>
+  /* Почты команды — только SHA-256-хэши, адресов в коде нет.
+     Если почта из реестра, роль берётся из него, а не из дропдауна. */
+  var KNOWN_ROLE = {
+    '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322':'founder',
+    '9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47':'founder',
+    '5c73e10d48407d2b9ff50fb4383019c45b75eafe46b334ea4bf20de51d7df9ba':'director'
+  };
+  function sha256(s){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function(buf){
+      var a = new Uint8Array(buf), out = '';
+      for (var i=0;i<a.length;i++) out += ('0'+a[i].toString(16)).slice(-2);
+      return out;
+    });
+  }
   document.getElementById('joinForm').addEventListener('submit', function(e){
     e.preventDefault();
     var m = {
@@ -89,8 +104,16 @@
       phone: document.getElementById('phone').value.trim(),
       role: document.getElementById('role').value
     };
-    try{ localStorage.setItem('m5_member', JSON.stringify(m)); }catch(err){}
-    location.href = '/champion' + m.role;
+    function go(){
+      try{ localStorage.setItem('m5_member', JSON.stringify(m)); }catch(err){}
+      location.href = '/champion' + m.role;
+    }
+    if (window.crypto && crypto.subtle) {
+      sha256(m.email.toLowerCase()).then(function(h){
+        if (KNOWN_ROLE[h]) m.role = KNOWN_ROLE[h];
+        go();
+      }).catch(go);
+    } else go();
   });
 </script>
 </body>

@@ -61,13 +61,20 @@
   .key{display:inline-block;margin-top:9px;font-size:12.5px;line-height:1.5;color:#7A5C22;background:#FDF6E7;
     border-left:2px solid var(--gold);padding:7px 11px;border-radius:0 8px 8px 0}
 
-  .pick{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-  .pick a{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:20px;text-align:center;transition:.18s}
-  .pick a:hover{transform:translateY(-2px);box-shadow:0 18px 40px -26px rgba(32,36,46,.4)}
-  .pick b{display:block;font-size:17px;font-weight:800}
-  .pick span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d)}
-  @media(max-width:560px){.pick{grid-template-columns:1fr}}
+  .gate{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:22px;max-width:440px}
+  .gate label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:9px}
+  .gate input{width:100%;border:1px solid var(--line);border-radius:11px;padding:14px 15px;font-size:14.5px;
+    font-family:var(--sans);color:var(--ink)}
+  .gate input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,137,79,.14)}
+  .gate button{width:100%;margin-top:12px;border:none;border-radius:26px;padding:14px;cursor:pointer;
+    font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#fff;font-weight:700;
+    background:linear-gradient(180deg,#C9A25E,#96703B)}
+  .gate button:hover{filter:brightness(1.06)}
+  .gate .err{display:none;margin-top:11px;font-size:13px;line-height:1.5;color:#9E4A3A;background:#FBEFEA;
+    border-left:2px solid #D0765F;padding:8px 11px;border-radius:0 8px 8px 0}
+  .gate .err.on{display:block}
   .foot{margin-top:30px;font-size:13px;line-height:1.6;color:var(--soft);text-align:center}
+  .foot a{text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -81,7 +88,8 @@
 
 <script>
 /* Онбординг-чек-лист. Намеренно НЕ квиз: задача — чтобы человек сделал действия,
-   а не доказал, что прочитал. Прогресс живёт в localStorage. */
+   а не доказал, что прочитал. Прогресс живёт в localStorage.
+   Вход — по рабочей почте: в коде только SHA-256-хэши, самих адресов здесь нет. */
 var LINK = {
   monday:'https://m5miami.monday.com/',
   stock:'https://m5miami.monday.com/boards/5100794770',
@@ -90,7 +98,20 @@ var LINK = {
   drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm',
   tg:'https://t.me/+x4q86H688uNiODI8',
   app:'https://apps.apple.com/app/monday-com/id1290128888',
-  org:'/org/'
+  org:'/org/',
+  smmch:'/growth/?role=smm'
+};
+
+var HASH2WHO = {
+  '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322':'vlad',
+  '5c73e10d48407d2b9ff50fb4383019c45b75eafe46b334ea4bf20de51d7df9ba':'vadim',
+  '9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47':'alex'
+};
+
+var PERSON = {
+  vlad:  {name:'Влад',  role:'Co-Founder · Face of the Brand',        cab:'/championfounder',  track:'founder'},
+  alex:  {name:'Алекс', role:'Co-Founder · Strategy & Systems',       cab:'/championfounder',  track:'founder'},
+  vadim: {name:'Вадим', role:'Director · Licensed Qualifier',         cab:'/championdirector', track:'director'}
 };
 
 var COMMON = [
@@ -100,25 +121,28 @@ var COMMON = [
   {id:'jin', t:'Задать Jin один вопрос', p:'Jin знает, как устроена M5, и заточен под твою роль. Он не начальник и никому не докладывает — это твой инструмент. Спроси что-нибудь настоящее, из сегодняшнего дня.', go:['Открыть кабинет', '#cab']}
 ];
 
-var ROLE = {
-  vlad: {
-    name:'Влад', role:'Co-Founder · Brand & Sales', cab:'/championfounder',
-    lead:'Ты — лицо бренда и человек, который превращает интерес в контракт. Ниже — то, что нужно сделать один раз, чтобы система начала работать на тебя.',
-    why:'Заявка с сайта теперь мгновенно летит в Telegram и в CRM. Если её не взяли за 15 минут — бот напомнит в чате. За 30 — позовёт директора. По понедельникам приходит сводка. Ничего из этого не требует от тебя усилий, кроме одного: двигать карточку, когда берёшь лид в работу.',
+var TRACK = {
+  /* Фаундерский трек — это НЕ онбординг сотрудника. Это передача штурвала:
+     карта построенной машины и рычаги. Никаких шкал и «задач на уровень». */
+  founder: {
+    lead:'Тебе не нужен онбординг — ты сооснователь. Это карта машины, которую мы построили: что она уже делает сама и где в ней твои рычаги — бренд, клиенты, партнёры.',
+    why:'Пока мы разговариваем, система работает: заявка с сайта за секунды падает в Telegram и в CRM; лид без ответа 15 минут — бот напоминает в чате, 30 минут — зовёт директора; по понедельникам приходит сводка по скорости ответов; склад сам сигналит, когда пора заказывать; Jin отвечает каждому в команде по его роли. <b>Всё это не требует управления.</b> Единственное, что машина просит от человека — двигать карточку лида, когда взял её в работу.',
+    sec:'Твои рычаги',
     items:[
-      {id:'sla', t:'Понять правило 15 минут', p:'Это главный показатель компании. Клиент пишет пятерым и выбирает того, кто ответил первым — быстрый ответ выигрывает сделку чаще, чем красивая презентация.', key:'Взял лид в работу → перетащи карточку из группы «Новые лиды». Это сигнал системе, что им занялись, и напоминания прекращаются. Не перетащил — бот будет писать в чат, что лид брошен.', go:['Открыть CRM', LINK.crm]},
-      {id:'crm', t:'Проверить, что в карточках есть следующий шаг', p:'Стадия, заметка, следующий шаг — на каждой. Не для отчётности: чтобы завтра любой мог продолжить с того же места, а не начинать разговор заново.', go:['Открыть CRM', LINK.crm]},
-      {id:'part', t:'Посмотреть доску «Партнёры»', p:'Там уже 12 человек. Цель — 10+ активных, и чтобы через них шли сделки. После каждого касания — отметка в карточке, иначе через месяц никто не вспомнит, о чём договаривались.', go:['Открыть партнёров', LINK.partners]},
-      {id:'grow', t:'Открыть свою страницу роста', p:'15 ступеней: A1 → A5, B1 → B5, M1 → M5. Двигают вверх подписанные контракты. На каждой ступени растут фикс, процент и разовый бонус. Верхняя носит имя компании.', go:['Моя шкала', '#grow']}
+      {id:'sys', t:'Пройти по всей машине — /org', p:'Схема компании — наш манифест: маленькая команда навсегда, рутина на Jin, найм только по триггерам. Каждая карточка кликается — внутри ценность роли и планки. Там же открытая роль General Director с публичными критериями.', go:['Открыть /org', LINK.org]},
+      {id:'flow', t:'Увидеть путь заявки своими глазами', p:'Сайт → заявка → секунды → сообщение в Telegram + карточка в CRM в группе «Новые лиды». Отсюда начинается каждый доллар компании. Хочешь — отправь тестовую заявку с сайта и посмотри, как она прилетает.', key:'Взял лид в работу → перетащи карточку из «Новых лидов». Бот перестаёт напоминать. Это единственный ручной жест во всей цепочке.', go:['Открыть CRM', LINK.crm]},
+      {id:'crm', t:'Задать стандарт карточки', p:'Стадия, заметка, следующий шаг — на каждой. Команда будет вести карточки так, как ведёшь их ты: твои — эталон. Смысл не в отчётности, а в том, что завтра любой продолжит разговор с того места, где он остановился.', go:['Открыть CRM', LINK.crm]},
+      {id:'part', t:'Доска «Партнёры» — твоя территория', p:'Там уже 12 человек. Цель — 10+ активных риэлторов, через которых идут сделки. После каждого касания — отметка в карточке, иначе через месяц никто не вспомнит, о чём договаривались.', go:['Открыть партнёров', LINK.partners]},
+      {id:'face', t:'Контент: ты — фронтмен, снимается вся команда', p:'Ты — лицо бренда, но в кадре будут все: Вадим с объектов, каждый новый человек — в своей роли. План, съёмка и производство — работа SMM, каналы уже расписаны на его странице. Твоё в этом — камера, отношения и подкаст.', go:['Каналы SMM', LINK.smmch]}
     ]
   },
-  vadim: {
-    name:'Вадим', role:'Director · Licensed Qualifier', cab:'/championdirector',
+  director: {
     lead:'Ты держишь производство: лицензию, пермиты, бригады, качество. Это та часть компании, которую нельзя автоматизировать — поэтому она полностью твоя. Ниже — настройка, после которой система начнёт снимать с тебя бумажную работу.',
     why:'Jin — не сотрудник и не проверяющий. Он никому не докладывает и никого не заменяет. Он ловит заявки, догоняет напоминания, держит Monday и Drive в порядке, считает цифры. Он <b>никогда</b> не трогает лицензию и всё, что под ней подписывается, решения о деньгах и объёме, вкус и живые отношения. На схеме он нарисован слоем <b>под</b> компанией, а не рядом с людьми — потому что это инструмент. Смысл один: чтобы твой день уходил на стройку и людей, а не на отчёты.',
+    sec:'Сделать один раз',
     items:[
       {id:'stock', t:'Заполнить склад — это самое важное', p:'Доска и вся автоматика готовы, но пустые. Нужно один раз внести материалы: название, остаток, единицу и минимальный порог. После этого система сама будет писать утром, что заканчивается — и закупка перестанет быть авралом.', key:'Порог — это не «когда кончилось», а «когда пора заказывать с запасом на срок поставки». Поставь честно, иначе алерт придёт поздно.', go:['Открыть склад', LINK.stock]},
-      {id:'shoot', t:'Съёмка объекта — 4 кадра каждый визит', p:'До / процесс / после / деталь, сразу в Drive. Это не бюрократия: наш контент для продаж, наше портфолио и наша защита, если клиент заявит, что «было не так». Один визит без фото — дыра в доказательствах.', go:['Открыть Drive', LINK.drive]},
+      {id:'shoot', t:'Съёмка объекта — 4 кадра каждый визит', p:'До / процесс / после / деталь, сразу в Drive. Это не бюрократия: наш контент для продаж, наше портфолио и наша защита, если клиент заявит, что «было не так». Один визит без фото — дыра в доказательствах. Плюс короткие появления в кадре: контент бренда снимает вся команда, формат подскажет SMM.', go:['Открыть Drive', LINK.drive]},
       {id:'monday', t:'Держать Monday честным', p:'Реальные даты, а не желаемые. Блокер увидел — отметил сразу, а не когда сорвался срок. Система нужна, чтобы проблема всплывала рано, пока она ещё дешёвая.', go:['Мои доски', LINK.monday]},
       {id:'org', t:'Посмотреть оргструктуру и роль выше', p:'Там твоя карточка и одна будущая роль над тобой — General Director (стратегия, маркетинг, продукт). Она не закреплена ни за кем и открывается, когда компания перерастёт ручное управление. Планка написана открыто — чтобы это решение никогда не стало для тебя сюрпризом.', go:['Открыть /org', LINK.org]}
     ]
@@ -126,21 +150,44 @@ var ROLE = {
 };
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function qs(k){var m=new RegExp('[?&]'+k+'=([^&]*)').exec(location.search);return m?decodeURIComponent(m[1]):'';}
-
-var who = (qs('who')||'').toLowerCase();
 var app = document.getElementById('app');
 
-if (!ROLE[who]) {
+function sha256(s){
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)).then(function(buf){
+    var a = new Uint8Array(buf), out = '';
+    for (var i=0;i<a.length;i++) out += ('0'+a[i].toString(16)).slice(-2);
+    return out;
+  });
+}
+
+function renderGate(showErr){
   app.innerHTML =
     '<div class="hero"><div class="k">M5 Start</div><h1>Начнём.</h1>'+
-    '<p>Короткая настройка: что уже построено и что нужно сделать один раз, чтобы система работала на тебя. Минут десять, не больше.</p></div>'+
-    '<div class="pick">'+
-      '<a href="?who=vlad"><span>Co-Founder</span><b>Влад</b></a>'+
-      '<a href="?who=vadim"><span>Director</span><b>Вадим</b></a>'+
-    '</div>';
-} else {
-  var R = ROLE[who], items = R.items.concat(COMMON), KEY = 'm5_onb_' + who;
+    '<p>Короткая настройка: что уже построено и что нужно сделать один раз. Страница у каждого своя — открой её рабочей почтой.</p></div>'+
+    '<form class="gate" id="gate">'+
+      '<label for="em">Рабочая почта</label>'+
+      '<input type="email" id="em" placeholder="имя@m5miami.com" autocomplete="email" required>'+
+      '<button type="submit">Открыть мою страницу</button>'+
+      '<div class="err'+(showErr?' on':'')+'" id="gerr">Эта почта не в списке команды. Проверь написание — или напиши в «M5 Team», добавим.</div>'+
+    '</form>';
+  document.getElementById('gate').addEventListener('submit', function(e){
+    e.preventDefault();
+    var em = document.getElementById('em').value.trim().toLowerCase();
+    sha256(em).then(function(h){
+      var w = HASH2WHO[h];
+      if (w) {
+        try { localStorage.setItem('m5_onb_who', w); } catch (err) {}
+        renderTrack(w);
+      } else {
+        document.getElementById('gerr').classList.add('on');
+      }
+    });
+  });
+}
+
+function renderTrack(who){
+  var P = PERSON[who], T = TRACK[P.track];
+  var items = T.items.concat(COMMON), KEY = 'm5_onb_' + who;
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
 
@@ -149,8 +196,7 @@ if (!ROLE[who]) {
     var go = '';
     if (it.go) {
       var href = it.go[1];
-      if (href === '#cab') href = R.cab;
-      if (href === '#grow') href = R.cab;
+      if (href === '#cab') href = P.cab;
       go = '<a class="go" href="' + href + '" target="' + (href.charAt(0)==='/' ? '_self' : '_blank') + '" rel="noopener">' + esc(it.go[0]) + ' →</a>';
     }
     return '<div class="item' + d + '" id="row_' + it.id + '">' +
@@ -160,24 +206,30 @@ if (!ROLE[who]) {
   }
 
   app.innerHTML =
-    '<div class="hero"><div class="k">' + esc(R.role) + '</div><h1>' + esc(R.name) + ', начнём.</h1>' +
-    '<p>' + esc(R.lead) + '</p></div>' +
+    '<div class="hero"><div class="k">' + esc(P.role) + '</div><h1>' + esc(P.name) + ', начнём.</h1>' +
+    '<p>' + esc(T.lead) + '</p></div>' +
     '<div class="bar"><div class="bt"><span>Прогресс</span><b id="pct">0 / ' + items.length + '</b></div>' +
       '<div class="track"><div class="fill" id="fill"></div></div>' +
       '<div class="done-msg" id="dm">Готово. Система настроена — дальше она работает сама.</div></div>' +
     '<div class="sec">Что теперь происходит без тебя</div>' +
-    '<div class="why"><div class="wh">Важно понимать</div>' + R.why + '</div>' +
-    '<div class="sec">Сделать один раз</div>' +
-    R.items.map(rowHtml).join('') +
+    '<div class="why"><div class="wh">Важно понимать</div>' + T.why + '</div>' +
+    '<div class="sec">' + esc(T.sec) + '</div>' +
+    T.items.map(rowHtml).join('') +
     '<div class="sec">Общее для всех</div>' +
     COMMON.map(rowHtml).join('') +
-    '<div class="foot">Что-то неудобно или лишнее — скажи в «M5 Team». Систему строим под работу, а не работу под систему.</div>';
+    '<div class="foot">Что-то неудобно или лишнее — скажи в «M5 Team». Систему строим под работу, а не работу под систему.<br>' +
+      'Это не твоя страница? <a href="#" onclick="return swp()">Сменить почту</a></div>';
 
   window.tog = function(id){
     state[id] = !state[id];
     try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
     document.getElementById('row_' + id).classList.toggle('done', !!state[id]);
     paint();
+  };
+  window.swp = function(){
+    try { localStorage.removeItem('m5_onb_who'); } catch (e) {}
+    renderGate(false);
+    return false;
   };
   function paint(){
     var n = 0;
@@ -188,6 +240,26 @@ if (!ROLE[who]) {
   }
   paint();
 }
+
+/* Порядок входа: 1) уже открывал здесь → сразу его страница;
+   2) вошёл в хаб через welcomehero со своей почтой → узнаём молча;
+   3) иначе — почтовый замок. Старые ссылки ?who= больше не работают намеренно. */
+(function(){
+  var w = '';
+  try { w = localStorage.getItem('m5_onb_who') || ''; } catch (e) {}
+  if (PERSON[w]) { renderTrack(w); return; }
+  var em = '';
+  try { var m = JSON.parse(localStorage.getItem('m5_member') || 'null'); if (m && m.email) em = String(m.email).trim().toLowerCase(); } catch (e) {}
+  if (em && window.crypto && crypto.subtle) {
+    sha256(em).then(function(h){
+      var who = HASH2WHO[h];
+      if (who) {
+        try { localStorage.setItem('m5_onb_who', who); } catch (err) {}
+        renderTrack(who);
+      } else renderGate(false);
+    });
+  } else renderGate(false);
+})();
 </script>
 </body>
 </html>

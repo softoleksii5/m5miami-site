@@ -7,8 +7,8 @@ var LINKS={
   gcal:'https://calendar.google.com/',
   org:'/org/',
   stock:'https://m5miami.monday.com/boards/5100794770',
-  onbVlad:'/onboarding/?who=vlad',
-  onbVadim:'/onboarding/?who=vadim',
+  onb:'/onboarding/', // страница сама узнаёт человека по рабочей почте
+
   drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // «M5 · Company Drive»
   telegram:'https://t.me/+x4q86H688uNiODI8',  // группа «M5 Team»
   monday:'https://m5miami.monday.com/',
@@ -41,7 +41,7 @@ var ROLES={
   founder:{label:'Founder',sub:'Your command center',
     chips:['Leads this week','Site analytics','What needs my decision?'],
     tiles:[
-      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onbVlad'},
+      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'monday',k:'CRM',t:'Full pipeline',link:'monday'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
@@ -53,7 +53,7 @@ var ROLES={
   director:{label:'Director',sub:'Your command center',
     chips:['Margin & pipeline','Stock levels','This week'],
     tiles:[
-      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onbVadim'},
+      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
       {b:'monday',k:'CRM',t:'Full pipeline',link:'monday'},
       {ic:'📦',k:'Inventory',t:'Materials & stock',link:'stock'},
