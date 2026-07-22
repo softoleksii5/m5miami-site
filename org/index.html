@@ -71,6 +71,27 @@
   .soon{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1;padding:3px 8px;border-radius:20px}
   .card.mini{padding:20px}
+  /* Кредо: маленькая команда — это решение, а не стадия */
+  .creed{max-width:640px;margin:16px auto 0;font-size:14px;line-height:1.6;color:#4A4638}
+  /* Функция (не стул): сплошная рамка, но помечена как функция */
+  .card.person.fn{border-style:solid;border-color:#EBD9C6;background:linear-gradient(#fff,#FFFBF6)}
+  .card.person.fn:before{background:linear-gradient(90deg,#C98A5E,#E0B489)}
+  .card.person.fn .ava{background:linear-gradient(140deg,#D9A177,#C98A5E);font-size:20px}
+  .card.person.fn .who span,.card.person.fn .more{color:#8A5A32}
+  .fnb{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    color:#8A5A32;background:#FBEEE2;border:1px solid #F0D8C0;padding:3px 8px;border-radius:20px}
+  /* Jin — слой поперёк обеих функций */
+  .jinband{background:linear-gradient(135deg,#20242E,#2E3545);color:#EDEAE3;border-radius:18px;padding:24px 26px;
+    box-shadow:0 24px 54px -30px rgba(32,36,46,.65);position:relative;overflow:hidden}
+  .jinband:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% -20%,rgba(176,137,79,.35),transparent 55%)}
+  .jb-head{position:relative;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#E4C489;display:flex;align-items:center;gap:9px}
+  .jb-dot{width:8px;height:8px;border-radius:50%;background:#7DDC9A;box-shadow:0 0 0 4px rgba(125,220,154,.18)}
+  .jinband p{position:relative;font-size:14px;line-height:1.6;color:#D9D5CC;margin-top:11px}
+  .jinband p b{color:#fff}
+  .jb-rule{position:relative;margin-top:14px;padding-top:13px;border-top:1px solid rgba(237,234,227,.16);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:#E4C489}
+  .jb-rule b{color:#fff}
+  .trg{display:block;margin-top:10px;font-size:11px;line-height:1.45;color:#7A6F58;background:#FAF6EE;border-left:2px solid var(--gold);padding:6px 9px;border-radius:0 8px 8px 0}
   .br{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border-radius:20px}
   .br-g{color:#8A5A32;background:#FBEEE2;border:1px solid #F0D8C0}
   .br-d{color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1}
@@ -128,7 +149,8 @@
 
   <div class="hero">
     <h1>How M5 works.</h1>
-    <div class="k">Org structure · Click a person for details</div>
+    <div class="k">Org structure · Click a card for details</div>
+    <p class="creed">Small team on purpose. The routine runs on AI — people are here for judgment, taste and relationships. We add a person when something specific breaks, never because the calendar says so.</p>
   </div>
 
   <div class="lvl">Founders</div>
@@ -141,17 +163,26 @@
 
   <div class="down"></div>
 
-  <div class="lvl" style="margin-top:0">Two branches · report to the General Director</div>
+  <div class="lvl" style="margin-top:0">Two functions · not two departments</div>
   <div class="row branches" id="rowBranches"></div>
+
+  <div class="down"></div>
+
+  <div class="jinband">
+    <div class="jb-head"><span class="jb-dot"></span>JIN — the AI layer</div>
+    <p>Runs the routine underneath <b>both</b> functions: captures every lead, answers in seconds, chases follow-ups, keeps Monday clean, files docs to Drive, reports the numbers. This is the layer that lets M5 stay small.</p>
+    <div class="jb-rule">Before any new hire we ask one question first: <b>can Jin do this?</b></div>
+  </div>
 
   <div class="rail"></div>
 
-  <div class="lvl" style="margin-top:0">Team — we are hiring</div>
+  <div class="lvl" style="margin-top:0">People — we hire only on a trigger</div>
   <div class="row team">
     <div class="card mini" style="--bc:#E6DECB">
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">S</div><div><b>SMM</b></div></div>
       <p>Content, social growth, reels &amp; community.</p>
+      <span class="trg">Trigger: content is the top of the funnel — hiring now</span>
       <span class="br br-g">Growth</span>
       <a class="go" href="/championsmm">Workspace →</a>
     </div>
@@ -159,6 +190,7 @@
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">S</div><div><b>Sales</b></div></div>
       <p>Leads to contracts: calls, consults, follow-ups.</p>
+      <span class="trg">Trigger: more consultations than founders can run</span>
       <span class="br br-g">Growth</span>
       <a class="go" href="/championsales">Workspace →</a>
     </div>
@@ -166,6 +198,7 @@
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">D</div><div><b>Designer</b></div></div>
       <p>Interiors, 3D &amp; material selections.</p>
+      <span class="trg">Trigger: design becomes the bottleneck on parallel projects</span>
       <span class="br br-d">Delivery</span>
       <a class="go" href="/championdesigner">Workspace →</a>
     </div>
@@ -173,6 +206,7 @@
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">P</div><div><b>Project Manager</b></div></div>
       <p>Site execution, schedules &amp; supervision.</p>
+      <span class="trg">Trigger: 3+ sites running at once</span>
       <span class="br br-d">Delivery</span>
       <a class="go" href="/championpm">Workspace →</a>
     </div>
@@ -180,6 +214,7 @@
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">AI</div><div><b>AI Engineer</b></div></div>
       <p>Runs &amp; scales the system that powers M5.</p>
+      <span class="trg">Trigger: Jin's backlog outgrows founder evenings</span>
       <span class="br br-c">Company-wide</span>
       <a class="go" href="/champion">Workspace →</a>
     </div>
@@ -213,23 +248,23 @@ var TEAM=[
   email:'vadim@m5miami.com',tg:'mrShtempel',dob:'September — day TBC',start:'',end:'',contract:''},
  /* Будущая роль. Намеренно НЕ закреплена ни за кем: планка публичная, дорастает тот, кто её берёт. */
  {slug:'gd',name:'General Director',role:'Future role · opens as M5 scales',ava:'GD',avaClass:'',bc:'#8A8F9C',future:true,
-  duty:['Strategy — sets where M5 goes next','Runs the two branches below: Growth and Delivery','Owns the P&L across the whole company','Holds the outside bench: attorney, CPA, insurance'],
-  value:'The role that takes M5 from founder-run to company-run. It does not do marketing or production itself — it owns the two people who do, and answers to the founders for the result.',
-  bar:['Both branches run without founders in daily operations','A real team underneath — climbing the A → B → M ladder','Owns the P&L: margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
+  duty:['Strategy — sets where M5 goes next','Owns both functions: Growth and Delivery','Owns the P&L and keeps headcount low','Holds the outside bench: attorney, CPA, insurance'],
+  value:'The role that takes M5 from founder-run to company-run — without turning it into a pyramid. It runs a small team plus the AI system, not a department. It exists only when founders step out of daily operations.',
+  bar:['Both functions run without founders in daily operations','Output grows faster than headcount','Owns the P&L: margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
   openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'},
  /* Левая ветка. Роль-место, а не человек: сегодня её закрывают фаундеры, завтра — наёмный руководитель. */
- {slug:'growth',name:'Growth & Marketing',role:'Branch · covered by founders today',ava:'G',avaClass:'',bc:'#C98A5E',future:true,
-  duty:['Demand — content, ads, SEO & AI search','Brand & PR — the face M5 shows','Sales team and conversion','The AI system that runs leads and follow-ups'],
-  value:'Everything that brings a client to the door and turns them into a signed contract. Today Alex runs the engine and the AI layer, Vlad is the face and the relationships. It becomes a hired seat when the volume outgrows two founders doing it on the side.',
-  bar:['Leads arrive predictably, not in waves','Cost per contract known and falling','Content and ads feed Sales without founders pushing','Sales team on the A → B → M ladder'],
-  openTo:'Reports to the General Director. Until that seat exists, this branch answers straight to the founders.'}
+ {slug:'growth',name:'Growth',role:'Function · owned by founders · run by Jin',ava:'G',avaClass:'',bc:'#C98A5E',future:true,fn:true,
+  duty:['Demand — content, ads, SEO & AI search','Brand & PR — the face M5 shows','Leads → consultations → contracts','Most of it executed by Jin, not by staff'],
+  value:'Everything that brings a client to the door and turns them into a signed contract. This is a function, not a chair. Alex owns the engine, Vlad is the face — and the routine underneath (capture, follow-up, CRM, reporting) runs on Jin. We do not plan a marketing boss: we plan for the function to keep working with as few people as possible.',
+  bar:['Leads arrive predictably, not in waves','Cost per contract known and falling','Follow-up never depends on someone remembering','Every new task asks first: can Jin do this?'],
+  openTo:'A person is added here only when something specific breaks — never on a schedule. If Jin and two founders keep the numbers, the seat stays empty, and that is the win.'}
 ];
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 
 function cardHtml(p){
-  return '<div class="card person'+(p.future?' future':'')+'" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
-    (p.future?'<span class="soon">Future role</span>':'')+
+  return '<div class="card person'+(p.fn?' fn':(p.future?' future':''))+'" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
+    (p.fn?'<span class="fnb">Function</span>':(p.future?'<span class="soon">Future role</span>':''))+
     '<div class="who"><div class="ava '+p.avaClass+'">'+p.ava+'</div>'+
     '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
     '<ul class="duty">'+p.duty.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul>'+
@@ -252,10 +287,10 @@ function openP(slug){
       '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
       '<div class="pm-sec">What this role is</div><div class="pm-val">'+esc(p.value)+'</div>'+
       '<div class="pm-sec">What it takes — the bar</div><ul class="pm-ask">'+p.bar.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
-      '<div class="pm-sec">'+(p.slug==='growth'?'Who runs it':'Who can take it')+'</div><div class="pm-val">'+esc(p.openTo)+'</div>'+
+      '<div class="pm-sec">'+(p.fn?'When we add a person':'Who can take it')+'</div><div class="pm-val">'+esc(p.openTo)+'</div>'+
       '<hr class="pm-hr">'+
-      '<div class="pm-priv">'+(p.slug==='growth'
-        ? 'A seat, not a person. Founders cover it today — it is drawn here so everyone knows where marketing, content and sales report once M5 grows past that.'
+      '<div class="pm-priv">'+(p.fn
+        ? 'A function, not a chair. It is on the chart so everyone knows who owns demand — not to reserve a headcount. The routine underneath runs on Jin.'
         : 'This role does not exist yet — it opens when M5 outgrows hands-on founders. Written down early so the bar is known in advance, not invented on the day.')+'</div>';
     document.getElementById('pmOv').classList.add('on');
     document.getElementById('pmBox').classList.add('on');
