@@ -6,9 +6,9 @@ var LINKS={
   clarity:'https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard',
   gcal:'https://calendar.google.com/',
   org:'/org/',
-  drive:'https://drive.google.com/drive/folders/0AIS68-RBPjrTUk9PVA', // общий диск «M5 Team»
-  telegram:'',     // invite-ссылка канала «M5 Пульс»
-  monday:'',
+  drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // «M5 · Company Drive»
+  telegram:'https://t.me/+x4q86H688uNiODI8',  // группа «M5 Team»
+  monday:'https://m5miami.monday.com/',
   jobtread:'',
   quickbooks:'',
   heygen:'',
@@ -142,10 +142,16 @@ document.getElementById('app').innerHTML=
       '<div class="ask"><input type="text" id="askInput" placeholder="Ask the M5 Agent...">'+
       '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
     '</div>'+
-    '<a class="video" href="'+(videoUrl||'#')+'"'+(videoUrl?' target="_blank" rel="noopener"':' onclick="return soon()"')+'>'+
+    '<a class="video" href="'+(videoUrl||'#')+'"'+(videoUrl?' target="_blank" rel="noopener"':' onclick="return soon()"')+' style="background-image:linear-gradient(180deg,rgba(20,18,15,.08),rgba(20,18,15,.68)),url(\'/media/welcome_poster.jpg\');background-size:cover;background-position:center 60%">'+
       '<div class="play">▶</div>'+
       '<div class="video-cap"><b>Welcome from the founders</b><span>2 min · start here</span></div>'+
     '</a>'+
+  '</div>'+
+  '<div class="sec">Your first days</div>'+
+  '<div class="onb">'+
+    '<div class="ostep"><span class="on">Day 1</span><b>Get set up</b><p>Your work email is live. Join the <b>M5 Team</b> Telegram, open the <b>Company Drive</b>, and say hi in General. Watch the founders’ welcome above.</p></div>'+
+    '<div class="ostep"><span class="on">Day 2</span><b>Learn your tools</b><p>Open your <b>Monday</b> board and the <b>Calendar</b> from the tiles below. Skim the playbook, then take your first task from your lead.</p></div>'+
+    '<div class="ostep"><span class="on">Every day</span><b>How M5 runs</b><p>Deals, approvals and the human touch are on <b>us</b>. The system — leads, tasks, docs, follow-ups — runs on <b>AI</b>. Ask the M5 Agent anything, anytime.</p></div>'+
   '</div>'+
   '<div class="sec">Daily work</div>'+
   '<div class="grid">'+cfg.tiles.map(function(t){
