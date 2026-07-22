@@ -60,6 +60,14 @@
   .go:hover{background:#F4ECDD;color:var(--ink)}
   .key{display:inline-block;margin-top:9px;font-size:12.5px;line-height:1.5;color:#7A5C22;background:#FDF6E7;
     border-left:2px solid var(--gold);padding:7px 11px;border-radius:0 8px 8px 0}
+  .how{margin-top:10px}
+  .how summary{cursor:pointer;display:inline-block;list-style:none;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d);border:1px solid #E4D9C4;background:#FBF7EF;
+    padding:7px 12px;border-radius:9px}
+  .how summary::-webkit-details-marker{display:none}
+  .how summary:hover,.how[open] summary{background:#F4ECDD;color:var(--ink)}
+  .how ol{margin:11px 0 3px 20px;font-size:13px;line-height:1.6;color:#54503F}
+  .how li{margin-bottom:6px}
 
   .gate{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:22px;max-width:440px}
   .gate label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:9px}
@@ -115,6 +123,14 @@ var PERSON = {
 };
 
 var COMMON = [
+  {id:'mail', t:'Зайти в рабочую почту @m5miami.com', p:'Твой ящик имя@m5miami.com уже создан. Это ключ ко всему: кабинет, Drive, Monday — и вся переписка с клиентами идёт с него. Займёт две минуты.',
+   how:['Как зайти — короткая инструкция',
+     'Открой gmail.com → Sign in. Если уже залогинен в личный Google — нажми на свой аватар → «Добавить аккаунт».',
+     'Логин: имя@m5miami.com.',
+     'Пароль — временный, Алекс передал его лично. Потерялся — попроси Алекса, он сбросит за минуту. Пароли в чатах не пересылаем никогда.',
+     'Google сразу попросит придумать свой пароль — поставь надёжный и сохрани.',
+     'Поставь приложение Gmail на телефон и добавь туда этот аккаунт.'],
+   go:['Открыть Gmail', 'https://mail.google.com/']},
   {id:'tg', t:'Зайти в Telegram «M5 Team»', p:'Сюда падают заявки с сайта и все автоматические сигналы. Система пишет, только когда есть что сказать — пустых отчётов не бывает. Нет сообщений = всё в порядке.', go:['Открыть группу', LINK.tg]},
   {id:'app', t:'Поставить Monday на телефон', p:'Без приложения система работает наполовину: карточки двигают и склад отмечают с телефона, а не с ноутбука.', go:['Скачать', LINK.app]},
   {id:'drive', t:'Открыть Company Drive', p:'Все фото и документы живут здесь. Если чего-то нет в Drive или Monday — считай, что этого не было.', go:['Открыть Drive', LINK.drive]},
@@ -199,10 +215,15 @@ function renderTrack(who){
       if (href === '#cab') href = P.cab;
       go = '<a class="go" href="' + href + '" target="' + (href.charAt(0)==='/' ? '_self' : '_blank') + '" rel="noopener">' + esc(it.go[0]) + ' →</a>';
     }
+    var how = '';
+    if (it.how) {
+      how = '<details class="how"><summary>' + esc(it.how[0]) + ' →</summary><ol>' +
+        it.how.slice(1).map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('') + '</ol></details>';
+    }
     return '<div class="item' + d + '" id="row_' + it.id + '">' +
       '<div class="cb" onclick="tog(\'' + it.id + '\')">✓</div>' +
       '<div class="it-b"><h3>' + esc(it.t) + '</h3><p>' + esc(it.p) + '</p>' +
-      (it.key ? '<div class="key">' + esc(it.key) + '</div>' : '') + go + '</div></div>';
+      (it.key ? '<div class="key">' + esc(it.key) + '</div>' : '') + how + go + '</div></div>';
   }
 
   app.innerHTML =
