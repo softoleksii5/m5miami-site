@@ -139,8 +139,9 @@ document.getElementById('app').innerHTML=
       '<div class="agent-h"><div class="agent-ic">✦</div>'+
       '<div><b>Jin — ask me anything</b><span>Your AI teammate · trained on M5 brand &amp; rules</span></div></div>'+
       '<div class="chips">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+'</div>'+
-      '<div class="ask"><input type="text" id="askInput" placeholder="Ask Jin...">'+
+      '<div class="ask"><input type="text" id="askInput" placeholder="Ask Jin..." onkeydown="if(event.key===\'Enter\')askAgent()">'+
       '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
+      '<div class="jin-reply" id="jinReply"></div>'+
     '</div>'+
     '<a class="video" href="#" onclick="return openWelcome()" style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime.jpg\');background-size:cover;background-position:center 32%">'+
       '<div class="play">▶</div>'+
@@ -209,5 +210,17 @@ function closeWelcome(){
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWelcome(); });
 
 function soon(){ alert('This link is being set up — it will open the live tool soon.'); return false; }
-function askAgent(q){ alert('Jin is being connected — he’ll answer here soon.'+(q?('\n\n“'+q+'”'):'')); }
+var JIN_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';
+function askAgent(q){
+  var inp=document.getElementById('askInput'); q=q||(inp?inp.value.trim():''); if(!q)return;
+  if(inp&&!arguments.length)inp.value='';
+  var box=document.getElementById('jinReply');
+  box.className='jin-reply on'; box.innerHTML='<span class="jin-typing">Jin is thinking…</span>';
+  var cb='jinCb'+Date.now();
+  window[cb]=function(r){ box.innerHTML='<b>Jin</b> '+esc(r&&r.a?r.a:'—').replace(/\n/g,'<br>'); try{delete window[cb];}catch(e){} };
+  var s=document.createElement('script');
+  s.src=JIN_HOOK+'?jin=1&role='+encodeURIComponent(role)+'&cb='+cb+'&q='+encodeURIComponent(q);
+  s.onerror=function(){ box.innerHTML='Jin is offline for a second — try again.'; };
+  document.body.appendChild(s); setTimeout(function(){s.remove();},15000);
+}
 function signout(){ try{localStorage.removeItem('m5_member');}catch(e){}; location.href='/welcomehero'; }
