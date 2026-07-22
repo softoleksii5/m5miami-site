@@ -84,6 +84,37 @@ var OFFSCALE={
    'Your metals are the company’s: every teammate who hits Platinum «M5» is your win.']}
 };
 
+/* «За что платят» — понятное объяснение оплаты по роли */
+var PAY={
+ smm:{fixed:'$2,000/mo retainer',for:'your monthly content volume',
+   rows:[
+     ['Fixed retainer','$2,000/mo','Paid for hitting your monthly volume: 16–20 Reels, daily stories, 8–12 posts, 2 long videos, 4–8 shoots. Do less without agreeing it first → retainer is pro-rated to what you shipped.'],
+     ['Bonus per lead','+$50','Every social lead that reaches a consultation.'],
+     ['Bonus per contract','+$1,000','Every signed contract that came from social.'],
+     ['Retainer grows','$2,000 → $2,500 → $3,000','$2,500 at 3+ contracts/quarter · $3,000 when social is the #1 client source.']
+   ],
+   note:'Views &amp; followers are a health check, not a bonus — one $225K client beats a million views. The ladder below tracks contracts from social.'},
+ sales:{fixed:'$4,500/mo + 2% commission',for:'closing contracts',
+   rows:[
+     ['Fixed','$4,500/mo','Your base salary. Grows with every level you climb.'],
+     ['Commission','2.0% → 2.5%','Of each contract you close. The % rises as you move A → B → M.'],
+     ['Level bonus','$150 … $6,000','A one-time bonus each time you reach a new level, plus a metal you keep.']
+   ],
+   note:'To qualify each month (the gate): reply to leads ≤15 min · 8+ consultations · Monday CRM 100% clean. Miss the gate and the level does not count.'},
+ designer:{fixed:'Rate per project',for:'projects accepted cleanly',
+   rows:[
+     ['Rate / project','$1,500 → $2,500','Grows with your level. You are paid per accepted project.'],
+     ['Level bonus','$100 … $2,500','One-time each new level, plus a metal.']
+   ],
+   note:'What moves your level: projects accepted with ≤2 revision rounds. Client change-orders do not count against you.'},
+ pm:{fixed:'$7,000/mo',for:'sites delivered clean',
+   rows:[
+     ['Fixed','$7,000 → $9,400','Grows with your level.'],
+     ['Level bonus','$150 … $3,000','One-time each new level, plus a metal.']
+   ],
+   note:'What moves your level: sites delivered with no rework and inspections passed first time.'}
+};
+
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 function param(k){return (location.search.match(new RegExp('[?&]'+k+'=([^&]*)'))||[])[1]||'';}
 function detectRole(){
@@ -111,6 +142,18 @@ var legend='<div class="gcard grules"><div class="metals">'+
   '<p><b>How it works.</b> Your level is your <b>current result</b>, not seniority — hold the bar to stay, beat it to rise, slip and you drop one. Two axes: a monthly <b>discipline gate</b> lets you play; your <b>role metric</b> moves the level. Three rewards each step: higher pay, a one-time bonus, and a metal you keep forever. The source of truth is Monday/CRM — Jin tallies it on the 1st, the director confirms, and a level-up posts to <b>M5 · Pulse</b> automatically.</p>'+
 '</div>';
 
+/* блок «за что платят» */
+var payBlock='';
+if(PAY[role]){
+  var p=PAY[role];
+  payBlock='<div class="sec">How your pay works</div><div class="paywrap">'+
+    '<div class="paylead"><span>Your base</span><b>'+p.fixed+'</b><em>for '+p.for+'</em></div>'+
+    '<div class="paytbl">'+p.rows.map(function(r){
+      return '<div class="payrow"><div class="pk">'+esc(r[0])+'</div><div class="pv">'+esc(r[1])+'</div><div class="pd">'+esc(r[2])+'</div></div>';
+    }).join('')+'</div>'+
+    (p.note?'<div class="paynote">'+p.note+'</div>':'')+'</div>';
+}
+
 var body='';
 if(off){
   body='<div class="gcard goff"><div class="offh">'+off.head+'</div><ul>'+off.lines.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>';
@@ -136,5 +179,5 @@ if(off){
   if(sc.note) body+='<div class="gate-note" style="margin-top:10px">'+esc(sc.note)+'</div>';
 }
 
-document.getElementById('app').innerHTML=head+intro+legend+body+
+document.getElementById('app').innerHTML=head+intro+legend+payBlock+body+
   '<footer>M5 Interior Design &amp; Build · Miami · Your rating path to Platinum «M5»</footer></div>';

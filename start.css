@@ -78,8 +78,9 @@ footer{position:relative;z-index:2;padding:44px 0;text-align:center;font-family:
 .wv-box{position:relative;width:min(940px,94vw)}
 .wv-x{position:absolute;top:-16px;right:-16px;z-index:3;width:38px;height:38px;border-radius:50%;border:none;background:#fff;color:#20242E;font-size:16px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35)}
 .wv-stage{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#15110d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
-.wv-img{position:absolute;inset:0;background:url('/media/welcome_anime.jpg') center 30%/cover;animation:wvz 34s ease-out forwards;will-change:transform}
-@keyframes wvz{from{transform:scale(1.02)}to{transform:scale(1.17)}}
+.wv-img{position:absolute;inset:0;background-color:#15110d;background-size:cover;background-position:center 28%;will-change:transform,opacity}
+.wv-img.swap{animation:wvpop 4.2s ease-out forwards}
+@keyframes wvpop{0%{opacity:0;transform:scale(1.11) translateY(6px)}14%{opacity:1}100%{opacity:1;transform:scale(1.0) translateY(0)}}
 .wv-cap{position:absolute;left:0;right:0;bottom:0;padding:64px 34px 30px;background:linear-gradient(180deg,transparent,rgba(12,10,8,.85));color:#fff;font-family:var(--serif);font-size:clamp(19px,3.4vw,31px);line-height:1.25;text-align:center;min-height:40px}
 .wv-cap span{display:inline-block;animation:wvfade .5s ease}
 .wv-cap b{color:#E3C795}

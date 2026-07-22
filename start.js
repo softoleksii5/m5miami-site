@@ -172,40 +172,46 @@ document.getElementById('app').innerHTML=
   '<div class="wv-box">'+
     '<button class="wv-x" onclick="closeWelcome()" aria-label="Close">✕</button>'+
     '<div class="wv-stage"><div class="wv-img" id="wvImg"></div><div class="wv-cap" id="wvCap"></div></div>'+
-    '<audio id="wvA" src="/media/welcome_vo.m4a" preload="auto"></audio>'+
+    '<audio id="wvMusic" loop preload="auto"></audio>'+
   '</div>'+
 '</div>';
 
+var WV_MUSIC='';/* URL героического трека (Solo-Leveling вайб) — вставить mp3, зациклится */
+var JINPANEL={a:'/media/welcome_anime.jpg',sys:'/media/jin_p2.jpg',human:'/media/jin_p3.jpg',tools:'/media/jin_p4.jpg',hero:'/media/jin_p5.jpg'};
 var WVCAP=[
- [0,'Hey — I’m <b>Jin.</b>'],
- [2.6,'The engine behind M5.'],
- [5.6,'I run the system, so you can run the deals.'],
- [11.5,'Leads, tasks, docs, follow-ups — that’s me, 24/7.'],
- [17.5,'You bring the human side: relationships, craft, the final call.'],
- [24,'Monday · Telegram · Drive — your world.'],
- [29.5,'Need anything? Just ask me.'],
- [33,'Welcome to the team. <b>Let’s build something legendary 🚀</b>']
+ [0,'Hey — I’m <b>Jin.</b>','a'],
+ [2.8,'The engine behind M5.','sys'],
+ [6,'I run the system — so you run the deals.','sys'],
+ [9.6,'Leads, tasks, docs, follow-ups — that’s me. 24/7.','sys'],
+ [13.6,'You bring the human side: the relationships, the craft.','human'],
+ [17.6,'Monday · Telegram · Drive — your world.','tools'],
+ [21.2,'Need anything? Just ask me.','hero'],
+ [24.3,'Welcome to the team. <b>Let’s build something legendary 🚀</b>','hero']
 ];
 var wvTimer=null;
 function openWelcome(){
-  var m=document.getElementById('wv'),a=document.getElementById('wvA'),cap=document.getElementById('wvCap'),img=document.getElementById('wvImg');
-  m.classList.add('on'); cap.innerHTML=''; cap.removeAttribute('data-c');
-  img.style.animation='none'; void img.offsetWidth; img.style.animation='';
-  try{a.currentTime=0; a.play();}catch(e){}
+  var m=document.getElementById('wv'),cap=document.getElementById('wvCap'),img=document.getElementById('wvImg'),mus=document.getElementById('wvMusic');
+  m.classList.add('on'); cap.innerHTML=''; cap.removeAttribute('data-c'); img.removeAttribute('data-p');
+  if(WV_MUSIC){ try{ if(mus.src!==WV_MUSIC)mus.src=WV_MUSIC; mus.currentTime=0; mus.volume=0.6; mus.play(); }catch(e){} }
   var start=performance.now();
   clearInterval(wvTimer);
   wvTimer=setInterval(function(){
-    var t=(performance.now()-start)/1000, cur=WVCAP[0][1];
-    for(var i=0;i<WVCAP.length;i++){ if(t>=WVCAP[i][0]) cur=WVCAP[i][1]; }
-    if(cap.getAttribute('data-c')!==cur){ cap.setAttribute('data-c',cur); cap.innerHTML='<span>'+cur+'</span>'; }
-    if(t>35) closeWelcome();
-  },120);
+    var t=(performance.now()-start)/1000, cur=WVCAP[0], k;
+    for(var i=0;i<WVCAP.length;i++){ if(t>=WVCAP[i][0]) cur=WVCAP[i]; }
+    if(cap.getAttribute('data-c')!==cur[1]){ cap.setAttribute('data-c',cur[1]); cap.innerHTML='<span>'+cur[1]+'</span>'; }
+    if(img.getAttribute('data-p')!==cur[2]){
+      img.setAttribute('data-p',cur[2]);
+      img.style.backgroundImage="url('"+(JINPANEL[cur[2]]||JINPANEL.a)+"')";
+      img.classList.remove('swap'); void img.offsetWidth; img.classList.add('swap');
+    }
+    if(t>27.5) closeWelcome();
+  },100);
   return false;
 }
 function closeWelcome(){
-  var m=document.getElementById('wv'),a=document.getElementById('wvA');
+  var m=document.getElementById('wv'),mus=document.getElementById('wvMusic');
   m.classList.remove('on'); clearInterval(wvTimer);
-  try{a.pause(); a.currentTime=0;}catch(e){}
+  try{ mus.pause(); mus.currentTime=0; }catch(e){}
 }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWelcome(); });
 

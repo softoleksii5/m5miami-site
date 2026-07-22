@@ -36,3 +36,18 @@
  .lrow .lpay,.lrow .lbon{grid-column:2}
  .lbadge{position:absolute;right:16px;top:14px}
 }
+
+/* «За что платят» */
+.paywrap{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px 26px}
+.paylead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.paylead span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.paylead b{font-family:var(--serif);font-weight:800;font-size:24px;color:var(--ink)}
+.paylead em{font-style:normal;font-size:14px;color:var(--soft)}
+.paytbl{display:flex;flex-direction:column;gap:0}
+.payrow{display:grid;grid-template-columns:150px 130px 1fr;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid #F1EBDE}
+.payrow:last-child{border-bottom:none}
+.pk{font-weight:600;font-size:14.5px;color:var(--ink)}
+.pv{font-family:var(--serif);font-weight:700;font-size:15px;color:var(--gold-d)}
+.pd{font-size:13.5px;line-height:1.5;color:var(--soft)}
+.paynote{margin-top:14px;font-size:13px;line-height:1.55;color:#54503F;background:rgba(176,137,79,.09);border-radius:10px;padding:12px 15px}
+@media(max-width:640px){.payrow{grid-template-columns:1fr 1fr;gap:6px}.pd{grid-column:1/3}}
