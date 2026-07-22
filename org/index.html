@@ -70,6 +70,22 @@
   .card.person.future .more{color:#71767F}
   .soon{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1;padding:3px 8px;border-radius:20px}
+  /* Jin — карточка-движок. Тёмная: сразу видно, что это не человек. */
+  .card.person.jin{background:linear-gradient(135deg,#20242E,#2E3545);border-color:#2E3545;color:#EDEAE3;
+    box-shadow:0 24px 54px -30px rgba(32,36,46,.7)}
+  .card.person.jin:before{background:linear-gradient(90deg,#B0894F,#E4C489)}
+  .card.person.jin .who b{color:#fff}
+  .card.person.jin .who span{color:#E4C489}
+  .card.person.jin .ava{background:linear-gradient(140deg,#3A4152,#12151C);color:#E4C489;border:1px solid rgba(228,196,137,.35)}
+  .card.person.jin .duty li{color:#CFCBC1}
+  .card.person.jin .duty li:before{content:"▸";color:#7DDC9A}
+  .card.person.jin .more{color:#E4C489}
+  .card.person.jin:hover .more{color:#fff}
+  .jinb{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+    color:#1B1F27;background:#7DDC9A;padding:3px 8px;border-radius:20px;font-weight:700}
+  .jbrule{max-width:720px;margin:0 auto;text-align:center;font-family:var(--mono);font-size:12px;line-height:1.6;
+    color:#6E6656;background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:14px;padding:13px 18px}
+  .jbrule b{color:var(--gold-d)}
   .card.mini{padding:20px}
   /* Кредо: маленькая команда — это решение, а не стадия */
   .creed{max-width:640px;margin:16px auto 0;font-size:14px;line-height:1.6;color:#4A4638}
@@ -80,17 +96,6 @@
   .card.person.fn .who span,.card.person.fn .more{color:#8A5A32}
   .fnb{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#8A5A32;background:#FBEEE2;border:1px solid #F0D8C0;padding:3px 8px;border-radius:20px}
-  /* Jin — слой поперёк обеих функций */
-  .jinband{background:linear-gradient(135deg,#20242E,#2E3545);color:#EDEAE3;border-radius:18px;padding:24px 26px;
-    box-shadow:0 24px 54px -30px rgba(32,36,46,.65);position:relative;overflow:hidden}
-  .jinband:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% -20%,rgba(176,137,79,.35),transparent 55%)}
-  .jb-head{position:relative;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#E4C489;display:flex;align-items:center;gap:9px}
-  .jb-dot{width:8px;height:8px;border-radius:50%;background:#7DDC9A;box-shadow:0 0 0 4px rgba(125,220,154,.18)}
-  .jinband p{position:relative;font-size:14px;line-height:1.6;color:#D9D5CC;margin-top:11px}
-  .jinband p b{color:#fff}
-  .jb-rule{position:relative;margin-top:14px;padding-top:13px;border-top:1px solid rgba(237,234,227,.16);
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:#E4C489}
-  .jb-rule b{color:#fff}
   .trg{display:block;margin-top:10px;font-size:11px;line-height:1.45;color:#7A6F58;background:#FAF6EE;border-left:2px solid var(--gold);padding:6px 9px;border-radius:0 8px 8px 0}
   .br{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border-radius:20px}
   .br-g{color:#8A5A32;background:#FBEEE2;border:1px solid #F0D8C0}
@@ -163,16 +168,12 @@
 
   <div class="down"></div>
 
-  <div class="lvl" style="margin-top:0">Two functions · not two departments</div>
+  <div class="lvl" style="margin-top:0">How the work actually gets done</div>
   <div class="row branches" id="rowBranches"></div>
 
   <div class="down"></div>
 
-  <div class="jinband">
-    <div class="jb-head"><span class="jb-dot"></span>JIN — the AI layer</div>
-    <p>Runs the routine underneath <b>both</b> functions: captures every lead, answers in seconds, chases follow-ups, keeps Monday clean, files docs to Drive, reports the numbers. This is the layer that lets M5 stay small.</p>
-    <div class="jb-rule">Before any new hire we ask one question first: <b>can Jin do this?</b></div>
-  </div>
+  <div class="jbrule">Before any new hire, one question first: <b>can Jin do this?</b> A person is added only when the honest answer is no.</div>
 
   <div class="rail"></div>
 
@@ -183,7 +184,7 @@
       <div class="who"><div class="ava">S</div><div><b>SMM</b></div></div>
       <p>Content, social growth, reels &amp; community.</p>
       <span class="trg">Trigger: content is the top of the funnel — hiring now</span>
-      <span class="br br-g">Growth</span>
+      <span class="br br-g">Demand side</span>
       <a class="go" href="/championsmm">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
@@ -191,7 +192,7 @@
       <div class="who"><div class="ava">S</div><div><b>Sales</b></div></div>
       <p>Leads to contracts: calls, consults, follow-ups.</p>
       <span class="trg">Trigger: more consultations than founders can run</span>
-      <span class="br br-g">Growth</span>
+      <span class="br br-g">Demand side</span>
       <a class="go" href="/championsales">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
@@ -253,18 +254,19 @@ var TEAM=[
   bar:['Both functions run without founders in daily operations','Output grows faster than headcount','Owns the P&L: margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
   openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'},
  /* Левая ветка. Роль-место, а не человек: сегодня её закрывают фаундеры, завтра — наёмный руководитель. */
- {slug:'growth',name:'Growth',role:'Function · owned by founders · run by Jin',ava:'G',avaClass:'',bc:'#C98A5E',future:true,fn:true,
-  duty:['Demand — content, ads, SEO & AI search','Brand & PR — the face M5 shows','Leads → consultations → contracts','Most of it executed by Jin, not by staff'],
-  value:'Everything that brings a client to the door and turns them into a signed contract. This is a function, not a chair. Alex owns the engine, Vlad is the face — and the routine underneath (capture, follow-up, CRM, reporting) runs on Jin. We do not plan a marketing boss: we plan for the function to keep working with as few people as possible.',
-  bar:['Leads arrive predictably, not in waves','Cost per contract known and falling','Follow-up never depends on someone remembering','Every new task asks first: can Jin do this?'],
-  openTo:'A person is added here only when something specific breaks — never on a schedule. If Jin and two founders keep the numbers, the seat stays empty, and that is the win.'}
+ /* Jin — не человек и не вакансия. Стоит в схеме потому, что реально делает работу целой функции. */
+ {slug:'jin',name:'Jin',role:'AI layer · the demand side runs here',ava:'J',avaClass:'',bc:'#2E3545',jin:true,
+  duty:['Every lead caught and answered in seconds','Follow-ups chased without anyone remembering','Monday and Drive kept clean by default','Numbers reported back to founders'],
+  value:'Jin is not staff and not a future hire — it is the layer that does the demand-side routine end to end: capture, reply, follow-up, CRM hygiene, documents, reporting. The founders own the demand: Alex sets the engine and the strategy, Vlad is the face and the relationships. Jin runs everything underneath that would otherwise cost a salary.',
+  notes:['Judgment on money, scope and clients','Taste and design decisions','Real relationships — clients, partners, crews','Anything a licensed professional must sign'],
+  openTo:'This is why M5 stays small. Before any new hire the question is always the same: can Jin do this? A person is added only when the honest answer is no.'}
 ];
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 
 function cardHtml(p){
-  return '<div class="card person'+(p.fn?' fn':(p.future?' future':''))+'" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
-    (p.fn?'<span class="fnb">Function</span>':(p.future?'<span class="soon">Future role</span>':''))+
+  return '<div class="card person'+(p.jin?' jin':(p.fn?' fn':(p.future?' future':'')))+'" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
+    (p.jin?'<span class="jinb">Not a person</span>':(p.fn?'<span class="fnb">Function</span>':(p.future?'<span class="soon">Future role</span>':'')))+
     '<div class="who"><div class="ava '+p.avaClass+'">'+p.ava+'</div>'+
     '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
     '<ul class="duty">'+p.duty.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul>'+
@@ -274,12 +276,28 @@ function byslug(s){for(var i=0;i<TEAM.length;i++){if(TEAM[i].slug===s)return TEA
 document.getElementById('rowFounders').innerHTML=cardHtml(TEAM[0])+cardHtml(TEAM[1]);
 document.getElementById('rowGD').innerHTML=cardHtml(byslug('gd'));
 /* Две ветки на одном уровне: слева спрос (место), справа производство (занято Вадимом). */
-document.getElementById('rowBranches').innerHTML=cardHtml(byslug('growth'))+cardHtml(TEAM[2]);
+/* Два движка: слева софт держит спрос, справа человек держит стройку. Асимметрия намеренная. */
+document.getElementById('rowBranches').innerHTML=cardHtml(byslug('jin'))+cardHtml(TEAM[2]);
 
 function openP(slug){
   var p=null;
   for(var i=0;i<TEAM.length;i++){ if(TEAM[i].slug===slug){ p=TEAM[i]; break; } }
   if(!p)return;
+  if(p.jin){
+    document.getElementById('pmBox').innerHTML=
+      '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
+      '<div class="who"><div class="ava" style="width:62px;height:62px;font-size:24px;background:linear-gradient(140deg,#3A4152,#12151C);color:#E4C489">'+p.ava+'</div>'+
+      '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
+      '<div class="pm-sec">What Jin is</div><div class="pm-val">'+esc(p.value)+'</div>'+
+      '<div class="pm-sec">What Jin runs</div><ul class="pm-ask">'+p.duty.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
+      '<div class="pm-sec">What Jin never touches</div><ul class="pm-ask">'+p.notes.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
+      '<div class="pm-sec">Why it is on this chart</div><div class="pm-val">'+esc(p.openTo)+'</div>'+
+      '<hr class="pm-hr">'+
+      '<div class="pm-priv">Jin does the work of a function, so that function does not need a headcount. People stay for judgment, taste and relationships — the things that should never be automated.</div>';
+    document.getElementById('pmOv').classList.add('on');
+    document.getElementById('pmBox').classList.add('on');
+    return;
+  }
   if(p.future){
     document.getElementById('pmBox').innerHTML=
       '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
