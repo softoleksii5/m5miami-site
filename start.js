@@ -142,7 +142,7 @@ document.getElementById('app').innerHTML=
       '<div class="ask"><input type="text" id="askInput" placeholder="Ask the M5 Agent...">'+
       '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
     '</div>'+
-    '<a class="video" href="'+(videoUrl||'#')+'"'+(videoUrl?' target="_blank" rel="noopener"':' onclick="return soon()"')+' style="background-image:linear-gradient(180deg,rgba(20,18,15,.08),rgba(20,18,15,.68)),url(\'/media/welcome_poster.jpg\');background-size:cover;background-position:center 60%">'+
+    '<a class="video" href="'+(videoUrl||'#')+'"'+(videoUrl?' target="_blank" rel="noopener"':' onclick="return soon()"')+' style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime.jpg\');background-size:cover;background-position:center 32%">'+
       '<div class="play">▶</div>'+
       '<div class="video-cap"><b>Welcome from the founders</b><span>2 min · start here</span></div>'+
     '</a>'+
