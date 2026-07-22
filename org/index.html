@@ -34,9 +34,10 @@
   .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);text-align:center;margin:34px 0 14px}
   .row{display:grid;gap:18px}
   .row.founders{grid-template-columns:1fr 1fr}
+  .row.branches{grid-template-columns:1fr 1fr}
   .row.solo{grid-template-columns:minmax(0,560px);justify-content:center}
   .row.team{grid-template-columns:repeat(4,1fr)}
-  @media(max-width:860px){.row.founders{grid-template-columns:1fr}.row.team{grid-template-columns:1fr 1fr}}
+  @media(max-width:860px){.row.founders,.row.branches{grid-template-columns:1fr}.row.team{grid-template-columns:1fr 1fr}}
   @media(max-width:540px){.row.team{grid-template-columns:1fr}}
 
   .card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;position:relative;overflow:hidden;
@@ -70,6 +71,10 @@
   .soon{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1;padding:3px 8px;border-radius:20px}
   .card.mini{padding:20px}
+  .br{display:inline-block;margin-top:9px;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border-radius:20px}
+  .br-g{color:#8A5A32;background:#FBEEE2;border:1px solid #F0D8C0}
+  .br-d{color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1}
+  .br-c{color:#4E6B54;background:#E9F1EA;border:1px solid #CFE0D3}
   .card.mini .ava{width:44px;height:44px;font-size:15px;background:#F2ECE0;color:var(--gold-d)}
   .card.mini .who b{font-size:16.5px}
   .card.mini p{font-size:12.5px;color:#54503F;margin-top:12px;line-height:1.5}
@@ -136,8 +141,8 @@
 
   <div class="down"></div>
 
-  <div class="lvl" style="margin-top:0">Direction · Operations</div>
-  <div class="row solo" id="rowOps"></div>
+  <div class="lvl" style="margin-top:0">Two branches · report to the General Director</div>
+  <div class="row branches" id="rowBranches"></div>
 
   <div class="rail"></div>
 
@@ -147,30 +152,35 @@
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">S</div><div><b>SMM</b></div></div>
       <p>Content, social growth, reels &amp; community.</p>
+      <span class="br br-g">Growth</span>
       <a class="go" href="/championsmm">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">S</div><div><b>Sales</b></div></div>
       <p>Leads to contracts: calls, consults, follow-ups.</p>
+      <span class="br br-g">Growth</span>
       <a class="go" href="/championsales">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">D</div><div><b>Designer</b></div></div>
       <p>Interiors, 3D &amp; material selections.</p>
+      <span class="br br-d">Delivery</span>
       <a class="go" href="/championdesigner">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">P</div><div><b>Project Manager</b></div></div>
       <p>Site execution, schedules &amp; supervision.</p>
+      <span class="br br-d">Delivery</span>
       <a class="go" href="/championpm">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">AI</div><div><b>AI Engineer</b></div></div>
       <p>Runs &amp; scales the system that powers M5.</p>
+      <span class="br br-c">Company-wide</span>
       <a class="go" href="/champion">Workspace →</a>
     </div>
   </div>
@@ -203,10 +213,16 @@ var TEAM=[
   email:'vadim@m5miami.com',tg:'mrShtempel',dob:'September — day TBC',start:'',end:'',contract:''},
  /* Будущая роль. Намеренно НЕ закреплена ни за кем: планка публичная, дорастает тот, кто её берёт. */
  {slug:'gd',name:'General Director',role:'Future role · opens as M5 scales',ava:'GD',avaClass:'',bc:'#8A8F9C',future:true,
-  duty:['Strategy — sets where M5 goes next','Marketing — owns demand and the brand engine','Product — owns what we build and how it feels','Runs the company day to day'],
-  value:'The role that takes M5 from founder-run to company-run. Today strategy and marketing sit with Alex, and product with the Director. When the machine outgrows hands-on founders, this role takes the wheel.',
-  bar:['Production runs without founders in daily operations','A real team underneath — supervisors and PMs climbing the A → B → M ladder','Owns the P&L: project margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
-  openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'}
+  duty:['Strategy — sets where M5 goes next','Runs the two branches below: Growth and Delivery','Owns the P&amp;L across the whole company','Holds the outside bench: attorney, CPA, insurance'],
+  value:'The role that takes M5 from founder-run to company-run. It does not do marketing or production itself — it owns the two people who do, and answers to the founders for the result.',
+  bar:['Both branches run without founders in daily operations','A real team underneath — climbing the A → B → M ladder','Owns the P&L: margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
+  openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'},
+ /* Левая ветка. Роль-место, а не человек: сегодня её закрывают фаундеры, завтра — наёмный руководитель. */
+ {slug:'growth',name:'Growth & Marketing',role:'Branch · covered by founders today',ava:'G',avaClass:'',bc:'#C98A5E',future:true,
+  duty:['Demand — content, ads, SEO &amp; AI search','Brand &amp; PR — the face M5 shows','Sales team and conversion','The AI system that runs leads and follow-ups'],
+  value:'Everything that brings a client to the door and turns them into a signed contract. Today Alex runs the engine and the AI layer, Vlad is the face and the relationships. It becomes a hired seat when the volume outgrows two founders doing it on the side.',
+  bar:['Leads arrive predictably, not in waves','Cost per contract known and falling','Content and ads feed Sales without founders pushing','Sales team on the A → B → M ladder'],
+  openTo:'Reports to the General Director. Until that seat exists, this branch answers straight to the founders.'}
 ];
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
@@ -222,7 +238,8 @@ function cardHtml(p){
 function byslug(s){for(var i=0;i<TEAM.length;i++){if(TEAM[i].slug===s)return TEAM[i];}return null;}
 document.getElementById('rowFounders').innerHTML=cardHtml(TEAM[0])+cardHtml(TEAM[1]);
 document.getElementById('rowGD').innerHTML=cardHtml(byslug('gd'));
-document.getElementById('rowOps').innerHTML=cardHtml(TEAM[2]);
+/* Две ветки на одном уровне: слева спрос (место), справа производство (занято Вадимом). */
+document.getElementById('rowBranches').innerHTML=cardHtml(byslug('growth'))+cardHtml(TEAM[2]);
 
 function openP(slug){
   var p=null;
@@ -235,9 +252,11 @@ function openP(slug){
       '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
       '<div class="pm-sec">What this role is</div><div class="pm-val">'+esc(p.value)+'</div>'+
       '<div class="pm-sec">What it takes — the bar</div><ul class="pm-ask">'+p.bar.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
-      '<div class="pm-sec">Who can take it</div><div class="pm-val">'+esc(p.openTo)+'</div>'+
+      '<div class="pm-sec">'+(p.slug==='growth'?'Who runs it':'Who can take it')+'</div><div class="pm-val">'+esc(p.openTo)+'</div>'+
       '<hr class="pm-hr">'+
-      '<div class="pm-priv">This role does not exist yet — it opens when M5 outgrows hands-on founders. Written down early so the bar is known in advance, not invented on the day.</div>';
+      '<div class="pm-priv">'+(p.slug==='growth'
+        ? 'A seat, not a person. Founders cover it today — it is drawn here so everyone knows where marketing, content and sales report once M5 grows past that.'
+        : 'This role does not exist yet — it opens when M5 outgrows hands-on founders. Written down early so the bar is known in advance, not invented on the day.')+'</div>';
     document.getElementById('pmOv').classList.add('on');
     document.getElementById('pmBox').classList.add('on');
     return;
