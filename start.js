@@ -144,7 +144,7 @@ document.getElementById('app').innerHTML=
     '</div>'+
     '<a class="video" href="#" onclick="return openWelcome()" style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime.jpg\');background-size:cover;background-position:center 32%">'+
       '<div class="play">▶</div>'+
-      '<div class="video-cap"><b>Meet Jin · your AI teammate</b><span>~30 sec · start here</span></div>'+
+      '<div class="video-cap"><b>Welcome from Jin</b><span>Your AI teammate · ~30 sec</span></div>'+
     '</a>'+
   '</div>'+
   '<div class="sec">Your first days</div>'+
@@ -158,6 +158,7 @@ document.getElementById('app').innerHTML=
     var icon=t.b?'<div class="ic brand">'+LOGOS[t.b]+'</div>':'<div class="ic">'+(t.ic||'•')+'</div>';
     var col=t.b?BC[t.b]:'#E6DECB';
     var url=t.link?LINKS[t.link]:'';
+    if(t.k==='My growth') url='/growth/?role='+role;
     var ext=url&&url.charAt(0)!=='/';
     var open=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
     var badge=url?'<span class="live">Live</span>':'<span class="soon">Soon</span>';
