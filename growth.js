@@ -84,35 +84,61 @@ var OFFSCALE={
    'Your metals are the company’s: every teammate who hits Platinum «M5» is your win.']}
 };
 
-/* «За что платят» — понятное объяснение оплаты по роли */
+/* «За что платят» — вкладки по типам бонусов, per-role */
 var PAY={
  smm:{fixed:'$2,000/mo retainer',for:'your monthly content volume',
-   rows:[
-     ['Fixed retainer','$2,000/mo','Paid for hitting your monthly volume: 16–20 Reels, daily stories, 8–12 posts, 2 long videos, 4–8 shoots. Do less without agreeing it first → retainer is pro-rated to what you shipped.'],
-     ['Bonus per lead','+$50','Every social lead that reaches a consultation.'],
-     ['Bonus per contract','+$1,000','Every signed contract that came from social.'],
-     ['Retainer grows','$2,000 → $2,500 → $3,000','$2,500 at 3+ contracts/quarter · $3,000 when social is the #1 client source.']
-   ],
-   note:'Views &amp; followers are a health check, not a bonus — one $225K client beats a million views. The ladder below tracks contracts from social.'},
+   tabs:[
+     {k:'💼 Base pay',rows:[
+       ['Fixed retainer','$2,000/mo','Your guaranteed base for shipping the monthly content volume — see it in the next tab.']],
+       note:'This is money you can count on every month. Everything else is on top.'},
+     {k:'📋 What the base covers',rows:[
+       ['Reels','16–20 /mo','Published to Instagram + TikTok + YouTube Shorts.'],
+       ['Stories','daily','Instagram, every day.'],
+       ['Posts','8–12 /mo','Instagram feed.'],
+       ['Long videos','2 /mo','YouTube object tours / before-after.'],
+       ['Shoots','4–8 /mo','On-site + office, 1–2 a week.']],
+       note:'Ship the volume → full retainer. Do less without agreeing it first → retainer is pro-rated to what you shipped.'},
+     {k:'💵 Bonuses that pay',rows:[
+       ['Per lead','+$50','Every social lead that reaches a consultation.'],
+       ['Per contract','+$150','Every signed contract that came from social — this is the real goal.']],
+       note:'North star: turn content into clients. A lead is good, a signed contract is the win.'},
+     {k:'🏆 Achievements',rows:[
+       ['🔥 First viral Reel','+$100','A Reel crosses 100K views.'],
+       ['📈 10K followers','+$150','Any one platform hits 10K.'],
+       ['🚀 50K followers','+$300','Any one platform hits 50K.'],
+       ['👑 100K followers','+$500','Any one platform hits 100K.'],
+       ['🎙 Podcast launched','+$200','First 5 episodes live.'],
+       ['🎯 Content closed a deal','+$200','A specific post/Reel is credited in a signed contract.'],
+       ['🏅 3-month streak','+$150','Full content volume, no misses, 3 months running.']],
+       note:'One-time badges + cash for building the audience that brings contracts. Earn a badge once — it is yours forever.'},
+     {k:'📈 Level up',rows:[
+       ['Retainer grows','$2,000 → $2,500 → $3,000','$2,500 when social gives 3+ contracts/quarter · $3,000 when social is the #1 client source.'],
+       ['Metals','🥉 → 🥈 → 🥇 → 💎','Climb the A → B → M ladder below — each band is a metal you keep.']],
+       note:'Views &amp; followers are a health check; contracts move your level. The ladder below tracks contracts from social.'}
+   ]},
  sales:{fixed:'$4,500/mo + 2% commission',for:'closing contracts',
-   rows:[
-     ['Fixed','$4,500/mo','Your base salary. Grows with every level you climb.'],
-     ['Commission','2.0% → 2.5%','Of each contract you close. The % rises as you move A → B → M.'],
-     ['Level bonus','$150 … $6,000','A one-time bonus each time you reach a new level, plus a metal you keep.']
-   ],
-   note:'To qualify each month (the gate): reply to leads ≤15 min · 8+ consultations · Monday CRM 100% clean. Miss the gate and the level does not count.'},
+   tabs:[
+     {k:'💼 Base pay',rows:[['Fixed','$4,500/mo','Your base salary. Grows with every level you climb.']],
+       note:'Guaranteed monthly, before commission.'},
+     {k:'💵 Commission',rows:[['On each contract','2.0% → 2.5%','A cut of every deal you close. The % rises as you move A → B → M.']],
+       note:'Example: a $225K project at 2% = $4,500 on top of your base — per contract.'},
+     {k:'🏆 Level bonus',rows:[['One-time each level','$150 … $6,000','A cash bonus every time you reach a new level, plus a metal you keep (🥉🥈🥇💎).']],
+       note:'The bonus jumps at each band: entering B and M are the big ones.'},
+     {k:'✅ To qualify',rows:[['Monthly gate','required','Reply to leads ≤15 min · 8+ consultations · Monday CRM 100% clean.']],
+       note:'Miss the gate and the level does not count that month — discipline first.'}
+   ]},
  designer:{fixed:'Rate per project',for:'projects accepted cleanly',
-   rows:[
-     ['Rate / project','$1,500 → $2,500','Grows with your level. You are paid per accepted project.'],
-     ['Level bonus','$100 … $2,500','One-time each new level, plus a metal.']
-   ],
-   note:'What moves your level: projects accepted with ≤2 revision rounds. Client change-orders do not count against you.'},
+   tabs:[
+     {k:'💼 Base pay',rows:[['Rate / project','$1,500 → $2,500','You are paid per accepted project. The rate grows with your level.']],note:'More level → higher rate on every project.'},
+     {k:'🏆 Level bonus',rows:[['One-time each level','$100 … $2,500','A bonus each new level, plus a metal.']],note:''},
+     {k:'✅ To qualify',rows:[['What moves your level','—','Projects accepted with ≤2 revision rounds.']],note:'Client change-orders do not count against you — the record in Monday decides.'}
+   ]},
  pm:{fixed:'$7,000/mo',for:'sites delivered clean',
-   rows:[
-     ['Fixed','$7,000 → $9,400','Grows with your level.'],
-     ['Level bonus','$150 … $3,000','One-time each new level, plus a metal.']
-   ],
-   note:'What moves your level: sites delivered with no rework and inspections passed first time.'}
+   tabs:[
+     {k:'💼 Base pay',rows:[['Fixed','$7,000 → $9,400','Grows with your level.']],note:''},
+     {k:'🏆 Level bonus',rows:[['One-time each level','$150 … $3,000','A bonus each new level, plus a metal.']],note:''},
+     {k:'✅ To qualify',rows:[['What moves your level','—','Sites delivered with no rework and inspections passed first time.']],note:''}
+   ]}
 };
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
@@ -142,17 +168,29 @@ var legend='<div class="gcard grules"><div class="metals">'+
   '<p><b>How it works.</b> Your level is your <b>current result</b>, not seniority — hold the bar to stay, beat it to rise, slip and you drop one. Two axes: a monthly <b>discipline gate</b> lets you play; your <b>role metric</b> moves the level. Three rewards each step: higher pay, a one-time bonus, and a metal you keep forever. The source of truth is Monday/CRM — Jin tallies it on the 1st, the director confirms, and a level-up posts to <b>M5 · Pulse</b> automatically.</p>'+
 '</div>';
 
-/* блок «за что платят» */
+/* блок «за что платят» — вкладки */
 var payBlock='';
 if(PAY[role]){
   var p=PAY[role];
   payBlock='<div class="sec">How your pay works</div><div class="paywrap">'+
     '<div class="paylead"><span>Your base</span><b>'+p.fixed+'</b><em>for '+p.for+'</em></div>'+
-    '<div class="paytbl">'+p.rows.map(function(r){
-      return '<div class="payrow"><div class="pk">'+esc(r[0])+'</div><div class="pv">'+esc(r[1])+'</div><div class="pd">'+esc(r[2])+'</div></div>';
+    '<div class="paytabs">'+p.tabs.map(function(t,i){
+      return '<button class="ptab'+(i===0?' on':'')+'" onclick="payTab('+i+')">'+t.k+'</button>';
     }).join('')+'</div>'+
-    (p.note?'<div class="paynote">'+p.note+'</div>':'')+'</div>';
+    p.tabs.map(function(t,i){
+      return '<div class="ppanel'+(i===0?' on':'')+'" id="ppanel'+i+'">'+
+        '<div class="paytbl">'+t.rows.map(function(r){
+          return '<div class="payrow"><div class="pk">'+r[0]+'</div><div class="pv">'+esc(r[1])+'</div><div class="pd">'+esc(r[2])+'</div></div>';
+        }).join('')+'</div>'+
+        (t.note?'<div class="paynote">'+t.note+'</div>':'')+'</div>';
+    }).join('')+
+  '</div>';
 }
+window.payTab=function(i){
+  var tabs=document.querySelectorAll('.ptab'),pans=document.querySelectorAll('.ppanel');
+  for(var j=0;j<tabs.length;j++){ tabs[j].classList.toggle('on',j===i); }
+  for(var k=0;k<pans.length;k++){ pans[k].classList.toggle('on',k===i); }
+};
 
 var body='';
 if(off){
