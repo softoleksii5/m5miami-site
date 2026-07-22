@@ -65,6 +65,7 @@ var ROLES={
   smm:{label:'SMM',sub:'Your SMM & content workspace',
     chips:['My score this week','Is this post on-brand?','Take the onboarding quiz'],
     tiles:[
+      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'monday',k:'My tasks',t:'Monday.com',link:'monday'},
       {ic:'🗓',k:'Scheduler',t:'Auto-posting'},
       {b:'heygen',k:'HeyGen',t:'AI avatars',link:'heygen'},
@@ -77,6 +78,7 @@ var ROLES={
   sales:{label:'Sales',sub:'Your sales workspace',
     chips:['My pipeline','Today’s leads','Objection scripts'],
     tiles:[
+      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'monday',k:'CRM',t:'Monday.com',link:'monday'},
       {b:'openphone',k:'Calls',t:'OpenPhone',link:'openphone'},
       {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
@@ -89,6 +91,7 @@ var ROLES={
   designer:{label:'Designer',sub:'Your design workspace',
     chips:['My projects','Material library','Brand guide'],
     tiles:[
+      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'monday',k:'Boards',t:'Monday.com',link:'monday'},
       {ic:'🎨',k:'Design',t:'3D & tools'},
       {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
@@ -101,6 +104,7 @@ var ROLES={
   pm:{label:'Project Manager',sub:'Your production workspace',
     chips:['My projects','Today’s site tasks','Change orders'],
     tiles:[
+      {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
       {b:'monday',k:'Boards',t:'Monday.com',link:'monday'},
       {ic:'📐',k:'Supervision',t:'Site QC'},
@@ -157,12 +161,6 @@ document.getElementById('app').innerHTML=
       '<div class="play">▶</div>'+
       '<div class="video-cap"><b>Welcome from Jin</b><span>Your AI teammate · ~30 sec</span></div>'+
     '</a>'+
-  '</div>'+
-  '<div class="sec">Your first days</div>'+
-  '<div class="onb">'+
-    '<div class="ostep"><span class="on">Day 1</span><b>Get set up</b><p>Your work email is live. Join the <b>M5 Team</b> Telegram, open the <b>Company Drive</b>, and say hi in General. Watch the founders’ welcome above.</p></div>'+
-    '<div class="ostep"><span class="on">Day 2</span><b>Learn your tools</b><p>Open your <b>Monday</b> board and the <b>Calendar</b> from the tiles below. Skim the playbook, then take your first task from your lead.</p></div>'+
-    '<div class="ostep"><span class="on">Every day</span><b>How M5 runs</b><p>Deals, approvals and the human touch are on <b>you</b>. The system — leads, tasks, docs, follow-ups — runs on <b>Jin</b>, our AI. Ask him anything, anytime.</p></div>'+
   '</div>'+
   '<div class="sec">Daily work</div>'+
   '<div class="grid">'+cfg.tiles.map(function(t){

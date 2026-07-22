@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   :root{
     --ink:#20242E; --soft:#7A7466; --line:#E7E0D2; --white:#fff;
@@ -63,6 +64,11 @@
 <main>
   <form class="card" id="joinForm" autocomplete="off">
     <h1>Join the team hub</h1>
+    <div id="gwrap" style="display:none;margin-bottom:6px">
+      <div id="gbtn" style="display:flex;justify-content:center"></div>
+      <div class="note" style="margin-top:12px">use your @m5miami.com account</div>
+    </div>
+    <div id="manual">
     <div class="field"><input type="text" id="name" placeholder="Name" required></div>
     <div class="field"><input type="email" id="email" placeholder="Email" required></div>
     <div class="field"><input type="tel" id="phone" placeholder="Phone" required></div>
@@ -78,7 +84,8 @@
       </select>
     </div>
     <button type="submit" class="enter">Enter M5</button>
-    <div class="err" id="werr">This email is not on the team list. Access is by invitation — ask in «M5 Team» and we’ll add you.</div>
+    </div>
+    <div class="err" id="werr">This account is not on the team list. Access is by invitation — ask in «M5 Team» and we’ll add you.</div>
     <div class="note">access by invitation only</div>
   </form>
 </main>
@@ -86,8 +93,10 @@
 <footer>M5 Interior Design &amp; Build · Miami</footer>
 
 <script>
-  /* Почты команды — только SHA-256-хэши, адресов в коде нет.
-     Если почта из реестра, роль берётся из него, а не из дропдауна. */
+  /* Вход — кнопкой Google (когда задан GSI_CLIENT): аккаунт подтверждает сам Google,
+     полей нет вообще. Запасной путь — ручная форма с проверкой почты по реестру.
+     Почты команды — только SHA-256-хэши, адресов в коде нет. */
+  var GSI_CLIENT = '';
   var KNOWN_ROLE = {
     '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322':'founder',
     '9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47':'founder',
@@ -124,6 +133,37 @@
   document.getElementById('email').addEventListener('input', function(){
     document.getElementById('werr').classList.remove('on');
   });
+
+  function enter(email, name){
+    sha256(String(email||'').trim().toLowerCase()).then(function(h){
+      var reg = KNOWN_ROLE[h];
+      if (!reg) { document.getElementById('werr').classList.add('on'); return; }
+      try{ localStorage.setItem('m5_member', JSON.stringify({
+        name: name || '', email: String(email).trim().toLowerCase(), role: reg
+      })); }catch(err){}
+      location.href = '/champion' + reg;
+    }).catch(function(){ document.getElementById('werr').classList.add('on'); });
+  }
+  function onGsi(resp){
+    var p = {};
+    try { p = JSON.parse(decodeURIComponent(escape(atob(resp.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))))); } catch(e){}
+    enter(p.email, p.name);
+  }
+  if (GSI_CLIENT) {
+    var tries = 0;
+    (function wait(){
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.initialize({ client_id: GSI_CLIENT, callback: onGsi });
+        google.accounts.id.renderButton(document.getElementById('gbtn'),
+          { theme:'outline', size:'large', shape:'pill', text:'continue_with', width:300 });
+        document.getElementById('gwrap').style.display = 'block';
+        document.getElementById('manual').style.display = 'none';
+        var ins = document.querySelectorAll('#manual input, #manual select');
+        for (var i=0;i<ins.length;i++) ins[i].removeAttribute('required');
+      } else if (++tries < 80) setTimeout(wait, 50);
+      /* GIS не загрузился — остаётся ручная форма */
+    })();
+  }
 </script>
 </body>
 </html>

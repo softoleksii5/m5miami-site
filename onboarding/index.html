@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   :root{--ink:#20242E;--soft:#6E6656;--line:#EBE3D4;--white:#fff;--gold:#B0894F;--gold-d:#96703B;
     --sans:'Geist',-apple-system,sans-serif;--mono:'Space Mono',monospace}
@@ -97,7 +98,9 @@
 <script>
 /* Онбординг-чек-лист. Намеренно НЕ квиз: задача — чтобы человек сделал действия,
    а не доказал, что прочитал. Прогресс живёт в localStorage.
-   Вход — по рабочей почте: в коде только SHA-256-хэши, самих адресов здесь нет. */
+   Вход — кнопкой Google (аккаунт @m5miami.com подтверждает сам Google);
+   пока GSI_CLIENT пуст — запасной ручной ввод почты. В коде только SHA-256-хэши. */
+var GSI_CLIENT = '';
 var LINK = {
   monday:'https://m5miami.monday.com/',
   stock:'https://m5miami.monday.com/boards/5100794770',
@@ -120,6 +123,15 @@ var PERSON = {
   vlad:  {name:'Влад',  role:'Co-Founder · Face of the Brand',        cab:'/championfounder',  track:'founder'},
   alex:  {name:'Алекс', role:'Co-Founder · Strategy & Systems',       cab:'/championfounder',  track:'founder'},
   vadim: {name:'Вадим', role:'Director · Licensed Qualifier',         cab:'/championdirector', track:'director'}
+};
+
+/* Роли без людей: треки готовы заранее, фаундеры видят их в предпросмотре.
+   При найме — строка в PERSON + хэш почты в HASH2WHO (и в welcomehero). */
+var PREVIEW = {
+  smm:      {name:'SMM Manager',    role:'SMM Manager',    cab:'/championsmm',      track:'smm',      pv:true},
+  sales:    {name:'Sales',          role:'Sales',          cab:'/championsales',    track:'sales',    pv:true},
+  designer: {name:'Designer',       role:'Designer',       cab:'/championdesigner', track:'designer', pv:true},
+  pm:       {name:'Project Manager',role:'Project Manager',cab:'/championpm',       track:'pm',       pv:true}
 };
 
 var COMMON = [
@@ -162,6 +174,54 @@ var TRACK = {
       {id:'monday', t:'Держать Monday честным', p:'Реальные даты, а не желаемые. Блокер увидел — отметил сразу, а не когда сорвался срок. Система нужна, чтобы проблема всплывала рано, пока она ещё дешёвая.', go:['Мои доски', LINK.monday]},
       {id:'org', t:'Посмотреть оргструктуру и роль выше', p:'Там твоя карточка и одна будущая роль над тобой — General Director (стратегия, маркетинг, продукт). Она не закреплена ни за кем и открывается, когда компания перерастёт ручное управление. Планка написана открыто — чтобы это решение никогда не стало для тебя сюрпризом.', go:['Открыть /org', LINK.org]}
     ]
+  },
+  smm: {
+    lead:'Ты превращаешь контент в подписанные контракты — единственная метрика, по которой здесь меряют соцсети. Ниже — экономика роли и настройка первого месяца.',
+    why:'Система уже работает на тебя: заявка с сайта за секунды падает в Telegram и в CRM, бот сам напоминает команде про неотвеченные лиды — тебе не нужно нянчить заявки и собирать отчёты. Контракты из соцсетей считаются по источнику в CRM, так что твой результат виден без скриншотов и презентаций. Jin отвечает тебе по твоей роли: идеи, тексты, цифры — спрашивай. Чего система не умеет — <b>вкус, чувство тренда и камера</b>. Это и есть твоя работа, и поэтому она не автоматизируется.',
+    sec:'Сделать один раз',
+    items:[
+      {id:'pay', t:'Разобрать свою экономику на странице роста', p:'База $2,000/мес — за объём: 16–20 Reels в месяц плюс stories каждый день. Сверху деньги за результат: $50 за лид, дошедший до консультации, и $150 за каждый подписанный контракт из соцсетей. Ретейнер растёт до $2,500 и $3,000, когда соцсети стабильно приносят контракты.', key:'North star — контракты, не просмотры. Просмотры и подписчики — датчик здоровья; уровень и деньги двигают только подписанные контракты.', go:['Моя страница роста', '/growth/?role=smm']},
+      {id:'ch', t:'Выучить карту каналов', p:'Core — Instagram, TikTok, YouTube: их покрывает база. Next — Pinterest, Houzz, Google Business, Facebook, LinkedIn: включаем по одному, и при каждом пересматриваем ретейнер — новый канал никогда не значит тихую доп-работу. Открой вкладку Channels и запомни, что в core, а что в очереди.', go:['Вкладка Channels', '/growth/?role=smm']},
+      {id:'raw', t:'Запустить поток сырья с команды', p:'Ты не снимаешь всё в одиночку — сырьё даёт вся команда: Влад — фронтмен и лицо бренда, Вадим привозит кадры с объектов. Твоё — план, короткие брифы на съёмку и производство. Сделай раз: напиши каждому, какие кадры нужны от него каждую неделю.', go:['Познакомиться с командой', '/org/']},
+      {id:'src', t:'Держать источник лида чистым', p:'Бонусы и уровень считаются по источнику в CRM: пришёл лид из соцсетей — в карточке это должно быть видно. Загляни в CRM и посмотри, как живут карточки лидов.', key:'Нет источника в карточке — контракт из соцсетей не засчитан. Чистый трекинг — твоя страховка, а не бюрократия.', go:['Открыть CRM', 'https://m5miami.monday.com/boards/5100794737']},
+      {id:'ach', t:'Выбрать первую ачивку', p:'Разовые бейджи с деньгами: вирусный Reel (100K просмотров) +$100, подкаст (первые 5 выпусков) +$200, рост подписчиков — ступени от $150 до $500. Выбери одну и вплети в контент-план первого месяца — так у плана появляется вершина, а не только объём.'}
+    ]
+  },
+  sales: {
+    lead:'Твоя территория — путь от заявки до подписанного контракта. Всё вокруг этого пути система делает сама; ниже — правила, которые нужно понять один раз.',
+    why:'Заявка с сайта за секунды сама падает в Telegram и карточкой в CRM — охотиться за лидами не нужно, они приходят к тебе. Бот следит за временем ответа: 15 минут тишины — напомнит в чате, 30 — позовёт директора. Jin — не проверяющий: он никому не докладывает, он просто не даёт лиду потеряться и держит цифры в порядке. Чего он <b>никогда</b> не сделает за тебя: разговор, доверие и подпись под контрактом. <b>Машина доводит клиента до тебя за секунды — продаёт человек.</b>',
+    sec:'Сделать один раз',
+    items:[
+      {id:'speed', t:'Правило 15 минут — твой главный KPI', p:'Ответ лиду — не позже 15 минут, в любой день. Это не пожелание: скорость ответа — часть месячного гейта, бот считает её автоматически. Увидел заявку — ответь сразу, даже одной фразой, детали доберёшь после.'},
+      {id:'card', t:'Взял лид → перетащи карточку', p:'Каждая заявка появляется карточкой в группе «Новые лиды». Взял в работу — перетащи её из этой группы. Это единственный ручной жест во всей цепочке: бот перестаёт напоминать, система видит, что лид у тебя.', go:['Открыть CRM', 'https://m5miami.monday.com/boards/5100794737']},
+      {id:'log', t:'Каждое касание — в карточку', p:'Звонок, письмо, встреча — короткая заметка в карточке сразу после касания. Смысл не в отчётности: завтра любой продолжит разговор с того места, где ты остановился. Чего нет в карточке — того не было.', go:['Открыть CRM', 'https://m5miami.monday.com/boards/5100794737']},
+      {id:'disc', t:'Скидки сам не даёшь', p:'Клиент просит цену ниже — фиксируешь запрос в карточке и эскалируешь директору, решение за ним. Никаких «минус пять процентов и подписываем» на встрече. Твой инструмент — ценность проекта, а не цена.'},
+      {id:'scale', t:'Открой свою страницу роста', p:'Шкала A1→M5 двигается одним — подписанными контрактами (считаются по депозиту). База $4,500/мес плюс 2% комиссии с каждого контракта, процент растёт до 2.5% с уровнями. Месячный гейт: ответ ≤15 минут · 8+ консультаций · 100% лидов в Monday.', key:'Не выполнил гейт — уровень в этот месяц не засчитывается. Сначала дисциплина, потом рост.', go:['Моя страница роста', '/growth/?role=sales']}
+    ]
+  },
+  designer: {
+    lead:'Ты делаешь то, что клиент покупает глазами: концепт, 3D, визуализации. Ниже — правила приёмки и то, что нужно сделать один раз, чтобы система работала на тебя.',
+    why:'Jin — инструмент, не проверяющий. Заявки сами падают в CRM, напоминания догоняют сами, Monday и Drive держатся в порядке без твоего участия — тебе не нужно никого дёргать и ничего пересылать. Круги правок считает не чьё-то мнение, а <b>запись в карточке Monday</b> — она твоя защита, веди её честно. Чего система не делает никогда: вкус, композиция, свет, материал в руке клиента — тот слой, ради которого твоя роль существует. Смысл настройки один: чтобы день уходил на дизайн, а не на переписку и отчёты.',
+    sec:'Сделать один раз',
+    items:[
+      {id:'brand', t:'Открыть Brand Kit — и только Geist', p:'Палитра и шрифты бренда лежат в Brand Kit в Drive. Шрифт — Geist, прямой гротеск; антиква не появляется нигде — ни в макете, ни в презентации клиенту. Открой один раз и держи под рукой.'},
+      {id:'rev', t:'Правило двух кругов правок', p:'Не больше 2 кругов правок на макет — это метрика, за которую растёт твой уровень. Поэтому не чини по одной правке: собери все комментарии клиента в один список и закрой пакетом.', key:'Change-order клиента кругом не считается. Спор решает запись в Monday — фиксируй каждый круг в карточке сразу.', go:['Открыть Monday', 'https://m5miami.monday.com/']},
+      {id:'stage', t:'Сдавать по этапам, полным пакетом', p:'Проект принят, когда сдан в срок по этапам и с полным пакетом: 3D, визуализации, документы — всё в Drive. Использовал материал — сразу карточка в библиотеку материалов в Drive: к золотому уровню она полностью на тебе.'},
+      {id:'houzz', t:'Портфолио — на Houzz', p:'Каждый принятый проект — карточка на Houzz: именно там клиенты Майами выбирают, с кем строить. Портфолио, которое привело контракт или рекомендацию, — твой пропуск на золотой уровень.'},
+      {id:'scale', t:'Открыть свою шкалу A1→M5', p:'Ставка за проект — $1,500 на входе, растёт с каждым уровнем, плюс разовый бонус за уровень. Шкалу двигают только проекты, принятые с ≤2 кругами правок; период — полугодие.', go:['Моя шкала', '/growth/?role=designer']}
+    ]
+  },
+  pm: {
+    lead:'Ты держишь объекты: график, качество, инспекции, бригады. Ниже — правила игры и одна страница, которую стоит открыть в первый день.',
+    why:'Jin — инструмент, не проверяющий. Он ловит заявки, догоняет напоминания, утром сигналит, когда остаток на складе пробил порог, и считает цифры по объектам. Он <b>никогда</b> не решает за тебя: качество работ, инспекции, бригады и отношения с субподрядчиками — живая часть, её не автоматизировать. От тебя системе нужно всего два жеста: честные даты в Monday и 4 кадра с каждого визита. Остальное она разнесёт сама.',
+    sec:'Сделать один раз',
+    items:[
+      {id:'insp', t:'Инспекции Miami-Dade — с первого раза', p:'Инспектора зовём, только когда объект готов полностью — пройди всё сам до вызова. Повторная инспекция — потерянные дни в графике и лишний визит, которого могло не быть.', key:'«С первого раза» — не пожелание, а метрика, по которой растёт твой уровень.'},
+      {id:'shoot', t:'4 кадра каждый визит объекта', p:'До / процесс / после / деталь — сразу в Drive, с телефона, пока ты на объекте. Это портфолио, контент для продаж и защита, если клиент скажет «было не так». Визит без съёмки — визит, которого не было.'},
+      {id:'monday', t:'Держать Monday честным', p:'Реальные даты, а не желаемые. Увидел блокер — отметил сразу, а не когда срок уже сорван. Ранняя проблема стоит дёшево, поздняя срывает объект.', go:['Мои доски', 'https://m5miami.monday.com/']},
+      {id:'stock', t:'Следить за складом и порогами', p:'Доска «Склад · Материалы»: остатки и минимальные пороги. Забрал материал на объект — отметь. Система сама напишет, когда остаток пробьёт порог, но считает она только то, что ты отметил.', go:['Открыть склад', 'https://m5miami.monday.com/boards/5100794770']},
+      {id:'growth', t:'Открыть свою шкалу роста', p:'A1 → M5, уровень двигают объекты, сданные без переделок, и инспекции с первого раза. Фикс $7,000/mo, с уровнем растёт до $9,400. Посмотри гейт: ≥90% вех вовремя, change orders подписаны, съёмка в Drive.', go:['Моя шкала', '/growth/?role=pm']}
+    ]
   }
 };
 
@@ -176,34 +236,71 @@ function sha256(s){
   });
 }
 
-function renderGate(showErr){
-  app.innerHTML =
-    '<div class="hero"><div class="k">M5 Start</div><h1>Начнём.</h1>'+
-    '<p>Короткая настройка: что уже построено и что нужно сделать один раз. Страница у каждого своя — открой её рабочей почтой.</p></div>'+
-    '<form class="gate" id="gate">'+
-      '<label for="em">Рабочая почта</label>'+
-      '<input type="email" id="em" placeholder="имя@m5miami.com" autocomplete="email" required>'+
-      '<button type="submit">Открыть мою страницу</button>'+
-      '<div class="err'+(showErr?' on':'')+'" id="gerr">Эта почта не в списке команды. Проверь написание — или напиши в «M5 Team», добавим.</div>'+
-    '</form>';
-  document.getElementById('gate').addEventListener('submit', function(e){
+function acceptEmail(email, name){
+  return sha256(String(email||'').trim().toLowerCase()).then(function(h){
+    var w = HASH2WHO[h];
+    if (!w) return false;
+    try {
+      localStorage.setItem('m5_onb_who', w);
+      var m = {}; try { m = JSON.parse(localStorage.getItem('m5_member')||'{}')||{}; } catch(e){}
+      m.email = String(email).trim().toLowerCase();
+      if (name && !m.name) m.name = name;
+      m.role = PERSON[w].cab.replace('/champion','');
+      localStorage.setItem('m5_member', JSON.stringify(m));
+    } catch (err) {}
+    renderTrack(w);
+    return true;
+  });
+}
+
+function onGsi(resp){
+  var p = {};
+  try { p = JSON.parse(decodeURIComponent(escape(atob(resp.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))))); } catch(e){}
+  acceptEmail(p.email, p.name).then(function(ok){
+    var er = document.getElementById('gerr');
+    if (!ok && er) er.classList.add('on');
+  });
+}
+
+function mountEmailForm(){
+  var slot = document.getElementById('gslot'); if (!slot) return;
+  slot.innerHTML =
+    '<form id="gform"><label for="em">Рабочая почта</label>'+
+    '<input type="email" id="em" placeholder="имя@m5miami.com" autocomplete="email" required>'+
+    '<button type="submit">Открыть мою страницу</button></form>';
+  document.getElementById('gform').addEventListener('submit', function(e){
     e.preventDefault();
-    var em = document.getElementById('em').value.trim().toLowerCase();
-    sha256(em).then(function(h){
-      var w = HASH2WHO[h];
-      if (w) {
-        try { localStorage.setItem('m5_onb_who', w); } catch (err) {}
-        renderTrack(w);
-      } else {
-        document.getElementById('gerr').classList.add('on');
-      }
+    acceptEmail(document.getElementById('em').value).then(function(ok){
+      if (!ok) document.getElementById('gerr').classList.add('on');
     });
   });
 }
 
+function renderGate(showErr){
+  app.innerHTML =
+    '<div class="hero"><div class="k">M5 Start</div><h1>Начнём.</h1>'+
+    '<p>Короткая настройка: что уже построено и что нужно сделать один раз. Страница у каждого своя — войди рабочим Google-аккаунтом.</p></div>'+
+    '<div class="gate">'+
+      '<div id="gslot"><label>Рабочий аккаунт @m5miami.com</label><div id="gbtn"></div></div>'+
+      '<div class="err'+(showErr?' on':'')+'" id="gerr">Этот аккаунт не в списке команды. Войди рабочим аккаунтом @m5miami.com — или напиши в «M5 Team», добавим.</div>'+
+    '</div>';
+  if (!GSI_CLIENT) { mountEmailForm(); return; }
+  var tries = 0;
+  (function wait(){
+    if (window.google && google.accounts && google.accounts.id) {
+      google.accounts.id.initialize({ client_id: GSI_CLIENT, callback: onGsi });
+      google.accounts.id.renderButton(document.getElementById('gbtn'),
+        { theme:'outline', size:'large', shape:'pill', text:'continue_with', width:300 });
+    } else if (++tries < 80) setTimeout(wait, 50);
+    else mountEmailForm(); // GIS не загрузился — запасной ручной ввод
+  })();
+}
+
 function renderTrack(who){
-  var P = PERSON[who], T = TRACK[P.track];
-  var items = T.items.concat(COMMON), KEY = 'm5_onb_' + who;
+  var P = PERSON[who] || (who.indexOf('pv_') === 0 ? PREVIEW[who.slice(3)] : null);
+  if (!P) { renderGate(false); return; }
+  var T = TRACK[P.track];
+  var items = P.pv ? T.items : T.items.concat(COMMON), KEY = 'm5_onb_' + who;
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
 
@@ -226,8 +323,16 @@ function renderTrack(who){
       (it.key ? '<div class="key">' + esc(it.key) + '</div>' : '') + how + go + '</div></div>';
   }
 
+  var isFounderView = !P.pv && P.track === 'founder';
+  var pvLinks = ['smm','sales','designer','pm'].map(function(k){
+    return (P.pv && who.slice(3) === k)
+      ? '<b>' + esc(PREVIEW[k].name) + '</b>'
+      : '<a href="#" onclick="return pv(\'' + k + '\')">' + esc(PREVIEW[k].name) + '</a>';
+  }).join(' · ');
+
   app.innerHTML =
-    '<div class="hero"><div class="k">' + esc(P.role) + '</div><h1>' + esc(P.name) + ', начнём.</h1>' +
+    '<div class="hero"><div class="k">' + (P.pv ? 'Предпросмотр · так это увидит новый сотрудник' : esc(P.role)) + '</div>' +
+    '<h1>' + (P.pv ? 'Трек роли: ' + esc(P.name) : esc(P.name) + ', начнём.') + '</h1>' +
     '<p>' + esc(T.lead) + '</p></div>' +
     '<div class="bar"><div class="bt"><span>Прогресс</span><b id="pct">0 / ' + items.length + '</b></div>' +
       '<div class="track"><div class="fill" id="fill"></div></div>' +
@@ -236,10 +341,16 @@ function renderTrack(who){
     '<div class="why"><div class="wh">Важно понимать</div>' + T.why + '</div>' +
     '<div class="sec">' + esc(T.sec) + '</div>' +
     T.items.map(rowHtml).join('') +
-    '<div class="sec">Общее для всех</div>' +
-    COMMON.map(rowHtml).join('') +
-    '<div class="foot">Что-то неудобно или лишнее — скажи в «M5 Team». Систему строим под работу, а не работу под систему.<br>' +
-      'Это не твоя страница? <a href="#" onclick="return swp()">Сменить почту</a></div>';
+    (P.pv ? '' :
+      '<div class="sec">Общее для всех</div>' +
+      COMMON.map(rowHtml).join('')) +
+    '<div class="foot">' +
+      (P.pv
+        ? '<a href="#" onclick="return pvBack()">← Вернуться к моему треку</a><br>Другие роли: ' + pvLinks
+        : 'Что-то неудобно или лишнее — скажи в «M5 Team». Систему строим под работу, а не работу под систему.' +
+          (isFounderView ? '<br>Треки будущих ролей: ' + pvLinks : '') +
+          '<br>Это не твоя страница? <a href="#" onclick="return swp()">Сменить почту</a>') +
+    '</div>';
 
   window.tog = function(id){
     state[id] = !state[id];
@@ -251,6 +362,12 @@ function renderTrack(who){
     try { localStorage.removeItem('m5_onb_who'); } catch (e) {}
     renderGate(false);
     return false;
+  };
+  window.pv = function(k){ renderTrack('pv_' + k); window.scrollTo(0,0); return false; };
+  window.pvBack = function(){
+    var w = ''; try { w = localStorage.getItem('m5_onb_who') || ''; } catch (e) {}
+    if (PERSON[w]) renderTrack(w); else renderGate(false);
+    window.scrollTo(0,0); return false;
   };
   function paint(){
     var n = 0;
