@@ -70,19 +70,21 @@
   .card.person.future .more{color:#71767F}
   .soon{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#5B6672;background:#EEF0F3;border:1px solid #D7DBE1;padding:3px 8px;border-radius:20px}
-  /* Jin — карточка-движок. Тёмная: сразу видно, что это не человек. */
-  .card.person.jin{background:linear-gradient(135deg,#20242E,#2E3545);border-color:#2E3545;color:#EDEAE3;
-    box-shadow:0 24px 54px -30px rgba(32,36,46,.7)}
-  .card.person.jin:before{background:linear-gradient(90deg,#B0894F,#E4C489)}
-  .card.person.jin .who b{color:#fff}
-  .card.person.jin .who span{color:#E4C489}
-  .card.person.jin .ava{background:linear-gradient(140deg,#3A4152,#12151C);color:#E4C489;border:1px solid rgba(228,196,137,.35)}
-  .card.person.jin .duty li{color:#CFCBC1}
-  .card.person.jin .duty li:before{content:"▸";color:#7DDC9A}
-  .card.person.jin .more{color:#E4C489}
-  .card.person.jin:hover .more{color:#fff}
-  .jinb{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-    color:#1B1F27;background:#7DDC9A;padding:3px 8px;border-radius:20px;font-weight:700}
+  /* Jin — слой-фундамент под всей компанией, а НЕ равный участник иерархии.
+     Широкая полоса вместо карточки — намеренно: инфраструктуру не ставят в ряд с людьми. */
+  .jinlayer{background:linear-gradient(135deg,#20242E,#2E3545);color:#EDEAE3;border-radius:18px;padding:24px 26px;
+    position:relative;overflow:hidden;cursor:pointer;transition:.2s;box-shadow:0 24px 54px -30px rgba(32,36,46,.7)}
+  .jinlayer:hover{transform:translateY(-2px);box-shadow:0 28px 60px -28px rgba(32,36,46,.8)}
+  .jinlayer:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 90% -25%,rgba(176,137,79,.32),transparent 58%)}
+  .jl-head{position:relative;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#E4C489;
+    display:flex;align-items:center;gap:9px}
+  .jl-dot{width:8px;height:8px;border-radius:50%;background:#7DDC9A;box-shadow:0 0 0 4px rgba(125,220,154,.18)}
+  .jinlayer p{position:relative;font-size:14px;line-height:1.6;color:#D3CFC6;margin-top:11px}
+  .jinlayer p b{color:#fff}
+  .jl-never{border-top:1px solid rgba(237,234,227,.16);padding-top:12px;margin-top:13px !important}
+  .jl-more{position:relative;display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:#E4C489}
+  .jinlayer:hover .jl-more{color:#fff}
   .jbrule{max-width:720px;margin:0 auto;text-align:center;font-family:var(--mono);font-size:12px;line-height:1.6;
     color:#6E6656;background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:14px;padding:13px 18px}
   .jbrule b{color:var(--gold-d)}
@@ -168,10 +170,18 @@
 
   <div class="down"></div>
 
-  <div class="lvl" style="margin-top:0">How the work actually gets done</div>
-  <div class="row branches" id="rowBranches"></div>
+  <div class="lvl" style="margin-top:0">Direction · Operations</div>
+  <div class="row solo" id="rowOps"></div>
 
   <div class="down"></div>
+
+  <div class="lvl" style="margin-top:0">The layer underneath everyone</div>
+  <div class="jinlayer" onclick="openP('jin')">
+    <div class="jl-head"><span class="jl-dot"></span>JIN — infrastructure, not a colleague</div>
+    <p>Jin sits <b>under</b> the whole company, not next to anyone in it. It carries the routine for every person here: catches leads, answers in seconds, chases follow-ups, keeps Monday and Drive clean, reports the numbers.</p>
+    <p class="jl-never">It never touches what people are here for: <b>the license and everything signed under it, judgment on money and scope, taste, and real relationships.</b> Those do not get automated — they get protected by taking the paperwork off the people who own them.</p>
+    <span class="jl-more">What Jin runs — and what it never touches →</span>
+  </div>
 
   <div class="jbrule">Before any new hire, one question first: <b>can Jin do this?</b> A person is added only when the honest answer is no.</div>
 
@@ -255,9 +265,9 @@ var TEAM=[
   openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'},
  /* Левая ветка. Роль-место, а не человек: сегодня её закрывают фаундеры, завтра — наёмный руководитель. */
  /* Jin — не человек и не вакансия. Стоит в схеме потому, что реально делает работу целой функции. */
- {slug:'jin',name:'Jin',role:'AI layer · the demand side runs here',ava:'J',avaClass:'',bc:'#2E3545',jin:true,
+ {slug:'jin',name:'Jin',role:'Infrastructure · runs under the whole team',ava:'J',avaClass:'',bc:'#2E3545',jin:true,
   duty:['Every lead caught and answered in seconds','Follow-ups chased without anyone remembering','Monday and Drive kept clean by default','Numbers reported back to founders'],
-  value:'Jin is not staff and not a future hire — it is the layer that does the demand-side routine end to end: capture, reply, follow-up, CRM hygiene, documents, reporting. The founders own the demand: Alex sets the engine and the strategy, Vlad is the face and the relationships. Jin runs everything underneath that would otherwise cost a salary.',
+  value:'Jin is not staff, not a hire and not anyone’s peer — it is plumbing. It sits under the whole company and carries the routine for every person in it: capture, reply, follow-up, CRM hygiene, documents, reporting. Nobody reports to Jin and Jin reports to nobody. It exists so that the people here spend their day on the part only a person can do.',
   notes:['Judgment on money, scope and clients','Taste and design decisions','Real relationships — clients, partners, crews','Anything a licensed professional must sign'],
   openTo:'This is why M5 stays small. Before any new hire the question is always the same: can Jin do this? A person is added only when the honest answer is no.'}
 ];
@@ -277,7 +287,7 @@ document.getElementById('rowFounders').innerHTML=cardHtml(TEAM[0])+cardHtml(TEAM
 document.getElementById('rowGD').innerHTML=cardHtml(byslug('gd'));
 /* Две ветки на одном уровне: слева спрос (место), справа производство (занято Вадимом). */
 /* Два движка: слева софт держит спрос, справа человек держит стройку. Асимметрия намеренная. */
-document.getElementById('rowBranches').innerHTML=cardHtml(byslug('jin'))+cardHtml(TEAM[2]);
+document.getElementById('rowOps').innerHTML=cardHtml(TEAM[2]);
 
 function openP(slug){
   var p=null;
