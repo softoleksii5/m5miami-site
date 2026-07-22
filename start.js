@@ -137,21 +137,21 @@ document.getElementById('app').innerHTML=
   '<div class="top">'+
     '<div class="agent">'+
       '<div class="agent-h"><div class="agent-ic">✦</div>'+
-      '<div><b>Your AI agent — ask anything</b><span>Trained on M5 brand &amp; rules</span></div></div>'+
+      '<div><b>Jin — ask me anything</b><span>Your AI teammate · trained on M5 brand &amp; rules</span></div></div>'+
       '<div class="chips">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+'</div>'+
-      '<div class="ask"><input type="text" id="askInput" placeholder="Ask the M5 Agent...">'+
+      '<div class="ask"><input type="text" id="askInput" placeholder="Ask Jin...">'+
       '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
     '</div>'+
-    '<a class="video" href="'+(videoUrl||'#')+'"'+(videoUrl?' target="_blank" rel="noopener"':' onclick="return soon()"')+' style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime.jpg\');background-size:cover;background-position:center 32%">'+
+    '<a class="video" href="#" onclick="return openWelcome()" style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime.jpg\');background-size:cover;background-position:center 32%">'+
       '<div class="play">▶</div>'+
-      '<div class="video-cap"><b>Welcome from the founders</b><span>2 min · start here</span></div>'+
+      '<div class="video-cap"><b>Meet Jin · your AI teammate</b><span>~30 sec · start here</span></div>'+
     '</a>'+
   '</div>'+
   '<div class="sec">Your first days</div>'+
   '<div class="onb">'+
     '<div class="ostep"><span class="on">Day 1</span><b>Get set up</b><p>Your work email is live. Join the <b>M5 Team</b> Telegram, open the <b>Company Drive</b>, and say hi in General. Watch the founders’ welcome above.</p></div>'+
     '<div class="ostep"><span class="on">Day 2</span><b>Learn your tools</b><p>Open your <b>Monday</b> board and the <b>Calendar</b> from the tiles below. Skim the playbook, then take your first task from your lead.</p></div>'+
-    '<div class="ostep"><span class="on">Every day</span><b>How M5 runs</b><p>Deals, approvals and the human touch are on <b>us</b>. The system — leads, tasks, docs, follow-ups — runs on <b>AI</b>. Ask the M5 Agent anything, anytime.</p></div>'+
+    '<div class="ostep"><span class="on">Every day</span><b>How M5 runs</b><p>Deals, approvals and the human touch are on <b>you</b>. The system — leads, tasks, docs, follow-ups — runs on <b>Jin</b>, our AI. Ask him anything, anytime.</p></div>'+
   '</div>'+
   '<div class="sec">Daily work</div>'+
   '<div class="grid">'+cfg.tiles.map(function(t){
@@ -165,8 +165,48 @@ document.getElementById('app').innerHTML=
       '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge+'</a>';
   }).join('')+'</div>'+
 '</div>'+
-'<footer>M5 Interior Design &amp; Build · Miami · Private team hub</footer>';
+'<footer>M5 Interior Design &amp; Build · Miami · Private team hub</footer>'+
+'<div class="wv" id="wv" onclick="if(event.target===this)closeWelcome()">'+
+  '<div class="wv-box">'+
+    '<button class="wv-x" onclick="closeWelcome()" aria-label="Close">✕</button>'+
+    '<div class="wv-stage"><div class="wv-img" id="wvImg"></div><div class="wv-cap" id="wvCap"></div></div>'+
+    '<audio id="wvA" src="/media/welcome_vo.m4a" preload="auto"></audio>'+
+  '</div>'+
+'</div>';
+
+var WVCAP=[
+ [0,'Hey — I’m <b>Jin.</b>'],
+ [2.6,'The engine behind M5.'],
+ [5.6,'I run the system, so you can run the deals.'],
+ [11.5,'Leads, tasks, docs, follow-ups — that’s me, 24/7.'],
+ [17.5,'You bring the human side: relationships, craft, the final call.'],
+ [24,'Monday · Telegram · Drive — your world.'],
+ [29.5,'Need anything? Just ask me.'],
+ [33,'Welcome to the team. <b>Let’s build something legendary 🚀</b>']
+];
+var wvTimer=null;
+function openWelcome(){
+  var m=document.getElementById('wv'),a=document.getElementById('wvA'),cap=document.getElementById('wvCap'),img=document.getElementById('wvImg');
+  m.classList.add('on'); cap.innerHTML=''; cap.removeAttribute('data-c');
+  img.style.animation='none'; void img.offsetWidth; img.style.animation='';
+  try{a.currentTime=0; a.play();}catch(e){}
+  var start=performance.now();
+  clearInterval(wvTimer);
+  wvTimer=setInterval(function(){
+    var t=(performance.now()-start)/1000, cur=WVCAP[0][1];
+    for(var i=0;i<WVCAP.length;i++){ if(t>=WVCAP[i][0]) cur=WVCAP[i][1]; }
+    if(cap.getAttribute('data-c')!==cur){ cap.setAttribute('data-c',cur); cap.innerHTML='<span>'+cur+'</span>'; }
+    if(t>35) closeWelcome();
+  },120);
+  return false;
+}
+function closeWelcome(){
+  var m=document.getElementById('wv'),a=document.getElementById('wvA');
+  m.classList.remove('on'); clearInterval(wvTimer);
+  try{a.pause(); a.currentTime=0;}catch(e){}
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWelcome(); });
 
 function soon(){ alert('This link is being set up — it will open the live tool soon.'); return false; }
-function askAgent(q){ alert('The M5 AI agent connects here soon.'+(q?('\n\n“'+q+'”'):'')); }
+function askAgent(q){ alert('Jin is being connected — he’ll answer here soon.'+(q?('\n\n“'+q+'”'):'')); }
 function signout(){ try{localStorage.removeItem('m5_member');}catch(e){}; location.href='/welcomehero'; }

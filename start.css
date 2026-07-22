@@ -71,3 +71,16 @@ header{position:relative;z-index:3}
 .live{position:absolute;top:15px;right:15px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:#3E8E5A;border:1px solid #CBE3D3;background:#F0F8F2;padding:3px 8px;border-radius:20px;text-transform:uppercase}
 
 footer{position:relative;z-index:2;padding:44px 0;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--soft);text-transform:uppercase}
+
+/* ── Welcome video player (inline) ── */
+.wv{position:fixed;inset:0;background:rgba(10,8,6,.88);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:9999;padding:24px}
+.wv.on{display:flex}
+.wv-box{position:relative;width:min(940px,94vw)}
+.wv-x{position:absolute;top:-16px;right:-16px;z-index:3;width:38px;height:38px;border-radius:50%;border:none;background:#fff;color:#20242E;font-size:16px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.wv-stage{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#15110d;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.wv-img{position:absolute;inset:0;background:url('/media/welcome_anime.jpg') center 30%/cover;animation:wvz 34s ease-out forwards;will-change:transform}
+@keyframes wvz{from{transform:scale(1.02)}to{transform:scale(1.17)}}
+.wv-cap{position:absolute;left:0;right:0;bottom:0;padding:64px 34px 30px;background:linear-gradient(180deg,transparent,rgba(12,10,8,.85));color:#fff;font-family:var(--serif);font-size:clamp(19px,3.4vw,31px);line-height:1.25;text-align:center;min-height:40px}
+.wv-cap span{display:inline-block;animation:wvfade .5s ease}
+.wv-cap b{color:#E3C795}
+@keyframes wvfade{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
