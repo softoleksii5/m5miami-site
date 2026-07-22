@@ -67,6 +67,7 @@ var ROLES={
       {ic:'📸',k:'Channels',t:'IG · TikTok · YT'},
       {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
       {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
+      {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
   sales:{label:'Sales',sub:'Your sales workspace',
     chips:['My pipeline','Today’s leads','Objection scripts'],
@@ -78,6 +79,7 @@ var ROLES={
       {ic:'🤝',k:'Partners',t:'Realtors & brokers'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'drive',k:'Drive',t:'Docs',link:'drive'},
+      {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
   designer:{label:'Designer',sub:'Your design workspace',
     chips:['My projects','Material library','Brand guide'],
@@ -89,6 +91,7 @@ var ROLES={
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
+      {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
   pm:{label:'Project Manager',sub:'Your production workspace',
     chips:['My projects','Today’s site tasks','Change orders'],
@@ -100,6 +103,7 @@ var ROLES={
       {b:'drive',k:'Drive',t:'Docs & photos',link:'drive'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
+      {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
   team:{label:'Team',sub:'Your workspace',
     chips:['My tasks','Knowledge base','Ask anything'],
@@ -109,7 +113,8 @@ var ROLES={
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {ic:'✦',k:'AI Agent',t:'M5 assistant'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
-      {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'}]}
+      {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
+      {ic:'👥',k:'Team',t:'Who is who',link:'org'}]}
 };
 
 function detectRole(){

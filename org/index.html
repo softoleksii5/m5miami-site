@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>M5 — Org Structure</title>
+<title>M5 — Team & Org</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +41,8 @@
 
   .card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;position:relative;overflow:hidden;
     box-shadow:0 20px 46px -28px rgba(32,36,46,.35)}
+  .card.person{cursor:pointer;transition:.2s}
+  .card.person:hover{transform:translateY(-3px);box-shadow:0 24px 52px -26px rgba(32,36,46,.45)}
   .card:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--bc,var(--gold))}
   .who{display:flex;align-items:center;gap:15px}
   .ava{width:54px;height:54px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
@@ -52,23 +54,51 @@
   .duty{list-style:none;margin:16px 0 0}
   .duty li{font-size:13.5px;color:#54503F;padding:5px 0 5px 20px;position:relative}
   .duty li:before{content:"—";position:absolute;left:0;color:var(--gold)}
-  .mail{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--soft);letter-spacing:.04em}
-  .mail:hover{color:var(--gold-d)}
+  .more{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d)}
+  .card.person:hover .more{color:var(--ink)}
 
   .hire{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
     color:#B4682F;background:#FCEFE2;border:1px solid #F3D9BE;padding:3px 8px;border-radius:20px}
-  .go{display:inline-block;margin-top:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d)}
-  .go:hover{color:var(--ink)}
   .card.mini{padding:20px}
-  .card.mini .ava{width:44px;height:44px;font-size:17px;background:#F2ECE0;color:var(--gold-d)}
+  .card.mini .ava{width:44px;height:44px;font-size:15px;background:#F2ECE0;color:var(--gold-d)}
   .card.mini .who b{font-size:16.5px}
   .card.mini p{font-size:12.5px;color:#54503F;margin-top:12px;line-height:1.5}
+  .go{display:inline-block;margin-top:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d)}
+  .go:hover{color:var(--ink)}
 
   .down{width:2px;height:32px;background:var(--gold);opacity:.45;margin:0 auto}
   .rail{height:32px;position:relative;margin:0 auto;width:75%}
   .rail:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--gold);opacity:.45}
   .rail:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--gold);opacity:.45}
   @media(max-width:860px){.down,.rail{display:none}.lvl{margin-top:26px}}
+
+  /* профиль-модалка */
+  .pm-ov{position:fixed;inset:0;background:rgba(20,18,15,.55);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.25s;z-index:50}
+  .pm-ov.on{opacity:1;pointer-events:auto}
+  .pm{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);width:min(560px,92vw);max-height:88vh;overflow:auto;
+    background:var(--white);border-radius:20px;padding:30px;z-index:51;opacity:0;pointer-events:none;transition:.25s;
+    box-shadow:0 40px 90px -30px rgba(20,18,15,.55)}
+  .pm.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+  .pm-x{position:absolute;top:16px;right:16px;width:34px;height:34px;border:none;border-radius:50%;background:#F2ECE0;color:var(--ink);font-size:15px;cursor:pointer}
+  .pm-x:hover{background:#E8E0CE}
+  .pm .who b{font-size:23px}
+  .pm-sec{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin:20px 0 8px}
+  .pm-val{font-size:14.5px;color:#3A3325;line-height:1.55}
+  .pm-ask{list-style:none}
+  .pm-ask li{font-size:13.5px;color:#54503F;padding:4px 0 4px 20px;position:relative}
+  .pm-ask li:before{content:"→";position:absolute;left:0;color:var(--gold)}
+  .pm-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .pm-fact{background:#F8F4EB;border:1px solid var(--line);border-radius:12px;padding:11px 14px}
+  .pm-fact i{display:block;font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:4px}
+  .pm-fact b{font-size:13.5px;font-weight:600}
+  .pm-contacts a{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;color:var(--gold-d);margin-right:18px}
+  .pm-contacts a:hover{color:var(--ink)}
+  .pm-hr{border:none;border-top:1px solid var(--line);margin:20px 0 0}
+  .pm-priv{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#B4AC9A;margin-top:8px}
+  .pm-doc{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:11px 16px;border:1px solid var(--gold);border-radius:10px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d)}
+  .pm-doc:hover{background:#FBF6EC}
+  .pm-doc.na{border-color:var(--line);color:#B4AC9A;cursor:default}
 
   footer{padding:46px 0;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--soft);text-transform:uppercase}
 </style>
@@ -83,49 +113,16 @@
 
   <div class="hero">
     <h1>How M5 works.</h1>
-    <div class="k">Org structure · Who owns what</div>
+    <div class="k">Org structure · Click a person for details</div>
   </div>
 
   <div class="lvl">Founders</div>
-  <div class="row founders">
-    <div class="card" style="--bc:#20242E">
-      <div class="who"><div class="ava ink">A</div>
-        <div><b>Alex</b><span>Co-Founder · Strategy &amp; Systems</span></div></div>
-      <ul class="duty">
-        <li>Vision, strategy &amp; finance</li>
-        <li>Marketing engine &amp; growth</li>
-        <li>AI layer — processes &amp; automation</li>
-      </ul>
-      <a class="mail" href="mailto:alex@m5miami.com">alex@m5miami.com</a>
-    </div>
-    <div class="card" style="--bc:#F4673B">
-      <div class="who"><div class="ava coral">V</div>
-        <div><b>Vlad</b><span>Co-Founder · Brand &amp; Strategy</span></div></div>
-      <ul class="duty">
-        <li>Sales &amp; client relationships</li>
-        <li>Content, media &amp; brand face</li>
-        <li>Investment &amp; capital raising</li>
-      </ul>
-      <a class="mail" href="mailto:vlad@m5miami.com">vlad@m5miami.com</a>
-    </div>
-  </div>
+  <div class="row founders" id="rowFounders"></div>
 
   <div class="down"></div>
 
   <div class="lvl" style="margin-top:0">Direction · Operations</div>
-  <div class="row solo">
-    <div class="card" style="--bc:#B0894F">
-      <div class="who"><div class="ava">V</div>
-        <div><b>Vadim</b><span>Director · Licensed Qualifier</span></div></div>
-      <ul class="duty">
-        <li>Operations &amp; production</li>
-        <li>Permits &amp; compliance — Miami-Dade</li>
-        <li>Crews, subcontractors &amp; quality</li>
-        <li>Production strategy &amp; scaling</li>
-      </ul>
-      <a class="mail" href="mailto:vadim@m5miami.com">vadim@m5miami.com</a>
-    </div>
-  </div>
+  <div class="row solo" id="rowOps"></div>
 
   <div class="rail"></div>
 
@@ -164,7 +161,78 @@
   </div>
 </div>
 
+<div class="pm-ov" id="pmOv" onclick="closeP()"></div>
+<div class="pm" id="pmBox" role="dialog" aria-modal="true"></div>
+
 <footer>M5 Interior Design &amp; Build · Miami · Private team page</footer>
 
+<script>
+/* Данные команды. Чувствительное (договор) — только ссылкой на Drive:
+   файл в Drive доступен лишь фаундерам и директору, страница ничего не раскрывает.
+   Источник правды по датам/договорам: M5/4 Рабочие документы/Команда_реестр.csv */
+var TEAM=[
+ {slug:'alex',name:'Alex',role:'Co-Founder · Strategy & Systems',ava:'A',avaClass:'ink',bc:'#20242E',
+  duty:['Vision, strategy & finance','Marketing engine & growth','AI layer — processes & automation'],
+  value:'Builds the machine: strategy, money, marketing and the AI system (Jin) that runs leads, tasks and docs. If the company works like clockwork — that is his job.',
+  ask:['Strategy & priorities','Tools, accounts & access','Budgets & payments','Site, marketing & AI'],
+  email:'alex@m5miami.com',tg:'softoleksii',dob:'',start:'July 2026',end:'',contract:''},
+ {slug:'vlad',name:'Vlad',role:'Co-Founder · Brand & Strategy',ava:'V',avaClass:'coral',bc:'#F4673B',
+  duty:['Sales & client relationships','Content, media & brand face','Investment & capital raising'],
+  value:'The face and the voice of M5: clients, partners, content. Closes deals, raises capital and sets the design taste level the brand is known for.',
+  ask:['Clients & deals','Partners (realtors, brokers)','Content & socials','Investment questions'],
+  email:'vlad@m5miami.com',tg:'DidCo5',dob:'',start:'July 2026',end:'',contract:''},
+ {slug:'vadim',name:'Vadym Shtempel',role:'Director · Licensed Qualifier',ava:'V',avaClass:'',bc:'#B0894F',
+  duty:['Operations & production','Permits & compliance — Miami-Dade','Crews, subcontractors & quality','Production strategy & scaling'],
+  value:'Runs the build: crews, sites, permits, quality. The licensed qualifier who makes every project legal and every handover clean.',
+  ask:['Production & schedules','Permits & inspections','Subcontractors & crews','Hiring & team questions'],
+  email:'vadim@m5miami.com',tg:'mrShtempel',dob:'',start:'',end:'',contract:''}
+];
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+function cardHtml(p){
+  return '<div class="card person" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
+    '<div class="who"><div class="ava '+p.avaClass+'">'+p.ava+'</div>'+
+    '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
+    '<ul class="duty">'+p.duty.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul>'+
+    '<span class="more">Profile →</span></div>';
+}
+document.getElementById('rowFounders').innerHTML=cardHtml(TEAM[0])+cardHtml(TEAM[1]);
+document.getElementById('rowOps').innerHTML=cardHtml(TEAM[2]);
+
+function openP(slug){
+  var p=null;
+  for(var i=0;i<TEAM.length;i++){ if(TEAM[i].slug===slug){ p=TEAM[i]; break; } }
+  if(!p)return;
+  var facts=
+    '<div class="pm-fact"><i>Birthday</i><b>'+(p.dob?esc(p.dob):'—')+'</b></div>'+
+    '<div class="pm-fact"><i>With M5 since</i><b>'+(p.start?esc(p.start):'—')+'</b></div>'+
+    '<div class="pm-fact"><i>Contract until</i><b>'+(p.end?esc(p.end):'Open-ended')+'</b></div>'+
+    '<div class="pm-fact"><i>Role type</i><b>'+(p.slug==='vadim'?'Director · W-2':'Co-Founder')+'</b></div>';
+  var doc=p.contract
+    ? '<a class="pm-doc" target="_blank" rel="noopener" href="'+p.contract+'">📄 Contract — open in Drive</a>'
+    : '<span class="pm-doc na">📄 Contract — not uploaded yet</span>';
+  document.getElementById('pmBox').innerHTML=
+    '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
+    '<div class="who"><div class="ava '+p.avaClass+'" style="width:62px;height:62px;font-size:25px">'+p.ava+'</div>'+
+    '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
+    '<div class="pm-sec">What they do &amp; why it matters</div><div class="pm-val">'+esc(p.value)+'</div>'+
+    '<div class="pm-sec">Come to them about</div><ul class="pm-ask">'+p.ask.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
+    '<div class="pm-sec">Facts</div><div class="pm-facts">'+facts+'</div>'+
+    '<div class="pm-sec">Contacts</div><div class="pm-contacts">'+
+      '<a href="mailto:'+p.email+'">✉ '+p.email+'</a>'+
+      (p.tg?'<a target="_blank" rel="noopener" href="https://t.me/'+p.tg+'">✈ @'+p.tg+'</a>':'')+
+    '</div>'+
+    '<hr class="pm-hr">'+doc+
+    '<div class="pm-priv">Contract files live in Drive — access is limited to founders &amp; director</div>';
+  document.getElementById('pmOv').classList.add('on');
+  document.getElementById('pmBox').classList.add('on');
+}
+function closeP(){
+  document.getElementById('pmOv').classList.remove('on');
+  document.getElementById('pmBox').classList.remove('on');
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeP(); });
+</script>
 </body>
 </html>
