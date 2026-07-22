@@ -249,9 +249,9 @@ var TEAM=[
   email:'vadim@m5miami.com',tg:'mrShtempel',dob:'September — day TBC',start:'',end:'',contract:''},
  /* Будущая роль. Намеренно НЕ закреплена ни за кем: планка публичная, дорастает тот, кто её берёт. */
  {slug:'gd',name:'General Director',role:'Future role · opens as M5 scales',ava:'GD',avaClass:'',bc:'#8A8F9C',future:true,
-  duty:['Strategy — sets where M5 goes next','Owns both functions: Growth and Delivery','Owns the P&L and keeps headcount low','Holds the outside bench: attorney, CPA, insurance'],
-  value:'The role that takes M5 from founder-run to company-run — without turning it into a pyramid. It runs a small team plus the AI system, not a department. It exists only when founders step out of daily operations.',
-  bar:['Both functions run without founders in daily operations','Output grows faster than headcount','Owns the P&L: margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
+  duty:['Strategy — sets where M5 goes next','Owns both sides: demand (runs on Jin) and delivery (people)','Owns the P&L and keeps headcount low','Holds the outside bench: attorney, CPA, insurance'],
+  value:'The role that takes M5 from founder-run to company-run — without turning it into a pyramid. It runs the AI system and a small team, not a department. It exists only when founders step out of daily operations.',
+  bar:['Both sides run without founders in daily operations','Output grows faster than headcount','Owns the P&L: margin on plan several periods in a row','Brings strategy of their own, not just executes ours'],
   openTo:'Open to anyone at M5 who clears the bar — the current Director included — and to an external hire if nobody does. The bar is public on purpose: no one should ever be surprised by this decision.'},
  /* Левая ветка. Роль-место, а не человек: сегодня её закрывают фаундеры, завтра — наёмный руководитель. */
  /* Jin — не человек и не вакансия. Стоит в схеме потому, что реально делает работу целой функции. */
@@ -270,7 +270,7 @@ function cardHtml(p){
     '<div class="who"><div class="ava '+p.avaClass+'">'+p.ava+'</div>'+
     '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
     '<ul class="duty">'+p.duty.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul>'+
-    '<span class="more">'+(p.future?'What it takes →':'Profile →')+'</span></div>';
+    '<span class="more">'+(p.jin?'What Jin does →':(p.future?'What it takes →':'Profile →'))+'</span></div>';
 }
 function byslug(s){for(var i=0;i<TEAM.length;i++){if(TEAM[i].slug===s)return TEAM[i];}return null;}
 document.getElementById('rowFounders').innerHTML=cardHtml(TEAM[0])+cardHtml(TEAM[1]);
