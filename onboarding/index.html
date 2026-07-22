@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>M5 — Start here</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#20242E;--soft:#6E6656;--line:#EBE3D4;--white:#fff;--gold:#B0894F;--gold-d:#96703B;
+    --sans:'Geist',-apple-system,sans-serif;--mono:'Space Mono',monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);color:var(--ink);min-height:100vh;
+    background:#F6F0E5 url('/img/vice_bg.jpg') top center/100% auto no-repeat}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 70px;position:relative;z-index:2}
+  .hbar{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+  .logo{font-family:var(--sans);font-weight:800;font-size:23px;text-shadow:0 1px 12px rgba(246,240,229,.85)}
+  .logo b{color:var(--gold)}
+  .back{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);
+    text-shadow:0 1px 10px rgba(246,240,229,.85)}
+  .back:hover{color:var(--ink)}
+
+  .hero{padding:26px 0 6px}
+  .hero h1{font-weight:800;font-size:clamp(31px,5.4vw,46px);letter-spacing:-.03em;line-height:1.03;color:#232733}
+  .hero .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:12px}
+  .hero p{font-size:15px;line-height:1.6;color:#4A4638;margin-top:14px;max-width:620px}
+
+  .bar{margin:26px 0 8px;background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:14px;padding:15px 18px}
+  .bar .bt{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .bar .bt b{font-size:15px;color:var(--gold-d);letter-spacing:0}
+  .track{height:7px;background:#EDE6D8;border-radius:20px;margin-top:11px;overflow:hidden}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,#C9A25E,#96703B);border-radius:20px;transition:width .35s}
+  .done-msg{margin-top:11px;font-size:13.5px;color:#4E6B54;display:none}
+  .done-msg.on{display:block}
+
+  .sec{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin:30px 0 12px}
+
+  .why{background:linear-gradient(135deg,#20242E,#2E3545);color:#D9D5CC;border-radius:16px;padding:20px 22px;font-size:14px;line-height:1.62}
+  .why b{color:#fff}
+  .why .wh{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#E4C489;margin-bottom:9px}
+
+  .item{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:16px 18px;margin-bottom:11px;
+    display:flex;gap:14px;align-items:flex-start;transition:.18s}
+  .item.done{background:#F7F9F5;border-color:#D8E6DA}
+  .cb{width:25px;height:25px;flex-shrink:0;border:2px solid #CFC7B4;border-radius:8px;cursor:pointer;margin-top:1px;
+    display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;transition:.18s;background:#fff}
+  .cb:hover{border-color:var(--gold)}
+  .item.done .cb{background:#5C9E6E;border-color:#5C9E6E}
+  .it-b{flex:1;min-width:0}
+  .it-b h3{font-size:15.5px;font-weight:700;letter-spacing:-.01em}
+  .item.done .it-b h3{color:#6E7A70;text-decoration:line-through}
+  .it-b p{font-size:13.5px;line-height:1.55;color:#54503F;margin-top:5px}
+  .go{display:inline-block;margin-top:11px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--gold-d);border:1px solid #E4D9C4;background:#FBF7EF;padding:7px 12px;border-radius:9px}
+  .go:hover{background:#F4ECDD;color:var(--ink)}
+  .key{display:inline-block;margin-top:9px;font-size:12.5px;line-height:1.5;color:#7A5C22;background:#FDF6E7;
+    border-left:2px solid var(--gold);padding:7px 11px;border-radius:0 8px 8px 0}
+
+  .pick{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .pick a{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:20px;text-align:center;transition:.18s}
+  .pick a:hover{transform:translateY(-2px);box-shadow:0 18px 40px -26px rgba(32,36,46,.4)}
+  .pick b{display:block;font-size:17px;font-weight:800}
+  .pick span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d)}
+  @media(max-width:560px){.pick{grid-template-columns:1fr}}
+  .foot{margin-top:30px;font-size:13px;line-height:1.6;color:var(--soft);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hbar">
+    <a class="logo" href="/">M<b>5</b></a>
+    <a class="back" href="/">← m5miami.com</a>
+  </div>
+  <div id="app"></div>
+</div>
+
+<script>
+/* Онбординг-чек-лист. Намеренно НЕ квиз: задача — чтобы человек сделал действия,
+   а не доказал, что прочитал. Прогресс живёт в localStorage. */
+var LINK = {
+  monday:'https://m5miami.monday.com/',
+  stock:'https://m5miami.monday.com/boards/5100794770',
+  crm:'https://m5miami.monday.com/boards/5100794737',
+  partners:'https://m5miami.monday.com/boards/5100794805',
+  drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm',
+  tg:'https://t.me/+x4q86H688uNiODI8',
+  app:'https://apps.apple.com/app/monday-com/id1290128888',
+  org:'/org/'
+};
+
+var COMMON = [
+  {id:'tg', t:'Зайти в Telegram «M5 Team»', p:'Сюда падают заявки с сайта и все автоматические сигналы. Система пишет, только когда есть что сказать — пустых отчётов не бывает. Нет сообщений = всё в порядке.', go:['Открыть группу', LINK.tg]},
+  {id:'app', t:'Поставить Monday на телефон', p:'Без приложения система работает наполовину: карточки двигают и склад отмечают с телефона, а не с ноутбука.', go:['Скачать', LINK.app]},
+  {id:'drive', t:'Открыть Company Drive', p:'Все фото и документы живут здесь. Если чего-то нет в Drive или Monday — считай, что этого не было.', go:['Открыть Drive', LINK.drive]},
+  {id:'jin', t:'Задать Jin один вопрос', p:'Jin знает, как устроена M5, и заточен под твою роль. Он не начальник и никому не докладывает — это твой инструмент. Спроси что-нибудь настоящее, из сегодняшнего дня.', go:['Открыть кабинет', '#cab']}
+];
+
+var ROLE = {
+  vlad: {
+    name:'Влад', role:'Co-Founder · Brand & Sales', cab:'/championfounder',
+    lead:'Ты — лицо бренда и человек, который превращает интерес в контракт. Ниже — то, что нужно сделать один раз, чтобы система начала работать на тебя.',
+    why:'Заявка с сайта теперь мгновенно летит в Telegram и в CRM. Если её не взяли за 15 минут — бот напомнит в чате. За 30 — позовёт директора. По понедельникам приходит сводка. Ничего из этого не требует от тебя усилий, кроме одного: двигать карточку, когда берёшь лид в работу.',
+    items:[
+      {id:'sla', t:'Понять правило 15 минут', p:'Это главный показатель компании. Клиент пишет пятерым и выбирает того, кто ответил первым — быстрый ответ выигрывает сделку чаще, чем красивая презентация.', key:'Взял лид в работу → перетащи карточку из группы «Новые лиды». Это сигнал системе, что им занялись, и напоминания прекращаются. Не перетащил — бот будет писать в чат, что лид брошен.', go:['Открыть CRM', LINK.crm]},
+      {id:'crm', t:'Проверить, что в карточках есть следующий шаг', p:'Стадия, заметка, следующий шаг — на каждой. Не для отчётности: чтобы завтра любой мог продолжить с того же места, а не начинать разговор заново.', go:['Открыть CRM', LINK.crm]},
+      {id:'part', t:'Посмотреть доску «Партнёры»', p:'Там уже 12 человек. Цель — 10+ активных, и чтобы через них шли сделки. После каждого касания — отметка в карточке, иначе через месяц никто не вспомнит, о чём договаривались.', go:['Открыть партнёров', LINK.partners]},
+      {id:'grow', t:'Открыть свою страницу роста', p:'15 ступеней: A1 → A5, B1 → B5, M1 → M5. Двигают вверх подписанные контракты. На каждой ступени растут фикс, процент и разовый бонус. Верхняя носит имя компании.', go:['Моя шкала', '#grow']}
+    ]
+  },
+  vadim: {
+    name:'Вадим', role:'Director · Licensed Qualifier', cab:'/championdirector',
+    lead:'Ты держишь производство: лицензию, пермиты, бригады, качество. Это та часть компании, которую нельзя автоматизировать — поэтому она полностью твоя. Ниже — настройка, после которой система начнёт снимать с тебя бумажную работу.',
+    why:'Jin — не сотрудник и не проверяющий. Он никому не докладывает и никого не заменяет. Он ловит заявки, догоняет напоминания, держит Monday и Drive в порядке, считает цифры. Он <b>никогда</b> не трогает лицензию и всё, что под ней подписывается, решения о деньгах и объёме, вкус и живые отношения. На схеме он нарисован слоем <b>под</b> компанией, а не рядом с людьми — потому что это инструмент. Смысл один: чтобы твой день уходил на стройку и людей, а не на отчёты.',
+    items:[
+      {id:'stock', t:'Заполнить склад — это самое важное', p:'Доска и вся автоматика готовы, но пустые. Нужно один раз внести материалы: название, остаток, единицу и минимальный порог. После этого система сама будет писать утром, что заканчивается — и закупка перестанет быть авралом.', key:'Порог — это не «когда кончилось», а «когда пора заказывать с запасом на срок поставки». Поставь честно, иначе алерт придёт поздно.', go:['Открыть склад', LINK.stock]},
+      {id:'shoot', t:'Съёмка объекта — 4 кадра каждый визит', p:'До / процесс / после / деталь, сразу в Drive. Это не бюрократия: наш контент для продаж, наше портфолио и наша защита, если клиент заявит, что «было не так». Один визит без фото — дыра в доказательствах.', go:['Открыть Drive', LINK.drive]},
+      {id:'monday', t:'Держать Monday честным', p:'Реальные даты, а не желаемые. Блокер увидел — отметил сразу, а не когда сорвался срок. Система нужна, чтобы проблема всплывала рано, пока она ещё дешёвая.', go:['Мои доски', LINK.monday]},
+      {id:'org', t:'Посмотреть оргструктуру и роль выше', p:'Там твоя карточка и одна будущая роль над тобой — General Director (стратегия, маркетинг, продукт). Она не закреплена ни за кем и открывается, когда компания перерастёт ручное управление. Планка написана открыто — чтобы это решение никогда не стало для тебя сюрпризом.', go:['Открыть /org', LINK.org]}
+    ]
+  }
+};
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function qs(k){var m=new RegExp('[?&]'+k+'=([^&]*)').exec(location.search);return m?decodeURIComponent(m[1]):'';}
+
+var who = (qs('who')||'').toLowerCase();
+var app = document.getElementById('app');
+
+if (!ROLE[who]) {
+  app.innerHTML =
+    '<div class="hero"><div class="k">M5 Start</div><h1>Начнём.</h1>'+
+    '<p>Короткая настройка: что уже построено и что нужно сделать один раз, чтобы система работала на тебя. Минут десять, не больше.</p></div>'+
+    '<div class="pick">'+
+      '<a href="?who=vlad"><span>Co-Founder</span><b>Влад</b></a>'+
+      '<a href="?who=vadim"><span>Director</span><b>Вадим</b></a>'+
+    '</div>';
+} else {
+  var R = ROLE[who], items = R.items.concat(COMMON), KEY = 'm5_onb_' + who;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+  function rowHtml(it){
+    var d = state[it.id] ? ' done' : '';
+    var go = '';
+    if (it.go) {
+      var href = it.go[1];
+      if (href === '#cab') href = R.cab;
+      if (href === '#grow') href = R.cab;
+      go = '<a class="go" href="' + href + '" target="' + (href.charAt(0)==='/' ? '_self' : '_blank') + '" rel="noopener">' + esc(it.go[0]) + ' →</a>';
+    }
+    return '<div class="item' + d + '" id="row_' + it.id + '">' +
+      '<div class="cb" onclick="tog(\'' + it.id + '\')">✓</div>' +
+      '<div class="it-b"><h3>' + esc(it.t) + '</h3><p>' + esc(it.p) + '</p>' +
+      (it.key ? '<div class="key">' + esc(it.key) + '</div>' : '') + go + '</div></div>';
+  }
+
+  app.innerHTML =
+    '<div class="hero"><div class="k">' + esc(R.role) + '</div><h1>' + esc(R.name) + ', начнём.</h1>' +
+    '<p>' + esc(R.lead) + '</p></div>' +
+    '<div class="bar"><div class="bt"><span>Прогресс</span><b id="pct">0 / ' + items.length + '</b></div>' +
+      '<div class="track"><div class="fill" id="fill"></div></div>' +
+      '<div class="done-msg" id="dm">Готово. Система настроена — дальше она работает сама.</div></div>' +
+    '<div class="sec">Что теперь происходит без тебя</div>' +
+    '<div class="why"><div class="wh">Важно понимать</div>' + R.why + '</div>' +
+    '<div class="sec">Сделать один раз</div>' +
+    R.items.map(rowHtml).join('') +
+    '<div class="sec">Общее для всех</div>' +
+    COMMON.map(rowHtml).join('') +
+    '<div class="foot">Что-то неудобно или лишнее — скажи в «M5 Team». Систему строим под работу, а не работу под систему.</div>';
+
+  window.tog = function(id){
+    state[id] = !state[id];
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    document.getElementById('row_' + id).classList.toggle('done', !!state[id]);
+    paint();
+  };
+  function paint(){
+    var n = 0;
+    for (var i=0;i<items.length;i++) if (state[items[i].id]) n++;
+    document.getElementById('pct').textContent = n + ' / ' + items.length;
+    document.getElementById('fill').style.width = Math.round(n / items.length * 100) + '%';
+    document.getElementById('dm').classList.toggle('on', n === items.length);
+  }
+  paint();
+}
+</script>
+</body>
+</html>
