@@ -114,6 +114,16 @@ var PAY={
        ['Long videos','2 /mo','YouTube object tours / before-after.'],
        ['Shoots','4–8 /mo','On-site + office, 1–2 a week.']],
        note:'Ship the volume → full retainer. Do less without agreeing it first → retainer is pro-rated to what you shipped.'},
+     {k:'📱 Channels',rows:[
+       ['📸 Instagram','core · main','Reels + daily stories + feed. Most social leads come from here.'],
+       ['🎵 TikTok','core · reach','The same Reels, edited native. Cheapest way to reach people who never heard of M5.'],
+       ['▶️ YouTube','core · trust','Shorts + 2 long object tours a month + the podcast. Where a $200K client checks if you are real.'],
+       ['📌 Pinterest','next','Every finished project as pins. Design searches keep sending traffic for years, not days.'],
+       ['🏡 Houzz','next · high intent','Portfolio + reviews. This is where Miami homeowners actually shortlist contractors.'],
+       ['📍 Google Business','next · local','Photos + reviews. "renovation near me" is the highest-intent search there is.'],
+       ['👥 Facebook','next · Miami locals','Community groups + ad creative. Older, wealthier homeowners still live here.'],
+       ['💼 LinkedIn','next · partners','Realtors, brokers, developers — the partner network that feeds Sales.']],
+       note:'<b>Core</b> — Instagram · TikTok · YouTube. These three are what the $2,000 retainer covers today. <b>Next</b> — the growth map: we switch them on one at a time, and the retainer is revisited when we do, so new channels never mean silent extra work. Languages: EN is the main one, ES and RU where they fit the audience.'},
      {k:'💵 Bonuses that pay',rows:[
        ['Per lead','+$50','Every social lead that reaches a consultation.'],
        ['Per contract','+$150','Every signed contract that came from social — this is the real goal.']],
