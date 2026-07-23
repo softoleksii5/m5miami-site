@@ -144,8 +144,9 @@ var videoUrl=LINKS.video;
 try {
 document.getElementById('app').innerHTML=
 '<header><div class="wrap hbar">'+
-  '<a class="logo" href="/">M<b>5</b><small>START</small></a>'+
+  '<a class="logo" href="/champion'+role+'">M<b>5</b><small>START</small></a>'+
   '<div class="hr"><span class="priv"><i></i><span>Private · '+cfg.label+'</span></span>'+
+  '<a class="signout" href="/" style="text-decoration:none">m5miami.com</a>'+
   '<span class="signout" onclick="signout()">Sign out</span></div>'+
 '</div></header>'+
 '<div class="wrap">'+

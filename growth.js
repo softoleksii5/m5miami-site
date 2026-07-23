@@ -182,7 +182,7 @@ var member=null; try{member=JSON.parse(localStorage.getItem('m5_member')||'null'
 var first=(member&&member.name)?esc(member.name.split(' ')[0]):'';
 
 var head='<header><div class="wrap hbar">'+
-  '<a class="logo" href="/">M<b>5</b><small>START</small></a>'+
+  '<a class="logo" href="/champion">M<b>5</b><small>START</small></a>'+
   '<a class="back" href="/champion'+(role!=='founder'&&role!=='sales'?'':'')+'" onclick="history.back();return false">← Back to workspace</a>'+
 '</div></header>';
 
