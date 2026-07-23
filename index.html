@@ -104,6 +104,13 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       url('img/hero.jpg') center/cover no-repeat;
     opacity:1}
   .hero .wrap{position:relative;z-index:2;padding-bottom:90px}
+  @media(max-width:680px){
+    .hero-img{background:
+      linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
+      linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%),
+      url('img/m/hero.jpg') center/cover no-repeat}
+  }
+
   .hero-badge{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:#D9B87C;margin-bottom:26px}
   .hero h1{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;font-size:clamp(36px,4.7vw,58px);line-height:1.12;max-width:18ch;text-wrap:balance}
   .hero-sub{font-size:17px;color:#CFC5B2;margin:24px 0 40px;max-width:52ch;line-height:1.65}
@@ -563,8 +570,8 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     <div class="ba2-grid">
       <div>
         <div class="ba-slider" data-ba>
-          <img loading="lazy" class="ba-after" src="img/ba_plaster_after.jpg" alt="">
-          <img loading="lazy" class="ba-before" src="img/ba_plaster_before.jpg" alt="">
+          <img loading="lazy" class="ba-after" src="img/ba_plaster_after.jpg" srcset="img/m/ba_plaster_after.jpg 820w, img/ba_plaster_after.jpg 1400w" sizes="(max-width:680px) 100vw, 50vw" alt="">
+          <img loading="lazy" class="ba-before" src="img/ba_plaster_before.jpg" srcset="img/m/ba_plaster_before.jpg 820w, img/ba_plaster_before.jpg 1400w" sizes="(max-width:680px) 100vw, 50vw" alt="">
           <span class="ba-badge b" data-i18n="ba.before">BEFORE</span>
           <span class="ba-badge a" data-i18n="ba.after">AFTER</span>
           <div class="ba-line"></div>
@@ -574,8 +581,8 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       </div>
       <div>
         <div class="ba-slider" data-ba>
-          <img loading="lazy" class="ba-after" src="img/ba_reno_after.jpg" alt="">
-          <img loading="lazy" class="ba-before" src="img/ba_reno_before.jpg" alt="">
+          <img loading="lazy" class="ba-after" src="img/ba_reno_after.jpg" srcset="img/m/ba_reno_after.jpg 820w, img/ba_reno_after.jpg 1400w" sizes="(max-width:680px) 100vw, 50vw" alt="">
+          <img loading="lazy" class="ba-before" src="img/ba_reno_before.jpg" srcset="img/m/ba_reno_before.jpg 820w, img/ba_reno_before.jpg 1400w" sizes="(max-width:680px) 100vw, 50vw" alt="">
           <span class="ba-badge b" data-i18n="ba.before">BEFORE</span>
           <span class="ba-badge a" data-i18n="ba.after">AFTER</span>
           <div class="ba-line"></div>
@@ -1318,7 +1325,7 @@ var CM_L = {en:{scope:"Scope of work",mat:"Materials",cta:"Get a quote for a sim
 function curLang(){ var l=null; try{l=localStorage.getItem('m5lang')}catch(e){}; return CASES[l]?l:'en'; }
 function openCase(n){
   var l=curLang(), c=CASES[l][n-1], t=CM_L[l];
-  var el=document.getElementById('cmHero'); el.style.backgroundImage="url('"+c.img+"')";
+  var el=document.getElementById('cmHero'); var ci=c.img; if(window.innerWidth<=680&&ci.indexOf('img/')===0)ci='img/m/'+ci.slice(4); el.style.backgroundImage="url('"+ci+"')";
   document.getElementById('cmTag').textContent=c.tag;
   document.getElementById('cmH').textContent=c.h;
   document.getElementById('cmFacts').innerHTML=c.facts.map(function(f){return '<span>'+f+'</span>'}).join('');
@@ -1608,7 +1615,7 @@ document.addEventListener('click',function(e){
 (function(){
   var els=[].slice.call(document.querySelectorAll('[data-bg]'));
   if(!els.length)return;
-  function apply(el){ if(el.__bg)return; el.__bg=1; el.style.backgroundImage="url('"+el.getAttribute('data-bg')+"')"; el.style.backgroundPosition='center'; el.style.backgroundSize='cover'; }
+  function apply(el){ if(el.__bg)return; el.__bg=1; var bg=el.getAttribute('data-bg'); if(window.innerWidth<=680&&bg.indexOf('img/')===0)bg='img/m/'+bg.slice(4); el.style.backgroundImage="url('"+bg+"')"; el.style.backgroundPosition='center'; el.style.backgroundSize='cover'; }
   if(!('IntersectionObserver' in window)){ els.forEach(apply); return; }
   var io=new IntersectionObserver(function(entries){ entries.forEach(function(en){ if(en.isIntersecting){ apply(en.target); io.unobserve(en.target); } }); },{rootMargin:'400px'});
   els.forEach(function(el){ io.observe(el); });
