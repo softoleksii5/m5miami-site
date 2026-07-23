@@ -177,6 +177,7 @@ document.getElementById('app').innerHTML=
     return '<a class="tile" style="--bc:'+col+'" '+open+'>'+icon+
       '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge+'</a>';
   }).join('')+'</div>'+
+  '<div id="stackSec"></div>'+
 '</div>'+
 '<footer>M5 Interior Design &amp; Build · Miami · Private team hub</footer>'+
 '<div class="wv" id="wv" onclick="if(event.target===this)closeWelcome()">'+
@@ -272,3 +273,44 @@ function askAgent(q){
     });
 }
 function signout(){ try{localStorage.removeItem('m5_member');localStorage.removeItem('m5_onb_who');}catch(e){}; location.href='/welcomehero'; }
+
+/* «My stack» — личная карта сервисов компании. Видна ТОЛЬКО Алексу:
+   почта из m5_member сверяется по SHA-256-хэшу, адресов в коде нет. */
+var STACK=[
+ ['AI & Dev','Claude Code','движок всего: сайт, Jin, автоматика (терминал + VS Code)','https://claude.ai/code'],
+ ['AI & Dev','Claude Console','API-ключ Jin, лимиты трат','https://platform.claude.com/'],
+ ['AI & Dev','Higgsfield AI','видео и фото-фабрика (план PLUS, MCP подключён)','https://higgsfield.ai/'],
+ ['AI & Dev','Облачные рутины','Health Check · Daily Brief · Пульс · Scout','https://claude.ai/code/routines'],
+ ['Операционка','Monday CRM','лиды, задачи, склад, партнёры','https://m5miami.monday.com/'],
+ ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
+ ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
+ ['Операционка','Apps Script «M5 Hub»','автоматика: лиды→TG, SLA, склад, бэкенд Jin','https://script.google.com/u/2/home/projects/1TCKRgl1AKm6-9gyU3WHZpkHWsJRbkgyUkxiUiMvJYJq4p1m9_bv1jP-j/edit'],
+ ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
+ ['Сайт & аналитика','GitHub','код сайта (m5miami-site) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
+ ['Сайт & аналитика','Porkbun','домен m5miami.com, DNS, автопродление','https://porkbun.com/'],
+ ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
+ ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
+ ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
+ ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/']
+];
+(function(){
+  try{
+    var m=JSON.parse(localStorage.getItem('m5_member')||'null');
+    if(!m||!m.email||!window.crypto||!crypto.subtle)return;
+    crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(m.email).trim().toLowerCase())).then(function(buf){
+      var a=new Uint8Array(buf),h='';for(var i=0;i<a.length;i++)h+=('0'+a[i].toString(16)).slice(-2);
+      if(h!=='9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47')return;
+      var el=document.getElementById('stackSec'); if(!el)return;
+      var groups=[],seen={};
+      for(var i=0;i<STACK.length;i++){ if(!seen[STACK[i][0]]){seen[STACK[i][0]]=1;groups.push(STACK[i][0]);} }
+      var html='<div class="sec">My stack · только для тебя</div><div class="stack">';
+      for(var g=0;g<groups.length;g++){
+        html+='<div class="stk-g">'+groups[g]+'</div>';
+        for(var j=0;j<STACK.length;j++){ if(STACK[j][0]!==groups[g])continue;
+          html+='<a class="stk" href="'+STACK[j][3]+'" target="_blank" rel="noopener"><b>'+STACK[j][1]+'</b><span>'+STACK[j][2]+'</span></a>';
+        }
+      }
+      el.innerHTML=html+'</div>';
+    });
+  }catch(e){}
+})();
