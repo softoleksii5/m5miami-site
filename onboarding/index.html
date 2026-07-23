@@ -279,6 +279,7 @@ function mountEmailForm(){
 /* Встроенные браузеры (Telegram/Instagram/FB открывают ссылки в своём окне) ломают
    Google-вход: попап не может вернуть результат. Там сразу показываем почтовый вход. */
 function inWebview(){
+  if (location.search.indexOf('wv=1') >= 0) return true; // форс для тестов
   var ua = navigator.userAgent || '';
   if (/FBAN|FB_IAB|Instagram|Line\/|Telegram/i.test(ua)) return true;
   if (/iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua)) return true;
@@ -294,7 +295,8 @@ function renderGate(showErr){
     '<div class="gate">'+
       '<div id="gslot"><label>Рабочий аккаунт @m5miami.com</label><div id="gbtn"></div></div>'+
       '<div class="err'+(showErr?' on':'')+'" id="gerr">Этот аккаунт не в списке команды. Войди рабочим аккаунтом @m5miami.com — или напиши в «M5 Team», добавим.</div>'+
-      (wv ? '<div class="key" style="margin-top:12px">Открыто внутри мессенджера — вход по почте. Удобнее в браузере: нажми ⋯ вверху и выбери «Открыть в Safari».</div>' : '')+
+      (wv ? '<div class="key" style="margin-top:12px">Открыто внутри мессенджера — здесь вход по почте, это нормально.</div>'+
+            '<a class="go" style="display:block;text-align:center;margin-top:10px" href="x-safari-https://m5miami.com/onboarding/">Или открой в Safari — там вход одной кнопкой Google →</a>' : '')+
     '</div>';
   if (!GSI_CLIENT || wv) { mountEmailForm(); return; }
   var tries = 0;

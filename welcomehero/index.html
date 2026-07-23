@@ -152,6 +152,7 @@
   /* Встроенные браузеры (Telegram/Instagram/FB) ломают Google-попап —
      там оставляем ручную форму и подсказку открыть в Safari. */
   function inWebview(){
+    if (location.search.indexOf('wv=1') >= 0) return true; // форс для тестов
     var ua = navigator.userAgent || '';
     if (/FBAN|FB_IAB|Instagram|Line\/|Telegram/i.test(ua)) return true;
     if (/iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua)) return true;
@@ -160,7 +161,8 @@
   }
   if (GSI_CLIENT && inWebview()) {
     document.getElementById('werr').insertAdjacentHTML('beforebegin',
-      '<div class="note" style="margin-bottom:10px">Opened inside a messenger — use email to enter, or tap ⋯ and «Open in Safari».</div>');
+      '<div class="note" style="margin-bottom:10px">Opened inside a messenger — enter with your email below,<br>'+
+      'or <a href="x-safari-https://m5miami.com/welcomehero/" style="text-decoration:underline">open in Safari</a> for one-tap Google sign-in.</div>');
   }
   if (GSI_CLIENT && !inWebview()) {
     var tries = 0;
