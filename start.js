@@ -139,6 +139,9 @@ var role=detectRole(), cfg=ROLES[role];
 var member=null; try{member=JSON.parse(localStorage.getItem('m5_member')||'null');}catch(e){}
 
 var videoUrl=LINKS.video;
+/* Любая ошибка рендера без try/catch = молча пустая страница на телефоне.
+   Ловим и показываем честный fallback со ссылкой на вход. */
+try {
 document.getElementById('app').innerHTML=
 '<header><div class="wrap hbar">'+
   '<a class="logo" href="/">M<b>5</b><small>START</small></a>'+
@@ -146,7 +149,7 @@ document.getElementById('app').innerHTML=
   '<span class="signout" onclick="signout()">Sign out</span></div>'+
 '</div></header>'+
 '<div class="wrap">'+
-  '<div class="hero"><h1>'+((member&&member.name)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
+  '<div class="hero"><h1>'+((member&&typeof member.name==='string'&&member.name)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
   '<div class="k">'+cfg.sub+'</div></div>'+
   '<div class="top">'+
     '<div class="agent">'+
@@ -183,6 +186,15 @@ document.getElementById('app').innerHTML=
     '<audio id="wvMusic" loop preload="auto"></audio>'+
   '</div>'+
 '</div>';
+
+} catch(e) {
+  document.getElementById('app').innerHTML =
+    '<div style="max-width:420px;margin:120px auto;padding:24px;background:#fff;border-radius:14px;'+
+    'font-family:-apple-system,sans-serif;text-align:center;color:#20242E">'+
+    '<b>Something didn’t load.</b><br><br>'+
+    '<a href="/welcomehero/" style="color:#96703B;text-decoration:underline">Tap here to sign in again</a>'+
+    '<br><br><span style="font-size:12px;color:#6E6656">If it repeats — open m5miami.com in Safari.</span></div>';
+}
 
 var WV_MUSIC='';/* URL героического трека (Solo-Leveling вайб) — вставить mp3, зациклится */
 var JINPANEL={a:'/media/welcome_anime.jpg',sys:'/media/jin_p2.jpg',human:'/media/jin_p3.jpg',tools:'/media/jin_p4.jpg',hero:'/media/jin_p5.jpg'};
@@ -229,7 +241,9 @@ function askAgent(q){
   var inp=document.getElementById('askInput'); q=q||(inp?inp.value.trim():''); if(!q)return;
   if(inp&&!arguments.length)inp.value='';
   var box=document.getElementById('jinReply');
-  box.className='jin-reply on'; box.innerHTML='<span class="jin-typing">Jin is thinking…</span>';
+  box.className='jin-reply on';
+  if(!window.fetch){ box.innerHTML='Open m5miami.com in Safari to chat with Jin.'; return; }
+  box.innerHTML='<span class="jin-typing">Jin is thinking…</span>';
   /* fetch с credentials:'omit' — обязательно: script-тег шлёт Google-cookies,
      из-за чего залогиненный браузер редиректится на /macros/u/N/… и ловит 503.
      Без cookies запрос идёт как анонимный (как curl) и работает всегда. */
