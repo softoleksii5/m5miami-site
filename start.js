@@ -184,6 +184,7 @@ document.getElementById('app').innerHTML=
     '<button class="wv-x" onclick="closeWelcome()" aria-label="Close">✕</button>'+
     '<div class="wv-stage"><div class="wv-img" id="wvImg"></div><video class="wv-vid" id="wvVid" muted playsinline preload="none"></video><div class="wv-cap" id="wvCap"></div></div>'+
     '<audio id="wvMusic" loop preload="auto"></audio>'+
+    '<audio id="wvVo" preload="none"></audio>'+
   '</div>'+
 '</div>';
 
@@ -200,22 +201,30 @@ var WV_MUSIC='';/* URL героического трека (Solo-Leveling вай
 /* Приветствие Jin: 5 сгенерированных сцен (Higgsfield Seedance 2.0, 23.07),
    субтитр держится всю сцену, клипы идут подряд. */
 var WVSCENES=[
- {v:'/media/jin_s1.mp4', c:'Welcome — this is your <b>M5 workspace</b>. I’m <b>Jin</b>, the AI at the core of this company.'},
- {v:'/media/jin_s2.mp4', c:'We work as one team: <b>Telegram</b> is our pulse, <b>Monday CRM</b> holds every lead and task, <b>JobTread</b> runs the estimates.'},
- {v:'/media/jin_s3.mp4', c:'One rule makes the magic happen: <b>everything goes to our Google Drive</b> — photos, invoices, finances, content. What’s in the system, I turn into results.'},
- {v:'/media/jin_s4.mp4', c:'Ask me anything, right here in this hub — I’ll guide you. And there’s more inside: <b>explore</b>.'},
- {v:'/media/jin_s5.mp4', c:'I’m the system. <b>You’re the team that makes it matter.</b> Together we scale M5 — big 🚀'}
+ {v:'/media/jin_s1.mp4', a:'/media/jin_v1.mp3', c:'Welcome — this is your <b>M5 workspace</b>. I’m <b>Jin</b>, the AI at the core of this company.'},
+ {v:'/media/jin_s2.mp4', a:'/media/jin_v2.mp3', c:'We work as one team: <b>Telegram</b> is our pulse, <b>Monday CRM</b> holds every lead and task, <b>JobTread</b> runs the estimates.'},
+ {v:'/media/jin_s3.mp4', a:'/media/jin_v3.mp3', c:'One rule makes the magic happen: <b>everything goes to our Google Drive</b> — photos, invoices, finances, content. What’s in the system, I turn into results.'},
+ {v:'/media/jin_s4.mp4', a:'/media/jin_v4.mp3', c:'Ask me anything, right here in this hub — I’ll guide you. And there’s more inside: <b>explore</b>.'},
+ {v:'/media/jin_s5.mp4', a:'/media/jin_v5.mp3', c:'I’m the system. <b>You’re the team that makes it matter.</b> Together we scale M5 — big 🚀'}
 ];
 var wvIdx=0;
 function wvPlay(i){
-  var vid=document.getElementById('wvVid'),cap=document.getElementById('wvCap');
+  var vid=document.getElementById('wvVid'),cap=document.getElementById('wvCap'),vo=document.getElementById('wvVo');
   if(i>=WVSCENES.length){ setTimeout(closeWelcome,600); return; }
   wvIdx=i;
   cap.innerHTML='<span>'+WVSCENES[i].c+'</span>';
+  /* Видео зациклено внутри сцены; сцену переключает конец реплики Jin.
+     Если голос не загрузился — переключаемся по концу видео. */
+  vid.loop=true; vid.onended=null;
   vid.src=WVSCENES[i].v;
-  vid.onended=function(){ wvPlay(i+1); };
-  vid.onerror=function(){ wvPlay(i+1); };
+  vid.onerror=function(){ };
+  var advanced=false;
+  function next(){ if(advanced)return; advanced=true; wvPlay(i+1); }
+  vo.onended=next;
+  vo.onerror=function(){ vid.loop=false; vid.onended=next; };
+  vo.src=WVSCENES[i].a;
   var p=vid.play(); if(p&&p.catch)p.catch(function(){});
+  var q=vo.play(); if(q&&q.catch)q.catch(function(){ vid.loop=false; vid.onended=next; });
 }
 function openWelcome(){
   var m=document.getElementById('wv'),mus=document.getElementById('wvMusic');
@@ -225,9 +234,10 @@ function openWelcome(){
   return false;
 }
 function closeWelcome(){
-  var m=document.getElementById('wv'),vid=document.getElementById('wvVid'),mus=document.getElementById('wvMusic');
+  var m=document.getElementById('wv'),vid=document.getElementById('wvVid'),mus=document.getElementById('wvMusic'),vo=document.getElementById('wvVo');
   m.classList.remove('on');
   try{ vid.pause(); vid.removeAttribute('src'); vid.load(); }catch(e){}
+  try{ vo.pause(); vo.removeAttribute('src'); vo.load(); }catch(e){}
   try{ mus.pause(); mus.currentTime=0; }catch(e){}
 }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWelcome(); });
