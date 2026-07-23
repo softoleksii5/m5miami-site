@@ -149,7 +149,20 @@
     try { p = JSON.parse(decodeURIComponent(escape(atob(resp.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))))); } catch(e){}
     enter(p.email, p.name);
   }
-  if (GSI_CLIENT) {
+  /* Встроенные браузеры (Telegram/Instagram/FB) ломают Google-попап —
+     там оставляем ручную форму и подсказку открыть в Safari. */
+  function inWebview(){
+    var ua = navigator.userAgent || '';
+    if (/FBAN|FB_IAB|Instagram|Line\/|Telegram/i.test(ua)) return true;
+    if (/iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua)) return true;
+    if (/Android/.test(ua) && /; wv\)/.test(ua)) return true;
+    return false;
+  }
+  if (GSI_CLIENT && inWebview()) {
+    document.getElementById('werr').insertAdjacentHTML('beforebegin',
+      '<div class="note" style="margin-bottom:10px">Opened inside a messenger — use email to enter, or tap ⋯ and «Open in Safari».</div>');
+  }
+  if (GSI_CLIENT && !inWebview()) {
     var tries = 0;
     (function wait(){
       if (window.google && google.accounts && google.accounts.id) {
