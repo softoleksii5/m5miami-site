@@ -271,4 +271,4 @@ function askAgent(q){
       box.innerHTML = 'Jin is offline for a second — try again.';
     });
 }
-function signout(){ try{localStorage.removeItem('m5_member');}catch(e){}; location.href='/welcomehero'; }
+function signout(){ try{localStorage.removeItem('m5_member');localStorage.removeItem('m5_onb_who');}catch(e){}; location.href='/welcomehero'; }

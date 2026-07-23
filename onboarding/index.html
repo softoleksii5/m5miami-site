@@ -243,8 +243,10 @@ function acceptEmail(email, name){
     try {
       localStorage.setItem('m5_onb_who', w);
       var m = {}; try { m = JSON.parse(localStorage.getItem('m5_member')||'{}')||{}; } catch(e){}
-      m.email = String(email).trim().toLowerCase();
-      if (name && !m.name) m.name = name;
+      var em = String(email).trim().toLowerCase();
+      if (m.email && m.email !== em) delete m.name; // сменился человек — чужое имя не наследуем
+      m.email = em;
+      if (name) m.name = name;
       m.role = PERSON[w].cab.replace('/champion','');
       localStorage.setItem('m5_member', JSON.stringify(m));
     } catch (err) {}
@@ -393,13 +395,14 @@ function renderTrack(who){
   paint();
 }
 
-/* Порядок входа: 1) уже открывал здесь → сразу его страница;
-   2) вошёл в хаб через welcomehero со своей почтой → узнаём молча;
-   3) иначе — почтовый замок. Старые ссылки ?who= больше не работают намеренно. */
+/* Порядок входа: источник истины — почта из m5_member (её ставит Google-вход):
+   если она резолвится в человека, она ПОБЕЖДАЕТ сохранённый m5_onb_who
+   (защита от рассинхрона «кабинет один человек, чек-лист другой»).
+   Нет почты — берём сохранённый выбор; нет ничего — замок.
+   Старые ссылки ?who= не работают намеренно. */
 (function(){
   var w = '';
   try { w = localStorage.getItem('m5_onb_who') || ''; } catch (e) {}
-  if (PERSON[w]) { renderTrack(w); return; }
   var em = '';
   try { var m = JSON.parse(localStorage.getItem('m5_member') || 'null'); if (m && m.email) em = String(m.email).trim().toLowerCase(); } catch (e) {}
   if (em && window.crypto && crypto.subtle) {
@@ -408,9 +411,11 @@ function renderTrack(who){
       if (who) {
         try { localStorage.setItem('m5_onb_who', who); } catch (err) {}
         renderTrack(who);
-      } else renderGate(false);
+      } else if (PERSON[w]) renderTrack(w);
+      else renderGate(false);
     });
-  } else renderGate(false);
+  } else if (PERSON[w]) renderTrack(w);
+  else renderGate(false);
 })();
 </script>
 </body>
