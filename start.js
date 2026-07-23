@@ -230,11 +230,17 @@ function askAgent(q){
   if(inp&&!arguments.length)inp.value='';
   var box=document.getElementById('jinReply');
   box.className='jin-reply on'; box.innerHTML='<span class="jin-typing">Jin is thinking…</span>';
-  var cb='jinCb'+Date.now();
-  window[cb]=function(r){ box.innerHTML='<b>Jin</b> '+esc(r&&r.a?r.a:'—').replace(/\n/g,'<br>'); try{delete window[cb];}catch(e){} };
+  var cb='jinCb'+Date.now(), done=false;
+  window[cb]=function(r){ done=true; box.innerHTML='<b>Jin</b> '+esc(r&&r.a?r.a:'—').replace(/\n/g,'<br>'); try{delete window[cb];}catch(e){} };
   var s=document.createElement('script');
   s.src=JIN_HOOK+'?jin=1&role='+encodeURIComponent(role)+'&cb='+cb+'&q='+encodeURIComponent(q);
-  s.onerror=function(){ box.innerHTML='Jin is offline for a second — try again.'; };
-  document.body.appendChild(s); setTimeout(function(){s.remove();},15000);
+  s.onerror=function(){ if(!done){ done=true; box.innerHTML='Jin is offline for a second — try again.'; } };
+  document.body.appendChild(s);
+  /* Первый запрос после простоя (холодный Apps Script + думающий Claude) может идти 20-30с —
+     тег не трогаем раньше минуты, иначе обрыв загрузки выглядит как «offline». */
+  setTimeout(function(){
+    if(!done){ done=true; box.innerHTML='Jin is taking longer than usual — give it a moment and try again.'; }
+    try{ s.remove(); }catch(e){}
+  },60000);
 }
 function signout(){ try{localStorage.removeItem('m5_member');}catch(e){}; location.href='/welcomehero'; }
