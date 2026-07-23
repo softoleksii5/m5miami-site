@@ -182,7 +182,7 @@ document.getElementById('app').innerHTML=
 '<div class="wv" id="wv" onclick="if(event.target===this)closeWelcome()">'+
   '<div class="wv-box">'+
     '<button class="wv-x" onclick="closeWelcome()" aria-label="Close">✕</button>'+
-    '<div class="wv-stage"><div class="wv-img" id="wvImg"></div><div class="wv-cap" id="wvCap"></div></div>'+
+    '<div class="wv-stage"><div class="wv-img" id="wvImg"></div><video class="wv-vid" id="wvVid" muted playsinline preload="none"></video><div class="wv-cap" id="wvCap"></div></div>'+
     '<audio id="wvMusic" loop preload="auto"></audio>'+
   '</div>'+
 '</div>';
@@ -197,40 +197,37 @@ document.getElementById('app').innerHTML=
 }
 
 var WV_MUSIC='';/* URL героического трека (Solo-Leveling вайб) — вставить mp3, зациклится */
-var JINPANEL={a:'/media/welcome_anime.jpg',sys:'/media/jin_p2.jpg',human:'/media/jin_p3.jpg',tools:'/media/jin_p4.jpg',hero:'/media/jin_p5.jpg'};
-var WVCAP=[
- [0,'Hey — I’m <b>Jin.</b>','a'],
- [2.8,'The engine behind M5.','sys'],
- [6,'I run the system — so you run the deals.','sys'],
- [9.6,'Leads, tasks, docs, follow-ups — that’s me. 24/7.','sys'],
- [13.6,'You bring the human side: the relationships, the craft.','human'],
- [17.6,'Monday · Telegram · Drive — your world.','tools'],
- [21.2,'Need anything? Just ask me.','hero'],
- [24.3,'Welcome to the team. <b>Let’s build something legendary 🚀</b>','hero']
+/* Приветствие Jin: 5 сгенерированных сцен (Higgsfield Seedance 2.0, 23.07),
+   субтитр держится всю сцену, клипы идут подряд. */
+var WVSCENES=[
+ {v:'/media/jin_s1.mp4', c:'Welcome — this is your <b>M5 workspace</b>. I’m <b>Jin</b>, the AI at the core of this company.'},
+ {v:'/media/jin_s2.mp4', c:'We work as one team: <b>Telegram</b> is our pulse, <b>Monday CRM</b> holds every lead and task, <b>JobTread</b> runs the estimates.'},
+ {v:'/media/jin_s3.mp4', c:'One rule makes the magic happen: <b>everything goes to our Google Drive</b> — photos, invoices, finances, content. What’s in the system, I turn into results.'},
+ {v:'/media/jin_s4.mp4', c:'Ask me anything, right here in this hub — I’ll guide you. And there’s more inside: <b>explore</b>.'},
+ {v:'/media/jin_s5.mp4', c:'I’m the system. <b>You’re the team that makes it matter.</b> Together we scale M5 — big 🚀'}
 ];
-var wvTimer=null;
+var wvIdx=0;
+function wvPlay(i){
+  var vid=document.getElementById('wvVid'),cap=document.getElementById('wvCap');
+  if(i>=WVSCENES.length){ setTimeout(closeWelcome,600); return; }
+  wvIdx=i;
+  cap.innerHTML='<span>'+WVSCENES[i].c+'</span>';
+  vid.src=WVSCENES[i].v;
+  vid.onended=function(){ wvPlay(i+1); };
+  vid.onerror=function(){ wvPlay(i+1); };
+  var p=vid.play(); if(p&&p.catch)p.catch(function(){});
+}
 function openWelcome(){
-  var m=document.getElementById('wv'),cap=document.getElementById('wvCap'),img=document.getElementById('wvImg'),mus=document.getElementById('wvMusic');
-  m.classList.add('on'); cap.innerHTML=''; cap.removeAttribute('data-c'); img.removeAttribute('data-p');
+  var m=document.getElementById('wv'),mus=document.getElementById('wvMusic');
+  m.classList.add('on');
   if(WV_MUSIC){ try{ if(mus.src!==WV_MUSIC)mus.src=WV_MUSIC; mus.currentTime=0; mus.volume=0.6; mus.play(); }catch(e){} }
-  var start=performance.now();
-  clearInterval(wvTimer);
-  wvTimer=setInterval(function(){
-    var t=(performance.now()-start)/1000, cur=WVCAP[0], k;
-    for(var i=0;i<WVCAP.length;i++){ if(t>=WVCAP[i][0]) cur=WVCAP[i]; }
-    if(cap.getAttribute('data-c')!==cur[1]){ cap.setAttribute('data-c',cur[1]); cap.innerHTML='<span>'+cur[1]+'</span>'; }
-    if(img.getAttribute('data-p')!==cur[2]){
-      img.setAttribute('data-p',cur[2]);
-      img.style.backgroundImage="url('"+(JINPANEL[cur[2]]||JINPANEL.a)+"')";
-      img.classList.remove('swap'); void img.offsetWidth; img.classList.add('swap');
-    }
-    if(t>27.5) closeWelcome();
-  },100);
+  wvPlay(0);
   return false;
 }
 function closeWelcome(){
-  var m=document.getElementById('wv'),mus=document.getElementById('wvMusic');
-  m.classList.remove('on'); clearInterval(wvTimer);
+  var m=document.getElementById('wv'),vid=document.getElementById('wvVid'),mus=document.getElementById('wvMusic');
+  m.classList.remove('on');
+  try{ vid.pause(); vid.removeAttribute('src'); vid.load(); }catch(e){}
   try{ mus.pause(); mus.currentTime=0; }catch(e){}
 }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeWelcome(); });

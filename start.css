@@ -91,3 +91,4 @@ footer{position:relative;z-index:2;padding:44px 0;text-align:center;font-family:
 .jin-reply.on{display:block;animation:wvfade .35s ease}
 .jin-reply b{color:var(--gold-d);margin-right:6px}
 .jin-typing{color:var(--soft);font-style:italic}
+.wv-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#15110d}
