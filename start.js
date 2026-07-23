@@ -230,17 +230,24 @@ function askAgent(q){
   if(inp&&!arguments.length)inp.value='';
   var box=document.getElementById('jinReply');
   box.className='jin-reply on'; box.innerHTML='<span class="jin-typing">Jin is thinking…</span>';
-  var cb='jinCb'+Date.now(), done=false;
-  window[cb]=function(r){ done=true; box.innerHTML='<b>Jin</b> '+esc(r&&r.a?r.a:'—').replace(/\n/g,'<br>'); try{delete window[cb];}catch(e){} };
-  var s=document.createElement('script');
-  s.src=JIN_HOOK+'?jin=1&role='+encodeURIComponent(role)+'&cb='+cb+'&q='+encodeURIComponent(q);
-  s.onerror=function(){ if(!done){ done=true; box.innerHTML='Jin is offline for a second — try again.'; } };
-  document.body.appendChild(s);
-  /* Первый запрос после простоя (холодный Apps Script + думающий Claude) может идти 20-30с —
-     тег не трогаем раньше минуты, иначе обрыв загрузки выглядит как «offline». */
-  setTimeout(function(){
-    if(!done){ done=true; box.innerHTML='Jin is taking longer than usual — give it a moment and try again.'; }
-    try{ s.remove(); }catch(e){}
-  },60000);
+  /* fetch с credentials:'omit' — обязательно: script-тег шлёт Google-cookies,
+     из-за чего залогиненный браузер редиректится на /macros/u/N/… и ловит 503.
+     Без cookies запрос идёт как анонимный (как curl) и работает всегда. */
+  var ctl = ('AbortController' in window) ? new AbortController() : null;
+  var to = setTimeout(function(){ if (ctl) ctl.abort(); }, 60000);
+  fetch(JIN_HOOK+'?jin=1&role='+encodeURIComponent(role)+'&cb=cb&q='+encodeURIComponent(q),
+        {credentials:'omit', signal: ctl ? ctl.signal : undefined})
+    .then(function(res){ return res.text(); })
+    .then(function(t){
+      clearTimeout(to);
+      var m = t.match(/^\s*cb\(([\s\S]*)\)\s*;?\s*$/);
+      var r = null; try { r = JSON.parse(m ? m[1] : t); } catch(e) {}
+      if (r && r.a) box.innerHTML = '<b>Jin</b> ' + esc(r.a).replace(/\n/g,'<br>');
+      else box.innerHTML = 'Jin is offline for a second — try again.';
+    })
+    .catch(function(){
+      clearTimeout(to);
+      box.innerHTML = 'Jin is offline for a second — try again.';
+    });
 }
 function signout(){ try{localStorage.removeItem('m5_member');}catch(e){}; location.href='/welcomehero'; }
