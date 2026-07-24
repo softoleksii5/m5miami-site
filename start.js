@@ -319,6 +319,20 @@ var STACK=[
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
  ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/']
 ];
+
+/* Roadmap подключений — что и КОГДА включаем дальше (решение 24.07 после анкеты JobTread).
+   Триггер → сервис → зачем. Видно только Алексу, обновляется вместе с My Stack. */
+var ROADMAP=[
+ ['Сентябрь · LLC + банковский счёт открыты','QuickBooks Online + bookkeeper','бухгалтерия; сразу включаем нативный синк JobTread↔QBO — счета и платежи улетают сами'],
+ ['Онбординг-звонок JobTread (ближайшие недели)','Stripe в JobTread','депозиты и milestone-платежи клиентов картой/ACH прямо из сметы'],
+ ['Первая W-2 зарплата Вадима (~октябрь)','Gusto','payroll: зарплаты и зарплатные налоги, ~$40/мес + $6/чел'],
+ ['Первые закупки материалов','Home Depot Pro Xtra','скидки на объём + чеки закупок автоматом в job costing'],
+ ['Первый завершённый проект','Движок отзывов: сначала свой (Jin), не взлетит — Nicejob ~$75/мес','отзывы Google Business / Houzz на автомате'],
+ ['Первый замер помещения','Rendr — попробовать','3D-скан телефоном → планы и замеры за минуты вместо рулетки'],
+ ['3+ параллельных объекта','CompanyCam — если Daily Logs станет мало','фото-документация объектов; пока хватает JobTread Daily Logs'],
+ ['Первый живой лид прошёл по воронке JobTread','—: отключаем Monday','снять двойную запись, закрыть аккаунт — экономия и чистота'],
+ ['Запуск рекламы (по плану августа)','Houzz реклама ~$499/мес — решаем отдельно','платный поток лидов; профиль и портфолио должны быть готовы раньше']
+];
 (function(){
   try{
     var m=JSON.parse(localStorage.getItem('m5_member')||'null');
@@ -331,7 +345,7 @@ var STACK=[
       for(var i=0;i<STACK.length;i++){ if(!seen[STACK[i][0]]){seen[STACK[i][0]]=1;groups.push(STACK[i][0]);} }
       /* Свёрнут по умолчанию: клик по шапке разворачивает. Состояние помнится
          в localStorage, чтобы не сворачивалось при каждом заходе. */
-      var opened=false; try{opened=localStorage.getItem('m5_stack_open')==='1';}catch(e){}
+      var opened=false, opened2=false; try{opened=localStorage.getItem('m5_stack_open')==='1'; opened2=localStorage.getItem('m5_roadmap_open')==='1';}catch(e){}
       var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>My stack · только для тебя</span><span class="stk-hint">'+STACK.length+' сервисов · нажми</span></summary><div class="stack">';
       for(var g=0;g<groups.length;g++){
         html+='<div class="stk-g">'+groups[g]+'</div>';
@@ -339,9 +353,14 @@ var STACK=[
           html+='<a class="stk" href="'+STACK[j][3]+'" target="_blank" rel="noopener"><b>'+STACK[j][1]+'</b><span>'+STACK[j][2]+'</span></a>';
         }
       }
-      el.innerHTML=html+'</div></details>';
-      var box=el.querySelector('details.stackbox');
-      if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',box.open?'1':'0');}catch(e){} });
+      var rm='<details class="stackbox"'+(opened2?' open':'')+'><summary><span>🔌 Что подключаем дальше · план</span><span class="stk-hint">'+ROADMAP.length+' шагов · нажми</span></summary><div class="stack">';
+      for(var r=0;r<ROADMAP.length;r++){
+        rm+='<div class="stk-g">'+ROADMAP[r][0]+'</div><div class="lsn"><b>'+ROADMAP[r][1]+'</b> — '+ROADMAP[r][2]+'</div>';
+      }
+      el.innerHTML=html+'</div></details>'+rm+'</div></details>';
+      var boxes=el.querySelectorAll('details.stackbox');
+      if(boxes[0])boxes[0].addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',boxes[0].open?'1':'0');}catch(e){} });
+      if(boxes[1])boxes[1].addEventListener('toggle',function(){ try{localStorage.setItem('m5_roadmap_open',boxes[1].open?'1':'0');}catch(e){} });
     });
   }catch(e){}
 })();
