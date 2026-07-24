@@ -12,11 +12,11 @@ var LINKS={
   drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // «M5 · Company Drive»
   telegram:'https://t.me/+x4q86H688uNiODI8',  // группа «M5 Team»
   monday:'https://m5miami.monday.com/',
-  jobtread:'',
+  jobtread:'https://app.jobtread.com/', // операционное ядро: лиды→сметы→производство
   quickbooks:'',
   heygen:'',
   openphone:'',
-  houzz:'',
+  houzz:'https://pro.houzz.com/', // маркетинг-канал: профиль+отзывы (софт-тариф НЕ берём)
   playbook:'',
   video:'/media/m5_intro.mp4' // бренд-интро (Remotion, 24с)
 };
@@ -283,11 +283,13 @@ var STACK=[
  ['AI & Dev','Claude Console','API-ключ Jin, лимиты трат','https://platform.claude.com/'],
  ['AI & Dev','Higgsfield AI','видео и фото-фабрика (план PLUS, MCP подключён)','https://higgsfield.ai/'],
  ['AI & Dev','Облачные рутины','Health Check · Daily Brief · Пульс · Scout','https://claude.ai/code/routines'],
- ['Операционка','Monday CRM','лиды, задачи, склад, партнёры','https://m5miami.monday.com/'],
+ ['Операционка','JobTread','операционное ядро: лиды → сметы → производство → счета','https://app.jobtread.com/'],
+ ['Операционка','Monday CRM','⚠️ выводим — переезжаем на JobTread; пока тут склад и автоматика','https://m5miami.monday.com/'],
  ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
  ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
  ['Операционка','Apps Script «M5 Hub»','автоматика: лиды→TG, SLA, склад, бэкенд Jin','https://script.google.com/u/2/home/projects/1TCKRgl1AKm6-9gyU3WHZpkHWsJRbkgyUkxiUiMvJYJq4p1m9_bv1jP-j/edit'],
  ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
+ ['Сайт & аналитика','Houzz','маркетинг-канал: профиль, портфолио, отзывы; реклама — позже','https://pro.houzz.com/'],
  ['Сайт & аналитика','GitHub','код сайта (m5miami-site) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
  ['Сайт & аналитика','Porkbun','домен m5miami.com, DNS, автопродление','https://porkbun.com/'],
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
