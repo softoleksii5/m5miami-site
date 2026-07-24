@@ -43,6 +43,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'monday',k:'CRM',t:'Full pipeline',link:'monday'},
+      {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
