@@ -330,8 +330,8 @@ function openP(slug){
     '<div class="pm-fact"><i>Contract until</i><b>'+(p.end?esc(p.end):'Open-ended')+'</b></div>'+
     '<div class="pm-fact"><i>Role type</i><b>'+(p.slug==='vadim'?'Director · W-2':'Co-Founder')+'</b></div>';
   var doc=p.contract
-    ? '<a class="pm-doc" target="_blank" rel="noopener" href="'+p.contract+'">📄 Contract — open in Drive</a>'
-    : '<span class="pm-doc na">📄 Contract — not uploaded yet</span>';
+    ? '<a class="pm-doc" target="_blank" rel="noopener" href="'+p.contract+'"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg> Contract — open in Drive</a>'
+    : '<span class="pm-doc na"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg> Contract — not uploaded yet</span>';
   document.getElementById('pmBox').innerHTML=
     '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
     '<div class="who"><div class="ava '+p.avaClass+'" style="width:62px;height:62px;font-size:25px">'+p.ava+'</div>'+
@@ -340,8 +340,8 @@ function openP(slug){
     '<div class="pm-sec">Come to them about</div><ul class="pm-ask">'+p.ask.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+
     '<div class="pm-sec">Facts</div><div class="pm-facts">'+facts+'</div>'+
     '<div class="pm-sec">Contacts</div><div class="pm-contacts">'+
-      '<a href="mailto:'+p.email+'">✉ '+p.email+'</a>'+
-      (p.tg?'<a target="_blank" rel="noopener" href="https://t.me/'+p.tg+'">✈ @'+p.tg+'</a>':'')+
+      '<a href="mailto:'+p.email+'"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg> '+p.email+'</a>'+
+      (p.tg?'<a target="_blank" rel="noopener" href="https://t.me/'+p.tg+'"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3.5 11l5 2L19 6.5 10.5 14.5v4l3-2.8 4 3.3z"/></svg> @'+p.tg+'</a>':'')+
     '</div>'+
     '<hr class="pm-hr">'+doc+
     '<div class="pm-priv">Contract files live in Drive — access is limited to founders &amp; director</div>';
