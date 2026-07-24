@@ -157,7 +157,7 @@ document.getElementById('app').innerHTML=
       '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
       '<div class="jin-reply" id="jinReply"></div>'+
     '</div>'+
-    '<a class="video" href="#" onclick="return openWelcome()" style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime.jpg\');background-size:cover;background-position:center 32%">'+
+    '<a class="video" href="#" onclick="return openWelcome()" style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime2.jpg\');background-size:cover;background-position:center 30%">'+
       '<div class="play">▶</div>'+
       '<div class="video-cap"><b>Welcome from Jin</b><span>Your AI teammate · ~30 sec</span></div>'+
     '</a>'+
@@ -200,11 +200,11 @@ var WV_MUSIC='';/* URL героического трека (Solo-Leveling вай
 /* Приветствие Jin: 5 сгенерированных сцен (Higgsfield Seedance 2.0, 23.07),
    субтитр держится всю сцену, клипы идут подряд. */
 var WVSCENES=[
- {v:'/media/jin_s1.mp4', a:'/media/jin_v1.mp3', c:'Welcome — this is your <b>M5 workspace</b>. I’m <b>Jin</b>, the AI at the core of this company.'},
- {v:'/media/jin_s2.mp4', a:'/media/jin_v2.mp3', c:'We work as one team: <b>Telegram</b> is our pulse, <b>Monday CRM</b> holds every lead and task, <b>JobTread</b> runs the estimates.'},
- {v:'/media/jin_s3.mp4', a:'/media/jin_v3.mp3', c:'One rule makes the magic happen: <b>everything goes to our Google Drive</b> — photos, invoices, finances, content. What’s in the system, I turn into results.'},
- {v:'/media/jin_s4.mp4', a:'/media/jin_v4.mp3', c:'Ask me anything, right here in this hub — I’ll guide you. And there’s more inside: <b>explore</b>.'},
- {v:'/media/jin_s5.mp4', a:'/media/jin_v5.mp3', c:'I’m the system. <b>You’re the team that makes it matter.</b> Together we scale M5 — big 🚀'}
+ {v:'/media/jin2_s1.mp4', a:'/media/jin2_v1.mp3', c:'Hey, welcome to <b>M5</b>! I’m <b>Jin</b> — your AI teammate. Great to have you with us!'},
+ {v:'/media/jin2_s2.mp4', a:'/media/jin2_v2.mp3', c:'I’m powered by <b>artificial intelligence</b> — ask me anything, anytime. I’m here to help you.'},
+ {v:'/media/jin2_s3.mp4', a:'/media/jin2_v3.mp3', c:'We’re a tech-first company: <b>JobTread</b> runs our projects, <b>Telegram</b> keeps us in sync, everything lives in <b>Google Drive</b>.'},
+ {v:'/media/jin2_s4.mp4', a:'/media/jin2_v4.mp3', c:'Our mission is bold — we build the most <b>luxurious villas in Miami</b>.'},
+ {v:'/media/jin2_s5.mp4', a:'/media/jin2_v5.mp3', c:'And you’re part of our <b>superhero team</b>. Let’s build the future together! 🚀'}
 ];
 var wvIdx=0;
 function wvPlay(i){
