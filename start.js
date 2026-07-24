@@ -42,8 +42,7 @@ var ROLES={
     chips:['Leads this week','Site analytics','What needs my decision?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'monday',k:'CRM',t:'Full pipeline',link:'monday'},
-      {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
+      {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -55,9 +54,7 @@ var ROLES={
     chips:['Margin & pipeline','Stock levels','This week'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
-      {b:'monday',k:'CRM',t:'Full pipeline',link:'monday'},
-      {ic:'📦',k:'Inventory',t:'Materials & stock',link:'stock'},
+      {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -67,7 +64,6 @@ var ROLES={
     chips:['My score this week','Is this post on-brand?','Take the onboarding quiz'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'monday',k:'My tasks',t:'Monday.com',link:'monday'},
       {ic:'🗓',k:'Scheduler',t:'Auto-posting'},
       {b:'heygen',k:'HeyGen',t:'AI avatars',link:'heygen'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
@@ -80,7 +76,7 @@ var ROLES={
     chips:['My pipeline','Today’s leads','Objection scripts'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'monday',k:'CRM',t:'Monday.com',link:'monday'},
+      {b:'jobtread',k:'CRM',t:'JobTread',link:'jobtread'},
       {b:'openphone',k:'Calls',t:'OpenPhone',link:'openphone'},
       {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
       {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch'},
@@ -93,7 +89,7 @@ var ROLES={
     chips:['My projects','Material library','Brand guide'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'monday',k:'Boards',t:'Monday.com',link:'monday'},
+      {b:'jobtread',k:'Projects',t:'JobTread',link:'jobtread'},
       {ic:'🎨',k:'Design',t:'3D & tools'},
       {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
       {b:'houzz',k:'Houzz',t:'Pro profile',link:'houzz'},
@@ -107,7 +103,6 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
-      {b:'monday',k:'Boards',t:'Monday.com',link:'monday'},
       {ic:'📐',k:'Supervision',t:'Site QC'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {b:'drive',k:'Drive',t:'Docs & photos',link:'drive'},
@@ -118,7 +113,7 @@ var ROLES={
   team:{label:'Team',sub:'Your workspace',
     chips:['My tasks','Knowledge base','Ask anything'],
     tiles:[
-      {b:'monday',k:'Boards',t:'Monday.com',link:'monday'},
+      {b:'jobtread',k:'Projects',t:'JobTread',link:'jobtread'},
       {b:'drive',k:'Drive',t:'Knowledge base',link:'drive'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {ic:'✦',k:'AI Agent',t:'M5 assistant'},
@@ -290,7 +285,7 @@ var LESSON=[
 ];
 (function(){
   try{
-    if(role!=='director'&&role!=='founder'&&role!=='pm')return;
+    if(role!=='director'&&role!=='founder'&&role!=='pm'&&role!=='sales')return;
     var el=document.getElementById('lessonSec'); if(!el)return;
     var opened=false; try{opened=localStorage.getItem('m5_lesson_open')==='1';}catch(e){}
     var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>🎓 JobTread — как работать</span><span class="stk-hint">урок · '+LESSON.length+' шагов · нажми</span></summary><div class="stack">';
@@ -311,7 +306,7 @@ var STACK=[
  ['AI & Dev','Higgsfield AI','видео и фото-фабрика (план PLUS, MCP подключён)','https://higgsfield.ai/'],
  ['AI & Dev','Облачные рутины','Health Check · Daily Brief · Пульс · Scout','https://claude.ai/code/routines'],
  ['Операционка','JobTread','операционное ядро: лиды → сметы → производство → счета','https://app.jobtread.com/'],
- ['Операционка','Monday CRM','⚠️ выводим — переезжаем на JobTread; пока тут склад и автоматика','https://m5miami.monday.com/'],
+ ['Операционка','Monday CRM','⚠️ отключаем — кабинеты уже без него; остался только API-дубль лидов как страховка','https://m5miami.monday.com/'],
  ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
  ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
  ['Операционка','Apps Script «M5 Hub»','автоматика: лиды→TG, SLA, склад, бэкенд Jin','https://script.google.com/u/2/home/projects/1TCKRgl1AKm6-9gyU3WHZpkHWsJRbkgyUkxiUiMvJYJq4p1m9_bv1jP-j/edit'],
