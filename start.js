@@ -304,14 +304,19 @@ var STACK=[
       var el=document.getElementById('stackSec'); if(!el)return;
       var groups=[],seen={};
       for(var i=0;i<STACK.length;i++){ if(!seen[STACK[i][0]]){seen[STACK[i][0]]=1;groups.push(STACK[i][0]);} }
-      var html='<div class="sec">My stack · только для тебя</div><div class="stack">';
+      /* Свёрнут по умолчанию: клик по шапке разворачивает. Состояние помнится
+         в localStorage, чтобы не сворачивалось при каждом заходе. */
+      var opened=false; try{opened=localStorage.getItem('m5_stack_open')==='1';}catch(e){}
+      var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>My stack · только для тебя</span><span class="stk-hint">'+STACK.length+' сервисов · нажми</span></summary><div class="stack">';
       for(var g=0;g<groups.length;g++){
         html+='<div class="stk-g">'+groups[g]+'</div>';
         for(var j=0;j<STACK.length;j++){ if(STACK[j][0]!==groups[g])continue;
           html+='<a class="stk" href="'+STACK[j][3]+'" target="_blank" rel="noopener"><b>'+STACK[j][1]+'</b><span>'+STACK[j][2]+'</span></a>';
         }
       }
-      el.innerHTML=html+'</div>';
+      el.innerHTML=html+'</div></details>';
+      var box=el.querySelector('details.stackbox');
+      if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',box.open?'1':'0');}catch(e){} });
     });
   }catch(e){}
 })();
