@@ -277,6 +277,10 @@ function signout(){ try{localStorage.removeItem('m5_member');localStorage.remove
    Обновляется после каждой консультации с адвокатом — дата в шапке.
    ✅/⬜ — статус пункта, меняется по факту. Детали финансов здесь не публикуем. */
 var EPLAN_UPD='24.07 · после консультации с иммиграционным адвокатом';
+/* Шкала инвестиций: заведено на счёт LLC. Метки: $100K — минимум завести и потратить,
+   $150K — цель на счету к началу октября, $200K — план инвестиций на 2026 (=100% шкалы).
+   cur обновляется, когда Алекс говорит «завели X». */
+var EPLAN_FUND={cur:0, min:100, goal:150, plan:200};
 var EPLAN=[
  {m:'Август', tag:'Фундамент', items:[
    ['⬜','До 1 августа — подать LLC «M5 Studio Miami»','Florida LLC, Алекс 50% / Влад 50%. Регистрация + EIN. Это старт всего E-2 кейса.'],
@@ -307,7 +311,7 @@ var EPLAN=[
 var EPLAN_HINTS=[
  ['Что такое E-2','Виза инвестора США для граждан стран-участниц договора. Требует существенных инвестиций в реальный работающий бизнес. Алекс и Влад подаются как инвесторы (по 50%), Вадим — как ключевой сотрудник той же компании. Подача — в консульстве (Варшава), к подаче нужны: работающий бизнес, потраченные инвестиции, бизнес-план, source of funds.'],
  ['Бизнес-план','Живой документ: сейчас v3, к подаче станет v4 — намерения заменяются фактами (реальный шоурум, реальные клиенты, реальные траты). Хранится в Company Drive → 06 Legal & Docs, обновляет Клод после каждого события.'],
- ['Шоурум','<img src="/media/showroom_concept.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"> Майами, центральные улицы, до 100 м²: шоурум декоративной штукатурки + склад + офис. Концепт — «art-concrete». Ищем через LoopNet, Crexi и локальных брокеров; бюджет аренды $5–10K/мес.']
+ ['Шоурум','<img src="/media/showroom_main.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_storage.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_concept.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"> Майами, центральные улицы, до 100 м²: шоурум декоративной штукатурки + склад материалов + офис. Концепт — «art-concrete». Ищем через LoopNet, Crexi и локальных брокеров; бюджет аренды $5–10K/мес.']
 ];
 (function(){
   try{
@@ -316,6 +320,14 @@ var EPLAN_HINTS=[
     var op=false; try{op=localStorage.getItem('m5_eplan_open')==='1';}catch(e){}
     var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>🗓 План E-2 · август → ноябрь</span><span class="stk-hint">обновлено '+EPLAN_UPD+' · нажми</span></summary><div class="stack">';
     h+='<div class="lsn" style="margin-top:10px">📄 <b>Бизнес-план E-2</b> — закреп: <a href="https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm" target="_blank" rel="noopener" style="color:#96703B">Company Drive → 06 Legal &amp; Docs</a></div>';
+    var fp=Math.min(100,Math.round(EPLAN_FUND.cur/EPLAN_FUND.plan*100));
+    h+='<div class="lsn" style="margin-top:12px"><b>💰 Инвестиции на счету LLC: $'+EPLAN_FUND.cur+'K из $'+EPLAN_FUND.plan+'K</b></div>'+
+       '<div style="position:relative;height:22px;background:#EFE8D9;border-radius:11px;margin:8px 0 2px;overflow:hidden">'+
+         '<div style="position:absolute;left:0;top:0;bottom:0;width:'+fp+'%;background:linear-gradient(90deg,#B0894F,#96703B);border-radius:11px;transition:width .6s"></div>'+
+         '<div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff9"></div>'+
+         '<div style="position:absolute;left:75%;top:0;bottom:0;width:2px;background:#fff9"></div>'+
+       '</div>'+
+       '<div style="display:flex;font-size:10.5px;color:#8A8272;letter-spacing:.04em"><span style="width:50%">$100K — минимум завести и потратить</span><span style="width:25%">$150K — цель к окт.</span><span style="width:25%;text-align:right">$200K — план 2026</span></div>';
     for(var i=0;i<EPLAN.length;i++){
       h+='<div class="stk-g" style="font-size:12px;margin-top:16px">'+EPLAN[i].m+' — '+EPLAN[i].tag+'</div>';
       for(var j=0;j<EPLAN[i].items.length;j++){
