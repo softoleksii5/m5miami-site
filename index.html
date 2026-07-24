@@ -111,7 +111,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       url('img/m/hero.jpg') center/cover no-repeat}
   }
 
-  .hero-badge{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:#D9B87C;margin-bottom:26px}
+  .hero-badge{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#D9B87C;margin-bottom:26px}
   .hero h1{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;font-size:clamp(36px,4.7vw,58px);line-height:1.12;max-width:18ch;text-wrap:balance}
   .hero-sub{font-size:17px;color:#CFC5B2;margin:24px 0 40px;max-width:52ch;line-height:1.65}
   .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
@@ -336,7 +336,9 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
   .qz-opt{background:var(--white);border:1.5px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;transition:.18s;display:flex;align-items:center;gap:14px;font-size:15.5px;text-align:left;width:100%;font-family:var(--sans);color:var(--ink)}
   .qz-opt:hover{border-color:var(--gold);transform:translateY(-1px)}
   .qz-opt.sel{border-color:var(--gold-d);background:#FBF6EC}
-  .qz-opt .ic{font-size:20px}
+  .qz-opt .ic{display:flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border:1px solid var(--line);border-radius:10px;color:var(--gold-d);background:#FBF7EF}
+  .qz-opt .ic svg{width:20px;height:20px}
+  .qz-opt:hover .ic{border-color:var(--gold-d)}
   .qz-opt small{display:block;color:var(--soft);font-size:12.5px;margin-top:2px}
   .qz-slider{margin:8px 0 6px}
   .qz-sqft{font-family:var(--serif);font-weight:800;font-size:44px;text-align:center;letter-spacing:-.02em}
@@ -455,7 +457,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     <h1 data-i18n="hero.h1">We design, build and renovate homes in Miami.</h1>
     <p class="hero-sub" data-i18n="hero.sub">Interior design · turnkey renovation · decorative plaster · fit-out. One team designs it, builds it and answers for it.</p>
     <div class="hero-ctas">
-      <a class="btn btn-bone" href="#" onclick="return openQuiz('hero')" data-i18n="qz.open">⚡ Get my instant estimate</a>
+      <a class="btn btn-bone" href="#" onclick="return openQuiz('hero')" data-i18n="qz.open">Get my instant estimate</a>
       <a class="btn btn-line" style="border-color:rgba(244,238,228,.4);color:var(--bone)" href="#projects" data-i18n="hero.cta2">See our works</a>
     </div>
   </div>
@@ -625,7 +627,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     <div class="sub"><span data-i18n="cta.s1">FREE ON-SITE CONSULTATION</span><span data-i18n="cta.s2">RESPONSE WITHIN 1 HOUR</span></div>
     <div class="btns">
       <a class="btn btn-bone" href="#contact" data-i18n="cta.btn1">Get a quote</a>
-      <a class="btn btn-line" style="border-color:rgba(244,238,228,.55);color:var(--bone)" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'cta-banner'})" data-i18n="cta.btn3">📅 Book a free visit</a>
+      <a class="btn btn-line" style="border-color:rgba(244,238,228,.55);color:var(--bone)" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'cta-banner'})" data-i18n="cta.btn3">Book a free visit</a>
       <a class="btn btn-wa" href="https://wa.me/971585814215" data-i18n="cta.btn2">WhatsApp us</a>
     </div>
   </div>
@@ -657,7 +659,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     <div class="p-row"><div class="p-num">03</div><div><div class="p-name" data-i18n="proc3.name">Design &amp; 3D</div><div class="p-side" data-i18n="proc3.side">≈ 2–3 weeks</div></div><p class="p-desc" data-i18n="proc3.desc">Layouts, photoreal 3D, materials and an itemized budget — you sign knowing exactly what you get.</p></div>
     <div class="p-row"><div class="p-num">04</div><div><div class="p-name" data-i18n="proc4.name">Build &amp; fit-out</div><div class="p-side" data-i18n="proc4.side">per estimate</div></div><p class="p-desc" data-i18n="proc4.desc">Permitted construction by insured contractor partners, with weekly photo updates. Milestone payments — never a large upfront.</p></div>
     <div class="p-row"><div class="p-num">05</div><div><div class="p-name" data-i18n="proc5.name">Handover &amp; warranty</div><div class="p-side" data-i18n="proc5.side">final week</div></div><p class="p-desc" data-i18n="proc5.desc">Final cleaning, walkthrough and a 1-year written warranty backed by the same team that built it.</p></div>
-    <p style="text-align:center;margin-top:50px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--soft)" data-i18n="proc.foot">PROJECTS FROM ~$130K · TYPICAL TIMELINE UP TO 3 MONTHS</p>
+    <p style="text-align:center;margin-top:50px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.16em;color:var(--soft)" data-i18n="proc.foot">PROJECTS FROM ~$130K · TYPICAL TIMELINE UP TO 3 MONTHS</p>
   </div>
 </section>
 
@@ -854,15 +856,15 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/971585814215" style="text-align:center">WhatsApp</a>
     </form>
     <div class="qz-note" id="ldOk" style="display:none;color:#1faa52;font-size:14px"></div>
-    <a class="btn btn-line" id="ldBook" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'lead-modal'})" style="display:flex;margin-top:14px;border-color:var(--gold);color:var(--gold-d)" data-i18n="lead.book">📅 Or book a time — free site visit</a>
+    <a class="btn btn-line" id="ldBook" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'lead-modal'})" style="display:flex;margin-top:14px;border-color:var(--gold);color:var(--gold-d)" data-i18n="lead.book">Or book a time — free site visit</a>
   </div>
 </div>
 
 
 <div class="mbar" id="mbar">
-  <a href="tel:+971585814215" onclick="if(window.m5track)m5track('phone_click')"><span>📞</span><span data-i18n="mb.call">Call</span></a>
-  <a href="https://wa.me/971585814215" target="_blank" rel="noopener"><span>💬</span>WhatsApp</a>
-  <a href="#" class="est" onclick="return openQuiz('mbar')"><span>⚡</span><span data-i18n="mb.est">Estimate</span></a>
+  <a href="tel:+971585814215" onclick="if(window.m5track)m5track('phone_click')"><span style="display:inline-flex"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l1.7 4.2-2.1 1.6a12.5 12.5 0 0 0 5.6 5.6l1.6-2.1L20 15v4a1.6 1.6 0 0 1-1.8 1.6C10.5 19.9 4.1 13.5 3.4 5.8A1.6 1.6 0 0 1 5 4Z"/></svg></span><span data-i18n="mb.call">Call</span></a>
+  <a href="https://wa.me/971585814215" target="_blank" rel="noopener"><span style="display:inline-flex"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.5L4 21l1.5-4.6A8.5 8.5 0 1 1 21 12Z"/></svg></span>WhatsApp</a>
+  <a href="#" class="est" onclick="return openQuiz('mbar')"><span style="display:inline-flex"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M13 3 5.5 13.5H11L9.8 21l7.7-10.5H12L13 3Z"/></svg></span><span data-i18n="mb.est">Estimate</span></a>
 </div>
 
 
@@ -916,7 +918,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "plaster.li1":"Venetian plaster · microcement · limewash · travertine effects","plaster.li2":"Own sample library & Wynwood showroom","plaster.li3":"Feature walls, ceilings, wet areas & full interiors",
       "plaster.ctab":"Free on-site measurement & estimate","plaster.ctas":"We come to you, measure the space and prepare a detailed quote — at no cost.","plaster.ctabtn":"Book a free estimate",
       "proj.label":"Selected work","proj.h2":"Recent Miami projects","proj.viewall":"View all projects",
-      "qz.open":"⚡ Get my instant estimate","qz.title":"Instant Estimate","qz.sub":"60 seconds · no obligation",
+      "qz.open":"Get my instant estimate","qz.title":"Instant Estimate","qz.sub":"60 seconds · no obligation",
       "mb.call":"Call","mb.est":"Estimate",
       "xi.h":"Wait — grab the 2026 Miami Renovation Cost Guide","xi.p":"Real price ranges per sq ft, condo pitfalls, and a planning checklist — free PDF to your inbox.","xi.email":"Your email","xi.btn":"Send me the guide","xi.note":"No spam — one useful PDF and occasional project insights.",
       "want.ba":"Want this for your home?","want.gal":"One team for all of it — see your numbers.","want.btn":"Get my estimate",
@@ -928,7 +930,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case4.tag":"FULL VILLA","case4.h4":"Coral Gables Villa","case4.m2":"16 WEEKS",
       "case5.tag":"FIT-OUT","case5.h4":"South Beach Loft","case5.m2":"10 WEEKS",
       "case6.tag":"OUR SHOWROOM","case6.h4":"Wynwood Studio Showroom","case6.m1":"OUR OWN SPACE","case6.m2":"COME SEE IT",
-      "cta.h2":"Get your estimate<br>in 48 hours.","cta.s1":"FREE ON-SITE CONSULTATION","cta.s2":"RESPONSE WITHIN 1 HOUR","cta.btn1":"Get a quote","cta.btn2":"WhatsApp us","cta.btn3":"📅 Book a free visit",
+      "cta.h2":"Get your estimate<br>in 48 hours.","cta.s1":"FREE ON-SITE CONSULTATION","cta.s2":"RESPONSE WITHIN 1 HOUR","cta.btn1":"Get a quote","cta.btn2":"WhatsApp us","cta.btn3":"Book a free visit",
       "money.label":"Transparency","money.h2":"How we protect your money",
       "money.m1":"Itemized estimate before the contract","money.m2":"Payments by milestone, no large upfront","money.m3":"Change orders signed by you first","money.m4":"Lien releases from every subcontractor","money.m5":"Contract & insurance on request","money.btn":"1-Year Written Warranty",
       "proc.label":"Our process","proc.h2":"Clear process. Straight timelines.",
@@ -956,7 +958,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "faq3.q":"How much does a project cost?","faq3.a":"Turnkey design + renovation projects start around $130K. You see a clear itemized budget before you sign. It changes only through a change order you approve first.",
       "faq4.q":"How long does it take?","faq4.a":"A typical renovation takes up to 3 months. You get the timeline upfront and weekly photo updates all the way through.",
       "faq5.q":"Is there a warranty?","faq5.a":"Yes: a 1-year written warranty. The same team that built your project fixes any issue after handover.",
-      "lead.label":"Get a quote","lead.h2":"Tell us about your space.","lead.f1":"FREE CONSULTATION","lead.f2":"SITE VISIT INCLUDED","lead.f3":"REPLY WITHIN 1 HOUR","lead.book":"📅 Or book a time — free site visit",
+      "lead.label":"Get a quote","lead.h2":"Tell us about your space.","lead.f1":"FREE CONSULTATION","lead.f2":"SITE VISIT INCLUDED","lead.f3":"REPLY WITHIN 1 HOUR","lead.book":"Or book a time — free site visit",
       "form.consent":"By submitting, you agree to be contacted about your project.","form.privacy":"Privacy Policy","form.name":"Your name","form.phone":"Phone / WhatsApp","form.hood":"Neighborhood / building","form.budget":"Project budget","form.b4":"Not sure yet","form.btn":"Get my free estimate",
       "foot.about":"Interior design, renovation and construction studio — one accountable team, from first sketch to final handover. Miami, Florida.",
       "foot.h1":"Main pages","foot.privacy":"Privacy Policy","foot.l1":"Home","foot.l2":"About us","foot.l3":"Portfolio","foot.l4":"Contact","foot.h2":"Services","foot.h3":"Contact us",
@@ -986,7 +988,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "plaster.li1":"Estuco veneciano · microcemento · cal · efecto travertino","plaster.li2":"Muestrario propio y showroom en Wynwood","plaster.li3":"Paredes destacadas, techos, zonas húmedas e interiores completos",
       "plaster.ctab":"Medición y presupuesto gratis a domicilio","plaster.ctas":"Vamos a su espacio, tomamos medidas y preparamos un presupuesto detallado — sin coste.","plaster.ctabtn":"Reservar presupuesto gratis",
       "proj.label":"Trabajos seleccionados","proj.h2":"Proyectos recientes en Miami","proj.viewall":"Ver todos los proyectos",
-      "qz.open":"⚡ Estimación instantánea","qz.title":"Estimación instantánea","qz.sub":"60 segundos · sin compromiso",
+      "qz.open":"Estimación instantánea","qz.title":"Estimación instantánea","qz.sub":"60 segundos · sin compromiso",
       "mb.call":"Llamar","mb.est":"Estimar",
       "xi.h":"Espere — llévese la Guía de Costos de Reforma Miami 2026","xi.p":"Rangos reales de precios por sq ft, errores comunes en condos y checklist — PDF gratis a su correo.","xi.email":"Su email","xi.btn":"Enviarme la guía","xi.note":"Sin spam — un PDF útil y consejos ocasionales.",
       "want.ba":"¿Lo quiere para su casa?","want.gal":"Un solo equipo para todo — vea sus números.","want.btn":"Mi estimación",
@@ -998,7 +1000,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case4.tag":"VILLA COMPLETA","case4.h4":"Villa en Coral Gables","case4.m2":"16 SEMANAS",
       "case5.tag":"FIT-OUT","case5.h4":"Loft en South Beach","case5.m2":"10 SEMANAS",
       "case6.tag":"NUESTRO SHOWROOM","case6.h4":"Showroom del estudio en Wynwood","case6.m1":"ESPACIO PROPIO","case6.m2":"VENGA A VERLO",
-      "cta.h2":"Reciba su presupuesto<br>en 48 horas.","cta.s1":"CONSULTA GRATUITA A DOMICILIO","cta.s2":"RESPUESTA EN 1 HORA","cta.btn1":"Pedir presupuesto","cta.btn2":"Escríbanos por WhatsApp","cta.btn3":"📅 Reservar visita gratis",
+      "cta.h2":"Reciba su presupuesto<br>en 48 horas.","cta.s1":"CONSULTA GRATUITA A DOMICILIO","cta.s2":"RESPUESTA EN 1 HORA","cta.btn1":"Pedir presupuesto","cta.btn2":"Escríbanos por WhatsApp","cta.btn3":"Reservar visita gratis",
       "money.label":"Transparencia","money.h2":"Cómo protegemos su dinero",
       "money.m1":"Presupuesto detallado antes del contrato","money.m2":"Pagos por hitos, sin grandes anticipos","money.m3":"Los cambios los firma usted primero","money.m4":"Renuncia de gravamen de cada subcontratista","money.m5":"Contrato y seguro a petición","money.btn":"Garantía escrita de 1 año",
       "proc.label":"Nuestro proceso","proc.h2":"Proceso claro. Plazos directos.",
@@ -1026,7 +1028,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "faq3.q":"¿Cuánto cuesta un proyecto?","faq3.a":"Los proyectos de diseño + reforma llave en mano parten de unos $130K. Recibe un presupuesto detallado antes de firmar — y no cambia sin una orden de cambio que usted apruebe primero.",
       "faq4.q":"¿Cuánto tarda?","faq4.a":"Una reforma habitual tarda hasta 3 meses. Recibe el plazo por adelantado y fotos de avance cada semana durante todo el proceso.",
       "faq5.q":"¿Hay garantía?","faq5.a":"Sí — una garantía escrita de 1 año. Cualquier incidencia tras la entrega la resuelve el mismo equipo que la construyó.",
-      "lead.label":"Pedir presupuesto","lead.h2":"Cuéntenos sobre su espacio.","lead.f1":"CONSULTA GRATUITA","lead.f2":"VISITA A DOMICILIO INCLUIDA","lead.f3":"RESPUESTA EN 1 HORA","lead.book":"📅 O reserve una hora — visita gratis",
+      "lead.label":"Pedir presupuesto","lead.h2":"Cuéntenos sobre su espacio.","lead.f1":"CONSULTA GRATUITA","lead.f2":"VISITA A DOMICILIO INCLUIDA","lead.f3":"RESPUESTA EN 1 HORA","lead.book":"O reserve una hora — visita gratis",
       "form.consent":"Al enviar, acepta que le contactemos sobre su proyecto.","form.privacy":"Política de privacidad","form.name":"Su nombre","form.phone":"Teléfono / WhatsApp","form.hood":"Zona / edificio","form.budget":"Presupuesto del proyecto","form.b4":"Aún no lo sé","form.btn":"Recibir presupuesto gratis",
       "foot.about":"Estudio de diseño interior, reformas y construcción — un solo equipo responsable, del primer boceto a la entrega final. Miami, Florida.",
       "foot.h1":"Páginas principales","foot.privacy":"Política de privacidad","foot.l1":"Inicio","foot.l2":"Nosotros","foot.l3":"Proyectos","foot.l4":"Contacto","foot.h2":"Servicios","foot.h3":"Contáctenos",
@@ -1056,7 +1058,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "plaster.li1":"Венеційська штукатурка · мікроцемент · вапно · ефект травертину","plaster.li2":"Власна бібліотека зразків і шоурум у Wynwood","plaster.li3":"Акцентні стіни, стелі, вологі зони та інтер'єри повністю",
       "plaster.ctab":"Безкоштовний замір і кошторис на об'єкті","plaster.ctas":"Приїдемо до вас, зробимо заміри й підготуємо докладний кошторис — безкоштовно.","plaster.ctabtn":"Замовити безкоштовний кошторис",
       "proj.label":"Вибрані роботи","proj.h2":"Нещодавні проєкти в Маямі","proj.viewall":"Усі проєкти",
-      "qz.open":"⚡ Миттєвий розрахунок","qz.title":"Миттєвий розрахунок","qz.sub":"60 секунд · без зобовʼязань",
+      "qz.open":"Миттєвий розрахунок","qz.title":"Миттєвий розрахунок","qz.sub":"60 секунд · без зобовʼязань",
       "mb.call":"Дзвінок","mb.est":"Розрахунок",
       "xi.h":"Зачекайте — заберіть Гайд цін на ремонт у Маямі 2026","xi.p":"Реальні вилки цін за sq ft, підводні камені кондо та чек-лист — безкоштовний PDF на пошту.","xi.email":"Ваш email","xi.btn":"Надіслати гайд","xi.note":"Без спаму — один корисний PDF та рідкісні поради.",
       "want.ba":"Хочете так само у себе?","want.gal":"Одна команда на все — дізнайтесь свої цифри.","want.btn":"Мій розрахунок",
@@ -1068,7 +1070,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case4.tag":"ВІЛЛА ПІД КЛЮЧ","case4.h4":"Вілла, Coral Gables","case4.m2":"16 ТИЖНІВ",
       "case5.tag":"FIT-OUT","case5.h4":"Лофт, South Beach","case5.m2":"10 ТИЖНІВ",
       "case6.tag":"НАШ ШОУРУМ","case6.h4":"Шоурум студії, Wynwood","case6.m1":"ВЛАСНИЙ ПРОСТІР","case6.m2":"ПРИХОДЬТЕ ПОДИВИТИСЬ",
-      "cta.h2":"Отримайте кошторис<br>за 48 годин.","cta.s1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ НА ОБ'ЄКТІ","cta.s2":"ВІДПОВІДЬ ПРОТЯГОМ 1 ГОДИНИ","cta.btn1":"Отримати кошторис","cta.btn2":"Напишіть у WhatsApp","cta.btn3":"📅 Записатись на візит",
+      "cta.h2":"Отримайте кошторис<br>за 48 годин.","cta.s1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ НА ОБ'ЄКТІ","cta.s2":"ВІДПОВІДЬ ПРОТЯГОМ 1 ГОДИНИ","cta.btn1":"Отримати кошторис","cta.btn2":"Напишіть у WhatsApp","cta.btn3":"Записатись на візит",
       "money.label":"Прозорість","money.h2":"Як ми захищаємо ваші гроші",
       "money.m1":"Деталізований кошторис до підписання договору","money.m2":"Оплата за етапами, без великих авансів","money.m3":"Зміни спершу підписуєте ви","money.m4":"Відмова від застави від кожного субпідрядника","money.m5":"Договір і страховка на запит","money.btn":"Письмова гарантія 1 рік",
       "proc.label":"Наш процес","proc.h2":"Прозорий процес. Чіткі терміни.",
@@ -1096,7 +1098,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "faq3.q":"Скільки коштує проєкт?","faq3.a":"Проєкти «дизайн + ремонт під ключ» стартують приблизно від $130K. Ви отримуєте чіткий деталізований бюджет до підписання — і він не змінюється без зміни, яку ви спершу схвалюєте.",
       "faq4.q":"Скільки це триває?","faq4.a":"Звичайний ремонт триває до 3 місяців. Ви отримуєте терміни наперед і щотижневі фотозвіти протягом усього процесу.",
       "faq5.q":"Чи є гарантія?","faq5.a":"Так — письмова гарантія на 1 рік. Будь-яку проблему після здачі усуває та сама команда, що будувала.",
-      "lead.label":"Отримати кошторис","lead.h2":"Розкажіть про свій простір.","lead.f1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ","lead.f2":"ВИЇЗД НА ОБ'ЄКТ ВКЛЮЧЕНО","lead.f3":"ВІДПОВІДЬ ЗА 1 ГОДИНУ","lead.book":"📅 Або оберіть час — безкоштовний візит",
+      "lead.label":"Отримати кошторис","lead.h2":"Розкажіть про свій простір.","lead.f1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ","lead.f2":"ВИЇЗД НА ОБ'ЄКТ ВКЛЮЧЕНО","lead.f3":"ВІДПОВІДЬ ЗА 1 ГОДИНУ","lead.book":"Або оберіть час — безкоштовний візит",
       "form.consent":"Надсилаючи форму, ви погоджуєтесь, що ми зв'яжемось щодо вашого проєкту.","form.privacy":"Політика конфіденційності","form.name":"Ваше ім'я","form.phone":"Телефон / WhatsApp","form.hood":"Район / будинок","form.budget":"Бюджет проєкту","form.b4":"Ще не визначився","form.btn":"Отримати безкоштовний розрахунок",
       "foot.about":"Студія дизайну інтер'єру, ремонту та будівництва — одна відповідальна команда, від першого ескізу до фінальної здачі. Маямі, Флорида.",
       "foot.h1":"Головні сторінки","foot.privacy":"Політика конфіденційності","foot.l1":"Головна","foot.l2":"Про нас","foot.l3":"Портфоліо","foot.l4":"Контакти","foot.h2":"Послуги","foot.h3":"Зв'язатися з нами",
@@ -1435,9 +1437,15 @@ document.querySelectorAll('#services .svc').forEach(function(card,i){
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeService(); });
 
 /* ================= QUIZ · Instant Estimate ================= */
+var QZICON={
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-5.5h4V20"/></svg>',
+ design:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6.5 16.5 15.8 7.2a1.9 1.9 0 0 1 2.7 0l.3.3a1.9 1.9 0 0 1 0 2.7l-9.3 9.3-4.2 1.2 1.2-4.2Z"/></svg>',
+ plaster:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="13" height="5" rx="1.2"/><path d="M16.5 6.5h3a1 1 0 0 1 1 1V10a1 1 0 0 1-1 1h-7.5a1 1 0 0 0-1 1v2"/><rect x="9.75" y="14" width="2.5" height="6" rx=".8"/></svg>',
+ build:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16"/><rect x="6" y="11" width="5" height="10"/><rect x="13" y="14" width="5" height="7"/><path d="M8.5 11V5.5l9-1.5V7"/></svg>'
+};
 var QZ_EP='https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a';
 var QZL={
- en:{types:[['🏠','Turnkey renovation','apartment or house, full scope',145],['📐','Design + renovation','concept, 3D and build',151],['🎨','Decorative plaster','walls & feature surfaces',18],['🏗','New construction / villa','ground-up build',390]],
+ en:{types:[['home','Turnkey renovation','apartment or house, full scope',145],['design','Design + renovation','concept, 3D and build',151],['plaster','Decorative plaster','walls & feature surfaces',18],['build','New construction / villa','ground-up build',390]],
   q1:'What are we pricing?',q2:'Approximate area?',q2p:'For plaster — approx. wall area',sqft:'SQ FT',
   q3:'Finish level?',levels:[['Standard','quality materials, clean design',1],['Premium','custom joinery, higher-end finishes',1.35],['Luxury','signature materials, full custom',1.7]],
   q4:'When do you want to start?',times:['As soon as possible','In 1–3 months','In 3–6 months','Just exploring'],
@@ -1446,7 +1454,7 @@ var QZL={
   resT:'Your estimated range',resSub:'Exact quote after a free on-site visit — we come to you, measure and confirm the numbers.',
   resBook:'Book my free site visit',resWa:'Discuss in WhatsApp',
   auto:'Thanks for using the M5 instant estimate! Your range is attached below. Next step — a free on-site visit: we measure and give you an exact itemized quote within 48 hours. Reply to this email or WhatsApp us: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
- es:{types:[['🏠','Reforma llave en mano','apartamento o casa, alcance completo',145],['📐','Diseño + reforma','concepto, 3D y obra',151],['🎨','Estuco decorativo','paredes y superficies destacadas',18],['🏗','Obra nueva / villa','construcción desde cero',390]],
+ es:{types:[['home','Reforma llave en mano','apartamento o casa, alcance completo',145],['design','Diseño + reforma','concepto, 3D y obra',151],['plaster','Estuco decorativo','paredes y superficies destacadas',18],['build','Obra nueva / villa','construcción desde cero',390]],
   q1:'¿Qué vamos a presupuestar?',q2:'¿Área aproximada?',q2p:'Para estuco — área aprox. de paredes',sqft:'SQ FT',
   q3:'¿Nivel de acabados?',levels:[['Estándar','materiales de calidad, diseño limpio',1],['Premium','carpintería a medida, mejores acabados',1.35],['Lujo','materiales exclusivos, todo a medida',1.7]],
   q4:'¿Cuándo quiere empezar?',times:['Lo antes posible','En 1–3 meses','En 3–6 meses','Solo explorando'],
@@ -1455,7 +1463,7 @@ var QZL={
   resT:'Su rango estimado',resSub:'Presupuesto exacto tras una visita gratuita — vamos, medimos y confirmamos los números.',
   resBook:'Reservar visita gratuita',resWa:'Hablar por WhatsApp',
   auto:'¡Gracias por usar la estimación instantánea de M5! Su rango está abajo. Siguiente paso — visita gratuita a domicilio: medimos y le damos un presupuesto exacto en 48 horas. Responda a este correo o escríbanos por WhatsApp: https://wa.me/971585814215 — M5 Interior Design & Build, Miami'},
- uk:{types:[['🏠','Ремонт під ключ','квартира чи будинок, повний обсяг',145],['📐','Дизайн + ремонт','концепція, 3D і будівництво',151],['🎨','Декоративна штукатурка','стіни та акцентні поверхні',18],['🏗','Нове будівництво / вілла','з нуля',390]],
+ uk:{types:[['home','Ремонт під ключ','квартира чи будинок, повний обсяг',145],['design','Дизайн + ремонт','концепція, 3D і будівництво',151],['plaster','Декоративна штукатурка','стіни та акцентні поверхні',18],['build','Нове будівництво / вілла','з нуля',390]],
   q1:'Що рахуємо?',q2:'Приблизна площа?',q2p:'Для штукатурки — приблизна площа стін',sqft:'SQ FT',
   q3:'Рівень оздоблення?',levels:[['Стандарт','якісні матеріали, чистий дизайн',1],['Преміум','меблі на замовлення, кращі матеріали',1.35],['Люкс','ексклюзивні матеріали, повний кастом',1.7]],
   q4:'Коли плануєте почати?',times:['Якнайшвидше','Через 1–3 місяці','Через 3–6 місяців','Поки що придивляюсь'],
@@ -1481,7 +1489,7 @@ function qzFmt(n){return '$'+n.toLocaleString('en-US');}
 function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h='';
   document.getElementById('qzFill').style.width=(qz.step*16.6)+'%';
   if(qz.step===1){h='<div class="qz-q">'+t.q1+'</div><div class="qz-opts">'+t.types.map(function(x,i){
-    return '<button class="qz-opt" onclick="qz.type=QZL[qzLang()].types['+i+'];qz.step=2;qzRender()"><span class="ic">'+x[0]+'</span><span>'+x[1]+'<small>'+x[2]+'</small></span></button>';}).join('')+'</div>';}
+    return '<button class="qz-opt" onclick="qz.type=QZL[qzLang()].types['+i+'];qz.step=2;qzRender()"><span class="ic">'+(QZICON[x[0]]||x[0])+'</span><span>'+x[1]+'<small>'+x[2]+'</small></span></button>';}).join('')+'</div>';}
   else if(qz.step===2){h='<div class="qz-q">'+t.q2+'</div>'+(qz.type&&qz.type[3]===18?'<div class="qz-note" style="margin-bottom:10px">'+t.q2p+'</div>':'')+
     '<div class="qz-sqft"><span id="qzSq">'+qz.sqft.toLocaleString()+'</span> <i>'+t.sqft+'</i></div>'+
     '<div class="qz-slider"><input type="range" class="qzr" min="200" max="6000" step="50" value="'+qz.sqft+'" oninput="qz.sqft=+this.value;document.getElementById(\'qzSq\').textContent=qz.sqft.toLocaleString()"></div>'+
@@ -1543,7 +1551,7 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
   if(window.m5hook)m5hook({type:'guide',email:em,lang:l,source:'exit-popup'});
   if(window.m5track)m5track('guide_lead');
   xiDownload();
-  document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0 6px">✅ '+t.ok+'</h4><p style="font-size:13px;color:#8a8272;margin-bottom:14px">'+t.dl+'</p><a href="'+XI_PDF+'" target="_blank" rel="noopener" download onclick="xiDownload();return false;" class="btn btn-ink" style="display:inline-flex;margin-top:2px">'+t.lk+' ↓</a>';
+  document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0 6px">'+t.ok+'</h4><p style="font-size:13px;color:#8a8272;margin-bottom:14px">'+t.dl+'</p><a href="'+XI_PDF+'" target="_blank" rel="noopener" download onclick="xiDownload();return false;" class="btn btn-ink" style="display:inline-flex;margin-top:2px">'+t.lk+' ↓</a>';
   setTimeout(closeXi,6000);
   return false;}
 
@@ -1576,7 +1584,7 @@ function ldSubmit(e){e.preventDefault();
   var A={en:'Thank you for contacting M5! We received your request and will reply within the hour (Mon–Sat). Faster? WhatsApp: https://wa.me/971585814215 — M5 Miami',
     es:'¡Gracias por contactar a M5! Responderemos dentro de una hora (lun–sáb). ¿Más rápido? WhatsApp: https://wa.me/971585814215 — M5 Miami',
     uk:'Дякуємо за звернення до M5! Відповімо протягом години (пн–сб). Швидше? WhatsApp: https://wa.me/971585814215 — M5 Miami'};
-  var OK={en:'✅ Sent! We will reply within the hour.',es:'✅ ¡Enviado! Responderemos dentro de una hora.',uk:'✅ Надіслано! Відповімо протягом години.'};
+  var OK={en:'Sent! We will reply within the hour.',es:'¡Enviado! Responderemos dentro de una hora.',uk:'Надіслано! Відповімо протягом години.'};
   var l=qzLang();
   if(window.m5hook)m5hook({type:'lead',name:document.getElementById('ldName').value.trim(),phone:document.getElementById('ldPhone').value.trim(),details:(document.getElementById('ldHood').value+' '+document.getElementById('ldBudget').value).trim(),lang:l,source:'lead-modal'});
   fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
