@@ -179,6 +179,7 @@ document.getElementById('app').innerHTML=
     return '<a class="tile" style="--bc:'+col+'" '+open+'>'+icon+
       '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge+'</a>';
   }).join('')+'</div>'+
+  '<div id="lessonSec"></div>'+
   '<div id="stackSec"></div>'+
 '</div>'+
 '<footer>M5 Interior Design &amp; Build · Miami · Private team hub</footer>'+
@@ -275,6 +276,32 @@ function askAgent(q){
     });
 }
 function signout(){ try{localStorage.removeItem('m5_member');localStorage.removeItem('m5_onb_who');}catch(e){}; location.href='/welcomehero'; }
+
+/* Урок «JobTread — как работать». Виден ролям, живущим в производстве:
+   director (Вадим — главный юзер), founder, pm. Свёрнут по умолчанию. */
+var LESSON=[
+ ['Что это','JobTread — наша главная рабочая система: все клиенты, сметы, стройка и счета живут здесь. Открывается плиткой «Production · JobTread» выше или на app.jobtread.com — вход по рабочей почте @m5miami.com (приглашение пришлёт Алекс).'],
+ ['Лиды приходят сами','Каждая заявка с сайта m5miami.com автоматически становится клиентом в Customers — руками ничего переносить не надо. Открой клиента «DEMO · Maria Gonzalez» — это учебный пример, на нём виден весь путь лида.'],
+ ['Воронка = поле Status у Job','Новый лид → Связались → Консультация назначена → Смета отправлена → Выиграно → В производстве → Завершён (или Проиграно). Поменял статус сразу после действия — и вся отчётность компании считается сама. Это главная привычка.'],
+ ['Клиент руками','Позвонили напрямую? Customers → New: имя и телефон → Location (адрес объекта) → Job. Дальше тот же путь по воронке.'],
+ ['Смета','Внутри Job → Estimates: конструктор позиций с ценами и наценкой, клиент получает красивое предложение и подписывает онлайн. Шаблоны под 5 услуг M5 соберём вместе на онбординге.'],
+ ['Мобильное приложение','Поставь JobTread из App Store. Правило M5 — «4 кадра каждый визит»: до / процесс / после / деталь. Фото грузи в Daily Logs прямо с объекта.'],
+ ['Обучение бесплатно','У JobTread бесплатный онбординг-звонок и живой чат поддержки — бронируй, они настраивают систему вместе с тобой. Вопросы — Джину в чате выше или Алексу.']
+];
+(function(){
+  try{
+    if(role!=='director'&&role!=='founder'&&role!=='pm')return;
+    var el=document.getElementById('lessonSec'); if(!el)return;
+    var opened=false; try{opened=localStorage.getItem('m5_lesson_open')==='1';}catch(e){}
+    var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>🎓 JobTread — как работать</span><span class="stk-hint">урок · '+LESSON.length+' шагов · нажми</span></summary><div class="stack">';
+    for(var i=0;i<LESSON.length;i++){
+      html+='<div class="stk-g">Шаг '+(i+1)+' · '+LESSON[i][0]+'</div><div class="lsn">'+LESSON[i][1]+'</div>';
+    }
+    el.innerHTML=html+'</div></details>';
+    var box=el.querySelector('details.stackbox');
+    if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_lesson_open',box.open?'1':'0');}catch(e){} });
+  }catch(e){}
+})();
 
 /* «My stack» — личная карта сервисов компании. Видна ТОЛЬКО Алексу:
    почта из m5_member сверяется по SHA-256-хэшу, адресов в коде нет. */
