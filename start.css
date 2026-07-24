@@ -109,3 +109,8 @@ footer{position:relative;z-index:2;padding:44px 0;text-align:center;font-family:
 .stk span{font-size:12.5px;color:#6E6656;line-height:1.4}
 @media(max-width:560px){.stk{flex-direction:column;gap:2px}}
 .lsn{font-size:13.5px;color:#3D3A33;line-height:1.55;padding:0 10px;margin:0 -10px;max-width:640px}
+details.pl{margin:0 -10px;border-radius:9px}
+details.pl>summary{list-style:none;cursor:pointer;font-size:13.5px;color:#20242E;padding:6px 10px;border-radius:9px}
+details.pl>summary::-webkit-details-marker{display:none}
+details.pl>summary:hover{background:#FBF7EF}
+details.pl[open]>summary{font-weight:600}
