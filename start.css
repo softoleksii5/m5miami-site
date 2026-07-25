@@ -114,3 +114,6 @@ details.pl>summary{list-style:none;cursor:pointer;font-size:13.5px;color:#20242E
 details.pl>summary::-webkit-details-marker{display:none}
 details.pl>summary:hover{background:#FBF7EF}
 details.pl[open]>summary{font-weight:600}
+.pvw{background:#20242E;color:#EFE8D9;font-size:12.5px;letter-spacing:.02em;text-align:center;padding:10px 18px;border-radius:0 0 12px 12px;margin:0 auto;max-width:1160px}
+.pvw b{color:#D9B87C}
+.pvw a{color:#D9B87C;text-decoration:underline;text-underline-offset:3px}

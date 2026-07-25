@@ -133,6 +133,11 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 
 var role=detectRole(), cfg=ROLES[role];
 var member=null; try{member=JSON.parse(localStorage.getItem('m5_member')||'null');}catch(e){}
+/* Админ-предпросмотр: фаундер открыл кабинет ЧУЖОЙ роли (из /org → Workspace).
+   Показываем кабинет ровно так, как его увидит будущий сотрудник:
+   без имени фаундера и без его личных блоков, с баннером сверху. */
+var preview=false;
+try{ if(member&&member.role==='founder'&&ROLES[member.role]&&role!==member.role) preview=true; }catch(e){}
 
 var videoUrl=LINKS.video;
 /* Любая ошибка рендера без try/catch = молча пустая страница на телефоне.
@@ -146,7 +151,8 @@ document.getElementById('app').innerHTML=
   '<span class="signout" onclick="signout()">Sign out</span></div>'+
 '</div></header>'+
 '<div class="wrap">'+
-  '<div class="hero"><h1>'+((member&&typeof member.name==='string'&&member.name)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
+  (preview?'<div class="pvw">Admin preview — the <b>'+cfg.label+'</b> workspace exactly as a future hire will see it · <a href="/champion'+(member&&member.role?member.role:'')+'">Back to my workspace →</a></div>':'')+
+  '<div class="hero"><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
   '<div class="k">'+cfg.sub+'</div></div>'+
   '<div class="top">'+
     '<div class="agent">'+
@@ -408,6 +414,7 @@ var ROADMAP=[
 ];
 (function(){
   try{
+    if(preview)return; // в предпросмотре показываем кабинет глазами сотрудника — личные блоки Алекса скрыты
     var m=JSON.parse(localStorage.getItem('m5_member')||'null');
     if(!m||!m.email||!window.crypto||!crypto.subtle)return;
     crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(m.email).trim().toLowerCase())).then(function(buf){
