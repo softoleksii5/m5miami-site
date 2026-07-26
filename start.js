@@ -55,6 +55,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
+      {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
