@@ -279,6 +279,15 @@ function askAgent(q){
 }
 function signout(){ try{localStorage.removeItem('m5_member');localStorage.removeItem('m5_onb_who');}catch(e){}; location.href='/welcomehero'; }
 
+function smmShow(i){
+  var p=document.getElementById('smmPanel'); if(!p)return;
+  var d=SMMNET[i];
+  if(p.dataset.open===d.id){ p.innerHTML=''; p.dataset.open=''; return; }
+  p.dataset.open=d.id;
+  p.innerHTML='<div class="smpanel"><div class="smph"><span class="smoc" style="background:'+d.c+';width:26px;height:26px">'+d.ic+'</span><b>'+d.n+'</b><span class="stk-hint">'+d.st+'</span></div>'+d.mock+'</div>';
+  var os=document.querySelectorAll('.smo'); for(var k=0;k<os.length;k++)os[k].classList.toggle('on',k===i);
+}
+
 /* План E-2 · август→ноябрь. Только для фаундеров и директора (Алекс, Влад, Вадим).
    Обновляется после каждой консультации с адвокатом — дата в шапке.
    ✅/⬜ — статус пункта, меняется по факту. Детали финансов здесь не публикуем. */
@@ -417,8 +426,40 @@ var ALEXTODO=[
  ['soon','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
 ];
 
-/* Roadmap подключений — что и КОГДА включаем дальше (решение 24.07 после анкеты JobTread).
-   Триггер → сервис → зачем. Видно только Алексу, обновляется вместе с My Stack. */
+/* Соцсети M5 — визуальная схема системы (просьба Алекса 26.07).
+   Кружки кликабельны: внутри мокап «как будет выглядеть» + кто что делает. */
+var SMMNET=[
+ {id:'ig',n:'Instagram',c:'linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)',st:'core · главный',
+  ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff" stroke="none"/></svg>',
+  mock:'<div class="mkhead"><div class="mkava">M5</div><div><b>@m5miami</b><span>M5 Interior Design &amp; Build · Miami<br>Luxury renovation &amp; decorative plaster ✦ EN/ES<br>⤷ m5miami.com — instant estimate</span></div></div>'+
+   '<div class="mkhl"><i>Projects</i><i>Plaster</i><i>Before/After</i><i>Team</i><i>Reviews</i></div>'+
+   '<div class="mkgrid">'+
+   '<div style="background:linear-gradient(160deg,#D9B87C,#96703B)">До / После<small>каждый объект</small></div>'+
+   '<div style="background:linear-gradient(160deg,#20242E,#4a5065)">Влад · говорит<small>1–2 в неделю</small></div>'+
+   '<div style="background:linear-gradient(160deg,#8a7a5f,#5e5342)">Текстуры<small>штукатурка макро</small></div>'+
+   '<div style="background:linear-gradient(160deg,#3e4a5a,#20242E)">Процесс<small>Вадим с объекта</small></div>'+
+   '<div style="background:linear-gradient(160deg,#b3906a,#8a6a44)">Рилс-тур<small>по объекту</small></div>'+
+   '<div style="background:linear-gradient(160deg,#4d5b52,#2f3a34)">Советы<small>цены · чек-листы</small></div>'+
+   '</div><p class="mkp">Грид чередует 6 типов контента. Reels — двигатель охвата, сторис ежедневно. Цель: главный источник соцлидов.</p>'},
+ {id:'tt',n:'TikTok',c:'#161823',st:'core · охват',
+  ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M14 4v10.5a3.75 3.75 0 1 1-3-3.67"/><path d="M14 4c.5 2.4 2.1 4 4.5 4.3"/></svg>',
+  mock:'<div class="mkrow"><div class="mkvert"><b>Хук 0–2с</b>«Это НЕ обои…»<small>текстура-макро</small></div><div class="mkvert"><b>Хук 0–2с</b>«$180K ремонт за 60 сек»<small>таймлапс-тур</small></div><div class="mkvert"><b>Хук 0–2с</b>«Ошибка №1 в кондо Майами»<small>Влад · советы</small></div></div>'+
+   '<p class="mkp">Те же Reels, но с нативным монтажом под TikTok: жёсткий хук в первые 2 секунды, субтитры, 15–30с. Задача — дешёвый охват людей, которые нас не знают.</p>'},
+ {id:'yt',n:'YouTube',c:'#CC0000',st:'core · доверие',
+  ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="3.5"/><path d="m10.5 9.5 4.5 2.5-4.5 2.5z" fill="#fff" stroke="none"/></svg>',
+  mock:'<div class="mkyt"><div class="mkytb">M5 · Interior Design &amp; Build Miami</div><div class="mkytr"><i>Shorts</i><i>Shorts</i><i>Shorts</i><i>Shorts</i></div><div class="mkytv">▶ Full tour: Brickell 2BR — $180K turnkey renovation <small>8:24 · раз в месяц</small></div></div>'+
+   '<p class="mkp">Shorts — кросспост Reels. Длинные видео (обзор объекта, «как мы делаем штукатурку») — 1 в месяц, работают годами как SEO-актив и строят доверие до звонка.</p>'},
+ {id:'fb',n:'Facebook',c:'#1877F2',st:'техбаза · реклама',
+  ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M14 8.5h3V5.2h-3c-1.9 0-3.5 1.6-3.5 3.5V11H8v3h2.5v6h3.3v-6h2.7l.5-3h-3.2V8.9c0-.2.1-.4.4-.4Z" fill="#fff" stroke="none"/></svg>',
+  mock:'<p class="mkp" style="margin-top:6px">Страница-визитка: кавер с виллой, кнопка <b>Get a Quote → m5miami.com</b>, автокросспост из Instagram. Отдельного контента не делаем.</p><p class="mkp"><b>Главная роль — движок Meta-рекламы</b>: через неё крутятся кампании на штукатурку в IG и FB. Без страницы реклама невозможна.</p>'},
+ {id:'gb',n:'Google Business',c:'#188038',st:'локальные лиды',
+  ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.2-6.5-10a6.5 6.5 0 0 1 13 0c0 4.8-6.5 10-6.5 10Z"/><circle cx="12" cy="10.5" r="2.3"/></svg>',
+  mock:'<div class="mkgb"><b>M5 Interior Design &amp; Build</b><span>★★★★★ 5.0 (12) · Remodeler · Miami, FL</span><div class="mkgbb"><i>Call</i><i>Directions</i><i>Website</i><i>Quote</i></div></div>'+
+   '<p class="mkp">Карточка в Google Maps и поиске «decorative plaster miami». Фото работ + отзывы после каждого проекта (движок отзывов в roadmap). Бесплатные горячие локальные лиды. Телефон — только US (OpenPhone).</p>'},
+ {id:'hz',n:'Houzz',c:'#4DBC15',st:'портфолио · ниша',
+  ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M4 21V10.5L12 4l8 6.5V21h-6v-6h-4v6H4Z"/></svg>',
+  mock:'<p class="mkp" style="margin-top:6px">Профиль-портфолио: каждый сданный проект — фотокейс, отзывы клиентов. Тут владельцы домов Майами ищут, с кем строить — аудитория с деньгами и намерением.</p><p class="mkp">Наполняет Алекс. Платную рекламу Houzz (~$499/мес) не берём, пока не нужен доп. поток.</p>'}
+];
 var ROADMAP=[
  ['Сентябрь · LLC + банковский счёт открыты','QuickBooks Online + bookkeeper','бухгалтерия; сразу включаем нативный синк JobTread↔QBO — счета и платежи улетают сами'],
  ['Онбординг-звонок JobTread (ближайшие недели)','Stripe в JobTread','депозиты и milestone-платежи клиентов картой/ACH прямо из сметы'],
@@ -465,11 +506,21 @@ var ROADMAP=[
         td+='<details class="pl'+cls+'"><summary>'+ic+' '+ALEXTODO[t][1]+(cls===' tdnext'?' <span class="tdgo">следующий шаг</span>':'')+'</summary><div class="lsn" style="padding:4px 10px 8px 34px">'+ALEXTODO[t][2]+'</div></details>';
       }
       td+='</div></details>';
+      /* Соцсети — схема системы */
+      var sm='<details class="stackbox"><summary><span>📱 Соцсети · как устроена система</span><span class="stk-hint">'+SMMNET.length+' каналов · нажми на кружок</span></summary><div class="stack">';
+      sm+='<div class="smflow"><span>🎥 Команда снимает<small>Вадим: 4 кадра + видео · Влад: лицо</small></span><i>→</i><span>☁️ Google Drive<small>01 Content — всё сырьё</small></span><i>→</i><span>🤖 Клод<small>календарь · сценарии · тексты</small></span><i>→</i><span>📲 Публикация<small>планировщик Meta · 15 мин/день</small></span><i>→</i><span>💰 Лиды<small>сайт → JobTread · источник трекается</small></span></div>';
+      sm+='<div class="smorb">';
+      for(var s2=0;s2<SMMNET.length;s2++){
+        sm+='<div class="smo" onclick="smmShow('+s2+')"><span class="smoc" style="background:'+SMMNET[s2].c+'">'+SMMNET[s2].ic+'</span><b>'+SMMNET[s2].n+'</b><small>'+SMMNET[s2].st+'</small></div>';
+      }
+      sm+='</div><div id="smmPanel"></div>';
+      sm+='<div class="stk-g" style="margin-top:14px">Кто что делает</div><div class="lsn"><b>Клод</b> — контент-календарь, сценарии, капшены EN/ES, аналитика «контент → контракты». <b>Вадим + команда</b> — подсъём с объектов. <b>Влад</b> — лицо бренда, 1–2 ролика в неделю. <b>Ты</b> — 15 минут в неделю: утвердить календарь. <b>SMM-менеджер (с сентября)</b> — монтаж, постинг, сторис, комьюнити; её шкала уже в кабинете SMM.</div>';
+      sm+='</div></details>';
       var rm='<details class="stackbox"'+(opened2?' open':'')+'><summary><span>🔌 Что подключаем дальше · план</span><span class="stk-hint">'+ROADMAP.length+' шагов · нажми</span></summary><div class="stack">';
       for(var r=0;r<ROADMAP.length;r++){
         rm+='<div class="stk-g">'+ROADMAP[r][0]+'</div><div class="lsn"><b>'+ROADMAP[r][1]+'</b> — '+ROADMAP[r][2]+'</div>';
       }
-      el.innerHTML=td+html+'</div></details>'+rm+'</div></details>';
+      el.innerHTML=td+sm+html+'</div></details>'+rm+'</div></details>';
       var boxes=el.querySelectorAll('details.stackbox');
       if(boxes[0])boxes[0].addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',boxes[0].open?'1':'0');}catch(e){} });
       if(boxes[1])boxes[1].addEventListener('toggle',function(){ try{localStorage.setItem('m5_roadmap_open',boxes[1].open?'1':'0');}catch(e){} });
