@@ -400,6 +400,21 @@ var STACK=[
  ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/']
 ];
 
+/* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
+   в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
+var ALEXTODO_UPD='26.07';
+var ALEXTODO=[
+ ['⬜','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая.'],
+ ['⬜','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
+ ['⬜','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
+ ['⬜','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
+ ['⬜','Сказать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
+ ['⬜','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.'],
+ ['⬜','Удалить 5 тест-карточек в Telegram','4 в топике «Пульс» + 1 в топике «Лиды» (карточки TEST/Проверка).'],
+ ['⬜','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.'],
+ ['🔜','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
+];
+
 /* Roadmap подключений — что и КОГДА включаем дальше (решение 24.07 после анкеты JobTread).
    Триггер → сервис → зачем. Видно только Алексу, обновляется вместе с My Stack. */
 var ROADMAP=[
@@ -434,11 +449,16 @@ var ROADMAP=[
           html+='<a class="stk" href="'+STACK[j][3]+'" target="_blank" rel="noopener"><b>'+STACK[j][1]+'</b><span>'+STACK[j][2]+'</span></a>';
         }
       }
+      var td='<details class="stackbox" open><summary><span>📌 Мои задачи · ведёт Клод</span><span class="stk-hint">обновлено '+ALEXTODO_UPD+' · нажми</span></summary><div class="stack">';
+      for(var t=0;t<ALEXTODO.length;t++){
+        td+='<details class="pl"><summary>'+ALEXTODO[t][0]+' '+ALEXTODO[t][1]+'</summary><div class="lsn" style="padding:4px 10px 8px 26px">'+ALEXTODO[t][2]+'</div></details>';
+      }
+      td+='</div></details>';
       var rm='<details class="stackbox"'+(opened2?' open':'')+'><summary><span>🔌 Что подключаем дальше · план</span><span class="stk-hint">'+ROADMAP.length+' шагов · нажми</span></summary><div class="stack">';
       for(var r=0;r<ROADMAP.length;r++){
         rm+='<div class="stk-g">'+ROADMAP[r][0]+'</div><div class="lsn"><b>'+ROADMAP[r][1]+'</b> — '+ROADMAP[r][2]+'</div>';
       }
-      el.innerHTML=html+'</div></details>'+rm+'</div></details>';
+      el.innerHTML=td+html+'</div></details>'+rm+'</div></details>';
       var boxes=el.querySelectorAll('details.stackbox');
       if(boxes[0])boxes[0].addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',boxes[0].open?'1':'0');}catch(e){} });
       if(boxes[1])boxes[1].addEventListener('toggle',function(){ try{localStorage.setItem('m5_roadmap_open',boxes[1].open?'1':'0');}catch(e){} });
