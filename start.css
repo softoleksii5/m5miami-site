@@ -114,6 +114,14 @@ details.pl>summary{list-style:none;cursor:pointer;font-size:13.5px;color:#20242E
 details.pl>summary::-webkit-details-marker{display:none}
 details.pl>summary:hover{background:#FBF7EF}
 details.pl[open]>summary{font-weight:600}
+.tdbar{height:6px;background:#EFE8D9;border-radius:3px;margin:12px 0 4px;overflow:hidden}
+.tdbar i{display:block;height:100%;background:linear-gradient(90deg,#B0894F,#96703B);border-radius:3px;transition:width .5s}
+.tdk{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;flex:none;border:1.5px solid #D8CDB8;border-radius:6px;font-size:11px;font-weight:600;color:#96703B;background:#fff;vertical-align:-4px;margin-right:2px}
+.tdk.done{background:#96703B;border-color:#96703B;color:#fff}
+.tdk.soon{color:#AEA898;border-style:dashed}
+details.tddone>summary{color:#AEA898;text-decoration:line-through}
+details.tdnext>summary{background:#FBF7EF;border:1px solid #EBE3D4;border-radius:9px}
+.tdgo{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#96703B;border-radius:9px;padding:2px 8px;margin-left:6px;vertical-align:1px}
 .pvw{background:#20242E;color:#EFE8D9;font-size:12.5px;letter-spacing:.02em;text-align:center;padding:10px 18px;border-radius:0 0 12px 12px;margin:0 auto;max-width:1160px}
 .pvw b{color:#D9B87C}
 .pvw a{color:#D9B87C;text-decoration:underline;text-underline-offset:3px}

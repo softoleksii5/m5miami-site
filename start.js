@@ -403,16 +403,18 @@ var STACK=[
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
 var ALEXTODO_UPD='26.07';
+/* Статусы: todo | done | soon. Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
+   Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
- ['⬜','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая.'],
- ['⬜','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
- ['⬜','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
- ['⬜','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
- ['⬜','Сказать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
- ['⬜','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.'],
- ['⬜','Удалить 5 тест-карточек в Telegram','4 в топике «Пульс» + 1 в топике «Лиды» (карточки TEST/Проверка).'],
- ['⬜','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.'],
- ['🔜','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
+ ['todo','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая. openphone.com'],
+ ['todo','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
+ ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
+ ['todo','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
+ ['todo','Написать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
+ ['todo','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.'],
+ ['todo','Удалить 5 тест-карточек в Telegram','4 в топике «Пульс» + 1 в топике «Лиды» (карточки TEST/Проверка).'],
+ ['todo','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.'],
+ ['soon','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
 ];
 
 /* Roadmap подключений — что и КОГДА включаем дальше (решение 24.07 после анкеты JobTread).
@@ -449,9 +451,18 @@ var ROADMAP=[
           html+='<a class="stk" href="'+STACK[j][3]+'" target="_blank" rel="noopener"><b>'+STACK[j][1]+'</b><span>'+STACK[j][2]+'</span></a>';
         }
       }
-      var td='<details class="stackbox" open><summary><span>📌 Мои задачи · ведёт Клод</span><span class="stk-hint">обновлено '+ALEXTODO_UPD+' · нажми</span></summary><div class="stack">';
+      var tdDone=0,tdAll=0,tdNextFound=false;
+      for(var q=0;q<ALEXTODO.length;q++){ if(ALEXTODO[q][0]!=='soon'){tdAll++; if(ALEXTODO[q][0]==='done')tdDone++;} }
+      var td='<details class="stackbox" open><summary><span>📌 Мои задачи · ведёт Клод</span><span class="stk-hint">'+tdDone+' из '+tdAll+' · обновлено '+ALEXTODO_UPD+'</span></summary><div class="stack">';
+      td+='<div class="tdbar"><i style="width:'+(tdAll?Math.round(tdDone/tdAll*100):0)+'%"></i></div>';
+      td+='<div class="lsn" style="margin:4px 0 8px;color:#8A8272">Напиши Клоду в чат кодовое слово <b style="color:#96703B">«ПОГНАЛИ»</b> — он вспомнит этот список и поведёт тебя по шагам, по одному.</div>';
+      var num=0;
       for(var t=0;t<ALEXTODO.length;t++){
-        td+='<details class="pl"><summary>'+ALEXTODO[t][0]+' '+ALEXTODO[t][1]+'</summary><div class="lsn" style="padding:4px 10px 8px 26px">'+ALEXTODO[t][2]+'</div></details>';
+        var st=ALEXTODO[t][0], ic, cls='';
+        if(st==='done'){ ic='<span class="tdk done">✓</span>'; cls=' tddone'; }
+        else if(st==='soon'){ ic='<span class="tdk soon">…</span>'; }
+        else { num++; ic='<span class="tdk">'+num+'</span>'; if(!tdNextFound){ cls=' tdnext'; tdNextFound=true; } }
+        td+='<details class="pl'+cls+'"><summary>'+ic+' '+ALEXTODO[t][1]+(cls===' tdnext'?' <span class="tdgo">следующий шаг</span>':'')+'</summary><div class="lsn" style="padding:4px 10px 8px 34px">'+ALEXTODO[t][2]+'</div></details>';
       }
       td+='</div></details>';
       var rm='<details class="stackbox"'+(opened2?' open':'')+'><summary><span>🔌 Что подключаем дальше · план</span><span class="stk-hint">'+ROADMAP.length+' шагов · нажми</span></summary><div class="stack">';
