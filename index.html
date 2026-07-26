@@ -1537,8 +1537,8 @@ function openXi(){if(xiSeen())return;if(document.getElementById('qzModal').class
   document.getElementById('xiOverlay').classList.add('on');document.getElementById('xiModal').classList.add('on');xiMark();
   if(window.m5track)m5track('exit_intent_shown');}
 function closeXi(){document.getElementById('xiOverlay').classList.remove('on');document.getElementById('xiModal').classList.remove('on');}
-// единственный триггер — ровно 15-я секунда, не раньше (реш. Алекса 21.07: exit-intent и скролл-триггер убраны)
-setTimeout(function(){ openXi(); }, 15000);
+// единственный триггер — 18-я секунда, не раньше (реш. Алекса 26.07, было 15с; exit-intent и скролл-триггер убраны 21.07)
+setTimeout(function(){ openXi(); }, 18000);
 var XI_PDF='/guide/m5-miami-renovation-cost-guide-2026.pdf';
 var XIL={en:{ok:'Your guide is downloading',dl:"We've also emailed a copy so it's always handy.",lk:'Download the PDF',auto:'Here is your 2026 Miami Renovation Cost Guide: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf . Real $/sq ft ranges, the condo rules nobody warns you about, and a planning checklist. Want these numbers applied to your own place? Book a free on-site consultation at https://m5miami.com/#contact or reply to this email with your building name. WhatsApp: https://wa.me/971585814215 . Alex, M5 Interior Design & Build, Miami'},
  es:{ok:'Su guía se está descargando',dl:'También le enviamos una copia por correo.',lk:'Descargar el PDF',auto:'Aquí está su Guía de Costos de Reforma en Miami 2026: https://m5miami.com/guide/m5-miami-renovation-cost-guide-2026.pdf . Rangos reales de $/sq ft, las reglas de los condos y un checklist. ¿Quiere aplicar estos números a su propio espacio? Reserve una consulta gratuita en https://m5miami.com/#contact o responda a este correo. WhatsApp: https://wa.me/971585814215 . Alex, M5 Interior Design & Build, Miami'},
