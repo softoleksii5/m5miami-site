@@ -362,7 +362,8 @@ var EPLAN_HINTS=[
 })();
 
 /* Урок «JobTread — как работать». Виден ролям, живущим в производстве:
-   director (Вадим — главный юзер), founder, pm. Свёрнут по умолчанию. */
+   director (Вадим — главный юзер), pm, sales. У founder убран (26.07):
+   Алексу он не нужен ежедневно, только занимал фокус. */
 var LESSON=[
  ['Что это','JobTread — наша главная рабочая система: все клиенты, сметы, стройка и счета живут здесь. Открывается плиткой «JobTread» выше или на app.jobtread.com — вход по рабочей почте @m5miami.com (приглашение уже в твоём ящике).'],
  ['Лиды приходят сами','Каждая заявка с сайта m5miami.com автоматически становится клиентом в Customers — руками ничего переносить не надо. Открой клиента «DEMO · Maria Gonzalez» — это учебный пример, на нём виден весь путь лида.'],
@@ -375,7 +376,7 @@ var LESSON=[
 ];
 (function(){
   try{
-    if(role!=='director'&&role!=='founder'&&role!=='pm'&&role!=='sales')return;
+    if(role!=='director'&&role!=='pm'&&role!=='sales')return;
     var el=document.getElementById('lessonSec'); if(!el)return;
     var opened=false; try{opened=localStorage.getItem('m5_lesson_open')==='1';}catch(e){}
     var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>🎓 JobTread — как работать</span><span class="stk-hint">урок · '+LESSON.length+' шагов · нажми</span></summary><div class="stack">';
@@ -413,7 +414,8 @@ var STACK=[
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
 var ALEXTODO_UPD='26.07';
-/* Статусы: todo | done | soon. Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
+/* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
+   секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
  ['todo','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая. openphone.com'],
@@ -421,9 +423,9 @@ var ALEXTODO=[
  ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
  ['todo','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
  ['todo','Написать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
- ['todo','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.'],
- ['todo','Удалить 5 тест-карточек в Telegram','4 в топике «Пульс» + 1 в топике «Лиды» (карточки TEST/Проверка).'],
- ['todo','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.'],
+ ['todo','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.','m'],
+ ['todo','Удалить 5 тест-карточек в Telegram','4 в топике «Пульс» + 1 в топике «Лиды» (карточки TEST/Проверка).','m'],
+ ['todo','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.','m'],
  ['soon','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
 ];
 
@@ -485,8 +487,8 @@ var ROADMAP=[
       for(var i=0;i<STACK.length;i++){ if(!seen[STACK[i][0]]){seen[STACK[i][0]]=1;groups.push(STACK[i][0]);} }
       /* Свёрнут по умолчанию: клик по шапке разворачивает. Состояние помнится
          в localStorage, чтобы не сворачивалось при каждом заходе. */
-      var opened=false, opened2=false; try{opened=localStorage.getItem('m5_stack_open')==='1'; opened2=localStorage.getItem('m5_roadmap_open')==='1';}catch(e){}
-      var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>My stack · только для тебя</span><span class="stk-hint">'+STACK.length+' сервисов · нажми</span></summary><div class="stack">';
+      var opened=false; try{opened=localStorage.getItem('m5_stack_open')==='1';}catch(e){}
+      var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>My stack · только для тебя</span><span class="stk-hint">'+STACK.length+' сервисов + план · нажми</span></summary><div class="stack">';
       for(var g=0;g<groups.length;g++){
         html+='<div class="stk-g">'+groups[g]+'</div>';
         for(var j=0;j<STACK.length;j++){ if(STACK[j][0]!==groups[g])continue;
@@ -498,13 +500,28 @@ var ROADMAP=[
       var td='<details class="stackbox" open><summary><span>📌 Мои задачи · ведёт Клод</span><span class="stk-hint">'+tdDone+' из '+tdAll+' · обновлено '+ALEXTODO_UPD+'</span></summary><div class="stack">';
       td+='<div class="tdbar"><i style="width:'+(tdAll?Math.round(tdDone/tdAll*100):0)+'%"></i></div>';
       td+='<div class="lsn" style="margin:4px 0 8px;color:#8A8272">Напиши Клоду в чат кодовое слово <b style="color:#96703B">«ПОГНАЛИ»</b> — он вспомнит этот список и поведёт тебя по шагам, по одному.</div>';
+      var tdRow=function(t,ic,cls){ return '<details class="pl'+cls+'"><summary>'+ic+' '+ALEXTODO[t][1]+(cls===' tdnext'?' <span class="tdgo">следующий шаг</span>':'')+'</summary><div class="lsn" style="padding:4px 10px 8px 34px">'+ALEXTODO[t][2]+'</div></details>'; };
+      /* Секция 1: цепочка цели недели (всё, что не 'm' и не soon) */
+      td+='<div class="stk-g">🎯 Цель недели · запустить соцсети</div>';
       var num=0;
       for(var t=0;t<ALEXTODO.length;t++){
-        var st=ALEXTODO[t][0], ic, cls='';
-        if(st==='done'){ ic='<span class="tdk done">✓</span>'; cls=' tddone'; }
-        else if(st==='soon'){ ic='<span class="tdk soon">…</span>'; }
+        if(ALEXTODO[t][0]==='soon'||ALEXTODO[t][3]==='m')continue;
+        var ic, cls='';
+        if(ALEXTODO[t][0]==='done'){ num++; ic='<span class="tdk done">✓</span>'; cls=' tddone'; }
         else { num++; ic='<span class="tdk">'+num+'</span>'; if(!tdNextFound){ cls=' tdnext'; tdNextFound=true; } }
-        td+='<details class="pl'+cls+'"><summary>'+ic+' '+ALEXTODO[t][1]+(cls===' tdnext'?' <span class="tdgo">следующий шаг</span>':'')+'</summary><div class="lsn" style="padding:4px 10px 8px 34px">'+ALEXTODO[t][2]+'</div></details>';
+        td+=tdRow(t,ic,cls);
+      }
+      /* Секция 2: мелочи на 5 минут ('m') */
+      td+='<div class="stk-g" style="margin-top:12px">⚡ Мелочи на 5 минут</div>';
+      for(var t2=0;t2<ALEXTODO.length;t2++){
+        if(ALEXTODO[t2][3]!=='m')continue;
+        if(ALEXTODO[t2][0]==='done'){ td+=tdRow(t2,'<span class="tdk done">✓</span>',' tddone'); }
+        else { td+=tdRow(t2,'<span class="tdk">•</span>',''); }
+      }
+      /* Секция 3: позже (soon) */
+      for(var t3=0;t3<ALEXTODO.length;t3++){
+        if(ALEXTODO[t3][0]!=='soon')continue;
+        td+=tdRow(t3,'<span class="tdk soon">…</span>','');
       }
       td+='</div></details>';
       /* Соцсети — схема системы */
@@ -517,14 +534,18 @@ var ROADMAP=[
       sm+='</div><div id="smmPanel"></div>';
       sm+='<div class="stk-g" style="margin-top:14px">Кто что делает</div><div class="lsn"><b>Клод</b> — контент-календарь, сценарии, капшены EN/ES, аналитика «контент → контракты». <b>Вадим + команда</b> — подсъём с объектов. <b>Влад</b> — лицо бренда, 1–2 ролика в неделю. <b>Ты</b> — 15 минут в неделю: утвердить календарь. <b>SMM-менеджер (с сентября)</b> — монтаж, постинг, сторис, комьюнити; её шкала уже в кабинете SMM.</div>';
       sm+='</div></details>';
-      var rm='<details class="stackbox"'+(opened2?' open':'')+'><summary><span>🔌 Что подключаем дальше · план</span><span class="stk-hint">'+ROADMAP.length+' шагов · нажми</span></summary><div class="stack">';
+      /* Roadmap подключений — секцией внутри My Stack (отдельный блок убран 26.07:
+         дублировал задачи и размывал фокус; этим планом пользуется Клод по триггерам) */
+      var rmIn='<div class="stk-g" style="margin-top:14px">🔌 Что дальше · Клод подключает по триггерам</div>';
       for(var r=0;r<ROADMAP.length;r++){
-        rm+='<div class="stk-g">'+ROADMAP[r][0]+'</div><div class="lsn"><b>'+ROADMAP[r][1]+'</b> — '+ROADMAP[r][2]+'</div>';
+        rmIn+='<div class="lsn"><b>'+ROADMAP[r][1]+'</b> — '+ROADMAP[r][2]+'<br><span style="color:#8A8272">когда: '+ROADMAP[r][0]+'</span></div>';
       }
-      el.innerHTML=td+sm+html+'</div></details>'+rm+'</div></details>';
+      el.innerHTML=td+sm+html+rmIn+'</div></details>';
       var boxes=el.querySelectorAll('details.stackbox');
-      if(boxes[0])boxes[0].addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',boxes[0].open?'1':'0');}catch(e){} });
-      if(boxes[1])boxes[1].addEventListener('toggle',function(){ try{localStorage.setItem('m5_roadmap_open',boxes[1].open?'1':'0');}catch(e){} });
+      /* Порядок фокуса: Задачи и Соцсети — выше Плана E-2; My Stack остаётся внизу */
+      var ep=document.getElementById('planSec');
+      if(ep&&ep.parentNode&&boxes.length>2){ ep.parentNode.insertBefore(boxes[0],ep); ep.parentNode.insertBefore(boxes[1],ep); }
+      if(boxes[2])boxes[2].addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',boxes[2].open?'1':'0');}catch(e){} });
     });
   }catch(e){}
 })();
