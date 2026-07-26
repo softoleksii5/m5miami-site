@@ -394,7 +394,7 @@ var STACK=[
  ['AI & Dev','Claude Code','движок всего: сайт, Jin, автоматика (терминал + VS Code)','https://claude.ai/code'],
  ['AI & Dev','Claude Console','API-ключ Jin, лимиты трат','https://platform.claude.com/'],
  ['AI & Dev','Higgsfield AI','видео и фото-фабрика (план PLUS, MCP подключён)','https://higgsfield.ai/'],
- ['AI & Dev','Облачные рутины','Health Check · Daily Brief · Пульс · Пн-аудит безопасности','https://claude.ai/code/routines'],
+ ['AI & Dev','Облачные рутины','ежедневно: Health+Security · пн: мега-аудит + Growth Lab · Пульс · Brief','https://claude.ai/code/routines'],
  ['Операционка','JobTread','операционное ядро: лиды → сметы → производство → счета','https://app.jobtread.com/'],
  ['Операционка','Monday CRM','⚠️ отключаем — кабинеты уже без него; остался только API-дубль лидов как страховка','https://m5miami.monday.com/'],
  ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
