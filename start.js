@@ -404,7 +404,7 @@ var STACK=[
  ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
  ['Сайт & аналитика','Houzz','маркетинг-канал: профиль, портфолио, отзывы; реклама — позже','https://pro.houzz.com/'],
  ['Сайт & аналитика','GitHub','код сайта (m5miami-site) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
- ['Сайт & аналитика','Porkbun','домен m5miami.com, DNS, автопродление','https://porkbun.com/'],
+ ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
