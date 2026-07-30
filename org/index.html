@@ -48,6 +48,7 @@
   .who{display:flex;align-items:center;gap:15px}
   .ava{width:54px;height:54px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
     font-family:var(--serif);font-weight:800;font-size:22px;color:#fff;background:linear-gradient(140deg,#C9A25E,#96703B)}
+  .ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
   .ava.ink{background:linear-gradient(140deg,#3A4152,#20242E)}
   .ava.coral{background:linear-gradient(140deg,#FF8A65,#F4673B)}
   .who b{font-family:var(--serif);font-weight:800;font-size:20px;letter-spacing:-.01em;display:block}
@@ -242,17 +243,17 @@
    файл в Drive доступен лишь фаундерам и директору, страница ничего не раскрывает.
    Источник правды по датам/договорам: M5/4 Рабочие документы/Команда_реестр.csv */
 var TEAM=[
- {slug:'alex',name:'Alex',role:'Co-Founder · Strategy & Systems',ava:'A',avaClass:'ink',bc:'#20242E',
+ {slug:'alex',name:'Alex',role:'Co-Founder · Strategy & Systems',ava:'A',avaClass:'ink',img:'/img/ava_alex.jpg',bc:'#20242E',
   duty:['Vision, strategy & finance','Marketing engine & growth','AI layer — processes & automation'],
   value:'Builds the machine: strategy, money, marketing and the AI system (Jin) that runs leads, tasks and docs. If the company works like clockwork — that is his job.',
   ask:['Strategy & priorities','Tools, accounts & access','Budgets & payments','Site, marketing & AI'],
   email:'alex@m5miami.com',tg:'softoleksii',dob:'25 August',start:'July 2026',end:'',contract:''},
- {slug:'vlad',name:'Vlad',role:'Co-Founder · Brand & Strategy',ava:'V',avaClass:'coral',bc:'#F4673B',
+ {slug:'vlad',name:'Vlad',role:'Co-Founder · Brand & Strategy',ava:'V',avaClass:'coral',img:'/img/ava_vlad.jpg',bc:'#F4673B',
   duty:['Sales & client relationships','Content, media & brand face','Investment & capital raising'],
   value:'The face and the voice of M5: clients, partners, content. Closes deals, raises capital and sets the design taste level the brand is known for.',
   ask:['Clients & deals','Partners (realtors, brokers)','Content & socials','Investment questions'],
   email:'vlad@m5miami.com',tg:'DidCo5',dob:'5 August',start:'July 2026',end:'',contract:''},
- {slug:'vadim',name:'Vadym Shtempel',role:'Director · Licensed Qualifier',ava:'V',avaClass:'',bc:'#B0894F',
+ {slug:'vadim',name:'Vadym Shtempel',role:'Director · Licensed Qualifier',ava:'V',avaClass:'',img:'/img/ava_vadim.jpg',bc:'#B0894F',
   duty:['Operations & production','Permits & compliance — Miami-Dade','Crews, subcontractors & quality','Production strategy & scaling'],
   value:'Runs the build: crews, sites, permits, quality. The licensed qualifier who makes every project legal and every handover clean.',
   ask:['Production & schedules','Permits & inspections','Subcontractors & crews','Hiring & team questions'],
@@ -277,7 +278,7 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
 function cardHtml(p){
   return '<div class="card person'+(p.jin?' jin':(p.fn?' fn':(p.future?' future':'')))+'" style="--bc:'+p.bc+'" onclick="openP(\''+p.slug+'\')">'+
     (p.jin?'<span class="jinb">Not a person</span>':(p.fn?'<span class="fnb">Function</span>':(p.future?'<span class="soon">Future role</span>':'')))+
-    '<div class="who"><div class="ava '+p.avaClass+'">'+p.ava+'</div>'+
+    '<div class="who"><div class="ava '+p.avaClass+'">'+(p.img?'<img src="'+p.img+'" alt="'+esc(p.name)+'">':p.ava)+'</div>'+
     '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
     '<ul class="duty">'+p.duty.map(function(d){return '<li>'+esc(d)+'</li>';}).join('')+'</ul>'+
     '<span class="more">'+(p.jin?'What Jin does →':(p.future?'What it takes →':'Profile →'))+'</span></div>';
@@ -334,7 +335,7 @@ function openP(slug){
     : '<span class="pm-doc na"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg> Contract — not uploaded yet</span>';
   document.getElementById('pmBox').innerHTML=
     '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
-    '<div class="who"><div class="ava '+p.avaClass+'" style="width:62px;height:62px;font-size:25px">'+p.ava+'</div>'+
+    '<div class="who"><div class="ava '+p.avaClass+'" style="width:62px;height:62px;font-size:25px">'+(p.img?'<img src="'+p.img+'" alt="'+esc(p.name)+'">':p.ava)+'</div>'+
     '<div><b>'+esc(p.name)+'</b><span>'+esc(p.role)+'</span></div></div>'+
     '<div class="pm-sec">What they do &amp; why it matters</div><div class="pm-val">'+esc(p.value)+'</div>'+
     '<div class="pm-sec">Come to them about</div><ul class="pm-ask">'+p.ask.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>'+

@@ -141,6 +141,17 @@ var preview=false;
 try{ if(member&&member.role==='founder'&&ROLES[member.role]&&role!==member.role) preview=true; }catch(e){}
 
 var videoUrl=LINKS.video;
+/* Персональные аватарки (Pixar-стиль, серия для всей команды).
+   Матчим по префиксу рабочей почты, запасной вариант — по имени. */
+var AVATARS={alex:'/img/ava_alex.jpg',vlad:'/img/ava_vlad.jpg',vadim:'/img/ava_vadim.jpg',vadym:'/img/ava_vadim.jpg'};
+var avaUrl='';
+try{
+  if(member&&!preview){
+    var akey=String(member.email||'').split('@')[0].toLowerCase();
+    if(!AVATARS[akey]) akey=String(member.name||'').trim().split(' ')[0].toLowerCase();
+    avaUrl=AVATARS[akey]||'';
+  }
+}catch(e){}
 /* Любая ошибка рендера без try/catch = молча пустая страница на телефоне.
    Ловим и показываем честный fallback со ссылкой на вход. */
 try {
@@ -153,8 +164,9 @@ document.getElementById('app').innerHTML=
 '</div></header>'+
 '<div class="wrap">'+
   (preview?'<div class="pvw">Admin preview — the <b>'+cfg.label+'</b> workspace exactly as a future hire will see it · <a href="/champion'+(member&&member.role?member.role:'')+'">Back to my workspace →</a></div>':'')+
-  '<div class="hero"><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
-  '<div class="k">'+cfg.sub+'</div></div>'+
+  '<div class="hero">'+(avaUrl?'<img class="hero-ava" src="'+avaUrl+'" alt="">':'')+
+  '<div><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
+  '<div class="k">'+cfg.sub+'</div></div></div>'+
   '<div class="top">'+
     '<div class="agent">'+
       '<div class="agent-h"><div class="agent-ic">✦</div>'+
