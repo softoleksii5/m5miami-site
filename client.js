@@ -102,6 +102,7 @@ var DEMO=(slug==='brickell-demo');
 function hub(p){ if(DEMO) return; if(window.m5hook) m5hook(p); }
 
 var TSTYLE='<style>'+
+'html,body{overflow-x:hidden}'+
 'body{background:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
 '@media(max-width:680px){body{background-size:220% auto}}'+
 '.chero{margin:26px 0 18px;max-width:640px}'+
