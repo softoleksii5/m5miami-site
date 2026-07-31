@@ -206,6 +206,15 @@ var TSTYLE='<style>'+
 '.svm-step i{font-style:normal;min-width:24px;height:24px;border-radius:50%;background:#F5EFE6;color:#96703B;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;flex:none;margin-top:1px}'+
 '.svm-incl{background:#FBF7EF;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#6E6656}'+
 '.svm-a{display:flex;gap:10px;margin-top:16px}'+
+'.band{height:190px;border-radius:20px;margin:2px 0 16px;background-position:center;background-size:cover;box-shadow:0 4px 18px rgba(60,48,30,.10)}'+
+'@media(max-width:680px){.band{height:120px}}'+
+'.bagrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}'+
+'@media(max-width:680px){.bagrid{grid-template-columns:1fr}}'+
+'.bapair{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line)}'+
+'.bapair img{width:100%;height:150px;object-fit:cover;display:block}'+
+'.bapair em{position:absolute;top:10px;left:10px;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:10px;background:rgba(25,21,17,.72);color:#E3C795}'+
+'.bapair.after em{background:#F0F8F2;color:#3E8E5A}'+
+'.bacap{font-size:12.5px;color:#8A8272;margin:6px 2px 12px}'+
 '.gate{max-width:430px;margin:110px auto;background:#fff;border-radius:18px;padding:34px 30px;text-align:center;border:1px solid var(--line)}'+
 '</style>';
 
@@ -274,10 +283,19 @@ if(!C){
     '<div class="cph">'+ph+'</div>'+
     acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated live',
       tasks+'<div class="jinn"><span style="font-size:18px">✦</span><span><b>Jin, our AI, watches this project 24/7</b> — updates land here the moment the team logs them.</span></div>', true)+
+    acc('ba','📸','Before & after','Where we started — and where it’s going',
+      '<div class="bacap">Our content team shoots every room before works begin — so you can watch the transformation.</div>'+
+      '<div class="bagrid">'+
+      '<div><div class="bapair"><em>Before</em><img src="/img/ba_reno_before.jpg" alt="" loading="lazy"></div><div class="bacap">Living room — day one</div></div>'+
+      '<div><div class="bapair after"><em>After</em><img src="/img/ba_reno_after.jpg" alt="" loading="lazy"></div><div class="bacap">Living room — result (example)</div></div>'+
+      '<div><div class="bapair"><em>Before</em><img src="/img/ba_plaster_before.jpg" alt="" loading="lazy"></div><div class="bacap">Accent wall — before plaster</div></div>'+
+      '<div><div class="bapair after"><em>After</em><img src="/img/ba_plaster_after.jpg" alt="" loading="lazy"></div><div class="bacap">Accent wall — art-concrete (example)</div></div>'+
+      '</div>', false)+
     acc('mats','🧱','Materials & selections', needRev? needRev+' waiting for your review':'All approved',
       '<div class="mats">'+mats+'</div>', needRev>0)+
     acc('docs','📄','Documents', docsN+' files · reports, invoices, design',
       '<div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div>', false)+
+    '<div class="band" style="background-image:linear-gradient(180deg,rgba(250,246,238,.18),rgba(250,246,238,.05) 40%,rgba(250,246,238,.22)),url(/img/band_kitchen.jpg)"></div>'+
     acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
       '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">Tap any card for details. One team already on site = better price, zero coordination pain.</div>'+
       '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">Request sent! '+esc(C.pm)+' will text you today with details.</div>', true)+
@@ -295,6 +313,7 @@ if(!C){
       '<div class="refbox"><div style="font-size:13px;color:#6E6656">You get <b>$250 in credits</b>, your friend gets <b>$250 off</b> their first invoice. Share your personal link:</div>'+
       '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(slug)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
       '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false)+
+    '<div class="band" style="background-image:linear-gradient(180deg,rgba(250,246,238,.14),rgba(250,246,238,.04) 45%,rgba(250,246,238,.2)),url(/img/band_plaster.jpg)"></div>'+
     acc('fb','💬','Feedback & reviews','30 seconds — it goes straight to the founders',
       '<div style="font-size:13px;color:#6E6656;margin:2px 0 4px">How was our work this week?</div>'+
       '<div class="stars" id="stars">'+[1,2,3,4,5].map(function(n){return '<span onclick="starPick('+n+')">★</span>';}).join('')+'</div>'+
@@ -304,8 +323,8 @@ if(!C){
       '<button class="cbtn" onclick="sendFb()">Send to the founders</button>'+
       '<div class="okmsg" id="fbOk">Thank you! Your feedback just landed on the founders’ desk. We read every word.</div>'+
       gRev, false)+
-    acc('talk','📞','Talk to us directly','Alex (co-founder) · '+esc(C.pm)+' (your PM)',
-      '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Co-founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+    acc('talk','📞','Talk to us directly','Vlad (co-founder) · '+esc(C.pm)+' (your PM)',
+      '<div class="fdrs"><img src="/img/ava_vlad.jpg" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
       '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
   '<footer>M5 Interior Design &amp; Build · Miami · Powered by Jin, our AI</footer>'+
