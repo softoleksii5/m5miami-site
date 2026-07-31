@@ -194,10 +194,10 @@ if(!C){
           '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(slug)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
           '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div>'+
         '</div>'+
-        '<div class="cbox"><h3>Talk to the founders</h3>'+
+        '<div class="cbox"><h3>Talk to us directly</h3>'+
           '<div style="font-size:12.5px;color:#8A8272;margin-bottom:4px">Big idea? Concern? Skip the queue — message us directly.</div>'+
-          '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Founder · systems &amp; vision</span></div><a href="https://wa.me/17255770044">WhatsApp</a></div>'+
-          '<div class="fdrs"><img src="/img/ava_vlad.jpg" alt=""><div><b>Vlad</b><span>Founder · design &amp; craft</span></div><a href="https://wa.me/17255770044">WhatsApp</a></div>'+
+          '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+          '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a href="https://wa.me/17255770044">WhatsApp</a></div>'+
         '</div>'+
       '</div>'+
     '</div>'+

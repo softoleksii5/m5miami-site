@@ -39,7 +39,10 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');</script>
 <script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.source)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}
 window.M5_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';/* вебхук Apps Script «M5 Hub» (лиды → Telegram + Sheet) */
-window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)return;var s=JSON.stringify(p||{});if(navigator.sendBeacon){navigator.sendBeacon(M5_HOOK,s)}else{fetch(M5_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s})}}catch(e){}}</script>
+/* Реферальная метка: ?ref=<слаг клиента> с личной ссылки в Client Hub. Держим 90 дней,
+   подмешиваем в каждый лид — в Telegram-карточке видно «кто привёл» → начисляем $250/$250. */
+try{var _r=(location.search.match(/[?&]ref=([A-Za-z0-9_-]{1,64})/)||[])[1];if(_r)localStorage.setItem('m5_ref',_r+'|'+Date.now())}catch(e){}
+window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)return;p=p||{};try{var q=(localStorage.getItem('m5_ref')||'').split('|');if(q[0]&&Date.now()-(+q[1]||0)<7776e6){p.details=(p.details?p.details+' · ':'')+'REF:'+q[0]}}catch(e){}var s=JSON.stringify(p);if(navigator.sendBeacon){navigator.sendBeacon(M5_HOOK,s)}else{fetch(M5_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s})}}catch(e){}}</script>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
 
 

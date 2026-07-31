@@ -18,7 +18,8 @@ var LINKS={
   openphone:'',
   houzz:'https://pro.houzz.com/', // маркетинг-канал: профиль+отзывы (софт-тариф НЕ берём)
   playbook:'',
-  video:'/media/m5_intro.mp4' // бренд-интро (Remotion, 24с)
+  video:'/media/m5_intro.mp4', // бренд-интро (Remotion, 24с)
+  clienthub:'/client/?p=brickell-demo' // кабинет клиента — демо-проект (боевые слаги раздаёт PM)
 };
 
 /* фирменные логотипы сервисов (SVG со своими цветами) */
@@ -43,6 +44,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
+      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -55,6 +57,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
+      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
@@ -78,6 +81,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM',t:'JobTread',link:'jobtread'},
+      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {b:'openphone',k:'Calls',t:'OpenPhone',link:'openphone'},
       {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
       {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch'},
@@ -104,6 +108,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
+      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {ic:'📐',k:'Supervision',t:'Site QC'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {b:'drive',k:'Drive',t:'Docs & photos',link:'drive'},
@@ -415,6 +420,7 @@ var STACK=[
  ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
  ['Операционка','Apps Script «M5 Hub»','автоматика: лиды→TG, SLA, склад, бэкенд Jin','https://script.google.com/u/2/home/projects/1TCKRgl1AKm6-9gyU3WHZpkHWsJRbkgyUkxiUiMvJYJq4p1m9_bv1jP-j/edit'],
  ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
+ ['Сайт & аналитика','Client Hub','кабинет клиента: прогресс, кредиты 3%, реферал $250/$250, фидбек (свой, поверх будущего JobTread)','/client/?p=brickell-demo'],
  ['Сайт & аналитика','Houzz','маркетинг-канал: профиль, портфолио, отзывы; реклама — позже','https://pro.houzz.com/'],
  ['Сайт & аналитика','GitHub','код сайта (m5miami-site) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
  ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
@@ -426,11 +432,14 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='26.07';
+var ALEXTODO_UPD='31.07';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
+ ['todo','JobTread — включить подписку ($279/мес, помесячно)','30 дней money-back. После оплаты скажи Клоду — он подключит Jin через их AI Connector, и кабинет клиента начнёт тянуть реальные данные. jobtread.com/pricing'],
+ ['todo','Apps Script — вставить патч Клода (вместе, 10 мин)','Роутинг feedback/idea/redeem в Partners-топик + Jin-ветка для клиентов. Готовый код: M5/4 Рабочие документы/AppsScript_M5Hub_patch_кабинеты.md. Открыть script.google.com под alex@ — дальше по шагам с Клодом (там ловушка с сохранением).'],
+ ['todo','Показать Владу кабинет клиента','m5miami.com/client/?p=brickell-demo — демо-проект. Кредиты 3%, реферал $250/$250, фидбек. Это наш ответ «как у больших».','m'],
  ['todo','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая. openphone.com'],
  ['todo','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
  ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
