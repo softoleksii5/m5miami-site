@@ -19,7 +19,8 @@ var LINKS={
   houzz:'https://pro.houzz.com/', // маркетинг-канал: профиль+отзывы (софт-тариф НЕ берём)
   playbook:'',
   video:'/media/m5_intro.mp4', // бренд-интро (Remotion, 24с)
-  clienthub:'/client/?p=brickell-demo' // кабинет клиента — демо-проект (боевые слаги раздаёт PM)
+  clienthub:'/client/?p=brickell-demo', // кабинет клиента — демо-проект (боевые слаги раздаёт PM)
+  tutorial:'/media/tutorial_system_ru.mp4' // видео-туториал «Как устроена система M5» (Remotion + Jin, 31.07)
 };
 
 /* фирменные логотипы сервисов (SVG со своими цветами) */
@@ -45,6 +46,7 @@ var ROLES={
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
+      {ic:'🎓',k:'Обучение',t:'Как устроена система',link:'tutorial'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -58,6 +60,7 @@ var ROLES={
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
+      {ic:'🎓',k:'Обучение',t:'Как устроена система',link:'tutorial'},
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
