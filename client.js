@@ -6,7 +6,7 @@
 
 var CLIENTS={
  'brickell-demo':{
-   name:'Taras', project:'Brickell Residence — Full Renovation', status:'Active',
+   name:'David', project:'Brickell Residence — Full Renovation', status:'Active',
    pm:'Vadym', pmPhone:'17255770044', started:'Sep 2026',
    phase:1, phases:['Design','Materials','Build','Styling','Handover'],
    googleReview:'', /* ссылка g.page появится после создания Google Business Profile */
@@ -40,14 +40,46 @@ var CLIENTS={
 
 /* Продающий каталог: что клиент может добавить к проекту. Заявка в 1 клик. */
 var SERVICES=[
- {img:'/img/svc3_plaster.jpg', ttl:'Decorative Plaster & Art-Concrete', sub:'Venetian, microcement, limewash — the signature M5 finish clients photograph most', from:'from $18 / sq ft'},
- {img:'/img/svc1_interior.jpg', ttl:'Interior Design Package', sub:'Concept, 3D visuals, materials list — a home that feels curated, not furnished', from:'from $6,500'},
- {img:'/img/case2_kitchen.jpg', ttl:'Kitchen Remodel', sub:'Custom fronts, stone counters, appliances — the room that sells the home', from:'from $28,000'},
- {img:'/img/case3_bath.jpg', ttl:'Bathroom / Spa Remodel', sub:'Stone, glass, rainfall shower — hotel-grade mornings at home', from:'from $18,000'},
- {img:'/img/gal_living.jpg', ttl:'Furniture & Styling', sub:'Sourcing, white-glove delivery, staging — move-in ready, magazine ready', from:'from $9,500'},
- {img:'/img/case4_villa.jpg', ttl:'Outdoor & Terrace', sub:'Summer kitchens, decks, landscape lighting — Miami lives outside', from:'custom quote'},
- {img:'/img/svc5_supervision.jpg', ttl:'Design Supervision', sub:'Our designer protects the vision on site — weekly visits & style control', from:'from $1,200 / mo'},
- {img:'/img/case6_showroom.jpg', ttl:'Commercial Fit-Out', sub:'Offices, showrooms, restaurants — spaces that work as hard as you', from:'custom quote'}
+ {img:'/img/svc3_plaster.jpg', ttl:'Decorative Plaster & Art-Concrete', sub:'Venetian, microcement, limewash — the signature M5 finish clients photograph most', from:'from $18 / sq ft',
+  time:'3–7 days per room',
+  what:'A hand-applied mineral finish that turns a flat wall into the centerpiece of the room — the same finish we build our showroom around.',
+  steps:['Sample session — we bring 3–5 physical samples to your home and match them to your light','Surface prep & protection of floors and furniture','2–3 coats applied by our master (each needs to cure)','Sealing & final polish, walkthrough together'],
+  incl:'Materials, protection, application, sealing and a touch-up kit. Dust-free process.'},
+ {img:'/img/svc1_interior.jpg', ttl:'Interior Design Package', sub:'Concept, 3D visuals, materials list — a home that feels curated, not furnished', from:'from $6,500',
+  time:'2–4 weeks',
+  what:'A complete design brain for your space: how it looks, feels and functions — before a single wall is touched.',
+  steps:['Discovery: how you live, what you love, reference session','Concept & moodboard — 2 directions to choose from','3D visualizations of key rooms + full materials & furniture list','Design supervision handoff: drawings your builders actually follow'],
+  incl:'Moodboards, 3D renders, material specs, furniture list with links, lighting plan.'},
+ {img:'/img/case2_kitchen.jpg', ttl:'Kitchen Remodel', sub:'Custom fronts, stone counters, appliances — the room that sells the home', from:'from $28,000',
+  time:'4–8 weeks',
+  what:'Full kitchen replacement: layout, cabinetry, stone, appliances, lighting — managed end to end by one team.',
+  steps:['Layout & appliance plan (we check every clearance)','Cabinetry order — custom fronts, soft-close everything','Demo, rough-in, stone templating & install','Appliances, lighting, tiling, final detailing'],
+  incl:'Design, demolition, cabinetry, countertops, installation, plumbing & electrical hookups, cleanup.'},
+ {img:'/img/case3_bath.jpg', ttl:'Bathroom / Spa Remodel', sub:'Stone, glass, rainfall shower — hotel-grade mornings at home', from:'from $18,000',
+  time:'3–6 weeks',
+  what:'Your bathroom rebuilt to the standard of the hotels you love: waterproofing done right, stone done beautifully.',
+  steps:['Design & fixture selection (we bring the catalog to you)','Demo + proper waterproofing (the part nobody sees, everybody regrets skipping)','Tile, stone & glass installation','Fixtures, heated details, final seal & shine'],
+  incl:'Design, waterproofing, tile & stone work, glass, plumbing, fixtures installation.'},
+ {img:'/img/gal_living.jpg', ttl:'Furniture & Styling', sub:'Sourcing, white-glove delivery, staging — move-in ready, magazine ready', from:'from $9,500',
+  time:'2–5 weeks',
+  what:'We source, buy, receive, assemble and style everything — you come home to a finished space, not a pile of boxes.',
+  steps:['Styling concept on top of your design','Sourcing & ordering (trade discounts passed to you)','Receiving, quality check, white-glove delivery','Full staging day: furniture, art, textiles, greenery'],
+  incl:'Sourcing, purchasing management, delivery, assembly, styling day, returns handling.'},
+ {img:'/img/case4_villa.jpg', ttl:'Outdoor & Terrace', sub:'Summer kitchens, decks, landscape lighting — Miami lives outside', from:'custom quote',
+  time:'2–8 weeks',
+  what:'Your outdoor space turned into the best room of the house: kitchen, shade, light, sound.',
+  steps:['Site visit & concept (sun, wind, privacy mapping)','Materials board: decking, stone, outdoor fabrics','Build: pergolas, summer kitchen, decking, planters','Lighting & sound — the 8pm test walkthrough'],
+  incl:'Design, permits where needed, construction, outdoor kitchen, lighting, plants.'},
+ {img:'/img/svc5_supervision.jpg', ttl:'Design Supervision', sub:'Our designer protects the vision on site — weekly visits & style control', from:'from $1,200 / mo',
+  time:'monthly',
+  what:'The insurance policy for your design: our designer on site every week making sure what was drawn is what gets built.',
+  steps:['Weekly site visits with photo report to your hub','Materials & finishes control against the spec','Instant answers for builders — no guessing, no delays','Deviation alerts before they become expensive'],
+  incl:'Weekly visits, photo reports, materials control, builder consultations, hub updates.'},
+ {img:'/img/case6_showroom.jpg', ttl:'Commercial Fit-Out', sub:'Offices, showrooms, restaurants — spaces that work as hard as you', from:'custom quote',
+  time:'4–12 weeks',
+  what:'Commercial spaces that convert: built fast, built on brand, built to code.',
+  steps:['Brief & brand immersion','Concept + budget in one week','Build with night/weekend crews if you cannot close','Punch list & handover with all documentation'],
+  incl:'Design, permits, construction, finishes, millwork, lighting, handover docs.'}
 ];
 
 var REWARDS=[
@@ -64,6 +96,10 @@ var KUDOS=['Vadym — project manager','Design team','Site crew','Jin — AI ass
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var slug=(location.search.match(/[?&]p=([^&]*)/)||[])[1]||'';
 var C=CLIENTS[slug];
+/* Демо-кабинет: показываем весь флоу, но НИЧЕГО не шлём в боевой Telegram/CRM
+   (инцидент 31.07: клики Request с демо падали лид-карточками в «Лиды»). */
+var DEMO=(slug==='brickell-demo');
+function hub(p){ if(DEMO) return; if(window.m5hook) m5hook(p); }
 
 var TSTYLE='<style>'+
 'body{background:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
@@ -155,6 +191,20 @@ var TSTYLE='<style>'+
 '.fdrs b{display:block;font-size:14px;color:#20242E}.fdrs span{font-size:12px;color:#8A8272}'+
 '.fdrs a{margin-left:auto;font-family:var(--mono);font-size:11px;color:#96703B;text-decoration:none;border:1px solid #D9B87C;padding:7px 13px;border-radius:16px;white-space:nowrap}'+
 '.okmsg{background:#F0F8F2;border:1px solid #CBE3D3;color:#3E8E5A;border-radius:12px;padding:12px 16px;font-size:14px;margin-top:10px;display:none}'+
+'.svm{position:fixed;inset:0;background:rgba(25,21,17,.55);z-index:80;display:none;align-items:center;justify-content:center;padding:18px}'+
+'.svm.on{display:flex}'+
+'.svm-box{background:#fff;border-radius:20px;max-width:640px;width:100%;max-height:88vh;overflow:auto;position:relative}'+
+'.svm-box img{width:100%;height:200px;object-fit:cover;display:block}'+
+'.svm-x{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(25,21,17,.55);color:#fff;border:0;font-size:16px;cursor:pointer;z-index:2}'+
+'.svm-in{padding:20px 24px 24px}'+
+'.svm-in h3{font-size:22px;margin:0 0 4px;color:#232733;letter-spacing:-.01em}'+
+'.svm-meta{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:#96703B;letter-spacing:.06em;margin-bottom:12px}'+
+'.svm-in p{font-size:14px;color:#5A5142;line-height:1.55;margin:0 0 14px}'+
+'.svm-st{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A8272;margin:14px 0 8px}'+
+'.svm-step{display:flex;gap:12px;align-items:flex-start;padding:7px 0;font-size:13.5px;color:#20242E}'+
+'.svm-step i{font-style:normal;min-width:24px;height:24px;border-radius:50%;background:#F5EFE6;color:#96703B;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;flex:none;margin-top:1px}'+
+'.svm-incl{background:#FBF7EF;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#6E6656}'+
+'.svm-a{display:flex;gap:10px;margin-top:16px}'+
 '.gate{max-width:430px;margin:110px auto;background:#fff;border-radius:18px;padding:34px 30px;text-align:center;border:1px solid var(--line)}'+
 '</style>';
 
@@ -192,10 +242,10 @@ if(!C){
     (m.st==='approved'?'Approved':(m.st==='review'?'Your review':'Coming up'))+'</em></div></div>';}).join('');
   var needRev=C.materials.filter(function(m){return m.st==='review';}).length;
   var svc=SERVICES.map(function(s,i){
-    return '<div class="svc"><img src="'+s.img+'" alt="" loading="lazy"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
+    return '<div class="svc" onclick="svcOpen('+i+')" style="cursor:pointer"><img src="'+s.img+'" alt="" loading="lazy"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
     '<div class="fr">'+esc(s.from)+'</div><div class="sa">'+
-    '<span class="sbtn go" onclick="reqSvc('+i+')">Request →</span>'+
-    '<a class="sbtn wa" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WhatsApp</a>'+
+    '<span class="sbtn go" onclick="event.stopPropagation();reqSvc('+i+')">Request →</span>'+
+    '<a class="sbtn wa" onclick="event.stopPropagation()" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WhatsApp</a>'+
     '</div></div></div>';}).join('');
   var hist=C.credits.hist.map(function(h){return '<div><b>'+esc(h[0])+'</b> '+esc(h[1])+'<small>'+esc(h[2])+'</small></div>';}).join('');
   var rwds=REWARDS.map(function(r,i){var ok=C.credits.bal>=r.cr;
@@ -256,13 +306,31 @@ if(!C){
       '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
       '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
-  '<footer>M5 Interior Design &amp; Build · Miami · Powered by Jin, our AI</footer>';
+  '<footer>M5 Interior Design &amp; Build · Miami · Powered by Jin, our AI</footer>'+
+  '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
 }
 }catch(e){
   document.getElementById('app').innerHTML='<div class="gate" style="margin-top:120px"><b>Something didn’t load.</b><br><br>'+
   '<a href="https://wa.me/17255770044" style="color:#96703B">Message us on WhatsApp</a></div>';
 }
 
+function svcOpen(i){
+  var s=SERVICES[i]; if(!s) return;
+  var steps=(s.steps||[]).map(function(st,n){return '<div class="svm-step"><i>'+(n+1)+'</i><span>'+st+'</span></div>';}).join('');
+  document.getElementById('svmBox').innerHTML=
+    '<button class="svm-x" onclick="svcClose()">✕</button>'+
+    '<img src="'+s.img+'" alt="">'+
+    '<div class="svm-in"><h3>'+s.ttl+'</h3>'+
+    '<div class="svm-meta"><span>'+s.from+'</span><span>⏱ '+(s.time||'')+'</span></div>'+
+    '<p>'+(s.what||s.sub)+'</p>'+
+    '<div class="svm-st">How it works</div>'+steps+
+    '<div class="svm-st">What’s included</div><div class="svm-incl">'+(s.incl||'')+'</div>'+
+    '<div class="svm-a"><span class="sbtn go" style="flex:1" onclick="svcClose();reqSvc('+i+')">Request — '+ (C?esc(C.pm):'we') +' texts you today</span>'+
+    '<a class="sbtn wa" style="flex:0 0 auto;padding:11px 18px" target="_blank" rel="noopener" href="https://wa.me/'+(C?C.pmPhone:'17255770044')+'?text='+encodeURIComponent('Hi! This is '+(C?C.name:'')+'. I’m interested in: '+s.ttl)+'">WhatsApp</a></div>'+
+    '</div>';
+  document.getElementById('svm').className='svm on';
+}
+function svcClose(){var m=document.getElementById('svm'); if(m)m.className='svm';}
 var fbStars=0, fbKud=-1;
 function starPick(n){fbStars=n;var s=document.querySelectorAll('#stars span');for(var i=0;i<s.length;i++){s[i].className=i<n?'on':'';}}
 function kudPick(i){fbKud=(fbKud===i)?-1:i;for(var j=0;j<KUDOS.length;j++){var el=document.getElementById('kud'+j);if(el)el.className=(j===fbKud)?'on':'';}}
@@ -270,13 +338,13 @@ function sendFb(){
   var t=(document.getElementById('fbText').value||'').trim();
   if(!fbStars&&!t&&fbKud<0)return;
   var d=(fbStars?fbStars+'★':'')+(fbKud>=0?' · Kudos: '+KUDOS[fbKud]:'')+(t?' · '+t:'');
-  if(window.m5hook)m5hook({type:'feedback',name:C?C.name:'',service:C?C.project:'',details:d,source:'client-hub:'+slug});
+  hub({type:'feedback',name:C?C.name:'',service:C?C.project:'',details:d,source:'client-hub:'+slug});
   document.getElementById('fbText').value='';starPick(0);kudPick(-1);kudPick(-1);
   var ok=document.getElementById('fbOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},6000);
 }
 function reqSvc(i){
   var s=SERVICES[i];if(!s)return;
-  if(window.m5hook)m5hook({type:'service',name:C?C.name:'',phone:'',service:s.ttl,details:'Client Hub upsell · '+(C?C.project:'')+' · '+s.from,source:'client-hub-upsell:'+slug});
+  hub({type:'service',name:C?C.name:'',phone:'',service:s.ttl,details:'Client Hub upsell · '+(C?C.project:'')+' · '+s.from,source:'client-hub-upsell:'+slug});
   var ok=document.getElementById('svcOk');ok.style.display='block';
   try{ok.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}
   setTimeout(function(){ok.style.display='none';},7000);
@@ -284,13 +352,13 @@ function reqSvc(i){
 function redeem(i){
   var r=REWARDS[i];if(!r)return;
   if(!confirm('Redeem “'+r.ttl+'” for '+r.cr+' credits?\nThe team will confirm within 24 hours.'))return;
-  if(window.m5hook)m5hook({type:'redeem',name:C?C.name:'',service:r.ttl,details:r.cr+' credits · balance '+(C?C.credits.bal:'?'),source:'client-hub:'+slug});
+  hub({type:'redeem',name:C?C.name:'',service:r.ttl,details:r.cr+' credits · balance '+(C?C.credits.bal:'?'),source:'client-hub:'+slug});
   var ok=document.getElementById('rwOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},6000);
 }
 function copyRef(){
   var inp=document.getElementById('refUrl');inp.select();inp.setSelectionRange(0,99);
   try{navigator.clipboard.writeText(inp.value);}catch(e){document.execCommand('copy');}
-  if(window.m5hook)m5hook({type:'referral-copy',name:C?C.name:'',source:'client-hub:'+slug});
+  hub({type:'referral-copy',name:C?C.name:'',source:'client-hub:'+slug});
   var ok=document.getElementById('refOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},5000);
 }
 function docTab(el,cat){

@@ -628,8 +628,15 @@ var ROADMAP=[
     if(role!=='founder'&&role!=='director')return;
     var el=document.getElementById('kpiSec'); if(!el)return;
     var opened=false; try{opened=localStorage.getItem('m5_kpi_open')==='1';}catch(e){}
-    var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">пилот · включим после первых проектов</span></summary><div class="stack">';
-    h+='<div class="lsn" style="margin-bottom:10px"><b>Как это работает:</b> Jin собирает факты из JobTread и CRM (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
+    var isDir=(role==='director');
+    var ht='<details class="stackbox"'+(isDir?' open':'')+'><summary><span>📖 Как вести проект · 3 шага</span><span class="stk-hint">просто и каждый день одинаково</span></summary><div class="stack">';
+    ht+='<div class="lsn"><b>1 · Днём — фото и видео с объекта → Google Drive.</b> Открой плитку Drive → папка <b>02 Projects → имя проекта</b> → кидай всё сырьё туда (и для клиента, и для соцсетей). Заходить только с рабочей почты @m5miami.com.</div>';
+    ht+='<div class="lsn"><b>2 · Вечером — 2 минуты в Telegram.</b> В «M5 Team» → топик <b>Projects</b>: голосовое или пару строк — что сделали сегодня, что завтра, что нужно. Всё, отчёт сдан.</div>';
+    ht+='<div class="lsn"><b>3 · Дальше — Джин и Клод.</b> Мы переносим статус в <b>кабинет клиента</b> — клиент видит галочки и фото сам, тебе руками ничего заполнять не надо. После подключения JobTread шаг 2 станет отчётом прямо в его приложении с фото — кабинет клиента обновится автоматически.</div>';
+    ht+='<div class="lsn" style="color:#8A8272">Деньги и счета — <b>QuickBooks</b> (плитка Finance): там работает онлайн-бухгалтер, мы туда только загружаем чеки. Вопросы в любой момент — Джину наверху или Алексу.</div>';
+    ht+='</div></details>';
+    var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">для будущих сотрудников · включим с первыми наймами</span></summary><div class="stack">';
+    h+='<div class="lsn" style="margin-bottom:10px"><b>Для кого это:</b> для сотрудников, которых наберём — sales, SMM, мастера. У фаундеров и у Вадима-директора свои договорённости — их этот блок не касается. <b>Как работает:</b> Jin собирает факты из JobTread (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
     h+='<div class="stk-g">Правила игры</div>';
     h+='<div class="lsn"><b>1 · Правило Shopify.</b> Прежде чем просить бюджет, часы или подрядчика — покажи, что Jin не может сделать это сам.</div>';
     h+='<div class="lsn"><b>2 · Пятница, 15 минут.</b> Каждый показывает одну вещь, сделанную с Jin за неделю. Jin сам собирает дайджест побед в Пульс.</div>';
@@ -639,14 +646,14 @@ var ROADMAP=[
     h+='<div class="stk-g" style="margin-top:12px">Так будет выглядеть карточка от Jin</div>';
     h+='<div style="background:#20242E;border-radius:14px;padding:16px 18px;color:#fff;margin-top:6px">'+
        '<div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E3C795">✦ Jin · предложение бонуса</div>'+
-       '<div style="font-size:15px;margin-top:8px"><b>Вадим</b> · октябрь: 9 из 9 отчётов вовремя, лиды — ответ в среднем 11 мин (цель 15), переделок 0.</div>'+
-       '<div style="font-size:20px;font-weight:800;margin-top:6px;color:#7ED9A0">Рекомендую: +$400 <span style="font-size:12px;color:#AEA898;font-weight:600">(gross · ~$310 на руки)</span></div>'+
+       '<div style="font-size:15px;margin-top:8px"><b>Sales</b> <span style="font-size:11px;color:#8A8272">(пример будущего сотрудника)</span> · октябрь: 31 лид обработан, ответ в среднем 9 мин (цель 15), конверсия в замер 42%.</div>'+
+       '<div style="font-size:20px;font-weight:800;margin-top:6px;color:#7ED9A0">Рекомендую: +$350 <span style="font-size:12px;color:#AEA898;font-weight:600">(gross · ~$272 на руки)</span></div>'+
        '<div style="display:flex;gap:8px;margin-top:10px">'+
        '<span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:8px 16px;border-radius:16px;background:#7ED9A0;color:#0d3532">✓ Утвердить</span>'+
        '<span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:8px 16px;border-radius:16px;background:rgba(255,255,255,.12);color:#CFC8B8">Изменить</span></div>'+
        '<div style="font-size:11px;color:#8A8272;margin-top:10px">Финальное решение — за руководителем. Каждая выплата — в журнале. Не согласен с оценкой — кнопка «оспорить» в твоём кабинете.</div></div>';
     h+='</div></details>';
-    el.innerHTML=h;
+    el.innerHTML=ht+h;
     var box=document.getElementById('kpiBox');
     if(box)box.addEventListener('toggle',function(){try{localStorage.setItem('m5_kpi_open',box.open?'1':'0');}catch(e){}});
   }catch(e){}
