@@ -41,13 +41,12 @@ var LOGOS={
 var BC={monday:'#ff3d57',drive:'#00ac47',telegram:'#229ED9',gcal:'#4285F4',ga4:'#F9AB00',clarity:'#1B6EC2',quickbooks:'#2CA01C',jobtread:'#F26722',heygen:'#5B3DF5',openphone:'#6B5FFF',houzz:'#4DBC15'};
 
 var ROLES={
-  founder:{label:'Founder',sub:'Your command center',
+  founder:{label:'Co-founder',sub:'Your command center',
     chips:['Leads this week','Site analytics','What needs my decision?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
-      {ic:'🤝',k:'Alex + Vlad',t:'Partnership agreement',link:'legal'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -201,6 +200,7 @@ document.getElementById('app').innerHTML=
     return '<a class="tile" style="--bc:'+col+'" '+open+'>'+icon+
       '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge+'</a>';
   }).join('')+'</div>'+
+  '<div id="clientsSec"></div>'+
   '<div id="planSec"></div>'+
   '<div id="lessonSec"></div>'+
   '<div id="kpiSec"></div>'+
@@ -658,5 +658,47 @@ var ROADMAP=[
     el.innerHTML=ht+h;
     var box=document.getElementById('kpiBox');
     if(box)box.addEventListener('toggle',function(){try{localStorage.setItem('m5_kpi_open',box.open?'1':'0');}catch(e){}});
+  }catch(e){}
+})();
+
+
+/* ═══ Клиенты · хабы — список всех клиентских кабинетов (founder + director).
+   Новый клиент = Клод добавляет строку сюда и объект в client.js (единая точка — чат с Клодом). ═══ */
+var CLIENTHUBS=[
+ {slug:'brickell-demo', name:'David', project:'Brickell Residence — Full Renovation', status:'Demo'}
+];
+(function(){
+  try{
+    if(role!=='founder'&&role!=='director')return;
+    var el=document.getElementById('clientsSec'); if(!el)return;
+    var h='<details class="stackbox" open><summary><span>👥 Clients · hubs</span><span class="stk-hint">'+CLIENTHUBS.length+' · полный доступ для фаундеров и директора</span></summary><div class="stack">';
+    for(var i=0;i<CLIENTHUBS.length;i++){
+      var c=CLIENTHUBS[i];
+      h+='<a class="stk" href="/client/?p='+c.slug+'"><b>'+c.name+' <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#B0894F;border:1px solid #D9B87C;border-radius:8px;padding:2px 7px;margin-left:6px">'+c.status+'</span></b><span>'+c.project+' · открыть кабинет клиента →</span></a>';
+    }
+    h+='<div class="lsn" style="color:#8A8272">Каждому клиенту выдаём персональную ссылку. Новый клиент — скажи Клоду «заведи кабинет для …» — появится здесь и у клиента.</div>';
+    h+='</div></details>';
+    el.innerHTML=h;
+  }catch(e){}
+})();
+
+/* ═══ Partnership agreement — видят ТОЛЬКО совладельцы (Алекс и Влад, по хэшам почт). ═══ */
+(function(){
+  try{
+    var OWNERS=['9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47',
+                '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322'];
+    if(preview)return;
+    var m=JSON.parse(localStorage.getItem('m5_member')||'null');
+    if(!m||!m.email||!window.crypto||!crypto.subtle)return;
+    crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(m.email).trim().toLowerCase())).then(function(buf){
+      var a=new Uint8Array(buf),hx='';for(var i=0;i<a.length;i++)hx+=('0'+a[i].toString(16)).slice(-2);
+      if(OWNERS.indexOf(hx)===-1)return;
+      var el=document.getElementById('clientsSec'); if(!el)return;
+      var d=document.createElement('div');
+      d.innerHTML='<details class="stackbox"><summary><span>🤝 Alex + Vlad · Partnership</span><span class="stk-hint">только совладельцы</span></summary><div class="stack">'+
+      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Company Drive → папка 06 Legal · роли, инвестиции, выгорание, выход</span></a>'+
+      '</div></details>';
+      el.appendChild(d.firstChild);
+    });
   }catch(e){}
 })();

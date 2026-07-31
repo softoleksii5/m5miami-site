@@ -226,7 +226,8 @@ if(!C){
   '<b style="font-size:18px;color:#20242E">This is a private project hub.</b><br><br>'+
   '<span style="font-size:14px;color:#6E6656">Every M5 client receives a personal link from their project manager. '+
   'Lost yours? Message us on WhatsApp and we’ll resend it.</span><br><br>'+
-  '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17255770044">WhatsApp M5</a></div>'+
+  '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17255770044">WhatsApp M5</a>'+
+  '<div style="margin-top:14px"><a href="/client/?p=brickell-demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#96703B;text-decoration:underline">SEE A DEMO PROJECT HUB →</a></div></div>'+
   '<footer>M5 Interior Design &amp; Build · Miami</footer>';
 }else{
   var ph=C.phases.map(function(p,i){return '<span class="'+(i<C.phase?'done':(i===C.phase?'on':''))+'">'+esc(p)+'</span>';}).join('');
@@ -303,8 +304,8 @@ if(!C){
       '<button class="cbtn" onclick="sendFb()">Send to the founders</button>'+
       '<div class="okmsg" id="fbOk">Thank you! Your feedback just landed on the founders’ desk. We read every word.</div>'+
       gRev, false)+
-    acc('talk','📞','Talk to us directly','Alex (founder) · '+esc(C.pm)+' (your PM)',
-      '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+    acc('talk','📞','Talk to us directly','Alex (co-founder) · '+esc(C.pm)+' (your PM)',
+      '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Co-founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
       '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
   '<footer>M5 Interior Design &amp; Build · Miami · Powered by Jin, our AI</footer>'+
