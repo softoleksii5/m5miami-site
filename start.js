@@ -431,7 +431,9 @@ var STACK=[
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
  ['Связь','WhatsApp Business','+1 786 407 4441 — бизнес-номер: сайт, кабинет клиента, реклама','https://wa.me/17864074441'],
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
- ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/']
+ ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/'],
+ ['Связь','Loom','видео-объяснялки команде: экран + кружочек с камерой, ссылка сразу','https://www.loom.com/'],
+ ['Связь','Zight','скриншоты и запись экрана со стрелочками/кружками (аннотации)','https://zight.com/']
 ];
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
