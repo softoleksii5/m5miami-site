@@ -1,14 +1,15 @@
-/* M5 Client Hub — кабинет клиента (v1, 31.07.2026).
-   Паттерн Игоря (emmpa) + наш слой: прогресс, документы, материалы, фидбек,
-   кредиты-кешбэк 3%, реферал $250/$250, прямой контакт фаундеров.
-   Доступ: /client/?p=<slug>. Слаг = токен из письма PM. Демо: ?p=brickell-demo
-   Позже данные переедут в JobTread API — структура CLIENTS повторяет их сущности. */
+/* M5 Client Hub v2 — кабинет клиента (31.07.2026, редизайн по фидбеку Алекса).
+   Светлый «инвесторский» стиль (панорама вилл, как низ главной), аккордеоны с иконками,
+   продающий каталог услуг (заявка → m5hook → Telegram «Лиды» мгновенно + WhatsApp),
+   кредиты 3%, реферал $250/$250, фидбек с kudos сотрудникам, Google-отзыв за +50 cr.
+   Доступ: /client/?p=<slug>. Демо: ?p=brickell-demo. Данные позже — из JobTread API. */
 
 var CLIENTS={
  'brickell-demo':{
    name:'Taras', project:'Brickell Residence — Full Renovation', status:'Active',
-   pm:'Vadym', pmPhone:'+17255770044', started:'Sep 2026',
+   pm:'Vadym', pmPhone:'17255770044', started:'Sep 2026',
    phase:1, phases:['Design','Materials','Build','Styling','Handover'],
+   googleReview:'', /* ссылка g.page появится после создания Google Business Profile */
    tasks:[
      ['done','Design concept & moodboard','Sep 12'],
      ['done','Contract signed · deposit received','Sep 15'],
@@ -37,42 +38,63 @@ var CLIENTS={
  }
 };
 
-var REWARDS=[
- {ic:'🧱', ttl:'Art-Concrete Accent Wall', sub:'Signature M5 wall up to 40 sq ft — our showroom finish in your home', cr:750},
- {ic:'🏛', ttl:'Design Supervision Month', sub:'Designer visits + style control during any build month', cr:500},
- {ic:'🎨', ttl:'Moodboard Pack', sub:'Materials + palette + 2 AI visualizations of your space', cr:250},
- {ic:'✨', ttl:'Deep Clean After Works', sub:'Professional post-renovation cleaning crew', cr:200},
- {ic:'🏠', ttl:'Smart-Home Consult', sub:'Lighting, climate & security scenarios for your unit', cr:150},
- {ic:'⚡', ttl:'Priority Scheduling', sub:'Your project jumps the queue for the next phase', cr:100}
+/* Продающий каталог: что клиент может добавить к проекту. Заявка в 1 клик. */
+var SERVICES=[
+ {img:'/img/svc3_plaster.jpg', ttl:'Decorative Plaster & Art-Concrete', sub:'Venetian, microcement, limewash — the signature M5 finish clients photograph most', from:'from $18 / sq ft'},
+ {img:'/img/svc1_interior.jpg', ttl:'Interior Design Package', sub:'Concept, 3D visuals, materials list — a home that feels curated, not furnished', from:'from $6,500'},
+ {img:'/img/case2_kitchen.jpg', ttl:'Kitchen Remodel', sub:'Custom fronts, stone counters, appliances — the room that sells the home', from:'from $28,000'},
+ {img:'/img/case3_bath.jpg', ttl:'Bathroom / Spa Remodel', sub:'Stone, glass, rainfall shower — hotel-grade mornings at home', from:'from $18,000'},
+ {img:'/img/gal_living.jpg', ttl:'Furniture & Styling', sub:'Sourcing, white-glove delivery, staging — move-in ready, magazine ready', from:'from $9,500'},
+ {img:'/img/case4_villa.jpg', ttl:'Outdoor & Terrace', sub:'Summer kitchens, decks, landscape lighting — Miami lives outside', from:'custom quote'},
+ {img:'/img/svc5_supervision.jpg', ttl:'Design Supervision', sub:'Our designer protects the vision on site — weekly visits & style control', from:'from $1,200 / mo'},
+ {img:'/img/case6_showroom.jpg', ttl:'Commercial Fit-Out', sub:'Offices, showrooms, restaurants — spaces that work as hard as you', from:'custom quote'}
 ];
+
+var REWARDS=[
+ {ic:'🧱', ttl:'Art-Concrete Accent Wall', sub:'Signature M5 wall up to 40 sq ft', cr:750},
+ {ic:'🏛', ttl:'Design Supervision Month', sub:'Designer visits + style control', cr:500},
+ {ic:'🎨', ttl:'Moodboard Pack', sub:'Materials + palette + 2 AI visualizations', cr:250},
+ {ic:'✨', ttl:'Deep Clean After Works', sub:'Professional post-renovation cleaning', cr:200},
+ {ic:'🏠', ttl:'Smart-Home Consult', sub:'Lighting, climate & security scenarios', cr:150},
+ {ic:'⚡', ttl:'Priority Scheduling', sub:'Your project jumps the queue', cr:100}
+];
+
+var KUDOS=['Vadym — project manager','Design team','Site crew','Jin — AI assistant'];
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var slug=(location.search.match(/[?&]p=([^&]*)/)||[])[1]||'';
 var C=CLIENTS[slug];
 
 var TSTYLE='<style>'+
-'.chero{position:relative;border-radius:20px;overflow:hidden;margin:18px 0 22px;min-height:300px;display:flex;align-items:flex-end;'+
-'background:linear-gradient(180deg,rgba(20,18,15,.05) 30%,rgba(20,18,15,.78)),url(/img/client_hub_hero.jpg) center/cover}'+
-'.chero-in{padding:26px 28px;color:#fff}'+
-'.chero-in .ey{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#E3C795;margin-bottom:8px}'+
-'.chero-in h1{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:0 0 6px}'+
-'.chero-in .st{font-size:14px;opacity:.85}'+
-'.cph{display:flex;gap:6px;margin:14px 0 6px;flex-wrap:wrap}'+
-'.cph span{flex:1;min-width:70px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;'+
-'padding:9px 4px;border-radius:10px;background:#fff;border:1px solid var(--line);color:#AEA898}'+
+'body{background:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
+'@media(max-width:680px){body{background-size:220% auto}}'+
+'.chero{margin:26px 0 18px;max-width:640px}'+
+'.chero .ey{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#96703B;margin-bottom:10px}'+
+'.chero h1{font-size:40px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:#232733}'+
+'.chero .st{font-size:14.5px;color:#5A5142}'+
+'.cph{display:flex;gap:6px;margin:20px 0 22px;flex-wrap:wrap}'+
+'.cph span{flex:1;min-width:72px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;'+
+'padding:10px 4px;border-radius:12px;background:rgba(255,255,255,.82);border:1px solid var(--line);color:#AEA898;backdrop-filter:blur(4px)}'+
 '.cph span.on{background:#20242E;border-color:#20242E;color:#E3C795}'+
 '.cph span.done{background:#F0F8F2;border-color:#CBE3D3;color:#3E8E5A}'+
-'.crow{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start}'+
-'@media(max-width:860px){.crow{grid-template-columns:1fr}}'+
-'.cbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px}'+
-'.cbox h3{margin:0 0 12px;font-size:17px;font-weight:800;letter-spacing:-.01em;color:#232733}'+
+'.acc{background:#fff;border:1px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 12px rgba(60,48,30,.05)}'+
+'.acc summary{display:flex;align-items:center;gap:14px;padding:17px 20px;cursor:pointer;list-style:none;user-select:none}'+
+'.acc summary::-webkit-details-marker{display:none}'+
+'.acc .aic{width:40px;height:40px;border-radius:12px;background:#F5EFE6;display:flex;align-items:center;justify-content:center;font-size:19px;flex:none}'+
+'.acc .att b{font-size:16.5px;font-weight:800;color:#232733;display:block;letter-spacing:-.01em}'+
+'.acc .att span{font-size:12px;color:#8A8272}'+
+'.acc .chev{margin-left:auto;color:#B4AC9A;transition:.25s;font-size:14px}'+
+'.acc[open] .chev{transform:rotate(180deg)}'+
+'.acc .abody{padding:4px 20px 20px}'+
 '.tsk{display:flex;gap:12px;align-items:center;padding:10px 8px;border-radius:10px}'+
 '.tsk:hover{background:#FBF7EF}'+
 '.tsk i{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;flex:none}'+
 '.tsk.done i{background:#F0F8F2;color:#3E8E5A}.tsk.now i{background:#FDF3E2;color:#B0894F}.tsk.next i{background:#F5EFE6;color:#AEA898}'+
 '.tsk b{font-size:14.5px;font-weight:650;color:#20242E}.tsk small{margin-left:auto;color:#AEA898;font-family:var(--mono);font-size:11px;flex:none}'+
 '.tsk.done b{color:#8A8272;text-decoration:line-through;text-decoration-color:#CBE3D3}'+
-'.dtab{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}'+
+'.jinn{display:flex;gap:10px;align-items:center;background:#F7F2EA;border-radius:12px;padding:11px 14px;margin-top:10px}'+
+'.jinn b{color:#20242E}.jinn span{font-size:12.5px;color:#6E6656}'+
+'.dtab{display:flex;gap:8px;margin:6px 0 10px;flex-wrap:wrap}'+
 '.dtab span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border-radius:18px;background:#F5EFE6;cursor:pointer;color:#6E6656}'+
 '.dtab span.on{background:#20242E;color:#E3C795}'+
 '.doc{display:flex;justify-content:space-between;align-items:center;padding:11px 8px;border-radius:10px;color:#20242E}'+
@@ -83,34 +105,52 @@ var TSTYLE='<style>'+
 '.mat .mi{padding:10px 12px}.mat b{font-size:13.5px;display:block;color:#20242E}.mat span{font-size:12px;color:#8A8272}'+
 '.mat em{display:inline-block;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:8px;margin-top:7px}'+
 '.mat em.approved{background:#F0F8F2;color:#3E8E5A}.mat em.review{background:#FDF3E2;color:#B0894F}.mat em.todo{background:#F5EFE6;color:#AEA898}'+
-'.stars{display:flex;gap:6px;margin:8px 0 12px}'+
-'.stars span{font-size:26px;cursor:pointer;filter:grayscale(1);opacity:.45;transition:.15s}'+
-'.stars span.on{filter:none;opacity:1;transform:scale(1.08)}'+
-'.fb-ta{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:14px var(--sans);color:#20242E;min-height:74px;resize:vertical;box-sizing:border-box}'+
-'.cbtn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;'+
-'padding:12px 22px;border-radius:24px;border:0;cursor:pointer;background:linear-gradient(90deg,#B0894F,#96703B);color:#fff;margin-top:10px}'+
-'.cbtn.line{background:transparent;border:1px solid var(--ink);color:var(--ink)}'+
-'.credbox{background:linear-gradient(135deg,#20242E,#2C3140);border-radius:16px;color:#fff;padding:20px 22px;margin-bottom:16px}'+
+'.svcs{display:grid;grid-template-columns:1fr 1fr;gap:14px}'+
+'@media(max-width:680px){.svcs{grid-template-columns:1fr}}'+
+'.svc{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column}'+
+'.svc img{width:100%;height:130px;object-fit:cover;display:block}'+
+'.svc .si{padding:13px 15px 15px;display:flex;flex-direction:column;flex:1}'+
+'.svc b{font-size:15.5px;color:#232733;letter-spacing:-.01em}'+
+'.svc p{font-size:12.5px;color:#6E6656;margin:5px 0 8px;line-height:1.45;flex:1}'+
+'.svc .fr{font-family:var(--mono);font-size:11px;color:#96703B;letter-spacing:.06em;margin-bottom:10px}'+
+'.svc .sa{display:flex;gap:8px}'+
+'.sbtn{flex:1;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:11px 8px;border-radius:20px;cursor:pointer;border:0;text-decoration:none}'+
+'.sbtn.go{background:linear-gradient(90deg,#B0894F,#96703B);color:#fff}'+
+'.sbtn.wa{border:1px solid #25D366;color:#1faa52;background:#fff}'+
+'.credrow{display:flex;gap:16px;align-items:stretch;flex-wrap:wrap}'+
+'.credbox{flex:1;min-width:240px;background:linear-gradient(135deg,#20242E,#2C3140);border-radius:16px;color:#fff;padding:18px 20px}'+
 '.credbox .tier{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#E3C795}'+
-'.credbox .bal{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.1}'+
-'.credbox .bal small{font-size:15px;font-weight:600;color:#AEA898;letter-spacing:0}'+
-'.credbar{height:6px;border-radius:3px;background:rgba(255,255,255,.14);margin:12px 0 6px;overflow:hidden}'+
+'.credbox .bal{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.15}'+
+'.credbox .bal small{font-size:14px;font-weight:600;color:#AEA898;letter-spacing:0}'+
+'.credbar{height:6px;border-radius:3px;background:rgba(255,255,255,.14);margin:10px 0 6px;overflow:hidden}'+
 '.credbar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#B0894F,#E3C795)}'+
 '.credbox .nx{font-size:12px;color:#AEA898}'+
-'.chist{margin-top:12px;border-top:1px solid rgba(255,255,255,.12);padding-top:10px}'+
-'.chist div{display:flex;gap:10px;font-size:12.5px;color:#CFC8B8;padding:4px 0}'+
+'.chist{margin-top:10px;border-top:1px solid rgba(255,255,255,.12);padding-top:8px}'+
+'.chist div{display:flex;gap:10px;font-size:12px;color:#CFC8B8;padding:3px 0}'+
 '.chist b{color:#7ED9A0;font-family:var(--mono);flex:none}'+
 '.chist small{margin-left:auto;color:#8A8272;flex:none}'+
-'.rwd{display:flex;gap:12px;align-items:center;padding:12px 10px;border-radius:12px;border:1px solid transparent}'+
+'.rwd{display:flex;gap:12px;align-items:center;padding:11px 10px;border-radius:12px;border:1px solid transparent}'+
 '.rwd:hover{background:#FBF7EF;border-color:var(--line)}'+
-'.rwd .ric{font-size:22px;flex:none;width:40px;height:40px;border-radius:11px;background:#F5EFE6;display:flex;align-items:center;justify-content:center}'+
+'.rwd .ric{font-size:20px;flex:none;width:38px;height:38px;border-radius:11px;background:#F5EFE6;display:flex;align-items:center;justify-content:center}'+
 '.rwd b{font-size:14px;display:block;color:#20242E}.rwd span{font-size:12px;color:#8A8272;display:block}'+
 '.rwd .rgo{margin-left:auto;flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:8px 14px;border-radius:18px;background:#20242E;color:#E3C795;cursor:pointer;white-space:nowrap}'+
 '.rwd .rgo.na{background:#F5EFE6;color:#AEA898;cursor:default}'+
-'.refbox{background:#FDF9F1;border:1px dashed #D9B87C;border-radius:16px;padding:18px 20px;margin-bottom:16px}'+
+'.refbox{background:#FDF9F1;border:1px dashed #D9B87C;border-radius:14px;padding:16px 18px}'+
 '.reflink{display:flex;gap:8px;margin-top:10px}'+
 '.reflink input{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:12.5px var(--mono);color:#6E6656;background:#fff;min-width:0}'+
-'.fdrs{display:flex;gap:10px;align-items:center;padding:10px 0}'+
+'.stars{display:flex;gap:6px;margin:6px 0 10px}'+
+'.stars span{font-size:26px;cursor:pointer;filter:grayscale(1);opacity:.45;transition:.15s}'+
+'.stars span.on{filter:none;opacity:1;transform:scale(1.08)}'+
+'.kud{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 12px}'+
+'.kud span{font-size:12.5px;padding:8px 14px;border-radius:18px;background:#F5EFE6;color:#6E6656;cursor:pointer;border:1px solid transparent}'+
+'.kud span.on{background:#20242E;color:#E3C795}'+
+'.fb-ta{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:14px var(--sans);color:#20242E;min-height:70px;resize:vertical;box-sizing:border-box}'+
+'.cbtn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;'+
+'padding:12px 22px;border-radius:24px;border:0;cursor:pointer;background:linear-gradient(90deg,#B0894F,#96703B);color:#fff;margin-top:10px}'+
+'.gr{display:flex;gap:12px;align-items:center;background:#F5F9FF;border:1px solid #D6E4F5;border-radius:12px;padding:12px 14px;margin-top:14px}'+
+'.gr b{font-size:13.5px;color:#20242E;display:block}.gr span{font-size:12px;color:#6E6656}'+
+'.gr .gbadge{margin-left:auto;flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#3E8E5A;background:#F0F8F2;border:1px solid #CBE3D3;padding:6px 10px;border-radius:10px;white-space:nowrap}'+
+'.fdrs{display:flex;gap:10px;align-items:center;padding:9px 0}'+
 '.fdrs img{width:44px;height:44px;border-radius:50%;object-fit:cover}'+
 '.fdrs b{display:block;font-size:14px;color:#20242E}.fdrs span{font-size:12px;color:#8A8272}'+
 '.fdrs a{margin-left:auto;font-family:var(--mono);font-size:11px;color:#96703B;text-decoration:none;border:1px solid #D9B87C;padding:7px 13px;border-radius:16px;white-space:nowrap}'+
@@ -118,10 +158,13 @@ var TSTYLE='<style>'+
 '.gate{max-width:430px;margin:110px auto;background:#fff;border-radius:18px;padding:34px 30px;text-align:center;border:1px solid var(--line)}'+
 '</style>';
 
-function jinNote(){
-  return '<div style="display:flex;gap:10px;align-items:center;background:#F7F2EA;border-radius:12px;padding:11px 14px;margin-top:12px">'+
-  '<span style="font-size:18px">✦</span><span style="font-size:12.5px;color:#6E6656">'+
-  '<b style="color:#20242E">Jin, our AI, watches this project 24/7</b> — updates land here the moment the team logs them. Questions? Message '+esc(C.pm)+' anytime.</span></div>';
+function accOpen(id){var st=0;try{st=localStorage.getItem('m5c_'+id);}catch(e){} return st===null?null:st==='1';}
+function acc(id, ic, ttl, hint, body, openDefault){
+  var saved=null; try{saved=localStorage.getItem('m5c_'+id);}catch(e){}
+  var isOpen = saved===null ? openDefault : saved==='1';
+  return '<details class="acc" id="acc_'+id+'"'+(isOpen?' open':'')+' ontoggle="try{localStorage.setItem(\'m5c_'+id+'\',this.open?\'1\':\'0\')}catch(e){}">'+
+  '<summary><div class="aic">'+ic+'</div><div class="att"><b>'+ttl+'</b><span>'+hint+'</span></div><span class="chev">▼</span></summary>'+
+  '<div class="abody">'+body+'</div></details>';
 }
 
 try{
@@ -138,18 +181,31 @@ if(!C){
   var ph=C.phases.map(function(p,i){return '<span class="'+(i<C.phase?'done':(i===C.phase?'on':''))+'">'+esc(p)+'</span>';}).join('');
   var tasks=C.tasks.map(function(t){var ic=t[0]==='done'?'✓':(t[0]==='now'?'●':'○');
     return '<div class="tsk '+t[0]+'"><i>'+ic+'</i><b>'+esc(t[1])+'</b><small>'+esc(t[2])+'</small></div>';}).join('');
+  var doneN=C.tasks.filter(function(t){return t[0]==='done';}).length;
   var cats=Object.keys(C.docs);
   var dtabs=cats.map(function(c,i){return '<span class="'+(i===0?'on':'')+'" onclick="docTab(this,\''+esc(c)+'\')">'+esc(c)+'</span>';}).join('');
   var docHtml=function(cat){return C.docs[cat].map(function(d){
     return '<div class="doc"><b>📄 '+esc(d[0])+'</b><small>'+esc(d[1])+'</small></div>';}).join('');};
+  var docsN=0; cats.forEach(function(c){docsN+=C.docs[c].length;});
   var mats=C.materials.map(function(m){
     return '<div class="mat"><img src="'+m.img+'" alt="" loading="lazy"><div class="mi"><b>'+esc(m.ttl)+'</b><span>'+esc(m.note)+'</span><br><em class="'+m.st+'">'+
     (m.st==='approved'?'Approved':(m.st==='review'?'Your review':'Coming up'))+'</em></div></div>';}).join('');
+  var needRev=C.materials.filter(function(m){return m.st==='review';}).length;
+  var svc=SERVICES.map(function(s,i){
+    return '<div class="svc"><img src="'+s.img+'" alt="" loading="lazy"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
+    '<div class="fr">'+esc(s.from)+'</div><div class="sa">'+
+    '<span class="sbtn go" onclick="reqSvc('+i+')">Request →</span>'+
+    '<a class="sbtn wa" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WhatsApp</a>'+
+    '</div></div></div>';}).join('');
   var hist=C.credits.hist.map(function(h){return '<div><b>'+esc(h[0])+'</b> '+esc(h[1])+'<small>'+esc(h[2])+'</small></div>';}).join('');
   var rwds=REWARDS.map(function(r,i){var ok=C.credits.bal>=r.cr;
     return '<div class="rwd"><div class="ric">'+r.ic+'</div><div><b>'+esc(r.ttl)+'</b><span>'+esc(r.sub)+'</span></div>'+
     '<span class="rgo'+(ok?'':' na')+'" '+(ok?('onclick="redeem('+i+')"'):'')+'>'+r.cr+' cr</span></div>';}).join('');
   var pct=Math.min(100,Math.round(C.credits.earned/C.credits.nextAt*100));
+  var kud=KUDOS.map(function(k,i){return '<span id="kud'+i+'" onclick="kudPick('+i+')">'+esc(k)+'</span>';}).join('');
+  var gRev=C.googleReview
+    ? '<div class="gr"><div style="font-size:20px">⭐</div><div><b>Loved the result? Tell Google.</b><span>2 minutes — and 50 credits land on your balance.</span></div><a class="gbadge" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(C.googleReview)+'">Review → +50 cr</a></div>'
+    : '<div class="gr"><div style="font-size:20px">⭐</div><div><b>Google reviews open soon</b><span>Leave one when we launch — and get +50 credits on your balance.</span></div><span class="gbadge">+50 cr</span></div>';
 
   document.getElementById('app').innerHTML=TSTYLE+
   '<header><div class="wrap hbar">'+
@@ -158,49 +214,47 @@ if(!C){
     '<a class="signout" href="/" style="text-decoration:none">m5miami.com</a></div>'+
   '</div></header>'+
   '<div class="wrap">'+
-    '<div class="chero"><div class="chero-in">'+
+    '<div class="chero">'+
       '<div class="ey">Your studio hub · everything in one place</div>'+
       '<h1>Hi, '+esc(C.name)+'.</h1>'+
-      '<div class="st">'+esc(C.project)+' · started '+esc(C.started)+' · PM: '+esc(C.pm)+'</div>'+
-    '</div></div>'+
-    '<div class="cph">'+ph+'</div>'+
-    '<div class="crow">'+
-      '<div>'+
-        '<div class="cbox"><h3>Project progress</h3>'+tasks+jinNote()+'</div>'+
-        '<div class="cbox"><h3>Documents</h3><div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div></div>'+
-        '<div class="cbox"><h3>Materials &amp; selections</h3><div class="mats">'+mats+'</div></div>'+
-        '<div class="cbox"><h3>How was our work this week?</h3>'+
-          '<div class="stars" id="stars">'+[1,2,3,4,5].map(function(n){return '<span onclick="starPick('+n+')">★</span>';}).join('')+'</div>'+
-          '<textarea class="fb-ta" id="fbText" placeholder="Anything on your mind — a quick “all good”, an idea, or a concern. It goes straight to the founders."></textarea>'+
-          '<button class="cbtn" onclick="sendFb()">Send feedback</button>'+
-          '<div class="okmsg" id="fbOk">Thank you! Your feedback just landed on the founders’ desk. We read every word.</div>'+
-        '</div>'+
-      '</div>'+
-      '<div>'+
-        '<div class="credbox">'+
-          '<div class="tier">◆ '+esc(C.credits.tier)+' tier · '+C.credits.rate+'% cashback</div>'+
-          '<div class="bal">'+C.credits.bal+' <small>credits available · 1 cr = $1</small></div>'+
-          '<div class="credbar"><i style="width:'+pct+'%"></i></div>'+
-          '<div class="nx">Earn '+(C.credits.nextAt-C.credits.earned)+' more to reach '+esc(C.credits.next)+' (3.5% cashback)</div>'+
-          '<div class="chist">'+hist+'</div>'+
-        '</div>'+
-        '<div class="cbox"><h3>Spend your credits</h3>'+
-          '<div style="font-size:12.5px;color:#8A8272;margin-bottom:8px">Every paid invoice earns '+C.credits.rate+'% back. Redeem for extra M5 services — we confirm within 24h.</div>'+
-          rwds+
-          '<div class="okmsg" id="rwOk">Request sent! '+esc(C.pm)+' will confirm and schedule it within 24 hours.</div>'+
-        '</div>'+
-        '<div class="refbox"><b style="font-size:15px;color:#20242E">🤝 Refer a friend — you both win</b>'+
-          '<div style="font-size:13px;color:#6E6656;margin-top:6px">You get <b>$250 in credits</b>, your friend gets <b>$250 off</b> their first invoice. Share your personal link:</div>'+
-          '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(slug)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
-          '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div>'+
-        '</div>'+
-        '<div class="cbox"><h3>Talk to us directly</h3>'+
-          '<div style="font-size:12.5px;color:#8A8272;margin-bottom:4px">Big idea? Concern? Skip the queue — message us directly.</div>'+
-          '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
-          '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a href="https://wa.me/17255770044">WhatsApp</a></div>'+
-        '</div>'+
-      '</div>'+
+      '<div class="st">'+esc(C.project)+' · started '+esc(C.started)+' · your PM: '+esc(C.pm)+'</div>'+
     '</div>'+
+    '<div class="cph">'+ph+'</div>'+
+    acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated live',
+      tasks+'<div class="jinn"><span style="font-size:18px">✦</span><span><b>Jin, our AI, watches this project 24/7</b> — updates land here the moment the team logs them.</span></div>', true)+
+    acc('mats','🧱','Materials & selections', needRev? needRev+' waiting for your review':'All approved',
+      '<div class="mats">'+mats+'</div>', needRev>0)+
+    acc('docs','📄','Documents', docsN+' files · reports, invoices, design',
+      '<div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div>', false)+
+    acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
+      '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">One team already on site = better price and zero coordination pain. Tap Request — '+esc(C.pm)+' texts you back today.</div>'+
+      '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">Request sent! '+esc(C.pm)+' will text you today with details.</div>', true)+
+    acc('cred','💎','Credits & rewards',C.credits.bal+' credits · '+C.credits.tier+' tier · '+C.credits.rate+'% cashback',
+      '<div class="credrow"><div class="credbox">'+
+        '<div class="tier">◆ '+esc(C.credits.tier)+' tier · '+C.credits.rate+'% cashback</div>'+
+        '<div class="bal">'+C.credits.bal+' <small>credits · 1 cr = $1</small></div>'+
+        '<div class="credbar"><i style="width:'+pct+'%"></i></div>'+
+        '<div class="nx">Earn '+(C.credits.nextAt-C.credits.earned)+' more to reach '+esc(C.credits.next)+' (3.5% cashback)</div>'+
+        '<div class="chist">'+hist+'</div></div>'+
+      '<div style="flex:1.2;min-width:260px">'+
+        '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 6px">Every paid invoice earns '+C.credits.rate+'% back. Spend on extra M5 services — we confirm within 24h.</div>'+
+        rwds+'<div class="okmsg" id="rwOk">Request sent! '+esc(C.pm)+' will confirm and schedule it within 24 hours.</div></div></div>', false)+
+    acc('ref','🤝','Refer a friend — you both get $250','Your personal link inside',
+      '<div class="refbox"><div style="font-size:13px;color:#6E6656">You get <b>$250 in credits</b>, your friend gets <b>$250 off</b> their first invoice. Share your personal link:</div>'+
+      '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(slug)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
+      '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false)+
+    acc('fb','💬','Feedback & reviews','30 seconds — it goes straight to the founders',
+      '<div style="font-size:13px;color:#6E6656;margin:2px 0 4px">How was our work this week?</div>'+
+      '<div class="stars" id="stars">'+[1,2,3,4,5].map(function(n){return '<span onclick="starPick('+n+')">★</span>';}).join('')+'</div>'+
+      '<div style="font-size:12.5px;color:#8A8272">Anyone on the team impress you? Tap to give kudos — it counts toward their bonus:</div>'+
+      '<div class="kud">'+kud+'</div>'+
+      '<textarea class="fb-ta" id="fbText" placeholder="Anything on your mind — a quick “all good”, an idea, or a concern."></textarea>'+
+      '<button class="cbtn" onclick="sendFb()">Send to the founders</button>'+
+      '<div class="okmsg" id="fbOk">Thank you! Your feedback just landed on the founders’ desk. We read every word.</div>'+
+      gRev, false)+
+    acc('talk','📞','Talk to us directly','Alex (founder) · '+esc(C.pm)+' (your PM)',
+      '<div class="fdrs"><img src="/img/ava_alex.jpg" alt=""><div><b>Alex</b><span>Founder · systems &amp; vision</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+      '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
   '<footer>M5 Interior Design &amp; Build · Miami · Powered by Jin, our AI</footer>';
 }
@@ -209,14 +263,23 @@ if(!C){
   '<a href="https://wa.me/17255770044" style="color:#96703B">Message us on WhatsApp</a></div>';
 }
 
-var fbStars=0;
+var fbStars=0, fbKud=-1;
 function starPick(n){fbStars=n;var s=document.querySelectorAll('#stars span');for(var i=0;i<s.length;i++){s[i].className=i<n?'on':'';}}
+function kudPick(i){fbKud=(fbKud===i)?-1:i;for(var j=0;j<KUDOS.length;j++){var el=document.getElementById('kud'+j);if(el)el.className=(j===fbKud)?'on':'';}}
 function sendFb(){
   var t=(document.getElementById('fbText').value||'').trim();
-  if(!fbStars&&!t)return;
-  if(window.m5hook)m5hook({type:'feedback',name:C?C.name:'',service:C?C.project:'',details:(fbStars?fbStars+'★ ':'')+t,source:'client-hub:'+slug});
-  document.getElementById('fbText').value='';starPick(0);
+  if(!fbStars&&!t&&fbKud<0)return;
+  var d=(fbStars?fbStars+'★':'')+(fbKud>=0?' · Kudos: '+KUDOS[fbKud]:'')+(t?' · '+t:'');
+  if(window.m5hook)m5hook({type:'feedback',name:C?C.name:'',service:C?C.project:'',details:d,source:'client-hub:'+slug});
+  document.getElementById('fbText').value='';starPick(0);kudPick(-1);kudPick(-1);
   var ok=document.getElementById('fbOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},6000);
+}
+function reqSvc(i){
+  var s=SERVICES[i];if(!s)return;
+  if(window.m5hook)m5hook({type:'service',name:C?C.name:'',phone:'',service:s.ttl,details:'Client Hub upsell · '+(C?C.project:'')+' · '+s.from,source:'client-hub-upsell:'+slug});
+  var ok=document.getElementById('svcOk');ok.style.display='block';
+  try{ok.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}
+  setTimeout(function(){ok.style.display='none';},7000);
 }
 function redeem(i){
   var r=REWARDS[i];if(!r)return;
