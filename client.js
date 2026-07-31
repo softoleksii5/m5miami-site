@@ -207,8 +207,10 @@ var TSTYLE='<style>'+
 '.svm-step i{font-style:normal;min-width:24px;height:24px;border-radius:50%;background:#F5EFE6;color:#96703B;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;flex:none;margin-top:1px}'+
 '.svm-incl{background:#FBF7EF;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#6E6656}'+
 '.svm-a{display:flex;gap:10px;margin-top:16px}'+
-'.band{height:190px;border-radius:20px;margin:2px 0 16px;background-position:center;background-size:cover;box-shadow:0 4px 18px rgba(60,48,30,.10)}'+
-'@media(max-width:680px){.band{height:120px}}'+
+'.band{width:100vw;margin:-70px 0 -240px calc(50% - 50vw);height:480px;background-position:center;background-size:cover;position:relative;z-index:0;pointer-events:none}'+
+'.band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#FAF6EE 0%,rgba(250,246,238,.34) 26%,rgba(250,246,238,.10) 48%,rgba(250,246,238,.45) 74%,#FAF6EE 100%)}'+
+'.acc{position:relative;z-index:1}'+
+'@media(max-width:680px){.band{height:300px;margin:-50px 0 -170px calc(50% - 50vw)}}'+
 '.bagrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}'+
 '@media(max-width:680px){.bagrid{grid-template-columns:1fr}}'+
 '.bapair{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line)}'+
@@ -296,7 +298,7 @@ if(!C){
       '<div class="mats">'+mats+'</div>', needRev>0)+
     acc('docs','📄','Documents', docsN+' files · reports, invoices, design',
       '<div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div>', false)+
-    '<div class="band" style="background-image:linear-gradient(180deg,rgba(250,246,238,.18),rgba(250,246,238,.05) 40%,rgba(250,246,238,.22)),url(/img/band_kitchen.jpg)"></div>'+
+    '<div class="band" style="background-image:url(/img/band_kitchen.jpg)"></div>'+
     acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
       '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">Tap any card for details. One team already on site = better price, zero coordination pain.</div>'+
       '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">Request sent! '+esc(C.pm)+' will text you today with details.</div>', true)+
@@ -314,7 +316,7 @@ if(!C){
       '<div class="refbox"><div style="font-size:13px;color:#6E6656">You get <b>$250 in credits</b>, your friend gets <b>$250 off</b> their first invoice. Share your personal link:</div>'+
       '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(slug)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
       '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false)+
-    '<div class="band" style="background-image:linear-gradient(180deg,rgba(250,246,238,.14),rgba(250,246,238,.04) 45%,rgba(250,246,238,.2)),url(/img/band_plaster.jpg)"></div>'+
+    '<div class="band" style="background-image:url(/img/band_plaster.jpg)"></div>'+
     acc('fb','💬','Feedback & reviews','30 seconds — it goes straight to the founders',
       '<div style="font-size:13px;color:#6E6656;margin:2px 0 4px">How was our work this week?</div>'+
       '<div class="stars" id="stars">'+[1,2,3,4,5].map(function(n){return '<span onclick="starPick('+n+')">★</span>';}).join('')+'</div>'+
