@@ -46,7 +46,6 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
-      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -59,7 +58,6 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
-      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
@@ -83,7 +81,6 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM',t:'JobTread',link:'jobtread'},
-      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {b:'openphone',k:'Calls',t:'OpenPhone',link:'openphone'},
       {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
       {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch'},
@@ -110,7 +107,6 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
-      {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
       {ic:'📐',k:'Supervision',t:'Site QC'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {b:'drive',k:'Drive',t:'Docs & photos',link:'drive'},
@@ -447,7 +443,7 @@ var ALEXTODO=[
  ['done','JobTread — связь работает, демо-мусор вычищен','Заявки с сайта создают Customer+Contact+Job автоматически. Клод получил доступ на запись (scripts/jt_api.sh) и удалил демо-джобы Taras — SLA-алерты остановлены.'],
  ['todo','Apps Script — вставить готовый файл (3 мин)','Всё собрано одним copy-paste: M5/4 Рабочие/AppsScript_M5Hub_v13_вставить.gs — фидбек в Partners, SLA тише и без дублей, Jin без Monday. Инструкция в шапке файла, шаг за шагом.'],
  ['todo','Drive: папка Visa (2 клика)','Company Drive → New → Folder «Visa» → Share → только alex@, vlad@, vadim@ (Restricted). Для документов E-2/парол — только вы трое.','m'],
- ['todo','Договор с Владом → в Drive → 06 Legal','Перетащи подписанный PDF «05_Партнёрство…». Плитка «Partnership agreement» (видна только тебе и Владу) уже ведёт туда.','m'],
+ ['todo','Договор с Владом → приватная папка в Drive','В 06 Legal НЕЛЬЗЯ (там доступ у Вадима). Сделай: My Drive → New Folder «Partnership — Alex + Vlad» → Share → только vlad@m5miami.com → залей подписанный PDF. Блок в кабинете уже указывает туда.','m'],
  ['todo','Дать Клоду запись в Google Drive (2 мин)','Сейчас у Клода Drive только на чтение — папки/файлы создавать не может. Скажи «настроим Drive» — пройдём OAuth один раз, и такие задачи он будет закрывать сам.','m'],
  ['todo','Apps Script — вставить патч Клода (вместе, 10 мин)','Роутинг feedback/idea/redeem в Partners-топик + Jin-ветка для клиентов. Готовый код: M5/4 Рабочие документы/AppsScript_M5Hub_patch_кабинеты.md. Открыть script.google.com под alex@ — дальше по шагам с Клодом (там ловушка с сохранением).'],
  ['done','Показать команде кабинет клиента','Пост с демо-ссылкой и видео-туториалом ушёл в M5 Team → Pulse & Wins (31.07).','m'],
@@ -678,12 +674,16 @@ var CLIENTHUBS=[
   try{
     if(role!=='founder'&&role!=='director')return;
     var el=document.getElementById('clientsSec'); if(!el)return;
-    var h='<details class="stackbox" open><summary><span>👥 Clients · hubs</span><span class="stk-hint">'+CLIENTHUBS.length+' · полный доступ для фаундеров и директора</span></summary><div class="stack">';
-    for(var i=0;i<CLIENTHUBS.length;i++){
-      var c=CLIENTHUBS[i];
-      h+='<a class="stk" href="/client/?p='+c.slug+'"><b>'+c.name+' <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#B0894F;border:1px solid #D9B87C;border-radius:8px;padding:2px 7px;margin-left:6px">'+c.status+'</span></b><span>'+c.project+' · открыть кабинет клиента →</span></a>';
+    var row=function(c){return '<a class="stk" href="/client/?p='+c.slug+'"><b>'+c.name+' <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#B0894F;border:1px solid #D9B87C;border-radius:8px;padding:2px 7px;margin-left:6px">'+c.status+'</span></b><span>'+c.project+' · открыть кабинет →</span></a>';};
+    var h='<details class="stackbox" open><summary><span>👥 Clients · панель управления</span><span class="stk-hint">'+CLIENTHUBS.length+' всего · показаны последние '+Math.min(5,CLIENTHUBS.length)+'</span></summary><div class="stack">';
+    var recent=CLIENTHUBS.slice(0,5);
+    for(var i=0;i<recent.length;i++){ h+=row(recent[i]); }
+    if(CLIENTHUBS.length>5){
+      h+='<details class="pl"><summary>📁 Все клиенты ('+CLIENTHUBS.length+')</summary><div style="padding:4px 0 4px 10px">';
+      for(var j=5;j<CLIENTHUBS.length;j++){ h+=row(CLIENTHUBS[j]); }
+      h+='</div></details>';
     }
-    h+='<div class="lsn" style="color:#8A8272">Каждому клиенту выдаём персональную ссылку. Новый клиент — скажи Клоду «заведи кабинет для …» — появится здесь и у клиента.</div>';
+    h+='<div class="lsn" style="color:#8A8272">Отсюда вы (Алекс, Влад, Вадим) заходите в кабинет любого клиента и видите его глазами. Новый клиент — скажи Клоду «заведи кабинет для …»; правки данных — тоже через Клода. Новые добавляются наверх, старые уходят в «Все клиенты».</div>';
     h+='</div></details>';
     el.innerHTML=h;
   }catch(e){}
@@ -703,7 +703,7 @@ var CLIENTHUBS=[
       var el=document.getElementById('clientsSec'); if(!el)return;
       var d=document.createElement('div');
       d.innerHTML='<details class="stackbox"><summary><span>🤝 Alex + Vlad · Partnership</span><span class="stk-hint">только совладельцы</span></summary><div class="stack">'+
-      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Company Drive → папка 06 Legal · роли, инвестиции, выгорание, выход</span></a>'+
+      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Drive → приватная папка «Partnership — Alex + Vlad» (доступ только у вас двоих; в 06 Legal не кладём — там есть Вадим)</span></a>'+
       '</div></details>';
       el.appendChild(d.firstChild);
     });
