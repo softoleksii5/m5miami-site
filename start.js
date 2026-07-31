@@ -634,14 +634,14 @@ var ROADMAP=[
     var el=document.getElementById('kpiSec'); if(!el)return;
     var opened=false; try{opened=localStorage.getItem('m5_kpi_open')==='1';}catch(e){}
     var isDir=(role==='director');
-    var ht='<details class="stackbox"'+(isDir?' open':'')+'><summary><span>📖 Как вести проект · 3 шага</span><span class="stk-hint">просто и каждый день одинаково</span></summary><div class="stack">';
+    var ht='<details class="stackbox"'+(isDir?' open':'')+'><summary><span>📖 Как вести проект · 3 шага</span><span class="stk-hint">ежедневный ритм</span></summary><div class="stack">';
     ht+='<div class="lsn"><b>0 · Старт проекта.</b> Договор подписан → PDF в Drive: <b>02 Projects → имя проекта → 01 Contract</b> → сообщение в Projects «Договор подписан: имя · адрес · старт». Дальше Клод заводит кабинет клиента, SMM снимает «до» (папка 02 Before). Полная инструкция по ролям: Кто_чем_пользуется + Документооборот (4 Рабочие документы).</div>';
     ht+='<div class="lsn"><b>1 · Днём — фото и видео с объекта → Google Drive.</b> Открой плитку Drive → папка <b>02 Projects → имя проекта</b> → кидай всё сырьё туда (и для клиента, и для соцсетей). Заходить только с рабочей почты @m5miami.com.</div>';
     ht+='<div class="lsn"><b>2 · Вечером — 2 минуты в Telegram.</b> В «M5 Team» → топик <b>Projects</b>: голосовое или пару строк — что сделали сегодня, что завтра, что нужно. Всё, отчёт сдан.</div>';
     ht+='<div class="lsn"><b>3 · Дальше — Джин и Клод.</b> Мы переносим статус в <b>кабинет клиента</b> — клиент видит галочки и фото сам, тебе руками ничего заполнять не надо. После подключения JobTread шаг 2 станет отчётом прямо в его приложении с фото — кабинет клиента обновится автоматически.</div>';
     ht+='<div class="lsn" style="color:#8A8272">Деньги и счета — <b>QuickBooks</b> (плитка Finance): там работает онлайн-бухгалтер, мы туда только загружаем чеки. Вопросы в любой момент — Джину наверху или Алексу.</div>';
     ht+='</div></details>';
-    var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">для будущих сотрудников · включим с первыми наймами</span></summary><div class="stack">';
+    var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">включим с первыми наймами</span></summary><div class="stack">';
     h+='<div class="lsn" style="margin-bottom:10px"><b>Для кого это:</b> для сотрудников, которых наберём — sales, SMM, мастера. <b>Как работает:</b> Jin собирает факты из JobTread (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
     h+='<div class="stk-g">Правила игры</div>';
     h+='<div class="lsn"><b>1 · Правило Shopify.</b> Прежде чем просить бюджет, часы или подрядчика — покажи, что Jin не может сделать это сам.</div>';
@@ -676,7 +676,7 @@ var CLIENTHUBS=[
     if(role!=='founder'&&role!=='director')return;
     var el=document.getElementById('clientsSec'); if(!el)return;
     var row=function(c){return '<a class="stk" href="/client/?p='+c.slug+'"><b>'+c.name+' <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#B0894F;border:1px solid #D9B87C;border-radius:8px;padding:2px 7px;margin-left:6px">'+c.status+'</span></b><span>'+c.project+' · открыть кабинет →</span></a>';};
-    var h='<details class="stackbox" open><summary><span>👥 Clients · панель управления</span><span class="stk-hint">'+CLIENTHUBS.length+' всего · показаны последние '+Math.min(5,CLIENTHUBS.length)+'</span></summary><div class="stack">';
+    var h='<details class="stackbox"'+(role==='director'?' open':'')+'><summary><span>👥 Clients · панель управления</span><span class="stk-hint">'+CLIENTHUBS.length+' · вход в кабинеты клиентов</span></summary><div class="stack">';
     var recent=CLIENTHUBS.slice(0,5);
     for(var i=0;i<recent.length;i++){ h+=row(recent[i]); }
     if(CLIENTHUBS.length>5){
@@ -749,14 +749,14 @@ var TEAMVIEW=[
     var el=document.getElementById('guideSec'); if(!el)return;
     var h='';
     if(ROLEGUIDE[role]){
-      h+='<details class="stackbox" open><summary><span>📖 Твоя инструкция · '+role+'</span><span class="stk-hint">шаги — коротко и по делу</span></summary><div class="stack">';
+      h+='<details class="stackbox" open><summary><span>📖 Твоя инструкция · '+role+'</span><span class="stk-hint">твои шаги</span></summary><div class="stack">';
       for(var i=0;i<ROLEGUIDE[role].length;i++){
         h+='<div class="lsn"><b>'+ROLEGUIDE[role][i][0]+'.</b> '+ROLEGUIDE[role][i][1]+'</div>';
       }
       h+='<div class="lsn" style="color:#8A8272">Вопросы — Джину наверху. Что-то неудобно — кнопка «⚡ Idea / Bug» справа внизу.</div></div></details>';
     }
     if(role==='director'||role==='founder'){
-      h+='<details class="stackbox"'+(role==='director'?' open':'')+'><summary><span>🧭 Команда · кто что делает</span><span class="stk-hint">вид сверху — '+TEAMVIEW.length+' ролей</span></summary><div class="stack">';
+      h+='<details class="stackbox"'+(role==='director'?' open':'')+'><summary><span>🧭 Команда · кто что делает</span><span class="stk-hint">'+TEAMVIEW.length+' ролей</span></summary><div class="stack">';
       for(var t=0;t<TEAMVIEW.length;t++){
         h+='<div class="lsn"><b>'+TEAMVIEW[t][0]+'</b> — '+TEAMVIEW[t][1]+'</div>';
       }

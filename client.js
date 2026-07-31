@@ -330,7 +330,7 @@ if(!C){
       '<div class="fdrs"><img src="/img/ava_vlad.jpg" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
       '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
-  '<footer>M5 Interior Design &amp; Build · Miami · Powered by Jin, our AI</footer>'+
+  '<footer>M5 · Interior Design &amp; Build · Miami</footer>'+
   '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
 }
 }catch(e){
