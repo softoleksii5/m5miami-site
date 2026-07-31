@@ -7,7 +7,7 @@
 var CLIENTS={
  'brickell-demo':{
    name:'David', project:'Brickell Residence — Full Renovation', status:'Active',
-   pm:'Vadym', pmPhone:'17255770044', started:'Sep 2026',
+   pm:'Vadym', pmPhone:'17864074441', started:'Sep 2026',
    phase:1, phases:['Design','Materials','Build','Styling','Handover'],
    googleReview:'', /* ссылка g.page появится после создания Google Business Profile */
    tasks:[
@@ -226,7 +226,7 @@ if(!C){
   '<b style="font-size:18px;color:#20242E">This is a private project hub.</b><br><br>'+
   '<span style="font-size:14px;color:#6E6656">Every M5 client receives a personal link from their project manager. '+
   'Lost yours? Message us on WhatsApp and we’ll resend it.</span><br><br>'+
-  '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17255770044">WhatsApp M5</a>'+
+  '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17864074441">WhatsApp M5</a>'+
   '<div style="margin-top:14px"><a href="/client/?p=brickell-demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#96703B;text-decoration:underline">SEE A DEMO PROJECT HUB →</a></div></div>'+
   '<footer>M5 Interior Design &amp; Build · Miami</footer>';
 }else{
@@ -313,7 +313,7 @@ if(!C){
 }
 }catch(e){
   document.getElementById('app').innerHTML='<div class="gate" style="margin-top:120px"><b>Something didn’t load.</b><br><br>'+
-  '<a href="https://wa.me/17255770044" style="color:#96703B">Message us on WhatsApp</a></div>';
+  '<a href="https://wa.me/17864074441" style="color:#96703B">Message us on WhatsApp</a></div>';
 }
 
 function svcOpen(i){
@@ -328,7 +328,7 @@ function svcOpen(i){
     '<div class="svm-st">How it works</div>'+steps+
     '<div class="svm-st">What’s included</div><div class="svm-incl">'+(s.incl||'')+'</div>'+
     '<div class="svm-a"><span class="sbtn go" style="flex:1" onclick="svcClose();reqSvc('+i+')">Request — '+ (C?esc(C.pm):'we') +' texts you today</span>'+
-    '<a class="sbtn wa" style="flex:0 0 auto;padding:11px 18px" target="_blank" rel="noopener" href="https://wa.me/'+(C?C.pmPhone:'17255770044')+'?text='+encodeURIComponent('Hi! This is '+(C?C.name:'')+'. I’m interested in: '+s.ttl)+'">WhatsApp</a></div>'+
+    '<a class="sbtn wa" style="flex:0 0 auto;padding:11px 18px" target="_blank" rel="noopener" href="https://wa.me/'+(C?C.pmPhone:'17864074441')+'?text='+encodeURIComponent('Hi! This is '+(C?C.name:'')+'. I’m interested in: '+s.ttl)+'">WhatsApp</a></div>'+
     '</div>';
   document.getElementById('svm').className='svm on';
 }

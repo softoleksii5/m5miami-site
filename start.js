@@ -429,6 +429,7 @@ var STACK=[
  ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
+ ['Связь','WhatsApp Business','+1 786 407 4441 — бизнес-номер: сайт, кабинет клиента, реклама','https://wa.me/17864074441'],
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
  ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/']
 ];
@@ -447,7 +448,7 @@ var ALEXTODO=[
  ['todo','Дать Клоду запись в Google Drive (2 мин)','Сейчас у Клода Drive только на чтение — папки/файлы создавать не может. Скажи «настроим Drive» — пройдём OAuth один раз, и такие задачи он будет закрывать сам.','m'],
  ['todo','Apps Script — вставить патч Клода (вместе, 10 мин)','Роутинг feedback/idea/redeem в Partners-топик + Jin-ветка для клиентов. Готовый код: M5/4 Рабочие документы/AppsScript_M5Hub_patch_кабинеты.md. Открыть script.google.com под alex@ — дальше по шагам с Клодом (там ловушка с сохранением).'],
  ['done','Показать команде кабинет клиента','Пост с демо-ссылкой и видео-туториалом ушёл в M5 Team → Pulse & Wins (31.07).','m'],
- ['todo','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая. openphone.com'],
+ ['done','US-номер есть: +1 786 407 4441 (WhatsApp Business)','Клод заменил номер на всём сайте и в кабинете клиента (31.07). Разблокированы: Google Business Profile, Meta-реклама — следующие шаги списка.'],
  ['todo','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
  ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
  ['todo','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
