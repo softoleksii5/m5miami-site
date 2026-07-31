@@ -20,7 +20,7 @@ var LINKS={
   playbook:'',
   video:'/media/m5_intro.mp4', // бренд-интро (Remotion, 24с)
   clienthub:'/client/?p=brickell-demo', // кабинет клиента — демо-проект (боевые слаги раздаёт PM)
-  legal:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // Company Drive → папка 06 Legal (договор партнёрства)
+  legal:'https://drive.google.com/drive/folders/1OFl-LaWf5ZMmKEyVsc1PjLdcKsJEBJmL', // приватная папка «Partnership — Alex + Vlad» (доступ ТОЛЬКО Алекс+Влад)
   tutorial:'/media/tutorial_system_ru.mp4' // видео-туториал «Как устроена система M5» (Remotion + Jin, 31.07)
 };
 
@@ -426,6 +426,7 @@ var STACK=[
  ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
+ ['AI & Dev','Drive API (полный)','Клод управляет Google Drive под alex@: папки, файлы, доступы (gdrive_api.sh)','https://drive.google.com/'],
  ['Связь','WhatsApp Business','+1 786 407 4441 — бизнес-номер: сайт, кабинет клиента, реклама','https://wa.me/17864074441'],
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
  ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/'],
@@ -442,9 +443,9 @@ var ALEXTODO_UPD='31.07 ночь';
 var ALEXTODO=[
  ['done','JobTread — связь работает, демо-мусор вычищен','Заявки с сайта создают Customer+Contact+Job автоматически. Клод получил доступ на запись (scripts/jt_api.sh) и удалил демо-джобы Taras — SLA-алерты остановлены.'],
  ['todo','Apps Script — вставить готовый файл (3 мин)','Всё собрано одним copy-paste: M5/4 Рабочие/AppsScript_M5Hub_v13_вставить.gs — фидбек в Partners, SLA тише и без дублей, Jin без Monday. Инструкция в шапке файла, шаг за шагом.'],
- ['todo','Drive: папка Visa (2 клика)','Company Drive → New → Folder «Visa» → Share → только alex@, vlad@, vadim@ (Restricted). Для документов E-2/парол — только вы трое.','m'],
- ['todo','Договор с Владом → приватная папка в Drive','В 06 Legal НЕЛЬЗЯ (там доступ у Вадима). Сделай: My Drive → New Folder «Partnership — Alex + Vlad» → Share → только vlad@m5miami.com → залей подписанный PDF. Блок в кабинете уже указывает туда.','m'],
- ['todo','Дать Клоду запись в Google Drive (2 мин)','Сейчас у Клода Drive только на чтение — папки/файлы создавать не может. Скажи «настроим Drive» — пройдём OAuth один раз, и такие задачи он будет закрывать сам.','m'],
+ ['done','Drive: папка Visa создана','Клод создал и расшарил только вам троим (alex@, vlad@, vadim@). Ссылка: drive.google.com/drive/folders/1Mg4ZMJtjJlcrS4eYj3jr3nrhm6CBR9po','m'],
+ ['done','Договор с Владом — в приватной папке Drive','Клод создал папку «Partnership — Alex + Vlad» (только ты и Влад) и загрузил подписанный PDF v3 от 22.07. Плитка в кабинете ведёт туда.','m'],
+ ['done','Клод получил полный доступ к Google Drive','OAuth под alex@m5miami.com (01.08). Теперь папки, файлы, доступы — сам: Visa и Partnership уже созданы.','m'],
  ['todo','Apps Script — вставить патч Клода (вместе, 10 мин)','Роутинг feedback/idea/redeem в Partners-топик + Jin-ветка для клиентов. Готовый код: M5/4 Рабочие документы/AppsScript_M5Hub_patch_кабинеты.md. Открыть script.google.com под alex@ — дальше по шагам с Клодом (там ловушка с сохранением).'],
  ['done','Показать команде кабинет клиента','Пост с демо-ссылкой и видео-туториалом ушёл в M5 Team → Pulse & Wins (31.07).','m'],
  ['done','US-номер есть: +1 786 407 4441 (WhatsApp Business)','Клод заменил номер на всём сайте и в кабинете клиента (31.07). Разблокированы: Google Business Profile, Meta-реклама — следующие шаги списка.'],
@@ -703,7 +704,7 @@ var CLIENTHUBS=[
       var el=document.getElementById('clientsSec'); if(!el)return;
       var d=document.createElement('div');
       d.innerHTML='<details class="stackbox"><summary><span>🤝 Alex + Vlad · Partnership</span><span class="stk-hint">только совладельцы</span></summary><div class="stack">'+
-      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Drive → приватная папка «Partnership — Alex + Vlad» (доступ только у вас двоих; в 06 Legal не кладём — там есть Вадим)</span></a>'+
+      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Подписанный PDF уже в приватной папке Drive — доступ только у вас двоих</span></a>'+
       '</div></details>';
       el.appendChild(d.firstChild);
     });
