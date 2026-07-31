@@ -195,6 +195,7 @@ document.getElementById('app').innerHTML=
   }).join('')+'</div>'+
   '<div id="planSec"></div>'+
   '<div id="lessonSec"></div>'+
+  '<div id="kpiSec"></div>'+
   '<div id="stackSec"></div>'+
 '</div>'+
 '<footer>M5 Interior Design &amp; Build · Miami · Private team hub</footer>'+
@@ -559,5 +560,82 @@ var ROADMAP=[
       if(ep&&ep.parentNode&&boxes.length>2){ ep.parentNode.insertBefore(boxes[0],ep); ep.parentNode.insertBefore(boxes[1],ep); }
       if(boxes[2])boxes[2].addEventListener('toggle',function(){ try{localStorage.setItem('m5_stack_open',boxes[2].open?'1':'0');}catch(e){} });
     });
+  }catch(e){}
+})();
+
+/* ═══ Кнопка «Идея / баг» — паттерн Игоря (emmpa): каждый в команде чинит систему.
+   Мелкое Клод правит сам, крупное уходит Алексу. Отправка через M5 Hub (тот же
+   endpoint, что Jin), type:'idea' — падает в Sheet + карточкой в Telegram. ═══ */
+(function(){
+  try{
+    var css='.fbx{position:fixed;right:18px;bottom:18px;z-index:60;font-family:var(--mono);font-size:11px;letter-spacing:.1em;'+
+    'text-transform:uppercase;background:#20242E;color:#E3C795;border-radius:24px;padding:12px 18px;cursor:pointer;'+
+    'box-shadow:0 8px 24px rgba(20,18,15,.28);border:1px solid rgba(227,199,149,.35)}'+
+    '.fbx:hover{background:#2C3140}'+
+    '.fbm{position:fixed;inset:0;background:rgba(20,18,15,.5);z-index:61;display:none;align-items:center;justify-content:center;padding:18px}'+
+    '.fbm.on{display:flex}'+
+    '.fbm-box{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:24px 24px 20px}'+
+    '.fbm-box b{font-size:17px;color:#20242E}'+
+    '.fbm-box p{font-size:12.5px;color:#8A8272;margin:6px 0 12px}'+
+    '.fbm-box textarea{width:100%;box-sizing:border-box;border:1px solid #EBE3D4;border-radius:12px;padding:12px;min-height:90px;font:14px var(--sans);color:#20242E;resize:vertical}'+
+    '.fbm-a{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}'+
+    '.fbm-a span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:20px;cursor:pointer}'+
+    '.fbm-send{background:linear-gradient(90deg,#B0894F,#96703B);color:#fff}'+
+    '.fbm-x2{color:#8A8272}'+
+    '.fbm-ok{display:none;background:#F0F8F2;border:1px solid #CBE3D3;color:#3E8E5A;border-radius:10px;padding:10px 14px;font-size:13px;margin-top:10px}';
+    var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+    var wrap=document.createElement('div');
+    wrap.innerHTML='<div class="fbx" onclick="fbOpen()">⚡ Идея / баг</div>'+
+    '<div class="fbm" id="fbm" onclick="if(event.target===this)fbClose()"><div class="fbm-box">'+
+    '<b>⚡ Report a bug or idea</b>'+
+    '<p>Что-то работает криво или есть идея, как сделать лучше? Пиши как есть — мелочь Клод починит сам, крупное попадёт к Алексу.</p>'+
+    '<textarea id="fbTxt" placeholder="Например: в кабинете не видно мой прогресс на телефоне…"></textarea>'+
+    '<div class="fbm-ok" id="fbmOk">Улетело! Спасибо — система станет лучше благодаря тебе 🙌</div>'+
+    '<div class="fbm-a"><span class="fbm-x2" onclick="fbClose()">Отмена</span><span class="fbm-send" onclick="fbSend()">Отправить</span></div>'+
+    '</div></div>';
+    document.body.appendChild(wrap);
+    window.fbOpen=function(){document.getElementById('fbm').className='fbm on';};
+    window.fbClose=function(){document.getElementById('fbm').className='fbm';};
+    window.fbSend=function(){
+      var t=(document.getElementById('fbTxt').value||'').trim(); if(!t)return;
+      var m=null; try{m=JSON.parse(localStorage.getItem('m5_member')||'null');}catch(e){}
+      var p={type:'idea',name:(m&&m.name)||'team member',email:(m&&m.email)||'',details:t,source:'cabinet:'+role};
+      try{var s=JSON.stringify(p); if(navigator.sendBeacon){navigator.sendBeacon(JIN_HOOK,s);}else{fetch(JIN_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s});}}catch(e){}
+      document.getElementById('fbTxt').value='';
+      var ok=document.getElementById('fbmOk');ok.style.display='block';
+      setTimeout(function(){ok.style.display='none';fbClose();},1800);
+    };
+  }catch(e){}
+})();
+
+/* ═══ Jin-KPI · пилот системы мотивации (founder + director).
+   Формула из ресёрча 31.07: Jin считает и ПРЕДЛАГАЕТ — человек утверждает —
+   сотрудник видит логику. Парные метрики против закона Гудхарта. ═══ */
+(function(){
+  try{
+    if(role!=='founder'&&role!=='director')return;
+    var el=document.getElementById('kpiSec'); if(!el)return;
+    var opened=false; try{opened=localStorage.getItem('m5_kpi_open')==='1';}catch(e){}
+    var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">пилот · включим после первых проектов</span></summary><div class="stack">';
+    h+='<div class="lsn" style="margin-bottom:10px"><b>Как это работает:</b> Jin собирает факты из JobTread и CRM (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
+    h+='<div class="stk-g">Правила игры</div>';
+    h+='<div class="lsn"><b>1 · Правило Shopify.</b> Прежде чем просить бюджет, часы или подрядчика — покажи, что Jin не может сделать это сам.</div>';
+    h+='<div class="lsn"><b>2 · Пятница, 15 минут.</b> Каждый показывает одну вещь, сделанную с Jin за неделю. Jin сам собирает дайджест побед в Пульс.</div>';
+    h+='<div class="lsn"><b>3 · Нашёл экономию — забери долю.</b> Придумал, как Jin экономит часы или деньги — получаешь 20% экономии первого месяца бонусом.</div>';
+    h+='<div class="stk-g" style="margin-top:12px">Метрики всегда парами · чтобы не было накруток</div>';
+    h+='<div class="lsn">⚡ Скорость ответа лиду <b>+</b> конверсия в замер · 📋 Задачи через Jin <b>+</b> доля переделок · 📐 AI-сметы <b>+</b> точность против факта</div>';
+    h+='<div class="stk-g" style="margin-top:12px">Так будет выглядеть карточка от Jin</div>';
+    h+='<div style="background:#20242E;border-radius:14px;padding:16px 18px;color:#fff;margin-top:6px">'+
+       '<div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E3C795">✦ Jin · предложение бонуса</div>'+
+       '<div style="font-size:15px;margin-top:8px"><b>Вадим</b> · октябрь: 9 из 9 отчётов вовремя, лиды — ответ в среднем 11 мин (цель 15), переделок 0.</div>'+
+       '<div style="font-size:20px;font-weight:800;margin-top:6px;color:#7ED9A0">Рекомендую: +$400 <span style="font-size:12px;color:#AEA898;font-weight:600">(gross · ~$310 на руки)</span></div>'+
+       '<div style="display:flex;gap:8px;margin-top:10px">'+
+       '<span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:8px 16px;border-radius:16px;background:#7ED9A0;color:#0d3532">✓ Утвердить</span>'+
+       '<span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:8px 16px;border-radius:16px;background:rgba(255,255,255,.12);color:#CFC8B8">Изменить</span></div>'+
+       '<div style="font-size:11px;color:#8A8272;margin-top:10px">Финальное решение — за руководителем. Каждая выплата — в журнале. Не согласен с оценкой — кнопка «оспорить» в твоём кабинете.</div></div>';
+    h+='</div></details>';
+    el.innerHTML=h;
+    var box=document.getElementById('kpiBox');
+    if(box)box.addEventListener('toggle',function(){try{localStorage.setItem('m5_kpi_open',box.open?'1':'0');}catch(e){}});
   }catch(e){}
 })();
