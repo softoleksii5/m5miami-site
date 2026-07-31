@@ -141,16 +141,17 @@ var TSTYLE='<style>'+
 '.mat .mi{padding:10px 12px}.mat b{font-size:13.5px;display:block;color:#20242E}.mat span{font-size:12px;color:#8A8272}'+
 '.mat em{display:inline-block;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:8px;margin-top:7px}'+
 '.mat em.approved{background:#F0F8F2;color:#3E8E5A}.mat em.review{background:#FDF3E2;color:#B0894F}.mat em.todo{background:#F5EFE6;color:#AEA898}'+
-'.svcs{display:grid;grid-template-columns:1fr 1fr;gap:14px}'+
-'@media(max-width:680px){.svcs{grid-template-columns:1fr}}'+
+'.svcs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}'+
+'@media(max-width:1100px){.svcs{grid-template-columns:repeat(3,1fr)}}'+
+'@media(max-width:680px){.svcs{grid-template-columns:repeat(2,1fr)}}'+
 '.svc{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column}'+
-'.svc img{width:100%;height:130px;object-fit:cover;display:block}'+
-'.svc .si{padding:13px 15px 15px;display:flex;flex-direction:column;flex:1}'+
-'.svc b{font-size:15.5px;color:#232733;letter-spacing:-.01em}'+
-'.svc p{font-size:12.5px;color:#6E6656;margin:5px 0 8px;line-height:1.45;flex:1}'+
-'.svc .fr{font-family:var(--mono);font-size:11px;color:#96703B;letter-spacing:.06em;margin-bottom:10px}'+
-'.svc .sa{display:flex;gap:8px}'+
-'.sbtn{flex:1;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:11px 8px;border-radius:20px;cursor:pointer;border:0;text-decoration:none}'+
+'.svc img{width:100%;height:68px;object-fit:cover;display:block}'+
+'.svc .si{padding:9px 11px 11px;display:flex;flex-direction:column;flex:1}'+
+'.svc b{font-size:12.5px;color:#232733;letter-spacing:-.01em;line-height:1.25}'+
+'.svc p{display:none}'+
+'.svc .fr{font-family:var(--mono);font-size:9.5px;color:#96703B;letter-spacing:.04em;margin:4px 0 8px;flex:1}'+
+'.svc .sa{display:flex;gap:6px}'+
+'.sbtn{flex:1;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:8px 6px;border-radius:16px;cursor:pointer;border:0;text-decoration:none;white-space:nowrap}'+
 '.sbtn.go{background:linear-gradient(90deg,#B0894F,#96703B);color:#fff}'+
 '.sbtn.wa{border:1px solid #25D366;color:#1faa52;background:#fff}'+
 '.credrow{display:flex;gap:16px;align-items:stretch;flex-wrap:wrap}'+
@@ -245,7 +246,7 @@ if(!C){
     return '<div class="svc" onclick="svcOpen('+i+')" style="cursor:pointer"><img src="'+s.img+'" alt="" loading="lazy"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
     '<div class="fr">'+esc(s.from)+'</div><div class="sa">'+
     '<span class="sbtn go" onclick="event.stopPropagation();reqSvc('+i+')">Request →</span>'+
-    '<a class="sbtn wa" onclick="event.stopPropagation()" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WhatsApp</a>'+
+    '<a class="sbtn wa" onclick="event.stopPropagation()" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WA</a>'+
     '</div></div></div>';}).join('');
   var hist=C.credits.hist.map(function(h){return '<div><b>'+esc(h[0])+'</b> '+esc(h[1])+'<small>'+esc(h[2])+'</small></div>';}).join('');
   var rwds=REWARDS.map(function(r,i){var ok=C.credits.bal>=r.cr;
@@ -277,7 +278,7 @@ if(!C){
     acc('docs','📄','Documents', docsN+' files · reports, invoices, design',
       '<div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div>', false)+
     acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
-      '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">One team already on site = better price and zero coordination pain. Tap Request — '+esc(C.pm)+' texts you back today.</div>'+
+      '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">Tap any card for details. One team already on site = better price, zero coordination pain.</div>'+
       '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">Request sent! '+esc(C.pm)+' will text you today with details.</div>', true)+
     acc('cred','💎','Credits & rewards',C.credits.bal+' credits · '+C.credits.tier+' tier · '+C.credits.rate+'% cashback',
       '<div class="credrow"><div class="credbox">'+

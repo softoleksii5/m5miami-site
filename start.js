@@ -20,6 +20,7 @@ var LINKS={
   playbook:'',
   video:'/media/m5_intro.mp4', // бренд-интро (Remotion, 24с)
   clienthub:'/client/?p=brickell-demo', // кабинет клиента — демо-проект (боевые слаги раздаёт PM)
+  legal:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // Company Drive → папка 06 Legal (договор партнёрства)
   tutorial:'/media/tutorial_system_ru.mp4' // видео-туториал «Как устроена система M5» (Remotion + Jin, 31.07)
 };
 
@@ -46,7 +47,7 @@ var ROLES={
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
-      {ic:'🎓',k:'Обучение',t:'Как устроена система',link:'tutorial'},
+      {ic:'🤝',k:'Alex + Vlad',t:'Partnership agreement',link:'legal'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
       {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
       {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
@@ -60,7 +61,6 @@ var ROLES={
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {ic:'💎',k:'Client experience',t:'Client Hub (demo)',link:'clienthub'},
-      {ic:'🎓',k:'Обучение',t:'Как устроена система',link:'tutorial'},
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
@@ -435,12 +435,14 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='31.07';
+var ALEXTODO_UPD='31.07 вечер';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
- ['todo','JobTread — включить подписку ($279/мес, помесячно)','30 дней money-back. После оплаты скажи Клоду — он подключит Jin через их AI Connector, и кабинет клиента начнёт тянуть реальные данные. jobtread.com/pricing'],
+ ['done','JobTread — подписка активна, связь РАБОТАЕТ','Проверено 31.07: заявки с сайта создают Customer + Contact + Job через API автоматически. Организация «M5» подключена.'],
+ ['todo','JobTread: удалить 3 демо-джоба «Taras»','В JobTread: Jobs → три «Taras» от 31.07 → Delete (и 3 клиента «Taras — …» в Customers). Либо скажи Клоду «разрешаю запись в JobTread» — вычистит сам. Пока они висят — SLA-алерты будут капать.','m'],
+ ['todo','Договор с Владом → в Company Drive','Перетащи подписанный PDF «05_Партнёрство…» в Drive → папка 06 Legal. Плитка «Partnership agreement» в кабинете уже ведёт туда.','m'],
  ['todo','Apps Script — вставить патч Клода (вместе, 10 мин)','Роутинг feedback/idea/redeem в Partners-топик + Jin-ветка для клиентов. Готовый код: M5/4 Рабочие документы/AppsScript_M5Hub_patch_кабинеты.md. Открыть script.google.com под alex@ — дальше по шагам с Клодом (там ловушка с сохранением).'],
  ['todo','Показать Владу кабинет клиента','m5miami.com/client/?p=brickell-demo — демо-проект. Кредиты 3%, реферал $250/$250, фидбек. Это наш ответ «как у больших».','m'],
  ['todo','OpenPhone — US-номер (~$15/мес)','Первый шаг: разблокирует Google Business, рекламу и сайт. 10 минут, работает из Дубая. openphone.com'],
@@ -597,13 +599,13 @@ var ROADMAP=[
     '.fbm-ok{display:none;background:#F0F8F2;border:1px solid #CBE3D3;color:#3E8E5A;border-radius:10px;padding:10px 14px;font-size:13px;margin-top:10px}';
     var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
     var wrap=document.createElement('div');
-    wrap.innerHTML='<div class="fbx" onclick="fbOpen()">⚡ Идея / баг</div>'+
+    wrap.innerHTML='<div class="fbx" onclick="fbOpen()">⚡ Idea / Bug</div>'+
     '<div class="fbm" id="fbm" onclick="if(event.target===this)fbClose()"><div class="fbm-box">'+
     '<b>⚡ Report a bug or idea</b>'+
-    '<p>Что-то работает криво или есть идея, как сделать лучше? Пиши как есть — мелочь Клод починит сам, крупное попадёт к Алексу.</p>'+
-    '<textarea id="fbTxt" placeholder="Например: в кабинете не видно мой прогресс на телефоне…"></textarea>'+
-    '<div class="fbm-ok" id="fbmOk">Улетело! Спасибо — система станет лучше благодаря тебе 🙌</div>'+
-    '<div class="fbm-a"><span class="fbm-x2" onclick="fbClose()">Отмена</span><span class="fbm-send" onclick="fbSend()">Отправить</span></div>'+
+    '<p>Something broken, or an idea to make M5 better? Write it as is. It goes straight to Alex &amp; Claude (our AI engineer): small fixes ship fast, bigger changes get approved first.</p>'+
+    '<textarea id="fbTxt" placeholder="e.g. On my phone the progress bar is cut off…"></textarea>'+
+    '<div class="fbm-ok" id="fbmOk">Sent! Thank you — the system gets better because of you 🙌</div>'+
+    '<div class="fbm-a"><span class="fbm-x2" onclick="fbClose()">Cancel</span><span class="fbm-send" onclick="fbSend()">Send</span></div>'+
     '</div></div>';
     document.body.appendChild(wrap);
     window.fbOpen=function(){document.getElementById('fbm').className='fbm on';};
@@ -636,7 +638,7 @@ var ROADMAP=[
     ht+='<div class="lsn" style="color:#8A8272">Деньги и счета — <b>QuickBooks</b> (плитка Finance): там работает онлайн-бухгалтер, мы туда только загружаем чеки. Вопросы в любой момент — Джину наверху или Алексу.</div>';
     ht+='</div></details>';
     var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">для будущих сотрудников · включим с первыми наймами</span></summary><div class="stack">';
-    h+='<div class="lsn" style="margin-bottom:10px"><b>Для кого это:</b> для сотрудников, которых наберём — sales, SMM, мастера. У фаундеров и у Вадима-директора свои договорённости — их этот блок не касается. <b>Как работает:</b> Jin собирает факты из JobTread (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
+    h+='<div class="lsn" style="margin-bottom:10px"><b>Для кого это:</b> для сотрудников, которых наберём — sales, SMM, мастера. <b>Как работает:</b> Jin собирает факты из JobTread (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
     h+='<div class="stk-g">Правила игры</div>';
     h+='<div class="lsn"><b>1 · Правило Shopify.</b> Прежде чем просить бюджет, часы или подрядчика — покажи, что Jin не может сделать это сам.</div>';
     h+='<div class="lsn"><b>2 · Пятница, 15 минут.</b> Каждый показывает одну вещь, сделанную с Jin за неделю. Jin сам собирает дайджест побед в Пульс.</div>';

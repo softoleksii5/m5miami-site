@@ -346,6 +346,10 @@ function renderTrack(who){
     '<div class="hero"><div class="k">' + (P.pv ? 'Предпросмотр · так это увидит новый сотрудник' : esc(P.role)) + '</div>' +
     '<h1>' + (P.pv ? 'Трек роли: ' + esc(P.name) : esc(P.name) + ', начнём.') + '</h1>' +
     '<p>' + esc(T.lead) + '</p></div>' +
+    '<div style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0 18px">' +
+      '<div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#96703B;margin-bottom:10px">🎓 Сначала посмотри · 2 минуты</div>' +
+      '<video controls preload="metadata" playsinline style="width:100%;border-radius:12px;display:block;background:#15110d" src="/media/tutorial_system_ru.mp4"></video>' +
+      '<div style="font-size:12.5px;color:#8A8272;margin-top:8px">Как устроена вся система M5: сайт → лиды → кабинеты → Drive → кабинет клиента. Озвучил Jin.</div></div>' +
     '<div class="bar"><div class="bt"><span>Прогресс</span><b id="pct">0 / ' + items.length + '</b></div>' +
       '<div class="track"><div class="fill" id="fill"></div></div>' +
       '<div class="done-msg" id="dm">Готово. Система настроена — дальше она работает сама.</div></div>' +
