@@ -13,6 +13,9 @@ var LINKS={
   jobtread:'https://app.jobtread.com/', // операционное ядро: лиды→сметы→производство
   whatsapp:'https://wa.me/17864074441', // бизнес-номер M5 (WhatsApp Business)
   permits:'https://www.miamidade.gov/permits/', // разрешения Miami-Dade
+  expenses:'https://docs.google.com/spreadsheets/d/1kn88ENlBpt1_hE9y5MIIncKgqjk_9iah6jhJFOBOM8c/edit', // живая таблица расходов (Drive → 04 Finance)
+  receipts:'https://drive.google.com/drive/folders/1pxf-z-hO8cYtPl0TEZaMvAtJAtxc4CbZ',      // папка «Чеки — фото и PDF»
+  visaVadim:'https://drive.google.com/drive/folders/1SlaE1h7tWicXY49TJwYn339aMGsxZ3Sr',     // Visa — Vadim (доступ: Алекс, Влад, Вадим)
   quickbooks:'',
   heygen:'',
   houzz:'https://pro.houzz.com/', // маркетинг-канал: профиль+отзывы (софт-тариф НЕ берём)
@@ -219,7 +222,7 @@ function pulseHtml(){
     {i:'plLeads',k:'Leads · 7d',v:'…',d:'считаю…',s:'все источники',url:LINKS.jobtread},
     {i:'plPipe',k:'Pipeline',v:'…',d:'считаю…',s:'JobTread',url:LINKS.jobtread},
     {i:'plBook',k:'Booking rate',v:'…',d:'лид → смета',s:'JobTread',url:LINKS.jobtread},
-    {i:'plExp',k:'Расходы',v:'…',d:'считаю…',s:'реестр · веду я',url:LINKS.drive}
+    {i:'plExp',k:'Расходы',v:'…',d:'считаю…',s:'открыть таблицу',url:LINKS.expenses}
   ];
   return '<div class="sec">Company pulse · 7 days</div><div class="pulsegrid">'+P.map(function(p){
     return '<a class="ptile"'+(p.i?' id="'+p.i+'"':'')+' href="'+p.url+'" target="_blank" rel="noopener"><div class="pk">'+p.k+'</div><b>'+p.v+'</b><div class="pdelta">'+p.d+'</div><small>'+(p.s||'')+'</small></a>';}).join('')+'</div>';
@@ -303,6 +306,7 @@ document.getElementById('app').innerHTML=
     var open2=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
     return '<a class="tile" style="--bc:'+col+'" '+open2+'>'+icon+'<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b></a>';
   }).join('')+'</div></details>'):'')+
+  '<div id="expSec"></div>'+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+
   '<div id="planSec"></div>'+
@@ -469,6 +473,7 @@ var EPLAN_HINTS=[
     var eDone=0,eAll=0;
     for(var ex=0;ex<EPLAN.length;ex++)for(var ey=0;ey<EPLAN[ex].items.length;ey++){var es=EPLAN[ex].items[ey][0]; if(es==='✅'||es==='⬜'||es==='⚠️'){eAll++; if(es==='✅')eDone++;}}
     var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>🗓 План E-2 · август → ноябрь</span><span class="stk-hint">'+eDone+'/'+eAll+' · обновлено '+EPLAN_UPD+'</span></summary><div class="stack">';
+    h+='<a class="stk" href="'+LINKS.visaVadim+'" target="_blank" rel="noopener" style="margin-top:10px"><b>🛂 Visa — Vadim (документы Вадима)</b><span>Вадим загружает сюда паспорт, диплом, опыт, финансы · доступ: Алекс, Влад, Вадим · внутри инструкция «читать первым»</span></a>';
     h+='<div class="lsn" style="margin-top:10px">📄 <b>Бизнес-план E-2</b> — закреп: <a href="https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm" target="_blank" rel="noopener" style="color:#96703B">Company Drive → 06 Legal &amp; Docs</a></div>';
     h+='<div class="lsn" style="margin-top:12px"><b>💰 Шкала инвестиций</b> — суммы и статус живут в Бизнес-плане (Drive) и офлайн с адвокатом; в кабинете не публикуем.</div>';
     for(var i=0;i<EPLAN.length;i++){
@@ -759,6 +764,26 @@ var ROADMAP=[
   }catch(e){}
 })();
 
+
+/* ═══ Расходы: одно правило для всех, чтобы траты не терялись (02.08).
+   Механика: человек шлёт трату в Telegram-бот → Клод заносит в таблицу и
+   складывает чек в Drive. Руками таблицу никто не заполняет. ═══ */
+(function(){
+  try{
+    var el=document.getElementById('expSec'); if(!el)return;
+    var op=false; try{op=localStorage.getItem('m5_exp_open')==='1';}catch(e){}
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>💸 Расходы · куда сдавать</span><span class="stk-hint">правило одно для всех</span></summary><div class="stack">';
+    h+='<div class="lsn"><b>1 · Потратил — сразу напиши боту.</b> Открой <b>@m5miami_bot</b> в Telegram и отправь одним сообщением: <b>«расход 40 шпаклёвка Home Depot»</b>. Можно голосовым. Сумма в долларах, что купил, где — этого достаточно.</div>';
+    h+='<div class="lsn"><b>2 · Сфоткай чек и приложи.</b> Фото чека — следующим сообщением боту или сразу в папку <b>Чеки</b> (ссылка ниже). Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
+    h+='<div class="lsn"><b>3 · Дальше не твоя забота.</b> Клод заносит трату в общую таблицу, раскладывает чек по папкам и обновляет цифру «Расходы» в пульте кабинета. Таблицу руками не заполняет никто.</div>';
+    h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Таблица расходов 2026</b><span>все траты компании: дата, что, категория, кто платил, сумма — открыть</span></a>';
+    h+='<a class="stk" href="'+LINKS.receipts+'" target="_blank" rel="noopener"><b>🧾 Папка «Чеки»</b><span>Drive → 04 Finance → Чеки: фото и PDF всех чеков</span></a>';
+    h+='<div class="lsn" style="color:#8A8272">Почему так: пока компания не зарегистрирована, все траты идут с личных карт — и если их не собрать, при регистрации LLC и подаче налогов мы просто потеряем эти деньги как расходы бизнеса. Одно сообщение боту в момент покупки решает вопрос.</div>';
+    el.innerHTML=h+'</div></details>';
+    var box=el.querySelector('details.stackbox');
+    if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_exp_open',box.open?'1':'0');}catch(e){} });
+  }catch(e){}
+})();
 
 /* ═══ Клиенты · хабы — список всех клиентских кабинетов (founder + director).
    Новый клиент = Клод добавляет строку сюда и объект в client.js (единая точка — чат с Клодом). ═══ */
