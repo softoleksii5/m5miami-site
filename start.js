@@ -426,6 +426,7 @@ var STACK=[
  ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
+ ['AI & Dev','Apps Script API','Клод правит и деплоит M5 Hub программно (gapi.sh, проект под alex@)','https://script.google.com/'],
  ['AI & Dev','Drive API (полный)','Клод управляет Google Drive под alex@: папки, файлы, доступы (gdrive_api.sh)','https://drive.google.com/'],
  ['Связь','WhatsApp Business','+1 786 407 4441 — бизнес-номер: сайт, кабинет клиента, реклама','https://wa.me/17864074441'],
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
@@ -442,7 +443,7 @@ var ALEXTODO_UPD='31.07 ночь';
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
  ['done','JobTread — связь работает, демо-мусор вычищен','Заявки с сайта создают Customer+Contact+Job автоматически. Клод получил доступ на запись (scripts/jt_api.sh) и удалил демо-джобы Taras — SLA-алерты остановлены.'],
- ['todo','Apps Script — вставить готовый файл (3 мин)','Всё собрано одним copy-paste: M5/4 Рабочие/AppsScript_M5Hub_v13_вставить.gs — фидбек в Partners, SLA тише и без дублей, Jin без Monday. Инструкция в шапке файла, шаг за шагом.'],
+ ['done','Apps Script v13 — Клод применил сам через API','Фидбек/идеи → Partners, SLA только фаундерам (максимум 2 на лид), Jin знает JobTread и кабинет клиента, Monday отключён. Плюс найден и выключен локальный агент «SLA-алерт больше часа» (launchd, слал каждые 30 мин). Telegram чист.'],
  ['done','Drive: папка Visa создана','Клод создал и расшарил только вам троим (alex@, vlad@, vadim@). Ссылка: drive.google.com/drive/folders/1Mg4ZMJtjJlcrS4eYj3jr3nrhm6CBR9po','m'],
  ['done','Договор с Владом — в приватной папке Drive','Клод создал папку «Partnership — Alex + Vlad» (только ты и Влад) и загрузил подписанный PDF v3 от 22.07. Плитка в кабинете ведёт туда.','m'],
  ['done','Клод получил полный доступ к Google Drive','OAuth под alex@m5miami.com (01.08). Теперь папки, файлы, доступы — сам: Visa и Partnership уже созданы.','m'],
