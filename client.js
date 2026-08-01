@@ -1,13 +1,15 @@
 /* M5 Client Hub v2 — кабинет клиента (31.07.2026, редизайн по фидбеку Алекса).
    Светлый «инвесторский» стиль (панорама вилл, как низ главной), аккордеоны с иконками,
    продающий каталог услуг (заявка → m5hook → Telegram «Лиды» мгновенно + WhatsApp),
-   кредиты 3%, реферал $250/$250, фидбек с kudos сотрудникам, Google-отзыв за +50 cr.
+   кредиты 3%, реферал $500/$500 (ref-код ≠ slug доступа!), фидбек с kudos.
+   Google-отзыв просим БЕЗ оплаты (политика Google запрещает платные отзывы).
    Доступ: /client/?p=<slug>. Демо: ?p=brickell-demo. Данные позже — из JobTread API. */
 
 var CLIENTS={
  'brickell-demo':{
    name:'David', project:'Brickell Residence — Full Renovation', status:'Active',
-   pm:'Vadym', pmPhone:'17864074441', started:'Sep 2026',
+   pm:'Vadym', pmPhone:'17864074441', started:'Sep 2026', eta:'Dec 2026', updated:'Sep 20',
+   refCode:'dv7k2f', /* реф-код ВСЕГДА отдельный от slug — slug это ключ доступа к кабинету */
    phase:1, phases:['Design','Materials','Build','Styling','Handover'],
    googleReview:'', /* ссылка g.page появится после создания Google Business Profile */
    tasks:[
@@ -20,7 +22,7 @@ var CLIENTS={
    ],
    docs:{
      'Reports':[['Weekly report #2','Sep 20',''],['Weekly report #1','Sep 13','']],
-     'Invoices':[['Invoice 1002 — materials deposit','Sep 18',''],['Invoice 1001 — design phase','Sep 15','']],
+     'Invoices':[['Invoice 1002 — materials deposit','Sep 18','','$1,500 · Paid'],['Invoice 1001 — design phase','Sep 15','','$2,300 · Paid']],
      'Design':[['Moodboard v2 (approved)','Sep 12',''],['Layout plan 1.1','Sep 8','']]
    },
    materials:[
@@ -29,8 +31,9 @@ var CLIENTS={
      {img:'/img/gal_bath.jpg', ttl:'Bathroom stone', note:'Travertine, honed', st:'approved'},
      {img:'/img/gal_living.jpg', ttl:'Living textiles', note:'Ivory boucle set', st:'todo'}
    ],
-   credits:{bal:114, earned:314, tier:'Bronze', rate:3, next:'Silver', nextAt:500,
+   credits:{bal:114, earned:314, tier:'Bronze', rate:3, next:'Silver', nextAt:500, nextRate:3.5,
      hist:[
+       ['−200','Deep Clean After Works — redeemed','Sep 20'],
        ['+45','3% cashback · Invoice 1002 ($1,500)','Sep 18'],
        ['+69','3% cashback · Invoice 1001 ($2,300)','Sep 15'],
        ['+200','Welcome bonus — thank you for trusting M5','Sep 15']
@@ -88,14 +91,17 @@ var REWARDS=[
  {ic:'🎨', ttl:'Moodboard Pack', sub:'Materials + palette + 2 AI visualizations', cr:250},
  {ic:'✨', ttl:'Deep Clean After Works', sub:'Professional post-renovation cleaning', cr:200},
  {ic:'🏠', ttl:'Smart-Home Consult', sub:'Lighting, climate & security scenarios', cr:150},
- {ic:'⚡', ttl:'Priority Scheduling', sub:'Your project jumps the queue', cr:100}
+ {ic:'🛋', ttl:'Designer Shopping Hour', sub:'A personal hour with our designer — sourcing & styling picks', cr:100}
 ];
 
-var KUDOS=['Vadym — project manager','Design team','Site crew','Jin — AI assistant'];
+var KUDOS=['Vadym — project lead','Design team','Site crew'];
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var slug=(location.search.match(/[?&]p=([^&]*)/)||[])[1]||'';
 var C=CLIENTS[slug];
+/* Guard: у нового клиента часть данных может отсутствовать — секции не должны падать */
+if(C){ C.tasks=C.tasks||[]; C.materials=C.materials||[]; C.docs=C.docs||{}; C.phases=C.phases||['Design','Materials','Build','Styling','Handover']; C.phase=C.phase||0;
+  C.credits=C.credits||{bal:0,earned:0,tier:'Bronze',rate:3,next:'Silver',nextAt:500,hist:[]}; C.credits.hist=C.credits.hist||[]; }
 /* Демо-кабинет: показываем весь флоу, но НИЧЕГО не шлём в боевой Telegram/CRM
    (инцидент 31.07: клики Request с демо падали лид-карточками в «Лиды»). */
 var DEMO=(slug==='brickell-demo');
@@ -219,6 +225,15 @@ var TSTYLE='<style>'+
 '.bapair.after em{background:#F0F8F2;color:#3E8E5A}'+
 '.bacap{font-size:12.5px;color:#8A8272;margin:6px 2px 12px}'+
 '.gate{max-width:430px;margin:110px auto;background:#fff;border-radius:18px;padding:34px 30px;text-align:center;border:1px solid var(--line)}'+
+'a.doc{display:block;text-decoration:none;color:inherit}'+
+'.docmeta{font-family:var(--mono);font-size:9.5px;color:#3E8E5A;border:1px solid #CBE3D3;border-radius:8px;padding:2px 7px;margin-left:6px;white-space:nowrap}'+
+'.chist b.neg{color:#8A8272}'+
+'.mact{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}'+
+'.mact .sbtn{font-size:10px;min-height:34px;display:inline-flex;align-items:center;justify-content:center;padding:6px 14px}'+
+'@media(max-width:680px){.sbtn,.mact .sbtn{font-size:10px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}'+
+'.rgo{font-size:11px;padding:10px 14px}'+
+'.cph{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}'+
+'.cph span{flex:0 0 auto;min-width:86px}}'+
 '</style>';
 
 function accOpen(id){var st=0;try{st=localStorage.getItem('m5c_'+id);}catch(e){} return st===null?null:st==='1';}
@@ -248,12 +263,20 @@ if(!C){
   var doneN=C.tasks.filter(function(t){return t[0]==='done';}).length;
   var cats=Object.keys(C.docs);
   var dtabs=cats.map(function(c,i){return '<span class="'+(i===0?'on':'')+'" onclick="docTab(this,\''+esc(c)+'\')">'+esc(c)+'</span>';}).join('');
-  var docHtml=function(cat){return C.docs[cat].map(function(d){
-    return '<div class="doc"><b>📄 '+esc(d[0])+'</b><small>'+esc(d[1])+'</small></div>';}).join('');};
+  var docHtml=function(cat){
+    var rows=(C.docs[cat]||[]);
+    if(!rows.length) return '<div class="doc" style="color:#8A8272">Documents appear here after kickoff.</div>';
+    return rows.map(function(d){
+      var inner='<b>📄 '+esc(d[0])+(d[3]?' <span class="docmeta">'+esc(d[3])+'</span>':'')+'</b><small>'+esc(d[1])+'</small>';
+      return d[2]?('<a class="doc" href="'+esc(d[2])+'" target="_blank" rel="noopener">'+inner+'</a>'):('<div class="doc">'+inner+'</div>');
+    }).join('');};
   var docsN=0; cats.forEach(function(c){docsN+=C.docs[c].length;});
-  var mats=C.materials.map(function(m){
-    return '<div class="mat"><img src="'+m.img+'" alt="" loading="lazy"><div class="mi"><b>'+esc(m.ttl)+'</b><span>'+esc(m.note)+'</span><br><em class="'+m.st+'">'+
-    (m.st==='approved'?'Approved':(m.st==='review'?'Your review':'Coming up'))+'</em></div></div>';}).join('');
+  var mats=C.materials.map(function(m,mi){
+    var act=(m.st==='review')?('<div class="mact"><span class="sbtn go" onclick="matApprove('+mi+')">Approve ✓</span>'+
+      '<a class="sbtn wa" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+'. About the sample “'+m.ttl+'”: ')+'">Discuss</a></div>'):'';
+    return '<div class="mat" id="mat'+mi+'"><img src="'+m.img+'" alt="" loading="lazy"><div class="mi"><b>'+esc(m.ttl)+'</b><span>'+esc(m.note)+'</span><br><em class="'+m.st+'">'+
+    (m.st==='approved'?'Approved':(m.st==='review'?'Your review':'Coming up'))+'</em>'+act+'</div></div>';}).join('');
+  if(!C.materials.length) mats='<div class="bacap">Materials board fills up during the Design phase — samples land here for your approval.</div>';
   var needRev=C.materials.filter(function(m){return m.st==='review';}).length;
   var svc=SERVICES.map(function(s,i){
     return '<div class="svc" onclick="svcOpen('+i+')" style="cursor:pointer"><img src="'+s.img+'" alt="" loading="lazy"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
@@ -261,31 +284,35 @@ if(!C){
     '<span class="sbtn go" onclick="event.stopPropagation();reqSvc('+i+')">Request →</span>'+
     '<a class="sbtn wa" onclick="event.stopPropagation()" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WA</a>'+
     '</div></div></div>';}).join('');
-  var hist=C.credits.hist.map(function(h){return '<div><b>'+esc(h[0])+'</b> '+esc(h[1])+'<small>'+esc(h[2])+'</small></div>';}).join('');
+  var hist=C.credits.hist.map(function(h){var neg=(h[0].charAt(0)==='−'||h[0].charAt(0)==='-');
+    return '<div><b'+(neg?' class="neg"':'')+'>'+esc(h[0])+'</b> '+esc(h[1])+'<small>'+esc(h[2])+'</small></div>';}).join('');
+  if(!C.credits.hist.length) hist='<div style="color:#8A8272;font-size:12px">Credits start landing with your first paid invoice — '+C.credits.rate+'% of every payment comes back.</div>';
   var rwds=REWARDS.map(function(r,i){var ok=C.credits.bal>=r.cr;
     return '<div class="rwd"><div class="ric">'+r.ic+'</div><div><b>'+esc(r.ttl)+'</b><span>'+esc(r.sub)+'</span></div>'+
     '<span class="rgo'+(ok?'':' na')+'" '+(ok?('onclick="redeem('+i+')"'):'')+'>'+r.cr+' cr</span></div>';}).join('');
   var pct=Math.min(100,Math.round(C.credits.earned/C.credits.nextAt*100));
   var kud=KUDOS.map(function(k,i){return '<span id="kud'+i+'" onclick="kudPick('+i+')">'+esc(k)+'</span>';}).join('');
+  /* Отзыв просим БЕЗ вознаграждения (политика Google/FTC запрещает платные отзывы). */
   var gRev=C.googleReview
-    ? '<div class="gr"><div style="font-size:20px">⭐</div><div><b>Loved the result? Tell Google.</b><span>2 minutes — and 50 credits land on your balance.</span></div><a class="gbadge" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(C.googleReview)+'">Review → +50 cr</a></div>'
-    : '<div class="gr"><div style="font-size:20px">⭐</div><div><b>Google reviews open soon</b><span>Leave one when we launch — and get +50 credits on your balance.</span></div><span class="gbadge">+50 cr</span></div>';
+    ? '<div class="gr"><div style="font-size:20px">⭐</div><div><b>Loved the result? A review means the world to a small studio.</b><span>2 minutes on Google — it helps Miami find us.</span></div><a class="gbadge" style="text-decoration:none" target="_blank" rel="noopener" href="'+esc(C.googleReview)+'">Leave a review</a></div>'
+    : '';
 
   document.getElementById('app').innerHTML=TSTYLE+
   '<header><div class="wrap hbar">'+
     '<a class="logo" href="/">M<b>5</b><small>CLIENT</small></a>'+
-    '<div class="hr"><span class="priv"><i></i><span>Private · '+esc(C.status)+'</span></span>'+
+    '<div class="hr"><span class="priv"><i></i><span>'+(DEMO?'Demo project · sample data':'Private · '+esc(C.status))+'</span></span>'+
     '<a class="signout" href="/" style="text-decoration:none">m5miami.com</a></div>'+
   '</div></header>'+
   '<div class="wrap">'+
     '<div class="chero">'+
       '<div class="ey">Your studio hub · everything in one place</div>'+
       '<h1>Hi, '+esc(C.name)+'.</h1>'+
-      '<div class="st">'+esc(C.project)+' · started '+esc(C.started)+' · your PM: '+esc(C.pm)+'</div>'+
+      '<div class="st">'+esc(C.project)+' · started '+esc(C.started)+(C.eta?' · target completion: <b>'+esc(C.eta)+'</b>':'')+'</div>'+
+      '<div class="st" style="margin-top:4px">Your project lead: '+esc(C.pm)+' · Director</div>'+
     '</div>'+
     '<div class="cph">'+ph+'</div>'+
-    acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated live',
-      tasks+'<div class="jinn"><span style="font-size:18px">✦</span><span><b>Jin, our AI, watches this project 24/7</b> — updates land here the moment the team logs them.</span></div>', true)+
+    acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated '+esc(C.updated||C.started),
+      (C.tasks.length?tasks:'<div class="bacap">Your project plan lands here right after kickoff.</div>')+'<div class="jinn"><span style="font-size:18px">✦</span><span><b>Jin, our AI, keeps this page in sync with the team</b> — updates land here as the team logs them.</span></div>', true)+
     acc('ba','📸','Before & after','Where we started — and where it’s going',
       '<div class="bacap">Our content team shoots every room before works begin — so you can watch the transformation.</div>'+
       '<div class="bagrid">'+
@@ -301,21 +328,22 @@ if(!C){
     '<div class="band" style="background-image:url(/img/band_kitchen.jpg)"></div>'+
     acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
       '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">Tap any card for details. One team already on site = better price, zero coordination pain.</div>'+
-      '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">Request sent! '+esc(C.pm)+' will text you today with details.</div>', true)+
+      '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">'+(DEMO?'Demo mode — in your real hub, '+esc(C.pm)+' texts you the same day.':'Request sent! '+esc(C.pm)+' will text you today with details.')+'</div>', false)+
     acc('cred','💎','Credits & rewards',C.credits.bal+' credits · '+C.credits.tier+' tier · '+C.credits.rate+'% cashback',
       '<div class="credrow"><div class="credbox">'+
         '<div class="tier">◆ '+esc(C.credits.tier)+' tier · '+C.credits.rate+'% cashback</div>'+
         '<div class="bal">'+C.credits.bal+' <small>credits · 1 cr = $1</small></div>'+
         '<div class="credbar"><i style="width:'+pct+'%"></i></div>'+
-        '<div class="nx">Earn '+(C.credits.nextAt-C.credits.earned)+' more to reach '+esc(C.credits.next)+' (3.5% cashback)</div>'+
+        '<div class="nx">Earn '+(C.credits.nextAt-C.credits.earned)+' more to reach '+esc(C.credits.next)+' ('+(C.credits.nextRate||3.5)+'% cashback)</div>'+
         '<div class="chist">'+hist+'</div></div>'+
       '<div style="flex:1.2;min-width:260px">'+
         '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 6px">Every paid invoice earns '+C.credits.rate+'% back. Spend on extra M5 services — we confirm within 24h.</div>'+
-        rwds+'<div class="okmsg" id="rwOk">Request sent! '+esc(C.pm)+' will confirm and schedule it within 24 hours.</div></div></div>', false)+
-    acc('ref','🤝','Refer a friend — you both get $250','Your personal link inside',
-      '<div class="refbox"><div style="font-size:13px;color:#6E6656">You get <b>$250 in credits</b>, your friend gets <b>$250 off</b> their first invoice. Share your personal link:</div>'+
-      '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(slug)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
-      '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false)+
+        rwds+'<div class="okmsg" id="rwOk">'+(DEMO?'Demo mode — in your real hub, '+esc(C.pm)+' confirms within 24 hours.':'Request sent! '+esc(C.pm)+' will confirm and schedule it within 24 hours.')+'</div></div></div>', false)+
+    (C.refCode?acc('ref','🤝','Refer a friend — you both get $500','Your personal link inside',
+      '<div class="refbox"><div style="font-size:13px;color:#6E6656">You get <b>$500 in credits</b>, your friend gets <b>$500 off</b> their first invoice. Share your personal link:</div>'+
+      '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(C.refCode)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
+      '<div style="font-size:12px;color:#8A8272;margin-top:8px">When your friend books a consultation, we message you — and the $500 lands on your balance.</div>'+
+      '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false):'')+
     '<div class="band" style="background-image:url(/img/band_plaster.jpg)"></div>'+
     acc('fb','💬','Feedback & reviews','30 seconds — it goes straight to the founders',
       '<div style="font-size:13px;color:#6E6656;margin:2px 0 4px">How was our work this week?</div>'+
@@ -324,9 +352,9 @@ if(!C){
       '<div class="kud">'+kud+'</div>'+
       '<textarea class="fb-ta" id="fbText" placeholder="Anything on your mind — a quick “all good”, an idea, or a concern."></textarea>'+
       '<button class="cbtn" onclick="sendFb()">Send to the founders</button>'+
-      '<div class="okmsg" id="fbOk">Thank you! Your feedback just landed on the founders’ desk. We read every word.</div>'+
+      '<div class="okmsg" id="fbOk">'+(DEMO?'Demo mode — in your real hub this lands on the founders’ desk instantly.':'Thank you! Your feedback just landed on the founders’ desk. We read every word.')+'</div>'+
       gRev, false)+
-    acc('talk','📞','Talk to us directly','Vlad (co-founder) · '+esc(C.pm)+' (your PM)',
+    acc('talk','📞','Talk to us directly','Vlad (co-founder) · '+esc(C.pm)+' (Director)',
       '<div class="fdrs"><img src="/img/ava_vlad.jpg" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
       '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
@@ -334,7 +362,9 @@ if(!C){
   '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
 }
 }catch(e){
-  document.getElementById('app').innerHTML='<div class="gate" style="margin-top:120px"><b>Something didn’t load.</b><br><br>'+
+  document.getElementById('app').innerHTML=(typeof TSTYLE==='string'?TSTYLE:'')+
+  '<div style="max-width:420px;margin:120px auto;text-align:center;font-family:Geist,-apple-system,sans-serif;padding:0 20px">'+
+  '<b style="font-size:17px;color:#20242E">Something didn’t load.</b><br><br>'+
   '<a href="https://wa.me/17864074441" style="color:#96703B">Message us on WhatsApp</a></div>';
 }
 
@@ -355,6 +385,14 @@ function svcOpen(i){
   document.getElementById('svm').className='svm on';
 }
 function svcClose(){var m=document.getElementById('svm'); if(m)m.className='svm';}
+function matApprove(i){
+  var m=C&&C.materials[i]; if(!m)return;
+  if(!confirm('Approve “'+m.ttl+'”?'+(DEMO?' (Demo — nothing is sent.)':' The team gets notified right away.')))return;
+  hub({type:'approve',name:C.name,service:m.ttl,details:'Material approved · '+C.project,source:'client-hub:'+slug});
+  m.st='approved';
+  var em=document.querySelector('#mat'+i+' em'); if(em){em.className='approved';em.textContent='Approved';}
+  var ac=document.querySelector('#mat'+i+' .mact'); if(ac)ac.style.display='none';
+}
 var fbStars=0, fbKud=-1;
 function starPick(n){fbStars=n;var s=document.querySelectorAll('#stars span');for(var i=0;i<s.length;i++){s[i].className=i<n?'on':'';}}
 function kudPick(i){fbKud=(fbKud===i)?-1:i;for(var j=0;j<KUDOS.length;j++){var el=document.getElementById('kud'+j);if(el)el.className=(j===fbKud)?'on':'';}}
@@ -363,11 +401,12 @@ function sendFb(){
   if(!fbStars&&!t&&fbKud<0)return;
   var d=(fbStars?fbStars+'★':'')+(fbKud>=0?' · Kudos: '+KUDOS[fbKud]:'')+(t?' · '+t:'');
   hub({type:'feedback',name:C?C.name:'',service:C?C.project:'',details:d,source:'client-hub:'+slug});
-  document.getElementById('fbText').value='';starPick(0);kudPick(-1);kudPick(-1);
+  document.getElementById('fbText').value='';starPick(0);kudPick(-1);
   var ok=document.getElementById('fbOk');ok.style.display='block';setTimeout(function(){ok.style.display='none';},6000);
 }
 function reqSvc(i){
   var s=SERVICES[i];if(!s)return;
+  if(!confirm('Request “'+s.ttl+'”? '+(C?C.pm:'We')+' will text you today — no obligation.'))return;
   hub({type:'service',name:C?C.name:'',phone:'',service:s.ttl,details:'Client Hub upsell · '+(C?C.project:'')+' · '+s.from,source:'client-hub-upsell:'+slug});
   var ok=document.getElementById('svcOk');ok.style.display='block';
   try{ok.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}
@@ -389,6 +428,8 @@ function docTab(el,cat){
   var t=document.querySelectorAll('.dtab span');for(var i=0;i<t.length;i++)t[i].className='';
   el.className='on';
   var C2=CLIENTS[slug];
-  document.getElementById('docList').innerHTML=C2.docs[cat].map(function(d){
-    return '<div class="doc"><b>📄 '+d[0].replace(/</g,'&lt;')+'</b><small>'+d[1].replace(/</g,'&lt;')+'</small></div>';}).join('');
+  var rows2=(C2.docs[cat]||[]);
+  document.getElementById('docList').innerHTML=rows2.length?rows2.map(function(d){
+    var inner='<b>📄 '+esc(d[0])+(d[3]?' <span class="docmeta">'+esc(d[3])+'</span>':'')+'</b><small>'+esc(d[1])+'</small>';
+    return d[2]?('<a class="doc" href="'+esc(d[2])+'" target="_blank" rel="noopener">'+inner+'</a>'):('<div class="doc">'+inner+'</div>');}).join(''):'<div class="doc" style="color:#8A8272">Documents appear here after kickoff.</div>';
 }

@@ -6,27 +6,24 @@ var LINKS={
   clarity:'https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard',
   gcal:'https://calendar.google.com/',
   org:'/org/',
-  stock:'https://m5miami.monday.com/boards/5100794770',
   onb:'/onboarding/', // страница сама узнаёт человека по рабочей почте
 
   drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // «M5 · Company Drive»
   telegram:'https://t.me/+x4q86H688uNiODI8',  // группа «M5 Team»
-  monday:'https://m5miami.monday.com/',
   jobtread:'https://app.jobtread.com/', // операционное ядро: лиды→сметы→производство
+  whatsapp:'https://wa.me/17864074441', // бизнес-номер M5 (WhatsApp Business)
+  permits:'https://www.miamidade.gov/permits/', // разрешения Miami-Dade
   quickbooks:'',
   heygen:'',
-  openphone:'',
   houzz:'https://pro.houzz.com/', // маркетинг-канал: профиль+отзывы (софт-тариф НЕ берём)
   playbook:'',
-  video:'/media/m5_intro.mp4', // бренд-интро (Remotion, 24с)
-  clienthub:'/client/?p=brickell-demo', // кабинет клиента — демо-проект (боевые слаги раздаёт PM)
   legal:'https://drive.google.com/drive/folders/1OFl-LaWf5ZMmKEyVsc1PjLdcKsJEBJmL', // приватная папка «Partnership — Alex + Vlad» (доступ ТОЛЬКО Алекс+Влад)
   tutorial:'/media/tutorial_system_ru.mp4' // видео-туториал «Как устроена система M5» (Remotion + Jin, 31.07)
 };
 
 /* фирменные логотипы сервисов (SVG со своими цветами) */
 var LOGOS={
-  monday:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#fff"/><circle cx="13" cy="24" r="6" fill="#ff3d57"/><circle cx="23" cy="24" r="6" fill="#ffcb00"/><circle cx="33" cy="24" r="6" fill="#00ca72"/></svg>',
+  whatsapp:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#25D366"/><path fill="#fff" d="M23 11.5c-6.3 0-11.4 5.1-11.4 11.4 0 2 .5 4 1.5 5.7L11.5 34l5.6-1.5c1.7.9 3.7 1.4 5.9 1.4 6.3 0 11.4-5.1 11.4-11.4S29.3 11.5 23 11.5Zm0 20.6c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-3.3.9.9-3.2-.2-.4c-1-1.6-1.5-3.5-1.5-5.3 0-5.4 4.4-9.7 9.8-9.7s9.8 4.4 9.8 9.7-4.4 9.6-9.8 9.6Zm5.4-7.2c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg>',
   drive:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#fff"/><g transform="translate(8,10) scale(0.345)"><path fill="#0066da" d="M6.6 66.9l3.8 6.6c.8 1.4 2 2.5 3.4 3.3L27.4 53.5H0c0 1.6.4 3.2 1.2 4.6z"/><path fill="#00ac47" d="M43.6 25L30 1.5c-1.4.8-2.6 1.9-3.4 3.3L1.2 48.7C.4 50.1 0 51.7 0 53.5h27.4z"/><path fill="#ea4335" d="M73.6 76.8c1.4-.8 2.6-1.9 3.4-3.3l1.6-2.7 7.6-13.2c.8-1.4 1.2-3 1.2-4.6H59.4l5.8 11.4z"/><path fill="#00832d" d="M43.6 25L57.2 1.5c-1.4-.8-3-1.2-4.6-1.2H34.6c-1.6 0-3.2.5-4.6 1.2z"/><path fill="#2684fc" d="M59.4 53.5H27.4L13.8 76.8c1.4.8 3 1.2 4.6 1.2h50.4c1.6 0 3.2-.5 4.6-1.2z"/><path fill="#ffba00" d="M73.4 26.5L60.7 4.8c-.8-1.4-2-2.5-3.4-3.3L43.6 25l15.8 28.5h27.2c0-1.8-.4-3.4-1.2-4.6z"/></g></svg>',
   telegram:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#229ED9"/><path fill="#fff" d="M9.8 22.2l23-8.9c1.1-.4 2 .3 1.6 1.9l-3.9 18.4c-.3 1.2-1 1.5-2 .9l-5.6-4.1-2.7 2.6c-.3.3-.6.5-1.1.5l.4-5.8L30.4 17c.5-.4-.1-.7-.8-.3L16 25.1l-5.7-1.8c-1.2-.4-1.2-1.2.5-1.1z"/></svg>',
   gcal:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#fff"/><rect x="11" y="12" width="24" height="23" rx="3" fill="#fff" stroke="#4285F4" stroke-width="2.4"/><text x="23" y="30" font-family="Arial,Helvetica,sans-serif" font-size="12.5" font-weight="700" fill="#4285F4" text-anchor="middle">31</text></svg>',
@@ -35,92 +32,88 @@ var LOGOS={
   quickbooks:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#2CA01C"/><circle cx="23" cy="23" r="12" fill="none" stroke="#fff" stroke-width="3.4"/><rect x="21.3" y="13" width="3.4" height="20" fill="#fff"/></svg>',
   jobtread:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#F26722"/><text x="23" y="30" font-family="Arial" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">JT</text></svg>',
   heygen:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#5B3DF5"/><text x="23" y="31" font-family="Arial" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">H</text></svg>',
-  openphone:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#6B5FFF"/><path fill="#fff" d="M19 14c-1 0-1.9.7-2.1 1.7l-.9 3.7c-.2.8.1 1.5.7 2l2.1 1.7c-.2 1.4 2.3 3.9 3.7 3.7l1.7 2.1c.5.6 1.2.9 2 .7l3.7-.9c1-.2 1.7-1.1 1.7-2.1v-2.7c0-.9-.6-1.6-1.5-1.8l-2.4-.4c-.6-.1-1.1.1-1.5.5l-.8.8c-1.6-.9-2.9-2.2-3.8-3.8l.8-.8c.4-.4.6-.9.5-1.5l-.4-2.4c-.2-.9-.9-1.5-1.8-1.5z"/></svg>',
   houzz:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#4DBC15"/><path fill="#fff" d="M23 12l-8 4.6v13.4h5.2v-6.2h5.6v6.2H31V16.6z"/></svg>'
 };
-var BC={monday:'#ff3d57',drive:'#00ac47',telegram:'#229ED9',gcal:'#4285F4',ga4:'#F9AB00',clarity:'#1B6EC2',quickbooks:'#2CA01C',jobtread:'#F26722',heygen:'#5B3DF5',openphone:'#6B5FFF',houzz:'#4DBC15'};
+var BC={whatsapp:'#25D366',drive:'#00ac47',telegram:'#229ED9',gcal:'#4285F4',ga4:'#F9AB00',clarity:'#1B6EC2',quickbooks:'#2CA01C',jobtread:'#F26722',heygen:'#5B3DF5',houzz:'#4DBC15'};
 
 var ROLES={
   founder:{label:'Co-founder',sub:'Your command center',
-    chips:['Leads this week','Site analytics','What needs my decision?'],
+    chips:['Что по лидам?','Как завести кабинет клиента?','Где документы компании?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
-      {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
-      {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'},
-      {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
-      {ic:'👥',k:'People',t:'Org structure',link:'org'},
-      {b:'drive',k:'Drive',t:'Company docs',link:'drive'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
-      {b:'gcal',k:'Calendar',t:'Meetings & bookings',link:'gcal'}]},
+      {b:'drive',k:'Drive',t:'Company docs',link:'drive'},
+      {b:'gcal',k:'Calendar',t:'Meetings & bookings',link:'gcal'},
+      {ic:'👥',k:'People',t:'Org structure',link:'org'},
+      {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
+      {b:'clarity',k:'Sessions',t:'MS Clarity',link:'clarity'}]},
   director:{label:'Director',sub:'Your command center',
-    chips:['Margin & pipeline','Stock levels','This week'],
+    chips:['Как сдать вечерний отчёт?','Как добавить клиента в JobTread?','Где фото объектов?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
-      {ic:'📄',k:'Permits',t:'Miami-Dade'},
-      {ic:'👥',k:'People',t:'Org structure',link:'org'},
-      {b:'quickbooks',k:'Finance',t:'QuickBooks',link:'quickbooks'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
-      {b:'drive',k:'Drive',t:'Company docs',link:'drive'}]},
+      {b:'drive',k:'Drive',t:'Company docs',link:'drive'},
+      {ic:'📄',k:'Permits',t:'Miami-Dade',link:'permits'},
+      {ic:'👥',k:'People',t:'Org structure',link:'org'}]},
   smm:{label:'SMM',sub:'Your SMM & content workspace',
-    chips:['My score this week','Is this post on-brand?','Take the onboarding quiz'],
+    chips:['Что снимать на объекте?','Где сырьё в Drive?','Какой у нас тон и стиль?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
+      {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
+      {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
+      {ic:'📈',k:'My growth',t:'Levels & growth'},
+      {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'🗓',k:'Scheduler',t:'Auto-posting'},
       {b:'heygen',k:'HeyGen',t:'AI avatars',link:'heygen'},
-      {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {ic:'📸',k:'Channels',t:'IG · TikTok · YT'},
-      {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
-      {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
-      {ic:'👥',k:'Team',t:'Who is who',link:'org'},
-      {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
+      {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'}]},
   sales:{label:'Sales',sub:'Your sales workspace',
-    chips:['My pipeline','Today’s leads','Objection scripts'],
+    chips:['Как ответить на новый лид?','Как собрать смету в JobTread?','Где скрипты продаж?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM',t:'JobTread',link:'jobtread'},
-      {b:'openphone',k:'Calls',t:'OpenPhone',link:'openphone'},
-      {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
-      {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch'},
-      {ic:'🤝',k:'Partners',t:'Realtors & brokers'},
+      {b:'whatsapp',k:'Calls & chats',t:'WhatsApp Business',link:'whatsapp'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
+      {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
       {b:'drive',k:'Drive',t:'Docs',link:'drive'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'},
-      {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
+      {ic:'📈',k:'My growth',t:'Levels & growth'},
+      {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch'},
+      {ic:'🤝',k:'Partners',t:'Realtors & brokers'}]},
   designer:{label:'Designer',sub:'Your design workspace',
-    chips:['My projects','Material library','Brand guide'],
+    chips:['Где библиотека материалов?','Как согласовать образец?','Бренд и стиль M5'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Projects',t:'JobTread',link:'jobtread'},
-      {ic:'🎨',k:'Design',t:'3D & tools'},
       {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
       {b:'houzz',k:'Houzz',t:'Pro profile',link:'houzz'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
-      {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'},
-      {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
+      {ic:'📈',k:'My growth',t:'Levels & growth'},
+      {ic:'🎨',k:'Design',t:'3D & tools'},
+      {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'}]},
   pm:{label:'Project Manager',sub:'Your production workspace',
-    chips:['My projects','Today’s site tasks','Change orders'],
+    chips:['Ритм дня на объекте','Как загрузить фото в Drive?','Что писать в вечернем отчёте?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
-      {ic:'📐',k:'Supervision',t:'Site QC'},
-      {ic:'📄',k:'Permits',t:'Miami-Dade'},
       {b:'drive',k:'Drive',t:'Docs & photos',link:'drive'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
+      {ic:'📄',k:'Permits',t:'Miami-Dade',link:'permits'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'},
-      {ic:'📈',k:'My growth',t:'Level A → B → M'}]},
+      {ic:'📈',k:'My growth',t:'Levels & growth'},
+      {ic:'📐',k:'Supervision',t:'Site QC'}]},
   team:{label:'Team',sub:'Your workspace',
     chips:['My tasks','Knowledge base','Ask anything'],
     tiles:[
       {b:'jobtread',k:'Projects',t:'JobTread',link:'jobtread'},
       {b:'drive',k:'Drive',t:'Knowledge base',link:'drive'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
-      {ic:'✦',k:'AI Agent',t:'M5 assistant'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
       {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'}]}
@@ -143,7 +136,6 @@ var member=null; try{member=JSON.parse(localStorage.getItem('m5_member')||'null'
 var preview=false;
 try{ if(member&&member.role==='founder'&&ROLES[member.role]&&role!==member.role) preview=true; }catch(e){}
 
-var videoUrl=LINKS.video;
 /* Персональные аватарки (Pixar-стиль, серия для всей команды).
    Матчим по префиксу рабочей почты, запасной вариант — по имени. */
 var AVATARS={alex:'/img/ava_alex.jpg',vlad:'/img/ava_vlad.jpg',vadim:'/img/ava_vadim.jpg',vadym:'/img/ava_vadim.jpg'};
@@ -155,6 +147,107 @@ try{
     avaUrl=AVATARS[akey]||'';
   }
 }catch(e){}
+/* ── Первый экран v3 (01.08): «Now»-карточка · Company pulse · режим новичка ──
+   «Now» — одна карточка-целеуказатель: одно честное действие по роли (без фейк-данных).
+   Pulse — полоса цифр только для co-founder/director; лиды подтягиваются живьём
+   из M5 Hub (?pulse=1), остальные плитки честно ведут в источник.
+   Новичок (роль без завершённого онбординга или ?new=1) вместо «Now» видит
+   чек-лист первого дня с бадди; галочки — в localStorage, финал снимает режим. */
+function onbDone(){ try{return localStorage.getItem('m5_onb_done')==='1';}catch(e){return false;} }
+var TILES=cfg.tiles.filter(function(t){
+  if(t.k==='Start here') return !onbDone();   // после онбординга плитка уходит из ежедневных
+  if(t.k==='My growth') return true;          // своя внутренняя страница /growth/
+  var u=t.link?LINKS[t.link]:'';
+  return !!u;                                 // «Soon»-плитки не показываем вовсе
+});
+var NEWBIE=/[?&]new=1/.test(location.search) || (!onbDone() && ['sales','smm','pm','designer','team'].indexOf(role)>-1);
+function nowHtml(){
+  if(NEWBIE) return obHtml();
+  var n;
+  if(role==='founder') n={txt:'<b>Фокус недели:</b> запустить соцсети — Meta Business, Google Business Profile, TikTok/YT. Детали — ниже в кабинете.',btn:'План недели',act:'nowTasks()'};
+  else if(role==='director') n=(new Date().getHours()>=17)
+    ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Drive · 03 Progress.',btn:'Отправить',url:LINKS.telegram}
+    : {txt:'<b>Сегодня:</b> фото и видео с объекта → Drive · 02 Projects. Вечером — отчёт в Projects (2 минуты).',btn:'Открыть Drive',url:LINKS.drive};
+  else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в Telegram → Лиды и в JobTread.',btn:'Открыть CRM',url:LINKS.jobtread};
+  else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Drive (01 Content / 03 Progress); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть Drive',url:LINKS.drive};
+  else n={txt:'Задачи дня — в Telegram · M5 Team. Не знаешь, с чего начать — спроси Jin сверху.',btn:'Открыть чат',url:LINKS.telegram};
+  var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
+  return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div><a class="now-btn" '+open+'>'+n.btn+' →</a></div>';
+}
+window.nowTasks=function(){ try{ var b=document.getElementById('tdBox')||document.getElementById('planSec'); if(b){ if(b.tagName==='DETAILS')b.open=true; b.scrollIntoView({behavior:'smooth',block:'start'}); } }catch(e){} };
+/* Онбординг-чеклист первого дня: 2 шага уже отмечены (endowed progress),
+   галочки живут в localStorage, «всё готово» ставит m5_onb_done. */
+var OB_STEPS=[
+  {t:'Аккаунт создан',fixed:1},
+  {t:'Jin уже знает твою роль и правила M5',fixed:1},
+  {t:'Задай Jin первый вопрос — строка сверху'},
+  {t:'Посмотри видео «Как устроена система» · 2 мин',url:'/media/tutorial_system_ru.mp4'},
+  {t:'Прочитай свой плейбук — блок «Your playbook» ниже'},
+  {t:'Напиши «Привет, я на месте» в чат команды',url:''}
+];
+function obState(i){ try{return localStorage.getItem('m5_ob_'+i)==='1';}catch(e){return false;} }
+window.obToggle=function(i){
+  try{
+    localStorage.setItem('m5_ob_'+i,obState(i)?'0':'1');
+    var all=true; for(var k=0;k<OB_STEPS.length;k++){ if(!OB_STEPS[k].fixed&&!obState(k)){all=false;break;} }
+    if(all) localStorage.setItem('m5_onb_done','1');
+    location.reload();
+  }catch(e){}
+};
+function obHtml(){
+  var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex.jpg'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim.jpg'};
+  OB_STEPS[5].url=LINKS.telegram;
+  if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t='Загляни в базу знаний — плитка Drive ниже';
+  var done=0,total=OB_STEPS.length,rows='';
+  for(var i=0;i<OB_STEPS.length;i++){
+    var st=OB_STEPS[i], on=st.fixed||obState(i); if(on)done++;
+    var link=st.url?(' <a href="'+st.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:#96703B;text-decoration:underline;text-underline-offset:2px">открыть ↗</a>'):'';
+    rows+='<div class="obstep'+(on?' done':'')+'"'+(st.fixed?'':' onclick="obToggle('+i+')" style="cursor:pointer"')+'><i>'+(on?'✓':'')+'</i><span>'+st.t+link+'</span></div>';
+  }
+  var pct=Math.round(done/total*100);
+  return '<div class="nowcard obcard">'+
+    '<div class="ob-head"><span class="now-tag">⚡ Your first day at M5</span><span class="ob-pct">'+pct+'%</span></div>'+
+    '<div class="obbar"><i style="width:'+pct+'%"></i></div>'+rows+
+    '<div class="lsn" style="color:#8A8272;font-size:11.5px;margin-top:6px">Отмечай шаги по мере выполнения — когда всё готово, кабинет переключится в рабочий режим.</div>'+
+    '<div class="buddy"><img src="'+buddy.img+'" alt=""><div><b>'+buddy.name+' · '+buddy.r+'</b><span>Твой бадди: любой вопрос — пиши напрямую, это нормально.</span></div>'+
+    '<a class="now-btn" href="'+LINKS.telegram+'" target="_blank" rel="noopener">Написать →</a></div></div>';
+}
+function pulseHtml(){
+  if(NEWBIE||(role!=='founder'&&role!=='director')) return '';
+  var P=[
+    {i:'plLeads',k:'Leads · 7d',v:'…',d:'считаю…',s:'все источники',url:LINKS.jobtread},
+    {k:'Pipeline',v:'→',d:'воронка по стадиям',s:'открыть в JobTread',url:LINKS.jobtread},
+    {k:'Booking rate',v:'→',d:'лид → смета',s:'открыть в JobTread',url:LINKS.jobtread},
+    {k:'Расходы',v:'→',d:'реестр расходов',s:'Drive · веду я',url:LINKS.drive}
+  ];
+  return '<div class="sec">Company pulse · 7 days</div><div class="pulsegrid">'+P.map(function(p){
+    return '<a class="ptile"'+(p.i?' id="'+p.i+'"':'')+' href="'+p.url+'" target="_blank" rel="noopener"><div class="pk">'+p.k+'</div><b>'+p.v+'</b><div class="pdelta">'+p.d+'</div><small>'+(p.s||'')+'</small></a>';}).join('')+'</div>';
+}
+/* Живые лиды с M5 Hub (тот же endpoint, что Jin; credentials:'omit' — см. askAgent) */
+function loadPulse(){
+  try{
+    if(!window.fetch||!document.getElementById('plLeads'))return;
+    fetch(JIN_HOOK+'?pulse=1&k=m5p-4471&cb=cb',{credentials:'omit'}).then(function(r){return r.text();}).then(function(t){
+      var m=t.match(/^\s*cb\(([\s\S]*)\)\s*;?\s*$/); var d=null; try{d=JSON.parse(m?m[1]:t);}catch(e){}
+      if(!d||typeof d.leads7!=='number'){pulseFallback_();return;}
+      var L=document.getElementById('plLeads');
+      var delta=(typeof d.leadsPrev==='number')?(d.leads7-d.leadsPrev):null;
+      L.querySelector('b').textContent=d.leads7;
+      var pd=L.querySelector('.pdelta');
+      if(d.leads7===0){ pd.textContent='до запуска рекламы'; }
+      else { pd.textContent=(delta===null)?'за 7 дней':((delta>=0?'+':'')+delta+' vs прошлая неделя'); if(delta!==null&&delta>0)pd.className='pdelta up'; }
+      if(typeof d.site7==='number')L.querySelector('small').textContent='с сайта — '+d.site7;
+    }).catch(function(){pulseFallback_();});
+  }catch(e){}
+}
+function pulseFallback_(){
+  try{ var L=document.getElementById('plLeads'); if(!L)return;
+    L.querySelector('b').textContent='→';
+    L.querySelector('.pdelta').textContent='открыть в JobTread';
+    L.querySelector('small').textContent='';
+  }catch(e){}
+}
+
 /* Любая ошибка рендера без try/catch = молча пустая страница на телефоне.
    Ловим и показываем честный fallback со ссылкой на вход. */
 try {
@@ -170,22 +263,17 @@ document.getElementById('app').innerHTML=
   '<div class="hero">'+(avaUrl?'<img class="hero-ava" src="'+avaUrl+'" alt="">':'')+
   '<div><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
   '<div class="k">'+cfg.sub+'</div></div></div>'+
-  '<div class="top">'+
-    '<div class="agent">'+
-      '<div class="agent-h"><div class="agent-ic">✦</div>'+
-      '<div><b>Jin — ask me anything</b><span>Your AI teammate · trained on M5 brand &amp; rules</span></div></div>'+
-      '<div class="chips">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+'</div>'+
-      '<div class="ask"><input type="text" id="askInput" placeholder="Ask Jin..." onkeydown="if(event.key===\'Enter\')askAgent()">'+
-      '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
-      '<div class="jin-reply" id="jinReply"></div>'+
-    '</div>'+
-    '<a class="video" href="#" onclick="return openWelcome()" style="background-image:linear-gradient(180deg,rgba(20,18,15,0),rgba(20,18,15,.72)),url(\'/media/welcome_anime2.jpg\');background-size:cover;background-position:center 30%">'+
-      '<div class="play">▶</div>'+
-      '<div class="video-cap"><b>Welcome from Jin</b><span>Your AI teammate · ~30 sec</span></div>'+
-    '</a>'+
+  '<div class="jinhero">'+
+    '<div class="ask askbig"><span class="askic">✦</span><input type="text" id="askInput" placeholder="Ask Jin — tasks, clients, how-to…" onkeydown="if(event.key===\'Enter\')askAgent()">'+
+    '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
+    '<div class="chips chipsbig">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+'</div>'+
+    '<div class="jin-reply" id="jinReply"></div>'+
+    '<div class="meetjin" onclick="openWelcome()">▶ Meet Jin · your AI teammate · 30 sec</div>'+
   '</div>'+
+  nowHtml()+
+  pulseHtml()+
   '<div class="sec">Daily work</div>'+
-  '<div class="grid">'+cfg.tiles.map(function(t){
+  '<div class="grid">'+TILES.slice(0,4).map(function(t){
     var icon=t.b?'<div class="ic brand">'+LOGOS[t.b]+'</div>':'<div class="ic">'+(t.ic||'•')+'</div>';
     var col=t.b?BC[t.b]:'#E6DECB';
     var url=t.link?LINKS[t.link]:'';
@@ -196,6 +284,16 @@ document.getElementById('app').innerHTML=
     return '<a class="tile" style="--bc:'+col+'" '+open+'>'+icon+
       '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge+'</a>';
   }).join('')+'</div>'+
+  (TILES.length>4?('<details class="stackbox alltools"><summary><span>🧰 All tools</span><span class="stk-hint">'+(TILES.length-4)+' more</span></summary><div class="grid" style="padding:12px 14px 14px">'+TILES.slice(4).map(function(t){
+    var icon=t.b?'<div class="ic brand">'+LOGOS[t.b]+'</div>':'<div class="ic">'+(t.ic||'•')+'</div>';
+    var col=t.b?BC[t.b]:'#E6DECB';
+    var url=t.link?LINKS[t.link]:'';
+    if(t.k==='My growth') url='/growth/?role='+role;
+    var ext=url&&url.charAt(0)!=='/';
+    var open2=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
+    var badge2=url?'<span class="live">Live</span>':'<span class="soon">Soon</span>';
+    return '<a class="tile" style="--bc:'+col+'" '+open2+'>'+icon+'<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge2+'</a>';
+  }).join('')+'</div></details>'):'')+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+
   '<div id="planSec"></div>'+
@@ -212,6 +310,7 @@ document.getElementById('app').innerHTML=
     '<audio id="wvVo" preload="none"></audio>'+
   '</div>'+
 '</div>';
+if(role==='founder'||role==='director') setTimeout(loadPulse,50);
 
 } catch(e) {
   document.getElementById('app').innerHTML =
@@ -310,32 +409,28 @@ function smmShow(i){
 /* План E-2 · август→ноябрь. Только для фаундеров и директора (Алекс, Влад, Вадим).
    Обновляется после каждой консультации с адвокатом — дата в шапке.
    ✅/⬜ — статус пункта, меняется по факту. Детали финансов здесь не публикуем. */
-var EPLAN_UPD='24.07 · после консультации с иммиграционным адвокатом';
-/* Шкала инвестиций: заведено на счёт LLC. Метки: $100K — минимум завести и потратить,
-   $150K — цель на счету к началу октября, $200K — план инвестиций на 2026 (=100% шкалы).
-   cur обновляется, когда Алекс говорит «завели X». */
-var EPLAN_FUND={cur:0, min:100, goal:150, plan:200};
+var EPLAN_UPD='01.08';
 var EPLAN=[
  {m:'Август', tag:'Фундамент', items:[
    ['⬜','До 1 августа — подать LLC «M5 Studio Miami»','Florida LLC, Алекс 50% / Влад 50%. Регистрация + EIN. Это старт всего E-2 кейса.'],
-   ['⬜','Американский номер телефона','Подключаем и привязываем к сайту и всей лидогенерации.'],
+   ['✅','Американский номер телефона','Готово: +1 786 407 4441 (WhatsApp Business) — стоит на сайте и в кабинете клиента.'],
    ['⬜','Instagram M5 + запуск рекламы','Таргет на декоративную штукатурку. Аккаунт, контент, первая кампания.'],
    ['⬜','Сайт: реальные фото работ — Вадим','Реальные работы по штукатурке, сделанные в США, вместо стоков.'],
    ['⬜','Старт поиска шоурума','Майами, центральные улицы, до 100 м²: шоурум + склад + офис. См. подсказку «Шоурум» ниже.'],
-   ['⬜','Source of funds — подготовить','Алекс $75K + Влад $75K: документы происхождения инвестиций к сентябрьскому переводу. Детали — офлайн с адвокатом.'],
+   ['⬜','Source of funds — подготовить','Документы происхождения инвестиций к сентябрьскому переводу. Суммы и детали — офлайн с адвокатом.'],
    ['🎯','Цель месяца','Работают сайт + Instagram + реклама, лиды идут, система крутится.']
  ]},
  {m:'Сентябрь', tag:'Запуск', items:[
    ['⬜','Алекс прилетает в Майами (B1/B2)','Первые числа сентября. Лично открывает банковский счёт компании.'],
-   ['⬜','Перевод $100K на счёт компании','К концу сентября на счету — $150K.'],
+   ['⬜','Перевод инвестиций на счёт компании','По плану бизнес-плана; суммы и статус — офлайн с адвокатом.'],
    ['⬜','До 15 сентября — аренда помещения','Подписать аренду → реновация → готовим шоурум.'],
    ['⬜','Первые 3+ клиента на штукатурку','Запуск реальных работ — выручка и трекшн для кейса.'],
    ['⬜','Вадим официально в штате','Директор/менеджер, W-2, реальная работа — база для его E-2.']
  ]},
  {m:'Октябрь', tag:'Инвестиции + статус', items:[
-   ['⬜','Потратить $100K (сен–окт включительно)','Шоурум · авто под материалы · техника, столы, компьютеры · сервисы · найм SMM-таргетолога.'],
-   ['⚠️','Вадим: статус после 1 октября','U4U заканчивается 1.10. План продления статуса с адвокатом — заранее, до дедлайна.'],
-   ['⬜','Бизнес-план v4 — финал','Факт: $100K потрачено, $150K на счету, план инвестиций $200K на 2026. Реальные фото шоурума вместо рендеров.']
+   ['⬜','Инвестиции потратить по плану (сен–окт)','Шоурум · авто под материалы · техника, столы, компьютеры · сервисы · найм SMM-таргетолога.'],
+   ['⚠️','Вадим: продление статуса','План с адвокатом — заранее, до осеннего дедлайна. Детали — офлайн.'],
+   ['⬜','Бизнес-план v4 — финал','Намерения заменяем фактами: инвестиции потрачены и заведены по плану, реальные фото шоурума вместо рендеров.']
  ]},
  {m:'Ноябрь', tag:'Подача', items:[
    ['⬜','Варшава — подача E-2 всей командой','Алекс + Влад — инвесторы E-2. Вадим — E-2 employee.'],
@@ -351,17 +446,22 @@ var EPLAN_HINTS=[
   try{
     if(role!=='director'&&role!=='founder')return;
     var el=document.getElementById('planSec'); if(!el)return;
+    /* Интерим-гейт (аудит 01.08): E-2 не рендерим по одному ?role= — только по хэшу почты
+       Алекса/Влада/Вадима из m5_member. Полный серверный гейт — следующий шаг. */
+    var TRIO=['9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47',
+              '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322',
+              '5c73e10d48407d2b9ff50fb4383019c45b75eafe46b334ea4bf20de51d7df9ba'];
+    var mm=null; try{mm=JSON.parse(localStorage.getItem('m5_member')||'null');}catch(e){}
+    if(!mm||!mm.email||!window.crypto||!crypto.subtle)return;
+    crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(mm.email).trim().toLowerCase())).then(function(tbuf){
+    var ta=new Uint8Array(tbuf),thx='';for(var ti=0;ti<ta.length;ti++)thx+=('0'+ta[ti].toString(16)).slice(-2);
+    if(TRIO.indexOf(thx)===-1)return;
     var op=false; try{op=localStorage.getItem('m5_eplan_open')==='1';}catch(e){}
-    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>🗓 План E-2 · август → ноябрь</span><span class="stk-hint">обновлено '+EPLAN_UPD+' · нажми</span></summary><div class="stack">';
+    var eDone=0,eAll=0;
+    for(var ex=0;ex<EPLAN.length;ex++)for(var ey=0;ey<EPLAN[ex].items.length;ey++){var es=EPLAN[ex].items[ey][0]; if(es==='✅'||es==='⬜'||es==='⚠️'){eAll++; if(es==='✅')eDone++;}}
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>🗓 План E-2 · август → ноябрь</span><span class="stk-hint">'+eDone+'/'+eAll+' · обновлено '+EPLAN_UPD+'</span></summary><div class="stack">';
     h+='<div class="lsn" style="margin-top:10px">📄 <b>Бизнес-план E-2</b> — закреп: <a href="https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm" target="_blank" rel="noopener" style="color:#96703B">Company Drive → 06 Legal &amp; Docs</a></div>';
-    var fp=Math.min(100,Math.round(EPLAN_FUND.cur/EPLAN_FUND.plan*100));
-    h+='<div class="lsn" style="margin-top:12px"><b>💰 Инвестиции на счету LLC: $'+EPLAN_FUND.cur+'K из $'+EPLAN_FUND.plan+'K</b></div>'+
-       '<div style="position:relative;height:22px;background:#EFE8D9;border-radius:11px;margin:8px 0 2px;overflow:hidden">'+
-         '<div style="position:absolute;left:0;top:0;bottom:0;width:'+fp+'%;background:linear-gradient(90deg,#B0894F,#96703B);border-radius:11px;transition:width .6s"></div>'+
-         '<div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff9"></div>'+
-         '<div style="position:absolute;left:75%;top:0;bottom:0;width:2px;background:#fff9"></div>'+
-       '</div>'+
-       '<div style="display:flex;font-size:10.5px;color:#8A8272;letter-spacing:.04em"><span style="width:50%">$100K — минимум завести и потратить</span><span style="width:25%">$150K — цель к окт.</span><span style="width:25%;text-align:right">$200K — план 2026</span></div>';
+    h+='<div class="lsn" style="margin-top:12px"><b>💰 Шкала инвестиций</b> — суммы и статус живут в Бизнес-плане (Drive) и офлайн с адвокатом; в кабинете не публикуем.</div>';
     for(var i=0;i<EPLAN.length;i++){
       h+='<div class="stk-g" style="font-size:12px;margin-top:16px">'+EPLAN[i].m+' — '+EPLAN[i].tag+'</div>';
       for(var j=0;j<EPLAN[i].items.length;j++){
@@ -376,6 +476,7 @@ var EPLAN_HINTS=[
     el.innerHTML=h+'</div></details>';
     var box=el.querySelector('details.stackbox');
     if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_eplan_open',box.open?'1':'0');}catch(e){} });
+    });
   }catch(e){}
 })();
 
@@ -397,7 +498,7 @@ var LESSON=[
     if(role!=='director'&&role!=='pm'&&role!=='sales')return;
     var el=document.getElementById('lessonSec'); if(!el)return;
     var opened=false; try{opened=localStorage.getItem('m5_lesson_open')==='1';}catch(e){}
-    var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>🎓 JobTread — как работать</span><span class="stk-hint">урок · '+LESSON.length+' шагов · нажми</span></summary><div class="stack">';
+    var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>🎓 JobTread — как работать</span><span class="stk-hint">'+LESSON.length+' шагов</span></summary><div class="stack">';
     for(var i=0;i<LESSON.length;i++){
       html+='<div class="stk-g">Шаг '+(i+1)+' · '+LESSON[i][0]+'</div><div class="lsn">'+LESSON[i][1]+'</div>';
     }
@@ -415,12 +516,11 @@ var STACK=[
  ['AI & Dev','Higgsfield AI','видео и фото-фабрика (план PLUS, MCP подключён)','https://higgsfield.ai/'],
  ['AI & Dev','Облачные рутины','ежедневно: Health+Security · пн: мега-аудит + Growth Lab · Пульс · Brief','https://claude.ai/code/routines'],
  ['Операционка','JobTread','операционное ядро: лиды → сметы → производство → счета','https://app.jobtread.com/'],
- ['Операционка','Monday CRM','⚠️ отключаем — кабинеты уже без него; остался только API-дубль лидов как страховка','https://m5miami.monday.com/'],
  ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
  ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
  ['Операционка','Apps Script «M5 Hub»','автоматика: лиды→TG, SLA, склад, бэкенд Jin','https://script.google.com/u/2/home/projects/1TCKRgl1AKm6-9gyU3WHZpkHWsJRbkgyUkxiUiMvJYJq4p1m9_bv1jP-j/edit'],
  ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
- ['Сайт & аналитика','Client Hub','кабинет клиента: прогресс, кредиты 3%, реферал $250/$250, фидбек (свой, поверх будущего JobTread)','/client/?p=brickell-demo'],
+ ['Сайт & аналитика','Client Hub','кабинет клиента: прогресс, кредиты 3%, реферал $500/$500, фидбек (данные — из JobTread по мере интеграции)','/client/?p=brickell-demo'],
  ['Сайт & аналитика','Houzz','маркетинг-канал: профиль, портфолио, отзывы; реклама — позже','https://pro.houzz.com/'],
  ['Сайт & аналитика','GitHub','код сайта (m5miami-site) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
  ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
@@ -437,7 +537,7 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='31.07 ночь';
+var ALEXTODO_UPD='01.08';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
@@ -447,16 +547,16 @@ var ALEXTODO=[
  ['done','Drive: папка Visa создана','Клод создал и расшарил только вам троим (alex@, vlad@, vadim@). Ссылка: drive.google.com/drive/folders/1Mg4ZMJtjJlcrS4eYj3jr3nrhm6CBR9po','m'],
  ['done','Договор с Владом — в приватной папке Drive','Клод создал папку «Partnership — Alex + Vlad» (только ты и Влад) и загрузил подписанный PDF v3 от 22.07. Плитка в кабинете ведёт туда.','m'],
  ['done','Клод получил полный доступ к Google Drive','OAuth под alex@m5miami.com (01.08). Теперь папки, файлы, доступы — сам: Visa и Partnership уже созданы.','m'],
- ['todo','Apps Script — вставить патч Клода (вместе, 10 мин)','Роутинг feedback/idea/redeem в Partners-топик + Jin-ветка для клиентов. Готовый код: M5/4 Рабочие документы/AppsScript_M5Hub_patch_кабинеты.md. Открыть script.google.com под alex@ — дальше по шагам с Клодом (там ловушка с сохранением).'],
  ['done','Показать команде кабинет клиента','Пост с демо-ссылкой и видео-туториалом ушёл в M5 Team → Pulse & Wins (31.07).','m'],
  ['done','US-номер есть: +1 786 407 4441 (WhatsApp Business)','Клод заменил номер на всём сайте и в кабинете клиента (31.07). Разблокированы: Google Business Profile, Meta-реклама — следующие шаги списка.'],
  ['todo','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
- ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US из OpenPhone.'],
+ ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US: +1 786 407 4441 (WhatsApp Business).'],
  ['todo','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
  ['todo','Написать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
  ['todo','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.','m'],
  ['done','Тест-карточки в Telegram удалены','Клод вычистил 23 сообщения (тесты, demo-лиды, SLA-дубли) 31.07.','m'],
  ['todo','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.','m'],
+ ['todo','LLC подана? — скажи мне, отмечу везде','В плане E-2 пункт «До 1 августа — подать LLC» стоит ⬜, а август начался. Скажи статус — обновлю план и задачи.','m'],
  ['soon','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
 ];
 
@@ -489,7 +589,7 @@ var SMMNET=[
  {id:'gb',n:'Google Business',c:'#188038',st:'локальные лиды',
   ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.2-6.5-10a6.5 6.5 0 0 1 13 0c0 4.8-6.5 10-6.5 10Z"/><circle cx="12" cy="10.5" r="2.3"/></svg>',
   mock:'<div class="mkgb"><b>M5 Interior Design &amp; Build</b><span>★★★★★ 5.0 (12) · Remodeler · Miami, FL</span><div class="mkgbb"><i>Call</i><i>Directions</i><i>Website</i><i>Quote</i></div></div>'+
-   '<p class="mkp">Карточка в Google Maps и поиске «decorative plaster miami». Фото работ + отзывы после каждого проекта (движок отзывов в roadmap). Бесплатные горячие локальные лиды. Телефон — только US (OpenPhone).</p>'},
+   '<p class="mkp">Карточка в Google Maps и поиске «decorative plaster miami». Фото работ + отзывы после каждого проекта (движок отзывов в roadmap). Бесплатные горячие локальные лиды. Телефон — только US: +1 786 407 4441 (WhatsApp Business).</p>'},
  {id:'hz',n:'Houzz',c:'#4DBC15',st:'портфолио · ниша',
   ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M4 21V10.5L12 4l8 6.5V21h-6v-6h-4v6H4Z"/></svg>',
   mock:'<p class="mkp" style="margin-top:6px">Профиль-портфолио: каждый сданный проект — фотокейс, отзывы клиентов. Тут владельцы домов Майами ищут, с кем строить — аудитория с деньгами и намерением.</p><p class="mkp">Наполняет Алекс. Платную рекламу Houzz (~$499/мес) не берём, пока не нужен доп. поток.</p>'}
@@ -498,6 +598,7 @@ var ROADMAP=[
  ['Сентябрь · LLC + банковский счёт открыты','QuickBooks Online + bookkeeper','бухгалтерия; сразу включаем нативный синк JobTread↔QBO — счета и платежи улетают сами'],
  ['Онбординг-звонок JobTread (ближайшие недели)','Stripe в JobTread','депозиты и milestone-платежи клиентов картой/ACH прямо из сметы'],
  ['Первая W-2 зарплата Вадима (~октябрь)','Gusto','payroll: зарплаты и зарплатные налоги, ~$40/мес + $6/чел'],
+ ['Первый найм (sales / SMM / мастер)','Jin-KPI','панель мотивации: Jin считает по парным метрикам — Алекс/Вадим решают и платят; план в Кабинеты_и_Jin-KPI_план_M5.md'],
  ['Первые закупки материалов','Home Depot Pro Xtra','скидки на объём + чеки закупок автоматом в job costing'],
  ['Первый завершённый проект','Движок отзывов: сначала свой (Jin), не взлетит — Nicejob ~$75/мес','отзывы Google Business / Houzz на автомате'],
  ['Первый замер помещения','Rendr — попробовать','3D-скан телефоном → планы и замеры за минуты вместо рулетки'],
@@ -519,7 +620,7 @@ var ROADMAP=[
       /* Свёрнут по умолчанию: клик по шапке разворачивает. Состояние помнится
          в localStorage, чтобы не сворачивалось при каждом заходе. */
       var opened=false; try{opened=localStorage.getItem('m5_stack_open')==='1';}catch(e){}
-      var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>My stack · только для тебя</span><span class="stk-hint">'+STACK.length+' сервисов + план · нажми</span></summary><div class="stack">';
+      var html='<details class="stackbox"'+(opened?' open':'')+'><summary><span>🧩 My Stack · private</span><span class="stk-hint">'+STACK.length+' сервисов + план</span></summary><div class="stack">';
       for(var g=0;g<groups.length;g++){
         html+='<div class="stk-g">'+groups[g]+'</div>';
         for(var j=0;j<STACK.length;j++){ if(STACK[j][0]!==groups[g])continue;
@@ -528,20 +629,21 @@ var ROADMAP=[
       }
       var tdDone=0,tdAll=0,tdNextFound=false;
       for(var q=0;q<ALEXTODO.length;q++){ if(ALEXTODO[q][0]!=='soon'){tdAll++; if(ALEXTODO[q][0]==='done')tdDone++;} }
-      var td='<details class="stackbox" open><summary><span>📌 Мои задачи · ведёт Клод</span><span class="stk-hint">'+tdDone+' из '+tdAll+' · обновлено '+ALEXTODO_UPD+'</span></summary><div class="stack">';
+      var td='<details class="stackbox" open id="tdBox"><summary><span>📌 My tasks · run by Claude</span><span class="stk-hint">'+tdDone+' из '+tdAll+' · обновлено '+ALEXTODO_UPD+'</span></summary><div class="stack">';
       td+='<div class="tdbar"><i style="width:'+(tdAll?Math.round(tdDone/tdAll*100):0)+'%"></i></div>';
       td+='<div class="lsn" style="margin:4px 0 8px;color:#8A8272">Напиши Клоду в чат кодовое слово <b style="color:#96703B">«ПОГНАЛИ»</b> — он вспомнит этот список и поведёт тебя по шагам, по одному.</div>';
       var tdRow=function(t,ic,cls){ return '<details class="pl'+cls+'"><summary>'+ic+' '+ALEXTODO[t][1]+(cls===' tdnext'?' <span class="tdgo">следующий шаг</span>':'')+'</summary><div class="lsn" style="padding:4px 10px 8px 34px">'+ALEXTODO[t][2]+'</div></details>'; };
       /* Секция 1: цепочка цели недели (всё, что не 'm' и не soon) */
       td+='<div class="stk-g">🎯 Цель недели · запустить соцсети</div>';
-      var num=0;
+      var num=0, tdDoneRows='', tdDoneCnt=0;
       for(var t=0;t<ALEXTODO.length;t++){
         if(ALEXTODO[t][0]==='soon'||ALEXTODO[t][3]==='m')continue;
-        var ic, cls='';
-        if(ALEXTODO[t][0]==='done'){ num++; ic='<span class="tdk done">✓</span>'; cls=' tddone'; }
-        else { num++; ic='<span class="tdk">'+num+'</span>'; if(!tdNextFound){ cls=' tdnext'; tdNextFound=true; } }
-        td+=tdRow(t,ic,cls);
+        if(ALEXTODO[t][0]==='done'){ tdDoneCnt++; tdDoneRows+=tdRow(t,'<span class="tdk done">✓</span>',' tddone'); continue; }
+        num++; var cls='';
+        if(!tdNextFound){ cls=' tdnext'; tdNextFound=true; }
+        td+=tdRow(t,'<span class="tdk">'+num+'</span>',cls);
       }
+      if(tdDoneCnt)td+='<details class="pl tddone"><summary><span class="tdk done">✓</span> Сделано ('+tdDoneCnt+')</summary><div style="padding:2px 0 2px 8px">'+tdDoneRows+'</div></details>';
       /* Секция 2: мелочи на 5 минут ('m') */
       td+='<div class="stk-g" style="margin-top:12px">⚡ Мелочи на 5 минут</div>';
       for(var t2=0;t2<ALEXTODO.length;t2++){
@@ -556,7 +658,7 @@ var ROADMAP=[
       }
       td+='</div></details>';
       /* Соцсети — схема системы */
-      var sm='<details class="stackbox"><summary><span>📱 Соцсети · как устроена система</span><span class="stk-hint">'+SMMNET.length+' каналов · нажми на кружок</span></summary><div class="stack">';
+      var sm='<details class="stackbox"><summary><span>📱 Socials · how it works</span><span class="stk-hint">'+SMMNET.length+' каналов</span></summary><div class="stack">';
       sm+='<div class="smflow"><span>🎥 Команда снимает<small>Вадим: 4 кадра + видео · Влад: лицо</small></span><i>→</i><span>☁️ Google Drive<small>01 Content — всё сырьё</small></span><i>→</i><span>🤖 Клод<small>календарь · сценарии · тексты</small></span><i>→</i><span>📲 Публикация<small>планировщик Meta · 15 мин/день</small></span><i>→</i><span>💰 Лиды<small>сайт → JobTread · источник трекается</small></span></div>';
       sm+='<div class="smorb">';
       for(var s2=0;s2<SMMNET.length;s2++){
@@ -603,13 +705,13 @@ var ROADMAP=[
     '.fbm-ok{display:none;background:#F0F8F2;border:1px solid #CBE3D3;color:#3E8E5A;border-radius:10px;padding:10px 14px;font-size:13px;margin-top:10px}';
     var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
     var wrap=document.createElement('div');
-    wrap.innerHTML='<div class="fbx" onclick="fbOpen()">⚡ Idea / Bug</div>'+
+    wrap.innerHTML='<div class="fbx" onclick="fbOpen()">⚡ Идея / баг</div>'+
     '<div class="fbm" id="fbm" onclick="if(event.target===this)fbClose()"><div class="fbm-box">'+
-    '<b>⚡ Report a bug or idea</b>'+
-    '<p>Something broken, or an idea to make M5 better? Write it as is. It goes straight to Alex &amp; Claude (our AI engineer): small fixes ship fast, bigger changes get approved first.</p>'+
-    '<textarea id="fbTxt" placeholder="e.g. On my phone the progress bar is cut off…"></textarea>'+
-    '<div class="fbm-ok" id="fbmOk">Sent! Thank you — the system gets better because of you 🙌</div>'+
-    '<div class="fbm-a"><span class="fbm-x2" onclick="fbClose()">Cancel</span><span class="fbm-send" onclick="fbSend()">Send</span></div>'+
+    '<b>⚡ Идея или баг</b>'+
+    '<p>Что-то сломалось или есть идея, как сделать M5 лучше? Пиши как есть — уйдёт напрямую Алексу и Клоду (нашему AI-инженеру). Мелкое чиним быстро, крупное — после согласования.</p>'+
+    '<textarea id="fbTxt" placeholder="Например: на телефоне обрезается прогресс-бар…"></textarea>'+
+    '<div class="fbm-ok" id="fbmOk">Отправлено! Алекс и Клод увидят это в Telegram сегодня 🙌</div>'+
+    '<div class="fbm-a"><span class="fbm-x2" onclick="fbClose()">Отмена</span><span class="fbm-send" onclick="fbSend()">Отправить</span></div>'+
     '</div></div>';
     document.body.appendChild(wrap);
     window.fbOpen=function(){document.getElementById('fbm').className='fbm on';};
@@ -633,36 +735,17 @@ var ROADMAP=[
   try{
     if(role!=='founder'&&role!=='director')return;
     var el=document.getElementById('kpiSec'); if(!el)return;
-    var opened=false; try{opened=localStorage.getItem('m5_kpi_open')==='1';}catch(e){}
     var isDir=(role==='director');
-    var ht='<details class="stackbox"'+(isDir?' open':'')+'><summary><span>📖 Как вести проект · 3 шага</span><span class="stk-hint">ежедневный ритм</span></summary><div class="stack">';
+    var ht='<details class="stackbox"'+(isDir?' open':'')+'><summary><span>📖 How to run a project · 3 steps</span><span class="stk-hint">ежедневный ритм</span></summary><div class="stack">';
     ht+='<div class="lsn"><b>0 · Старт проекта.</b> Договор подписан → PDF в Drive: <b>02 Projects → имя проекта → 01 Contract</b> → сообщение в Projects «Договор подписан: имя · адрес · старт». Дальше Клод заводит кабинет клиента, SMM снимает «до» (папка 02 Before). Полная инструкция по ролям: Кто_чем_пользуется + Документооборот (4 Рабочие документы).</div>';
     ht+='<div class="lsn"><b>1 · Днём — фото и видео с объекта → Google Drive.</b> Открой плитку Drive → папка <b>02 Projects → имя проекта</b> → кидай всё сырьё туда (и для клиента, и для соцсетей). Заходить только с рабочей почты @m5miami.com.</div>';
     ht+='<div class="lsn"><b>2 · Вечером — 2 минуты в Telegram.</b> В «M5 Team» → топик <b>Projects</b>: голосовое или пару строк — что сделали сегодня, что завтра, что нужно. Всё, отчёт сдан.</div>';
     ht+='<div class="lsn"><b>3 · Дальше — Джин и Клод.</b> Мы переносим статус в <b>кабинет клиента</b> — клиент видит галочки и фото сам, тебе руками ничего заполнять не надо. После подключения JobTread шаг 2 станет отчётом прямо в его приложении с фото — кабинет клиента обновится автоматически.</div>';
-    ht+='<div class="lsn" style="color:#8A8272">Деньги и счета — <b>QuickBooks</b> (плитка Finance): там работает онлайн-бухгалтер, мы туда только загружаем чеки. Вопросы в любой момент — Джину наверху или Алексу.</div>';
+    ht+='<div class="lsn" style="color:#8A8272">Деньги и счета — <b>QuickBooks</b> (подключим после регистрации LLC — план в My Stack): мы туда только загружаем чеки. Вопросы в любой момент — Джину наверху или Алексу.</div>';
     ht+='</div></details>';
-    var h='<details class="stackbox"'+(opened?' open':'')+' id="kpiBox"><summary><span>⚙️ Jin-KPI · мотивация и бонусы</span><span class="stk-hint">включим с первыми наймами</span></summary><div class="stack">';
-    h+='<div class="lsn" style="margin-bottom:10px"><b>Для кого это:</b> для сотрудников, которых наберём — sales, SMM, мастера. <b>Как работает:</b> Jin собирает факты из JobTread (задачи, скорость ответа лидам, отчёты с объектов), считает KPI и <b>предлагает</b> бонус. Утверждает всегда человек — Алекс или Вадим, одним нажатием в Telegram. Так делают Meta и Shopify, и так это легально в США.</div>';
-    h+='<div class="stk-g">Правила игры</div>';
-    h+='<div class="lsn"><b>1 · Правило Shopify.</b> Прежде чем просить бюджет, часы или подрядчика — покажи, что Jin не может сделать это сам.</div>';
-    h+='<div class="lsn"><b>2 · Пятница, 15 минут.</b> Каждый показывает одну вещь, сделанную с Jin за неделю. Jin сам собирает дайджест побед в Пульс.</div>';
-    h+='<div class="lsn"><b>3 · Нашёл экономию — забери долю.</b> Придумал, как Jin экономит часы или деньги — получаешь 20% экономии первого месяца бонусом.</div>';
-    h+='<div class="stk-g" style="margin-top:12px">Метрики всегда парами · чтобы не было накруток</div>';
-    h+='<div class="lsn">⚡ Скорость ответа лиду <b>+</b> конверсия в замер · 📋 Задачи через Jin <b>+</b> доля переделок · 📐 AI-сметы <b>+</b> точность против факта</div>';
-    h+='<div class="stk-g" style="margin-top:12px">Так будет выглядеть карточка от Jin</div>';
-    h+='<div style="background:#20242E;border-radius:14px;padding:16px 18px;color:#fff;margin-top:6px">'+
-       '<div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E3C795">✦ Jin · предложение бонуса</div>'+
-       '<div style="font-size:15px;margin-top:8px"><b>Sales</b> <span style="font-size:11px;color:#8A8272">(пример будущего сотрудника)</span> · октябрь: 31 лид обработан, ответ в среднем 9 мин (цель 15), конверсия в замер 42%.</div>'+
-       '<div style="font-size:20px;font-weight:800;margin-top:6px;color:#7ED9A0">Рекомендую: +$350 <span style="font-size:12px;color:#AEA898;font-weight:600">(gross · ~$272 на руки)</span></div>'+
-       '<div style="display:flex;gap:8px;margin-top:10px">'+
-       '<span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:8px 16px;border-radius:16px;background:#7ED9A0;color:#0d3532">✓ Утвердить</span>'+
-       '<span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:8px 16px;border-radius:16px;background:rgba(255,255,255,.12);color:#CFC8B8">Изменить</span></div>'+
-       '<div style="font-size:11px;color:#8A8272;margin-top:10px">Финальное решение — за руководителем. Каждая выплата — в журнале. Не согласен с оценкой — кнопка «оспорить» в твоём кабинете.</div></div>';
-    h+='</div></details>';
-    el.innerHTML=ht+h;
-    var box=document.getElementById('kpiBox');
-    if(box)box.addEventListener('toggle',function(){try{localStorage.setItem('m5_kpi_open',box.open?'1':'0');}catch(e){}});
+    /* Jin-KPI из кабинета убран до первого найма (аудит 01.08): применять некому.
+       План остался в ROADMAP (My Stack) и в 4 Рабочие/Кабинеты_и_Jin-KPI_план_M5.md. */
+    el.innerHTML=ht;
   }catch(e){}
 })();
 
@@ -677,7 +760,8 @@ var CLIENTHUBS=[
     if(role!=='founder'&&role!=='director')return;
     var el=document.getElementById('clientsSec'); if(!el)return;
     var row=function(c){return '<a class="stk" href="/client/?p='+c.slug+'"><b>'+c.name+' <span style="font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#B0894F;border:1px solid #D9B87C;border-radius:8px;padding:2px 7px;margin-left:6px">'+c.status+'</span></b><span>'+c.project+' · открыть кабинет →</span></a>';};
-    var h='<details class="stackbox"'+(role==='director'?' open':'')+'><summary><span>👥 Clients · панель управления</span><span class="stk-hint">'+CLIENTHUBS.length+' · вход в кабинеты клиентов</span></summary><div class="stack">';
+    var allDemo=true; for(var ad=0;ad<CLIENTHUBS.length;ad++){ if(CLIENTHUBS[ad].status!=='Demo'){allDemo=false;break;} }
+    var h='<details class="stackbox"'+((role==='director'&&!allDemo)?' open':'')+'><summary><span>👥 Clients · control panel</span><span class="stk-hint">'+CLIENTHUBS.length+(allDemo?' · demo':' · кабинеты клиентов')+'</span></summary><div class="stack">';
     var recent=CLIENTHUBS.slice(0,5);
     for(var i=0;i<recent.length;i++){ h+=row(recent[i]); }
     if(CLIENTHUBS.length>5){
@@ -750,19 +834,20 @@ var TEAMVIEW=[
     var el=document.getElementById('guideSec'); if(!el)return;
     var h='';
     if(ROLEGUIDE[role]){
-      h+='<details class="stackbox" open><summary><span>📖 Твоя инструкция · '+role+'</span><span class="stk-hint">твои шаги</span></summary><div class="stack">';
+      h+='<details class="stackbox"'+(onbDone()?'':' open')+'><summary><span>📖 Your playbook · '+role+'</span><span class="stk-hint">'+ROLEGUIDE[role].length+' шагов</span></summary><div class="stack">';
       for(var i=0;i<ROLEGUIDE[role].length;i++){
         h+='<div class="lsn"><b>'+ROLEGUIDE[role][i][0]+'.</b> '+ROLEGUIDE[role][i][1]+'</div>';
       }
-      h+='<div class="lsn" style="color:#8A8272">Вопросы — Джину наверху. Что-то неудобно — кнопка «⚡ Idea / Bug» справа внизу.</div></div></details>';
+      h+='<div class="lsn" style="color:#8A8272">Вопросы — Джину наверху. Что-то неудобно — кнопка «⚡ Идея / баг» справа внизу.</div></div></details>';
     }
     if(role==='director'||role==='founder'){
-      h+='<details class="stackbox"'+(role==='director'?' open':'')+'><summary><span>🧭 Команда · кто что делает</span><span class="stk-hint">'+TEAMVIEW.length+' ролей</span></summary><div class="stack">';
+      h+='<details class="stackbox"><summary><span>🧭 Team · who does what</span><span class="stk-hint">'+TEAMVIEW.length+' ролей</span></summary><div class="stack">';
       for(var t=0;t<TEAMVIEW.length;t++){
         h+='<div class="lsn"><b>'+TEAMVIEW[t][0]+'</b> — '+TEAMVIEW[t][1]+'</div>';
       }
       h+='<div class="stk-g" style="margin-top:10px">Путь клиента за 30 секунд</div>';
-      h+='<div class="lsn">Лид → Sales (15 мин) → замер → договор (01 Contract + пост в Projects) → Клод заводит кабинет клиента → SMM снимает «ДО» → Вадим ведёт дневной цикл → Клод ставит галочки клиенту → инвойсы/кредиты → финал: SMM «ПОСЛЕ» + Джин просит Google-отзыв (+50 cr) + реферальная ссылка.</div>';
+      h+='<div class="lsn">Лид → Sales (15 мин) → замер → договор (01 Contract + пост в Projects) → Клод заводит кабинет клиента → SMM снимает «ДО» → Вадим ведёт дневной цикл → Клод ставит галочки клиенту → инвойсы/кредиты → финал: SMM «ПОСЛЕ» + просим Google-отзыв (бесплатно, на пике эмоций) + реферальная ссылка $500/$500.</div>';
+      h+='<div class="lsn" style="color:#8A8272">Полная орг-структура и контакты — <a href="/org/" style="color:#96703B">страница Org →</a></div>';
       h+='</div></details>';
     }
     el.innerHTML=h;
