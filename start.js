@@ -562,6 +562,7 @@ var ALEXTODO=[
  ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US: +1 786 407 4441 (WhatsApp Business).'],
  ['todo','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
  ['todo','Написать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
+ ['todo','JobTread: тур на 40 минут, потом онбординг-звонок','Пройди демо-джоб «DEMO Turnkey Brickell 2BR» по шагам — гайд: M5/4 Рабочие документы/JobTread_первая_сессия.md. Главное — собрать тестовую смету и отправить её себе как клиенту. После тура бери бесплатный онбординг (Help → Support): каталог смет там пока дефолтный от JobTread, наших услуг в нём нет — это работа Вадима на звонке.'],
  ['todo','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.','m'],
  ['done','Тест-карточки в Telegram удалены','Клод вычистил 23 сообщения (тесты, demo-лиды, SLA-дубли) 31.07.','m'],
  ['todo','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.','m'],
