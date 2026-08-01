@@ -138,7 +138,7 @@ try{ if(member&&member.role==='founder'&&ROLES[member.role]&&role!==member.role)
 
 /* Персональные аватарки (Pixar-стиль, серия для всей команды).
    Матчим по префиксу рабочей почты, запасной вариант — по имени. */
-var AVATARS={alex:'/img/ava_alex.jpg',vlad:'/img/ava_vlad.jpg',vadim:'/img/ava_vadim.jpg',vadym:'/img/ava_vadim.jpg'};
+var AVATARS={alex:'/img/ava_alex_t.jpg',vlad:'/img/ava_vlad_t.jpg',vadim:'/img/ava_vadim_t.jpg',vadym:'/img/ava_vadim_t.jpg'};
 var avaUrl='';
 try{
   if(member&&!preview){
@@ -196,7 +196,7 @@ window.obToggle=function(i){
   }catch(e){}
 };
 function obHtml(){
-  var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex.jpg'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim.jpg'};
+  var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex_t.jpg'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim_t.jpg'};
   OB_STEPS[5].url=LINKS.telegram;
   if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t='Загляни в базу знаний — плитка Drive ниже';
   var done=0,total=OB_STEPS.length,rows='';
@@ -210,7 +210,7 @@ function obHtml(){
     '<div class="ob-head"><span class="now-tag">⚡ Your first day at M5</span><span class="ob-pct">'+pct+'%</span></div>'+
     '<div class="obbar"><i style="width:'+pct+'%"></i></div>'+rows+
     '<div class="lsn" style="color:#8A8272;font-size:11.5px;margin-top:6px">Отмечай шаги по мере выполнения — когда всё готово, кабинет переключится в рабочий режим.</div>'+
-    '<div class="buddy"><img src="'+buddy.img+'" alt=""><div><b>'+buddy.name+' · '+buddy.r+'</b><span>Твой бадди: любой вопрос — пиши напрямую, это нормально.</span></div>'+
+    '<div class="buddy"><img src="'+buddy.img+'" alt="" loading="lazy" decoding="async"><div><b>'+buddy.name+' · '+buddy.r+'</b><span>Твой бадди: любой вопрос — пиши напрямую, это нормально.</span></div>'+
     '<a class="now-btn" href="'+LINKS.telegram+'" target="_blank" rel="noopener">Написать →</a></div></div>';
 }
 function pulseHtml(){
@@ -271,7 +271,7 @@ document.getElementById('app').innerHTML=
 '</div></header>'+
 '<div class="wrap">'+
   (preview?'<div class="pvw">Admin preview — the <b>'+cfg.label+'</b> workspace exactly as a future hire will see it · <a href="/champion'+(member&&member.role?member.role:'')+'">Back to my workspace →</a></div>':'')+
-  '<div class="hero">'+(avaUrl?'<img class="hero-ava" src="'+avaUrl+'" alt="">':'')+
+  '<div class="hero">'+(avaUrl?'<img class="hero-ava" src="'+avaUrl+'" alt="" decoding="async">':'')+
   '<div><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Hi, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
   '<div class="k">'+cfg.sub+'</div></div></div>'+
   '<div class="jinhero">'+

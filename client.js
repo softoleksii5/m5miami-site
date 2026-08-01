@@ -96,6 +96,18 @@ var REWARDS=[
 
 var KUDOS=['Vadym — project lead','Design team','Site crew'];
 
+/* Что означает каждая стадия — простым языком (просьба Алекса 02.08:
+   «полоса непонятна»). Клиент должен за 3 секунды понять, где он и что дальше. */
+var PHASE_INFO={
+ 'Design':'concept, layout and moodboards',
+ 'Materials':'choosing finishes, samples and selections',
+ 'Build':'demolition, construction and installation',
+ 'Styling':'furniture, decor and final touches',
+ 'Handover':'final walkthrough, documents and warranty'
+};
+/* Мелкие превью для карточек (640px) — полноразмерные фото только в модалке услуги. */
+function thumb(u){ return String(u||'').replace(/\.jpg$/, '_t.jpg'); }
+
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var slug=(location.search.match(/[?&]p=([^&]*)/)||[])[1]||'';
 var C=CLIENTS[slug];
@@ -114,7 +126,12 @@ function hub(p){ if(DEMO) return; if(window.m5hook) m5hook(p); }
 var TSTYLE='<style>'+
 'html,body{overflow-x:hidden}'+
 'body{background:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
-'@media(max-width:680px){body{background-size:220% auto}}'+
+'@media(max-width:680px){body{background-image:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg_m.jpg);background-size:auto,220% auto}}'+
+'.cph-h{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#96703B}'+
+'.cph-h b{color:#8A8272;font-weight:400}'+
+'.cph-now{font-size:14px;color:#5A5142;margin:-8px 0 20px;line-height:1.5}'+
+'.cph-now b{color:#232733}'+
+'.cjh{font-size:11.5px;color:#8A8272;margin:0 0 6px 2px}'+
 '.chero{margin:26px 0 18px;max-width:640px}'+
 '.chero .ey{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#96703B;margin-bottom:10px}'+
 '.chero h1{font-size:40px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:#232733}'+
@@ -277,7 +294,14 @@ function renderGate_(){
   '<footer>M5 Interior Design &amp; Build · Miami</footer>';
 }
 function renderHub_(){
-  var ph=C.phases.map(function(p,i){return '<span class="'+(i<C.phase?'done':(i===C.phase?'on':''))+'">'+esc(p)+'</span>';}).join('');
+  var ph=C.phases.map(function(p,i){
+    var st=i<C.phase?'done':(i===C.phase?'on':'');
+    var ic=i<C.phase?'✓ ':(i===C.phase?'● ':'');
+    return '<span class="'+st+'">'+ic+esc(p)+'</span>';}).join('');
+  var curPh=C.phases[C.phase]||C.phases[0], nxtPh=C.phases[C.phase+1]||'';
+  var phLead='<div class="cph-h"><span>Where your project is now</span><b>stage '+(C.phase+1)+' of '+C.phases.length+'</b></div>';
+  var phNote='<div class="cph-now"><b>You are here: '+esc(curPh)+'</b> — '+(PHASE_INFO[curPh]||'work in progress')+
+    (nxtPh?('. Up next: <b>'+esc(nxtPh)+'</b> — '+(PHASE_INFO[nxtPh]||'')):'')+'.</div>';
   var tasks=C.tasks.map(function(t){var ic=t[0]==='done'?'✓':(t[0]==='now'?'●':'○');
     return '<div class="tsk '+t[0]+'"><i>'+ic+'</i><b>'+esc(t[1])+'</b><small>'+esc(t[2])+'</small></div>';}).join('');
   var doneN=C.tasks.filter(function(t){return t[0]==='done';}).length;
@@ -294,12 +318,12 @@ function renderHub_(){
   var mats=C.materials.map(function(m,mi){
     var act=(m.st==='review')?('<div class="mact"><span class="sbtn go" onclick="matApprove('+mi+')">Approve ✓</span>'+
       '<a class="sbtn wa" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+'. About the sample “'+m.ttl+'”: ')+'">Discuss</a></div>'):'';
-    return '<div class="mat" id="mat'+mi+'"><img src="'+m.img+'" alt="" loading="lazy"><div class="mi"><b>'+esc(m.ttl)+'</b><span>'+esc(m.note)+'</span><br><em class="'+m.st+'">'+
+    return '<div class="mat" id="mat'+mi+'"><img src="'+thumb(m.img)+'" alt="" loading="lazy" decoding="async"><div class="mi"><b>'+esc(m.ttl)+'</b><span>'+esc(m.note)+'</span><br><em class="'+m.st+'">'+
     (m.st==='approved'?'Approved':(m.st==='review'?'Your review':'Coming up'))+'</em>'+act+'</div></div>';}).join('');
   if(!C.materials.length) mats='<div class="bacap">Materials board fills up during the Design phase — samples land here for your approval.</div>';
   var needRev=C.materials.filter(function(m){return m.st==='review';}).length;
   var svc=SERVICES.map(function(s,i){
-    return '<div class="svc" onclick="svcOpen('+i+')" style="cursor:pointer"><img src="'+s.img+'" alt="" loading="lazy"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
+    return '<div class="svc" onclick="svcOpen('+i+')" style="cursor:pointer"><img src="'+thumb(s.img)+'" alt="" loading="lazy" decoding="async"><div class="si"><b>'+esc(s.ttl)+'</b><p>'+esc(s.sub)+'</p>'+
     '<div class="fr">'+esc(s.from)+'</div><div class="sa">'+
     '<span class="sbtn go" onclick="event.stopPropagation();reqSvc('+i+')">Request →</span>'+
     '<a class="sbtn wa" onclick="event.stopPropagation()" target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'?text='+encodeURIComponent('Hi! This is '+C.name+' ('+C.project+'). I’m interested in: '+s.ttl)+'">WA</a>'+
@@ -330,7 +354,7 @@ function renderHub_(){
       '<div class="st">'+esc(C.project)+' · started '+esc(C.started)+(C.eta?' · target completion: <b>'+esc(C.eta)+'</b>':'')+'</div>'+
       '<div class="st" style="margin-top:4px">Your project lead: '+esc(C.pm)+' · Director</div>'+
     '</div>'+
-    '<div class="cph">'+ph+'</div>'+
+    phLead+'<div class="cph">'+ph+'</div>'+phNote+
     clientJinHtml()+
     clientNowHtml()+
     acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated '+esc(C.updated||C.started),
@@ -338,16 +362,16 @@ function renderHub_(){
     acc('ba','📸','Before & after','Where we started — and where it’s going',
       '<div class="bacap">Our content team shoots every room before works begin — so you can watch the transformation.</div>'+
       '<div class="bagrid">'+
-      '<div><div class="bapair"><em>Before</em><img src="/img/ba_reno_before.jpg" alt="" loading="lazy"></div><div class="bacap">Living room — day one</div></div>'+
-      '<div><div class="bapair after"><em>After</em><img src="/img/ba_reno_after.jpg" alt="" loading="lazy"></div><div class="bacap">Living room — result (example)</div></div>'+
-      '<div><div class="bapair"><em>Before</em><img src="/img/ba_plaster_before.jpg" alt="" loading="lazy"></div><div class="bacap">Accent wall — before plaster</div></div>'+
-      '<div><div class="bapair after"><em>After</em><img src="/img/ba_plaster_after.jpg" alt="" loading="lazy"></div><div class="bacap">Accent wall — art-concrete (example)</div></div>'+
+      '<div><div class="bapair"><em>Before</em><img src="/img/ba_reno_before_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Living room — day one</div></div>'+
+      '<div><div class="bapair after"><em>After</em><img src="/img/ba_reno_after_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Living room — result (example)</div></div>'+
+      '<div><div class="bapair"><em>Before</em><img src="/img/ba_plaster_before_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Accent wall — before plaster</div></div>'+
+      '<div><div class="bapair after"><em>After</em><img src="/img/ba_plaster_after_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Accent wall — art-concrete (example)</div></div>'+
       '</div>', false)+
     acc('mats','🧱','Materials & selections', needRev? needRev+' waiting for your review':'All approved',
       '<div class="mats">'+mats+'</div>', needRev>0)+
     acc('docs','📄','Documents', docsN+' files · reports, invoices, design',
       '<div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div>', false)+
-    '<div class="band" style="background-image:url(/img/band_kitchen.jpg)"></div>'+
+    '<div class="band" data-bg="/img/band_kitchen.jpg"></div>'+
     acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
       '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">Tap any card for details. One team already on site = better price, zero coordination pain.</div>'+
       '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">'+(DEMO?'Demo mode — in your real hub, '+esc(C.pm)+' texts you the same day.':'Request sent! '+esc(C.pm)+' will text you today with details.')+'</div>', false)+
@@ -366,7 +390,7 @@ function renderHub_(){
       '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(C.refCode)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
       '<div style="font-size:12px;color:#8A8272;margin-top:8px">When your friend books a consultation, we message you — and the $500 lands on your balance.</div>'+
       '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false):'')+
-    '<div class="band" style="background-image:url(/img/band_plaster.jpg)"></div>'+
+    '<div class="band" data-bg="/img/band_plaster.jpg"></div>'+
     acc('fb','💬','Feedback & reviews','30 seconds — it goes straight to the founders',
       '<div style="font-size:13px;color:#6E6656;margin:2px 0 4px">How was our work this week?</div>'+
       '<div class="stars" id="stars">'+[1,2,3,4,5].map(function(n){return '<span onclick="starPick('+n+')">★</span>';}).join('')+'</div>'+
@@ -377,11 +401,12 @@ function renderHub_(){
       '<div class="okmsg" id="fbOk">'+(DEMO?'Demo mode — in your real hub this lands on the founders’ desk instantly.':'Thank you! Your feedback just landed on the founders’ desk. We read every word.')+'</div>'+
       gRev, false)+
     acc('talk','📞','Talk to us directly','Vlad (co-founder) · '+esc(C.pm)+' (Director)',
-      '<div class="fdrs"><img src="/img/ava_vlad.jpg" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
-      '<div class="fdrs"><img src="/img/ava_vadim.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
+      '<div class="fdrs"><img src="/img/ava_vlad_t.jpg" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+      '<div class="fdrs"><img src="/img/ava_vadim_t.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
   '<footer>M5 · Interior Design &amp; Build · Miami</footer>'+
   '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
+  lazyBands_();
 }
 /* Реальные клиенты живут НЕ в этом файле: GAS отдаёт JSON по slug+token из листа Clients
    (Sheet-first, решение Алекса 02.08). Ссылка клиента: /client/?p=slug&t=token */
@@ -425,6 +450,23 @@ function svcOpen(i){
   document.getElementById('svm').className='svm on';
 }
 function svcClose(){var m=document.getElementById('svm'); if(m)m.className='svm';}
+/* Фоновые полосы весят ~200 КБ и лежат далеко внизу — грузим их, только когда
+   пользователь до них доскроллил (оптимизация 02.08). */
+function lazyBands_(){
+  try{
+    var els=document.querySelectorAll('.band[data-bg]'); if(!els.length)return;
+    if(!('IntersectionObserver' in window)){
+      for(var i=0;i<els.length;i++) els[i].style.backgroundImage='url('+els[i].getAttribute('data-bg')+')';
+      return;
+    }
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){ if(!en.isIntersecting)return;
+        var el=en.target; el.style.backgroundImage='url('+el.getAttribute('data-bg')+')';
+        el.removeAttribute('data-bg'); io.unobserve(el); });
+    },{rootMargin:'400px'});
+    for(var j=0;j<els.length;j++) io.observe(els[j]);
+  }catch(e){}
+}
 /* «Тот же подход, что в кабинете команды» (02.08): над аккордеонами — одно действие
    и одна ближайшая веха; клиент без «домашки» карточку не видит (правило тишины). */
 function clientNowHtml(){
@@ -442,7 +484,8 @@ function clientNowHtml(){
 }
 window.openAcc=function(id){ try{ var d=document.getElementById('acc_'+id); if(d){ d.open=true; try{localStorage.setItem('m5c_'+id,'1');}catch(e2){} d.scrollIntoView({behavior:'smooth',block:'start'}); } }catch(e){} };
 function clientJinHtml(){
-  return '<div class="cjin"><div class="cjbar"><span class="cjic">✦</span>'+
+  return '<div class="cjin"><div class="cjh">✦ Jin · your AI assistant — answers in seconds, any time of day</div>'+
+    '<div class="cjbar"><span class="cjic">✦</span>'+
     '<input type="text" id="cjInput" placeholder="Ask Jin about your project — timeline, materials, credits…" onkeydown="if(event.key===\'Enter\')cjAsk()">'+
     '<button onclick="cjAsk()" aria-label="Send">→</button></div>'+
     '<div class="cjreply" id="cjReply"></div></div>';
