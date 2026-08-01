@@ -15,6 +15,9 @@ var LINKS={
   permits:'https://www.miamidade.gov/permits/', // разрешения Miami-Dade
   expenses:'https://docs.google.com/spreadsheets/d/1kn88ENlBpt1_hE9y5MIIncKgqjk_9iah6jhJFOBOM8c/edit', // живая таблица расходов (Drive → 04 Finance)
   receipts:'https://drive.google.com/drive/folders/1pxf-z-hO8cYtPl0TEZaMvAtJAtxc4CbZ',      // папка «Чеки — фото и PDF»
+  content:'https://drive.google.com/drive/folders/1elQzb8bMN8BEIMtDpKBg-ySryidATYrc',      // 01 Content — весь контент
+  contentInbox:'https://drive.google.com/drive/folders/1K_VG6jUzGPruqMQAUQcKm8QsISGvHlqQ', // 00 Входящее — свалка, Клод разбирает
+  reviews:'https://drive.google.com/drive/folders/1rmhrlvU_DIS_GRzRQGOvaLZ9y2aii9ta',        // 01 Отзывы клиентов
   visaVadim:'https://drive.google.com/drive/folders/1SlaE1h7tWicXY49TJwYn339aMGsxZ3Sr',     // Visa — Vadim (доступ: Алекс, Влад, Вадим)
   quickbooks:'',
   heygen:'',
@@ -59,6 +62,7 @@ var ROLES={
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'drive',k:'Drive',t:'Company docs',link:'drive'},
+      {ic:'🛂',k:'Виза',t:'Мои документы',link:'visaVadim'},
       {ic:'📄',k:'Permits',t:'Miami-Dade',link:'permits'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'}]},
   smm:{label:'SMM',sub:'Your SMM & content workspace',
@@ -306,6 +310,7 @@ document.getElementById('app').innerHTML=
     var open2=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
     return '<a class="tile" style="--bc:'+col+'" '+open2+'>'+icon+'<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b></a>';
   }).join('')+'</div></details>'):'')+
+  '<div id="contSec"></div>'+
   '<div id="expSec"></div>'+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+
@@ -764,6 +769,26 @@ var ROADMAP=[
   }catch(e){}
 })();
 
+
+/* ═══ Контент: куда скидывать фото, видео и отзывы (02.08, вопрос Алекса про
+   отзыв и видео у Вадима). Одно правило: не знаешь куда — шли боту. ═══ */
+(function(){
+  try{
+    var el=document.getElementById('contSec'); if(!el)return;
+    var op=false; try{op=localStorage.getItem('m5_cont_open')==='1';}catch(e){}
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>📸 Контент · куда скидывать</span><span class="stk-hint">фото, видео, отзывы клиентов</span></summary><div class="stack">';
+    h+='<div class="lsn"><b>Правило одно: не знаешь куда — отправь боту.</b> @m5miami_bot принимает фото и видео прямо из галереи телефона, подпиши одним словом («отзыв», «штукатурка», «объект») — разложу по папкам сам. Большое видео (длиннее пары минут) грузи сразу в Drive → <b>00 Входящее</b> и напиши боту строку, что это было.</div>';
+    h+='<a class="stk" href="'+LINKS.reviews+'" target="_blank" rel="noopener"><b>⭐ Отзывы клиентов — видео и текст</b><span>самый ценный контент компании: видео-отзыв, скрин переписки с благодарностью, голосовое клиента</span></a>';
+    h+='<a class="stk" href="'+LINKS.content+'" target="_blank" rel="noopener"><b>📁 01 Content — все папки контента</b><span>Plaster works (фото штукатурки) · Renovation sites (объекты до/процесс/после) · Процесс · Команда · Готовые ролики · Brand</span></a>';
+    h+='<a class="stk" href="'+LINKS.contentInbox+'" target="_blank" rel="noopener"><b>📥 00 Входящее — если некогда думать</b><span>кидай сюда что угодно, я разберу по папкам</span></a>';
+    h+='<div class="stk-g" style="margin-top:12px">Как снимать, чтобы кадры годились</div>';
+    h+='<div class="lsn">Правило <b>«4 кадра каждый визит»</b>: до · процесс · после · макро-деталь. Вертикально — для рилсов, горизонтально — для сайта. Дневной свет, без вспышки: жёлтые люстры убивают фактуру. Штукатурку снимай сбоку под углом — так видно рельеф. Исходники с телефона не удаляй, пока файл не появился в Drive.</div>';
+    h+='<div class="lsn" style="color:#8A8272">Зачем: мы не покупаем стоки — наш контент это наши реальные работы. Один хороший кадр с объекта живёт в рекламе месяцами, а видео-отзыв клиента продаёт лучше любого текста.</div>';
+    el.innerHTML=h+'</div></details>';
+    var box=el.querySelector('details.stackbox');
+    if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_cont_open',box.open?'1':'0');}catch(e){} });
+  }catch(e){}
+})();
 
 /* ═══ Расходы: одно правило для всех, чтобы траты не терялись (02.08).
    Механика: человек шлёт трату в Telegram-бот → Клод заносит в таблицу и
