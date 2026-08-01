@@ -154,13 +154,13 @@ try{
    Новичок (роль без завершённого онбординга или ?new=1) вместо «Now» видит
    чек-лист первого дня с бадди; галочки — в localStorage, финал снимает режим. */
 function onbDone(){ try{return localStorage.getItem('m5_onb_done')==='1';}catch(e){return false;} }
+var NEWBIE=/[?&]new=1/.test(location.search) || (!onbDone() && ['sales','smm','pm','designer','team'].indexOf(role)>-1);
 var TILES=cfg.tiles.filter(function(t){
-  if(t.k==='Start here') return !onbDone();   // после онбординга плитка уходит из ежедневных
+  if(t.k==='Start here') return !onbDone()&&!NEWBIE;   // одна точка входа: карточка новичка ИЛИ плитка, не обе
   if(t.k==='My growth') return true;          // своя внутренняя страница /growth/
   var u=t.link?LINKS[t.link]:'';
   return !!u;                                 // «Soon»-плитки не показываем вовсе
 });
-var NEWBIE=/[?&]new=1/.test(location.search) || (!onbDone() && ['sales','smm','pm','designer','team'].indexOf(role)>-1);
 function nowHtml(){
   if(NEWBIE) return obHtml();
   var n;
@@ -183,7 +183,8 @@ var OB_STEPS=[
   {t:'Задай Jin первый вопрос — строка сверху'},
   {t:'Посмотри видео «Как устроена система» · 2 мин',url:'/media/tutorial_system_ru.mp4'},
   {t:'Прочитай свой плейбук — блок «Your playbook» ниже'},
-  {t:'Напиши «Привет, я на месте» в чат команды',url:''}
+  {t:'Напиши «Привет, я на месте» в чат команды',url:''},
+  {t:'Полная настройка аккаунтов — Setup checklist',url:'/onboarding/'}
 ];
 function obState(i){ try{return localStorage.getItem('m5_ob_'+i)==='1';}catch(e){return false;} }
 window.obToggle=function(i){
@@ -216,9 +217,9 @@ function pulseHtml(){
   if(NEWBIE||(role!=='founder'&&role!=='director')) return '';
   var P=[
     {i:'plLeads',k:'Leads · 7d',v:'…',d:'считаю…',s:'все источники',url:LINKS.jobtread},
-    {k:'Pipeline',v:'→',d:'воронка по стадиям',s:'открыть в JobTread',url:LINKS.jobtread},
-    {k:'Booking rate',v:'→',d:'лид → смета',s:'открыть в JobTread',url:LINKS.jobtread},
-    {k:'Расходы',v:'→',d:'реестр расходов',s:'Drive · веду я',url:LINKS.drive}
+    {i:'plPipe',k:'Pipeline',v:'…',d:'считаю…',s:'JobTread',url:LINKS.jobtread},
+    {i:'plBook',k:'Booking rate',v:'…',d:'лид → смета',s:'JobTread',url:LINKS.jobtread},
+    {i:'plExp',k:'Расходы',v:'…',d:'считаю…',s:'реестр · веду я',url:LINKS.drive}
   ];
   return '<div class="sec">Company pulse · 7 days</div><div class="pulsegrid">'+P.map(function(p){
     return '<a class="ptile"'+(p.i?' id="'+p.i+'"':'')+' href="'+p.url+'" target="_blank" rel="noopener"><div class="pk">'+p.k+'</div><b>'+p.v+'</b><div class="pdelta">'+p.d+'</div><small>'+(p.s||'')+'</small></a>';}).join('')+'</div>';
@@ -237,14 +238,24 @@ function loadPulse(){
       if(d.leads7===0){ pd.textContent='до запуска рекламы'; }
       else { pd.textContent=(delta===null)?'за 7 дней':((delta>=0?'+':'')+delta+' vs прошлая неделя'); if(delta!==null&&delta>0)pd.className='pdelta up'; }
       if(typeof d.site7==='number')L.querySelector('small').textContent='с сайта — '+d.site7;
+      var E=document.getElementById('plExp');
+      if(E&&d.exp){ E.querySelector('b').textContent='$'+(Math.round(Number(d.exp)/100)/10)+'K'; E.querySelector('.pdelta').textContent='весь период · на '+(d.expUpd||''); }
+      else if(E){ E.querySelector('b').textContent='→'; E.querySelector('.pdelta').textContent='открыть реестр'; }
+      var PP=document.getElementById('plPipe'), BB=document.getElementById('plBook'), jp=d.pipe;
+      if(PP){ if(jp&&jp.total>0){ PP.querySelector('b').textContent=jp.total; PP.querySelector('.pdelta').textContent='Лиды '+jp.lead+' · Сметы '+jp.est+' · Работа '+jp.work; }
+        else { PP.querySelector('b').textContent='0'; PP.querySelector('.pdelta').textContent='воронка пуста — всё впереди'; } }
+      if(BB){ if(jp&&jp.booking>=0){ BB.querySelector('b').textContent=jp.booking+'%'; }
+        else { BB.querySelector('b').textContent='—'; BB.querySelector('.pdelta').textContent='появится с первыми лидами'; } }
     }).catch(function(){pulseFallback_();});
   }catch(e){}
 }
 function pulseFallback_(){
-  try{ var L=document.getElementById('plLeads'); if(!L)return;
-    L.querySelector('b').textContent='→';
-    L.querySelector('.pdelta').textContent='открыть в JobTread';
-    L.querySelector('small').textContent='';
+  try{
+    var ids=['plLeads','plPipe','plBook','plExp'];
+    for(var i=0;i<ids.length;i++){ var el=document.getElementById(ids[i]); if(!el)continue;
+      el.querySelector('b').textContent='→';
+      el.querySelector('.pdelta').textContent=(ids[i]==='plExp')?'открыть реестр':'открыть в JobTread';
+    }
   }catch(e){}
 }
 
@@ -261,7 +272,7 @@ document.getElementById('app').innerHTML=
 '<div class="wrap">'+
   (preview?'<div class="pvw">Admin preview — the <b>'+cfg.label+'</b> workspace exactly as a future hire will see it · <a href="/champion'+(member&&member.role?member.role:'')+'">Back to my workspace →</a></div>':'')+
   '<div class="hero">'+(avaUrl?'<img class="hero-ava" src="'+avaUrl+'" alt="">':'')+
-  '<div><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Welcome, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
+  '<div><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Hi, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
   '<div class="k">'+cfg.sub+'</div></div></div>'+
   '<div class="jinhero">'+
     '<div class="ask askbig"><span class="askic">✦</span><input type="text" id="askInput" placeholder="Ask Jin — tasks, clients, how-to…" onkeydown="if(event.key===\'Enter\')askAgent()">'+
@@ -280,9 +291,8 @@ document.getElementById('app').innerHTML=
     if(t.k==='My growth') url='/growth/?role='+role;
     var ext=url&&url.charAt(0)!=='/';
     var open=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
-    var badge=url?'<span class="live">Live</span>':'<span class="soon">Soon</span>';
     return '<a class="tile" style="--bc:'+col+'" '+open+'>'+icon+
-      '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge+'</a>';
+      '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b></a>';
   }).join('')+'</div>'+
   (TILES.length>4?('<details class="stackbox alltools"><summary><span>🧰 All tools</span><span class="stk-hint">'+(TILES.length-4)+' more</span></summary><div class="grid" style="padding:12px 14px 14px">'+TILES.slice(4).map(function(t){
     var icon=t.b?'<div class="ic brand">'+LOGOS[t.b]+'</div>':'<div class="ic">'+(t.ic||'•')+'</div>';
@@ -291,8 +301,7 @@ document.getElementById('app').innerHTML=
     if(t.k==='My growth') url='/growth/?role='+role;
     var ext=url&&url.charAt(0)!=='/';
     var open2=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
-    var badge2=url?'<span class="live">Live</span>':'<span class="soon">Soon</span>';
-    return '<a class="tile" style="--bc:'+col+'" '+open2+'>'+icon+'<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b>'+badge2+'</a>';
+    return '<a class="tile" style="--bc:'+col+'" '+open2+'>'+icon+'<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b></a>';
   }).join('')+'</div></details>'):'')+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+

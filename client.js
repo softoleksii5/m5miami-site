@@ -100,8 +100,12 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 var slug=(location.search.match(/[?&]p=([^&]*)/)||[])[1]||'';
 var C=CLIENTS[slug];
 /* Guard: у нового клиента часть данных может отсутствовать — секции не должны падать */
-if(C){ C.tasks=C.tasks||[]; C.materials=C.materials||[]; C.docs=C.docs||{}; C.phases=C.phases||['Design','Materials','Build','Styling','Handover']; C.phase=C.phase||0;
+function normC_(){ if(!C) return;
+  C.tasks=C.tasks||[]; C.materials=C.materials||[]; C.docs=C.docs||{}; C.phases=C.phases||['Design','Materials','Build','Styling','Handover']; C.phase=C.phase||0;
   C.credits=C.credits||{bal:0,earned:0,tier:'Bronze',rate:3,next:'Silver',nextAt:500,hist:[]}; C.credits.hist=C.credits.hist||[]; }
+normC_();
+var HUB_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';
+var TOK=(location.search.match(/[?&]t=([^&]*)/)||[])[1]||'';
 /* Демо-кабинет: показываем весь флоу, но НИЧЕГО не шлём в боевой Telegram/CRM
    (инцидент 31.07: клики Request с демо падали лид-карточками в «Лиды»). */
 var DEMO=(slug==='brickell-demo');
@@ -261,8 +265,7 @@ function acc(id, ic, ttl, hint, body, openDefault){
   '<div class="abody">'+body+'</div></details>';
 }
 
-try{
-if(!C){
+function renderGate_(){
   document.getElementById('app').innerHTML=TSTYLE+
   '<header><div class="wrap hbar"><a class="logo" href="/">M<b>5</b><small>CLIENT</small></a></div></header>'+
   '<div class="gate"><div style="font-size:34px;margin-bottom:10px">🔑</div>'+
@@ -272,7 +275,8 @@ if(!C){
   '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17864074441">WhatsApp M5</a>'+
   '<div style="margin-top:14px"><a href="/client/?p=brickell-demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#96703B;text-decoration:underline">SEE A DEMO PROJECT HUB →</a></div></div>'+
   '<footer>M5 Interior Design &amp; Build · Miami</footer>';
-}else{
+}
+function renderHub_(){
   var ph=C.phases.map(function(p,i){return '<span class="'+(i<C.phase?'done':(i===C.phase?'on':''))+'">'+esc(p)+'</span>';}).join('');
   var tasks=C.tasks.map(function(t){var ic=t[0]==='done'?'✓':(t[0]==='now'?'●':'○');
     return '<div class="tsk '+t[0]+'"><i>'+ic+'</i><b>'+esc(t[1])+'</b><small>'+esc(t[2])+'</small></div>';}).join('');
@@ -379,6 +383,24 @@ if(!C){
   '<footer>M5 · Interior Design &amp; Build · Miami</footer>'+
   '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
 }
+/* Реальные клиенты живут НЕ в этом файле: GAS отдаёт JSON по slug+token из листа Clients
+   (Sheet-first, решение Алекса 02.08). Ссылка клиента: /client/?p=slug&t=token */
+function fetchClient_(){
+  document.getElementById('app').innerHTML=TSTYLE+'<div style="text-align:center;margin-top:150px;font-family:var(--sans);color:#8A8272">Loading your hub…</div>';
+  fetch(HUB_HOOK+'?client='+encodeURIComponent(slug)+'&t='+encodeURIComponent(TOK)+'&cb=cb',{credentials:'omit'})
+    .then(function(r){return r.text();})
+    .then(function(t){
+      var m=t.match(/^\s*cb\(([\s\S]*)\)\s*;?\s*$/); var d=null; try{d=JSON.parse(m?m[1]:t);}catch(e){}
+      if(!d||d.err||!d.name){ renderGate_(); return; }
+      C=d; normC_();
+      try{ renderHub_(); }catch(e2){ renderGate_(); }
+    })
+    .catch(function(){ renderGate_(); });
+}
+try{
+  if(C){ renderHub_(); }
+  else if(slug&&/^[A-Za-z0-9_-]{3,64}$/.test(slug)&&TOK){ fetchClient_(); }
+  else { renderGate_(); }
 }catch(e){
   document.getElementById('app').innerHTML=(typeof TSTYLE==='string'?TSTYLE:'')+
   '<div style="max-width:420px;margin:120px auto;text-align:center;font-family:Geist,-apple-system,sans-serif;padding:0 20px">'+
@@ -411,8 +433,11 @@ function clientNowHtml(){
   if(rev.length) cards+='<div class="cnow-c act" onclick="openAcc(\'mats\')"><span class="cnow-tag">🖐 Waiting on you</span><b>'+esc(rev[0].ttl)+(rev.length>1?' + '+(rev.length-1)+' more':'')+'</b><span class="cnow-go">Review &amp; approve →</span></div>';
   var nowT=null,nextT=null;
   for(var j=0;j<C.tasks.length;j++){ if(!nowT&&C.tasks[j][0]==='now')nowT=C.tasks[j]; if(!nextT&&C.tasks[j][0]==='next')nextT=C.tasks[j]; }
-  var t=nowT||nextT;
-  if(t) cards+='<div class="cnow-c"><span class="cnow-tag">'+(nowT?'⏳ Happening now':'⏭ Up next')+'</span><b>'+esc(t[1])+'</b><span class="cnow-date">'+esc(t[2])+'</span></div>';
+  /* Дедуп: если слева уже «ждём согласования» — справа показываем СЛЕДУЮЩЕЕ событие,
+     а не ту же позицию вторым заголовком. */
+  var t=rev.length?(nextT||nowT):(nowT||nextT);
+  var lbl=(t===nowT&&nowT)?'⏳ Happening now':'⏭ Up next';
+  if(t) cards+='<div class="cnow-c"><span class="cnow-tag">'+lbl+'</span><b>'+esc(t[1])+'</b><span class="cnow-date">'+esc(t[2])+'</span></div>';
   return cards?('<div class="cnow">'+cards+'</div>'):'';
 }
 window.openAcc=function(id){ try{ var d=document.getElementById('acc_'+id); if(d){ d.open=true; try{localStorage.setItem('m5c_'+id,'1');}catch(e2){} d.scrollIntoView({behavior:'smooth',block:'start'}); } }catch(e){} };

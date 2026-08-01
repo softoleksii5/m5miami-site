@@ -8,7 +8,7 @@ function L(code,rise,hold,pay,bonus,badge,com){return {code:code,rise:rise,hold:
 function G(g,t){return {gate:g,text:t};}
 
 var SCALES={
- sales:{label:'Sales Manager',metric:'Signed contracts (counted by deposit)',gate:'Reply ≤15 min · 8+ consults/mo · 100% leads in Monday',period:'Quarter',payhead:'Fixed /mo',com:true,
+ sales:{label:'Sales Manager',metric:'Signed contracts (counted by deposit)',gate:'Reply ≤15 min · 8+ consults/mo · 100% leads in JobTread',period:'Quarter',payhead:'Fixed /mo',com:true,
   rows:[
    L('A1','Hired, onboarded','gate','$4,500','—','', '2.0%'),
    L('A2','Gate 2 months in a row','gate','$4,575','$150','', '2.0%'),
@@ -151,14 +151,14 @@ var PAY={
        note:'Example: a $225K project at 2% = $4,500 on top of your base — per contract.'},
      {k:'🏆 Level bonus',rows:[['One-time each level','$150 … $6,000','A cash bonus every time you reach a new level, plus a metal you keep (🥉🥈🥇💎).']],
        note:'The bonus jumps at each band: entering B and M are the big ones.'},
-     {k:'✅ To qualify',rows:[['Monthly gate','required','Reply to leads ≤15 min · 8+ consultations · Monday CRM 100% clean.']],
+     {k:'✅ To qualify',rows:[['Monthly gate','required','Reply to leads ≤15 min · 8+ consultations · JobTread CRM 100% clean.']],
        note:'Miss the gate and the level does not count that month — discipline first.'}
    ]},
  designer:{fixed:'Rate per project',for:'projects accepted cleanly',
    tabs:[
      {k:'💼 Base pay',rows:[['Rate / project','$1,500 → $2,500','You are paid per accepted project. The rate grows with your level.']],note:'More level → higher rate on every project.'},
      {k:'🏆 Level bonus',rows:[['One-time each level','$100 … $2,500','A bonus each new level, plus a metal.']],note:''},
-     {k:'✅ To qualify',rows:[['What moves your level','—','Projects accepted with ≤2 revision rounds.']],note:'Client change-orders do not count against you — the record in Monday decides.'}
+     {k:'✅ To qualify',rows:[['What moves your level','—','Projects accepted with ≤2 revision rounds.']],note:'Client change-orders do not count against you — the record in JobTread decides.'}
    ]},
  pm:{fixed:'$7,000/mo',for:'sites delivered clean',
    tabs:[
@@ -192,7 +192,7 @@ var intro='<div class="wrap"><div class="hero"><h1>'+(first?first+'’s path.':'
 /* metals legend + rules */
 var legend='<div class="gcard grules"><div class="metals">'+
   Object.keys(METAL).map(function(k){return '<span class="ml"><b>'+METAL[k].e+'</b>'+METAL[k].n+'</span>';}).join('')+'</div>'+
-  '<p><b>How it works.</b> Your level is your <b>current result</b>, not seniority — hold the bar to stay, beat it to rise, slip and you drop one. Two axes: a monthly <b>discipline gate</b> lets you play; your <b>role metric</b> moves the level. Three rewards each step: higher pay, a one-time bonus, and a metal you keep forever. The source of truth is Monday/CRM — Jin tallies it on the 1st, the director confirms, and a level-up posts to <b>M5 · Pulse</b> automatically.</p>'+
+  '<p><b>How it works.</b> Your level is your <b>current result</b>, not seniority — hold the bar to stay, beat it to rise, slip and you drop one. Two axes: a monthly <b>discipline gate</b> lets you play; your <b>role metric</b> moves the level. Three rewards each step: higher pay, a one-time bonus, and a metal you keep forever. The source of truth is JobTread — Jin tallies it on the 1st, the director confirms, and a level-up posts to <b>M5 · Pulse</b> automatically.</p>'+
 '</div>';
 
 /* блок «за что платят» — вкладки */

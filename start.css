@@ -243,3 +243,18 @@ details.tdnext>summary{background:#FBF7EF;border:1px solid #EBE3D4;border-radius
   .ptile .pdelta{font-size:10.5px}
 }
 .buddy{flex-wrap:wrap}
+
+/* ── Ревью 02.08: читаемость шапки + мобильная плотность ── */
+header{position:relative}
+header::before{content:'';position:absolute;inset:0 0 -14px;background:linear-gradient(rgba(250,246,238,.78),rgba(250,246,238,0));pointer-events:none}
+header .hbar{position:relative}
+@media(max-width:560px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .tile{padding:12px 12px 10px}
+  .tile .ic{width:34px;height:34px}
+  .tile .ic.brand svg{width:26px;height:26px}
+  .tile b{font-size:13px}
+  .tile .k2{font-size:8.5px}
+  .lsn{overflow-wrap:anywhere}
+}
+html,body{overflow-x:hidden;max-width:100vw}

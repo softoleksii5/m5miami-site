@@ -390,6 +390,7 @@ function renderTrack(who){
     for (var i=0;i<items.length;i++) if (state[items[i].id]) n++;
     document.getElementById('pct').textContent = n + ' / ' + items.length;
     document.getElementById('fill').style.width = Math.round(n / items.length * 100) + '%';
+    if (n === items.length) { try{ localStorage.setItem('m5_onb_done','1'); }catch(e){} }
     document.getElementById('dm').classList.toggle('on', n === items.length);
   }
   paint();

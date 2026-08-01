@@ -71,9 +71,8 @@
     <div id="manual">
     <div class="field"><input type="text" id="name" placeholder="Name" required></div>
     <div class="field"><input type="email" id="email" placeholder="Email" required></div>
-    <div class="field"><input type="tel" id="phone" placeholder="Phone" required></div>
-    <div class="field">
-      <select id="role" required onchange="this.classList.add('filled')">
+    <div class="field" id="roleField" style="display:none">
+      <select id="role" onchange="this.classList.add('filled')">
         <option value="" disabled selected hidden>Role</option>
         <option value="smm">SMM Manager</option>
         <option value="sales">Sales</option>
@@ -114,18 +113,24 @@
      — фаундерская почта → роль из дропдауна (фаундеры смотрят любые кабинеты);
      — остальные → роль принудительно из реестра, чужой кабинет не открыть.
      Кабинет и онбординг дальше узнают человека сами — почту больше не спрашивают. */
+  /* Дропдаун роли — только для фаундерских почт (они смотрят любые кабинеты). */
+  document.getElementById('email').addEventListener('blur', function(){
+    var v = this.value.trim().toLowerCase(); if (!v) return;
+    sha256(v).then(function(h){
+      document.getElementById('roleField').style.display = (KNOWN_ROLE[h]==='founder') ? '' : 'none';
+    }).catch(function(){});
+  });
   document.getElementById('joinForm').addEventListener('submit', function(e){
     e.preventDefault();
     var m = {
       name: document.getElementById('name').value.trim(),
       email: document.getElementById('email').value.trim().toLowerCase(),
-      phone: document.getElementById('phone').value.trim(),
       role: document.getElementById('role').value
     };
     sha256(m.email).then(function(h){
       var reg = KNOWN_ROLE[h];
       if (!reg) { document.getElementById('werr').classList.add('on'); return; }
-      if (reg !== 'founder') m.role = reg;
+      if (reg !== 'founder') m.role = reg; else if (!m.role) m.role = 'founder';
       try{ localStorage.setItem('m5_member', JSON.stringify(m)); }catch(err){}
       location.href = '/champion' + m.role;
     }).catch(function(){ document.getElementById('werr').classList.add('on'); });

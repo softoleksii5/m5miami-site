@@ -758,8 +758,9 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       <button class="btn btn-ink" type="submit" data-i18n="form.btn">Get my free estimate</button>
       <div class="qz-note" style="margin-top:10px"><span data-i18n="form.consent">By submitting, you agree to be contacted about your project.</span> <a href="/privacy/" style="color:inherit;text-decoration:underline" data-i18n="form.privacy">Privacy Policy</a></div>
       <p id="formOk" style="display:none;font-size:15px;margin-top:14px;color:#2e7d4f" data-i18n="form.ok">Thank you — we received your request and will reply within one business hour (9am–6pm ET).</p>
+      <p id="formDemo" style="display:none;font-size:13.5px;margin-top:6px"><a href="/client/?p=brickell-demo" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px" onclick="if(window.m5track)m5track('demo_hub_click',{source:'thankyou'})">See how you’ll track your renovation — live demo →</a></p>
     </form>
-    <script>if(location.search.indexOf('sent=1')>-1){document.getElementById('formOk').style.display='block';if(window.m5track)m5track('lead_submit_confirmed');}</script>
+    <script>if(location.search.indexOf('sent=1')>-1){document.getElementById('formOk').style.display='block';document.getElementById('formDemo').style.display='block';if(window.m5track)m5track('lead_submit_confirmed');}</script>
   </div>
 </section>
 
@@ -1516,7 +1517,8 @@ function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h=''
     '<div class="qz-price">'+qzFmt(r[0])+' – '+qzFmt(r[1])+'</div>'+
     '<div class="qz-sub">'+t.resSub+'</div>'+
     '<div class="qz-cta"><a class="btn btn-ink" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track(\'booking_click\')">'+t.resBook+'</a>'+
-    '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/17864074441?text='+encodeURIComponent('Hi M5! My instant estimate: '+qz.type[1]+', '+qz.sqft+' sq ft, '+qz.level[0]+' → '+qzFmt(r[0])+'–'+qzFmt(r[1])+'. Let\'s talk!')+'">'+t.resWa+'</a></div></div>';}
+    '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/17864074441?text='+encodeURIComponent('Hi M5! My instant estimate: '+qz.type[1]+', '+qz.sqft+' sq ft, '+qz.level[0]+' → '+qzFmt(r[0])+'–'+qzFmt(r[1])+'. Let\'s talk!')+'">'+t.resWa+'</a></div>'+
+    '<div style="margin-top:14px"><a href="/client/?p=brickell-demo" target="_blank" rel="noopener" style="font-size:13px;color:inherit;opacity:.8;text-decoration:underline;text-underline-offset:3px" onclick="if(window.m5track)m5track(\'demo_hub_click\',{source:\'quiz\'})">See how you\'ll track your renovation — live demo →</a></div></div>';}
   b.innerHTML=h;}
 function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
   var go=document.getElementById('qzGo');go.disabled=true;go.style.opacity='.6';
