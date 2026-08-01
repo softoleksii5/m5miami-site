@@ -225,6 +225,22 @@ var TSTYLE='<style>'+
 '.bapair.after em{background:#F0F8F2;color:#3E8E5A}'+
 '.bacap{font-size:12.5px;color:#8A8272;margin:6px 2px 12px}'+
 '.gate{max-width:430px;margin:110px auto;background:#fff;border-radius:18px;padding:34px 30px;text-align:center;border:1px solid var(--line)}'+
+'.cjin{max-width:640px;margin:0 0 14px}'+
+'.cjin .cjbar{display:flex;gap:8px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:5px 5px 5px 14px;align-items:center;box-shadow:0 5px 18px rgba(60,48,30,.06)}'+
+'.cjin .cjic{color:#C8A96A;font-size:14px}'+
+'.cjin input{flex:1;border:0;outline:0;font:16px var(--sans);color:#232733;background:transparent;min-width:0}'+
+'.cjin button{width:36px;height:36px;border-radius:10px;border:0;background:#20242E;color:#E3C795;font-size:15px;cursor:pointer;flex:0 0 auto}'+
+'.cjin button:hover{background:#96703B;color:#fff}'+
+'.cjin .cjreply{display:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13.5px;color:#3E3A33;margin-top:8px;line-height:1.5}'+
+'.cjin .cjreply.on{display:block}'+
+'.cnow{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}'+
+'.cnow-c{flex:1;min-width:230px;background:#fff;border:1px solid var(--line);border-left:4px solid #C8A96A;border-radius:14px;padding:13px 16px;box-shadow:0 8px 24px rgba(60,48,30,.07)}'+
+'.cnow-c.act{cursor:pointer}'+
+'.cnow-c.act:hover{border-color:#C8A96A}'+
+'.cnow-tag{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#96703B;margin-bottom:5px}'+
+'.cnow-c b{font-size:14.5px;color:#232733}'+
+'.cnow-date{display:block;font-size:11.5px;color:#8A8272;margin-top:4px}'+
+'.cnow-go{display:block;font-size:11.5px;font-weight:600;color:#96703B;margin-top:6px}'+
 'a.doc{display:block;text-decoration:none;color:inherit}'+
 '.docmeta{font-family:var(--mono);font-size:9.5px;color:#3E8E5A;border:1px solid #CBE3D3;border-radius:8px;padding:2px 7px;margin-left:6px;white-space:nowrap}'+
 '.chist b.neg{color:#8A8272}'+
@@ -311,6 +327,8 @@ if(!C){
       '<div class="st" style="margin-top:4px">Your project lead: '+esc(C.pm)+' · Director</div>'+
     '</div>'+
     '<div class="cph">'+ph+'</div>'+
+    clientJinHtml()+
+    clientNowHtml()+
     acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated '+esc(C.updated||C.started),
       (C.tasks.length?tasks:'<div class="bacap">Your project plan lands here right after kickoff.</div>')+'<div class="jinn"><span style="font-size:18px">✦</span><span><b>Jin, our AI, keeps this page in sync with the team</b> — updates land here as the team logs them.</span></div>', true)+
     acc('ba','📸','Before & after','Where we started — and where it’s going',
@@ -385,6 +403,40 @@ function svcOpen(i){
   document.getElementById('svm').className='svm on';
 }
 function svcClose(){var m=document.getElementById('svm'); if(m)m.className='svm';}
+/* «Тот же подход, что в кабинете команды» (02.08): над аккордеонами — одно действие
+   и одна ближайшая веха; клиент без «домашки» карточку не видит (правило тишины). */
+function clientNowHtml(){
+  var cards='';
+  var rev=[]; for(var i=0;i<C.materials.length;i++) if(C.materials[i].st==='review') rev.push(C.materials[i]);
+  if(rev.length) cards+='<div class="cnow-c act" onclick="openAcc(\'mats\')"><span class="cnow-tag">🖐 Waiting on you</span><b>'+esc(rev[0].ttl)+(rev.length>1?' + '+(rev.length-1)+' more':'')+'</b><span class="cnow-go">Review &amp; approve →</span></div>';
+  var nowT=null,nextT=null;
+  for(var j=0;j<C.tasks.length;j++){ if(!nowT&&C.tasks[j][0]==='now')nowT=C.tasks[j]; if(!nextT&&C.tasks[j][0]==='next')nextT=C.tasks[j]; }
+  var t=nowT||nextT;
+  if(t) cards+='<div class="cnow-c"><span class="cnow-tag">'+(nowT?'⏳ Happening now':'⏭ Up next')+'</span><b>'+esc(t[1])+'</b><span class="cnow-date">'+esc(t[2])+'</span></div>';
+  return cards?('<div class="cnow">'+cards+'</div>'):'';
+}
+window.openAcc=function(id){ try{ var d=document.getElementById('acc_'+id); if(d){ d.open=true; try{localStorage.setItem('m5c_'+id,'1');}catch(e2){} d.scrollIntoView({behavior:'smooth',block:'start'}); } }catch(e){} };
+function clientJinHtml(){
+  return '<div class="cjin"><div class="cjbar"><span class="cjic">✦</span>'+
+    '<input type="text" id="cjInput" placeholder="Ask Jin about your project — timeline, materials, credits…" onkeydown="if(event.key===\'Enter\')cjAsk()">'+
+    '<button onclick="cjAsk()" aria-label="Send">→</button></div>'+
+    '<div class="cjreply" id="cjReply"></div></div>';
+}
+window.cjAsk=function(){
+  var inp=document.getElementById('cjInput'); var q=inp?inp.value.trim():''; if(!q)return;
+  inp.value='';
+  var box=document.getElementById('cjReply'); box.className='cjreply on';
+  if(!window.fetch){ box.innerHTML='Message us on WhatsApp — we reply fast.'; return; }
+  box.innerHTML='<span style="color:#8A8272">Jin is thinking…</span>';
+  var HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';
+  fetch(HOOK+'?jin=1&role=client&cb=cb&q='+encodeURIComponent(q.slice(0,500)),{credentials:'omit'})
+    .then(function(r){return r.text();})
+    .then(function(t){
+      var m=t.match(/^\s*cb\(([\s\S]*)\)\s*;?\s*$/); var r2=null; try{r2=JSON.parse(m?m[1]:t);}catch(e){}
+      box.innerHTML=(r2&&r2.a)?('<b>✦ Jin</b> · '+esc(r2.a).replace(/\n/g,'<br>')):'Jin is offline for a second — try again, or WhatsApp us.';
+    })
+    .catch(function(){ box.innerHTML='Jin is offline for a second — try again, or WhatsApp us.'; });
+};
 function matApprove(i){
   var m=C&&C.materials[i]; if(!m)return;
   if(!confirm('Approve “'+m.ttl+'”?'+(DEMO?' (Demo — nothing is sent.)':' The team gets notified right away.')))return;
