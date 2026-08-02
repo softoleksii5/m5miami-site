@@ -245,6 +245,19 @@ function loadPulse(){
       if(d.leads7===0){ pd.textContent='до запуска рекламы'; }
       else { pd.textContent=(delta===null)?'за 7 дней':((delta>=0?'+':'')+delta+' vs прошлая неделя'); if(delta!==null&&delta>0)pd.className='pdelta up'; }
       if(typeof d.site7==='number')L.querySelector('small').textContent='с сайта — '+d.site7;
+      /* Виза: пока Вадим ничего не загрузил — ведём его туда прямо из карточки «Now».
+         Фаундерам в блоке E-2 показываем, сколько файлов уже лежит. */
+      try{
+        var vn=parseInt(d.visa||'0',10)||0;
+        if(role==='director'&&vn===0){
+          var nb=document.querySelector('.nowcard');
+          if(nb&&!NEWBIE) nb.innerHTML='<span class="now-tag">⚡ Now</span><div class="now-txt">'+
+            '<b>Документы по визе E-2</b> — папка готова, внутри инструкция «читать первым»: паспорт, статус, диплом, опыт. Загружай по частям, как удобно.</div>'+
+            '<a class="now-btn" href="'+LINKS.visaVadim+'" target="_blank" rel="noopener">Открыть папку →</a>';
+        }
+        var vl=document.querySelector('a.stk[href="'+LINKS.visaVadim+'"] span');
+        if(vl&&vn>0) vl.textContent='Загружено файлов: '+vn+(d.visaSeen?' · последние: '+d.visaSeen:'');
+      }catch(ev){}
       var E=document.getElementById('plExp');
       if(E&&d.exp){ E.querySelector('b').textContent='$'+(Math.round(Number(d.exp)/100)/10)+'K'; E.querySelector('.pdelta').textContent='весь период · на '+(d.expUpd||''); }
       else if(E){ E.querySelector('b').textContent='→'; E.querySelector('.pdelta').textContent='открыть реестр'; }
