@@ -10,7 +10,7 @@ var CLIENTS={
    name:'David', project:'Brickell Residence — Full Renovation', status:'Active',
    pm:'Vadym', pmPhone:'17864074441', started:'Sep 2026', eta:'Dec 2026', updated:'Sep 20',
    refCode:'dv7k2f', /* реф-код ВСЕГДА отдельный от slug — slug это ключ доступа к кабинету */
-   phase:1, phases:['Design','Materials','Build','Styling','Handover'],
+   phase:2, phases:['Contract','Design','Materials','Build','Styling','Handover'],
    googleReview:'', /* ссылка g.page появится после создания Google Business Profile */
    tasks:[
      ['done','Design concept & moodboard','Sep 12'],
@@ -98,7 +98,12 @@ var KUDOS=['Vadym — project lead','Design team','Site crew'];
 
 /* Что означает каждая стадия — простым языком (просьба Алекса 02.08:
    «полоса непонятна»). Клиент должен за 3 секунды понять, где он и что дальше. */
+/* Иконки фаз — единый канон M5 (совпадает с папками проекта и отчётами Вадима).
+   Фазу двигает Клод/Джин по отчётам с объекта и стадии в JobTread — клиенту
+   всегда показывается реальное состояние, руками никто не переключает. */
+var PHASE_IMG={'Contract':'/img/ph_contract.png','Design':'/img/ph_design.png','Materials':'/img/ph_materials.png','Build':'/img/ph_build.png','Styling':'/img/ph_styling.png','Handover':'/img/ph_handover.png'};
 var PHASE_INFO={
+ 'Contract':'signed, deposit received — project is live',
  'Design':'concept, layout and moodboards',
  'Materials':'choosing finishes, samples and selections',
  'Build':'demolition, construction and installation',
@@ -262,6 +267,22 @@ var TSTYLE='<style>'+
 '.cnow-c b{font-size:14.5px;color:#232733}'+
 '.cnow-date{display:block;font-size:11.5px;color:#8A8272;margin-top:4px}'+
 '.cnow-go{display:block;font-size:11.5px;font-weight:600;color:#96703B;margin-top:6px}'+
+'.ph2{display:flex;position:relative;margin:20px 0 6px;padding:0 0 2px}'+
+'.ph2::before{content:"";position:absolute;top:19px;left:5%;right:5%;height:3px;background:#EDE5D5;border-radius:2px}'+
+'.ph2 .phfill{position:absolute;top:19px;left:5%;max-width:90%;height:3px;background:linear-gradient(90deg,#C8A96A,#96703B);border-radius:2px}'+
+'.phs{flex:1;text-align:center;position:relative;z-index:1;min-width:0}'+
+'.phs i{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid #E3DAC5;font-style:normal;font-size:15px;color:#B4AB99;overflow:hidden}'+
+'.phs i img{width:26px;height:26px;object-fit:contain;display:block}'+
+'.phs:not(.on):not(.done) i img{opacity:.45;filter:grayscale(60%)}'+
+'.phs.done i{background:#20242E;border-color:#20242E;color:#E3C795;font-size:14px;font-weight:700}'+
+'.phs.on i{border-color:#96703B;color:#20242E;box-shadow:0 0 0 5px rgba(200,169,106,.22);}'+
+'.phs b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:8px;color:#B4AB99;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'+
+'.phs.on b{color:#232733}'+
+'.phs.done b{color:#8A8272}'+
+'.phs small{display:block;font-size:9.5px;color:#C9C0AC;margin-top:2px;height:12px}'+
+'.phs.on small{color:#96703B;font-weight:700}'+
+'.phs.done small{color:#3E8E5A}'+
+'@media(max-width:680px){.phs i{width:30px;height:30px;font-size:12px}.phs b{font-size:8px}.ph2::before,.ph2 .phfill{top:15px}}'+
 'a.doc{display:block;text-decoration:none;color:inherit}'+
 '.docmeta{font-family:var(--mono);font-size:9.5px;color:#3E8E5A;border:1px solid #CBE3D3;border-radius:8px;padding:2px 7px;margin-left:6px;white-space:nowrap}'+
 '.chist b.neg{color:#8A8272}'+
@@ -296,8 +317,10 @@ function renderGate_(){
 function renderHub_(){
   var ph=C.phases.map(function(p,i){
     var st=i<C.phase?'done':(i===C.phase?'on':'');
-    var ic=i<C.phase?'✓ ':(i===C.phase?'● ':'');
-    return '<span class="'+st+'">'+ic+esc(p)+'</span>';}).join('');
+    var ic=i<C.phase?'✓':(PHASE_IMG[p]?'<img src="'+PHASE_IMG[p]+'" alt="">':(i+1));
+    var sub=i<C.phase?'done':(i===C.phase?'in progress':'');
+    return '<div class="phs '+st+'"><i>'+ic+'</i><b>'+esc(p)+'</b><small>'+sub+'</small></div>';}).join('');
+  var phFill=C.phases.length>1?Math.round(C.phase/(C.phases.length-1)*90):0;
   var curPh=C.phases[C.phase]||C.phases[0], nxtPh=C.phases[C.phase+1]||'';
   var phLead='<div class="cph-h"><span>Where your project is now</span><b>stage '+(C.phase+1)+' of '+C.phases.length+'</b></div>';
   var phNote='<div class="cph-now"><b>You are here: '+esc(curPh)+'</b> — '+(PHASE_INFO[curPh]||'work in progress')+
@@ -354,7 +377,7 @@ function renderHub_(){
       '<div class="st">'+esc(C.project)+' · started '+esc(C.started)+(C.eta?' · target completion: <b>'+esc(C.eta)+'</b>':'')+'</div>'+
       '<div class="st" style="margin-top:4px">Your project lead: '+esc(C.pm)+' · Director</div>'+
     '</div>'+
-    phLead+'<div class="cph">'+ph+'</div>'+phNote+
+    phLead+'<div class="ph2"><em class="phfill" style="width:'+phFill+'%"></em>'+ph+'</div>'+phNote+
     clientJinHtml()+
     clientNowHtml()+
     acc('prog','📋','Project progress',doneN+' of '+C.tasks.length+' tasks done · updated '+esc(C.updated||C.started),
