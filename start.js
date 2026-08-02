@@ -17,6 +17,9 @@ var LINKS={
   receipts:'https://drive.google.com/drive/folders/1pxf-z-hO8cYtPl0TEZaMvAtJAtxc4CbZ',      // папка «Чеки — фото и PDF»
   content:'https://drive.google.com/drive/folders/1elQzb8bMN8BEIMtDpKBg-ySryidATYrc',      // 01 Content — весь контент
   contentInbox:'https://drive.google.com/drive/folders/1K_VG6jUzGPruqMQAUQcKm8QsISGvHlqQ', // 00 Входящее — свалка, Клод разбирает
+  projects:'https://drive.google.com/drive/folders/1Oy7lmfnsyZ2Xz6ggCOFhCS4dYl--Xus_',     // 02 Projects — папки объектов (создаются автоматом из JobTread)
+  shootRule:'https://docs.google.com/document/d/1EPQnXlehD2946jpjtUZyoS5spFP65WIYpsGU2ddHt84/', // «Правило съёмки ДО/ПРОЦЕСС/ПОСЛЕ» RU+EN (05 Team)
+  jinBot:'https://t.me/m5miami_bot',            // Джин в Telegram: расходы, чеки, вопросы, «куда скидывать»
   reviews:'https://drive.google.com/drive/folders/1rmhrlvU_DIS_GRzRQGOvaLZ9y2aii9ta',        // 01 Отзывы клиентов
   objTemplate:'https://drive.google.com/drive/folders/12zDt0QBMzKshbfDG0nSCNms_tKhJQ2V6',  // _ШАБЛОН объекта — копировать под новый
   vadimWorks:'https://drive.google.com/drive/folders/185H0YfjrlDbPnsvt8ID64FVhqfxLZECE',   // архив работ Вадима до M5
@@ -170,6 +173,19 @@ var TILES=cfg.tiles.filter(function(t){
   var u=t.link?LINKS[t.link]:'';
   return !!u;                                 // «Soon»-плитки не показываем вовсе
 });
+/* «Куда что» — одна строка быстрых ссылок для всех ролей: те же 5 точек, что в закрепе TG и у Джина */
+function quickHtml(){
+  var Q=[
+    ['📸','Контент — папки объектов',LINKS.projects],
+    ['🎬','Правило съёмки',LINKS.shootRule],
+    ['💸','Расход — боту в TG',LINKS.jinBot],
+    ['🧾','Чеки',LINKS.receipts],
+    ['✦','Спросить Джина',LINKS.jinBot]
+  ];
+  return '<div class="quick"><span class="qcap">Куда что</span>'+Q.map(function(q){
+    return '<a class="qlink" href="'+q[2]+'" target="_blank" rel="noopener"><i>'+q[0]+'</i>'+q[1]+'</a>';
+  }).join('')+'</div>';
+}
 function nowHtml(){
   if(NEWBIE) return obHtml();
   var n;
@@ -304,6 +320,7 @@ document.getElementById('app').innerHTML=
     '<div class="meetjin" onclick="openWelcome()">▶ Meet Jin · your AI teammate · 30 sec</div>'+
   '</div>'+
   nowHtml()+
+  quickHtml()+
   pulseHtml()+
   '<div class="sec">Daily work</div>'+
   '<div class="grid">'+TILES.slice(0,4).map(function(t){
