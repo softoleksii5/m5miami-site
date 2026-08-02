@@ -344,6 +344,7 @@ document.getElementById('app').innerHTML=
   }).join('')+'</div></details>'):'')+
   '<div id="contSec"></div>'+
   '<div id="expSec"></div>'+
+  '<div id="hireSec"></div>'+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+
   '<div id="planSec"></div>'+
@@ -830,6 +831,62 @@ var ROADMAP=[
     if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_cont_open',box.open?'1':'0');}catch(e){} });
   }catch(e){}
 })();
+
+/* ═══ Hiring: кандидаты с портала /join/ (02.08). Только founder/director.
+   Данные за серверной сессией: m5_sid появляется при входе через кнопку Google. ═══ */
+(function(){
+  try{
+    var el=document.getElementById('hireSec'); if(!el)return;
+    if(role!=='founder'&&role!=='director')return;
+    var sid=''; try{sid=localStorage.getItem('m5_sid')||'';}catch(e){}
+    var ST={'new':'🆕 новый','liked':'👍 нравится','no':'👎 нет','pool':'💾 в пуле','hired':'🎉 нанят'};
+    function head(hint){return '<details class="stackbox"><summary><span>💼 Hiring · кандидаты</span><span class="stk-hint">'+hint+'</span></summary><div class="stack">';}
+    var tail='<a class="stk" href="/join/" target="_blank" rel="noopener"><b>🌐 Портал найма /join/</b><span>эту ссылку шлём кандидатам: бренд, квиз, тестовое задание, форма</span></a></div></details>';
+    if(!sid){
+      el.innerHTML=head('нужен вход через Google')+'<div class="lsn">Кандидаты видны только в защищённой сессии. Нажми <b>Sign out</b> и войди заново через <b>кнопку Google</b> — сессия включится сама, один раз на 60 дней.</div>'+tail;
+      return;
+    }
+    window.m5cands=function(d){
+      try{
+        if(!d||!d.ok||!d.CANDS){ el.innerHTML=head('сессия истекла')+'<div class="lsn">Перезайди через кнопку Google на странице входа — и кандидаты появятся.</div>'+tail; return; }
+        var c=d.CANDS,h=head(c.length?(c.length+' · 👍/👎 прямо здесь'):'пока пусто');
+        if(!c.length)h+='<div class="lsn">Заявок ещё нет. Как только кандидат заполнит форму на /join/ — он появится здесь, а в Telegram придёт алерт. Кандидаты сохраняются навсегда: 💾 — в пул фрилансеров с их ставками.</div>';
+        for(var i=0;i<c.length;i++){
+          var x=c[i],lk=String(x.links||'').match(/https?:\/\/[^\s,]+/);
+          h+='<div class="stk"><b>'+(x.role==='editor'?'✂️':'🎬')+' '+esc(x.name||'без имени')+' <span class="cst" style="font-weight:400;color:#8A8272">'+(ST[x.st]||esc(x.st))+'</span></b>'+
+             '<span>'+esc(x.d)+(x.rate?' · ставка: '+esc(x.rate):'')+(x.langs?' · '+esc(x.langs):'')+'</span>'+
+             (x.ai?'<span>AI: '+esc(x.ai.slice(0,110))+'</span>':'')+
+             '<span style="margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">'+
+             (lk?'<a href="'+lk[0]+'" target="_blank" rel="noopener" style="color:#96703B">портфолио ↗</a>':'')+
+             (x.f?'<a href="https://drive.google.com/drive/folders/'+x.f+'" target="_blank" rel="noopener" style="color:#96703B">📁 его загрузки</a>':'')+
+             (x.email?'<a href="mailto:'+esc(x.email)+'" style="color:#96703B">почта</a>':'')+
+             '<i style="font-style:normal;cursor:pointer" title="нравится" onclick="candStat('+x.r+',\'liked\',this)">👍</i>'+
+             '<i style="font-style:normal;cursor:pointer" title="не подходит" onclick="candStat('+x.r+',\'no\',this)">👎</i>'+
+             '<i style="font-style:normal;cursor:pointer" title="сохранить в пул фрилансеров" onclick="candStat('+x.r+',\'pool\',this)">💾</i>'+
+             '</span></div>';
+        }
+        el.innerHTML=h+tail;
+      }catch(e){}
+    };
+    var s=document.createElement('script');
+    s.src=JIN_HOOK+'?priv=1&cb=m5cands&sid='+encodeURIComponent(sid)+'&z='+Date.now();
+    document.head.appendChild(s);
+  }catch(e){}
+})();
+function candStat(row,val,btn){
+  var sid=''; try{sid=localStorage.getItem('m5_sid')||'';}catch(e){}
+  if(!sid)return;
+  var cbn='m5cs'+row+val;
+  window[cbn]=function(d){
+    if(d&&d.ok){ try{
+      var ST={'new':'🆕 новый','liked':'👍 нравится','no':'👎 нет','pool':'💾 в пуле','hired':'🎉 нанят'};
+      var card=btn.closest('.stk'); card.querySelector('.cst').textContent=ST[d.st]||d.st;
+    }catch(e){} }
+  };
+  var s=document.createElement('script');
+  s.src=JIN_HOOK+'?candstat=1&cb='+cbn+'&sid='+encodeURIComponent(sid)+'&row='+row+'&val='+val+'&z='+Date.now();
+  document.head.appendChild(s);
+}
 
 /* ═══ Расходы: одно правило для всех, чтобы траты не терялись (02.08).
    Механика: человек шлёт трату в Telegram-бот → Клод заносит в таблицу и

@@ -152,7 +152,24 @@
   function onGsi(resp){
     var p = {};
     try { p = JSON.parse(decodeURIComponent(escape(atob(resp.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))))); } catch(e){}
-    enter(p.email, p.name);
+    /* Серверная сессия (sid): открывает приватные блоки кабинета (кандидаты и т.п.).
+       Если бэкенд молчит дольше 8 секунд — входим по-старому, без sid. */
+    var done = false;
+    window.m5auth = function(d){
+      if (done) return; done = true;
+      if (d && d.ok) {
+        try{ localStorage.setItem('m5_sid', d.sid); }catch(err){}
+        try{ localStorage.setItem('m5_member', JSON.stringify({
+          name: d.name || p.name || '', email: d.email, role: d.role })); }catch(err){}
+        location.href = '/champion' + d.role; return;
+      }
+      enter(p.email, p.name);
+    };
+    var sc = document.createElement('script');
+    sc.src = 'https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec?auth=1&cb=m5auth&idt=' + encodeURIComponent(resp.credential);
+    sc.onerror = function(){ if (!done) { done = true; enter(p.email, p.name); } };
+    document.head.appendChild(sc);
+    setTimeout(function(){ if (!done) { done = true; enter(p.email, p.name); } }, 8000);
   }
   /* Встроенные браузеры (Telegram/Instagram/FB) ломают Google-попап —
      там оставляем ручную форму и подсказку открыть в Safari. */

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Join M5 — Miami's AI-operated design & build studio</title>
+<meta name="description" content="M5 is hiring: SMM creator and video editor. Work inside an AI-operated design & build studio in Miami.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#20242E;--soft:#6E6656;--line:#EBE3D4;--gold:#B0894F;--gold2:#C8A96A;--gold-d:#96703B;--bg:#F7F2E9;--card:#FFFDF9;
+--sans:'Geist',-apple-system,sans-serif;--mono:'Space Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+.k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d)}
+header{position:sticky;top:0;background:rgba(247,242,233,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:20}
+.hbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.02em;text-decoration:none}
+.logo b{color:var(--gold)}
+.logo small{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--soft);margin-left:8px}
+.site{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-decoration:none;color:var(--soft)}
+/* hero */
+.hero{padding:76px 0 50px;position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;right:-160px;top:-160px;width:480px;height:480px;border-radius:50%;
+background:radial-gradient(circle,rgba(200,169,106,.22),transparent 65%)}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.03em;line-height:1.04;max-width:760px}
+.hero h1 em{font-style:normal;color:var(--gold-d)}
+.hero p{margin:20px 0 0;font-size:17px;color:var(--soft);max-width:640px;line-height:1.55}
+.rolechips{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.rolechip{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#F4EEE4;border-radius:14px;
+padding:14px 22px;font-size:15px;font-weight:600;text-decoration:none;transition:.2s;border:1px solid var(--ink)}
+.rolechip:hover{background:#2C3140}
+.rolechip.alt{background:transparent;color:var(--ink);border-color:#D8CDB6}
+.rolechip.alt:hover{background:#F0E8D8}
+/* sections */
+.sec{padding:46px 0;border-top:1px solid var(--line)}
+.sec h2{font-size:clamp(24px,3.6vw,34px);font-weight:800;letter-spacing:-.02em;margin:8px 0 8px}
+.sec .lead{color:var(--soft);font-size:15.5px;max-width:640px;line-height:1.55}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.fact b{display:block;font-size:21px;letter-spacing:-.01em;margin-bottom:6px}
+.fact span{color:var(--soft);font-size:13.5px;line-height:1.5;display:block}
+/* roles */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.role{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;cursor:pointer;transition:.2s;position:relative}
+.role:hover{border-color:#D8C9A8;transform:translateY(-2px)}
+.role .ic{font-size:26px}
+.role h3{font-size:20px;margin:10px 0 8px;letter-spacing:-.01em}
+.role p{color:var(--soft);font-size:14px;line-height:1.55}
+.role ul{margin:12px 0 0 16px;color:var(--soft);font-size:13.5px;line-height:1.7}
+.role .go{margin-top:16px;display:inline-block;font-weight:700;font-size:14px;color:var(--gold-d)}
+/* taste */
+.pal{display:flex;gap:10px;margin:18px 0 30px}
+.sw{width:66px;height:66px;border-radius:14px;border:1px solid rgba(255,255,255,.18);position:relative}
+.sw i{position:absolute;left:-6px;right:-6px;bottom:-20px;text-align:center;font-style:normal;font-family:var(--mono);font-size:9.5px;color:#B8AE9C;white-space:nowrap}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:24px}
+.feeds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.feed{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;text-decoration:none;transition:.2s;display:block}
+.feed:hover{border-color:#D8C9A8}
+.feed b{font-size:13.5px;display:block}
+.feed span{color:var(--soft);font-size:12px;line-height:1.45;display:block;margin-top:3px}
+.avoid{margin-top:16px}
+.avoid li{list-style:none;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 15px;margin-bottom:9px;font-size:13.5px;color:var(--soft);line-height:1.5}
+.avoid li b{color:var(--ink)}
+.brandrule{background:var(--ink);color:#EFE8DA;border-radius:18px;padding:24px;margin-top:22px}
+.brandrule b{color:var(--gold2)}
+.brandrule p{font-size:14.5px;line-height:1.6;margin-top:6px}
+/* quiz */
+.qz{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}
+.qq{margin-bottom:20px}
+.qq h4{font-size:15.5px;margin-bottom:10px}
+.qo{display:block;width:100%;text-align:left;background:#F6F0E3;border:1px solid transparent;border-radius:11px;
+padding:11px 14px;font-size:14px;font-family:var(--sans);color:var(--ink);cursor:pointer;margin-bottom:7px;transition:.15s}
+.qo:hover{background:#F0E8D6}
+.qo.right{background:#E8F0E2;border-color:#9DBB8C}
+.qo.wrong{background:#F5E4DE;border-color:#D9A18F;opacity:.7}
+.qo small{display:none;color:var(--soft);margin-top:4px}
+.qo.right small,.qo.wrong small{display:block}
+.qres{display:none;background:var(--ink);color:#EFE8DA;border-radius:13px;padding:16px 18px;font-size:14.5px;line-height:1.55}
+.qres b{color:var(--gold2)}
+/* test task */
+.tabs{display:flex;gap:8px;margin:22px 0 0}
+.tab{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:11px 11px 0 0;
+background:#EDE5D3;cursor:pointer;border:1px solid var(--line);border-bottom:none;color:var(--soft)}
+.tab.on{background:var(--card);color:var(--ink);font-weight:700}
+.task{background:var(--card);border:1px solid var(--line);border-radius:0 16px 16px 16px;padding:26px}
+.task ol{margin:14px 0 0 18px}
+.task li{margin-bottom:14px;font-size:14.5px;line-height:1.6}
+.task li b{display:block}
+.task li span{color:var(--soft);font-size:13.5px}
+.matbtn{display:inline-flex;align-items:center;gap:9px;background:var(--gold-d);color:#fff;border-radius:12px;padding:13px 20px;
+font-weight:700;font-size:14px;text-decoration:none;margin-top:6px}
+.matbtn:hover{background:#7E5C2F}
+.note{background:#F3ECDD;border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--soft);line-height:1.55;margin-top:18px}
+.note b{color:var(--ink)}
+.calcols{font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--soft);background:#F6F0E3;border-radius:11px;padding:12px 15px;margin-top:8px}
+/* form */
+.form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;margin-top:24px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.fld input,.fld select,.fld textarea{width:100%;border:1px solid #DDD3BE;border-radius:11px;padding:12px 14px;font-size:14.5px;
+font-family:var(--sans);background:#FDFBF6;color:var(--ink);outline:none}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--gold)}
+.fld textarea{min-height:76px;resize:vertical}
+.sbm{width:100%;background:var(--ink);color:#F4EEE4;border:none;border-radius:13px;padding:16px;font-size:15.5px;font-weight:700;
+font-family:var(--sans);cursor:pointer;margin-top:6px}
+.sbm:hover{background:#2C3140}
+.ok{display:none;text-align:center;padding:40px 20px}
+.ok .big{font-size:44px}
+.ok h3{font-size:22px;margin:12px 0 8px}
+.ok p{color:var(--soft);font-size:14.5px;line-height:1.6;max-width:440px;margin:0 auto}
+footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media(max-width:760px){
+.facts,.roles,.cols2,.feeds,.frow{grid-template-columns:1fr}
+.hero{padding:52px 0 38px}
+.sec{padding:36px 0}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap hbar">
+<a class="logo" href="/">M<b>5</b><small>MIAMI</small></a>
+<a class="site" href="https://m5miami.com">m5miami.com</a>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="k">Hiring · Miami + Remote</div>
+<h1>Help us build the <em>loudest design brand</em> in Miami.</h1>
+<p>M5 is an interior design &amp; build studio running $150–250K renovations — and the first one in Miami operated by AI.
+Our content should look like a magazine and hit like a launch. That's where you come in.</p>
+<div class="rolechips">
+<a class="rolechip" href="#task" onclick="pickRole('smm')">🎬 SMM Creator</a>
+<a class="rolechip alt" href="#task" onclick="pickRole('editor')">✂️ Video Editor</a>
+</div>
+</div></div>
+
+<div class="sec"><div class="wrap">
+<div class="k">The company</div>
+<h2>A studio that runs on AI — for real.</h2>
+<p class="lead">Two founders, a licensed director, and Jin — our AI teammate who moves leads, tasks, files and reports 24/7.
+Every teammate gets a personal cabinet on m5miami.com and a visible growth ladder. You don't fight bureaucracy here; you make things.</p>
+<div class="facts">
+<div class="fact"><b>$150–250K</b><span>typical project. Full renovations and our signature decorative plaster — texture is our fingerprint.</span></div>
+<div class="fact"><b>AI-operated</b><span>Jin answers in seconds, sorts your uploads, drafts your captions. You bring taste and judgment — AI does the routine.</span></div>
+<div class="fact"><b>🥉🥈🥇💎 Growth ladder</b><span>levels, not politics: your pay and status grow on a visible track inside your personal cabinet.</span></div>
+</div>
+</div></div>
+
+<div class="sec" id="roles"><div class="wrap">
+<div class="k">Open roles</div>
+<h2>Two ways in.</h2>
+<div class="roles">
+<div class="role" onclick="pickRole('smm');location.hash='task'">
+<div class="ic">🎬</div><h3>SMM Creator</h3>
+<p>You own Instagram, TikTok and YouTube: shoot on real job sites, edit reels, write captions that sell $200K projects, plan the calendar.</p>
+<ul><li>English required · Spanish is a big plus</li><li>Miami-based (job-site shooting days)</li><li>Full-time or strong part-time</li><li>AI tools daily — we'll show you our stack</li></ul>
+<span class="go">Take the test task →</span>
+</div>
+<div class="role" onclick="pickRole('editor');location.hash='task'">
+<div class="ic">✂️</div><h3>Video Editor</h3>
+<p>You turn raw job-site footage into reels that stop the scroll: clean cuts, text overlays, sound sync, magazine-grade color.</p>
+<ul><li>Freelance-friendly — tell us your rate</li><li>Remote OK, any timezone</li><li>CapCut / Premiere / DaVinci — your call</li><li>No watermarks, ever</li></ul>
+<span class="go">Take the test task →</span>
+</div>
+</div>
+</div></div>
+
+<div class="sec"><div class="wrap">
+<div class="k">Our taste</div>
+<h2>What we love — and what we never do.</h2>
+<div class="brandrule">
+<b>The M5 rule:</b>
+<p>The grid should read like a magazine issue, not a camera roll. Black &amp; gold, clean grotesque type (never script fonts),
+texture macro shots of plaster, matched-angle before/afters. Every post either proves craft or proves numbers.</p>
+<div class="pal">
+<div class="sw" style="background:#20242E"><i>ink #20242E</i></div>
+<div class="sw" style="background:#C8A96A"><i>gold #C8A96A</i></div>
+<div class="sw" style="background:#F7F2E9"><i>cream #F7F2E9</i></div>
+<div class="sw" style="background:#96703B"><i>bronze #96703B</i></div>
+</div>
+</div>
+<div class="cols2">
+<div>
+<h3 style="font-size:17px">Feeds we admire</h3>
+<div class="feeds">
+<a class="feed" href="https://www.instagram.com/studiomcgee/" target="_blank" rel="noopener"><b>@studiomcgee</b><span>the benchmark: reveal-reel formats, magazine grid rhythm</span></a>
+<a class="feed" href="https://www.instagram.com/kellywearstler/" target="_blank" rel="noopener"><b>@kellywearstler</b><span>black/gold art direction, texture macro — our ambition</span></a>
+<a class="feed" href="https://www.instagram.com/siredesign/" target="_blank" rel="noopener"><b>@siredesign</b><span>Miami: numbered projects, founder + studio two-account play</span></a>
+<a class="feed" href="https://www.instagram.com/moniomidesign/" target="_blank" rel="noopener"><b>@moniomidesign</b><span>Miami: unmistakable visual DNA — grid reads as one poster</span></a>
+<a class="feed" href="https://www.instagram.com/threebirdsrenovations/" target="_blank" rel="noopener"><b>@threebirdsrenovations</b><span>each house = a "season": serialized renovation storytelling</span></a>
+<a class="feed" href="https://www.instagram.com/the_fox_group_/" target="_blank" rel="noopener"><b>@the_fox_group_</b><span>design-build done right: craftsmanship close-ups as a pillar</span></a>
+<a class="feed" href="https://www.instagram.com/jeanstofferdesign/" target="_blank" rel="noopener"><b>@jeanstofferdesign</b><span>episode-style project stories people subscribe to</span></a>
+<a class="feed" href="https://www.instagram.com/2idinteriors/" target="_blank" rel="noopener"><b>@2idinteriors</b><span>Miami condo renos like ours — distinct look per project</span></a>
+</div>
+</div>
+<div>
+<h3 style="font-size:17px">What we avoid</h3>
+<ul class="avoid">
+<li><b>Camera-roll grid.</b> Unedited site photos + holiday graphics + a random meme. No grade, no rhythm — reads cheap.</li>
+<li><b>Collage-and-watermark disease.</b> Before/after crammed into one split image with arrows and a phone number. Kills the reveal.</li>
+<li><b>Reels without hooks.</b> A 60-second doorway pan with no text in the first 2 seconds. Viewers are gone by second 3.</li>
+<li><b>Trophy-only feed.</b> Glam finals in a burst, then months of silence. No process, no people — nothing to trust.</li>
+<li><b>Caption = hashtag soup.</b> 30 hashtags, zero sentences, "Call now!!". A $200K brand explains decisions instead.</li>
+</ul>
+</div>
+</div>
+</div></div>
+
+<div class="sec"><div class="wrap">
+<div class="k">Quick check</div>
+<h2>Check your eye — 5 questions.</h2>
+<p class="lead">Not graded, just fun. But it shows you how we think.</p>
+<div class="qz" id="quiz">
+<div class="qq"><h4>1 · Best first 2 seconds of a renovation reel?</h4>
+<button class="qo" data-ok="0" onclick="qa(this)">Slow pan from the front door<small>They swiped already. Payoff first, story second.</small></button>
+<button class="qo" data-ok="1" onclick="qa(this)">Flash the finished space — then rewind to day one<small>Yes. Show the transformation inside second 1, then tell the story.</small></button>
+<button class="qo" data-ok="0" onclick="qa(this)">Logo animation with music<small>Nobody waits through a logo. Ever.</small></button></div>
+<div class="qq"><h4>2 · The before/after rule?</h4>
+<button class="qo" data-ok="0" onclick="qa(this)">Different angles — more variety<small>Different angles = no proof. The brain can't compare.</small></button>
+<button class="qo" data-ok="0" onclick="qa(this)">Split collage with arrows<small>That's a classified ad, not a magazine page.</small></button>
+<button class="qo" data-ok="1" onclick="qa(this)">Same angle, frame for frame<small>Exactly. Locked-off, matched frames — the reveal does the selling.</small></button></div>
+<div class="qq"><h4>3 · A caption that sells a $200K renovation?</h4>
+<button class="qo" data-ok="0" onclick="qa(this)">30 hashtags, no text<small>Hashtag soup died years ago. Keywords in the caption now.</small></button>
+<button class="qo" data-ok="1" onclick="qa(this)">Story + real numbers + one specific CTA<small>Yes: problem → decision → outcome, "$187K, 9 weeks", "DM RENO for the guide".</small></button>
+<button class="qo" data-ok="0" onclick="qa(this)">"Call now for a free estimate!!"<small>Hard sell in every caption reads desperate at this price point.</small></button></div>
+<div class="qq"><h4>4 · A premium studio's grid should look like…</h4>
+<button class="qo" data-ok="0" onclick="qa(this)">A camera roll — keep it real<small>"Real" still needs a color grade and rhythm.</small></button>
+<button class="qo" data-ok="1" onclick="qa(this)">A magazine issue<small>Right. Curated, graded, alternating wide/detail/people.</small></button>
+<button class="qo" data-ok="0" onclick="qa(this)">Memes + projects — fun mix<small>Fun for a food truck. Not for $200K interiors.</small></button></div>
+<div class="qq"><h4>5 · The most weighted Instagram signal in 2026?</h4>
+<button class="qo" data-ok="0" onclick="qa(this)">Likes<small>Weakest signal on the list.</small></button>
+<button class="qo" data-ok="0" onclick="qa(this)">Follower count<small>Vanity. Distribution is content-by-content now.</small></button>
+<button class="qo" data-ok="1" onclick="qa(this)">DM sends &amp; shares<small>Yes — content people forward to a spouse wins. Make forwardable content.</small></button></div>
+<div class="qres" id="qres"></div>
+</div>
+</div></div>
+
+<div class="sec" id="task"><div class="wrap">
+<div class="k">Test task</div>
+<h2>Show us, don't tell us.</h2>
+<p class="lead">Real materials from a real M5 project. Work exactly the way you would after joining: download, create, upload back.
+<b>Using AI tools is encouraged</b> — we're an AI-operated company. Show us your process.</p>
+<div class="tabs">
+<div class="tab on" id="tab-smm" onclick="pickRole('smm')">🎬 SMM Creator</div>
+<div class="tab" id="tab-editor" onclick="pickRole('editor')">✂️ Video Editor</div>
+</div>
+<div class="task" id="task-smm">
+<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener">📁 Download the materials — Google Drive</a>
+<ol>
+<li><b>1 reel · 15–30 sec — before/after</b><span>Hook in the first 2 seconds, text overlays (half of viewers watch muted), matched frames. Photos only in the pack? Bring them to life — AI image-to-video, smart zooms, your call.</span></li>
+<li><b>3 story frames</b><span>One poll, one behind-the-scenes, one reveal. Think "job site diary".</span></li>
+<li><b>Instagram grid — 9 tiles</b><span>A layout mockup that reads like a magazine issue. Black &amp; gold. Any tool: Canva, Figma, AI.</span></li>
+<li><b>YouTube cover · 1280×720</b><span>For a video titled "Miami Condo Renovation Cost 2026: Full Breakdown". 3–5 words on the cover, numbers welcome.</span></li>
+<li><b>2-week content calendar</b><span>IG + TikTok + YouTube + Google Business. Sheet or doc, columns below. We read hooks word by word.</span>
+<div class="calcols">date · channel · pillar · format · hook (verbatim!) · caption summary · CTA · asset needed · KPI to watch</div>
+<span>Pillars to balance: transformations ~30% · process &amp; craft ~25% · education &amp; cost ~20% · people ~15% · social proof ~10%. Miami is a lens on everything, not a separate bucket.</span></li>
+</ol>
+<div class="note"><b>How to submit:</b> apply below → you'll instantly get an email with your personal upload folder. Put everything there within <b>5 days</b>. Questions — just reply to that email.</div>
+</div>
+<div class="task" id="task-editor" style="display:none">
+<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener">📁 Download the materials — Google Drive</a>
+<ol>
+<li><b>Links to your 3 best works</b><span>Reels, cuts, anything you're proud of. Links in the form below.</span></li>
+<li><b>1 reel · 20–40 sec from our materials</b><span>Cuts every 1.5–3 s, text overlays, sound-synced transitions, magazine-grade color. Photos only in the pack? Animate them — AI image-to-video welcome. No watermarks.</span></li>
+<li><b>Your terms</b><span>Rate per reel (or per hour) + typical turnaround. Put it in the form — we respect clear numbers.</span></li>
+</ol>
+<div class="note"><b>How to submit:</b> apply below → you'll instantly get an email with your personal upload folder. Upload the reel there within <b>5 days</b>.</div>
+</div>
+</div></div>
+
+<div class="sec" id="apply"><div class="wrap">
+<div class="k">Apply</div>
+<h2>Ready? Two minutes.</h2>
+<div class="form" id="formBox">
+<form id="jf" onsubmit="return sendApp(event)">
+<div class="frow">
+<div class="fld"><label>Role</label>
+<select id="f_role"><option value="smm">🎬 SMM Creator</option><option value="editor">✂️ Video Editor</option></select></div>
+<div class="fld"><label>Full name</label><input id="f_name" required placeholder="Ana García"></div>
+</div>
+<div class="frow">
+<div class="fld"><label>Email</label><input id="f_email" type="email" required placeholder="you@email.com"></div>
+<div class="fld"><label>Phone / WhatsApp</label><input id="f_phone" placeholder="+1 …"></div>
+</div>
+<div class="frow">
+<div class="fld"><label>Languages</label><input id="f_langs" placeholder="English, Spanish…"></div>
+<div class="fld"><label>Your rate (if freelance)</label><input id="f_rate" placeholder="$ per reel / per hour — editors"></div>
+</div>
+<div class="fld"><label>Portfolio links</label><input id="f_links" placeholder="Instagram, TikTok, YouTube, Behance, Drive…"></div>
+<div class="fld"><label>How do you use AI in your work?</label>
+<textarea id="f_ai" placeholder="Tools, prompts, workflows — honest answer. 'I don't yet, but…' is also an answer."></textarea></div>
+<button class="sbm" type="submit">Apply → get the upload folder by email</button>
+</form>
+<div class="ok" id="okBox">
+<div class="big">✦</div>
+<h3>Application received.</h3>
+<p>Check your inbox — your personal upload folder is on its way (look in spam too).
+Deadline: 5 days. We review every submission personally and reply either way.</p>
+</div>
+</div>
+</div></div>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:0">
+<span>M5 Interior Design &amp; Build · Miami</span>
+<span><a href="mailto:hello@m5miami.com" style="color:var(--gold-d)">hello@m5miami.com</a> · <a href="https://m5miami.com" style="color:var(--gold-d)">m5miami.com</a></span>
+</div></footer>
+
+<script>
+var HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';
+function pickRole(r){
+  document.getElementById('tab-smm').className='tab'+(r==='smm'?' on':'');
+  document.getElementById('tab-editor').className='tab'+(r==='editor'?' on':'');
+  document.getElementById('task-smm').style.display=r==='smm'?'':'none';
+  document.getElementById('task-editor').style.display=r==='editor'?'':'none';
+  var s=document.getElementById('f_role'); if(s) s.value=r;
+}
+var qDone=0,qGood=0;
+function qa(btn){
+  var q=btn.parentNode; if(q.dataset.done) return; q.dataset.done='1'; qDone++;
+  var os=q.getElementsByClassName('qo');
+  for(var i=0;i<os.length;i++){ if(os[i].dataset.ok==='1'){ os[i].className='qo right'; } }
+  if(btn.dataset.ok==='1'){ qGood++; } else { btn.className='qo wrong'; }
+  if(qDone===5){
+    var r=document.getElementById('qres'); r.style.display='block';
+    r.innerHTML=qGood>=4?('<b>'+qGood+'/5 — you have the eye.</b> Now prove it with your hands: the test task is below.')
+      :qGood>=2?('<b>'+qGood+'/5 — solid instincts.</b> Read "what we avoid" once more, then go get the test task.')
+      :('<b>'+qGood+'/5 — bold of you.</b> Study the feeds we admire, then surprise us with the test task.');
+  }
+}
+function sendApp(ev){
+  ev.preventDefault();
+  var g=function(id){var el=document.getElementById(id);return el?String(el.value||'').trim():''};
+  var d={type:'candidate',role:g('f_role'),name:g('f_name'),email:g('f_email'),phone:g('f_phone'),
+    langs:g('f_langs'),rate:g('f_rate'),links:g('f_links'),ai:g('f_ai'),source:'join-portal'};
+  if(!d.name||!d.email) return false;
+  try{ fetch(HOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(d)}); }catch(e){}
+  document.getElementById('jf').style.display='none';
+  document.getElementById('okBox').style.display='block';
+  return false;
+}
+if(/[?&]role=editor/.test(location.search)) pickRole('editor');
+</script>
+</body>
+</html>
