@@ -150,7 +150,7 @@ try{ if(member&&member.role==='founder'&&ROLES[member.role]&&role!==member.role)
 
 /* Персональные аватарки (Pixar-стиль, серия для всей команды).
    Матчим по префиксу рабочей почты, запасной вариант — по имени. */
-var AVATARS={alex:'/img/ava_alex_t.jpg',vlad:'/img/ava_vlad_t.jpg',vadim:'/img/ava_vadim_t.jpg',vadym:'/img/ava_vadim_t.jpg'};
+var AVATARS={alex:'/img/ava_alex_t.webp',vlad:'/img/ava_vlad_t.webp',vadim:'/img/ava_vadim_t.webp',vadym:'/img/ava_vadim_t.webp'};
 var avaUrl='';
 try{
   if(member&&!preview){
@@ -221,7 +221,7 @@ window.obToggle=function(i){
   }catch(e){}
 };
 function obHtml(){
-  var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex_t.jpg'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim_t.jpg'};
+  var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex_t.webp'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim_t.webp'};
   OB_STEPS[5].url=LINKS.telegram;
   if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t='Загляни в базу знаний — плитка Drive ниже';
   var done=0,total=OB_STEPS.length,rows='';
@@ -491,7 +491,7 @@ var EPLAN=[
 var EPLAN_HINTS=[
  ['Что такое E-2','Виза инвестора США для граждан стран-участниц договора. Требует существенных инвестиций в реальный работающий бизнес. Алекс и Влад подаются как инвесторы (по 50%), Вадим — как ключевой сотрудник той же компании. Подача — в консульстве (Варшава), к подаче нужны: работающий бизнес, потраченные инвестиции, бизнес-план, source of funds.'],
  ['Бизнес-план','Живой документ: сейчас v3, к подаче станет v4 — намерения заменяются фактами (реальный шоурум, реальные клиенты, реальные траты). Хранится в Company Drive → 06 Legal & Docs, обновляет Клод после каждого события.'],
- ['Шоурум','<img src="/media/showroom_main.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_storage.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_concept.jpg" style="max-width:100%;border-radius:10px;margin:6px 0"> Майами, центральные улицы, до 100 м²: шоурум декоративной штукатурки + склад материалов + офис. Концепт — «art-concrete». Ищем через LoopNet, Crexi и локальных брокеров; бюджет аренды $5–10K/мес.']
+ ['Шоурум','<img src="/media/showroom_main.webp" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_storage.webp" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_concept.webp" style="max-width:100%;border-radius:10px;margin:6px 0"> Майами, центральные улицы, до 100 м²: шоурум декоративной штукатурки + склад материалов + офис. Концепт — «art-concrete». Ищем через LoopNet, Crexi и локальных брокеров; бюджет аренды $5–10K/мес.']
 ];
 (function(){
   try{

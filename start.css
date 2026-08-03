@@ -5,8 +5,8 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--sans);color:var(--ink);min-height:100vh;position:relative;
-  background:#F6F0E5 url('/img/vice_bg.jpg') top center/100% auto no-repeat}
-@media(max-width:680px){body{background-image:url('/img/vice_bg_m.jpg')}}
+  background:#F6F0E5 url('/img/vice_bg.webp') top center/100% auto no-repeat}
+@media(max-width:680px){body{background-image:url('/img/vice_bg_m.webp')}}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1120px;margin:0 auto;padding:0 26px;position:relative;z-index:2}
 

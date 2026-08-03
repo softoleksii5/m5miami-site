@@ -26,10 +26,10 @@ var CLIENTS={
      'Design':[['Moodboard v2 (approved)','Sep 12',''],['Layout plan 1.1','Sep 8','']]
    },
    materials:[
-     {img:'/img/gal_plaster.jpg', ttl:'Art-concrete wall', note:'Sample #3 — warm gray', st:'review'},
-     {img:'/img/gal_kitchen.jpg', ttl:'Kitchen fronts', note:'Matte oak + black', st:'approved'},
-     {img:'/img/gal_bath.jpg', ttl:'Bathroom stone', note:'Travertine, honed', st:'approved'},
-     {img:'/img/gal_living.jpg', ttl:'Living textiles', note:'Ivory boucle set', st:'todo'}
+     {img:'/img/gal_plaster.webp', ttl:'Art-concrete wall', note:'Sample #3 — warm gray', st:'review'},
+     {img:'/img/gal_kitchen.webp', ttl:'Kitchen fronts', note:'Matte oak + black', st:'approved'},
+     {img:'/img/gal_bath.webp', ttl:'Bathroom stone', note:'Travertine, honed', st:'approved'},
+     {img:'/img/gal_living.webp', ttl:'Living textiles', note:'Ivory boucle set', st:'todo'}
    ],
    credits:{bal:114, earned:314, tier:'Bronze', rate:3, next:'Silver', nextAt:500, nextRate:3.5,
      hist:[
@@ -43,42 +43,42 @@ var CLIENTS={
 
 /* Продающий каталог: что клиент может добавить к проекту. Заявка в 1 клик. */
 var SERVICES=[
- {img:'/img/svc3_plaster.jpg', ttl:'Decorative Plaster & Art-Concrete', sub:'Venetian, microcement, limewash — the signature M5 finish clients photograph most', from:'from $18 / sq ft',
+ {img:'/img/svc3_plaster.webp', ttl:'Decorative Plaster & Art-Concrete', sub:'Venetian, microcement, limewash — the signature M5 finish clients photograph most', from:'from $18 / sq ft',
   time:'3–7 days per room',
   what:'A hand-applied mineral finish that turns a flat wall into the centerpiece of the room — the same finish we build our showroom around.',
   steps:['Sample session — we bring 3–5 physical samples to your home and match them to your light','Surface prep & protection of floors and furniture','2–3 coats applied by our master (each needs to cure)','Sealing & final polish, walkthrough together'],
   incl:'Materials, protection, application, sealing and a touch-up kit. Dust-free process.'},
- {img:'/img/svc1_interior.jpg', ttl:'Interior Design Package', sub:'Concept, 3D visuals, materials list — a home that feels curated, not furnished', from:'from $6,500',
+ {img:'/img/svc1_interior.webp', ttl:'Interior Design Package', sub:'Concept, 3D visuals, materials list — a home that feels curated, not furnished', from:'from $6,500',
   time:'2–4 weeks',
   what:'A complete design brain for your space: how it looks, feels and functions — before a single wall is touched.',
   steps:['Discovery: how you live, what you love, reference session','Concept & moodboard — 2 directions to choose from','3D visualizations of key rooms + full materials & furniture list','Design supervision handoff: drawings your builders actually follow'],
   incl:'Moodboards, 3D renders, material specs, furniture list with links, lighting plan.'},
- {img:'/img/case2_kitchen.jpg', ttl:'Kitchen Remodel', sub:'Custom fronts, stone counters, appliances — the room that sells the home', from:'from $28,000',
+ {img:'/img/case2_kitchen.webp', ttl:'Kitchen Remodel', sub:'Custom fronts, stone counters, appliances — the room that sells the home', from:'from $28,000',
   time:'4–8 weeks',
   what:'Full kitchen replacement: layout, cabinetry, stone, appliances, lighting — managed end to end by one team.',
   steps:['Layout & appliance plan (we check every clearance)','Cabinetry order — custom fronts, soft-close everything','Demo, rough-in, stone templating & install','Appliances, lighting, tiling, final detailing'],
   incl:'Design, demolition, cabinetry, countertops, installation, plumbing & electrical hookups, cleanup.'},
- {img:'/img/case3_bath.jpg', ttl:'Bathroom / Spa Remodel', sub:'Stone, glass, rainfall shower — hotel-grade mornings at home', from:'from $18,000',
+ {img:'/img/case3_bath.webp', ttl:'Bathroom / Spa Remodel', sub:'Stone, glass, rainfall shower — hotel-grade mornings at home', from:'from $18,000',
   time:'3–6 weeks',
   what:'Your bathroom rebuilt to the standard of the hotels you love: waterproofing done right, stone done beautifully.',
   steps:['Design & fixture selection (we bring the catalog to you)','Demo + proper waterproofing (the part nobody sees, everybody regrets skipping)','Tile, stone & glass installation','Fixtures, heated details, final seal & shine'],
   incl:'Design, waterproofing, tile & stone work, glass, plumbing, fixtures installation.'},
- {img:'/img/gal_living.jpg', ttl:'Furniture & Styling', sub:'Sourcing, white-glove delivery, staging — move-in ready, magazine ready', from:'from $9,500',
+ {img:'/img/gal_living.webp', ttl:'Furniture & Styling', sub:'Sourcing, white-glove delivery, staging — move-in ready, magazine ready', from:'from $9,500',
   time:'2–5 weeks',
   what:'We source, buy, receive, assemble and style everything — you come home to a finished space, not a pile of boxes.',
   steps:['Styling concept on top of your design','Sourcing & ordering (trade discounts passed to you)','Receiving, quality check, white-glove delivery','Full staging day: furniture, art, textiles, greenery'],
   incl:'Sourcing, purchasing management, delivery, assembly, styling day, returns handling.'},
- {img:'/img/case4_villa.jpg', ttl:'Outdoor & Terrace', sub:'Summer kitchens, decks, landscape lighting — Miami lives outside', from:'custom quote',
+ {img:'/img/case4_villa.webp', ttl:'Outdoor & Terrace', sub:'Summer kitchens, decks, landscape lighting — Miami lives outside', from:'custom quote',
   time:'2–8 weeks',
   what:'Your outdoor space turned into the best room of the house: kitchen, shade, light, sound.',
   steps:['Site visit & concept (sun, wind, privacy mapping)','Materials board: decking, stone, outdoor fabrics','Build: pergolas, summer kitchen, decking, planters','Lighting & sound — the 8pm test walkthrough'],
   incl:'Design, permits where needed, construction, outdoor kitchen, lighting, plants.'},
- {img:'/img/svc5_supervision.jpg', ttl:'Design Supervision', sub:'Our designer protects the vision on site — weekly visits & style control', from:'from $1,200 / mo',
+ {img:'/img/svc5_supervision.webp', ttl:'Design Supervision', sub:'Our designer protects the vision on site — weekly visits & style control', from:'from $1,200 / mo',
   time:'monthly',
   what:'The insurance policy for your design: our designer on site every week making sure what was drawn is what gets built.',
   steps:['Weekly site visits with photo report to your hub','Materials & finishes control against the spec','Instant answers for builders — no guessing, no delays','Deviation alerts before they become expensive'],
   incl:'Weekly visits, photo reports, materials control, builder consultations, hub updates.'},
- {img:'/img/case6_showroom.jpg', ttl:'Commercial Fit-Out', sub:'Offices, showrooms, restaurants — spaces that work as hard as you', from:'custom quote',
+ {img:'/img/case6_showroom.webp', ttl:'Commercial Fit-Out', sub:'Offices, showrooms, restaurants — spaces that work as hard as you', from:'custom quote',
   time:'4–12 weeks',
   what:'Commercial spaces that convert: built fast, built on brand, built to code.',
   steps:['Brief & brand immersion','Concept + budget in one week','Build with night/weekend crews if you cannot close','Punch list & handover with all documentation'],
@@ -111,7 +111,7 @@ var PHASE_INFO={
  'Handover':'final walkthrough, documents and warranty'
 };
 /* Мелкие превью для карточек (640px) — полноразмерные фото только в модалке услуги. */
-function thumb(u){ return String(u||'').replace(/\.jpg$/, '_t.jpg'); }
+function thumb(u){ return String(u||'').replace(/\.webp$/, '_t.webp'); }
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var slug=(location.search.match(/[?&]p=([^&]*)/)||[])[1]||'';
@@ -132,8 +132,8 @@ var TSTYLE='<style>'+
 'html,body{overflow-x:hidden}'+
 /* Вуаль привязана к высоте самого фото (фото 100% ширины, пропорция 1.79 → высота ≈56vw),
    иначе градиент растягивался на всю страницу и панорама просвечивала сквозь полосу фаз. */
-'body{background:linear-gradient(rgba(250,246,238,.05),rgba(250,246,238,.32) 26%,rgba(250,246,238,.84) 40%,#FAF6EE 50%) top center/100% 56vw no-repeat,url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
-'@media(max-width:680px){body{background-image:linear-gradient(rgba(250,246,238,.05),rgba(250,246,238,.32) 26%,rgba(250,246,238,.84) 40%,#FAF6EE 50%),url(/img/hub_bg_m.jpg);background-size:100% 112vw,200% auto;background-position:top center,top center;background-repeat:no-repeat,no-repeat}}'+
+'body{background:linear-gradient(rgba(250,246,238,.05),rgba(250,246,238,.32) 26%,rgba(250,246,238,.84) 40%,#FAF6EE 50%) top center/100% 56vw no-repeat,url(/img/hub_bg.webp) top center/100% auto no-repeat #FAF6EE}'+
+'@media(max-width:680px){body{background-image:linear-gradient(rgba(250,246,238,.05),rgba(250,246,238,.32) 26%,rgba(250,246,238,.84) 40%,#FAF6EE 50%),url(/img/hub_bg_m.webp);background-size:100% 112vw,200% auto;background-position:top center,top center;background-repeat:no-repeat,no-repeat}}'+
 '.cph-h{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#96703B}'+
 '.cph-h b{color:#8A8272;font-weight:400}'+
 '.cph-now{font-size:14px;color:#5A5142;margin:-8px 0 20px;line-height:1.5}'+
@@ -387,16 +387,16 @@ function renderHub_(){
     acc('ba','📸','Before & after','Where we started — and where it’s going',
       '<div class="bacap">Our content team shoots every room before works begin — so you can watch the transformation.</div>'+
       '<div class="bagrid">'+
-      '<div><div class="bapair"><em>Before</em><img src="/img/ba_reno_before_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Living room — day one</div></div>'+
-      '<div><div class="bapair after"><em>After</em><img src="/img/ba_reno_after_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Living room — result (example)</div></div>'+
-      '<div><div class="bapair"><em>Before</em><img src="/img/ba_plaster_before_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Accent wall — before plaster</div></div>'+
-      '<div><div class="bapair after"><em>After</em><img src="/img/ba_plaster_after_t.jpg" alt="" loading="lazy" decoding="async"></div><div class="bacap">Accent wall — art-concrete (example)</div></div>'+
+      '<div><div class="bapair"><em>Before</em><img src="/img/ba_reno_before_t.webp" alt="" loading="lazy" decoding="async"></div><div class="bacap">Living room — day one</div></div>'+
+      '<div><div class="bapair after"><em>After</em><img src="/img/ba_reno_after_t.webp" alt="" loading="lazy" decoding="async"></div><div class="bacap">Living room — result (example)</div></div>'+
+      '<div><div class="bapair"><em>Before</em><img src="/img/ba_plaster_before_t.webp" alt="" loading="lazy" decoding="async"></div><div class="bacap">Accent wall — before plaster</div></div>'+
+      '<div><div class="bapair after"><em>After</em><img src="/img/ba_plaster_after_t.webp" alt="" loading="lazy" decoding="async"></div><div class="bacap">Accent wall — art-concrete (example)</div></div>'+
       '</div>', false)+
     acc('mats','🧱','Materials & selections', needRev? needRev+' waiting for your review':'All approved',
       '<div class="mats">'+mats+'</div>', needRev>0)+
     acc('docs','📄','Documents', docsN+' files · reports, invoices, design',
       '<div class="dtab">'+dtabs+'</div><div id="docList">'+docHtml(cats[0])+'</div>', false)+
-    '<div class="band" data-bg="/img/band_kitchen.jpg"></div>'+
+    '<div class="band" data-bg="/img/band_kitchen.webp"></div>'+
     acc('svc','🛎','Add to your project','Popular upgrades — request in one tap',
       '<div style="font-size:12.5px;color:#8A8272;margin:2px 0 12px">Tap any card for details. One team already on site = better price, zero coordination pain.</div>'+
       '<div class="svcs">'+svc+'</div><div class="okmsg" id="svcOk">'+(DEMO?'Demo mode — in your real hub, '+esc(C.pm)+' texts you the same day.':'Request sent! '+esc(C.pm)+' will text you today with details.')+'</div>', false)+
@@ -415,7 +415,7 @@ function renderHub_(){
       '<div class="reflink"><input id="refUrl" readonly value="https://m5miami.com/?ref='+esc(C.refCode)+'"><button class="cbtn" style="margin:0" onclick="copyRef()">Copy</button></div>'+
       '<div style="font-size:12px;color:#8A8272;margin-top:8px">When your friend books a consultation, we message you — and the $500 lands on your balance.</div>'+
       '<div class="okmsg" id="refOk">Link copied — send it to someone who deserves a beautiful home.</div></div>', false):'')+
-    '<div class="band" data-bg="/img/band_plaster.jpg"></div>'+
+    '<div class="band" data-bg="/img/band_plaster.webp"></div>'+
     acc('fb','💬','Feedback & reviews','30 seconds — it goes straight to the founders',
       '<div style="font-size:13px;color:#6E6656;margin:2px 0 4px">How was our work this week?</div>'+
       '<div class="stars" id="stars">'+[1,2,3,4,5].map(function(n){return '<span onclick="starPick('+n+')">★</span>';}).join('')+'</div>'+
@@ -426,8 +426,8 @@ function renderHub_(){
       '<div class="okmsg" id="fbOk">'+(DEMO?'Demo mode — in your real hub this lands on the founders’ desk instantly.':'Thank you! Your feedback just landed on the founders’ desk. We read every word.')+'</div>'+
       gRev, false)+
     acc('talk','📞','Talk to us directly','Vlad (co-founder) · '+esc(C.pm)+' (Director)',
-      '<div class="fdrs"><img src="/img/ava_vlad_t.jpg" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
-      '<div class="fdrs"><img src="/img/ava_vadim_t.jpg" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
+      '<div class="fdrs"><img src="/img/ava_vlad_t.webp" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+      '<div class="fdrs"><img src="/img/ava_vadim_t.webp" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
   '<footer>M5 · Interior Design &amp; Build · Miami</footer>'+
   '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
