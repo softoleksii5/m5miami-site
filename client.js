@@ -130,8 +130,10 @@ function hub(p){ if(DEMO) return; if(window.m5hook) m5hook(p); }
 
 var TSTYLE='<style>'+
 'html,body{overflow-x:hidden}'+
-'body{background:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
-'@media(max-width:680px){body{background-image:linear-gradient(rgba(250,246,238,.14),rgba(250,246,238,.46) 38%,rgba(250,246,238,.94) 60%,#FAF6EE 74%),url(/img/hub_bg_m.jpg);background-size:auto,220% auto}}'+
+/* Вуаль привязана к высоте самого фото (фото 100% ширины, пропорция 1.79 → высота ≈56vw),
+   иначе градиент растягивался на всю страницу и панорама просвечивала сквозь полосу фаз. */
+'body{background:linear-gradient(rgba(250,246,238,.05),rgba(250,246,238,.32) 26%,rgba(250,246,238,.84) 40%,#FAF6EE 50%) top center/100% 56vw no-repeat,url(/img/hub_bg.jpg) top center/100% auto no-repeat #FAF6EE}'+
+'@media(max-width:680px){body{background-image:linear-gradient(rgba(250,246,238,.05),rgba(250,246,238,.32) 26%,rgba(250,246,238,.84) 40%,#FAF6EE 50%),url(/img/hub_bg_m.jpg);background-size:100% 112vw,200% auto;background-position:top center,top center;background-repeat:no-repeat,no-repeat}}'+
 '.cph-h{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 6px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#96703B}'+
 '.cph-h b{color:#8A8272;font-weight:400}'+
 '.cph-now{font-size:14px;color:#5A5142;margin:-8px 0 20px;line-height:1.5}'+
