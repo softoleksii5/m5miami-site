@@ -13,7 +13,12 @@ var LINKS={
   jobtread:'https://app.jobtread.com/', // операционное ядро: лиды→сметы→производство
   whatsapp:'https://wa.me/17864074441', // бизнес-номер M5 (WhatsApp Business)
   permits:'https://www.miamidade.gov/permits/', // разрешения Miami-Dade
-  expenses:'https://docs.google.com/spreadsheets/d/1kn88ENlBpt1_hE9y5MIIncKgqjk_9iah6jhJFOBOM8c/edit', // живая таблица расходов (Drive → 04 Finance)
+  expenses:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=360903293', // живой журнал расходов (Hub · лист Expenses — сюда пишет бот)
+  expensesOld:'https://docs.google.com/spreadsheets/d/1kn88ENlBpt1_hE9y5MIIncKgqjk_9iah6jhJFOBOM8c/edit', // архив трат до запуска бота ($4,424 — уже в счётчике)
+  revenue:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=801839867', // журнал доходов (Hub · лист Revenue — бот «доход …»)
+  vendors:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=907822598', // реестр подрядчиков (Hub · Vendors — бот «подрядчик …»)
+  teamSheet:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=1800521970', // команда: контракты, ставки, выплачено (Hub · Team)
+  legalDocs:'https://drive.google.com/drive/folders/1t9n4s6oRSS63UWC2Fr38E5qadGmfH_Kg', // 06 Legal & Docs — документы компании
   receipts:'https://drive.google.com/drive/folders/1pxf-z-hO8cYtPl0TEZaMvAtJAtxc4CbZ',      // папка «Чеки — фото и PDF»
   content:'https://drive.google.com/drive/folders/1elQzb8bMN8BEIMtDpKBg-ySryidATYrc',      // 01 Content — весь контент
   contentInbox:'https://drive.google.com/drive/folders/1K_VG6jUzGPruqMQAUQcKm8QsISGvHlqQ', // 00 Входящее — свалка, Клод разбирает
@@ -279,6 +284,15 @@ function loadPulse(){
       var E=document.getElementById('plExp');
       if(E&&d.exp){ E.querySelector('b').textContent='$'+(Math.round(Number(d.exp)/100)/10)+'K'; E.querySelector('.pdelta').textContent='весь период · на '+(d.expUpd||''); }
       else if(E){ E.querySelector('b').textContent='→'; E.querySelector('.pdelta').textContent='открыть реестр'; }
+      /* Company · back office: живые доход/расход/итог/подрядчики */
+      try{
+        var cR=document.getElementById('coRev'),cE=document.getElementById('coExp'),cN=document.getElementById('coNet'),cV=document.getElementById('coVend');
+        var cRv=Number(d.rev||0), cEx=Number(d.exp||0);
+        if(cR){ cR.querySelector('b').textContent='$'+cRv.toLocaleString('en-US'); if(d.revUpd)cR.querySelector('.pdelta').textContent='обновлено '+d.revUpd; }
+        if(cE){ cE.querySelector('b').textContent='$'+cEx.toLocaleString('en-US'); if(d.expUpd)cE.querySelector('.pdelta').textContent='обновлено '+d.expUpd; }
+        if(cN){ var cNt=cRv-cEx; cN.querySelector('b').textContent=(cNt<0?'−$':'$')+Math.abs(cNt).toLocaleString('en-US'); }
+        if(cV){ cV.querySelector('b').textContent=String(Number(d.vend||0)); }
+      }catch(eCo){}
       var PP=document.getElementById('plPipe'), BB=document.getElementById('plBook'), jp=d.pipe;
       if(PP){ if(jp&&jp.total>0){ PP.querySelector('b').textContent=jp.total; PP.querySelector('.pdelta').textContent='Лиды '+jp.lead+' · Сметы '+jp.est+' · Работа '+jp.work; }
         else { PP.querySelector('b').textContent='0'; PP.querySelector('.pdelta').textContent='воронка пуста — всё впереди'; } }
@@ -344,6 +358,7 @@ document.getElementById('app').innerHTML=
   }).join('')+'</div></details>'):'')+
   '<div id="contSec"></div>'+
   '<div id="expSec"></div>'+
+  '<div id="companySec"></div>'+
   '<div id="hireSec"></div>'+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+
@@ -589,7 +604,7 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='01.08';
+var ALEXTODO_UPD='04.08';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
@@ -601,14 +616,15 @@ var ALEXTODO=[
  ['done','Клод получил полный доступ к Google Drive','OAuth под alex@m5miami.com (01.08). Теперь папки, файлы, доступы — сам: Visa и Partnership уже созданы.','m'],
  ['done','Показать команде кабинет клиента','Пост с демо-ссылкой и видео-туториалом ушёл в M5 Team → Pulse & Wins (31.07).','m'],
  ['done','US-номер есть: +1 786 407 4441 (WhatsApp Business)','Клод заменил номер на всём сайте и в кабинете клиента (31.07). Разблокированы: Google Business Profile, Meta-реклама — следующие шаги списка.'],
- ['todo','Meta Business: FB-страница + Instagram','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Регистрация на дубайский номер — ок.'],
- ['todo','Google Business Profile','business.google.com · категория Interior Design / Remodeling · service area Miami · телефон — уже US: +1 786 407 4441 (WhatsApp Business).'],
+ ['todo','Meta Business: FB-страница + Instagram + 2 строки Клоду','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Затем пришли Клоду 2 строки: Pixel ID (Events Manager) + строку доменной верификации — код пикселя уже вшит в сайт и ждёт ID. Чеклист: 4 Рабочие документы/Настройка_Meta_и_номер.md.'],
+ ['soon','Google Business Profile — по приезде в Майами','Реш. 04.08: видео-верификация GBP требует физического присутствия; из Дубая высокий риск бана профиля, который трудно снять. Заводим с адресом LLC / по прилёте в сентябре.'],
  ['todo','TikTok + YouTube — завести аккаунты','На alex@m5miami.com, по 2 минуты. Контент — кросспост тех же Reels.'],
  ['todo','Написать Клоду «аккаунты готовы»','Дальше я сам: контент-календарь на 4 недели + первые 10 сценариев рилсов (вкл. ролик-знакомство Влада) + My Stack.'],
  ['todo','JobTread: забронировать онбординг — 2 минуты, вкладка уже открыта','CEO JobTread ответил: время по почте не согласовывают, бронь только в приложении → app.jobtread.com/help/meet. Наш персональный менеджер — Пабло. Бери слот 10:00 Central = 19:00 Дубай = 11:00 у Вадима (холд на вторник в календаре стоит). На будущее: писать им на support@jobtread.com, а не info@ — там тикет и ответ за час.'],
  ['todo','JobTread: тур на 40 минут ДО звонка','Пройди демо-джоб «DEMO Turnkey Brickell 2BR» — гайд: M5/4 Рабочие документы/JobTread_первая_сессия.md. Главное — собрать тестовую смету и отправить её себе как клиенту. Каталог смет в аккаунте пока дефолтный от JobTread, наших услуг нет — это работа Вадима на звонке.'],
  ['todo','Влад в JobTread','Settings → Members → + Internal Users → Vlad / vlad@m5miami.com / Admin → тумблер +$20/мес → Submit.','m'],
  ['done','Тест-карточки в Telegram удалены','Клод вычистил 23 сообщения (тесты, demo-лиды, SLA-дубли) 31.07.','m'],
+ ['done','Пульт «Company · back office» в кабинете (04.08)','Документы · финконтроль (живые доход/расход/итог) · налоги-план · реестр подрядчиков · Team-реестр с контрактами. Бот понимает «доход 3000 депозит — объект» и «подрядчик Имя, специализация, тел, ставка». Заодно починен баг: бот писал «LITN» вместо переносов строк.','m'],
  ['todo','Прислать чек Higgsfield','Сумма $49 в реестре не подтверждена — глянь письмо Stripe, с какой почты платил.','m'],
  ['todo','LLC — подать на этой неделе (3–9 августа)','Florida LLC «M5 Studio Miami», Алекс 50% / Влад 50%, регистрация + EIN. Как подашь — скажи «LLC подана»: отмечу в плане E-2 и запущу триггеры (банк → QuickBooks по ROADMAP).','m'],
  ['soon','Реклама — только после 5–10 постов','Пустой профиль сжигает бюджет. План готов: Реклама_план_запуска_M5.md.']
@@ -900,12 +916,63 @@ function candStat(row,val,btn){
     h+='<div class="lsn"><b>1 · Потратил — сразу напиши боту.</b> Открой <b>@m5miami_bot</b> в Telegram и отправь одним сообщением: <b>«расход 40 шпаклёвка Home Depot»</b>. Можно голосовым. Сумма в долларах, что купил, где — этого достаточно.</div>';
     h+='<div class="lsn"><b>2 · Сфоткай чек и приложи.</b> Фото чека — следующим сообщением боту или сразу в папку <b>Чеки</b> (ссылка ниже). Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
     h+='<div class="lsn"><b>3 · Дальше не твоя забота.</b> Клод заносит трату в общую таблицу, раскладывает чек по папкам и обновляет цифру «Расходы» в пульте кабинета. Таблицу руками не заполняет никто.</div>';
-    h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Таблица расходов 2026</b><span>все траты компании: дата, что, категория, кто платил, сумма — открыть</span></a>';
+    h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Журнал расходов (живой)</b><span>сюда пишет бот: дата, кто, сумма, что, объект · траты до бота — в архивном реестре ($4,424 уже в счётчике)</span></a>';
     h+='<a class="stk" href="'+LINKS.receipts+'" target="_blank" rel="noopener"><b>🧾 Папка «Чеки»</b><span>Drive → 04 Finance → Чеки: фото и PDF всех чеков</span></a>';
     h+='<div class="lsn" style="color:#8A8272">Почему так: пока компания не зарегистрирована, все траты идут с личных карт — и если их не собрать, при регистрации LLC и подаче налогов мы просто потеряем эти деньги как расходы бизнеса. Одно сообщение боту в момент покупки решает вопрос.</div>';
     el.innerHTML=h+'</div></details>';
     var box=el.querySelector('details.stackbox');
     if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_exp_open',box.open?'1':'0');}catch(e){} });
+  }catch(e){}
+})();
+
+/* ═══ Company · back office — пульт владельца (просьба Алекса 04.08): документы,
+   финконтроль, налоги, подрядчики, команда — одной раскрывашкой, чтобы кабинет
+   не пух. Цифры сверху живые (loadPulse дописывает из M5 Hub). Данные живут в
+   Google Sheets/Drive, сюда — только двери + правила «как это попадает само». ═══ */
+(function(){
+  try{
+    if(role!=='founder'&&role!=='director')return;
+    var el=document.getElementById('companySec'); if(!el)return;
+    var op=false; try{op=localStorage.getItem('m5_co_open')==='1';}catch(e){}
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>🏢 Company · back office</span><span class="stk-hint">документы · деньги · налоги · подрядчики · команда</span></summary><div class="stack">';
+    h+='<div class="pulsegrid" style="margin-top:10px">'+
+      '<a class="ptile" id="coRev" href="'+LINKS.revenue+'" target="_blank" rel="noopener"><div class="pk">Доход</div><b>…</b><div class="pdelta">за всё время</div><small>бот: «доход 3000 депозит»</small></a>'+
+      '<a class="ptile" id="coExp" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><div class="pk">Расходы</div><b>…</b><div class="pdelta">за всё время</div><small>бот: «расход 40 …»</small></a>'+
+      '<a class="ptile" id="coNet" href="'+LINKS.revenue+'" target="_blank" rel="noopener"><div class="pk">Итог</div><b>…</b><div class="pdelta">доход − расход</div><small>до QuickBooks — оценка</small></a>'+
+      '<a class="ptile" id="coVend" href="'+LINKS.vendors+'" target="_blank" rel="noopener"><div class="pk">Подрядчики</div><b>…</b><div class="pdelta">в реестре</div><small>бот: «подрядчик …»</small></a>'+
+    '</div>';
+    h+='<details class="pl"><summary>📁 Документы компании — где что лежит</summary><div style="padding:4px 10px 8px 10px">'+
+      '<a class="stk" href="'+LINKS.legalDocs+'" target="_blank" rel="noopener"><b>06 Legal &amp; Docs — главный реестр</b><span>LLC (Articles · EIN · Operating Agreement), страховки, аренда, бизнес-план E-2 — всё сюда</span></a>'+
+      '<div class="lsn">Статусы: ⬜ LLC (подача 3–9 авг) · ⬜ EIN · ⬜ Operating Agreement · ⬜ GL-страховка. Как только событие случилось — скажи Клоду («LLC подана») — обновлю здесь и в плане E-2.</div>'+
+      '<div class="lsn">Договоры клиентов живут в папке объекта: <b>02 Projects → [объект] → 01 Contract</b>. Договор партнёров — блок «Alex + Vlad» ниже (видите только вы двое). Виза Вадима — в плане E-2.</div>'+
+      '<div class="lsn" style="color:#8A8272">Правило: любой новый документ компании → в 06 Legal &amp; Docs или боту с подписью «документ» — разложу и обновлю статусы.</div>'+
+    '</div></details>';
+    h+='<details class="pl"><summary>💰 Финконтроль — как деньги учитываются</summary><div style="padding:4px 10px 8px 10px">'+
+      '<div class="lsn"><b>Одно правило:</b> в момент, когда деньги пришли или ушли — одно сообщение боту: <b>«расход 40 шпаклёвка Home Depot»</b> · <b>«доход 3000 депозит — Brickell»</b>. Дальше само: строка в журнале → цифры выше → алерт партнёрам. Таблицы руками не заполняет никто.</div>'+
+      '<a class="stk" href="'+LINKS.revenue+'" target="_blank" rel="noopener"><b>📈 Журнал доходов</b><span>кто внёс · сумма · клиент · этап · объект</span></a>'+
+      '<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📉 Журнал расходов</b><span>живые траты от бота · чеки — в папке «Чеки» (блок Расходы выше)</span></a>'+
+      '<div class="lsn" style="color:#8A8272">Траты до запуска бота ($4,424) уже в счётчике — <a href="'+LINKS.expensesOld+'" target="_blank" rel="noopener" style="color:#96703B">архивный реестр</a>. После LLC + банка подключаем QuickBooks + синк с JobTread — это станет настоящим P&amp;L, журналы останутся историей до-LLC периода.</div>'+
+    '</div></details>';
+    h+='<details class="pl"><summary>🧾 Налоги — статус и план</summary><div style="padding:4px 10px 8px 10px">'+
+      '<div class="lsn"><b>Сейчас (до LLC):</b> налогов ещё нет — копим базу вычетов: каждый чек в Drive + каждая трата в журнале. Это уже происходит автоматически через бота.</div>'+
+      '<div class="lsn"><b>После LLC + EIN (сентябрь):</b> QuickBooks Online + онлайн-CPA (бухгалтер). CPA приглашается в QuickBooks как Accountant — видит книги напрямую, ничего пересылать не нужно; его цифры «к уплате / уплачено» появятся в этом блоке. ⬜ выбрать CPA — скажи «ищем CPA», подберу кандидатов.</div>'+
+      '<div class="lsn" style="color:#8A8272">Календарь Florida LLC: Annual Report — до 1 мая ($138.75) · федеральная декларация партнёрства (форма 1065) — до 15 марта · sales tax на ремонт real property во Флориде обычно не начисляется клиенту (подтвердит CPA — зависит от формы контракта).</div>'+
+    '</div></details>';
+    h+='<details class="pl"><summary>🧱 Подрядчики — реестр и правила</summary><div style="padding:4px 10px 8px 10px">'+
+      '<a class="stk" href="'+LINKS.vendors+'" target="_blank" rel="noopener"><b>Реестр подрядчиков</b><span>имя · специализация · контакт · ставки · условия · W-9 · рейтинг</span></a>'+
+      '<div class="lsn"><b>Добавить:</b> боту — <b>«подрядчик Хуан Перес, штукатурка, +1 305 555 0000, $25/sqft»</b>. Любой из вас троих. Всё через запятую, порядок: имя, специализация, контакт, ставка.</div>'+
+      '<div class="lsn" style="color:#8A8272">Правила денег: до первой оплаты берём у суба <b>форму W-9</b> (фото — боту); всем, кому заплатили ≥$600/год — в январе CPA делает 1099-NEC по этому реестру и чекам. Наряды и сметы субов — в JobTread на объекте; реестр — адресная книга и ценник.</div>'+
+    '</div></details>';
+    h+='<details class="pl"><summary>👥 Команда — контракты, ставки, выплаты</summary><div style="padding:4px 10px 8px 10px">'+
+      '<a class="stk" href="/org/"><b>Оргструктура и контакты</b><span>кто есть кто, роли, обязанности — страница Org</span></a>'+
+      '<a class="stk" href="'+LINKS.teamSheet+'" target="_blank" rel="noopener"><b>Team-реестр (приватный)</b><span>тип (W-2/фрилансер) · ставка · контракт с/по · ссылка на договор · выплачено всего</span></a>'+
+      '<div class="lsn"><b>Новый человек:</b> скажи Клоду «заведи в команду: имя, роль, ставка, тип» — строка в реестре + папка в 05 Team + доступы по чек-листу. Кандидаты с портала найма — блок Hiring выше.</div>'+
+      '<div class="lsn" style="color:#8A8272">Деньги и контракты — только в Team-реестре (на страницу Org не публикуем). KPI сотрудников включим с первым наймом — план Jin-KPI готов (Jin считает → человек утверждает).</div>'+
+    '</div></details>';
+    h+='<div class="lsn" style="color:#8A8272;margin-top:10px">Как пользоваться: раз в неделю открыл — цифры сверху живые; вопрос «сколько заработали / кому платим / где документ» — здесь или Джину наверху.</div>';
+    el.innerHTML=h+'</div></details>';
+    var box=el.querySelector('details.stackbox');
+    if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_co_open',box.open?'1':'0');}catch(e){} });
   }catch(e){}
 })();
 
