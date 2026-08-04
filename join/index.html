@@ -384,8 +384,9 @@ No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m
     var k=nearest(i); if(k<0)return;
     var im=imgs[k],iw=im.naturalWidth,ih=im.naturalHeight,s=Math.max(W/iw,H/ih);
     var ax=(touch&&W<760)?0.72:1; /* десктоп: держим правый край кадра — дракон дальше от текста */
+    var over=ih*s-H, top=Math.min(over,ih*s*0.10); /* срез сверху не глубже 10% кадра: рога с запасом неба, остальное режем снизу (парапет) */
     ctx.clearRect(0,0,W,H);
-    ctx.drawImage(im,(W-iw*s)*ax,H-ih*s,iw*s,ih*s);
+    ctx.drawImage(im,(W-iw*s)*ax,-top,iw*s,ih*s);
     shown=k;
   }
   function setTarget(nx){nx=Math.max(0,Math.min(1,nx));
