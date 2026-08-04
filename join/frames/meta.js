@@ -1,1 +1,1 @@
-window.__JCOUNT=102;window.__JCENTER=67;
+window.__JSETS={d:{p:"frames/f",n:102,c:67},m:{p:"frames-m/m",n:51,c:34}};
