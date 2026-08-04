@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>M5 · Система уже работает — созвон 10 августа</title>
+<style>
+@font-face{font-family:'Geist';src:local('Geist');font-weight:400 900}
+:root{--bone:#F7F2E9;--bone2:#F0E8D8;--ink:#20242E;--ink2:#2C3140;--soft:#6A6F7B;
+--gold:#B0894F;--gold-d:#8F6E3C;--gold-l:#D9B87C;--line:#E2D9C6;
+--sans:'Geist',-apple-system,'Inter','Manrope',sans-serif;
+--mono:'Geist Mono','Space Mono',ui-monospace,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--ink);font-family:var(--sans);color:var(--ink)}
+.deck{position:fixed;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;background:var(--bone);overflow:hidden}
+.slide.on{display:block}
+.pad{position:absolute;inset:0;padding:64px 84px;display:flex;flex-direction:column}
+.k{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-d)}
+h1{font-size:clamp(44px,5.6vw,86px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(34px,3.6vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.ghost{color:transparent;-webkit-text-stroke:1.6px rgba(32,36,46,.55)}
+.sub{font-size:clamp(15px,1.25vw,19px);color:var(--soft);line-height:1.55}
+a.go{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#F4EEE4;border-radius:12px;
+padding:12px 22px;font-size:15px;font-weight:700;text-decoration:none;transition:.2s}
+a.go:hover{background:var(--ink2)}
+a.go.alt{background:transparent;color:var(--ink);border:1px solid #CDBF9F}
+a.go.alt:hover{background:var(--bone2)}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;color:var(--ink)}
+.chip b{color:var(--gold-d)}
+.shot{border-radius:14px;border:1px solid var(--line);box-shadow:0 24px 70px -28px rgba(32,36,46,.45);overflow:hidden;background:#fff}
+.shot .bar{height:30px;background:#ECE4D2;display:flex;align-items:center;gap:6px;padding:0 12px}
+.shot .bar i{width:9px;height:9px;border-radius:50%;background:#D7CBB0}
+.shot .bar span{font-family:var(--mono);font-size:10.5px;color:var(--soft);margin-left:8px;letter-spacing:.06em}
+.shot img{width:100%;display:block}
+/* ---------- навигация ---------- */
+.hud{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;
+padding:14px 26px;z-index:50;pointer-events:none;font-family:var(--mono)}
+.hud .dots{display:flex;gap:7px;pointer-events:auto}
+.hud .dots i{width:8px;height:8px;border-radius:50%;background:rgba(128,124,110,.4);cursor:pointer;transition:.2s}
+.hud .dots i.on{background:var(--gold);transform:scale(1.25)}
+.hud .num,.hud .hint{font-size:11px;letter-spacing:.18em;color:rgba(128,124,110,.75);text-transform:uppercase}
+.slide.dark .hud-sib{color:#fff}
+/* ---------- S1 титул ---------- */
+#s1{background:var(--bone)}
+#s1 .drag{position:absolute;right:-4%;bottom:0;height:96%;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(143,110,60,.35))}
+#s1 .veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--bone) 34%,rgba(247,242,233,.55) 55%,rgba(247,242,233,0) 75%)}
+#s1 .pad{justify-content:center;position:relative;z-index:2}
+#s1 .date{margin-top:34px;display:flex;gap:14px;align-items:center}
+/* ---------- S2 круговорот ---------- */
+#s2 .pad{align-items:center}
+.loopwrap{flex:1;width:100%;display:flex;align-items:center;justify-content:center;position:relative;margin-top:6px}
+.loop{position:relative;width:min(66vh,760px);height:min(66vh,760px)}
+.loop .ring{position:absolute;inset:7%;border:2px dashed #CDBF9F;border-radius:50%;animation:spin 80s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:27%;aspect-ratio:1;border-radius:50%;
+background:#fff;border:2px solid var(--gold);box-shadow:0 18px 50px -18px rgba(143,110,60,.45);z-index:3;overflow:hidden}
+.core img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:74% 30%}
+.core .tag{position:absolute;left:0;right:0;bottom:0;padding:26px 0 12px;text-align:center;
+background:linear-gradient(180deg,rgba(247,242,233,0),rgba(247,242,233,.96) 58%)}
+.core .tag b{font-size:16px;letter-spacing:.02em;display:block}
+.core .tag span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--gold-d);text-transform:uppercase}
+.node{position:absolute;width:172px;margin:-52px 0 0 -86px;background:#fff;border:1px solid var(--line);border-radius:16px;
+padding:12px 14px;text-align:center;box-shadow:0 12px 34px -16px rgba(32,36,46,.28);z-index:2}
+.node .em{font-size:24px;line-height:1}
+.node b{display:block;font-size:14.5px;margin-top:5px;letter-spacing:-.01em}
+.node span{display:block;font-family:var(--mono);font-size:9.5px;color:var(--soft);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.node.hot{border-color:var(--gold);box-shadow:0 12px 38px -14px rgba(176,137,79,.55)}
+.loop svg.arr{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible}
+.loop svg.arr path{fill:none;stroke:var(--gold);stroke-width:.55;marker-end:url(#ah);opacity:.9}
+.mantra{font-size:17px;font-weight:700;color:var(--ink);background:var(--bone2);border:1px solid var(--line);
+border-radius:999px;padding:12px 26px}
+.mantra b{color:var(--gold-d)}
+/* ---------- S3–S6 сплиты ---------- */
+.split{display:flex;gap:56px;flex:1;min-height:0;align-items:center}
+.split .txt{width:38%;display:flex;flex-direction:column;gap:22px}
+.split .vis{flex:1;min-width:0;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.list{display:flex;flex-direction:column;gap:12px}
+.list .row{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;line-height:1.45}
+.list .row i{font-style:normal;flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--bone2);
+border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px}
+.list .row b{font-weight:700}
+.fact{background:#fff;border:1px solid var(--gold-l);border-radius:14px;padding:14px 18px;font-size:15.5px;line-height:1.45}
+.fact b{color:var(--gold-d)}
+/* S4 цепочка лида */
+.chain{display:flex;align-items:stretch;gap:0;flex:1;min-height:0;align-items:center}
+.step{flex:1;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;
+flex-direction:column;gap:10px;box-shadow:0 16px 44px -22px rgba(32,36,46,.3)}
+.step .em{font-size:30px}
+.step b{font-size:18px;letter-spacing:-.01em}
+.step p{font-size:14px;color:var(--soft);line-height:1.5}
+.step.tg{border-color:#9AC1E5;background:linear-gradient(180deg,#FDFEFF,#F1F7FD)}
+.arrow{width:56px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:26px;font-weight:700}
+.tgcard{background:#fff;border:1px solid #D8E6F2;border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.55;
+font-family:var(--mono);color:#26313D;box-shadow:inset 0 0 0 1px rgba(154,193,229,.25)}
+.tgcard b{color:#0F70B7}
+/* S7 roadmap */
+.cols{display:flex;gap:26px;flex:1;min-height:0;align-items:stretch;margin-top:28px;max-height:480px}
+.col{flex:1;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:16px}
+.col.hot{border-color:var(--gold);box-shadow:0 22px 60px -26px rgba(176,137,79,.5)}
+.col .when{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d)}
+.col h3{font-size:24px;letter-spacing:-.02em}
+.col .list .row{font-size:15.5px}
+/* S8 финал */
+#s8{background:var(--ink);color:#F4EEE4}
+#s8 .k{color:var(--gold-l)}
+#s8 .ghost{-webkit-text-stroke-color:rgba(244,238,228,.5)}
+.crew{display:flex;gap:22px;margin-top:12px}
+.card{flex:1;background:#2A2F3B;border:1px solid #3A4150;border-radius:20px;padding:24px;text-align:center;display:flex;
+flex-direction:column;align-items:center;gap:10px}
+.card img{width:86px;height:86px;border-radius:22px;object-fit:cover}
+.card.jin{background:linear-gradient(180deg,#332C1E,#2A2F3B);border-color:var(--gold-d)}
+.card.jin img{object-fit:cover;object-position:72% 26%}
+.card b{font-size:19px}
+.card span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-l)}
+.card p{font-size:13.5px;color:#AEB4C0;line-height:1.5}
+@media (max-width:900px){.pad{padding:34px 26px}.split{flex-direction:column;gap:20px}.split .txt{width:100%}.cols,.crew,.chain{flex-direction:column}.arrow{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+
+<section class="slide on" id="s1">
+  <img class="drag" src="img/jin_dragon.webp" alt="">
+  <div class="veil"></div>
+  <div class="pad">
+    <div class="k">M5 · Interior Design &amp; Build · Miami</div>
+    <h1 style="margin-top:18px">Система<br>уже <span style="color:var(--gold-d)">работает.</span></h1>
+    <p class="sub" style="max-width:460px;margin-top:22px">Сайт ловит клиентов, Jin разносит данные,<br>команда видит всё в своих кабинетах.<br><b style="color:var(--ink)">Сегодня — экскурсия по живому.</b></p>
+    <div class="date">
+      <a class="go" href="https://m5miami.com/" target="_blank">m5miami.com ↗</a>
+      <span class="k">созвон · понедельник · 10 августа 2026</span>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s2">
+  <div class="pad">
+    <div style="text-align:center">
+      <div class="k">Как это устроено</div>
+      <h2 style="margin-top:10px">Круговорот <span class="ghost">M5</span></h2>
+    </div>
+    <div class="loopwrap">
+      <div class="loop" id="loop">
+        <svg class="arr" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs><marker id="ah" markerWidth="3.4" markerHeight="3.4" refX="2.4" refY="1.7" orient="auto">
+            <path d="M0,0 L3.4,1.7 L0,3.4 Z" fill="#B0894F"/></marker></defs>
+        </svg>
+        <div class="ring"></div>
+        <div class="core">
+          <img src="img/jin_dragon.webp" alt="Jin">
+          <div class="tag"><b>Jin</b><span>AI · 24/7</span></div>
+        </div>
+        <div class="node" data-a="270"><div class="em">📣</div><b>Соцсети + реклама</b><span>IG · TikTok · Meta</span></div>
+        <div class="node hot" data-a="330"><div class="em">🌐</div><b>m5miami.com</b><span>квиз · гайд · формы</span></div>
+        <div class="node" data-a="30"><div class="em">🔔</div><b>Лид падает сам</b><span>Telegram + JobTread</span></div>
+        <div class="node" data-a="90"><div class="em">👷</div><b>Команда</b><span>кабинеты по ролям</span></div>
+        <div class="node" data-a="150"><div class="em">🏠</div><b>Объект</b><span>проект · стройка</span></div>
+        <div class="node" data-a="210"><div class="em">📸</div><b>Контент</b><span>фото боту → Drive</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;padding-bottom:6px">
+      <span class="mantra">Данные вводятся <b>один раз</b> — дальше система разносит их сама</span>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s3">
+  <div class="pad">
+    <div class="split">
+      <div class="txt">
+        <div>
+          <div class="k">Витрина · уже в бою</div>
+          <h2 style="margin-top:10px">Сайт продаёт<br><span class="ghost">круглосуточно</span></h2>
+        </div>
+        <div class="list">
+          <div class="row"><i>🌎</i><div><b>3 языка</b> — EN · ES · UK</div></div>
+          <div class="row"><i>🧮</i><div><b>Квиз-калькулятор</b> — клиент сам считает бюджет и оставляет контакт</div></div>
+          <div class="row"><i>📗</i><div><b>PDF-гайд по ценам</b> — ловит тех, кто «просто смотрит»</div></div>
+          <div class="row"><i>📊</i><div><b>Аналитика</b> — GA4 · Clarity · Meta Pixel готов к рекламе</div></div>
+        </div>
+        <div><a class="go" href="https://m5miami.com/" target="_blank">Открыть сайт ↗</a>
+        <a class="go alt" href="https://m5miami.com/guide/" target="_blank">Гайд ↗</a></div>
+      </div>
+      <div class="vis">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><span>m5miami.com</span></div>
+        <img src="img/live_home.webp" alt="Сайт M5"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s4">
+  <div class="pad">
+    <div>
+      <div class="k">Ноль ручной работы</div>
+      <h2 style="margin-top:10px">Заявка находит нас <span class="ghost">сама</span></h2>
+    </div>
+    <div class="chain">
+      <div class="step"><div class="em">✍️</div><b>Клиент на сайте</b>
+        <p>Любая из форм: квиз, гайд, консультация, страница проекта.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="em">⚡</div><b>Jin · M5 Hub</b>
+        <p>Проверяет (спам — в мусор), записывает в таблицу, размечает источник.</p></div>
+      <div class="arrow">→</div>
+      <div class="step tg"><div class="em">🔔</div><b>Telegram · «🔥 Лиды»</b>
+        <div class="tgcard"><b>🔥 New lead · Quiz $48–61K</b><br>Maria G. · Brickell · reno 2BR<br>☎ +1 305 ··· ·· 47 · EN<br><b>SLA:</b> перезвонить ≤ 15 мин</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="em">🧱</div><b>JobTread</b>
+        <p>Лид уже в CRM: карточка, статус, дальше — смета и производство.</p></div>
+    </div>
+    <div class="fact" style="align-self:flex-start">⏱ Если на лид не ответили — Jin <b>напоминает сам</b>, пока заявку не возьмут в работу.</div>
+  </div>
+</section>
+
+
+<section class="slide" id="s5">
+  <div class="pad">
+    <div class="split">
+      <div class="txt">
+        <div>
+          <div class="k">m5miami.com → Team</div>
+          <h2 style="margin-top:10px">У каждого —<br>свой <span style="color:var(--gold-d)">кабинет</span></h2>
+        </div>
+        <div class="list">
+          <div class="row"><i>🚪</i><div><b>Роли:</b> фаундеры · директор · sales · SMM · PM · дизайнер</div></div>
+          <div class="row"><i>✨</i><div><b>Jin внутри</b> — отвечает на вопросы роли, ведёт за руку с первого дня</div></div>
+          <div class="row"><i>💬</i><div><b>Jin в Telegram:</b> «расход 40 шпаклёвка» · «доход 3000 депозит» · фото объекта → само в Drive</div></div>
+          <div class="row"><i>🏢</i><div><b>Пульт владельца:</b> доход · расходы · подрядчики · документы</div></div>
+        </div>
+        <div class="fact">✅ <b>Вадим уже подключён к Jin</b> — с этой недели расходы и фото объектов летят в систему из чата.</div>
+        <div><a class="go" href="https://m5miami.com/championdirector/" target="_blank">Кабинет директора ↗</a>
+        <a class="go alt" href="https://m5miami.com/client/?p=brickell-demo" target="_blank">Кабинет клиента ↗</a></div>
+      </div>
+      <div class="vis">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><span>m5miami.com/championsmm · PRIVATE</span></div>
+        <img src="img/live_cabsmm.webp" alt="Кабинет SMM"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s6">
+  <div class="pad">
+    <div class="split">
+      <div class="vis">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><span>m5miami.com/join</span></div>
+        <img src="img/live_join.webp" alt="Портал найма"></div>
+      </div>
+      <div class="txt">
+        <div>
+          <div class="k">Найм · сентябрь</div>
+          <h2 style="margin-top:10px">Портал найма<br>с <span style="color:var(--gold-d)">характером</span></h2>
+        </div>
+        <div class="list">
+          <div class="row"><i>🐉</i><div><b>Дракон следит за курсором</b> — кандидат запоминает нас с первой секунды</div></div>
+          <div class="row"><i>🎬</i><div><b>Вакансии:</b> SMM Creator · Video Editor — под контент-конвейер</div></div>
+          <div class="row"><i>📥</i><div><b>Заявки</b> падают в тот же Telegram + список кандидатов в кабинете</div></div>
+        </div>
+        <div><a class="go" href="https://m5miami.com/join/" target="_blank">Открыть /join ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s7">
+  <div class="pad">
+    <div>
+      <div class="k">План · ближайшие 90 дней</div>
+      <h2 style="margin-top:10px">Что включаем <span class="ghost">дальше</span></h2>
+    </div>
+    <div class="cols">
+      <div class="col hot">
+        <div class="when">Август</div><h3>Топливо</h3>
+        <div class="list">
+          <div class="row"><i>📸</i><div><b>Реальные работы на сайт</b> — фото штукатурки и объектов → Drive</div></div>
+          <div class="row"><i>📣</i><div><b>Meta-реклама</b> — пиксель уже вшит, включаем кампании</div></div>
+          <div class="row"><i>☎️</i><div><b>US-номер</b> на сайт</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="when">Сентябрь</div><h3>Майами</h3>
+        <div class="list">
+          <div class="row"><i>🛬</i><div><b>Приезд команды</b> — работаем на месте</div></div>
+          <div class="row"><i>🎬</i><div><b>Найм SMM</b> через /join — контент с объектов каждую неделю</div></div>
+          <div class="row"><i>🏛</i><div><b>Шоу-рум:</b> ищем помещение под штукатурку</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="when">Октябрь → 10 ноября</div><h3>Разгон</h3>
+        <div class="list">
+          <div class="row"><i>🧱</i><div><b>JobTread глубже</b> — сметы, производство, статусы для клиента</div></div>
+          <div class="row"><i>🤝</i><div><b>Кабинеты клиентов в бою</b> — каждый проект со своей ссылкой</div></div>
+          <div class="row"><i>🚀</i><div><b>Спринт до 10 ноября</b> — первые проекты в системе от лида до сдачи</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slide" id="s8">
+  <div class="pad" style="justify-content:center;gap:30px">
+    <div style="text-align:center">
+      <div class="k">M5 · 2026</div>
+      <h2 style="margin-top:10px">Трое людей и один <span class="ghost">дракон</span></h2>
+    </div>
+    <div class="crew">
+      <div class="card"><img src="img/ava_alex_t.webp" alt="Alex"><b>Алекс</b><span>Systems &amp; Strategy</span>
+        <p>Собрал всё это с AI.<br>Сон — по остаточному принципу 😴</p></div>
+      <div class="card"><img src="img/ava_vlad_t.webp" alt="Vlad"><b>Влад</b><span>Brand &amp; Growth</span>
+        <p>Камера его любит —<br>и клиенты тоже 😎</p></div>
+      <div class="card"><img src="img/ava_vadim_t.webp" alt="Vadim"><b>Вадим</b><span>Director · Production</span>
+        <p>Единственный, кто правильно<br>держит шпатель 👷</p></div>
+      <div class="card jin"><img src="img/jin_dragon.webp" alt="Jin"><b>Jin</b><span>AI Teammate · 24/7</span>
+        <p>Без зарплаты, отпуска и кофе.<br>Уже знает Вадима в лицо ⚡</p></div>
+    </div>
+    <div style="text-align:center"><a class="go" style="background:var(--gold);color:#20242E" href="https://m5miami.com/" target="_blank">Вопросы → сразу смотрим живьём ↗</a></div>
+  </div>
+</section>
+
+
+<div class="hud">
+  <span class="num" id="num">01 / 08</span>
+  <div class="dots" id="dots"></div>
+  <span class="hint">← → · листать · F — весь экран</span>
+</div>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),i=0;
+  var dots=document.getElementById('dots'),num=document.getElementById('num');
+  slides.forEach(function(_,k){var d=document.createElement('i');d.onclick=function(){go(k)};dots.appendChild(d)});
+  function go(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle('on',k===i)});
+    [].slice.call(dots.children).forEach(function(d,k){d.classList.toggle('on',k===i)});
+    num.textContent=('0'+(i+1)).slice(-2)+' / 0'+slides.length;
+    if(i===1)layoutLoop();
+  }
+  addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')go(i+1);
+    else if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);
+    else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+  });
+  document.getElementById('deck').addEventListener('click',function(e){
+    if(e.target.closest('a')||e.target.closest('.dots'))return;
+    (e.clientX>innerWidth*0.5)?go(i+1):go(i-1);
+  });
+  /* раскладка узлов круговорота по окружности + стрелки между ними */
+  function layoutLoop(){
+    var loop=document.getElementById('loop');if(!loop)return;
+    var R=loop.clientWidth/2,cx=R,cy=R,r=R*0.93;
+    var nodes=[].slice.call(loop.querySelectorAll('.node'));
+    nodes.forEach(function(n){
+      var a=(+n.dataset.a-90)*Math.PI/180;
+      n.style.left=(cx+r*Math.cos(a))+'px';
+      n.style.top=(cy+r*Math.sin(a))+'px';
+    });
+    var svg=loop.querySelector('svg.arr');
+    [].slice.call(svg.querySelectorAll('path:not([d^="M0,0"])')).forEach(function(p){p.remove()});
+    var rr=39.5; /* радиус дуг стрелок в координатах viewBox */
+    for(var k=0;k<nodes.length;k++){
+      var a1=(+nodes[k].dataset.a-90+16)*Math.PI/180;
+      var a2=(+nodes[(k+1)%nodes.length].dataset.a-90-16)*Math.PI/180;
+      var x1=50+rr*Math.cos(a1),y1=50+rr*Math.sin(a1);
+      var x2=50+rr*Math.cos(a2),y2=50+rr*Math.sin(a2);
+      var p=document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d','M'+x1+','+y1+' A'+rr+','+rr+' 0 0 1 '+x2+','+y2);
+      svg.appendChild(p);
+    }
+  }
+  addEventListener('resize',layoutLoop);
+  var q=new URLSearchParams(location.search).get('s'); if(q)go(+q-1);
+})();
+</script>
+</body>
+</html>

@@ -34,6 +34,10 @@ header{position:sticky;top:0;background:rgba(247,242,233,.92);backdrop-filter:bl
 .logo small{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--soft);margin-left:8px}
 .h-cta{background:var(--ink);color:#F4EEE4;border-radius:11px;padding:10px 18px;font-size:13.5px;font-weight:700;text-decoration:none}
 .h-cta:hover{background:#2C3140}
+.jlang{display:flex;gap:3px}
+.jlang button{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;background:none;border:1px solid transparent;border-radius:8px;padding:6px 8px;cursor:pointer;color:var(--soft)}
+.jlang button.on{border-color:#D8CDB6;color:var(--ink);background:#F0E8D8}
+@media(max-width:480px){.jlang button{padding:6px 5px}}
 /* hero — интерактив: дракон следит за курсором (кадры на canvas) */
 .jhero{position:relative;overflow:hidden;min-height:calc(100vh - 62px);display:flex;align-items:center}
 .jcv{position:absolute;inset:0}
@@ -180,7 +184,12 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 <body>
 <header><div class="wrap hbar">
 <a class="logo" href="/">M<b>5</b><small>MIAMI</small></a>
-<a class="h-cta" href="#apply">Apply →</a>
+<div style="display:flex;align-items:center;gap:14px">
+<div class="jlang" role="group" aria-label="Language">
+<button type="button" data-l="en" onclick="jSetLang('en')">EN</button><button type="button" data-l="es" onclick="jSetLang('es')">ES</button><button type="button" data-l="uk" onclick="jSetLang('uk')">UK</button><button type="button" data-l="ru" onclick="jSetLang('ru')">RU</button>
+</div>
+<a class="h-cta" href="#apply" data-i="cta">Apply →</a>
+</div>
 </div></header>
 
 <div class="jhero">
@@ -188,14 +197,14 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 <div class="jshade" aria-hidden="true"></div>
 <div class="jbar" id="jbar" aria-hidden="true"></div>
 <div class="wrap jcopy">
-<div class="k jrise">Hiring · Miami + Remote</div>
-<h1 class="jrise d2">Talent never<span class="ghost">goes unnoticed.</span></h1>
-<p class="jsub jrise d3">Creative, sharp-eyed and in love with making things? <b>M5</b> — Miami's AI-operated design &amp; build studio — is hiring to build our feed from post #1. If that sounds like you, we can't wait to work together.</p>
+<div class="k jrise" data-i="hk">Hiring · Miami + Remote</div>
+<h1 class="jrise d2"><span data-i="h1a">Talent never</span><span class="ghost" data-i="h1b">goes unnoticed.</span></h1>
+<p class="jsub jrise d3" data-i="sub">Creative, sharp-eyed and in love with making things? <b>M5</b> — Miami's AI-operated design &amp; build studio — is hiring to build our feed from post #1. If that sounds like you, we can't wait to work together.</p>
 <div class="rolechips jrise d4">
-<a class="rolechip" href="#roles"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>SMM Creator</a>
-<a class="rolechip alt" href="#roles"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg>Video Editor</a>
+<a class="rolechip" href="#roles"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span data-i="rc1">SMM Creator</span></a>
+<a class="rolechip alt" href="#roles"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg><span data-i="rc2">Video Editor</span></a>
 </div>
-<div class="jhint jrise d4"><i></i>Move your cursor — he's watching</div>
+<div class="jhint jrise d4"><i></i><span data-i="hint">Move your cursor — he's watching</span></div>
 </div>
 </div>
 
@@ -203,144 +212,140 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 <img class="pbg" src="img/miami_pano.webp" alt="" decoding="async">
 <div class="pveil" aria-hidden="true"></div>
 <div class="wrap pin">
-<div class="k">The company</div>
+<div class="k" data-i="pk">The company</div>
 <h2>M5 Miami — Design &amp; Build.</h2>
-<p class="plead">A renovation &amp; interior studio crafting <b>luxury homes</b> in the USA — run day-to-day with AI.
-We're here to make the world a little more beautiful, one home at a time.</p>
+<p class="plead" data-i="plead">A renovation &amp; interior studio crafting <b>luxury homes</b> in the USA — run day-to-day with AI. We're here to make the world a little more beautiful, one home at a time.</p>
 <div class="chiprow">
-<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg>Luxury renovations</span>
-<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M18.5 15l.9 2.3 2.1.9-2.1.9-.9 2.3-.9-2.3-2.1-.9 2.1-.9z"/></svg>AI-operated</span>
-<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-9C.8 8.6 2.4 5 5.7 5c2 0 3.3 1 4.3 2.5C11 6 12.3 5 14.3 5c3.3 0 4.9 3.6 3.2 7-2.5 4.4-5.5 9-5.5 9z"/></svg>Style-obsessed</span>
+<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg><span data-i="pc1">Luxury renovations</span></span>
+<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M18.5 15l.9 2.3 2.1.9-2.1.9-.9 2.3-.9-2.3-2.1-.9 2.1-.9z"/></svg><span data-i="pc2">AI-operated</span></span>
+<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-9C.8 8.6 2.4 5 5.7 5c2 0 3.3 1 4.3 2.5C11 6 12.3 5 14.3 5c3.3 0 4.9 3.6 3.2 7-2.5 4.4-5.5 9-5.5 9z"/></svg><span data-i="pc3">Style-obsessed</span></span>
 </div>
 </div></div>
 
 <div class="sec" id="roles"><div class="wrap">
-<div class="k">Open roles</div>
-<h2>Two ways in.</h2>
+<div class="k" data-i="rk">Open roles</div>
+<h2 data-i="rh2">Two ways in.</h2>
 <div class="roles">
 <a class="role" href="#apply">
-<h3><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>SMM Creator</h3>
-<p>Own Instagram, TikTok &amp; YouTube from post #1. Shoot on real job sites and put the <b>whole team in frame</b> — founders, artisans, lives.</p>
-<div class="pay"><b>Official employment</b> · fixed base up to <b>$3,000/mo</b> · earnings <b>unlimited</b> — they follow your results</div>
-<div class="pillrow"><span>Miami</span><span>English</span><span>AI tools daily</span></div>
-<span class="go">Apply →</span>
+<h3><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span data-i="r1n">SMM Creator</span></h3>
+<p data-i="r1p">Own Instagram, TikTok &amp; YouTube from post #1. Shoot on real job sites and put the <b>whole team in frame</b> — founders, artisans, lives.</p>
+<div class="pay" data-i="r1pay"><b>Official employment</b> · fixed base up to <b>$3,000/mo</b> · earnings <b>unlimited</b> — they follow your results</div>
+<div class="pillrow"><span data-i="r1l1">Miami</span><span data-i="r1l2">English</span><span data-i="r1l3">AI tools daily</span></div>
+<span class="go" data-i="go1">Apply →</span>
 </a>
 <a class="role" href="#apply">
-<h3><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg>Video Editor</h3>
-<p>Turn raw job-site footage into reels that stop the scroll. Clean cuts, text, sound, magazine-grade color.</p>
-<div class="pay"><b>Paid per reel</b> · you name your rate</div>
-<div class="pillrow"><span>Remote OK</span><span>Any editor</span><span>No watermarks</span></div>
-<span class="go">Apply →</span>
+<h3><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg><span data-i="r2n">Video Editor</span></h3>
+<p data-i="r2p">Turn raw job-site footage into reels that stop the scroll. Clean cuts, text, sound, magazine-grade color.</p>
+<div class="pay" data-i="r2pay"><b>Paid per reel</b> · you name your rate</div>
+<div class="pillrow"><span data-i="r2l1">Remote OK</span><span data-i="r2l2">Any editor</span><span data-i="r2l3">No watermarks</span></div>
+<span class="go" data-i="go2">Apply →</span>
 </a>
 </div>
-<div class="other">Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> — we keep a talent pool.</div>
+<div class="other" data-i="other">Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> — we keep a talent pool.</div>
 </div></div>
 
 <div class="sec" id="taste"><div class="wrap">
-<div class="k">Taste check</div>
-<h2>Feeds we love.</h2>
-<p class="lead">This is the bar. Real accounts, real numbers — open them, feel the rhythm.</p>
+<div class="k" data-i="tk">Taste check</div>
+<h2 data-i="th2">Feeds we love.</h2>
+<p class="lead" data-i="tlead">This is the bar. Real accounts, real numbers — open them, feel the rhythm.</p>
 <div class="feedgrid">
 <a class="feedcard" href="https://www.instagram.com/ryanserhant/" target="_blank" rel="noopener">
 <img src="img/feeds/ig_serhant.webp" alt="Instagram grid of @ryanserhant" loading="lazy" decoding="async">
-<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@ryanserhant</b><span>Netflix's «Owning Manhattan» · personality sells</span></div><i class="fnum">3.3M</i></div>
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@ryanserhant</b><span data-i="f1">Netflix's «Owning Manhattan» · personality sells</span></div><i class="fnum">3.3M</i></div>
 </a>
 <a class="feedcard" href="https://www.instagram.com/studiomcgee/" target="_blank" rel="noopener">
 <img src="img/feeds/ig_mcgee.webp" alt="Instagram grid of @studiomcgee" loading="lazy" decoding="async">
-<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@studiomcgee</b><span>a grid that reads like a magazine</span></div><i class="fnum">4M</i></div>
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@studiomcgee</b><span data-i="f2">a grid that reads like a magazine</span></div><i class="fnum">4M</i></div>
 </a>
 <a class="feedcard" href="https://www.instagram.com/kellywearstler/" target="_blank" rel="noopener">
 <img src="img/feeds/ig_wearstler.webp" alt="Instagram grid of @kellywearstler" loading="lazy" decoding="async">
-<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@kellywearstler</b><span>art direction, texture, nerve</span></div><i class="fnum">2.3M</i></div>
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@kellywearstler</b><span data-i="f3">art direction, texture, nerve</span></div><i class="fnum">2.3M</i></div>
 </a>
 <a class="feedcard" href="https://www.instagram.com/threebirdsrenovations/" target="_blank" rel="noopener">
 <img src="img/feeds/ig_threebirds.webp" alt="Instagram grid of @threebirdsrenovations" loading="lazy" decoding="async">
-<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@threebirdsrenovations</b><span>every house = a season</span></div><i class="fnum">1M</i></div>
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@threebirdsrenovations</b><span data-i="f4">every house = a season</span></div><i class="fnum">1M</i></div>
 </a>
 <a class="feedcard" href="https://www.youtube.com/@EnesYilmazer" target="_blank" rel="noopener">
 <img src="img/feeds/yt_enes.webp" alt="YouTube channel of Enes Yilmazer" loading="lazy" decoding="async">
-<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><div><b>Enes Yilmazer</b><span>luxury home tours that hook millions</span></div><i class="fnum">4.2M</i></div>
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><div><b>Enes Yilmazer</b><span data-i="f5">luxury home tours that hook millions</span></div><i class="fnum">4.2M</i></div>
 </a>
 <a class="feedcard" href="https://www.youtube.com/@RyanSerhant" target="_blank" rel="noopener">
 <img src="img/feeds/yt_serhant.webp" alt="YouTube channel of Ryan Serhant" loading="lazy" decoding="async">
-<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><div><b>Ryan Serhant · YouTube</b><span>serialized shows, not clips</span></div><i class="fnum">1.5M</i></div>
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><div><b>Ryan Serhant · YouTube</b><span data-i="f6">serialized shows, not clips</span></div><i class="fnum">1.5M</i></div>
 </a>
 </div>
-<div class="fnote">Screenshots © their authors · not affiliated — just feeds we admire</div>
+<div class="fnote" data-i="fnote">Screenshots © their authors · not affiliated — just feeds we admire</div>
 </div></div>
 
 <div class="sec"><div class="wrap">
-<div class="k">The playbook</div>
-<h2>What you'll create.</h2>
+<div class="k" data-i="plk">The playbook</div>
+<h2 data-i="plh2">What you'll create.</h2>
 <div class="pillars">
-<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><b>Stories — daily</b><span>Job sites live: plaster, kitchens, process. Highlights — one per project.</span></div>
-<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4l2.5 5M14 4l2.5 5"/></svg><b>Reels + TikTok — before / after</b><span>Hook in 2 seconds. Same angle, frame for frame. Instagram and TikTok in parallel.</span>
-<div class="baymini"><figure><img src="img/ba_before_thumb.webp" alt="Wall before renovation" loading="lazy" decoding="async"><figcaption>BEFORE</figcaption></figure><figure><img src="img/ba_after_thumb.webp" alt="Same wall after M5 plaster" loading="lazy" decoding="async"><figcaption>AFTER</figcaption></figure></div></div>
-<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><b>YouTube — sagas</b><span>Shorts + every project from zero to done, episode by episode.</span></div>
-<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 14.6c2.6-.4 4.6 1 5 3.9"/></svg><b>Team in frame</b><span>Lives with founders &amp; artisans. Different faces, every week — we love it.</span></div>
-<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.9.7-1.5 1.2-1.5 2.1h-4c0-.9-.6-1.4-1.5-2.1A6 6 0 0 1 12 3z"/></svg><b>Expert takes</b><span>Materials, costs, flips, investing — why we choose what we choose.</span></div>
-<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><path d="M3 11v3a1.5 1.5 0 0 0 1.5 1.5H7l5 4V5.5l-5 4H4.5A1.5 1.5 0 0 0 3 11z"/><path d="M16 9.5a4 4 0 0 1 0 5.5M18.5 7a8 8 0 0 1 0 10.5"/></svg><b>Brand films</b><span>«This is M5» — promo that opens doors and books projects.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><b data-i="p1b">Stories — daily</b><span data-i="p1s">Job sites live: plaster, kitchens, process. Highlights — one per project.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4l2.5 5M14 4l2.5 5"/></svg><b data-i="p2b">Reels + TikTok — before / after</b><span data-i="p2s">Hook in 2 seconds. Same angle, frame for frame. Instagram and TikTok in parallel.</span>
+<div class="baymini"><figure><img src="img/ba_before_thumb.webp" alt="Wall before renovation" loading="lazy" decoding="async"><figcaption data-i="capb">BEFORE</figcaption></figure><figure><img src="img/ba_after_thumb.webp" alt="Same wall after M5 plaster" loading="lazy" decoding="async"><figcaption data-i="capa">AFTER</figcaption></figure></div></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><b data-i="p3b">YouTube — sagas</b><span data-i="p3s">Shorts + every project from zero to done, episode by episode.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 14.6c2.6-.4 4.6 1 5 3.9"/></svg><b data-i="p4b">Team in frame</b><span data-i="p4s">Lives with founders &amp; artisans. Different faces, every week — we love it.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.9.7-1.5 1.2-1.5 2.1h-4c0-.9-.6-1.4-1.5-2.1A6 6 0 0 1 12 3z"/></svg><b data-i="p5b">Expert takes</b><span data-i="p5s">Materials, costs, flips, investing — why we choose what we choose.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><path d="M3 11v3a1.5 1.5 0 0 0 1.5 1.5H7l5 4V5.5l-5 4H4.5A1.5 1.5 0 0 0 3 11z"/><path d="M16 9.5a4 4 0 0 1 0 5.5M18.5 7a8 8 0 0 1 0 10.5"/></svg><b data-i="p6b">Brand films</b><span data-i="p6s">«This is M5» — promo that opens doors and books projects.</span></div>
 </div>
 </div></div>
 
 <div class="sec" id="growth"><div class="wrap">
-<div class="k">The path</div>
-<h2>Level up. Literally.</h2>
+<div class="k" data-i="gk">The path</div>
+<h2 data-i="gh2">Level up. Literally.</h2>
 <div class="growth">
 <div>
 <div class="ladder">
-<div class="rung"><i>A</i><div><b>Start</b><span>Official employment. Fixed base up to $3,000/mo for SMM — real projects from day one.</span></div></div>
-<div class="rung"><i>B</i><div><b>Grow</b><span>Your content brings leads and orders — your pay grows with them. No ceiling.</span></div></div>
-<div class="rung m"><i>M</i><div><b>Master</b><span>You run the whole channel: team, budget, your name on it.</span></div></div>
+<div class="rung"><i>A</i><div><b data-i="gab">Start</b><span data-i="gas">Official employment. Fixed base up to $3,000/mo for SMM — real projects from day one.</span></div></div>
+<div class="rung"><i>B</i><div><b data-i="gbb">Grow</b><span data-i="gbs">Your content brings leads and orders — your pay grows with them. No ceiling.</span></div></div>
+<div class="rung m"><i>M</i><div><b data-i="gmb">Master</b><span data-i="gms">You run the whole channel: team, budget, your name on it.</span></div></div>
 </div>
-<p class="gnote"><b>We grow together.</b> Levels live in your personal M5 dashboard — the game is real.</p>
+<p class="gnote" data-i="gnote"><b>We grow together.</b> Levels live in your personal M5 dashboard — the game is real.</p>
 </div>
 <img class="gimg" src="img/dragon_steps.webp" alt="The M5 dragon hopping up marble steps — the A to M growth path" loading="lazy" decoding="async">
 </div>
 </div></div>
 
 <div class="sec" id="apply"><div class="wrap">
-<div class="k">Apply</div>
-<h2>Show us you.</h2>
-<p class="lead">Your Instagram, your best work, a few words why M5. Two minutes.</p>
+<div class="k" data-i="ak">Apply</div>
+<h2 data-i="ah2">Show us you.</h2>
+<p class="lead" data-i="alead">Your Instagram, your best work, a few words why M5. Two minutes.</p>
 <div class="challenge">
 <svg class="ic-l" viewBox="0 0 24 24"><path d="M4 10h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4.5 10 3.6 6.9a1.5 1.5 0 0 1 1-1.9l11.6-3.3a1.5 1.5 0 0 1 1.9 1l.9 3.1z"/><path d="m8 8.6 2.2-4.1M13 7.2l2.2-4.1"/></svg>
 <div>
-<b>Optional challenge — want to stand out?</b>
-<p><b>1</b> — Grab real footage from a real M5 job site (button below).<br>
-<b>2</b> — Cut one reel or one story <b>your way</b>. AI tools welcome, no deadline.<br>
-<b>3</b> — Apply below → your <b>personal upload folder</b> arrives by email instantly. Drop your cut there — it lands straight on our Drive, and Vlad &amp; Vadym watch it.</p>
-<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Get the raw materials</a>
+<b data-i="chb">Optional challenge — want to stand out?</b>
+<p data-i="chp"><b>1</b> — Grab real footage from a real M5 job site (button below).<br><b>2</b> — Cut one reel or one story <b>your way</b>. AI tools welcome, no deadline.<br><b>3</b> — Apply below → your <b>personal upload folder</b> arrives by email instantly. Drop your cut there — it lands straight on our Drive, and Vlad &amp; Vadym watch it.</p>
+<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg><span data-i="mat">Get the raw materials</span></a>
 </div>
 </div>
 <div class="form" id="formBox" style="margin-top:16px">
 <form id="jf" onsubmit="return sendApp(event)">
 <div class="frow">
-<div class="fld"><label for="f_role">Role</label>
-<select id="f_role"><option value="smm">SMM Creator</option><option value="editor">Video Editor</option><option value="general">Other — talent pool</option></select></div>
-<div class="fld"><label for="f_name">Full name</label><input id="f_name" required placeholder="Ana García"></div>
+<div class="fld"><label for="f_role" data-i="lrole">Role</label>
+<select id="f_role"><option value="smm" data-i="osmm">SMM Creator</option><option value="editor" data-i="oed">Video Editor</option><option value="general" data-i="ooth">Other — talent pool</option></select></div>
+<div class="fld"><label for="f_name" data-i="lname">Full name</label><input id="f_name" required placeholder="Ana García"></div>
 </div>
 <div class="frow">
-<div class="fld"><label for="f_email">Email</label><input id="f_email" type="email" required placeholder="you@email.com"></div>
-<div class="fld"><label for="f_phone">Phone / WhatsApp</label><input id="f_phone" placeholder="+1 …"></div>
+<div class="fld"><label for="f_email" data-i="lemail">Email</label><input id="f_email" type="email" required placeholder="you@email.com"></div>
+<div class="fld"><label for="f_phone" data-i="lphone">Phone / WhatsApp</label><input id="f_phone" placeholder="+1 …"></div>
 </div>
-<div class="fld"><label for="f_links">Your Instagram + best work</label><input id="f_links" placeholder="@you · TikTok, YouTube, Drive — anything you're proud of"></div>
-<div class="fld"><label for="f_why">Why M5?</label>
-<textarea id="f_why" placeholder="A few honest sentences. What pulls you here, what would you make first?"></textarea></div>
+<div class="fld"><label for="f_links" data-i="llinks">Your Instagram + best work</label><input id="f_links" data-iph="phlinks" placeholder="@you · TikTok, YouTube, Drive — anything you're proud of"></div>
+<div class="fld"><label for="f_why" data-i="lwhy">Why M5?</label>
+<textarea id="f_why" data-iph="phwhy" placeholder="A few honest sentences. What pulls you here, what would you make first?"></textarea></div>
 <div class="hp"><label for="f_web">Website</label><input id="f_web" tabindex="-1" autocomplete="off"></div>
-<button class="sbm" type="submit">Apply → get the upload folder by email</button>
+<button class="sbm" type="submit" data-i="sbm">Apply → get the upload folder by email</button>
 </form>
 <div class="ok" id="okBox">
 <div class="big">✦</div>
-<h3>Application received.</h3>
-<p>Check your inbox — your personal upload folder is on its way (look in spam too).
-No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.</p>
+<h3 data-i="okh">Application received.</h3>
+<p data-i="okp">Check your inbox — your personal upload folder is on its way (look in spam too). No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.</p>
 </div>
 </div>
 <div class="people">
-<div class="person"><img src="/img/ava_vlad.webp" alt="Vlad — co-founder of M5" loading="lazy" decoding="async"><div><b>Vlad</b><span>Co-founder</span></div></div>
-<div class="person"><img src="/img/ava_vadim.webp" alt="Vadym — director of M5" loading="lazy" decoding="async"><div><b>Vadym</b><span>Director · licensed contractor</span></div></div>
-<p class="pnote">They read every application personally and reply within 3 business days — either way.</p>
+<div class="person"><img src="/img/ava_vlad.webp" alt="Vlad — co-founder of M5" loading="lazy" decoding="async"><div><b>Vlad</b><span data-i="pco">Co-founder</span></div></div>
+<div class="person"><img src="/img/ava_vadim.webp" alt="Vadym — director of M5" loading="lazy" decoding="async"><div><b>Vadym</b><span data-i="pdir">Director · licensed contractor</span></div></div>
+<p class="pnote" data-i="pnote">They read every application personally and reply within 3 business days — either way.</p>
 </div>
 </div></div>
 
@@ -431,7 +436,7 @@ function sendApp(ev){
   var g=function(id){var el=document.getElementById(id);return el?String(el.value||'').trim():''};
   if(g('f_web')) return false; /* honeypot: боты заполняют скрытое поле */
   var d={type:'candidate',role:g('f_role'),name:g('f_name'),email:g('f_email'),phone:g('f_phone'),
-    links:g('f_links'),why:g('f_why'),source:'join-portal'};
+    links:g('f_links'),why:g('f_why'),source:'join-portal',lang:(window.__jlang||'en')};
   if(!d.name||!d.email) return false;
   try{ fetch(HOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(d)}); }catch(e){}
   try{ if(window.clarity) clarity('event','candidate_apply'); }catch(e){}
@@ -440,6 +445,161 @@ function sendApp(ev){
   return false;
 }
 if(/[?&]role=editor/.test(location.search)){ var s=document.getElementById('f_role'); if(s)s.value='editor'; }
+</script>
+<script>
+var J={
+en:{jtitle:"Join M5 — Miami's AI-operated design & build studio",cta:'Apply →',hk:'Hiring · Miami + Remote',h1a:'Talent never',h1b:'goes unnoticed.',
+sub:"Creative, sharp-eyed and in love with making things? <b>M5</b> — Miami's AI-operated design &amp; build studio — is hiring to build our feed from post #1. If that sounds like you, we can't wait to work together.",
+hint:"Move your cursor — he's watching",rc1:'SMM Creator',rc2:'Video Editor',pk:'The company',
+plead:"A renovation &amp; interior studio crafting <b>luxury homes</b> in the USA — run day-to-day with AI. We're here to make the world a little more beautiful, one home at a time.",
+pc1:'Luxury renovations',pc2:'AI-operated',pc3:'Style-obsessed',rk:'Open roles',rh2:'Two ways in.',
+r1n:'SMM Creator',r1p:'Own Instagram, TikTok &amp; YouTube from post #1. Shoot on real job sites and put the <b>whole team in frame</b> — founders, artisans, lives.',
+r1pay:'<b>Official employment</b> · fixed base up to <b>$3,000/mo</b> · earnings <b>unlimited</b> — they follow your results',
+r1l1:'Miami',r1l2:'English',r1l3:'AI tools daily',go1:'Apply →',go2:'Apply →',
+r2n:'Video Editor',r2p:'Turn raw job-site footage into reels that stop the scroll. Clean cuts, text, sound, magazine-grade color.',
+r2pay:'<b>Paid per reel</b> · you name your rate',r2l1:'Remote OK',r2l2:'Any editor',r2l3:'No watermarks',
+other:'Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> — we keep a talent pool.',
+tk:'Taste check',th2:'Feeds we love.',tlead:'This is the bar. Real accounts, real numbers — open them, feel the rhythm.',
+f1:"Netflix's «Owning Manhattan» · personality sells",f2:'a grid that reads like a magazine',f3:'art direction, texture, nerve',f4:'every house = a season',f5:'luxury home tours that hook millions',f6:'serialized shows, not clips',
+fnote:'Screenshots © their authors · not affiliated — just feeds we admire',plk:'The playbook',plh2:"What you'll create.",
+p1b:'Stories — daily',p1s:'Job sites live: plaster, kitchens, process. Highlights — one per project.',
+p2b:'Reels + TikTok — before / after',p2s:'Hook in 2 seconds. Same angle, frame for frame. Instagram and TikTok in parallel.',capb:'BEFORE',capa:'AFTER',
+p3b:'YouTube — sagas',p3s:'Shorts + every project from zero to done, episode by episode.',
+p4b:'Team in frame',p4s:'Lives with founders &amp; artisans. Different faces, every week — we love it.',
+p5b:'Expert takes',p5s:'Materials, costs, flips, investing — why we choose what we choose.',
+p6b:'Brand films',p6s:'«This is M5» — promo that opens doors and books projects.',
+gk:'The path',gh2:'Level up. Literally.',gab:'Start',gas:'Official employment. Fixed base up to $3,000/mo for SMM — real projects from day one.',
+gbb:'Grow',gbs:'Your content brings leads and orders — your pay grows with them. No ceiling.',
+gmb:'Master',gms:'You run the whole channel: team, budget, your name on it.',
+gnote:'<b>We grow together.</b> Levels live in your personal M5 dashboard — the game is real.',
+ak:'Apply',ah2:'Show us you.',alead:'Your Instagram, your best work, a few words why M5. Two minutes.',
+chb:'Optional challenge — want to stand out?',
+chp:'<b>1</b> — Grab real footage from a real M5 job site (button below).<br><b>2</b> — Cut one reel or one story <b>your way</b>. AI tools welcome, no deadline.<br><b>3</b> — Apply below → your <b>personal upload folder</b> arrives by email instantly. Drop your cut there — it lands straight on our Drive, and Vlad &amp; Vadym watch it.',
+mat:'Get the raw materials',lrole:'Role',lname:'Full name',lemail:'Email',lphone:'Phone / WhatsApp',llinks:'Your Instagram + best work',lwhy:'Why M5?',
+osmm:'SMM Creator',oed:'Video Editor',ooth:'Other — talent pool',
+phlinks:"@you · TikTok, YouTube, Drive — anything you're proud of",phwhy:'A few honest sentences. What pulls you here, what would you make first?',
+sbm:'Apply → get the upload folder by email',okh:'Application received.',
+okp:'Check your inbox — your personal upload folder is on its way (look in spam too). No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
+pco:'Co-founder',pdir:'Director · licensed contractor',pnote:'They read every application personally and reply within 3 business days — either way.'},
+es:{jtitle:'Únete a M5 — estudio de diseño y construcción de Miami operado con IA',cta:'Postúlate →',hk:'Vacantes · Miami + Remoto',h1a:'El talento nunca',h1b:'pasa desapercibido.',
+sub:'¿Creatividad, buen ojo y amor por crear? <b>M5</b> — el estudio de diseño y construcción de Miami operado con IA — busca equipo para construir nuestro feed desde el post #1. Si te suena a ti, ya queremos trabajar contigo.',
+hint:'Mueve el cursor — te está mirando',rc1:'Creador SMM',rc2:'Editor de video',pk:'La empresa',
+plead:'Estudio de remodelación e interiores que crea <b>hogares de lujo</b> en EE. UU. — operado día a día con IA. Estamos aquí para hacer el mundo un poco más bello, un hogar a la vez.',
+pc1:'Remodelaciones de lujo',pc2:'Operado con IA',pc3:'Obsesionados con el estilo',rk:'Vacantes',rh2:'Dos caminos.',
+r1n:'Creador SMM',r1p:'Lleva Instagram, TikTok y YouTube desde el post #1. Graba en obras reales y pon a <b>todo el equipo en cámara</b> — fundadores, artesanos, en vivo.',
+r1pay:'<b>Empleo formal</b> · base fija hasta <b>$3,000/mes</b> · ingresos <b>sin techo</b> — siguen tus resultados',
+r1l1:'Miami',r1l2:'Inglés',r1l3:'IA a diario',go1:'Postúlate →',go2:'Postúlate →',
+r2n:'Editor de video',r2p:'Convierte material crudo de obra en reels que detienen el scroll. Cortes limpios, texto, sonido, color de revista.',
+r2pay:'<b>Pago por reel</b> · tú pones tu tarifa',r2l1:'Remoto OK',r2l2:'Cualquier editor',r2l3:'Sin marcas de agua',
+other:'¿Otro oficio — artesano del estuco, diseño, ventas? <a href="#apply">Postúlate igual</a> — guardamos un banco de talento.',
+tk:'Prueba de gusto',th2:'Feeds que amamos.',tlead:'Este es el nivel. Cuentas reales, números reales — ábrelas y siente el ritmo.',
+f1:'«Owning Manhattan» de Netflix · la personalidad vende',f2:'un grid que se lee como revista',f3:'dirección de arte, textura, carácter',f4:'cada casa = una temporada',f5:'tours de casas de lujo que enganchan a millones',f6:'series, no clips sueltos',
+fnote:'Capturas © sus autores · sin afiliación — solo feeds que admiramos',plk:'El playbook',plh2:'Lo que vas a crear.',
+p1b:'Stories — a diario',p1s:'La obra en vivo: estuco, cocinas, proceso. Highlights — uno por proyecto.',
+p2b:'Reels + TikTok — antes / después',p2s:'Gancho en 2 segundos. Mismo ángulo, cuadro a cuadro. Instagram y TikTok en paralelo.',capb:'ANTES',capa:'DESPUÉS',
+p3b:'YouTube — sagas',p3s:'Shorts + cada proyecto de cero a entregado, episodio a episodio.',
+p4b:'El equipo en cámara',p4s:'En vivos con fundadores y artesanos. Caras distintas cada semana — nos encanta.',
+p5b:'Voz experta',p5s:'Materiales, costos, flips, inversión — por qué elegimos lo que elegimos.',
+p6b:'Brand films',p6s:'«Esto es M5» — promos que abren puertas y cierran proyectos.',
+gk:'El camino',gh2:'Sube de nivel. Literal.',gab:'Inicio',gas:'Empleo formal. Base fija hasta $3,000/mes para SMM — proyectos reales desde el día uno.',
+gbb:'Crece',gbs:'Tu contenido trae leads y contratos — tu pago crece con ellos. Sin techo.',
+gmb:'Master',gms:'Diriges todo el canal: equipo, presupuesto, tu nombre en él.',
+gnote:'<b>Crecemos juntos.</b> Los niveles viven en tu panel personal M5 — el juego es real.',
+ak:'Postúlate',ah2:'Muéstranos quién eres.',alead:'Tu Instagram, tu mejor trabajo y unas palabras de por qué M5. Dos minutos.',
+chb:'Reto opcional — ¿quieres destacar?',
+chp:'<b>1</b> — Toma material real de una obra real de M5 (botón abajo).<br><b>2</b> — Monta un reel o una story <b>a tu manera</b>. IA bienvenida, sin fecha límite.<br><b>3</b> — Postúlate abajo → tu <b>carpeta personal de subida</b> llega al correo al instante. Sube tu corte ahí — cae directo en nuestro Drive y lo ven Vlad y Vadym.',
+mat:'Descargar el material crudo',lrole:'Rol',lname:'Nombre completo',lemail:'Email',lphone:'Teléfono / WhatsApp',llinks:'Tu Instagram + mejor trabajo',lwhy:'¿Por qué M5?',
+osmm:'Creador SMM',oed:'Editor de video',ooth:'Otro — banco de talento',
+phlinks:'@tú · TikTok, YouTube, Drive — lo que te enorgullezca',phwhy:'Unas frases honestas. ¿Qué te atrae, qué harías primero?',
+sbm:'Postúlate → recibe la carpeta por email',okh:'Solicitud recibida.',
+okp:'Revisa tu correo — tu carpeta personal va en camino (mira también en spam). ¿Nada en 10 minutos? Escríbenos: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
+pco:'Cofundador',pdir:'Director · contratista licenciado',pnote:'Leen cada solicitud personalmente y responden en 3 días hábiles — sea cual sea la decisión.'},
+uk:{jtitle:'Приєднуйся до M5 — студія дизайну та будівництва в Маямі, керована ШІ',cta:'Подати заявку →',hk:'Вакансії · Маямі + віддалено',h1a:'Талант ніколи',h1b:'не лишається непоміченим.',
+sub:'Креативність, гостре око й любов до створення? <b>M5</b> — студія дизайну та будівництва в Маямі, якою щодня керує ШІ, — шукає команду, щоб будувати стрічку з поста №1. Якщо це про тебе — вже хочемо працювати разом.',
+hint:'Поворуши курсором — він стежить',rc1:'SMM-креатор',rc2:'Відеомонтажер',pk:'Компанія',
+plead:'Студія ремонтів та інтер’єрів, що створює <b>люксові домівки</b> в США, — щоденні процеси веде ШІ. Ми тут, щоб робити світ трохи красивішим — по одному дому за раз.',
+pc1:'Люксові ремонти',pc2:'Керується ШІ',pc3:'Одержимі стилем',rk:'Відкриті ролі',rh2:'Два шляхи.',
+r1n:'SMM-креатор',r1p:'Веди Instagram, TikTok і YouTube з поста №1. Знімай на реальних об’єктах і став у кадр <b>усю команду</b> — засновники, майстри, лайви.',
+r1pay:'<b>Офіційне працевлаштування</b> · фікс до <b>$3,000/міс</b> · заробіток <b>без стелі</b> — росте за результатами',
+r1l1:'Маямі',r1l2:'Англійська',r1l3:'ШІ щодня',go1:'Подати заявку →',go2:'Подати заявку →',
+r2n:'Відеомонтажер',r2p:'Перетворюй сире відео з об’єктів на рілси, що зупиняють скрол. Чистий монтаж, текст, звук, колір як у журналі.',
+r2pay:'<b>Оплата за рілс</b> · ставку називаєш ти',r2l1:'Можна віддалено',r2l2:'Будь-який редактор',r2l3:'Без вотермарків',
+other:'Інший фах — майстер штукатурки, дизайнер, продажі? <a href="#apply">Однаково подавайся</a> — ведемо пул талантів.',
+tk:'Перевірка смаку',th2:'Стрічки, які ми любимо.',tlead:'Це — планка. Реальні акаунти, реальні цифри: відкрий і відчуй ритм.',
+f1:'«Owning Manhattan» на Netflix · особистість продає',f2:'стрічка, що читається як журнал',f3:'арт-дирекшн, фактура, характер',f4:'кожен будинок = сезон',f5:'тури люкс-домами, що чіпляють мільйони',f6:'серіали, а не окремі кліпи',
+fnote:'Скриншоти © їхні автори · без афіліації — просто стрічки, якими захоплюємось',plk:'Плейбук',plh2:'Що ти створюватимеш.',
+p1b:'Сторіз — щодня',p1s:'Об’єкти наживо: штукатурка, кухні, процес. Хайлайти — один на проєкт.',
+p2b:'Reels + TikTok — до / після',p2s:'Гак у перші 2 секунди. Той самий ракурс, кадр у кадр. Instagram і TikTok паралельно.',capb:'ДО',capa:'ПІСЛЯ',
+p3b:'YouTube — саги',p3s:'Shorts + кожен проєкт від нуля до фіналу, серія за серією.',
+p4b:'Команда в кадрі',p4s:'Лайви із засновниками та майстрами. Нові обличчя щотижня — нам це подобається.',
+p5b:'Експертні думки',p5s:'Матеріали, ціни, фліпи, інвестиції — чому ми обираємо саме це.',
+p6b:'Бренд-фільми',p6s:'«Це M5» — промо, що відчиняє двері та приводить проєкти.',
+gk:'Шлях',gh2:'Прокачуйся. Буквально.',gab:'Старт',gas:'Офіційне працевлаштування. Фікс до $3,000/міс для SMM — реальні проєкти з першого дня.',
+gbb:'Ріст',gbs:'Твій контент приводить ліди й замовлення — твій дохід росте разом із ними. Без стелі.',
+gmb:'Майстер',gms:'Ведеш увесь канал: команда, бюджет, твоє ім’я на ньому.',
+gnote:'<b>Ростемо разом.</b> Рівні живуть у твоєму особистому кабінеті M5 — гра справжня.',
+ak:'Заявка',ah2:'Покажи себе.',alead:'Твій Instagram, найкращі роботи й кілька слів, чому M5. Дві хвилини.',
+chb:'Необов’язковий челендж — хочеш вирізнитися?',
+chp:'<b>1</b> — Візьми реальні кадри з реального об’єкта M5 (кнопка нижче).<br><b>2</b> — Змонтуй один рілс чи сторіз <b>по-своєму</b>. ШІ вітається, дедлайну немає.<br><b>3</b> — Подай заявку нижче → <b>особиста папка для завантаження</b> миттєво прийде на пошту. Кинь туди свій монтаж — він одразу в нашому Drive, і його дивляться Влад і Вадим.',
+mat:'Забрати сирий матеріал',lrole:'Роль',lname:'Повне ім’я',lemail:'Email',lphone:'Телефон / WhatsApp',llinks:'Твій Instagram + найкращі роботи',lwhy:'Чому M5?',
+osmm:'SMM-креатор',oed:'Відеомонтажер',ooth:'Інше — пул талантів',
+phlinks:'@ти · TikTok, YouTube, Drive — усе, чим пишаєшся',phwhy:'Кілька чесних речень. Що тебе тягне сюди, що зробив би першим?',
+sbm:'Подати заявку → папка прийде на пошту',okh:'Заявку отримано.',
+okp:'Перевір пошту — особиста папка вже летить (глянь і в спам). Немає листа за 10 хвилин? Напиши нам: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
+pco:'Співзасновник',pdir:'Директор · ліцензований підрядник',pnote:'Вони особисто читають кожну заявку й відповідають протягом 3 робочих днів — у будь-якому разі.'},
+ru:{jtitle:'Присоединяйся к M5 — студия дизайна и строительства в Майами под управлением ИИ',cta:'Откликнуться →',hk:'Вакансии · Майами + удалённо',h1a:'Талант никогда',h1b:'не остаётся незамеченным.',
+sub:'Креативность, острый глаз и любовь к созданию? <b>M5</b> — студия дизайна и строительства в Майами, которой ежедневно управляет ИИ, — ищет команду, чтобы строить ленту с поста №1. Если это про тебя — уже хотим работать вместе.',
+hint:'Подвигай курсором — он следит',rc1:'SMM-креатор',rc2:'Видеомонтажёр',pk:'Компания',
+plead:'Студия ремонтов и интерьеров, создающая <b>люксовые дома</b> в США, — ежедневные процессы ведёт ИИ. Мы здесь, чтобы делать мир немного красивее — по одному дому за раз.',
+pc1:'Люксовые ремонты',pc2:'Управляется ИИ',pc3:'Одержимы стилем',rk:'Открытые роли',rh2:'Два пути.',
+r1n:'SMM-креатор',r1p:'Веди Instagram, TikTok и YouTube с поста №1. Снимай на реальных объектах и ставь в кадр <b>всю команду</b> — основатели, мастера, лайвы.',
+r1pay:'<b>Официальное трудоустройство</b> · фикс до <b>$3,000/мес</b> · заработок <b>без потолка</b> — растёт за результатами',
+r1l1:'Майами',r1l2:'Английский',r1l3:'ИИ каждый день',go1:'Откликнуться →',go2:'Откликнуться →',
+r2n:'Видеомонтажёр',r2p:'Превращай сырое видео с объектов в рилсы, останавливающие скролл. Чистый монтаж, текст, звук, цвет как в журнале.',
+r2pay:'<b>Оплата за рилс</b> · ставку называешь ты',r2l1:'Можно удалённо',r2l2:'Любой редактор',r2l3:'Без вотермарок',
+other:'Другое ремесло — мастер штукатурки, дизайнер, продажи? <a href="#apply">Всё равно откликайся</a> — ведём пул талантов.',
+tk:'Проверка вкуса',th2:'Ленты, которые мы любим.',tlead:'Это — планка. Реальные аккаунты, реальные цифры: открой и почувствуй ритм.',
+f1:'«Owning Manhattan» на Netflix · личность продаёт',f2:'лента, которая читается как журнал',f3:'арт-дирекшн, фактура, характер',f4:'каждый дом = сезон',f5:'туры по люкс-домам, цепляющие миллионы',f6:'сериалы, а не отдельные клипы',
+fnote:'Скриншоты © их авторы · без аффилиации — просто ленты, которыми восхищаемся',plk:'Плейбук',plh2:'Что ты будешь создавать.',
+p1b:'Сторис — ежедневно',p1s:'Объекты вживую: штукатурка, кухни, процесс. Хайлайты — один на проект.',
+p2b:'Reels + TikTok — до / после',p2s:'Хук в первые 2 секунды. Тот же ракурс, кадр в кадр. Instagram и TikTok параллельно.',capb:'ДО',capa:'ПОСЛЕ',
+p3b:'YouTube — саги',p3s:'Shorts + каждый проект от нуля до сдачи, серия за серией.',
+p4b:'Команда в кадре',p4s:'Лайвы с основателями и мастерами. Новые лица каждую неделю — нам это нравится.',
+p5b:'Экспертные мнения',p5s:'Материалы, цены, флипы, инвестиции — почему мы выбираем то, что выбираем.',
+p6b:'Бренд-фильмы',p6s:'«Это M5» — промо, которое открывает двери и приводит проекты.',
+gk:'Путь',gh2:'Прокачивайся. Буквально.',gab:'Старт',gas:'Официальное трудоустройство. Фикс до $3,000/мес для SMM — реальные проекты с первого дня.',
+gbb:'Рост',gbs:'Твой контент приводит лиды и заказы — твой доход растёт вместе с ними. Без потолка.',
+gmb:'Мастер',gms:'Ведёшь весь канал: команда, бюджет, твоё имя на нём.',
+gnote:'<b>Растём вместе.</b> Уровни живут в твоём личном кабинете M5 — игра настоящая.',
+ak:'Заявка',ah2:'Покажи себя.',alead:'Твой Instagram, лучшие работы и пара слов, почему M5. Две минуты.',
+chb:'Необязательный челлендж — хочешь выделиться?',
+chp:'<b>1</b> — Возьми реальные кадры с реального объекта M5 (кнопка ниже).<br><b>2</b> — Смонтируй один рилс или сторис <b>по-своему</b>. ИИ приветствуется, дедлайна нет.<br><b>3</b> — Откликнись ниже → <b>личная папка для загрузки</b> мгновенно придёт на почту. Кинь туда свой монтаж — он сразу в нашем Drive, и его смотрят Влад и Вадим.',
+mat:'Забрать сырой материал',lrole:'Роль',lname:'Полное имя',lemail:'Email',lphone:'Телефон / WhatsApp',llinks:'Твой Instagram + лучшие работы',lwhy:'Почему M5?',
+osmm:'SMM-креатор',oed:'Видеомонтажёр',ooth:'Другое — пул талантов',
+phlinks:'@ты · TikTok, YouTube, Drive — всё, чем гордишься',phwhy:'Несколько честных фраз. Что тянет сюда, что сделал бы первым?',
+sbm:'Откликнуться → папка придёт на почту',okh:'Заявка получена.',
+okp:'Проверь почту — личная папка уже летит (загляни и в спам). Нет письма за 10 минут? Напиши нам: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
+pco:'Сооснователь',pdir:'Директор · лицензированный подрядчик',pnote:'Они лично читают каждую заявку и отвечают в течение 3 рабочих дней — в любом случае.'}
+};
+function jSetLang(l){
+  if(!J[l])l='en';
+  try{localStorage.setItem('m5_join_lang',l)}catch(e){}
+  document.documentElement.lang=l;
+  var d=J[l],i;
+  var els=document.querySelectorAll('[data-i]');
+  for(i=0;i<els.length;i++){var k=els[i].getAttribute('data-i');if(d[k]!=null)els[i].innerHTML=d[k]}
+  var phs=document.querySelectorAll('[data-iph]');
+  for(i=0;i<phs.length;i++){var k2=phs[i].getAttribute('data-iph');if(d[k2]!=null)phs[i].setAttribute('placeholder',d[k2])}
+  var bs=document.querySelectorAll('.jlang button');
+  for(i=0;i<bs.length;i++){bs[i].classList.toggle('on',bs[i].getAttribute('data-l')===l)}
+  if(d.jtitle)document.title=d.jtitle;
+  window.__jlang=l;
+}
+(function(){
+  var s0=null;try{s0=localStorage.getItem('m5_join_lang')}catch(e){}
+  if(!s0){var n=(navigator.language||'en').slice(0,2).toLowerCase();s0={es:'es',uk:'uk',ru:'ru'}[n]||'en'}
+  jSetLang(s0);
+})();
 </script>
 </body>
 </html>
