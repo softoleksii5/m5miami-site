@@ -84,78 +84,65 @@ padding:14px 22px;font-size:15px;font-weight:600;text-decoration:none;transition
 .trial b{color:var(--gold2)}
 .other{margin-top:12px;color:var(--soft);font-size:13.5px}
 .other a{color:var(--gold-d)}
-/* taste — editorial */
-.taste{background:var(--ink);color:#EFE8DA;position:relative;overflow:hidden}
-.taste .tbg{width:100%;height:230px;object-fit:cover;display:block;opacity:.9}
-.taste .tin{padding:38px 0 50px}
-.tk{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2)}
-.tnum{font-family:var(--mono);font-size:12px;color:var(--gold2);letter-spacing:.1em;margin:34px 0 10px;display:flex;align-items:center;gap:12px}
-.tnum:after{content:'';flex:1;height:1px;background:rgba(200,169,106,.25)}
-.taste h2{font-size:clamp(24px,3.6vw,34px);font-weight:800;letter-spacing:-.02em;margin:8px 0 6px;color:#F4EEE4}
-.taste .rule{font-size:15.5px;line-height:1.65;max-width:680px;color:#CFC6B4}
-.taste .rule b{color:#F4EEE4}
-.pal{display:flex;gap:10px;margin:20px 0 6px;flex-wrap:wrap}
-.sw{width:62px;height:62px;border-radius:13px;border:1px solid rgba(255,255,255,.18);position:relative;margin-bottom:22px}
-.sw i{position:absolute;left:-8px;right:-8px;bottom:-19px;text-align:center;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#B8AE9C;white-space:nowrap}
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;max-width:760px}
-.ba figure{position:relative;margin:0}
-.ba img{width:100%;border-radius:12px;display:block;aspect-ratio:4/3;object-fit:cover}
-.ba figcaption{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;background:rgba(20,22,28,.72);color:#EFE8DA;border-radius:7px;padding:5px 10px}
-.bacap{margin-top:10px;font-size:13px;color:#B8AE9C}
-/* feeds / avoid — light editorial */
-.cols2{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:8px}
-.enum{font-family:var(--mono);font-size:12px;color:var(--gold-d);letter-spacing:.1em;margin:26px 0 6px;display:flex;align-items:center;gap:12px}
-.enum:after{content:'';flex:1;height:1px;background:var(--line)}
-.feedrow{display:block;padding:11px 2px;border-bottom:1px solid var(--line);text-decoration:none;transition:.15s}
-.feedrow:hover{background:#F2EBDC}
-.feedrow b{font-size:14px}
-.feedrow span{color:var(--soft);font-size:12.5px;line-height:1.45;display:block;margin-top:2px}
-.avoidrow{padding:11px 2px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--soft);line-height:1.5}
-.avoidrow b{color:var(--ink)}
-/* quiz */
-.qz{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}
-.qq{margin-bottom:20px}
-.qq h4{font-size:15.5px;margin-bottom:10px}
-.qo{display:block;width:100%;text-align:left;background:#F6F0E3;border:1px solid transparent;border-radius:11px;
-padding:11px 14px;font-size:14px;font-family:var(--sans);color:var(--ink);cursor:pointer;margin-bottom:7px;transition:.15s}
-.qo:hover{background:#F0E8D6}
-.qo.right{background:#E8F0E2;border-color:#9DBB8C}
-.qo.wrong{background:#F5E4DE;border-color:#D9A18F;opacity:.7}
-.qo small{display:none;color:var(--soft);margin-top:4px}
-.qo.right small,.qo.wrong small{display:block}
-.qres{display:none;background:var(--ink);color:#EFE8DA;border-radius:13px;padding:16px 18px;font-size:14.5px;line-height:1.55}
-.qres b{color:var(--gold2)}
-/* people */
-.people{display:flex;gap:16px;margin-top:22px;flex-wrap:wrap}
-.person{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 20px 14px 14px}
-.person img{width:58px;height:58px;border-radius:14px;object-fit:cover}
-.person b{display:block;font-size:15px}
-.person span{color:var(--soft);font-size:12.5px}
-.avanote{margin-top:10px;color:var(--soft);font-size:12.5px}
-/* test task */
-.tabs{display:flex;gap:8px;margin:22px 0 0}
-.tab{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border-radius:11px 11px 0 0;
-background:#EDE5D3;cursor:pointer;border:1px solid var(--line);border-bottom:none;color:var(--soft)}
-.tab.on{background:var(--card);color:var(--ink);font-weight:700}
-.task{background:var(--card);border:1px solid var(--line);border-radius:0 16px 16px 16px;padding:26px}
-.task ol{margin:14px 0 0 18px}
-.task li{margin-bottom:14px;font-size:14.5px;line-height:1.6}
-.task li b{display:block}
-.task li span{color:var(--soft);font-size:13.5px}
-.timebox{display:inline-flex;align-items:center;gap:8px;background:#F3ECDA;border-radius:10px;padding:8px 13px;font-size:13px;color:var(--gold-d);font-weight:700;margin:14px 0 0}
-.matbtn{display:inline-flex;align-items:center;gap:10px;background:var(--gold-d);color:#fff;border-radius:12px;padding:13px 20px;
-font-weight:700;font-size:14px;text-decoration:none;margin-top:6px}
+/* панорама — о компании */
+.pano{position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.pano .pbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.pano .pveil{position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(247,242,233,.45) 30%,rgba(247,242,233,.3) 55%,rgba(247,242,233,.92) 100%)}
+.pano .pin{position:relative;z-index:2;padding:80px 0 96px;text-align:center}
+.pano h2{font-size:clamp(28px,4.6vw,46px);font-weight:800;letter-spacing:-.03em;margin:10px 0 12px}
+.pano .plead{color:#4E4736;font-size:clamp(15px,2vw,17.5px);max-width:600px;margin:0 auto;line-height:1.6}
+.pano .plead b{color:var(--ink)}
+.chiprow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,253,249,.9);border:1px solid #E2D8C2;border-radius:999px;padding:10px 18px;font-size:13.5px;font-weight:700}
+.chip .ic-l{width:17px;height:17px}
+/* фиды-раскладки */
+.feedgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.feedcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;transition:.25s}
+.feedcard:hover{transform:translateY(-3px);border-color:#D8C9A8;box-shadow:0 12px 28px rgba(32,36,46,.08)}
+.feedcard img{width:100%;aspect-ratio:16/10.4;object-fit:cover;object-position:top;display:block}
+.fmeta{display:flex;align-items:center;gap:10px;padding:13px 16px}
+.fmeta .ic-l{width:18px;height:18px}
+.fmeta b{font-size:14px;letter-spacing:-.01em;display:block}
+.fmeta span{color:var(--soft);font-size:11.5px;display:block;margin-top:1px}
+.fnum{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--gold-d);background:#F3ECDA;border-radius:8px;padding:5px 9px;white-space:nowrap;font-weight:700}
+.fnote{margin-top:14px;color:#A79D8B;font-size:10.5px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+/* контент-плейбук */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.pillar .ic-l{width:26px;height:26px;margin-bottom:12px}
+.pillar b{display:block;font-size:16px;letter-spacing:-.01em;margin-bottom:5px}
+.pillar span{color:var(--soft);font-size:13px;line-height:1.5}
+.baymini{display:flex;gap:6px;margin-top:12px}
+.baymini figure{position:relative;margin:0;width:50%}
+.baymini img{width:100%;border-radius:9px;aspect-ratio:4/3;object-fit:cover;display:block}
+.baymini figcaption{position:absolute;left:6px;top:6px;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;background:rgba(20,22,28,.72);color:#EFE8DA;border-radius:5px;padding:3px 6px}
+/* рост A→B→M */
+.growth{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;margin-top:26px}
+.ladder{display:flex;flex-direction:column;gap:10px}
+.rung{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px 18px}
+.rung i{font-style:normal;font-family:var(--mono);font-weight:700;font-size:22px;color:var(--gold-d);background:#F3ECDA;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rung b{display:block;font-size:15.5px}
+.rung span{color:var(--soft);font-size:13px;line-height:1.45}
+.rung.m i{background:var(--ink);color:var(--gold2)}
+.gnote{margin-top:14px;font-size:14px;color:var(--soft);line-height:1.55}
+.gnote b{color:var(--ink)}
+.gimg{border-radius:20px;width:100%;display:block;border:1px solid var(--line)}
+/* заявка */
+.challenge{display:flex;gap:18px;align-items:flex-start;background:var(--ink);color:#EFE8DA;border-radius:18px;padding:22px 24px;margin-top:24px}
+.challenge .ic-l{stroke:var(--gold2);width:26px;height:26px;flex-shrink:0;margin-top:3px}
+.challenge b{color:#F4EEE4}
+.challenge p{font-size:14.5px;line-height:1.6;color:#CFC6B4;margin:4px 0 0}
+.matbtn{display:inline-flex;align-items:center;gap:9px;background:var(--gold-d);color:#fff;border-radius:11px;padding:11px 17px;font-weight:700;font-size:13.5px;text-decoration:none;margin-top:12px}
 .matbtn:hover{background:#7E5C2F}
-.matbtn .ic-l{stroke:#fff;width:18px;height:18px}
-.note{background:#F3ECDD;border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--soft);line-height:1.55;margin-top:18px}
-.note b{color:var(--ink)}
-.calcols{font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--soft);background:#F6F0E3;border-radius:11px;padding:12px 15px;margin:8px 0}
-/* how it works */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
-.step{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px}
-.step i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--gold-d);letter-spacing:.1em;display:block;margin-bottom:8px}
-.step b{font-size:14.5px;display:block;margin-bottom:5px}
-.step span{color:var(--soft);font-size:12.5px;line-height:1.5}
+.matbtn .ic-l{stroke:#fff;width:17px;height:17px;margin:0}
+.pillrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pillrow span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:#F3ECDA;color:#6E6248;border-radius:8px;padding:6px 10px;font-weight:700}
+.people{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.person{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:11px 18px 11px 11px}
+.person img{width:50px;height:50px;border-radius:12px;object-fit:cover}
+.person b{display:block;font-size:14px}
+.person span{color:var(--soft);font-size:12px}
+.pnote{color:var(--soft);font-size:13px;max-width:340px;line-height:1.5}
 /* form */
 .form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;margin-top:24px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -176,16 +163,15 @@ font-family:var(--sans);cursor:pointer;margin-top:6px}
 .ok p a{color:var(--gold-d)}
 footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);font-size:13px}
 @media(max-width:760px){
-.facts,.roles,.cols2,.frow{grid-template-columns:1fr}
-.steps{grid-template-columns:1fr 1fr}
-.ba{grid-template-columns:1fr}
+.facts,.roles,.frow,.feedgrid,.pillars,.growth{grid-template-columns:1fr}
+.pano .pin{padding:56px 0 64px}
+.challenge{flex-direction:column;gap:10px}
 .jhero{min-height:auto;display:block}
 .jcv{position:relative;height:54vh;min-height:340px}
 .jshade{display:none}
 .jcopy{padding:40px 22px 8px}
 .jhero h1{font-size:clamp(34px,10vw,44px)}
 .sec{padding:36px 0}
-.taste .tbg{height:150px}
 }
 </style>
 </head>
@@ -204,22 +190,25 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 <h1 class="jrise d2">Talent never<span class="ghost">goes unnoticed.</span></h1>
 <p class="jsub jrise d3">Creative, sharp-eyed and in love with making things? <b>M5</b> — Miami's AI-operated design &amp; build studio — is hiring to build our feed from post #1. If that sounds like you, we can't wait to work together.</p>
 <div class="rolechips jrise d4">
-<a class="rolechip" href="#task" onclick="pickRole('smm')"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>SMM Creator</a>
-<a class="rolechip alt" href="#task" onclick="pickRole('editor')"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg>Video Editor</a>
+<a class="rolechip" href="#roles"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>SMM Creator</a>
+<a class="rolechip alt" href="#roles"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg>Video Editor</a>
 </div>
 <div class="jhint jrise d4"><i></i>Move your cursor — he's watching</div>
 </div>
 </div>
 
-<div class="sec"><div class="wrap">
+<div class="pano">
+<img class="pbg" src="img/miami_pano.webp" alt="">
+<div class="pveil" aria-hidden="true"></div>
+<div class="wrap pin">
 <div class="k">The company</div>
-<h2>A studio that runs on AI. For real.</h2>
-<p class="lead">Two founders, a licensed director, and Jin — our AI teammate who moves leads, tasks, files and reports around the clock.
-Every teammate gets a personal dashboard on m5miami.com and a visible growth track. No bureaucracy to fight. You make things.</p>
-<div class="facts">
-<div class="fact"><b><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 2 2.7 5 3.3 5 1.5 5 3.7-2.2 3-5 3-5-1-5-3"/></svg>$150–250K</b><span>typical project. Full renovations and our signature decorative plaster — texture is our fingerprint.</span></div>
-<div class="fact"><b><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M18.5 15l.9 2.3 2.1.9-2.1.9-.9 2.3-.9-2.3-2.1-.9 2.1-.9z"/></svg>AI-operated</b><span>Jin answers in seconds, sorts your uploads and preps caption drafts. You make them sell — taste and judgment stay human.</span></div>
-<div class="fact"><b><span class="abm">A → B → M</span> Growth track</b><span>levels, not politics: your pay and status rise on a visible ladder inside your dashboard.</span></div>
+<h2>M5 Miami — Design &amp; Build.</h2>
+<p class="plead">A renovation &amp; interior studio crafting <b>luxury homes</b> in the USA — run day-to-day with AI.
+We're here to make the world a little more beautiful, one home at a time.</p>
+<div class="chiprow">
+<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg>Luxury renovations</span>
+<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M18.5 15l.9 2.3 2.1.9-2.1.9-.9 2.3-.9-2.3-2.1-.9 2.1-.9z"/></svg>AI-operated</span>
+<span class="chip"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-9C.8 8.6 2.4 5 5.7 5c2 0 3.3 1 4.3 2.5C11 6 12.3 5 14.3 5c3.3 0 4.9 3.6 3.2 7-2.5 4.4-5.5 9-5.5 9z"/></svg>Style-obsessed</span>
 </div>
 </div></div>
 
@@ -227,155 +216,100 @@ Every teammate gets a personal dashboard on m5miami.com and a visible growth tra
 <div class="k">Open roles</div>
 <h2>Two ways in.</h2>
 <div class="roles">
-<a class="role" href="#task" onclick="pickRole('smm')">
+<a class="role" href="#apply">
 <h3><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg>SMM Creator</h3>
-<p>You own Instagram, TikTok and YouTube: shoot on real job sites, edit reels, write captions that sell $200K projects, plan the calendar.</p>
-<div class="pay"><b>Pay: ~$3,000/month to start</b> · official employment · raises on the A→B→M track</div>
-<ul><li>English required · Spanish is a big plus</li><li>Miami-based (job-site shooting days)</li><li>Full-time (or serious part-time)</li><li>AI tools daily — we'll hand you our stack</li></ul>
-<span class="go">Take the test task →</span>
+<p>Own Instagram, TikTok &amp; YouTube from post #1. Shoot on real job sites and put the <b>whole team in frame</b> — founders, artisans, lives.</p>
+<div class="pay"><b>Up to $3,000/mo to start</b> · grows with your results</div>
+<div class="pillrow"><span>Miami</span><span>English</span><span>AI tools daily</span></div>
+<span class="go">Apply →</span>
 </a>
-<a class="role" href="#task" onclick="pickRole('editor')">
+<a class="role" href="#apply">
 <h3><svg class="ic-l" viewBox="0 0 24 24"><circle cx="6.5" cy="7" r="2.5"/><circle cx="6.5" cy="17" r="2.5"/><path d="M8.6 8.6 20 20M8.6 15.4 20 4"/></svg>Video Editor</h3>
-<p>You turn raw job-site footage into reels that stop the scroll: clean cuts, text overlays, sound sync, magazine-grade color.</p>
-<div class="pay"><b>Paid per reel</b> — freelance, you name your rate in the form</div>
-<ul><li>Remote OK, any timezone</li><li>CapCut / Premiere / DaVinci — your call</li><li>No watermarks, ever</li></ul>
-<span class="go">Take the test task →</span>
+<p>Turn raw job-site footage into reels that stop the scroll. Clean cuts, text, sound, magazine-grade color.</p>
+<div class="pay"><b>Paid per reel</b> · you name your rate</div>
+<div class="pillrow"><span>Remote OK</span><span>Any editor</span><span>No watermarks</span></div>
+<span class="go">Apply →</span>
 </a>
 </div>
-<div class="trial"><b>Shortlist gets a paid trial week.</b> Real brief, real materials, real money — that's where grids, stories and covers happen. The test task below is deliberately small.</div>
-<div class="other">Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> and pick «Other»: we keep a talent pool and come back when the seat opens.</div>
+<div class="other">Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> — we keep a talent pool.</div>
 </div></div>
 
-<div class="taste" id="taste">
-<img class="tbg" src="/img/join_taste_bg.webp" alt="Dark decorative plaster, raking gold light — M5 signature texture">
-<div class="wrap tin">
-<div class="tk">Our taste</div>
-<h2>What we love — and what we never do.</h2>
-<div class="tnum">01 / The rule</div>
-<p class="rule">The grid should read like a <b>magazine issue</b>, not a camera roll. Black &amp; gold, clean grotesque type (never script fonts),
-texture macro shots of plaster, matched-angle before/afters. Every post either <b>proves craft</b> or <b>proves numbers</b>.</p>
-<div class="pal">
-<div class="sw" style="background:#20242E"><i>ink #20242E</i></div>
-<div class="sw" style="background:#C8A96A"><i>gold #C8A96A</i></div>
-<div class="sw" style="background:#F7F2E9"><i>cream #F7F2E9</i></div>
-<div class="sw" style="background:#96703B"><i>bronze #96703B</i></div>
+<div class="sec" id="taste"><div class="wrap">
+<div class="k">Taste check</div>
+<h2>Feeds we love.</h2>
+<p class="lead">This is the bar. Real accounts, real numbers — open them, feel the rhythm.</p>
+<div class="feedgrid">
+<a class="feedcard" href="https://www.instagram.com/ryanserhant/" target="_blank" rel="noopener">
+<img src="img/feeds/ig_serhant.webp" alt="Instagram grid of @ryanserhant">
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@ryanserhant</b><span>Netflix's «Owning Manhattan» · personality sells</span></div><i class="fnum">3.3M</i></div>
+</a>
+<a class="feedcard" href="https://www.instagram.com/studiomcgee/" target="_blank" rel="noopener">
+<img src="img/feeds/ig_mcgee.webp" alt="Instagram grid of @studiomcgee">
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@studiomcgee</b><span>a grid that reads like a magazine</span></div><i class="fnum">4M</i></div>
+</a>
+<a class="feedcard" href="https://www.instagram.com/kellywearstler/" target="_blank" rel="noopener">
+<img src="img/feeds/ig_wearstler.webp" alt="Instagram grid of @kellywearstler">
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@kellywearstler</b><span>art direction, texture, nerve</span></div><i class="fnum">2.3M</i></div>
+</a>
+<a class="feedcard" href="https://www.instagram.com/threebirdsrenovations/" target="_blank" rel="noopener">
+<img src="img/feeds/ig_threebirds.webp" alt="Instagram grid of @threebirdsrenovations">
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg><div><b>@threebirdsrenovations</b><span>every house = a season</span></div><i class="fnum">1M</i></div>
+</a>
+<a class="feedcard" href="https://www.youtube.com/@EnesYilmazer" target="_blank" rel="noopener">
+<img src="img/feeds/yt_enes.webp" alt="YouTube channel of Enes Yilmazer">
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><div><b>Enes Yilmazer</b><span>luxury home tours that hook millions</span></div><i class="fnum">4.2M</i></div>
+</a>
+<a class="feedcard" href="https://www.youtube.com/@RyanSerhant" target="_blank" rel="noopener">
+<img src="img/feeds/yt_serhant.webp" alt="YouTube channel of Ryan Serhant">
+<div class="fmeta"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><div><b>Ryan Serhant · YouTube</b><span>serialized shows, not clips</span></div><i class="fnum">1.5M</i></div>
+</a>
 </div>
-<div class="tnum">02 / Same angle. Frame for frame.</div>
-<div class="ba">
-<figure><img src="/img/ba_plaster_before.webp" alt="Wall before decorative plaster" loading="lazy"><figcaption>BEFORE</figcaption></figure>
-<figure><img src="/img/ba_plaster_after.webp" alt="Same wall after M5 decorative plaster" loading="lazy"><figcaption>AFTER</figcaption></figure>
-</div>
-<p class="bacap">One of ours. Locked-off frame — the reveal does the selling, no arrows, no collage.</p>
-</div>
-</div>
+<div class="fnote">Screenshots © their authors · not affiliated — just feeds we admire</div>
+</div></div>
 
 <div class="sec"><div class="wrap">
-<div class="cols2">
+<div class="k">The playbook</div>
+<h2>What you'll create.</h2>
+<div class="pillars">
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><b>Stories — daily</b><span>Job sites live: plaster, kitchens, process. Highlights — one per project.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4l2.5 5M14 4l2.5 5"/></svg><b>Reels — before / after</b><span>Hook in 2 seconds. Same angle, frame for frame.</span>
+<div class="baymini"><figure><img src="/img/ba_plaster_before.webp" alt="Wall before renovation"><figcaption>BEFORE</figcaption></figure><figure><img src="/img/ba_plaster_after.webp" alt="Same wall after M5 plaster"><figcaption>AFTER</figcaption></figure></div></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12.5" rx="4"/><path d="M10.2 9.6v5.3l4.8-2.65z"/></svg><b>YouTube — sagas</b><span>Shorts + every project from zero to done, episode by episode.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 14.6c2.6-.4 4.6 1 5 3.9"/></svg><b>Team in frame</b><span>Lives with founders &amp; artisans. Different faces, every week — we love it.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.9.7-1.5 1.2-1.5 2.1h-4c0-.9-.6-1.4-1.5-2.1A6 6 0 0 1 12 3z"/></svg><b>Expert takes</b><span>Materials, costs, flips, investing — why we choose what we choose.</span></div>
+<div class="pillar"><svg class="ic-l" viewBox="0 0 24 24"><path d="M3 11v3a1.5 1.5 0 0 0 1.5 1.5H7l5 4V5.5l-5 4H4.5A1.5 1.5 0 0 0 3 11z"/><path d="M16 9.5a4 4 0 0 1 0 5.5M18.5 7a8 8 0 0 1 0 10.5"/></svg><b>Brand films</b><span>«This is M5» — promo that opens doors and books projects.</span></div>
+</div>
+</div></div>
+
+<div class="sec" id="growth"><div class="wrap">
+<div class="k">The path</div>
+<h2>Level up. Literally.</h2>
+<div class="growth">
 <div>
-<div class="enum">03 / Feeds we admire</div>
-<a class="feedrow" href="https://www.instagram.com/studiomcgee/" target="_blank" rel="noopener"><b>@studiomcgee</b><span>the benchmark: reveal-reel formats, magazine grid rhythm</span></a>
-<a class="feedrow" href="https://www.instagram.com/kellywearstler/" target="_blank" rel="noopener"><b>@kellywearstler</b><span>black/gold art direction, texture macro — our ambition</span></a>
-<a class="feedrow" href="https://www.instagram.com/siredesign/" target="_blank" rel="noopener"><b>@siredesign</b><span>Miami: numbered projects, founder + studio two-account play</span></a>
-<a class="feedrow" href="https://www.instagram.com/moniomidesign/" target="_blank" rel="noopener"><b>@moniomidesign</b><span>Miami: unmistakable visual DNA — grid reads as one poster</span></a>
-<a class="feedrow" href="https://www.instagram.com/threebirdsrenovations/" target="_blank" rel="noopener"><b>@threebirdsrenovations</b><span>each house = a season: serialized renovation storytelling</span></a>
-<a class="feedrow" href="https://www.instagram.com/the_fox_group_/" target="_blank" rel="noopener"><b>@the_fox_group_</b><span>design-build done right: craftsmanship close-ups as a pillar</span></a>
-<a class="feedrow" href="https://www.instagram.com/jeanstofferdesign/" target="_blank" rel="noopener"><b>@jeanstofferdesign</b><span>episode-style project stories people subscribe to</span></a>
-<a class="feedrow" href="https://www.instagram.com/2idinteriors/" target="_blank" rel="noopener"><b>@2idinteriors</b><span>Miami condo renos like ours — distinct look per project</span></a>
+<div class="ladder">
+<div class="rung"><i>A</i><div><b>Start</b><span>Fixed base — up to $3,000/mo for SMM. Real projects from day one.</span></div></div>
+<div class="rung"><i>B</i><div><b>Grow</b><span>Your content brings leads and orders — your pay grows with them. No ceiling.</span></div></div>
+<div class="rung m"><i>M</i><div><b>Master</b><span>You run the whole channel: team, budget, your name on it.</span></div></div>
 </div>
-<div>
-<div class="enum">04 / What we never do</div>
-<div class="avoidrow"><b>Camera-roll grid.</b> Unedited site photos + holiday graphics + a random meme. No grade, no rhythm — reads cheap.</div>
-<div class="avoidrow"><b>Collage-and-watermark disease.</b> Before/after crammed into one split image with arrows and a phone number. Kills the reveal.</div>
-<div class="avoidrow"><b>Reels without hooks.</b> A 60-second doorway pan with no text in the first 2 seconds. Viewers are gone by second 3.</div>
-<div class="avoidrow"><b>Trophy-only feed.</b> Glam finals in a burst, then months of silence. No process, no people — nothing to trust.</div>
-<div class="avoidrow"><b>Caption = hashtag soup.</b> 30 hashtags, zero sentences, "Call now!!". A $200K brand explains its decisions instead.</div>
+<p class="gnote"><b>We grow together.</b> Levels live in your personal M5 dashboard — the game is real.</p>
 </div>
+<img class="gimg" src="img/dragon_steps.webp" alt="The M5 dragon hopping up marble steps — the A to M growth path">
 </div>
-</div></div>
-
-<div class="sec"><div class="wrap">
-<div class="k">Quick check</div>
-<h2>Check your eye — 5 questions.</h2>
-<p class="lead">Not graded, just fun. But it shows you how we think.</p>
-<div class="qz" id="quiz">
-<div class="qq"><h4>1 · Best first 2 seconds of a renovation reel?</h4>
-<button class="qo" data-ok="0" onclick="qa(this)">Slow pan from the front door<small>They swiped already. Payoff first, story second.</small></button>
-<button class="qo" data-ok="1" onclick="qa(this)">Flash the finished space — then rewind to day one<small>Yes. Show the transformation inside second 1, then tell the story.</small></button>
-<button class="qo" data-ok="0" onclick="qa(this)">Logo animation with music<small>Nobody waits through a logo. Ever.</small></button></div>
-<div class="qq"><h4>2 · The before/after rule?</h4>
-<button class="qo" data-ok="0" onclick="qa(this)">Different angles — more variety<small>Different angles = no proof. The brain can't compare.</small></button>
-<button class="qo" data-ok="0" onclick="qa(this)">Split collage with arrows<small>That's a classified ad, not a magazine page.</small></button>
-<button class="qo" data-ok="1" onclick="qa(this)">Same angle, frame for frame<small>Exactly. Locked-off, matched frames — the reveal does the selling.</small></button></div>
-<div class="qq"><h4>3 · A caption that sells a $200K renovation?</h4>
-<button class="qo" data-ok="0" onclick="qa(this)">30 hashtags, no text<small>Hashtag soup died years ago. Keywords in the caption now.</small></button>
-<button class="qo" data-ok="1" onclick="qa(this)">Story + real numbers + one specific CTA<small>Yes: problem → decision → outcome, "$187K, 9 weeks", "DM RENO for the guide".</small></button>
-<button class="qo" data-ok="0" onclick="qa(this)">"Call now for a free estimate!!"<small>Hard sell in every caption reads desperate at this price point.</small></button></div>
-<div class="qq"><h4>4 · A premium studio's grid should look like…</h4>
-<button class="qo" data-ok="0" onclick="qa(this)">A camera roll — keep it real<small>"Real" still needs a color grade and rhythm.</small></button>
-<button class="qo" data-ok="1" onclick="qa(this)">A magazine issue<small>Right. Curated, graded, alternating wide/detail/people.</small></button>
-<button class="qo" data-ok="0" onclick="qa(this)">Memes + projects — fun mix<small>Fun for a food truck. Not for $200K interiors.</small></button></div>
-<div class="qq"><h4>5 · The most weighted Instagram signal in 2026?</h4>
-<button class="qo" data-ok="0" onclick="qa(this)">Likes<small>Weakest signal on the list.</small></button>
-<button class="qo" data-ok="0" onclick="qa(this)">Follower count<small>Vanity. Distribution is content-by-content now.</small></button>
-<button class="qo" data-ok="1" onclick="qa(this)">DM sends &amp; shares<small>Yes — content people forward to a spouse wins. Make forwardable content.</small></button></div>
-<div class="qres" id="qres"></div>
-</div>
-</div></div>
-
-<div class="sec" id="task"><div class="wrap">
-<div class="k">Test task</div>
-<h2>Show us, don't tell us.</h2>
-<p class="lead">Real materials from a real M5 project. Work exactly the way you would after joining: download, create, upload back.
-<b>Using AI tools is encouraged</b> — show us your process, prompts included.</p>
-<div class="tabs">
-<div class="tab on" id="tab-smm" onclick="pickRole('smm')" role="button" tabindex="0">SMM Creator</div>
-<div class="tab" id="tab-editor" onclick="pickRole('editor')" role="button" tabindex="0">Video Editor</div>
-</div>
-<div class="task" id="task-smm">
-<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Download the materials — Google Drive</a>
-<ol>
-<li><b>1 reel · 15–30 sec — before/after</b><span>Hook in the first 2 seconds, text overlays (half of viewers watch muted), matched frames. The pack is photos-first? Bring them to life — AI image-to-video, smart zooms, your call.</span></li>
-<li><b>1-week content calendar — Instagram + TikTok</b><span>One week, two channels, done deep. We read hooks word by word.</span>
-<div class="calcols">date · channel · pillar · format · hook (verbatim!) · caption summary · CTA · asset needed · KPI to watch</div>
-<span>Pillars to balance: transformations ~30% · process &amp; craft ~25% · education &amp; cost ~20% · people ~15% · social proof ~10%. Miami is a lens on everything, not a separate bucket.</span></li>
-</ol>
-<div class="timebox">⏱ Designed for 3–4 focused hours. Not your weekend.</div>
-<div class="note"><b>Your test work stays yours.</b> We never publish candidate submissions. Grid layouts, stories and YouTube covers? That's paid-trial-week territory.</div>
-<div class="note"><b>How to submit:</b> apply below → you'll instantly get an email with your personal upload folder. Put both files there within <b>5 days</b>, at your own pace. Questions — just reply to that email.</div>
-</div>
-<div class="task" id="task-editor" style="display:none">
-<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Download the materials — Google Drive</a>
-<ol>
-<li><b>Links to your 3 best works</b><span>Reels, cuts, anything you're proud of. Links go in the form below.</span></li>
-<li><b>1 reel · 20–40 sec from our materials</b><span>Cuts every 1.5–3 s, text overlays, sound-synced transitions, magazine-grade color. Photos-first pack? Animate them — AI image-to-video welcome. No watermarks.</span></li>
-<li><b>Your terms</b><span>Rate per reel (or per hour) + typical turnaround, in the form. We respect clear numbers.</span></li>
-</ol>
-<div class="timebox">⏱ Designed for 2–3 focused hours.</div>
-<div class="note"><b>Your test work stays yours.</b> We never publish candidate submissions.</div>
-<div class="note"><b>How to submit:</b> apply below → you'll instantly get an email with your personal upload folder. Upload the reel there within <b>5 days</b>.</div>
-</div>
-</div></div>
-
-<div class="sec"><div class="wrap">
-<div class="k">How it works</div>
-<h2>Four steps. No black hole.</h2>
-<div class="steps">
-<div class="step"><i>01</i><b>Apply</b><span>2 minutes, 2 required fields. Your upload folder arrives by email instantly.</span></div>
-<div class="step"><i>02</i><b>Make the test</b><span>3–4 focused hours, within 5 days, at your own pace.</span></div>
-<div class="step"><i>03</i><b>We review — personally</b><span>Vlad and Vadym look at every submission. Reply within 3 business days, either way.</span></div>
-<div class="step"><i>04</i><b>Paid trial week</b><span>Shortlist gets a real brief with real money. Then we decide together.</span></div>
-</div>
-<div class="people">
-<div class="person"><img src="/img/ava_vlad.webp" alt="Vlad — co-founder of M5"><div><b>Vlad</b><span>Co-founder · the face of M5</span></div></div>
-<div class="person"><img src="/img/ava_vadim.webp" alt="Vadym — director of M5"><div><b>Vadym</b><span>Director · licensed contractor</span></div></div>
-</div>
-<p class="avanote">Yes, these are our AI-era avatars — the real ones you'll meet on the job site.</p>
 </div></div>
 
 <div class="sec" id="apply"><div class="wrap">
 <div class="k">Apply</div>
-<h2>Ready? Two minutes.</h2>
-<div class="form" id="formBox">
+<h2>Show us you.</h2>
+<p class="lead">Your Instagram, your best work, a few words why M5. Two minutes.</p>
+<div class="challenge">
+<svg class="ic-l" viewBox="0 0 24 24"><path d="M4 10h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4.5 10 3.6 6.9a1.5 1.5 0 0 1 1-1.9l11.6-3.3a1.5 1.5 0 0 1 1.9 1l.9 3.1z"/><path d="m8 8.6 2.2-4.1M13 7.2l2.2-4.1"/></svg>
+<div>
+<b>Optional challenge — want to stand out?</b>
+<p>Real footage from a real M5 job site. Cut one reel or one story <b>your way</b> — AI tools welcome, no rules, no deadline pressure. Apply below and your personal upload folder arrives by email.</p>
+<a class="matbtn" href="https://drive.google.com/drive/folders/1LKWMedfZSZGe51Id-lUMfdbZYK3pKd8Z" target="_blank" rel="noopener"><svg class="ic-l" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Get the raw materials</a>
+</div>
+</div>
+<div class="form" id="formBox" style="margin-top:16px">
 <form id="jf" onsubmit="return sendApp(event)">
 <div class="frow">
 <div class="fld"><label for="f_role">Role</label>
@@ -386,13 +320,9 @@ texture macro shots of plaster, matched-angle before/afters. Every post either <
 <div class="fld"><label for="f_email">Email</label><input id="f_email" type="email" required placeholder="you@email.com"></div>
 <div class="fld"><label for="f_phone">Phone / WhatsApp</label><input id="f_phone" placeholder="+1 …"></div>
 </div>
-<div class="frow">
-<div class="fld"><label for="f_langs">Languages</label><input id="f_langs" placeholder="English, Spanish…"></div>
-<div class="fld"><label for="f_rate">Your rate (if freelance)</label><input id="f_rate" placeholder="$ per reel / per hour — editors"></div>
-</div>
-<div class="fld"><label for="f_links">Portfolio links</label><input id="f_links" placeholder="Instagram, TikTok, YouTube, Behance, Drive…"></div>
-<div class="fld"><label for="f_ai">How do you use AI in your work?</label>
-<textarea id="f_ai" placeholder="Tools, prompts, workflows — honest answer. 'I don't yet, but…' is also an answer."></textarea></div>
+<div class="fld"><label for="f_links">Your Instagram + best work</label><input id="f_links" placeholder="@you · TikTok, YouTube, Drive — anything you're proud of"></div>
+<div class="fld"><label for="f_why">Why M5?</label>
+<textarea id="f_why" placeholder="A few honest sentences. What pulls you here, what would you make first?"></textarea></div>
 <div class="hp"><label for="f_web">Website</label><input id="f_web" tabindex="-1" autocomplete="off"></div>
 <button class="sbm" type="submit">Apply → get the upload folder by email</button>
 </form>
@@ -400,9 +330,13 @@ texture macro shots of plaster, matched-angle before/afters. Every post either <
 <div class="big">✦</div>
 <h3>Application received.</h3>
 <p>Check your inbox — your personal upload folder is on its way (look in spam too).
-No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.
-Deadline: 5 days. Vlad and Vadym review every submission and reply either way.</p>
+No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.</p>
 </div>
+</div>
+<div class="people">
+<div class="person"><img src="/img/ava_vlad.webp" alt="Vlad — co-founder of M5"><div><b>Vlad</b><span>Co-founder</span></div></div>
+<div class="person"><img src="/img/ava_vadim.webp" alt="Vadym — director of M5"><div><b>Vadym</b><span>Director · licensed contractor</span></div></div>
+<p class="pnote">They read every application personally and reply within 3 business days — either way.</p>
 </div>
 </div></div>
 
@@ -474,33 +408,12 @@ Deadline: 5 days. Vlad and Vadym review every submission and reply either way.</
 </script>
 <script>
 var HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';
-function pickRole(r){
-  if(r==='general')r='smm';
-  document.getElementById('tab-smm').className='tab'+(r==='smm'?' on':'');
-  document.getElementById('tab-editor').className='tab'+(r==='editor'?' on':'');
-  document.getElementById('task-smm').style.display=r==='smm'?'':'none';
-  document.getElementById('task-editor').style.display=r==='editor'?'':'none';
-  var s=document.getElementById('f_role'); if(s&&s.value==='general'&&r!=='general')return; if(s)s.value=r;
-}
-var qDone=0,qGood=0;
-function qa(btn){
-  var q=btn.parentNode; if(q.dataset.done) return; q.dataset.done='1'; qDone++;
-  var os=q.getElementsByClassName('qo');
-  for(var i=0;i<os.length;i++){ if(os[i].dataset.ok==='1'){ os[i].className='qo right'; } }
-  if(btn.dataset.ok==='1'){ qGood++; } else { btn.className='qo wrong'; }
-  if(qDone===5){
-    var r=document.getElementById('qres'); r.style.display='block';
-    r.innerHTML=qGood>=4?('<b>'+qGood+'/5 — you have the eye.</b> Now prove it with your hands: the test task is below.')
-      :qGood>=2?('<b>'+qGood+'/5 — solid instincts.</b> Read "what we never do" once more, then go get the test task.')
-      :('<b>'+qGood+'/5 — bold of you.</b> Study the feeds we admire, then surprise us with the test task.');
-  }
-}
 function sendApp(ev){
   ev.preventDefault();
   var g=function(id){var el=document.getElementById(id);return el?String(el.value||'').trim():''};
   if(g('f_web')) return false; /* honeypot: боты заполняют скрытое поле */
   var d={type:'candidate',role:g('f_role'),name:g('f_name'),email:g('f_email'),phone:g('f_phone'),
-    langs:g('f_langs'),rate:g('f_rate'),links:g('f_links'),ai:g('f_ai'),source:'join-portal'};
+    links:g('f_links'),why:g('f_why'),source:'join-portal'};
   if(!d.name||!d.email) return false;
   try{ fetch(HOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(d)}); }catch(e){}
   try{ if(window.clarity) clarity('event','candidate_apply'); }catch(e){}
@@ -508,7 +421,7 @@ function sendApp(ev){
   document.getElementById('okBox').style.display='block';
   return false;
 }
-if(/[?&]role=editor/.test(location.search)) pickRole('editor');
+if(/[?&]role=editor/.test(location.search)){ var s=document.getElementById('f_role'); if(s)s.value='editor'; }
 </script>
 </body>
 </html>
