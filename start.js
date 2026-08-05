@@ -582,6 +582,7 @@ var STACK=[
  ['AI & Dev','Claude Console','API-ключ Jin, лимиты трат','https://platform.claude.com/'],
  ['AI & Dev','Higgsfield AI','видео и фото-фабрика (план PLUS, MCP подключён)','https://higgsfield.ai/'],
  ['AI & Dev','Облачные рутины','ежедневно: Health+Security · пн: мега-аудит + Growth Lab · Пульс · Brief','https://claude.ai/code/routines'],
+ ['AI & Dev','Почтовый дозор','ежедневно 08:52: Клод читает alex@ за сутки, важное — Алексу в TG (локально на Mac)','https://mail.google.com/'],
  ['Операционка','JobTread','операционное ядро: лиды → сметы → производство → счета','https://app.jobtread.com/'],
  ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
  ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
