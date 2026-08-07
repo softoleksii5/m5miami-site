@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#F4EEE4">
+<title>M5 — D1 · Editorial (концепт главной)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4EEE4;
+  --paper:#FCFAF4;
+  --ink:#20242E;
+  --ink-2:#4E5361;
+  --ink-3:#565B66;
+  --gold:#B0894F;
+  --gold-l:#D9B87C;
+  --gold-t:#8F6B38;   /* золото для крупного текста на креме */
+  --bronze:#7A5B2E;   /* золото для мелкого текста на креме */
+  --line:rgba(32,36,46,.16);
+  --line-inv:rgba(244,238,228,.2);
+  --ph-bg:#E9E1D2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px;background:var(--bg)}
+body{
+  font-family:'Geist',ui-sans-serif,'Helvetica Neue',Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:clip;
+  padding-bottom:92px;
+}
+::selection{background:var(--gold-l);color:var(--ink)}
+::-webkit-scrollbar{width:12px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#C9BEA8;border:3px solid var(--bg);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+:focus-visible{outline:2px solid var(--gold-t);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+figure{margin:0}
+h1,h2,h3{font-weight:620}
+
+/* ── редакционная сетка: поля + 12 колонок + вылеты до края ── */
+.g{
+  display:grid;
+  grid-template-columns:
+    [full-start] minmax(clamp(20px,5vw,72px),1fr)
+    [main-start] repeat(12,minmax(0,92px))
+    [main-end] minmax(clamp(20px,5vw,72px),1fr)
+    [full-end];
+  column-gap:clamp(14px,1.7vw,26px);
+}
+.g>*{min-width:0}
+
+.micro{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink-3)}
+.folio{color:var(--bronze);font-variant-numeric:tabular-nums;letter-spacing:.12em}
+
+.ph{position:relative;overflow:hidden;background:var(--ph-bg)}
+.r1610{aspect-ratio:16/10}
+.r32{aspect-ratio:3/2}
+.r34{aspect-ratio:3/4}
+.r43{aspect-ratio:4/3}
+.r11{aspect-ratio:1/1}
+figcaption{
+  margin-top:10px;display:flex;justify-content:space-between;gap:16px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink-3);
+}
+
+/* ── шапка ── */
+.mast{border-bottom:1px solid var(--line);padding:18px 0;align-items:baseline}
+.mast-l{grid-column:main-start/8;display:flex;align-items:baseline;gap:18px}
+.mast-r{grid-column:8/main-end;display:flex;justify-content:flex-end;align-items:baseline;gap:22px}
+.logo{font-size:21px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.logo em{font-style:normal;color:var(--gold-t)}
+.mast-link{color:var(--bronze);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;transition:color .18s ease-out}
+.mast-link:hover{color:var(--ink)}
+
+/* ── hero ── */
+.hero{padding-top:clamp(44px,7vh,90px)}
+.hero-head h1{
+  grid-column:main-start/main-end;
+  font-size:clamp(2.55rem,8.8vw,8rem);
+  line-height:.97;letter-spacing:-.045em;font-weight:620;
+  text-wrap:balance;
+}
+.hero-head .au{color:var(--gold-t)}
+.hero-body{margin-top:clamp(30px,4.5vw,64px)}
+.hero-ph{grid-column:7/full-end;grid-row:1}
+.hero-copy{grid-column:main-start/7;grid-row:1;display:flex;flex-direction:column;justify-content:space-between;gap:36px;padding-right:clamp(0px,2vw,32px)}
+.index{list-style:none}
+.index li{
+  display:flex;align-items:baseline;gap:18px;
+  border-top:1px solid var(--line);padding:12px 0;
+  font-size:15px;font-weight:560;
+}
+.index li:last-child{border-bottom:1px solid var(--line)}
+.index .ix{font-size:11px;font-weight:600}
+.lede{margin-top:26px;font-size:clamp(16px,1.3vw,18px);line-height:1.6;color:var(--ink-2);max-width:36ch}
+.cta-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.btn{
+  display:inline-block;background:var(--ink);color:var(--paper);
+  font-size:15px;font-weight:560;letter-spacing:.01em;
+  padding:16px 30px;border-radius:2px;
+  transition:background-color .18s ease-out,transform .12s ease-out;
+}
+.btn:hover{background:var(--bronze)}
+.btn:active{transform:translateY(1px)}
+.tlink{
+  font-size:15px;font-weight:560;
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;
+  transition:color .18s ease-out;
+}
+.tlink:hover{color:var(--bronze)}
+
+/* ── секции ── */
+.sec{padding-block:clamp(64px,10vh,128px) 0}
+.shead{
+  grid-column:main-start/main-end;
+  border-top:1px solid var(--line);padding-top:14px;
+  display:flex;justify-content:space-between;gap:16px;
+  margin-bottom:clamp(36px,5.5vw,72px);
+}
+
+/* ── цифры ── */
+.works-ph{grid-column:full-start/9;grid-row:1}
+.stats{grid-column:9/main-end;grid-row:1;align-self:center}
+.stat{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  border-top:1px solid var(--line);padding:clamp(18px,2.2vw,26px) 0;
+}
+.stat:last-child{border-bottom:1px solid var(--line)}
+.num{
+  font-size:clamp(2.3rem,4.4vw,4rem);font-weight:620;letter-spacing:-.03em;line-height:1;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.slbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--ink-3);text-align:right}
+
+/* ── услуги ── */
+.band{background:var(--paper);border-block:1px solid var(--line);margin-top:clamp(64px,10vh,128px);padding-bottom:clamp(64px,10vh,128px)}
+.band.sec{padding-top:clamp(56px,8vh,104px)}
+.svc-list{grid-column:main-start/10;align-self:start}
+.svc{
+  display:grid;grid-template-columns:46px 1fr auto;align-items:baseline;column-gap:18px;
+  border-top:1px solid var(--line);padding:clamp(20px,2.6vw,30px) 0;
+}
+.svc:nth-of-type(3){border-bottom:1px solid var(--line)}
+.svc h3{font-size:clamp(1.6rem,3.3vw,3rem);letter-spacing:-.035em;line-height:1.05;font-weight:610}
+.svc .ix{font-size:11px;font-weight:600}
+.price{font-size:15px;font-weight:560;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.svc-note{margin-top:22px;font-size:14px;line-height:1.5;color:var(--ink-2);max-width:44ch}
+.svc-ph{grid-column:10/main-end}
+
+/* ── фактуры ── */
+.tex-head h2{
+  grid-column:main-start/9;grid-row:1;align-self:end;
+  font-size:clamp(1.85rem,3.5vw,3.2rem);letter-spacing:-.04em;line-height:1.04;font-weight:615;
+  text-wrap:balance;max-width:18ch;
+}
+.panno-ph{grid-column:10/main-end;grid-row:1}
+.tex-strip{margin-top:clamp(48px,6.5vw,84px)}
+.tex-big{grid-column:main-start/7;align-self:start}
+.tex-big figcaption{font-size:13px;letter-spacing:.06em}
+.tcols{
+  grid-column:7/full-end;
+  display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:clamp(14px,1.7vw,26px);
+}
+.tcol{display:flex;flex-direction:column;gap:clamp(24px,3vw,40px)}
+.tcolB{padding-top:clamp(24px,3.2vw,48px)}
+.tcolC{padding-top:clamp(48px,6.4vw,96px)}
+.tile figcaption{font-size:12px;letter-spacing:.06em}
+
+/* ── финал ── */
+.final{
+  margin-top:clamp(72px,12vh,144px);
+  background:var(--ink);color:var(--bg);
+  padding-block:clamp(72px,12vh,140px) clamp(36px,5vh,56px);
+}
+.fin-h{
+  grid-column:main-start/13;
+  font-size:clamp(2.3rem,7vw,6.4rem);letter-spacing:-.045em;line-height:1;font-weight:620;
+  text-wrap:balance;
+}
+.fin-h .au2{color:var(--gold-l)}
+.fin-cta{grid-column:main-start/main-end;display:flex;align-items:center;gap:30px;flex-wrap:wrap;margin-top:clamp(36px,5vw,56px)}
+.btn-gold{background:var(--gold-l);color:var(--ink)}
+.btn-gold:hover{background:var(--bg)}
+.tlink-l{color:var(--bg)}
+.tlink-l:hover{color:var(--gold-l)}
+.fin-foot{
+  grid-column:main-start/main-end;
+  margin-top:clamp(72px,10vh,120px);border-top:1px solid var(--line-inv);padding-top:22px;
+  display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;
+}
+.fin-l{display:flex;align-items:baseline;gap:16px}
+.logo-l{color:var(--bg)}
+.logo-l em{color:var(--gold-l)}
+.fin-meta{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:rgba(244,238,228,.62)}
+
+/* ── панель вариантов ── */
+.variants{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:50;
+  display:flex;align-items:center;gap:3px;padding:6px;
+  background:var(--ink);border:1px solid rgba(217,184,124,.4);border-radius:999px;
+  box-shadow:0 10px 28px rgba(32,36,46,.28);
+}
+.variants a{
+  font-size:12px;font-weight:600;letter-spacing:.04em;
+  color:rgba(244,238,228,.82);padding:8px 15px;border-radius:999px;
+  transition:background-color .15s ease-out,color .15s ease-out;
+}
+.variants a:hover{color:var(--paper);background:rgba(252,250,244,.09)}
+.variants a.on{background:var(--gold-l);color:var(--ink)}
+.variants a.on:hover{background:var(--gold-l);color:var(--ink)}
+.vsep{width:1px;height:16px;background:rgba(244,238,228,.22);margin:0 3px}
+
+/* подписи фото-вылетов не липнут к краю вьюпорта */
+@media (min-width:861px){
+  .hero-ph figcaption{padding-right:calc(clamp(20px,5vw,72px) + clamp(14px,1.7vw,26px))}
+  .works-ph figcaption{padding-left:calc(clamp(20px,5vw,72px) + clamp(14px,1.7vw,26px))}
+  .tcolC figcaption{padding-right:clamp(16px,2vw,28px)}
+}
+
+/* ── появление hero (единственный авторский момент) ── */
+@media (prefers-reduced-motion:no-preference){
+  .rise{opacity:0;animation:rise .3s cubic-bezier(.19,1,.22,1) forwards}
+  .rd1{animation-delay:.08s}
+  .rd2{animation-delay:.14s}
+}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── мобильная верстка ── */
+@media (max-width:860px){
+  body{padding-bottom:84px}
+  .g{display:block;padding-inline:20px}
+  .m-bleed{margin-inline:-20px}
+  .m-bleed figcaption{padding-inline:20px}
+  .mast{display:flex;justify-content:space-between;padding:16px 20px}
+  .mast-l,.mast-r{display:flex}
+  .mast-tag{display:none}
+  .mast-city{display:none}
+  .hero-body{margin-top:26px}
+  .hero-copy{margin-top:30px;gap:30px}
+  .cta-row{gap:20px}
+  .btn{padding:15px 26px}
+  .works-ph{margin-bottom:34px}
+  .band{margin-top:clamp(64px,10vh,128px)}
+  .svc{grid-template-columns:34px 1fr}
+  .price{grid-column:2;margin-top:8px}
+  .svc-ph{margin-top:44px;max-width:420px}
+  .tex-head h2{max-width:none}
+  .panno-ph{margin-top:34px}
+  .tex-strip{margin-top:44px}
+  .tex-big{margin-bottom:26px}
+  .tcols{display:grid;grid-template-columns:1fr 1fr;gap:24px 14px}
+  .tcol{display:contents}
+  .tile-ven{grid-column:1/-1}
+  .tile-ven .ph{aspect-ratio:16/10}
+  .fin-cta{gap:22px}
+  .fin-foot{margin-top:64px}
+}
+</style>
+</head>
+<body>
+
+<header class="mast g">
+  <div class="mast-l">
+    <a class="logo" href="./d1.html" aria-label="M5 — на главную концепта">M<em>5</em></a>
+    <span class="mast-tag micro">Interior Design &amp; Build</span>
+  </div>
+  <div class="mast-r">
+    <span class="micro mast-city">Miami, FL</span>
+    <a class="micro mast-link" href="#smeta">Смета за 48 часов</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="g hero-head">
+    <h1 class="rise">Проектируем, строим и&nbsp;ремонтируем <span class="au">дома в&nbsp;Майами.</span></h1>
+  </div>
+  <div class="g hero-body">
+    <figure class="hero-ph rise rd2 m-bleed">
+      <div class="ph r1610"><img src="https://m5miami.com/img/hero.webp" alt="Вилла на закате в Майами" fetchpriority="high"></div>
+      <figcaption><span>Вилла · Майами</span><span class="folio">01</span></figcaption>
+    </figure>
+    <div class="hero-copy rise rd1">
+      <div>
+        <ul class="index">
+          <li><span class="ix folio">01</span>Дизайн интерьера</li>
+          <li><span class="ix folio">02</span>Ремонт под ключ</li>
+          <li><span class="ix folio">03</span>Декоративная штукатурка</li>
+        </ul>
+        <p class="lede">Одна команда проектирует, строит и&nbsp;отвечает за&nbsp;результат.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="#smeta">Рассчитать проект</a>
+        <a class="tlink" href="#works">Наши работы</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="works">
+  <div class="g">
+    <div class="shead"><span class="micro">Цифры</span><span class="micro folio">02 / 05</span></div>
+  </div>
+  <div class="g works-body">
+    <figure class="works-ph m-bleed">
+      <div class="ph r32"><img loading="lazy" src="https://m5miami.com/img/gal_living.webp" alt="Гостиная в проекте M5"></div>
+      <figcaption><span>Гостиная · наш проект</span><span class="folio">02</span></figcaption>
+    </figure>
+    <div class="stats">
+      <div class="stat"><span class="num">14</span><span class="slbl">лет опыта</span></div>
+      <div class="stat"><span class="num">15</span><span class="slbl">проектов в&nbsp;США</span></div>
+      <div class="stat"><span class="num">1&nbsp;год</span><span class="slbl">письменная гарантия</span></div>
+      <div class="stat"><span class="num">100%</span><span class="slbl">пермиты</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band">
+  <div class="g">
+    <div class="shead"><span class="micro">Услуги</span><span class="micro folio">03 / 05</span></div>
+  </div>
+  <div class="g svc-body">
+    <div class="svc-list">
+      <div class="svc">
+        <span class="ix folio">01</span>
+        <h3>Дизайн интерьера и&nbsp;3D</h3>
+        <span class="price">от $6 / sq ft</span>
+      </div>
+      <div class="svc">
+        <span class="ix folio">02</span>
+        <h3>Ремонт под&nbsp;ключ</h3>
+        <span class="price">от $145 / sq ft</span>
+      </div>
+      <div class="svc">
+        <span class="ix folio">03</span>
+        <h3>Декоративная штукатурка</h3>
+        <span class="price">от $18 / sq ft</span>
+      </div>
+      <p class="svc-note">Пермиты и&nbsp;письменная гарантия&nbsp;— в&nbsp;каждом проекте.</p>
+    </div>
+    <figure class="svc-ph">
+      <div class="ph r34"><img loading="lazy" src="https://m5miami.com/img/plaster_master.webp" alt="Мастер наносит декоративную штукатурку"></div>
+      <figcaption><span>Мастер за работой</span><span class="folio">03</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="g">
+    <div class="shead"><span class="micro">Фактуры</span><span class="micro folio">04 / 05</span></div>
+  </div>
+  <div class="g tex-head">
+    <h2>Реальные фактуры из&nbsp;нашей библиотеки образцов</h2>
+    <figure class="panno-ph">
+      <div class="ph r43"><img loading="lazy" src="https://m5miami.com/img/gal_plaster.webp" alt="Панно из декоративной штукатурки"></div>
+      <figcaption><span>Панно · штукатурка</span><span class="folio">04</span></figcaption>
+    </figure>
+  </div>
+  <div class="g tex-strip">
+    <figure class="tex-big">
+      <div class="ph r11"><img loading="lazy" src="https://m5miami.com/img/tex_crystalshine.webp" alt="Фактура Crystal Shine"></div>
+      <figcaption><span>Crystal Shine</span><span class="folio">01</span></figcaption>
+    </figure>
+    <div class="tcols">
+      <div class="tcol tcolA">
+        <figure class="tile">
+          <div class="ph r11"><img loading="lazy" src="https://m5miami.com/img/tex_travertine.webp" alt="Фактура Travertine"></div>
+          <figcaption><span>Travertine</span><span class="folio">02</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="ph r11"><img loading="lazy" src="https://m5miami.com/img/tex_crystal.webp" alt="Фактура Crystal"></div>
+          <figcaption><span>Crystal</span><span class="folio">04</span></figcaption>
+        </figure>
+      </div>
+      <div class="tcol tcolB">
+        <figure class="tile">
+          <div class="ph r11"><img loading="lazy" src="https://m5miami.com/img/tex_exotic.webp" alt="Фактура Exotic"></div>
+          <figcaption><span>Exotic</span><span class="folio">03</span></figcaption>
+        </figure>
+        <figure class="tile">
+          <div class="ph r11"><img loading="lazy" src="https://m5miami.com/img/tex_marmorino.webp" alt="Фактура Marmorino"></div>
+          <figcaption><span>Marmorino</span><span class="folio">05</span></figcaption>
+        </figure>
+      </div>
+      <div class="tcol tcolC">
+        <figure class="tile tile-ven">
+          <div class="ph r11"><img loading="lazy" src="https://m5miami.com/img/tex_venetian.webp" alt="Фактура Venetian"></div>
+          <figcaption><span>Venetian</span><span class="folio">06</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="smeta">
+  <div class="g">
+    <h2 class="fin-h">Ваша смета&nbsp;— <span class="au2">за&nbsp;48&nbsp;часов.</span></h2>
+    <div class="fin-cta">
+      <a class="btn btn-gold" href="mailto:hello@m5miami.com">Рассчитать проект</a>
+      <a class="tlink tlink-l" href="#works">Наши работы</a>
+    </div>
+    <div class="fin-foot">
+      <div class="fin-l">
+        <span class="logo logo-l">M<em>5</em></span>
+        <span class="fin-meta">Interior Design &amp; Build</span>
+      </div>
+      <span class="fin-meta">Концепт D1 · Editorial</span>
+    </div>
+  </div>
+</section>
+
+<nav class="variants" aria-label="Варианты дизайна">
+  <a href="./d1.html" class="on" aria-current="page">D1</a>
+  <a href="./d2.html">D2</a>
+  <a href="./d3.html">D3</a>
+  <span class="vsep" aria-hidden="true"></span>
+  <a href="/">ПРОД</a>
+</nav>
+
+</body>
+</html>

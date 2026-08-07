@@ -19,6 +19,9 @@ var LINKS={
   vendors:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=907822598', // реестр подрядчиков (Hub · Vendors — бот «подрядчик …»)
   teamSheet:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=1800521970', // команда: контракты, ставки, выплачено (Hub · Team)
   legalDocs:'https://drive.google.com/drive/folders/1t9n4s6oRSS63UWC2Fr38E5qadGmfH_Kg', // 06 Legal & Docs — документы компании
+  planBox:'https://docs.google.com/document/d/1D9ppXo27xQFGo1062SZ7BYUTrjy1gDDoNE5ylJQ6Bwk/edit', // Texture Box — полный план (Drive → 07 Планы)
+  planIdeas:'https://docs.google.com/document/d/1dXBPQWTd4PDf-gyo9xCOwRM0XMhzLxjYSpKkm9Ywjxo/edit', // Каталог 18 креатив-идей
+  planSmm:'https://docs.google.com/document/d/1dsonUAcJyTU8wVipu0LlO6Sx5UnvutByq65PiN4lYkM/edit', // Соцсети — план запуска
   receipts:'https://drive.google.com/drive/folders/1pxf-z-hO8cYtPl0TEZaMvAtJAtxc4CbZ',      // папка «Чеки — фото и PDF»
   content:'https://drive.google.com/drive/folders/1elQzb8bMN8BEIMtDpKBg-ySryidATYrc',      // 01 Content — весь контент
   contentInbox:'https://drive.google.com/drive/folders/1K_VG6jUzGPruqMQAUQcKm8QsISGvHlqQ', // 00 Входящее — свалка, Клод разбирает
@@ -359,6 +362,7 @@ document.getElementById('app').innerHTML=
   '<div id="contSec"></div>'+
   '<div id="expSec"></div>'+
   '<div id="companySec"></div>'+
+  '<div id="ideasSec"></div>'+
   '<div id="hireSec"></div>'+
   '<div id="guideSec"></div>'+
   '<div id="clientsSec"></div>'+
@@ -605,7 +609,7 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='04.08';
+var ALEXTODO_UPD='07.08';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
@@ -974,6 +978,32 @@ function candStat(row,val,btn){
     el.innerHTML=h+'</div></details>';
     var box=el.querySelector('details.stackbox');
     if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_co_open',box.open?'1':'0');}catch(e){} });
+  }catch(e){}
+})();
+
+/* ═══ Идеи · очередь запуска (просьба Алекса 07.08: «всё, что мне нужно помнить —
+   в кабинете, без повторений»). Только уникальное: задачи — в My tasks, соцсети-схема —
+   в Socials, план E-2 — ниже. Полные планы живут в Drive → 07 Планы и маркетинг. ═══ */
+(function(){
+  try{
+    if(role!=='founder')return;
+    var el=document.getElementById('ideasSec'); if(!el)return;
+    var op=false; try{op=localStorage.getItem('m5_ideas_open')==='1';}catch(e){}
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>💡 Идеи · очередь запуска</span><span class="stk-hint">сентябрь + контент · обновлено 07.08</span></summary><div class="stack">';
+    h+='<div class="stk-g">📦 Сентябрь · по приезде (реш. 07.08)</div>';
+    h+='<a class="stk" href="'+LINKS.planBox+'" target="_blank" rel="noopener"><b>M5 Texture Box — главная идея сентября</b><span>20 боксов × 8 фактур ручной отливки → дизайн-студиям и люкс-риелторам · 28 адресатов уже отресёрчены (Sire Design, Strang, Britto Charette, Goldentayer, Ivan &amp; Mike) · QR-трекинг per-бокс · план полностью готов — открой</span></a>';
+    h+='<div class="lsn">🧱 <b>«Стена в подарок»</b> — панно бесплатно в знаковом месте диаспоры (Sunny Isles/Aventura) за табличку «Wall by M5» + видео процесса → сарафан в «Наши в Майами».</div>';
+    h+='<div class="lsn">🏠 <b>Listing Wall</b> — wow-стена люкс-риелтору перед фотосессией листинга за себестоимость (~$400) → co-branded reel + канал рефералов.</div>';
+    h+='<div class="lsn">🤝 <b>/pros — trade-программа</b> — страница для дизайнеров без бригад: «мы ваш execution-партнёр по фактурам», аутрич по базе 100 студий.</div>';
+    h+='<div class="lsn">🎨 <b>Открытие шоурума = Wynwood Art Walk</b> — вторая суббота ноября: Вадим кладёт венецианку в витрине как перформанс; вторая волна — Art Basel (нач. декабря).</div>';
+    h+='<div class="stk-g" style="margin-top:12px">🎬 Контент-очередь · делает Клод до аккаунтов</div>';
+    h+='<div class="lsn"><b>Топ-5 одобрено к производству:</b> Plaster ASMR (нарезка 17 видео Техаса) · Texture of the Day (27 фактур) · Guess the price · Houzz-профиль (66 фото, нужны твои 20 мин на регистрацию) · email-цепочка «7 дней после гайда». Готовое копится в Drive → 01 Content → Ready to post; публикация стартует после заведения аккаунтов.</div>';
+    h+='<div class="lsn" style="color:#8A8272">🐉 В резерве: «Jin reacts» (дракон судит ремонты — пруф-концепт по запросу), fake-OOH «Miami, but plastered», сериал «Texas built us», живая смета, видео-приветствия Jin.</div>';
+    h+='<a class="stk" href="'+LINKS.planIdeas+'" target="_blank" rel="noopener"><b>📚 Полный каталог — 18 идей</b><span>контент · конверсия · Майами-партнёрства, с ресурсами и первыми шагами</span></a>';
+    h+='<a class="stk" href="'+LINKS.planSmm+'" target="_blank" rel="noopener"><b>📱 Соцсети — план запуска</b><span>аккаунты @m5miami, био, стартер-пак 10 постов, найм SMM через /join</span></a>';
+    el.innerHTML=h+'</div></details>';
+    var box=el.querySelector('details.stackbox');
+    if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_ideas_open',box.open?'1':'0');}catch(e){} });
   }catch(e){}
 })();
 
