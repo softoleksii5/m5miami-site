@@ -1,6 +1,11 @@
 /* M5 Start — общий движок кабинетов. Один файл на все роли (/champion*).
    Ссылки вставляются ТОЛЬКО в LINKS — пустая строка = плитка в режиме Soon. */
 
+/* ВРЕМЕННО (12.08, просьба Алекса): открытый вход — хэш-гейты приватных блоков
+   пропускают всех. Вернуть защиту: OPEN_ACCESS=false и задеплоить. localStorage
+   вошедших не трогается — после возврата защиты перерегистрация не нужна. */
+var OPEN_ACCESS=true;
+
 var LINKS={
   ga4:'https://analytics.google.com/analytics/web/',
   clarity:'https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard',
@@ -522,10 +527,11 @@ var EPLAN_HINTS=[
               '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322',
               '5c73e10d48407d2b9ff50fb4383019c45b75eafe46b334ea4bf20de51d7df9ba'];
     var mm=null; try{mm=JSON.parse(localStorage.getItem('m5_member')||'null');}catch(e){}
+    if(OPEN_ACCESS&&!(mm&&mm.email))mm={email:'guest@open'};
     if(!mm||!mm.email||!window.crypto||!crypto.subtle)return;
     crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(mm.email).trim().toLowerCase())).then(function(tbuf){
     var ta=new Uint8Array(tbuf),thx='';for(var ti=0;ti<ta.length;ti++)thx+=('0'+ta[ti].toString(16)).slice(-2);
-    if(TRIO.indexOf(thx)===-1)return;
+    if(!OPEN_ACCESS&&TRIO.indexOf(thx)===-1)return;
     var op=false; try{op=localStorage.getItem('m5_eplan_open')==='1';}catch(e){}
     var eDone=0,eAll=0;
     for(var ex=0;ex<EPLAN.length;ex++)for(var ey=0;ey<EPLAN[ex].items.length;ey++){var es=EPLAN[ex].items[ey][0]; if(es==='✅'||es==='⬜'||es==='⚠️'){eAll++; if(es==='✅')eDone++;}}
@@ -685,10 +691,11 @@ var ROADMAP=[
   try{
     if(preview)return; // в предпросмотре показываем кабинет глазами сотрудника — личные блоки Алекса скрыты
     var m=JSON.parse(localStorage.getItem('m5_member')||'null');
+    if(OPEN_ACCESS&&!(m&&m.email))m={email:'guest@open'};
     if(!m||!m.email||!window.crypto||!crypto.subtle)return;
     crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(m.email).trim().toLowerCase())).then(function(buf){
       var a=new Uint8Array(buf),h='';for(var i=0;i<a.length;i++)h+=('0'+a[i].toString(16)).slice(-2);
-      if(h!=='9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47')return;
+      if(!OPEN_ACCESS&&h!=='9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47')return;
       var el=document.getElementById('stackSec'); if(!el)return;
       var groups=[],seen={};
       for(var i=0;i<STACK.length;i++){ if(!seen[STACK[i][0]]){seen[STACK[i][0]]=1;groups.push(STACK[i][0]);} }
@@ -1039,10 +1046,11 @@ var CLIENTHUBS=[
                 '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322'];
     if(preview)return;
     var m=JSON.parse(localStorage.getItem('m5_member')||'null');
+    if(OPEN_ACCESS&&!(m&&m.email))m={email:'guest@open'};
     if(!m||!m.email||!window.crypto||!crypto.subtle)return;
     crypto.subtle.digest('SHA-256',new TextEncoder().encode(String(m.email).trim().toLowerCase())).then(function(buf){
       var a=new Uint8Array(buf),hx='';for(var i=0;i<a.length;i++)hx+=('0'+a[i].toString(16)).slice(-2);
-      if(OWNERS.indexOf(hx)===-1)return;
+      if(!OPEN_ACCESS&&OWNERS.indexOf(hx)===-1)return;
       var el=document.getElementById('clientsSec'); if(!el)return;
       var d=document.createElement('div');
       d.innerHTML='<details class="stackbox"><summary><span>🤝 Alex + Vlad · Partnership</span><span class="stk-hint">только совладельцы</span></summary><div class="stack">'+
