@@ -600,7 +600,8 @@ var STACK=[
  ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
  ['Сайт & аналитика','Client Hub','кабинет клиента: прогресс, кредиты 3%, реферал $500/$500, фидбек (данные — из JobTread по мере интеграции)','/client/?p=brickell-demo'],
  ['Сайт & аналитика','Houzz','маркетинг-канал: профиль, портфолио, отзывы; реклама — позже','https://pro.houzz.com/'],
- ['Сайт & аналитика','GitHub','код сайта (m5miami-site) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
+ ['Сайт & аналитика','GitHub','код сайта (m5miami-site), превью (m5miami-preview) + бэкап (M5-Dashbord)','https://github.com/softoleksii5'],
+ ['Сайт & аналитика','Preview-сайт','preview.m5miami.com — полный сайт целиком, пока на боевой главной заглушка coming-soon (реш. 17.08)','https://preview.m5miami.com/'],
  ['Сайт & аналитика','Porkbun','домены: m5miami.com + m5florida.com (301-редирект), DNS, автопродление','https://porkbun.com/'],
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
@@ -615,11 +616,12 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='07.08';
+var ALEXTODO_UPD='17.08';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
+ ['todo','Porkbun: 1 DNS-строка — включить превью-сайт','Сайт скрыт заглушкой coming-soon (реш. 17.08, до реальных кейсов), полная версия переезжает на preview.m5miami.com. Сделать: porkbun.com → Domain Management → m5miami.com → DNS Records → Add: Type CNAME, Host «preview», Answer «softoleksii5.github.io», TTL 600. Через ~10 мин превью оживёт (HTTPS-сертификат GitHub выпустит сам, до часа). Кабинеты, /join/ и /deck/ работают на основном домене как раньше.','m'],
  ['done','JobTread — связь работает, демо-мусор вычищен','Заявки с сайта создают Customer+Contact+Job автоматически. Клод получил доступ на запись (scripts/jt_api.sh) и удалил демо-джобы Taras — SLA-алерты остановлены.'],
  ['done','Apps Script v13 — Клод применил сам через API','Фидбек/идеи → Partners, SLA только фаундерам (максимум 2 на лид), Jin знает JobTread и кабинет клиента, Monday отключён. Плюс найден и выключен локальный агент «SLA-алерт больше часа» (launchd, слал каждые 30 мин). Telegram чист.'],
  ['done','Drive: папка Visa создана','Клод создал и расшарил только вам троим (alex@, vlad@, vadim@). Ссылка: drive.google.com/drive/folders/1Mg4ZMJtjJlcrS4eYj3jr3nrhm6CBR9po','m'],
