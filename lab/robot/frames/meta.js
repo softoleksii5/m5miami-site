@@ -1,1 +1,0 @@
-window.__FCOUNT=62;window.__FSTART=0;window.__FEND=61;window.__FCENTER=41;
