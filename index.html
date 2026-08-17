@@ -1,81 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>M5 — Interior Design &amp; Build · Miami</title>
-<meta name="description" content="M5 is a Miami design & build studio — European craft, decorative plaster, full-scope renovation. Opening soon.">
 <meta name="theme-color" content="#14120F">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="M5 — Interior Design &amp; Build · Miami">
-<meta property="og:description" content="European craft. Decorative plaster. Full-scope renovation. Opening soon in Miami.">
-<meta property="og:image" content="https://m5miami.com/img/band_plaster.jpg">
-<meta property="og:url" content="https://m5miami.com/">
-<meta property="og:type" content="website">
+<title>M5 — Interior Design &amp; Build · Miami · Opening Soon</title>
+<meta name="description" content="M5 — interior design, renovation and decorative plaster studio. Opening soon in Miami.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
+
+<script>window.M5_PIXEL='';/* ← Pixel ID из Meta Events Manager — активирует пиксель */
+if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',window.M5_PIXEL);fbq('track','PageView');}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#14120F;--bone:#F4EEE4;--gold:#D9B87C;--bronze:#B0894F;--dim:#8F877A;
---sans:'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'Space Mono',ui-monospace,monospace}
+:root{--bone:#F4EEE4;--gold:#B0894F;--gold-l:#D9B87C;--ink:#14120F;
+--sans:'Manrope',-apple-system,sans-serif;--mono:'Space Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
-body{background:var(--ink);color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased;
-display:flex;flex-direction:column;min-height:100svh;overflow-x:hidden}
-.bg{position:fixed;inset:0;z-index:0;background:url('/img/band_plaster.webp') center/cover no-repeat;opacity:.14;
-filter:saturate(.6)}
-.bg::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 10%,transparent 0%,rgba(20,18,15,.55) 55%,rgba(20,18,15,.96) 100%)}
-main{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-text-align:center;padding:48px 24px;gap:0}
-.logo{display:inline-flex;opacity:0;animation:in .9s .1s cubic-bezier(.2,.7,.2,1) forwards}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--bronze);
-margin:34px 0 22px;opacity:0;animation:in .9s .3s cubic-bezier(.2,.7,.2,1) forwards}
-h1{font-weight:300;font-size:clamp(38px,7vw,76px);line-height:1.06;letter-spacing:-.02em;max-width:15ch;
-opacity:0;animation:in .9s .45s cubic-bezier(.2,.7,.2,1) forwards}
-h1 em{font-style:normal;color:var(--gold)}
-.rule{width:64px;height:1px;background:linear-gradient(90deg,transparent,var(--bronze),transparent);margin:30px auto;
-opacity:0;animation:in .9s .6s cubic-bezier(.2,.7,.2,1) forwards}
-.sub{font-weight:300;font-size:clamp(15px,2.2vw,18px);line-height:1.65;color:var(--dim);max-width:52ch;
-opacity:0;animation:in .9s .7s cubic-bezier(.2,.7,.2,1) forwards}
-.sub b{font-weight:500;color:var(--bone)}
-.cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:38px;
-opacity:0;animation:in .9s .85s cubic-bezier(.2,.7,.2,1) forwards}
-.btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
-padding:14px 26px;border:1px solid rgba(176,137,79,.55);color:var(--bone);border-radius:2px;
-transition:background .25s,border-color .25s,color .25s}
-.btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
-.btn.ghost{border-color:rgba(244,238,228,.18);color:var(--dim)}
-.btn.ghost:hover{background:transparent;border-color:var(--bone);color:var(--bone)}
-footer{position:relative;z-index:1;padding:26px 24px 30px;display:flex;flex-direction:column;gap:8px;align-items:center;
-font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#5E574C}
-footer .langs{letter-spacing:.1em;text-transform:none;color:#6E6659}
-@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.logo,.eyebrow,h1,.rule,.sub,.cta{animation:none;opacity:1}}
+body{font-family:var(--sans);color:var(--bone);
+background:linear-gradient(rgba(20,18,15,.72),rgba(20,18,15,.82)),url('img/hero.webp') center/cover no-repeat fixed;
+display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+.box{max-width:640px;opacity:0;transform:translateY(18px);animation:in 1s cubic-bezier(.22,.61,.36,1) .15s forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.logo{font-size:64px;font-weight:800;letter-spacing:-.02em}
+.logo b{color:var(--gold-l)}
+.logo small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.42em;color:rgba(244,238,228,.65);margin-top:10px;text-transform:uppercase}
+.line{width:56px;height:1px;background:var(--gold);margin:34px auto}
+h1{font-size:clamp(24px,4.4vw,34px);font-weight:700;letter-spacing:-.015em;line-height:1.25}
+h1 i{font-style:normal;color:var(--gold-l)}
+p.sub{font-size:15.5px;line-height:1.7;color:rgba(244,238,228,.72);margin-top:16px}
+.soon{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-l);border:1px solid rgba(217,184,124,.45);border-radius:999px;padding:10px 22px;margin-top:30px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:15px 26px;border-radius:2px;transition:.2s}
+.btn-gold{background:var(--gold);color:#1E1710}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-line{border:1px solid rgba(244,238,228,.4);color:var(--bone)}
+.btn-line:hover{border-color:var(--gold-l);color:var(--gold-l)}
+.foot{margin-top:44px;font-size:12.5px;color:rgba(244,238,228,.45)}
+.foot a{color:rgba(244,238,228,.65);text-decoration:none}
+.foot a:hover{color:var(--gold-l)}
+@media(max-width:480px){.logo{font-size:48px}}
 </style>
-<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
 </head>
 <body>
-<div class="bg" aria-hidden="true"></div>
-<main>
-  <span class="logo" aria-label="M5">
-    <svg width="66" height="55" viewBox="0 0 46 38" fill="none">
-      <path d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
-      <text x="23" y="26" text-anchor="middle" font-family="Geist,-apple-system,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
-    </svg>
-  </span>
-  <p class="eyebrow">Interior Design &amp; Build · Miami</p>
-  <h1>Something <em>beautiful</em> is being built here.</h1>
-  <div class="rule" aria-hidden="true"></div>
-  <p class="sub"><b>M5</b> is a Miami design &amp; build studio — European craftsmanship, decorative plaster,
-  full-scope renovation. We're putting the finishing touches on our new home. <b>Opening soon.</b></p>
+<div class="box">
+  <div class="logo">M<b>5</b><small>Interior Design &amp; Build</small></div>
+  <div class="line"></div>
+  <h1>Crafting Miami's most beautiful renovations<br>and signature <i>plaster finishes</i>.</h1>
+  <p class="sub">Interior design · turnkey renovation · decorative plaster.<br>One team designs it, builds it and answers for it.</p>
+  <div class="soon">Opening soon · Miami · Fall 2026</div>
   <div class="cta">
-    <a class="btn" href="mailto:hello@m5miami.com">hello@m5miami.com</a>
-    <a class="btn ghost" href="https://wa.me/17864074441" rel="noopener">WhatsApp</a>
+    <a class="btn btn-gold" href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp us</a>
+    <a class="btn btn-line" href="mailto:hello@m5miami.com">hello@m5miami.com</a>
   </div>
-</main>
-<footer>
-  <span>© 2026 M5 · Miami, FL</span>
-  <span class="langs">We speak English · Español · Українська · Русский</span>
-</footer>
+  <div class="foot">© M5 · 2026 · Miami, Florida · <a href="/privacy/">Privacy</a></div>
+</div>
 </body>
 </html>
