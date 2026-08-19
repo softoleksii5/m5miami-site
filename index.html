@@ -103,7 +103,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
 (function(){
   var f=document.getElementById('gate'),o=document.getElementById('gateOpen'),
       r=document.getElementById('gateRow'),i=document.getElementById('gateIn');
-  var IV='4tfaRMsrPzt8946O',CT='KRJu0QmVkgJTtyAgdH6hZDDkFMQ1AHnZ/+zDzPiUtRtPeNXc04dSxv48hqI=';
+  var IV='ZKAr9Aak7QfJLqKNNUTkhQ==',CT='UcbmMmlqI2ty7mfmMqrpMVG560myfaMHhT0eWww=';
   function b(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0)})}
   o.addEventListener('click',function(){o.hidden=true;r.hidden=false;i.focus()});
   f.addEventListener('submit',function(e){
@@ -115,6 +115,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     }).then(function(key){
       return crypto.subtle.decrypt({name:'AES-GCM',iv:b(IV)},key,b(CT));
     }).then(function(pt){
+      try{localStorage.setItem('m5_gate','1')}catch(_){}
       location.href=new TextDecoder().decode(pt);
     }).catch(function(){
       f.classList.remove('err');void f.offsetWidth;f.classList.add('err');i.select();
