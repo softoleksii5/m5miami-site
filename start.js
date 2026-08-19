@@ -616,12 +616,12 @@ var STACK=[
 
 /* «Мои задачи» — личный TODO Алекса, ведёт Клод (обновляется после каждого решения
    в чате; «сделал» → ✅). Виден только Алексу (hash-gate). */
-var ALEXTODO_UPD='17.08';
+var ALEXTODO_UPD='19.08';
 /* Статусы: todo | done | soon. 4-й элемент 'm' = «мелочь на 5 минут» (отдельная
    секция под целью недели). Кодовое слово Алекса в чате Клоду — «ПОГНАЛИ»:
    Клод открывает этот список и ведёт по шагам, «сделал» → done. */
 var ALEXTODO=[
- ['todo','Porkbun: 1 DNS-строка — включить превью-сайт','Сайт скрыт заглушкой coming-soon (реш. 17.08), полная версия живёт на preview.m5miami.com, но без DNS-записи поддомен мёртв. Сделать: porkbun.com → Domain Management → m5miami.com → DNS Records → Add: Type CNAME, Host «preview», Answer «softoleksii5.github.io», TTL 600. Через 5–30 мин GitHub выпустит сертификат — и код 2026 на заглушке («Private preview», 19.08) начнёт открывать полный сайт. API-ключей Porkbun у Клода нет — шаг ручной (2 мин). Кабинеты, /join/ и /deck/ работают на основном домене как раньше.','m'],
+ ['soon','Porkbun: DNS-строка для превью-поддомена (теперь опционально)','Код 2026 на заглушке УЖЕ открывает полный сайт прямо на боевом (/welcome.html за гейтом, реш. 19.08) — блокера нет. DNS-строка нужна, только если захочешь отдельный чистый поддомен preview.m5miami.com (делиться ссылкой без пароля, репо уже готов): porkbun.com → Domain Management → m5miami.com → DNS Records → Add: Type CNAME, Host «preview», Answer «softoleksii5.github.io», TTL 600. API-ключей Porkbun у Клода нет — шаг ручной (2 мин).','m'],
  ['done','JobTread — связь работает, демо-мусор вычищен','Заявки с сайта создают Customer+Contact+Job автоматически. Клод получил доступ на запись (scripts/jt_api.sh) и удалил демо-джобы Taras — SLA-алерты остановлены.'],
  ['done','Apps Script v13 — Клод применил сам через API','Фидбек/идеи → Partners, SLA только фаундерам (максимум 2 на лид), Jin знает JobTread и кабинет клиента, Monday отключён. Плюс найден и выключен локальный агент «SLA-алерт больше часа» (launchd, слал каждые 30 мин). Telegram чист.'],
  ['done','Drive: папка Visa создана','Клод создал и расшарил только вам троим (alex@, vlad@, vadim@). Ссылка: drive.google.com/drive/folders/1Mg4ZMJtjJlcrS4eYj3jr3nrhm6CBR9po','m'],
