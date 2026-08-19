@@ -49,8 +49,19 @@ transition:background .25s,border-color .25s,color .25s}
 footer{position:relative;z-index:1;padding:26px 24px 30px;display:flex;flex-direction:column;gap:8px;align-items:center;
 font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#5E574C}
 footer .langs{letter-spacing:.1em;text-transform:none;color:#6E6659}
+.gate{margin-top:26px;min-height:44px;opacity:0;animation:in .9s 1s cubic-bezier(.2,.7,.2,1) forwards}
+.gate-open{background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#5E574C;padding:8px;transition:color .25s}
+.gate-open:hover{color:var(--bronze)}
+.gate-row{display:flex;gap:10px;justify-content:center}
+.gate-row input{width:200px;background:rgba(244,238,228,.04);border:1px solid rgba(244,238,228,.18);border-radius:2px;color:var(--bone);font-family:var(--mono);font-size:13px;letter-spacing:.3em;text-align:center;padding:12px 14px;outline:none;transition:border-color .25s}
+.gate-row input:focus{border-color:rgba(176,137,79,.7)}
+.gate-row input::placeholder{color:#5E574C;letter-spacing:.18em}
+.gate-go{font-family:var(--mono);font-size:14px;cursor:pointer;background:none;border:1px solid rgba(176,137,79,.55);border-radius:2px;color:var(--bone);padding:0 18px;transition:background .25s,color .25s}
+.gate-go:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.gate.err .gate-row input{border-color:#c96f5e;animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.logo,.eyebrow,h1,.rule,.sub,.cta{animation:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.logo,.eyebrow,h1,.rule,.sub,.cta,.gate{animation:none;opacity:1}}
 </style>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN"></script>
@@ -76,10 +87,40 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     <a class="btn" href="mailto:hello@m5miami.com">hello@m5miami.com</a>
     <a class="btn ghost" href="https://wa.me/17864074441" rel="noopener">WhatsApp</a>
   </div>
+  <form class="gate" id="gate" autocomplete="off">
+    <button type="button" class="gate-open" id="gateOpen">Private preview</button>
+    <div class="gate-row" id="gateRow" hidden>
+      <input id="gateIn" type="password" inputmode="numeric" autocomplete="off" placeholder="Access code" aria-label="Access code">
+      <button type="submit" class="gate-go" aria-label="Enter">&rarr;</button>
+    </div>
+  </form>
 </main>
 <footer>
   <span>© 2026 M5 · Miami, FL</span>
   <span class="langs">We speak English · Español · Українська · Русский</span>
 </footer>
+<script>
+(function(){
+  var f=document.getElementById('gate'),o=document.getElementById('gateOpen'),
+      r=document.getElementById('gateRow'),i=document.getElementById('gateIn');
+  var IV='4tfaRMsrPzt8946O',CT='KRJu0QmVkgJTtyAgdH6hZDDkFMQ1AHnZ/+zDzPiUtRtPeNXc04dSxv48hqI=';
+  function b(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0)})}
+  o.addEventListener('click',function(){o.hidden=true;r.hidden=false;i.focus()});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var pw=i.value.trim();
+    if(!pw||!window.crypto||!crypto.subtle){return}
+    crypto.subtle.digest('SHA-256',new TextEncoder().encode(pw)).then(function(k){
+      return crypto.subtle.importKey('raw',k,'AES-GCM',false,['decrypt']);
+    }).then(function(key){
+      return crypto.subtle.decrypt({name:'AES-GCM',iv:b(IV)},key,b(CT));
+    }).then(function(pt){
+      location.href=new TextDecoder().decode(pt);
+    }).catch(function(){
+      f.classList.remove('err');void f.offsetWidth;f.classList.add('err');i.select();
+    });
+  });
+})();
+</script>
 </body>
 </html>
