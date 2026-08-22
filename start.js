@@ -10,6 +10,8 @@ var LINKS={
   ga4:'https://analytics.google.com/analytics/web/',
   clarity:'https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard',
   gcal:'https://calendar.google.com/',
+  salescrm:'https://crm.m5miami.com/', // M5 CRM — лиды и КП (Vercel + Supabase); менять домен только здесь
+  saleskit:'https://crm.m5miami.com/kit', // скрипты продаж внутри CRM
   org:'/org/',
   onb:'/onboarding/', // страница сама узнаёт человека по рабочей почте
 
@@ -96,17 +98,18 @@ var ROLES={
       {ic:'📸',k:'Channels',t:'IG · TikTok · YT'},
       {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'}]},
   sales:{label:'Sales',sub:'Your sales workspace',
-    chips:['Как ответить на новый лид?','Как собрать смету в JobTread?','Где скрипты продаж?'],
+    chips:['Как ответить на новый лид?','Как собрать КП в CRM?','Где скрипты продаж?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'jobtread',k:'CRM',t:'JobTread',link:'jobtread'},
+      {ic:'📇',k:'CRM · Sales',t:'Лиды и КП',link:'salescrm'},
+      {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
       {b:'whatsapp',k:'Calls & chats',t:'WhatsApp Business',link:'whatsapp'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
       {b:'drive',k:'Drive',t:'Docs',link:'drive'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'📈',k:'My growth',t:'Levels & growth'},
-      {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch'},
+      {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch',link:'saleskit'},
       {ic:'🤝',k:'Partners',t:'Realtors & brokers'}]},
   designer:{label:'Designer',sub:'Your design workspace',
     chips:['Где библиотека материалов?','Как согласовать образец?','Бренд и стиль M5'],
@@ -206,7 +209,7 @@ function nowHtml(){
   else if(role==='director') n=(new Date().getHours()>=17)
     ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Drive · 03 Progress.',btn:'Отправить',url:LINKS.telegram}
     : {txt:'<b>Сегодня:</b> фото и видео с объекта → Drive · 02 Projects. Вечером — отчёт в Projects (2 минуты).',btn:'Открыть Drive',url:LINKS.drive};
-  else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в Telegram → Лиды и в JobTread.',btn:'Открыть CRM',url:LINKS.jobtread};
+  else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM-кабинет и в Telegram → Лиды.',btn:'Открыть CRM',url:LINKS.salescrm};
   else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Drive (01 Content / 03 Progress); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть Drive',url:LINKS.drive};
   else n={txt:'Задачи дня — в Telegram · M5 Team. Не знаешь, с чего начать — спроси Jin сверху.',btn:'Открыть чат',url:LINKS.telegram};
   var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
@@ -1069,8 +1072,8 @@ var CLIENTHUBS=[
 var ROLEGUIDE={
  sales:[
   ['1 · Новый лид — ответ за 15 минут','Карточка падает в Telegram «Лиды» и в JobTread. Звони или пиши с бизнес-WhatsApp +1 786 407 4441. Цель — записать на консультацию/замер.'],
-  ['2 · Консультация → замер → смета','Всё ведёшь в JobTread: заметки, смета, статусы. Календарь замеров — плитка Calendar.'],
-  ['3 · Договор подписан','PDF → Drive: 02 Projects → [имя проекта] → 01 Contract. Затем пост в «M5 Team» → Projects: «🖊 Договор подписан: имя · адрес · старт [дата]» — это сигнал всей команде.'],
+  ['2 · Консультация → замер → КП','Лид и КП ведёшь в CRM (плитка CRM · Sales): статусы, discovery, «живая смета» с фиксацией цены. Календарь замеров — плитка Calendar. После подписания договора объект переезжает в JobTread (производство).'],
+  ['3 · Договор подписан','PDF договора — в карточку сделки в CRM (файл уходит в Supabase, не в Drive). Затем пост в «M5 Team» → Projects: «🖊 Договор подписан: имя · адрес · старт [дата]» — это сигнал всей команде.'],
   ['4 · Ссылка клиенту','Клод заведёт кабинет клиента и даст тебе персональную ссылку — отправь её клиенту с бизнес-WhatsApp: «Ваш личный кабинет — прогресс, документы, материалы».'],
   ['5 · Допродажи','Заявки клиента из его кабинета (услуги/кредиты) прилетают в Telegram — отвечаешь в тот же день.']],
  smm:[
@@ -1089,7 +1092,7 @@ var ROLEGUIDE={
   ['3 · Дизайн-надзор','Еженедельный визит на объект + фотоотчёт в 03 Progress: то, что нарисовано = то, что строится.']]
 };
 var TEAMVIEW=[
- ['Sales','Лиды за 15 минут · смета в JobTread · договор → 01 Contract + пост в Projects · ссылка на кабинет клиенту · допродажи'],
+ ['Sales','Лиды за 15 минут · КП в CRM · договор → карточка сделки в CRM + пост в Projects · ссылка на кабинет клиенту · допродажи'],
  ['SMM','Фотосессии «до/после» (02 Before / 06 After) · контент только из Drive · постинг IG/TikTok/YT · 1–2 ролика с Владом'],
  ['Мастер / бригада','Работы по наряду Вадима · фото «до/после» своего участка Вадиму · без систем — только качество'],
  ['Вадим (ты)','Дневной цикл (блок «Как вести проект» выше) · контроль качества и приёмка · обучение команды этим инструкциям'],
@@ -1113,7 +1116,7 @@ var TEAMVIEW=[
         h+='<div class="lsn"><b>'+TEAMVIEW[t][0]+'</b> — '+TEAMVIEW[t][1]+'</div>';
       }
       h+='<div class="stk-g" style="margin-top:10px">Путь клиента за 30 секунд</div>';
-      h+='<div class="lsn">Лид → Sales (15 мин) → замер → договор (01 Contract + пост в Projects) → Клод заводит кабинет клиента → SMM снимает «ДО» → Вадим ведёт дневной цикл → Клод ставит галочки клиенту → инвойсы/кредиты → финал: SMM «ПОСЛЕ» + просим Google-отзыв (бесплатно, на пике эмоций) + реферальная ссылка $500/$500.</div>';
+      h+='<div class="lsn">Лид → Sales (15 мин) → замер → КП в CRM → договор (карточка сделки в CRM + пост в Projects) → Клод заводит кабинет клиента → SMM снимает «ДО» → Вадим ведёт дневной цикл → Клод ставит галочки клиенту → инвойсы/кредиты → финал: SMM «ПОСЛЕ» + просим Google-отзыв (бесплатно, на пике эмоций) + реферальная ссылка $500/$500.</div>';
       h+='<div class="lsn" style="color:#8A8272">Полная орг-структура и контакты — <a href="/org/" style="color:#96703B">страница Org →</a></div>';
       h+='</div></details>';
     }
