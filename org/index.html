@@ -180,7 +180,7 @@
   <div class="lvl" style="margin-top:0">The layer underneath everyone</div>
   <div class="jinlayer" onclick="openP('jin')">
     <div class="jl-head"><span class="jl-dot"></span>JIN — infrastructure, not a colleague</div>
-    <p>Jin sits <b>under</b> the whole company, not next to anyone in it. It carries the routine for every person here: catches leads, answers every teammate right in their workspace (the ✦ Jin bar on top of each cabinet and the client hub), chases follow-ups, keeps JobTread and Drive clean, reports the numbers.</p>
+    <p>Jin sits <b>under</b> the whole company, not next to anyone in it. It carries the routine for every person here: catches leads, answers every teammate right in their workspace (the ✦ Jin bar on top of each cabinet and the client hub), chases follow-ups, keeps JobTread and the company files clean, reports the numbers.</p>
     <p class="jl-never">It never touches what people are here for: <b>the license and everything signed under it, judgment on money and scope, taste, and real relationships.</b> Those do not get automated — they get protected by taking the paperwork off the people who own them.</p>
     <span class="jl-more">What Jin runs — and what it never touches →</span>
   </div>
@@ -240,8 +240,8 @@
 <footer>M5 Interior Design &amp; Build · Miami · Private team page</footer>
 
 <script>
-/* Данные команды. Чувствительное (договор) — только ссылкой на Drive:
-   файл в Drive доступен лишь фаундерам и директору, страница ничего не раскрывает.
+/* Данные команды. Чувствительное (договор) — только ссылкой в CRM · Файлы (раздел HR):
+   файл лежит за входом в CRM, страница сама ничего не раскрывает.
    Источник правды по датам/договорам: M5/4 Рабочие документы/Команда_реестр.csv */
 var TEAM=[
  {slug:'alex',name:'Alex',role:'Co-Founder · Strategy & Systems',ava:'A',avaClass:'ink',img:'/img/ava_alex.webp',bc:'#20242E',
@@ -268,7 +268,7 @@ var TEAM=[
  /* Левая ветка. Роль-место, а не человек: сегодня её закрывают фаундеры, завтра — наёмный руководитель. */
  /* Jin — не человек и не вакансия. Стоит в схеме потому, что реально делает работу целой функции. */
  {slug:'jin',name:'Jin',role:'Infrastructure · runs under the whole team',ava:'J',avaClass:'',bc:'#2E3545',jin:true,
-  duty:['Every lead caught and answered in seconds','Follow-ups chased without anyone remembering','JobTread and Drive kept clean by default','Answers every teammate in their workspace — the ✦ Jin bar','Numbers reported back to founders'],
+  duty:['Every lead caught and answered in seconds','Follow-ups chased without anyone remembering','JobTread and company files kept clean by default','Answers every teammate in their workspace — the ✦ Jin bar','Numbers reported back to founders'],
   value:'Jin is not staff, not a hire and not anyone’s peer — it is plumbing. It sits under the whole company and carries the routine for every person in it: capture, reply, follow-up, CRM hygiene, documents, reporting. Nobody reports to Jin and Jin reports to nobody. It exists so that the people here spend their day on the part only a person can do.',
   notes:['Judgment on money, scope and clients','Taste and design decisions','Real relationships — clients, partners, crews','Anything a licensed professional must sign'],
   openTo:'This is why M5 stays small. Before any new hire the question is always the same: can Jin do this? A person is added only when the honest answer is no.'}
@@ -332,7 +332,7 @@ function openP(slug){
     '<div class="pm-fact"><i>Contract until</i><b>'+(p.end?esc(p.end):'Open-ended')+'</b></div>'+
     '<div class="pm-fact"><i>Role type</i><b>'+(p.slug==='vadim'?'Director · W-2':'Co-Founder')+'</b></div>';
   var doc=p.contract
-    ? '<a class="pm-doc" target="_blank" rel="noopener" href="'+p.contract+'"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg> Contract — open in Drive</a>'
+    ? '<a class="pm-doc" target="_blank" rel="noopener" href="'+p.contract+'"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg> Contract — open in CRM</a>'
     : '<span class="pm-doc na"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg> Contract — not uploaded yet</span>';
   document.getElementById('pmBox').innerHTML=
     '<button class="pm-x" onclick="closeP()" aria-label="Close">✕</button>'+
@@ -346,7 +346,7 @@ function openP(slug){
       (p.tg?'<a target="_blank" rel="noopener" href="https://t.me/'+p.tg+'"><svg viewBox="0 0 24 24" width="13" height="13" style="vertical-align:-2px" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3.5 11l5 2L19 6.5 10.5 14.5v4l3-2.8 4 3.3z"/></svg> @'+p.tg+'</a>':'')+
     '</div>'+
     '<hr class="pm-hr">'+doc+
-    '<div class="pm-priv">Contract files live in Drive — access is limited to founders &amp; director</div>';
+    '<div class="pm-priv">Contract files live in the M5 CRM — access is limited to founders &amp; director</div>';
   document.getElementById('pmOv').classList.add('on');
   document.getElementById('pmBox').classList.add('on');
 }

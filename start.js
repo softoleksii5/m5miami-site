@@ -15,7 +15,10 @@ var LINKS={
   org:'/org/',
   onb:'/onboarding/', // страница сама узнаёт человека по рабочей почте
 
-  drive:'https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm', // «M5 · Company Drive»
+  /* Файлы компании — CRM (Supabase Storage). Единое хранилище: объекты, контент,
+     чеки, документы, HR. Google Drive с 24.08 — только архив на чтение, из
+     интерфейса кабинетов убран. Фильтр раздела — параметр ?b=<bucket>. */
+  files:'https://crm.m5miami.com/files',
   telegram:'https://t.me/+x4q86H688uNiODI8',  // группа «M5 Team»
   jobtread:'https://app.jobtread.com/', // операционное ядро: лиды→сметы→производство
   whatsapp:'https://wa.me/17864074441', // бизнес-номер M5 (WhatsApp Business)
@@ -25,32 +28,31 @@ var LINKS={
   revenue:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=801839867', // журнал доходов (Hub · лист Revenue — бот «доход …»)
   vendors:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=907822598', // реестр подрядчиков (Hub · Vendors — бот «подрядчик …»)
   teamSheet:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=1800521970', // команда: контракты, ставки, выплачено (Hub · Team)
-  legalDocs:'https://drive.google.com/drive/folders/1t9n4s6oRSS63UWC2Fr38E5qadGmfH_Kg', // 06 Legal & Docs — документы компании
-  planBox:'https://docs.google.com/document/d/1D9ppXo27xQFGo1062SZ7BYUTrjy1gDDoNE5ylJQ6Bwk/edit', // Texture Box — полный план (Drive → 07 Планы)
+  legalDocs:'https://crm.m5miami.com/files?b=legal', // документы компании: LLC, страховки, аренда, бизнес-план E-2
+  planBox:'https://docs.google.com/document/d/1D9ppXo27xQFGo1062SZ7BYUTrjy1gDDoNE5ylJQ6Bwk/edit', // Texture Box — полный план (Google Docs)
   planIdeas:'https://docs.google.com/document/d/1dXBPQWTd4PDf-gyo9xCOwRM0XMhzLxjYSpKkm9Ywjxo/edit', // Каталог 18 креатив-идей
   planSmm:'https://docs.google.com/document/d/1dsonUAcJyTU8wVipu0LlO6Sx5UnvutByq65PiN4lYkM/edit', // Соцсети — план запуска
-  receipts:'https://drive.google.com/drive/folders/1pxf-z-hO8cYtPl0TEZaMvAtJAtxc4CbZ',      // папка «Чеки — фото и PDF»
-  content:'https://drive.google.com/drive/folders/1elQzb8bMN8BEIMtDpKBg-ySryidATYrc',      // 01 Content — весь контент
-  contentInbox:'https://drive.google.com/drive/folders/1K_VG6jUzGPruqMQAUQcKm8QsISGvHlqQ', // 00 Входящее — свалка, Клод разбирает
-  projects:'https://drive.google.com/drive/folders/1Oy7lmfnsyZ2Xz6ggCOFhCS4dYl--Xus_',     // 02 Projects — папки объектов (создаются автоматом из JobTread)
-  shootRule:'https://docs.google.com/document/d/1EPQnXlehD2946jpjtUZyoS5spFP65WIYpsGU2ddHt84/', // «Правило съёмки ДО/ПРОЦЕСС/ПОСЛЕ» RU+EN (05 Team)
+  receipts:'https://crm.m5miami.com/files?b=receipts',      // чеки — фото и PDF (кладёт Джин из Telegram)
+  content:'https://crm.m5miami.com/files?b=content',        // весь контент компании
+  contentInbox:'https://crm.m5miami.com/files?b=content',   // общая приёмка — что прислали без темы, Джин разбирает
+  projects:'https://crm.m5miami.com/files?b=projects',      // файлы объектов (папка на объект)
+  shootRule:'https://docs.google.com/document/d/1EPQnXlehD2946jpjtUZyoS5spFP65WIYpsGU2ddHt84/', // «Правило съёмки ДО/ПРОЦЕСС/ПОСЛЕ» RU+EN (Google Docs)
   jinBot:'https://t.me/m5miami_bot',            // Джин в Telegram: расходы, чеки, вопросы, «куда скидывать»
-  reviews:'https://drive.google.com/drive/folders/1rmhrlvU_DIS_GRzRQGOvaLZ9y2aii9ta',        // 01 Отзывы клиентов
-  objTemplate:'https://drive.google.com/drive/folders/12zDt0QBMzKshbfDG0nSCNms_tKhJQ2V6',  // _ШАБЛОН объекта — копировать под новый
-  vadimWorks:'https://drive.google.com/drive/folders/185H0YfjrlDbPnsvt8ID64FVhqfxLZECE',   // архив работ Вадима до M5
-  visaVadim:'https://drive.google.com/drive/folders/1SlaE1h7tWicXY49TJwYn339aMGsxZ3Sr',     // Visa — Vadim (доступ: Алекс, Влад, Вадим)
+  reviews:'https://crm.m5miami.com/files?b=content',        // отзывы клиентов — внутри контента
+  objTemplate:'https://crm.m5miami.com/files?b=projects',   // структура нового объекта заводится автоматом
+  vadimWorks:'https://crm.m5miami.com/files?b=content',     // архив работ Вадима до M5
+  visaVadim:'https://crm.m5miami.com/files?b=legal',        // визовые документы Вадима (приватный раздел)
   quickbooks:'',
   heygen:'',
   houzz:'https://pro.houzz.com/', // маркетинг-канал: профиль+отзывы (софт-тариф НЕ берём)
   playbook:'',
-  legal:'https://drive.google.com/drive/folders/1OFl-LaWf5ZMmKEyVsc1PjLdcKsJEBJmL', // приватная папка «Partnership — Alex + Vlad» (доступ ТОЛЬКО Алекс+Влад)
+  legal:'https://crm.m5miami.com/files?b=legal', // документы партнёров (приватный раздел legal в CRM)
   tutorial:'/media/tutorial_system_ru.mp4' // видео-туториал «Как устроена система M5» (Remotion + Jin, 31.07)
 };
 
 /* фирменные логотипы сервисов (SVG со своими цветами) */
 var LOGOS={
   whatsapp:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#25D366"/><path fill="#fff" d="M23 11.5c-6.3 0-11.4 5.1-11.4 11.4 0 2 .5 4 1.5 5.7L11.5 34l5.6-1.5c1.7.9 3.7 1.4 5.9 1.4 6.3 0 11.4-5.1 11.4-11.4S29.3 11.5 23 11.5Zm0 20.6c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-3.3.9.9-3.2-.2-.4c-1-1.6-1.5-3.5-1.5-5.3 0-5.4 4.4-9.7 9.8-9.7s9.8 4.4 9.8 9.7-4.4 9.6-9.8 9.6Zm5.4-7.2c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg>',
-  drive:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#fff"/><g transform="translate(8,10) scale(0.345)"><path fill="#0066da" d="M6.6 66.9l3.8 6.6c.8 1.4 2 2.5 3.4 3.3L27.4 53.5H0c0 1.6.4 3.2 1.2 4.6z"/><path fill="#00ac47" d="M43.6 25L30 1.5c-1.4.8-2.6 1.9-3.4 3.3L1.2 48.7C.4 50.1 0 51.7 0 53.5h27.4z"/><path fill="#ea4335" d="M73.6 76.8c1.4-.8 2.6-1.9 3.4-3.3l1.6-2.7 7.6-13.2c.8-1.4 1.2-3 1.2-4.6H59.4l5.8 11.4z"/><path fill="#00832d" d="M43.6 25L57.2 1.5c-1.4-.8-3-1.2-4.6-1.2H34.6c-1.6 0-3.2.5-4.6 1.2z"/><path fill="#2684fc" d="M59.4 53.5H27.4L13.8 76.8c1.4.8 3 1.2 4.6 1.2h50.4c1.6 0 3.2-.5 4.6-1.2z"/><path fill="#ffba00" d="M73.4 26.5L60.7 4.8c-.8-1.4-2-2.5-3.4-3.3L43.6 25l15.8 28.5h27.2c0-1.8-.4-3.4-1.2-4.6z"/></g></svg>',
   telegram:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#229ED9"/><path fill="#fff" d="M9.8 22.2l23-8.9c1.1-.4 2 .3 1.6 1.9l-3.9 18.4c-.3 1.2-1 1.5-2 .9l-5.6-4.1-2.7 2.6c-.3.3-.6.5-1.1.5l.4-5.8L30.4 17c.5-.4-.1-.7-.8-.3L16 25.1l-5.7-1.8c-1.2-.4-1.2-1.2.5-1.1z"/></svg>',
   gcal:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#fff"/><rect x="11" y="12" width="24" height="23" rx="3" fill="#fff" stroke="#4285F4" stroke-width="2.4"/><text x="23" y="30" font-family="Arial,Helvetica,sans-serif" font-size="12.5" font-weight="700" fill="#4285F4" text-anchor="middle">31</text></svg>',
   ga4:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#fff"/><rect x="12" y="24" width="5.5" height="10" rx="2.7" fill="#E37400"/><rect x="20.2" y="17" width="5.5" height="17" rx="2.7" fill="#E37400"/><rect x="28.4" y="11" width="5.5" height="23" rx="2.7" fill="#F9AB00"/></svg>',
@@ -60,7 +62,7 @@ var LOGOS={
   heygen:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#5B3DF5"/><text x="23" y="31" font-family="Arial" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">H</text></svg>',
   houzz:'<svg viewBox="0 0 46 46"><rect width="46" height="46" rx="11" fill="#4DBC15"/><path fill="#fff" d="M23 12l-8 4.6v13.4h5.2v-6.2h5.6v6.2H31V16.6z"/></svg>'
 };
-var BC={whatsapp:'#25D366',drive:'#00ac47',telegram:'#229ED9',gcal:'#4285F4',ga4:'#F9AB00',clarity:'#1B6EC2',quickbooks:'#2CA01C',jobtread:'#F26722',heygen:'#5B3DF5',houzz:'#4DBC15'};
+var BC={whatsapp:'#25D366',telegram:'#229ED9',gcal:'#4285F4',ga4:'#F9AB00',clarity:'#1B6EC2',quickbooks:'#2CA01C',jobtread:'#F26722',heygen:'#5B3DF5',houzz:'#4DBC15'};
 
 var ROLES={
   founder:{label:'Co-founder',sub:'Your command center',
@@ -69,7 +71,7 @@ var ROLES={
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
-      {b:'drive',k:'Drive',t:'Company docs',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'Объекты · чеки · документы',link:'files'},
       {b:'gcal',k:'Calendar',t:'Meetings & bookings',link:'gcal'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'},
       {b:'ga4',k:'Analytics',t:'GA4 · Site',link:'ga4'},
@@ -81,15 +83,15 @@ var ROLES={
       {b:'jobtread',k:'CRM & Production',t:'JobTread',link:'jobtread'},
       {b:'gcal',k:'Calendar',t:'My schedule',link:'gcal'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
-      {b:'drive',k:'Drive',t:'Company docs',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'Объекты · чеки · документы',link:'files'},
       {ic:'🛂',k:'Виза',t:'Мои документы',link:'visaVadim'},
       {ic:'📄',k:'Permits',t:'Miami-Dade',link:'permits'},
       {ic:'👥',k:'People',t:'Org structure',link:'org'}]},
   smm:{label:'SMM',sub:'Your SMM & content workspace',
-    chips:['Что снимать на объекте?','Где сырьё в Drive?','Какой у нас тон и стиль?'],
+    chips:['Что снимать на объекте?','Где сырьё для контента?','Какой у нас тон и стиль?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
-      {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'Контент и объекты',link:'files'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {ic:'📈',k:'My growth',t:'Levels & growth'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'},
@@ -106,7 +108,7 @@ var ROLES={
       {b:'whatsapp',k:'Calls & chats',t:'WhatsApp Business',link:'whatsapp'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Consultations',link:'gcal'},
-      {b:'drive',k:'Drive',t:'Docs',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'Документы сделок',link:'files'},
       {ic:'👥',k:'Team',t:'Who is who',link:'org'},
       {ic:'📈',k:'My growth',t:'Levels & growth'},
       {ic:'🧰',k:'Sales Kit',t:'Scripts & pitch',link:'saleskit'},
@@ -116,7 +118,7 @@ var ROLES={
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Projects',t:'JobTread',link:'jobtread'},
-      {b:'drive',k:'Drive',t:'Assets & docs',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'Объекты и материалы',link:'files'},
       {b:'houzz',k:'Houzz',t:'Pro profile',link:'houzz'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
@@ -125,11 +127,11 @@ var ROLES={
       {ic:'🎨',k:'Design',t:'3D & tools'},
       {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'}]},
   pm:{label:'Project Manager',sub:'Your production workspace',
-    chips:['Ритм дня на объекте','Как загрузить фото в Drive?','Что писать в вечернем отчёте?'],
+    chips:['Ритм дня на объекте','Как загрузить фото с объекта?','Что писать в вечернем отчёте?'],
     tiles:[
       {ic:'🚀',k:'Start here',t:'Setup checklist',link:'onb'},
       {b:'jobtread',k:'Production',t:'JobTread',link:'jobtread'},
-      {b:'drive',k:'Drive',t:'Docs & photos',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'Объекты и фото',link:'files'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
       {ic:'📄',k:'Permits',t:'Miami-Dade',link:'permits'},
@@ -140,7 +142,7 @@ var ROLES={
     chips:['My tasks','Knowledge base','Ask anything'],
     tiles:[
       {b:'jobtread',k:'Projects',t:'JobTread',link:'jobtread'},
-      {b:'drive',k:'Drive',t:'Knowledge base',link:'drive'},
+      {ic:'📁',k:'Файлы',t:'База файлов компании',link:'files'},
       {b:'telegram',k:'M5 Pulse',t:'Team channel',link:'telegram'},
       {b:'gcal',k:'Calendar',t:'Meetings',link:'gcal'},
       {ic:'📖',k:'Playbook',t:'Brand & rules',link:'playbook'},
@@ -192,7 +194,7 @@ var TILES=cfg.tiles.filter(function(t){
 /* «Куда что» — одна строка быстрых ссылок для всех ролей: те же 5 точек, что в закрепе TG и у Джина */
 function quickHtml(){
   var Q=[
-    ['📸','Контент — папки объектов',LINKS.projects],
+    ['📸','Файлы объектов',LINKS.projects],
     ['🎬','Правило съёмки',LINKS.shootRule],
     ['💸','Расход — боту в TG',LINKS.jinBot],
     ['🧾','Чеки',LINKS.receipts],
@@ -207,10 +209,10 @@ function nowHtml(){
   var n;
   if(role==='founder') n={txt:'<b>Фокус недели:</b> запустить соцсети — Meta Business, Google Business Profile, TikTok/YT. Детали — ниже в кабинете.',btn:'План недели',act:'nowTasks()'};
   else if(role==='director') n=(new Date().getHours()>=17)
-    ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Drive · 03 Progress.',btn:'Отправить',url:LINKS.telegram}
-    : {txt:'<b>Сегодня:</b> фото и видео с объекта → Drive · 02 Projects. Вечером — отчёт в Projects (2 минуты).',btn:'Открыть Drive',url:LINKS.drive};
+    ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — туда же, Джин сам разложит по объекту.',btn:'Отправить',url:LINKS.telegram}
+    : {txt:'<b>Сегодня:</b> фото и видео с объекта — Джину в Telegram, он разложит. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
   else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM-кабинет и в Telegram → Лиды.',btn:'Открыть CRM',url:LINKS.salescrm};
-  else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Drive (01 Content / 03 Progress); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть Drive',url:LINKS.drive};
+  else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть файлы',url:LINKS.content};
   else n={txt:'Задачи дня — в Telegram · M5 Team. Не знаешь, с чего начать — спроси Jin сверху.',btn:'Открыть чат',url:LINKS.telegram};
   var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
   return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div><a class="now-btn" '+open+'>'+n.btn+' →</a></div>';
@@ -239,7 +241,7 @@ window.obToggle=function(i){
 function obHtml(){
   var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex_t.webp'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim_t.webp'};
   OB_STEPS[5].url=LINKS.telegram;
-  if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t='Загляни в базу знаний — плитка Drive ниже';
+  if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t='Загляни в файлы компании — плитка «Файлы» ниже';
   var done=0,total=OB_STEPS.length,rows='';
   for(var i=0;i<OB_STEPS.length;i++){
     var st=OB_STEPS[i], on=st.fixed||obState(i); if(on)done++;
@@ -286,8 +288,8 @@ function loadPulse(){
         if(role==='director'&&vn===0){
           var nb=document.querySelector('.nowcard');
           if(nb&&!NEWBIE) nb.innerHTML='<span class="now-tag">⚡ Now</span><div class="now-txt">'+
-            '<b>Документы по визе E-2</b> — папка готова, внутри инструкция «читать первым»: паспорт, статус, диплом, опыт. Загружай по частям, как удобно.</div>'+
-            '<a class="now-btn" href="'+LINKS.visaVadim+'" target="_blank" rel="noopener">Открыть папку →</a>';
+            '<b>Документы по визе E-2</b> — раздел в CRM готов, внутри инструкция «читать первым»: паспорт, статус, диплом, опыт. Загружай по частям, как удобно.</div>'+
+            '<a class="now-btn" href="'+LINKS.visaVadim+'" target="_blank" rel="noopener">Открыть раздел →</a>';
         }
         var vl=document.querySelector('a.stk[href="'+LINKS.visaVadim+'"] span');
         if(vl&&vn>0) vl.textContent='Загружено файлов: '+vn+(d.visaSeen?' · последние: '+d.visaSeen:'');
@@ -405,7 +407,9 @@ var WV_MUSIC='';/* URL героического трека (Solo-Leveling вай
 var WVSCENES=[
  {v:'/media/jin2_s1.mp4', a:'/media/jin2_v1.mp3', c:'Hey, welcome to <b>M5</b>! I’m <b>Jin</b> — your AI teammate. Great to have you with us!'},
  {v:'/media/jin2_s2.mp4', a:'/media/jin2_v2.mp3', c:'I’m powered by <b>artificial intelligence</b> — ask me anything, anytime. I’m here to help you.'},
- {v:'/media/jin2_s3.mp4', a:'/media/jin2_v3.mp3', c:'We’re a tech-first company: <b>JobTread</b> runs our projects, <b>Telegram</b> keeps us in sync, everything lives in <b>Google Drive</b>.'},
+ /* Субтитр обновлён 24.08 под переезд файлов в CRM. ВНИМАНИЕ: озвучка jin2_v3.mp3
+    ещё говорит «Google Drive» — нужен ре-рендер голоса, иначе текст ≠ звук. */
+ {v:'/media/jin2_s3.mp4', a:'/media/jin2_v3.mp3', c:'We’re a tech-first company: <b>JobTread</b> runs our projects, <b>Telegram</b> keeps us in sync, and every file lives in our own <b>M5 CRM</b>.'},
  {v:'/media/jin2_s4.mp4', a:'/media/jin2_v4.mp3', c:'Our mission is bold — we craft Miami’s most beautiful <b>renovations</b> and signature <b>plaster finishes</b>.'},
  {v:'/media/jin2_s5.mp4', a:'/media/jin2_v5.mp3', c:'And you’re part of our <b>superhero team</b>. Let’s build the future together! 🚀'}
 ];
@@ -517,7 +521,7 @@ var EPLAN=[
 ];
 var EPLAN_HINTS=[
  ['Что такое E-2','Виза инвестора США для граждан стран-участниц договора. Требует существенных инвестиций в реальный работающий бизнес. Алекс и Влад подаются как инвесторы (по 50%), Вадим — как ключевой сотрудник той же компании. Подача — в консульстве (Варшава), к подаче нужны: работающий бизнес, потраченные инвестиции, бизнес-план, source of funds.'],
- ['Бизнес-план','Живой документ: сейчас v3, к подаче станет v4 — намерения заменяются фактами (реальный шоурум, реальные клиенты, реальные траты). Хранится в Company Drive → 06 Legal & Docs, обновляет Клод после каждого события.'],
+ ['Бизнес-план','Живой документ: сейчас v3, к подаче станет v4 — намерения заменяются фактами (реальный шоурум, реальные клиенты, реальные траты). Хранится в CRM · Файлы → Legal, обновляет Клод после каждого события.'],
  ['Шоурум','<img src="/media/showroom_main.webp" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_storage.webp" style="max-width:100%;border-radius:10px;margin:6px 0"><img src="/media/showroom_concept.webp" style="max-width:100%;border-radius:10px;margin:6px 0"> Майами, центральные улицы, до 100 м²: шоурум декоративной штукатурки + склад материалов + офис. Концепт — «art-concrete». Ищем через LoopNet, Crexi и локальных брокеров; бюджет аренды $5–10K/мес.']
 ];
 (function(){
@@ -539,9 +543,9 @@ var EPLAN_HINTS=[
     var eDone=0,eAll=0;
     for(var ex=0;ex<EPLAN.length;ex++)for(var ey=0;ey<EPLAN[ex].items.length;ey++){var es=EPLAN[ex].items[ey][0]; if(es==='✅'||es==='⬜'||es==='⚠️'){eAll++; if(es==='✅')eDone++;}}
     var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>🗓 План E-2 · август → ноябрь</span><span class="stk-hint">'+eDone+'/'+eAll+' · обновлено '+EPLAN_UPD+'</span></summary><div class="stack">';
-    h+='<a class="stk" href="'+LINKS.visaVadim+'" target="_blank" rel="noopener" style="margin-top:10px"><b>🛂 Visa — Vadim (документы Вадима)</b><span>Вадим загружает сюда паспорт, диплом, опыт, финансы · доступ: Алекс, Влад, Вадим · внутри инструкция «читать первым»</span></a>';
-    h+='<div class="lsn" style="margin-top:10px">📄 <b>Бизнес-план E-2</b> — закреп: <a href="https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm" target="_blank" rel="noopener" style="color:#96703B">Company Drive → 06 Legal &amp; Docs</a></div>';
-    h+='<div class="lsn" style="margin-top:12px"><b>💰 Шкала инвестиций</b> — суммы и статус живут в Бизнес-плане (Drive) и офлайн с адвокатом; в кабинете не публикуем.</div>';
+    h+='<a class="stk" href="'+LINKS.visaVadim+'" target="_blank" rel="noopener" style="margin-top:10px"><b>🛂 Visa — Vadim (документы Вадима)</b><span>Вадим загружает сюда паспорт, диплом, опыт, финансы · приватный раздел CRM · внутри инструкция «читать первым»</span></a>';
+    h+='<div class="lsn" style="margin-top:10px">📄 <b>Бизнес-план E-2</b> — закреп: <a href="'+LINKS.legalDocs+'" target="_blank" rel="noopener" style="color:#96703B">CRM · Файлы → Legal</a></div>';
+    h+='<div class="lsn" style="margin-top:12px"><b>💰 Шкала инвестиций</b> — суммы и статус живут в Бизнес-плане (CRM · Файлы) и офлайн с адвокатом; в кабинете не публикуем.</div>';
     for(var i=0;i<EPLAN.length;i++){
       h+='<div class="stk-g" style="font-size:12px;margin-top:16px">'+EPLAN[i].m+' — '+EPLAN[i].tag+'</div>';
       for(var j=0;j<EPLAN[i].items.length;j++){
@@ -597,7 +601,7 @@ var STACK=[
  ['AI & Dev','Облачные рутины','ежедневно: Health+Security · пн: мега-аудит + Growth Lab · Пульс · Brief','https://claude.ai/code/routines'],
  ['AI & Dev','Почтовый дозор','ежедневно 08:52: Клод читает alex@ за сутки, важное — Алексу в TG (локально на Mac)','https://mail.google.com/'],
  ['Операционка','JobTread','операционное ядро: лиды → сметы → производство → счета','https://app.jobtread.com/'],
- ['Операционка','Company Drive','все файлы, фото, документы','https://drive.google.com/drive/folders/1I41acYvpvpHgkojOxs5sznNkVPExixsm'],
+ ['Операционка','CRM · Файлы','единое хранилище: объекты, контент, чеки, документы, HR','https://crm.m5miami.com/files'],
  ['Операционка','Google Admin','почты @m5miami.com, сброс паролей команде','https://admin.google.com/'],
  ['Операционка','Apps Script «M5 Hub»','автоматика: лиды→TG, SLA, склад, бэкенд Jin','https://script.google.com/u/2/home/projects/1TCKRgl1AKm6-9gyU3WHZpkHWsJRbkgyUkxiUiMvJYJq4p1m9_bv1jP-j/edit'],
  ['Операционка','Google Cloud «m5-site»','вход через Google на сайте (OAuth)','https://console.cloud.google.com/auth/overview?project=m5-site'],
@@ -609,7 +613,7 @@ var STACK=[
  ['Сайт & аналитика','GA4','сколько людей и откуда','https://analytics.google.com/analytics/web/'],
  ['Сайт & аналитика','MS Clarity','записи сессий, тепловые карты, rage clicks','https://clarity.microsoft.com/projects/view/xpd5kfm31r/dashboard'],
  ['AI & Dev','Apps Script API','Клод правит и деплоит M5 Hub программно (gapi.sh, проект под alex@)','https://script.google.com/'],
- ['AI & Dev','Drive API (полный)','Клод управляет Google Drive под alex@: папки, файлы, доступы (gdrive_api.sh)','https://drive.google.com/'],
+ ['AI & Dev','Supabase (M5)','база CRM + приватные бакеты файлов: projects, content, receipts, legal, hr','https://supabase.com/dashboard/projects'],
  ['Связь','WhatsApp Business','+1 786 407 4441 — бизнес-номер: сайт, кабинет клиента, реклама','https://wa.me/17864074441'],
  ['Связь','Telegram-бот @m5miami_bot','рассылки; группы «M5 Team» и «M5 Partners»','https://t.me/m5miami_bot'],
  ['Связь','Gmail','рабочая почта alex@m5miami.com','https://mail.google.com/'],
@@ -627,9 +631,9 @@ var ALEXTODO=[
  ['soon','Porkbun: DNS-строка для превью-поддомена (теперь опционально)','Код 2026 на заглушке УЖЕ открывает полный сайт прямо на боевом (/welcome.html за гейтом, реш. 19.08) — блокера нет. DNS-строка нужна, только если захочешь отдельный чистый поддомен preview.m5miami.com (делиться ссылкой без пароля, репо уже готов): porkbun.com → Domain Management → m5miami.com → DNS Records → Add: Type CNAME, Host «preview», Answer «softoleksii5.github.io», TTL 600. API-ключей Porkbun у Клода нет — шаг ручной (2 мин).','m'],
  ['done','JobTread — связь работает, демо-мусор вычищен','Заявки с сайта создают Customer+Contact+Job автоматически. Клод получил доступ на запись (scripts/jt_api.sh) и удалил демо-джобы Taras — SLA-алерты остановлены.'],
  ['done','Apps Script v13 — Клод применил сам через API','Фидбек/идеи → Partners, SLA только фаундерам (максимум 2 на лид), Jin знает JobTread и кабинет клиента, Monday отключён. Плюс найден и выключен локальный агент «SLA-алерт больше часа» (launchd, слал каждые 30 мин). Telegram чист.'],
- ['done','Drive: папка Visa создана','Клод создал и расшарил только вам троим (alex@, vlad@, vadim@). Ссылка: drive.google.com/drive/folders/1Mg4ZMJtjJlcrS4eYj3jr3nrhm6CBR9po','m'],
- ['done','Договор с Владом — в приватной папке Drive','Клод создал папку «Partnership — Alex + Vlad» (только ты и Влад) и загрузил подписанный PDF v3 от 22.07. Плитка в кабинете ведёт туда.','m'],
- ['done','Клод получил полный доступ к Google Drive','OAuth под alex@m5miami.com (01.08). Теперь папки, файлы, доступы — сам: Visa и Partnership уже созданы.','m'],
+ ['done','Раздел «Виза — Вадим» готов','Создан и открыт только вам троим (alex@, vlad@, vadim@). С 24.08 живёт в CRM · Файлы → Legal, плитка «Виза» ведёт туда.','m'],
+ ['done','Договор с Владом — в приватном разделе файлов','Подписанный PDF v3 от 22.07 загружен. С 24.08 — CRM · Файлы → Legal (приватный бакет). Плитка в кабинете ведёт туда.','m'],
+ ['done','Файлы компании — в CRM (решение 24.08)','Хранилище: Supabase Storage за кабинетом crm.m5miami.com/files — объекты, контент, чеки, документы, HR. Кабинеты, онбординг и портал найма переведены на него. Google Drive остаётся архивом только для чтения.','m'],
  ['done','Показать команде кабинет клиента','Пост с демо-ссылкой и видео-туториалом ушёл в M5 Team → Pulse & Wins (31.07).','m'],
  ['done','US-номер есть: +1 786 407 4441 (WhatsApp Business)','Клод заменил номер на всём сайте и в кабинете клиента (31.07). Разблокированы: Google Business Profile, Meta-реклама — следующие шаги списка.'],
  ['todo','Meta Business: FB-страница + Instagram + 2 строки Клоду','business.facebook.com → страница «M5 Interior Design & Build» → создать/привязать IG (@m5miami или @m5.miami). ~20 мин. Затем пришли Клоду 2 строки: Pixel ID (Events Manager) + строку доменной верификации — код пикселя уже вшит в сайт и ждёт ID. Чеклист: 4 Рабочие документы/Настройка_Meta_и_номер.md.'],
@@ -746,7 +750,7 @@ var ROADMAP=[
       td+='</div></details>';
       /* Соцсети — схема системы */
       var sm='<details class="stackbox"><summary><span>📱 Socials · how it works</span><span class="stk-hint">'+SMMNET.length+' каналов</span></summary><div class="stack">';
-      sm+='<div class="smflow"><span>🎥 Команда снимает<small>Вадим: 4 кадра + видео · Влад: лицо</small></span><i>→</i><span>☁️ Google Drive<small>01 Content — всё сырьё</small></span><i>→</i><span>🤖 Клод<small>календарь · сценарии · тексты</small></span><i>→</i><span>📲 Публикация<small>планировщик Meta · 15 мин/день</small></span><i>→</i><span>💰 Лиды<small>сайт → JobTread · источник трекается</small></span></div>';
+      sm+='<div class="smflow"><span>🎥 Команда снимает<small>Вадим: 4 кадра + видео · Влад: лицо</small></span><i>→</i><span>📁 CRM · Файлы<small>Контент — всё сырьё</small></span><i>→</i><span>🤖 Клод<small>календарь · сценарии · тексты</small></span><i>→</i><span>📲 Публикация<small>планировщик Meta · 15 мин/день</small></span><i>→</i><span>💰 Лиды<small>сайт → JobTread · источник трекается</small></span></div>';
       sm+='<div class="smorb">';
       for(var s2=0;s2<SMMNET.length;s2++){
         sm+='<div class="smo" onclick="smmShow('+s2+')"><span class="smoc" style="background:'+SMMNET[s2].c+'">'+SMMNET[s2].ic+'</span><b>'+SMMNET[s2].n+'</b><small>'+SMMNET[s2].st+'</small></div>';
@@ -824,8 +828,8 @@ var ROADMAP=[
     var el=document.getElementById('kpiSec'); if(!el)return;
     var isDir=(role==='director');
     var ht='<details class="stackbox"'+(isDir?' open':'')+'><summary><span>📖 How to run a project · 3 steps</span><span class="stk-hint">ежедневный ритм</span></summary><div class="stack">';
-    ht+='<div class="lsn"><b>0 · Старт проекта.</b> Договор подписан → PDF в Drive: <b>02 Projects → имя проекта → 01 Contract</b> → сообщение в Projects «Договор подписан: имя · адрес · старт». Дальше Клод заводит кабинет клиента, SMM снимает «до» (папка 02 Before). Полная инструкция по ролям: Кто_чем_пользуется + Документооборот (4 Рабочие документы).</div>';
-    ht+='<div class="lsn"><b>1 · Днём — фото и видео с объекта → Google Drive.</b> Открой плитку Drive → папка <b>02 Projects → имя проекта</b> → кидай всё сырьё туда (и для клиента, и для соцсетей). Заходить только с рабочей почты @m5miami.com.</div>';
+    ht+='<div class="lsn"><b>0 · Старт проекта.</b> Договор подписан → PDF в карточку сделки в CRM (файл ложится в <b>Файлы → объекты</b>) → сообщение в Projects «Договор подписан: имя · адрес · старт». Дальше Клод заводит кабинет клиента, SMM снимает «до». Полная инструкция по ролям: Кто_чем_пользуется + Документооборот (4 Рабочие документы).</div>';
+    ht+='<div class="lsn"><b>1 · Днём — фото и видео с объекта.</b> Кидай всё сырьё Джину в Telegram (тема объекта) — он сам разложит по объекту, стадию выбирать не надо. Посмотреть, что уже лежит, — плитка <b>Файлы</b>. Длинное видео, которое Telegram не берёт, — загрузи сам на crm.m5miami.com/files.</div>';
     ht+='<div class="lsn"><b>2 · Вечером — 2 минуты в Telegram.</b> В «M5 Team» → топик <b>Projects</b>: голосовое или пару строк — что сделали сегодня, что завтра, что нужно. Всё, отчёт сдан.</div>';
     ht+='<div class="lsn"><b>3 · Дальше — Джин и Клод.</b> Мы переносим статус в <b>кабинет клиента</b> — клиент видит галочки и фото сам, тебе руками ничего заполнять не надо. После подключения JobTread шаг 2 станет отчётом прямо в его приложении с фото — кабинет клиента обновится автоматически.</div>';
     ht+='<div class="lsn" style="color:#8A8272">Деньги и счета — <b>QuickBooks</b> (подключим после регистрации LLC — план в My Stack): мы туда только загружаем чеки. Вопросы в любой момент — Джину наверху или Алексу.</div>';
@@ -849,13 +853,13 @@ var ROADMAP=[
     h+='<div class="lsn">У каждого объекта есть тема «🏠 Имя объекта» в группе <b>M5 Team</b>. Открой её и кинь фото/видео — без подписей. Джин заберёт, разложит и поставит 👌. Не удаляй с телефона, пока нет 👌.</div>';
     h+='<div class="stk-g" style="margin-top:12px">Путь 2 · Личка бота — портфолио и всё без договора</div>';
     h+='<div class="lsn">Старые работы, шоу-рум, отзывы клиентов → в личку <b>@m5miami_bot</b> + одной строкой название объекта («мой объект на Collins, венецианка»). Отзыв — с подписью «отзыв».</div>';
-    h+='<div class="stk-g" style="margin-top:12px">Путь 3 · Напрямую в Google Drive — с телефона и с компьютера</div>';
-    h+='<div class="lsn">На телефоне: приложение <b>Google Drive</b> → открой папку по ссылке ниже → «+» → Загрузить. Или из галереи: выделил кадры → Поделиться → Drive. На компьютере — просто перетащи файлы. Не знаешь, в какой раздел — кидай в <b>«00 Всё сюда»</b> внутри объекта (первая в списке), я разберу. Длинное видео, которое Telegram не берёт, — только этим путём. О любой загрузке я узнаю сам в течение часа.</div>';
-    h+='<a class="stk" href="https://drive.google.com/drive/folders/1Oy7lmfnsyZ2Xz6ggCOFhCS4dYl--Xus_" target="_blank" rel="noopener"><b>🏠 02 Projects — папки объектов</b><span>объекты с договором: внутри каждого «00 Всё сюда»</span></a>';
+    h+='<div class="stk-g" style="margin-top:12px">Путь 3 · Напрямую в CRM · Файлы — с телефона и с компьютера</div>';
+    h+='<div class="lsn">Открой <b>crm.m5miami.com/files</b> (плитка «Файлы» в кабинете) → выбери объект → кнопка загрузки. На телефоне работает так же: из галереи выбрал кадры → загрузил. Не знаешь, куда положить — грузи без раздела, я разберу. Длинное видео, которое Telegram не берёт, — только этим путём. О любой загрузке я узнаю сам.</div>';
+    h+='<a class="stk" href="'+LINKS.projects+'" target="_blank" rel="noopener"><b>🏠 Файлы объектов</b><span>объекты с договором: загрузка прямо со страницы</span></a>';
     if(role==='director'){
       h+='<a class="stk" href="'+LINKS.vadimWorks+'" target="_blank" rel="noopener"><b>🧱 Работы Вадима до M5 — твой архив</b><span>прошлые объекты: фото, процесс, видео — для сайта и рекламы</span></a>';
     }
-    h+='<a class="stk" href="'+LINKS.contentInbox+'" target="_blank" rel="noopener"><b>📥 00 Входящее — если некогда думать</b><span>общая приёмка: кидай что угодно, разберу</span></a>';
+    h+='<a class="stk" href="'+LINKS.contentInbox+'" target="_blank" rel="noopener"><b>📥 Входящее — если некогда думать</b><span>общая приёмка: кидай что угодно, разберу</span></a>';
     h+='<a class="stk" href="'+LINKS.reviews+'" target="_blank" rel="noopener"><b>⭐ Отзывы клиентов</b><span>видео, голосовые, скрины переписок — самое ценное</span></a>';
     h+='<div class="stk-g" style="margin-top:12px">Как снимать, чтобы кадры годились</div>';
     h+='<div class="lsn">Правило <b>«4 кадра каждый визит»</b>: до · процесс · после · макро-деталь. Вертикально — для рилсов, горизонтально — для сайта. Дневной свет, без вспышки; штукатурку снимай сбоку под углом — так видно рельеф.</div>';
@@ -875,7 +879,7 @@ var ROADMAP=[
     var sid=''; try{sid=localStorage.getItem('m5_sid')||'';}catch(e){}
     var ST={'new':'🆕 новый','liked':'👍 нравится','no':'👎 нет','pool':'💾 в пуле','hired':'🎉 нанят'};
     function head(hint){return '<details class="stackbox"><summary><span>💼 Hiring · кандидаты</span><span class="stk-hint">'+hint+'</span></summary><div class="stack">';}
-    var tail='<a class="stk" href="/join/" target="_blank" rel="noopener"><b>🌐 Портал найма /join/</b><span>эту ссылку шлём кандидатам: бренд, квиз, тестовое задание, форма</span></a></div></details>';
+    var tail='<a class="stk" href="/join/" target="_blank" rel="noopener"><b>🌐 Портал найма /join/</b><span>эту ссылку шлём кандидатам: бренд, квиз, тестовое задание, форма · их работы падают в CRM · Файлы → HR</span></a></div></details>';
     if(!sid){
       el.innerHTML=head('нужен вход через Google')+'<div class="lsn">Кандидаты видны только в защищённой сессии. Нажми <b>Sign out</b> и войди заново через <b>кнопку Google</b> — сессия включится сама, один раз на 60 дней.</div>'+tail;
       return;
@@ -892,7 +896,9 @@ var ROADMAP=[
              (x.ai?'<span>AI: '+esc(x.ai.slice(0,110))+'</span>':'')+
              '<span style="margin-top:6px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">'+
              (lk?'<a href="'+lk[0]+'" target="_blank" rel="noopener" style="color:#96703B">портфолио ↗</a>':'')+
-             (x.f?'<a href="https://drive.google.com/drive/folders/'+x.f+'" target="_blank" rel="noopener" style="color:#96703B">📁 его загрузки</a>':'')+
+             /* x.f — идентификатор загрузок кандидата от M5 Hub. Ссылкой пришёл — открываем как есть,
+                иначе ведём в HR-раздел файлов CRM (Drive из интерфейса убран 24.08). */
+             (x.f?'<a href="'+(/^https?:\/\/[^\s"'<>]+$/.test(String(x.f))?x.f:'https://crm.m5miami.com/files?b=hr')+'" target="_blank" rel="noopener" style="color:#96703B">📁 его загрузки</a>':'')+
              (x.email?'<a href="mailto:'+esc(x.email)+'" style="color:#96703B">почта</a>':'')+
              '<i style="font-style:normal;cursor:pointer" title="нравится" onclick="candStat('+x.r+',\'liked\',this)">👍</i>'+
              '<i style="font-style:normal;cursor:pointer" title="не подходит" onclick="candStat('+x.r+',\'no\',this)">👎</i>'+
@@ -924,17 +930,17 @@ function candStat(row,val,btn){
 
 /* ═══ Расходы: одно правило для всех, чтобы траты не терялись (02.08).
    Механика: человек шлёт трату в Telegram-бот → Клод заносит в таблицу и
-   складывает чек в Drive. Руками таблицу никто не заполняет. ═══ */
+   складывает чек в CRM · Файлы. Руками таблицу никто не заполняет. ═══ */
 (function(){
   try{
     var el=document.getElementById('expSec'); if(!el)return;
     var op=false; try{op=localStorage.getItem('m5_exp_open')==='1';}catch(e){}
     var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>💸 Расходы · куда сдавать</span><span class="stk-hint">правило одно для всех</span></summary><div class="stack">';
     h+='<div class="lsn"><b>1 · Потратил — сразу напиши боту.</b> Открой <b>@m5miami_bot</b> в Telegram и отправь одним сообщением: <b>«расход 40 шпаклёвка Home Depot»</b>. Можно голосовым. Сумма в долларах, что купил, где — этого достаточно.</div>';
-    h+='<div class="lsn"><b>2 · Сфоткай чек и приложи.</b> Фото чека — следующим сообщением боту или сразу в папку <b>Чеки</b> (ссылка ниже). Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
-    h+='<div class="lsn"><b>3 · Дальше не твоя забота.</b> Клод заносит трату в общую таблицу, раскладывает чек по папкам и обновляет цифру «Расходы» в пульте кабинета. Таблицу руками не заполняет никто.</div>';
+    h+='<div class="lsn"><b>2 · Сфоткай чек и приложи.</b> Фото чека — следующим сообщением боту, он сам положит его в раздел <b>Чеки</b> (ссылка ниже). Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
+    h+='<div class="lsn"><b>3 · Дальше не твоя забота.</b> Клод заносит трату в общую таблицу, складывает чек в CRM · Файлы → Чеки и обновляет цифру «Расходы» в пульте кабинета. Таблицу руками не заполняет никто.</div>';
     h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Журнал расходов (живой)</b><span>сюда пишет бот: дата, кто, сумма, что, объект · траты до бота — в архивном реестре ($4,424 уже в счётчике)</span></a>';
-    h+='<a class="stk" href="'+LINKS.receipts+'" target="_blank" rel="noopener"><b>🧾 Папка «Чеки»</b><span>Drive → 04 Finance → Чеки: фото и PDF всех чеков</span></a>';
+    h+='<a class="stk" href="'+LINKS.receipts+'" target="_blank" rel="noopener"><b>🧾 Раздел «Чеки»</b><span>CRM · Файлы → Чеки: фото и PDF всех чеков</span></a>';
     h+='<div class="lsn" style="color:#8A8272">Почему так: пока компания не зарегистрирована, все траты идут с личных карт — и если их не собрать, при регистрации LLC и подаче налогов мы просто потеряем эти деньги как расходы бизнеса. Одно сообщение боту в момент покупки решает вопрос.</div>';
     el.innerHTML=h+'</div></details>';
     var box=el.querySelector('details.stackbox');
@@ -944,8 +950,8 @@ function candStat(row,val,btn){
 
 /* ═══ Company · back office — пульт владельца (просьба Алекса 04.08): документы,
    финконтроль, налоги, подрядчики, команда — одной раскрывашкой, чтобы кабинет
-   не пух. Цифры сверху живые (loadPulse дописывает из M5 Hub). Данные живут в
-   Google Sheets/Drive, сюда — только двери + правила «как это попадает само». ═══ */
+   не пух. Цифры сверху живые (loadPulse дописывает из M5 Hub). Журналы — в Google
+   Sheets, файлы — в CRM; сюда — только двери + правила «как это попадает само». ═══ */
 (function(){
   try{
     if(role!=='founder'&&role!=='director')return;
@@ -959,19 +965,19 @@ function candStat(row,val,btn){
       '<a class="ptile" id="coVend" href="'+LINKS.vendors+'" target="_blank" rel="noopener"><div class="pk">Подрядчики</div><b>…</b><div class="pdelta">в реестре</div><small>бот: «подрядчик …»</small></a>'+
     '</div>';
     h+='<details class="pl"><summary>📁 Документы компании — где что лежит</summary><div style="padding:4px 10px 8px 10px">'+
-      '<a class="stk" href="'+LINKS.legalDocs+'" target="_blank" rel="noopener"><b>06 Legal &amp; Docs — главный реестр</b><span>LLC (Articles · EIN · Operating Agreement), страховки, аренда, бизнес-план E-2 — всё сюда</span></a>'+
+      '<a class="stk" href="'+LINKS.legalDocs+'" target="_blank" rel="noopener"><b>CRM · Файлы → Legal — главный реестр</b><span>LLC (Articles · EIN · Operating Agreement), страховки, аренда, бизнес-план E-2 — всё сюда</span></a>'+
       '<div class="lsn">Статусы: ⬜ LLC (подача 3–9 авг) · ⬜ EIN · ⬜ Operating Agreement · ⬜ GL-страховка. Как только событие случилось — скажи Клоду («LLC подана») — обновлю здесь и в плане E-2.</div>'+
-      '<div class="lsn">Договоры клиентов живут в папке объекта: <b>02 Projects → [объект] → 01 Contract</b>. Договор партнёров — блок «Alex + Vlad» ниже (видите только вы двое). Виза Вадима — в плане E-2.</div>'+
-      '<div class="lsn" style="color:#8A8272">Правило: любой новый документ компании → в 06 Legal &amp; Docs или боту с подписью «документ» — разложу и обновлю статусы.</div>'+
+      '<div class="lsn">Договоры клиентов живут в карточке сделки в CRM (файл — в <b>Файлы → объекты</b>). Договор партнёров — блок «Alex + Vlad» ниже (видите только вы двое). Виза Вадима — в плане E-2.</div>'+
+      '<div class="lsn" style="color:#8A8272">Правило: любой новый документ компании → в CRM · Файлы → Legal или боту с подписью «документ» — разложу и обновлю статусы.</div>'+
     '</div></details>';
     h+='<details class="pl"><summary>💰 Финконтроль — как деньги учитываются</summary><div style="padding:4px 10px 8px 10px">'+
       '<div class="lsn"><b>Одно правило:</b> в момент, когда деньги пришли или ушли — одно сообщение боту: <b>«расход 40 шпаклёвка Home Depot»</b> · <b>«доход 3000 депозит — Brickell»</b>. Дальше само: строка в журнале → цифры выше → алерт партнёрам. Таблицы руками не заполняет никто.</div>'+
       '<a class="stk" href="'+LINKS.revenue+'" target="_blank" rel="noopener"><b>📈 Журнал доходов</b><span>кто внёс · сумма · клиент · этап · объект</span></a>'+
-      '<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📉 Журнал расходов</b><span>живые траты от бота · чеки — в папке «Чеки» (блок Расходы выше)</span></a>'+
+      '<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📉 Журнал расходов</b><span>живые траты от бота · чеки — в CRM · Файлы → Чеки (блок Расходы выше)</span></a>'+
       '<div class="lsn" style="color:#8A8272">Траты до запуска бота ($4,424) уже в счётчике — <a href="'+LINKS.expensesOld+'" target="_blank" rel="noopener" style="color:#96703B">архивный реестр</a>. После LLC + банка подключаем QuickBooks + синк с JobTread — это станет настоящим P&amp;L, журналы останутся историей до-LLC периода.</div>'+
     '</div></details>';
     h+='<details class="pl"><summary>🧾 Налоги — статус и план</summary><div style="padding:4px 10px 8px 10px">'+
-      '<div class="lsn"><b>Сейчас (до LLC):</b> налогов ещё нет — копим базу вычетов: каждый чек в Drive + каждая трата в журнале. Это уже происходит автоматически через бота.</div>'+
+      '<div class="lsn"><b>Сейчас (до LLC):</b> налогов ещё нет — копим базу вычетов: каждый чек в CRM · Файлы + каждая трата в журнале. Это уже происходит автоматически через бота.</div>'+
       '<div class="lsn"><b>После LLC + EIN (сентябрь):</b> QuickBooks Online + онлайн-CPA (бухгалтер). CPA приглашается в QuickBooks как Accountant — видит книги напрямую, ничего пересылать не нужно; его цифры «к уплате / уплачено» появятся в этом блоке. ⬜ выбрать CPA — скажи «ищем CPA», подберу кандидатов.</div>'+
       '<div class="lsn" style="color:#8A8272">Календарь Florida LLC: Annual Report — до 1 мая ($138.75) · федеральная декларация партнёрства (форма 1065) — до 15 марта · sales tax на ремонт real property во Флориде обычно не начисляется клиенту (подтвердит CPA — зависит от формы контракта).</div>'+
     '</div></details>';
@@ -983,7 +989,7 @@ function candStat(row,val,btn){
     h+='<details class="pl"><summary>👥 Команда — контракты, ставки, выплаты</summary><div style="padding:4px 10px 8px 10px">'+
       '<a class="stk" href="/org/"><b>Оргструктура и контакты</b><span>кто есть кто, роли, обязанности — страница Org</span></a>'+
       '<a class="stk" href="'+LINKS.teamSheet+'" target="_blank" rel="noopener"><b>Team-реестр (приватный)</b><span>тип (W-2/фрилансер) · ставка · контракт с/по · ссылка на договор · выплачено всего</span></a>'+
-      '<div class="lsn"><b>Новый человек:</b> скажи Клоду «заведи в команду: имя, роль, ставка, тип» — строка в реестре + папка в 05 Team + доступы по чек-листу. Кандидаты с портала найма — блок Hiring выше.</div>'+
+      '<div class="lsn"><b>Новый человек:</b> скажи Клоду «заведи в команду: имя, роль, ставка, тип» — строка в реестре + раздел в CRM · Файлы → HR + доступы по чек-листу. Кандидаты с портала найма — блок Hiring выше.</div>'+
       '<div class="lsn" style="color:#8A8272">Деньги и контракты — только в Team-реестре (на страницу Org не публикуем). KPI сотрудников включим с первым наймом — план Jin-KPI готов (Jin считает → человек утверждает).</div>'+
     '</div></details>';
     h+='<div class="lsn" style="color:#8A8272;margin-top:10px">Как пользоваться: раз в неделю открыл — цифры сверху живые; вопрос «сколько заработали / кому платим / где документ» — здесь или Джину наверху.</div>';
@@ -995,7 +1001,7 @@ function candStat(row,val,btn){
 
 /* ═══ Идеи · очередь запуска (просьба Алекса 07.08: «всё, что мне нужно помнить —
    в кабинете, без повторений»). Только уникальное: задачи — в My tasks, соцсети-схема —
-   в Socials, план E-2 — ниже. Полные планы живут в Drive → 07 Планы и маркетинг. ═══ */
+   в Socials, план E-2 — ниже. Полные планы — Google Docs, ссылки внутри блока. ═══ */
 (function(){
   try{
     if(role!=='founder')return;
@@ -1009,7 +1015,7 @@ function candStat(row,val,btn){
     h+='<div class="lsn">🤝 <b>/pros — trade-программа</b> — страница для дизайнеров без бригад: «мы ваш execution-партнёр по фактурам», аутрич по базе 100 студий.</div>';
     h+='<div class="lsn">🎨 <b>Открытие шоурума = Wynwood Art Walk</b> — вторая суббота ноября: Вадим кладёт венецианку в витрине как перформанс; вторая волна — Art Basel (нач. декабря).</div>';
     h+='<div class="stk-g" style="margin-top:12px">🎬 Контент-очередь · делает Клод до аккаунтов</div>';
-    h+='<div class="lsn"><b>Топ-5 одобрено к производству:</b> Plaster ASMR (нарезка 17 видео Техаса) · Texture of the Day (27 фактур) · Guess the price · Houzz-профиль (66 фото, нужны твои 20 мин на регистрацию) · email-цепочка «7 дней после гайда». Готовое копится в Drive → 01 Content → Ready to post; публикация стартует после заведения аккаунтов.</div>';
+    h+='<div class="lsn"><b>Топ-5 одобрено к производству:</b> Plaster ASMR (нарезка 17 видео Техаса) · Texture of the Day (27 фактур) · Guess the price · Houzz-профиль (66 фото, нужны твои 20 мин на регистрацию) · email-цепочка «7 дней после гайда». Готовое копится в CRM · Файлы → Контент (Ready to post); публикация стартует после заведения аккаунтов.</div>';
     h+='<div class="lsn" style="color:#8A8272">🐉 В резерве: «Jin reacts» (дракон судит ремонты — пруф-концепт по запросу), fake-OOH «Miami, but plastered», сериал «Texas built us», живая смета, видео-приветствия Jin.</div>';
     h+='<a class="stk" href="'+LINKS.planIdeas+'" target="_blank" rel="noopener"><b>📚 Полный каталог — 18 идей</b><span>контент · конверсия · Майами-партнёрства, с ресурсами и первыми шагами</span></a>';
     h+='<a class="stk" href="'+LINKS.planSmm+'" target="_blank" rel="noopener"><b>📱 Соцсети — план запуска</b><span>аккаунты @m5miami, био, стартер-пак 10 постов, найм SMM через /join</span></a>';
@@ -1059,45 +1065,45 @@ var CLIENTHUBS=[
       var el=document.getElementById('clientsSec'); if(!el)return;
       var d=document.createElement('div');
       d.innerHTML='<details class="stackbox"><summary><span>🤝 Alex + Vlad · Partnership</span><span class="stk-hint">только совладельцы</span></summary><div class="stack">'+
-      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Подписанный PDF уже в приватной папке Drive — доступ только у вас двоих</span></a>'+
+      '<a class="stk" href="'+LINKS.legal+'" target="_blank" rel="noopener"><b>Partnership agreement (signed v3 · 22.07)</b><span>Подписанный PDF — в CRM · Файлы → Legal (приватный раздел)</span></a>'+
       '</div></details>';
       el.appendChild(d.firstChild);
     });
   }catch(e){}
 })();
 
-/* ═══ Инструкции по ролям — прямо в кабинете (просьба Алекса 31.07: не в Drive, текстом).
+/* ═══ Инструкции по ролям — прямо в кабинете (просьба Алекса 31.07: текстом, а не файлом).
    У каждого сотрудника — свои шаги; у директора и фаундеров — «вид сверху» на всю команду.
    Полный регламент: M5/4 Рабочие документы/Документооборот_клиентский_цикл.md ═══ */
 var ROLEGUIDE={
  sales:[
   ['1 · Новый лид — ответ за 15 минут','Карточка падает в Telegram «Лиды» и в JobTread. Звони или пиши с бизнес-WhatsApp +1 786 407 4441. Цель — записать на консультацию/замер.'],
   ['2 · Консультация → замер → КП','Лид и КП ведёшь в CRM (плитка CRM · Sales): статусы, discovery, «живая смета» с фиксацией цены. Календарь замеров — плитка Calendar. После подписания договора объект переезжает в JobTread (производство).'],
-  ['3 · Договор подписан','PDF договора — в карточку сделки в CRM (файл уходит в Supabase, не в Drive). Затем пост в «M5 Team» → Projects: «🖊 Договор подписан: имя · адрес · старт [дата]» — это сигнал всей команде.'],
+  ['3 · Договор подписан','PDF договора — в карточку сделки в CRM (файл сам ложится в Файлы → объекты). Затем пост в «M5 Team» → Projects: «🖊 Договор подписан: имя · адрес · старт [дата]» — это сигнал всей команде.'],
   ['4 · Ссылка клиенту','Клод заведёт кабинет клиента и даст тебе персональную ссылку — отправь её клиенту с бизнес-WhatsApp: «Ваш личный кабинет — прогресс, документы, материалы».'],
   ['5 · Допродажи','Заявки клиента из его кабинета (услуги/кредиты) прилетают в Telegram — отвечаешь в тот же день.']],
  smm:[
-  ['1 · Фотосессия «ДО» — 3 дня после договора','Увидела в Projects «Договор подписан» → едешь на объект: фото + видео каждой комнаты → Drive: 02 Projects → [проект] → 02 Before. Из этого потом собираем «до/после».'],
-  ['2 · Сырьё — только из Drive','01 Content (общий контент) и 03 Progress (Вадим грузит с объектов ежедневно). Ничего не снимаем «в никуда» — всё в папки.'],
+  ['1 · Фотосессия «ДО» — 3 дня после договора','Увидела в Projects «Договор подписан» → едешь на объект: фото + видео каждой комнаты → Джину в тему объекта или сразу в CRM · Файлы → объект. Стадию «до» проставит Джин. Из этого потом собираем «до/после».'],
+  ['2 · Сырьё — только из CRM · Файлы','Раздел Контент (общий) и папка объекта (Вадим грузит с объектов ежедневно). Ничего не снимаем «в никуда» — всё в файлы.'],
   ['3 · Контент-цикл','Календарь и сценарии готовит Клод → съёмка (с Вадимом/Владом) → монтаж → постинг IG/TikTok/YT. Влад — лицо бренда: 1–2 ролика в неделю с ним.'],
-  ['4 · Финал проекта','Фотосессия «ПОСЛЕ» → 06 After → рилс «до/после» — главный формат продаж.']],
+  ['4 · Финал проекта','Фотосессия «ПОСЛЕ» → в файлы объекта, стадия «после» → рилс «до/после» — главный формат продаж.']],
  pm:[
-  ['1 · Днём — фото с объекта','Фото/видео хода работ → Drive: 02 Projects → [проект] → 03 Progress. С рабочей почты @m5miami.com.'],
+  ['1 · Днём — фото с объекта','Фото/видео хода работ → Джину в Telegram (тема объекта) — он разложит по объекту в CRM · Файлы. Длинное видео — загрузи сам на crm.m5miami.com/files.'],
   ['2 · Вечером — 2 минуты','Голосовое или пару строк в «M5 Team» → Projects: что сделали · что завтра · что нужно. Всё — отчёт сдан.'],
-  ['3 · Материалы на согласование','Фото образца → 04 Materials + строка в вечернем отчёте. Статус клиенту выставит Клод.'],
+  ['3 · Материалы на согласование','Фото образца → Джину с подписью «материал» (ляжет в файлы объекта) + строка в вечернем отчёте. Статус клиенту выставит Клод.'],
   ['4 · Галочки — не твоя забота','Прогресс в кабинете клиента обновляет Клод/Джин по твоему отчёту.']],
  designer:[
-  ['1 · Концепт и мудборды','Ведёшь в JobTread + 3D и материалы в Drive проекта. Референсы стиля — Playbook.'],
-  ['2 · Образцы материалов','Фото → Drive: 04 Materials — Клод выставит клиенту на согласование в кабинете.'],
-  ['3 · Дизайн-надзор','Еженедельный визит на объект + фотоотчёт в 03 Progress: то, что нарисовано = то, что строится.']]
+  ['1 · Концепт и мудборды','Ведёшь в JobTread + 3D и материалы — в CRM · Файлы → объект. Референсы стиля — Playbook.'],
+  ['2 · Образцы материалов','Фото → в файлы объекта (или Джину с подписью «материал») — Клод выставит клиенту на согласование в кабинете.'],
+  ['3 · Дизайн-надзор','Еженедельный визит на объект + фотоотчёт в файлы объекта: то, что нарисовано = то, что строится.']]
 };
 var TEAMVIEW=[
  ['Sales','Лиды за 15 минут · КП в CRM · договор → карточка сделки в CRM + пост в Projects · ссылка на кабинет клиенту · допродажи'],
- ['SMM','Фотосессии «до/после» (02 Before / 06 After) · контент только из Drive · постинг IG/TikTok/YT · 1–2 ролика с Владом'],
+ ['SMM','Фотосессии «до/после» · контент только из CRM · Файлы · постинг IG/TikTok/YT · 1–2 ролика с Владом'],
  ['Мастер / бригада','Работы по наряду Вадима · фото «до/после» своего участка Вадиму · без систем — только качество'],
  ['Вадим (ты)','Дневной цикл (блок «Как вести проект» выше) · контроль качества и приёмка · обучение команды этим инструкциям'],
  ['Клод / Джин','Кабинеты клиентов, галочки, кредиты · карточки лидов · отчёты и напоминания · чинит систему по кнопке Idea/Bug'],
- ['Бухгалтер','QuickBooks: инвойсы, оплаты, налоги · мы только складываем чеки в 04 Finance']
+ ['Бухгалтер','QuickBooks: инвойсы, оплаты, налоги · мы только шлём чеки Джину — он складывает их в CRM · Файлы']
 ];
 (function(){
   try{
