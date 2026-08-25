@@ -403,8 +403,8 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
     var CRM='https://crm.m5miami.com';
     var ROUTES=[
       {r:'home',    t:'Главная',   ic:'🏠', secs:[]},
-      {r:'tasks',   t:'Задачи',    ic:'📌', secs:['#stackSec'], sub:'Личный список, стек и планы',
-        rel:[['Спринт команды','https://m5miami.com/sprint/'],['CRM',CRM]]},
+      {r:'tasks',   t:'Задачи',    ic:'📌', secs:['#stackSec'], sub:'Доска задач — в CRM; здесь стек и планы',
+        rel:[['Доска задач',CRM+'/tasks'],['Спринт команды','https://m5miami.com/sprint/']]},
       {r:'clients', t:'Клиенты',   ic:'👥', secs:['#clientsSec'], sub:'Кабинеты клиентов и допродажи',
         rel:[['CRM · сделки',CRM+'/proposals'],['Файлы · договоры',CRM+'/files?b=deals'],['Демо-кабинет','/client/?p=brickell-demo']]},
       {r:'projects',t:'Проекты',   ic:'📖', secs:['#kpiSec','#lessonSec'], sub:'Как вести объект · обучение JobTread',
