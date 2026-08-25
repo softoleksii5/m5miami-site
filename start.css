@@ -294,14 +294,54 @@ html,body{overflow-x:hidden;max-width:100vw}
 }
 
 
-/* ── Сетка секций (25.08): два столбца на десктопе, карточки как в AVG Spaces ── */
-.secgrid{display:flex;flex-direction:column}
+/* ── Сетка секций (25.08): две независимые колонки, без дыр; эмодзи в заголовках убраны ── */
+.secgrid{display:flex;flex-direction:column;gap:0}
+.seccol{display:flex;flex-direction:column;min-width:0}
 @media(min-width:900px){
-  .secgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;margin-top:14px}
-  .secgrid > div{margin:0;min-width:0}
-  .secgrid .stackbox{margin-top:0}
-  .secgrid > details.stackbox{min-width:0}
-  .secgrid .grid{grid-template-columns:1fr 1fr}
-  .secgrid .pulsegrid{grid-template-columns:1fr 1fr}
-  .secgrid .onb{grid-template-columns:1fr}
+  .secgrid{flex-direction:row;gap:10px;margin-top:14px;align-items:flex-start}
+  .seccol{flex:1;gap:10px}
+  .seccol > div{margin:0;min-width:0}
+  .seccol .stackbox{margin-top:0}
+  .seccol .grid{grid-template-columns:1fr 1fr}
+  .seccol .pulsegrid{grid-template-columns:1fr 1fr}
+  .seccol .onb{grid-template-columns:1fr}
 }
+/* спокойные иконки панели: монохром, как lucide в AVG */
+.side a.sn i{filter:grayscale(1);opacity:.65}
+.side a.sn.on i,.side a.sn:hover i{opacity:.9}
+
+
+/* ── Шапка-плашка кабинета (25.08, принцип AVG CabinetHero): тёмная, компактная,
+   функциональная — имя и роль, часы Майами, строка Jin и подсказки внутри ── */
+.hero2{background:linear-gradient(135deg,#1E222C,#262B37 55%,#2E3442);border:1px solid rgba(201,150,58,.22);
+  border-radius:14px;padding:14px 16px;margin:10px 0 14px;color:#F4EEE4;box-shadow:0 10px 28px -18px rgba(20,18,15,.5)}
+.h2-top{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+.h2-ava{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(217,184,124,.6);flex:none}
+.h2-id{flex:1;min-width:0}
+.h2-id b{display:block;font-size:15px;font-weight:700;letter-spacing:-.1px}
+.h2-id span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#B8AD9E;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h2-clock{text-align:right;flex:none}
+.h2-clock b{display:block;font-family:var(--mono);font-size:16px;font-weight:700;color:#D9B87C;font-variant-numeric:tabular-nums}
+.h2-clock span{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:#8F877A}
+.ask.h2-ask{display:flex;align-items:center;gap:9px;background:rgba(20,18,15,.45);border:1px solid rgba(244,238,228,.14);
+  border-radius:11px;padding:3px 3px 3px 13px}
+.ask.h2-ask .askic{color:#D9B87C;font-size:14px}
+.ask.h2-ask input{flex:1;border:0;outline:0;background:transparent;font:14px var(--sans);color:#F4EEE4;padding:9px 0}
+.ask.h2-ask input::placeholder{color:#8F877A}
+.ask.h2-ask button{width:34px;height:34px;border:0;border-radius:9px;background:#D9B87C;color:#14120F;font-size:15px;cursor:pointer;flex:none}
+.ask.h2-ask button:hover{background:#B0894F;color:#fff}
+.h2-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.h2-chips .chip{background:rgba(244,238,228,.08);border:1px solid rgba(244,238,228,.12);color:#CFC7B8;
+  font-size:11px;padding:5px 11px;border-radius:16px}
+.h2-chips .chip:hover{background:rgba(244,238,228,.16);color:#F4EEE4}
+.h2-chips .h2-meet{margin-left:auto;color:#D9B87C;border-color:rgba(217,184,124,.35)}
+.hero2 .jin-reply{background:rgba(244,238,228,.07);border-color:rgba(244,238,228,.14);color:#EDE7DA;margin-top:9px}
+.hero2 .jin-reply b{color:#D9B87C}
+@media(max-width:560px){
+  .hero2{padding:12px 13px}
+  .h2-chips .h2-meet{margin-left:0}
+  .ask.h2-ask input{font-size:16px}
+}
+
+/* приглушённые иконки быстрых ссылок — меньше пестроты */
+.qlink i{filter:grayscale(1);opacity:.65}

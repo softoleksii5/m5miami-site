@@ -336,15 +336,17 @@ document.getElementById('app').innerHTML=
 '</div></header>'+
 '<div class="wrap">'+
   (preview?'<div class="pvw">Admin preview — the <b>'+cfg.label+'</b> workspace exactly as a future hire will see it · <a href="/champion'+(member&&member.role?member.role:'')+'">Back to my workspace →</a></div>':'')+
-  '<div class="hero">'+(avaUrl?'<img class="hero-ava" src="'+avaUrl+'" alt="" decoding="async">':'')+
-  '<div><h1>'+((member&&typeof member.name==='string'&&member.name&&!preview)?('Hi, '+esc(member.name.split(' ')[0])+'.'):'Welcome to M5.')+'</h1>'+
-  '<div class="k">'+cfg.sub+'</div></div></div>'+
-  '<div class="jinhero">'+
-    '<div class="ask askbig"><span class="askic">✦</span><input type="text" id="askInput" placeholder="Ask Jin — tasks, clients, how-to…" onkeydown="if(event.key===\'Enter\')askAgent()">'+
+  '<div class="hero2">'+
+    '<div class="h2-top">'+
+      (avaUrl?'<img class="h2-ava" src="'+avaUrl+'" alt="" decoding="async">':'')+
+      '<div class="h2-id"><b>'+((member&&typeof member.name==='string'&&member.name&&!preview)?esc(member.name.split(' ')[0]):'M5 Team')+'</b><span>'+cfg.sub+'</span></div>'+
+      '<div class="h2-clock"><b id="h2Time">–:–</b><span>Miami</span></div>'+
+    '</div>'+
+    '<div class="ask h2-ask"><span class="askic">✦</span><input type="text" id="askInput" placeholder="Ask Jin — tasks, clients, how-to…" onkeydown="if(event.key===\'Enter\')askAgent()">'+
     '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
-    '<div class="chips chipsbig">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+'</div>'+
     '<div class="jin-reply" id="jinReply"></div>'+
-    '<div class="meetjin" onclick="openWelcome()">▶ Meet Jin · your AI teammate · 30 sec</div>'+
+    '<div class="h2-chips">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+
+    '<span class="chip h2-meet" onclick="openWelcome()">▶ Meet Jin · 30 sec</span></div>'+
   '</div>'+
   nowHtml()+
   quickHtml()+
@@ -441,8 +443,19 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
   }catch(eSide){}
 })();
 
-/* ── Секции в два столбца (принцип AVG Spaces): вместо одной длинной колонки —
-   компактная сетка карточек; открытая карточка растёт только в своей ячейке. */
+/* Часы Майами в шапке (принцип AVG: часы Бали в hero кабинета) */
+(function(){
+  try{
+    var el=document.getElementById('h2Time'); if(!el) return;
+    function tick(){ el.textContent=new Intl.DateTimeFormat('en-US',
+      {timeZone:'America/New_York',hour:'numeric',minute:'2-digit'}).format(new Date()); }
+    tick(); setInterval(tick,30000);
+  }catch(eClk){}
+})();
+
+/* ── Секции в два столбца (принцип AVG Spaces): две независимые колонки —
+   без дыр между блоками; открытая карточка растит только свою колонку.
+   Заголовки секций чистим от эмодзи — спокойнее, ближе к AVG. */
 (function(){
   try{
     var ids=['#contSec','#expSec','#companySec','#ideasSec','#hireSec','#guideSec',
@@ -453,8 +466,19 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
     for(var i=0;i<ids.length;i++){ var e=document.querySelector(ids[i]); if(e) els.push(e); }
     if(els.length<3) return;
     var g=document.createElement('div'); g.className='secgrid';
+    var c1=document.createElement('div'); c1.className='seccol';
+    var c2=document.createElement('div'); c2.className='seccol';
+    g.appendChild(c1); g.appendChild(c2);
     els[0].parentNode.insertBefore(g,els[0]);
-    for(var j=0;j<els.length;j++) g.appendChild(els[j]);
+    for(var j=0;j<els.length;j++) (j%2?c2:c1).appendChild(els[j]);
+    /* эмодзи из заголовков секций — долой (пестрит). Секции дорисовываются
+       синхронно ПОСЛЕ этого кода, поэтому чистим в конце очереди (setTimeout 0). */
+    setTimeout(function(){
+      var sums=document.querySelectorAll('.secgrid summary > span:first-child');
+      for(var k=0;k<sums.length;k++){
+        sums[k].textContent=sums[k].textContent.replace(/^[^A-Za-zА-Яа-яЁё0-9«"]+/,'');
+      }
+    },0);
   }catch(eGrid){}
 })();
 
