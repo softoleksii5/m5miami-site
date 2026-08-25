@@ -392,6 +392,55 @@ document.getElementById('app').innerHTML=
 '</div>';
 if(role==='founder'||role==='director') setTimeout(loadPulse,50);
 
+/* ── Левая панель навигации (редизайн 25.08, принцип AVG): секции кабинета слева,
+   активная подсвечивается по скроллу. Собирается из реально отрендеренных блоков. */
+(function(){
+  try{
+    if(document.getElementById('m5side')) return;
+    var items=[['#app','Главная','🏠']];
+    var map=[['#contSec','Контент','📸'],['#expSec','Расходы','💸'],['#companySec','Компания','🏢'],
+      ['#ideasSec','Идеи','💡'],['#hireSec','Кандидаты','💼'],['#clientsSec','Клиенты','👥'],
+      ['#planSec','План E-2','🗓'],['#lessonSec','Обучение','🎓'],['#kpiSec','Проекты','📖'],
+      ['#guideSec','Playbook','📘'],['#stackSec','Задачи и стек','🧩']];
+    for(var i=0;i<map.length;i++){
+      var el=document.querySelector(map[i][0]);
+      if(el) items.push(map[i]);
+    }
+    var h='<div class="side-logo">M<b>5</b><small>START</small></div>'
+      +'<div class="side-role"><b>'+esc(cfg.label)+'</b>'
+      +((member&&member.name&&!preview)?esc(member.name):'Private workspace')+'</div>';
+    for(var j=0;j<items.length;j++){
+      h+='<a class="sn'+(j===0?' on':'')+'" href="'+items[j][0]+'" data-t="'+items[j][0]+'">'
+        +'<i>'+items[j][2]+'</i>'+items[j][1]+'</a>';
+    }
+    h+='<div class="side-sep">Инструменты</div>'
+      +'<a class="sn" href="'+(LINKS.salescrm||'https://crm.m5miami.com/')+'" target="_blank" rel="noopener"><i>📇</i>CRM</a>'
+      +'<a class="sn" href="'+(LINKS.files||'https://crm.m5miami.com/files')+'" target="_blank" rel="noopener"><i>📁</i>Файлы</a>'
+      +'<a class="sn" href="'+(LINKS.jobtread||'#')+'" target="_blank" rel="noopener"><i>🛠</i>JobTread</a>'
+      +'<div class="side-foot"><a href="/">m5miami.com</a><span onclick="signout()">Sign out</span></div>';
+    var aside=document.createElement('aside');
+    aside.className='side'; aside.id='m5side'; aside.innerHTML=h;
+    document.body.appendChild(aside);
+    document.body.className+=' has-side';
+    aside.addEventListener('click',function(e){
+      var a=e.target.closest('a.sn[data-t]'); if(!a) return;
+      e.preventDefault();
+      var t=a.getAttribute('data-t');
+      if(t==='#app'){ window.scrollTo({top:0,behavior:'smooth'}); }
+      else{ var el2=document.querySelector(t); if(el2) el2.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+    var links=aside.querySelectorAll('a.sn[data-t]');
+    var secs=[];
+    for(var k=1;k<items.length;k++){ var se=document.querySelector(items[k][0]); if(se) secs.push([se,items[k][0]]); }
+    function spy(){
+      var cur='#app', y=window.scrollY+140;
+      for(var m=0;m<secs.length;m++){ if(secs[m][0].offsetTop<=y) cur=secs[m][1]; }
+      for(var n=0;n<links.length;n++){ links[n].className='sn'+(links[n].getAttribute('data-t')===cur?' on':''); }
+    }
+    window.addEventListener('scroll',spy,{passive:true}); spy();
+  }catch(eSide){}
+})();
+
 } catch(e) {
   document.getElementById('app').innerHTML =
     '<div style="max-width:420px;margin:120px auto;padding:24px;background:#fff;border-radius:14px;'+
