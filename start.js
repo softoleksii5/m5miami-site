@@ -23,7 +23,7 @@ var LINKS={
   jobtread:'https://app.jobtread.com/', // операционное ядро: лиды→сметы→производство
   whatsapp:'https://wa.me/17864074441', // бизнес-номер M5 (WhatsApp Business)
   permits:'https://www.miamidade.gov/permits/', // разрешения Miami-Dade
-  expenses:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=360903293', // живой журнал расходов (Hub · лист Expenses — сюда пишет бот)
+  expenses:'https://crm.m5miami.com/expenses', // реестр расходов в CRM (25.08); Google-лист — тихий бэкап бота (см. expensesOld)
   expensesOld:'https://docs.google.com/spreadsheets/d/1kn88ENlBpt1_hE9y5MIIncKgqjk_9iah6jhJFOBOM8c/edit', // архив трат до запуска бота ($4,424 — уже в счётчике)
   revenue:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=801839867', // журнал доходов (Hub · лист Revenue — бот «доход …»)
   vendors:'https://docs.google.com/spreadsheets/d/18-OBtv2S340IGODhQypgeK68fmLE85U_U65eVI6I7x4/edit#gid=907822598', // реестр подрядчиков (Hub · Vendors — бот «подрядчик …»)
@@ -198,7 +198,6 @@ function quickHtml(){
     ['🎬','Правило съёмки',LINKS.shootRule],
     ['💸','Расход — боту в TG',LINKS.jinBot],
     ['🧾','Чеки',LINKS.receipts],
-    ['✦','Спросить Джина',LINKS.jinBot]
   ];
   return '<div class="quick"><span class="qcap">Куда что</span>'+Q.map(function(q){
     return '<a class="qlink" href="'+q[2]+'" target="_blank" rel="noopener"><i>'+q[0]+'</i>'+q[1]+'</a>';
@@ -342,11 +341,6 @@ document.getElementById('app').innerHTML=
       '<div class="h2-id"><b>'+((member&&typeof member.name==='string'&&member.name&&!preview)?esc(member.name.split(' ')[0]):'M5 Team')+'</b><span>'+cfg.sub+'</span></div>'+
       '<div class="h2-clock"><b id="h2Time">–:–</b><span>Miami</span></div>'+
     '</div>'+
-    '<div class="ask h2-ask"><span class="askic">✦</span><input type="text" id="askInput" placeholder="Ask Jin — tasks, clients, how-to…" onkeydown="if(event.key===\'Enter\')askAgent()">'+
-    '<button onclick="askAgent()" aria-label="Send">→</button></div>'+
-    '<div class="jin-reply" id="jinReply"></div>'+
-    '<div class="h2-chips">'+cfg.chips.map(function(c){return '<span class="chip" onclick="askAgent(this.textContent)">'+c+'</span>';}).join('')+
-    '<span class="chip h2-meet" onclick="openWelcome()">▶ Meet Jin · 30 sec</span></div>'+
   '</div>'+
   nowHtml()+
   quickHtml()+
@@ -412,7 +406,7 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
       {r:'content', t:'Контент',   ic:'📸', secs:['#contSec'], sub:'Съёмка, соцсети, куда скидывать',
         rel:[['Файлы · контент',CRM+'/files?b=content']]},
       {r:'expenses',t:'Финансы',   ic:'💸', secs:['#expSec'], sub:'Расходы и чеки',
-        rel:[['Чеки',CRM+'/files?b=receipts']]},
+        rel:[['Реестр расходов',CRM+'/expenses'],['Чеки',CRM+'/files?b=receipts']]},
       {r:'company', t:'Компания',  ic:'🏢', secs:['#companySec','#ideasSec'], sub:'Back office, идеи, партнёрство',
         rel:[['Файлы · документы',CRM+'/files?b=legal']]},
       {r:'people',  t:'Кандидаты', ic:'💼', secs:['#hireSec'], sub:'Найм и портал join',
@@ -476,7 +470,7 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
     }
     idx.innerHTML=ih; wrap.appendChild(idx);
     /* панель слева: роуты + инструменты */
-    var h='<div class="side-logo">M<b>5</b><small>START</small></div>'
+    var h='<a class="side-logo" href="/champion'+role+'">M<b>5</b><small>START</small></a>'
       +'<div class="side-role"><b>'+esc(cfg.label)+'</b>'
       +((member&&member.name&&!preview)?esc(member.name):'Private workspace')+'</div>';
     for(var n=0;n<live.length;n++){
