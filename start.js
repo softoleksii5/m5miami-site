@@ -207,7 +207,7 @@ function quickHtml(){
 function nowHtml(){
   if(NEWBIE) return obHtml();
   var n;
-  if(role==='founder') n={txt:'<b>Фокус недели:</b> запустить соцсети — Meta Business, Google Business Profile, TikTok/YT. Детали — ниже в кабинете.',btn:'План недели',act:'nowTasks()'};
+  if(role==='founder') n={txt:'<b>Фокус недели:</b> запустить соцсети — Meta Business, Google Business Profile, TikTok/YT. Детали — в спейсах «Контент» и «Задачи».'};
   else if(role==='director') n=(new Date().getHours()>=17)
     ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — туда же, Джин сам разложит по объекту.',btn:'Отправить',url:LINKS.telegram}
     : {txt:'<b>Сегодня:</b> фото и видео с объекта — Джину в Telegram, он разложит. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
@@ -215,7 +215,7 @@ function nowHtml(){
   else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть файлы',url:LINKS.content};
   else n={txt:'Задачи дня — в Telegram · M5 Team. Не знаешь, с чего начать — спроси Jin сверху.',btn:'Открыть чат',url:LINKS.telegram};
   var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
-  return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div><a class="now-btn" '+open+'>'+n.btn+' →</a></div>';
+  return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div>'+(n.btn?'<a class="now-btn" '+open+'>'+n.btn+' →</a>':'')+'</div>';
 }
 window.nowTasks=function(){ try{ var b=document.getElementById('tdBox')||document.getElementById('planSec'); if(b){ if(b.tagName==='DETAILS')b.open=true; b.scrollIntoView({behavior:'smooth',block:'start'}); } }catch(e){} };
 /* Онбординг-чеклист первого дня: 2 шага уже отмечены (endowed progress),
