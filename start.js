@@ -394,52 +394,115 @@ document.getElementById('app').innerHTML=
 '</div>';
 if(role==='founder'||role==='director') setTimeout(loadPulse,50);
 
-/* ── Левая панель навигации (редизайн 25.08, принцип AVG): секции кабинета слева,
-   активная подсвечивается по скроллу. Собирается из реально отрендеренных блоков. */
+/* ── Спейсы-страницы (25.08, принцип Notion): каждый раздел — отдельная страница,
+   в которую проваливаешься из левой панели. Роутинг по hash (#/route), моб. — плитки
+   на главной. «Закольцовка»: на каждой странице чипы-связи с соседними системами. */
 (function(){
   try{
     if(document.getElementById('m5side')) return;
-    var items=[['#app','Главная','🏠']];
-    var map=[['#contSec','Контент','📸'],['#expSec','Расходы','💸'],['#companySec','Компания','🏢'],
-      ['#ideasSec','Идеи','💡'],['#hireSec','Кандидаты','💼'],['#clientsSec','Клиенты','👥'],
-      ['#planSec','План E-2','🗓'],['#lessonSec','Обучение','🎓'],['#kpiSec','Проекты','📖'],
-      ['#guideSec','Playbook','📘'],['#stackSec','Задачи и стек','🧩']];
-    for(var i=0;i<map.length;i++){
-      var el=document.querySelector(map[i][0]);
-      if(el) items.push(map[i]);
+    var CRM='https://crm.m5miami.com';
+    var ROUTES=[
+      {r:'home',    t:'Главная',   ic:'🏠', secs:[]},
+      {r:'tasks',   t:'Задачи',    ic:'📌', secs:['#stackSec'], sub:'Личный список, стек и планы',
+        rel:[['Спринт команды','https://m5miami.com/sprint/'],['CRM',CRM]]},
+      {r:'clients', t:'Клиенты',   ic:'👥', secs:['#clientsSec'], sub:'Кабинеты клиентов и допродажи',
+        rel:[['CRM · сделки',CRM+'/proposals'],['Файлы · договоры',CRM+'/files?b=deals'],['Демо-кабинет','/client/?p=brickell-demo']]},
+      {r:'projects',t:'Проекты',   ic:'📖', secs:['#kpiSec','#lessonSec'], sub:'Как вести объект · обучение JobTread',
+        rel:[['JobTread','https://app.jobtread.com'],['Файлы · объекты',CRM+'/files?b=projects']]},
+      {r:'content', t:'Контент',   ic:'📸', secs:['#contSec'], sub:'Съёмка, соцсети, куда скидывать',
+        rel:[['Файлы · контент',CRM+'/files?b=content']]},
+      {r:'expenses',t:'Финансы',   ic:'💸', secs:['#expSec'], sub:'Расходы и чеки',
+        rel:[['Чеки',CRM+'/files?b=receipts']]},
+      {r:'company', t:'Компания',  ic:'🏢', secs:['#companySec','#ideasSec'], sub:'Back office, идеи, партнёрство',
+        rel:[['Файлы · документы',CRM+'/files?b=legal']]},
+      {r:'people',  t:'Кандидаты', ic:'💼', secs:['#hireSec'], sub:'Найм и портал join',
+        rel:[['Портал найма','/join/'],['Файлы · HR',CRM+'/files?b=hr']]},
+      {r:'plan',    t:'План E-2',  ic:'🗓', secs:['#planSec'], sub:'Дорожная карта визы',
+        rel:[['Чеклист спринта','https://m5miami.com/sprint/']]},
+      {r:'playbook',t:'Playbook',  ic:'📘', secs:['#guideSec'], sub:'Твоя роль и кто что делает',
+        rel:[['Онбординг','/onboarding/']]}
+    ];
+    /* страницы: переносим секции внутрь и раскрываем аккордеоны в плоские блоки */
+    var wrap=document.querySelector('.wrap:not(.hbar)'); if(!wrap) return;
+    var live=[ROUTES[0]];
+    for(var i=1;i<ROUTES.length;i++){
+      var R=ROUTES[i], els=[];
+      for(var j=0;j<R.secs.length;j++){ var e=document.querySelector(R.secs[j]); if(e) els.push(e); }
+      if(!els.length) continue;
+      live.push(R);
+      var pg=document.createElement('section');
+      pg.className='space'; pg.id='sp-'+R.r;
+      var rel='';
+      for(var k=0;k<(R.rel||[]).length;k++){
+        rel+='<a class="rel" href="'+R.rel[k][1]+'"'+(/^http/.test(R.rel[k][1])?' target="_blank" rel="noopener"':'')+'>'+esc(R.rel[k][0])+' ↗</a>';
+      }
+      pg.innerHTML='<div class="crumbs"><a href="#/home">M5 Start</a> / '+esc(R.t)+'</div>'
+        +'<div class="sp-head"><span class="sp-ic">'+R.ic+'</span><div><h1>'+esc(R.t)+'</h1>'
+        +(R.sub?'<p>'+esc(R.sub)+'</p>':'')+'</div></div>'
+        +(rel?'<div class="rels">'+rel+'</div>':'')
+        +'<div class="sp-body"></div>';
+      var body=pg.querySelector('.sp-body');
+      for(var j2=0;j2<els.length;j2++) body.appendChild(els[j2]);
+      wrap.appendChild(pg);
     }
+    /* перекладываем: Socials → Контент, Partnership → Компания */
+    setTimeout(function(){
+      var all=document.querySelectorAll('details.stackbox');
+      for(var a=0;a<all.length;a++){
+        var t=(all[a].querySelector('summary')||{}).textContent||'';
+        if(/Socials/i.test(t)){ var c=document.querySelector('#sp-content .sp-body'); if(c) c.appendChild(all[a]); }
+        if(/Partnership/i.test(t)){ var cp=document.querySelector('#sp-company .sp-body'); if(cp) cp.appendChild(all[a]); }
+      }
+      /* на страницах аккордеоны всегда раскрыты и без карточной рамки */
+      var boxes=document.querySelectorAll('.space details.stackbox');
+      for(var b=0;b<boxes.length;b++){ boxes[b].setAttribute('open',''); boxes[b].className+=' flat'; }
+      var sums=document.querySelectorAll('.space summary > span:first-child');
+      for(var sSum=0;sSum<sums.length;sSum++){
+        sums[sSum].textContent=sums[sSum].textContent.replace(/^[^A-Za-zА-Яа-яЁё0-9«"]+/,'');
+      }
+      route();
+    },0);
+    /* главная: элементы верхнего уровня + плитки спейсов для мобилы */
+    var homeEls=[];
+    ['.hero2','.nowcard','.quick','.pulsegrid','.grid'].forEach(function(sel){
+      var e2=wrap.querySelector(sel); if(e2){ e2.classList.add('home-el'); homeEls.push(e2);
+        if(e2.previousElementSibling&&e2.previousElementSibling.className==='sec'){ e2.previousElementSibling.classList.add('home-el'); } }
+    });
+    var at=wrap.querySelector(':scope > details.stackbox'); if(at) at.classList.add('home-el');
+    var idx=document.createElement('div'); idx.className='sp-index home-el';
+    var ih='';
+    for(var q=1;q<live.length;q++){
+      ih+='<a href="#/'+live[q].r+'"><i>'+live[q].ic+'</i><b>'+esc(live[q].t)+'</b><span>'+esc(live[q].sub||'')+'</span></a>';
+    }
+    idx.innerHTML=ih; wrap.appendChild(idx);
+    /* панель слева: роуты + инструменты */
     var h='<div class="side-logo">M<b>5</b><small>START</small></div>'
       +'<div class="side-role"><b>'+esc(cfg.label)+'</b>'
       +((member&&member.name&&!preview)?esc(member.name):'Private workspace')+'</div>';
-    for(var j=0;j<items.length;j++){
-      h+='<a class="sn'+(j===0?' on':'')+'" href="'+items[j][0]+'" data-t="'+items[j][0]+'">'
-        +'<i>'+items[j][2]+'</i>'+items[j][1]+'</a>';
+    for(var n=0;n<live.length;n++){
+      h+='<a class="sn" href="#/'+live[n].r+'" data-r="'+live[n].r+'"><i>'+live[n].ic+'</i>'+esc(live[n].t)+'</a>';
     }
     h+='<div class="side-sep">Инструменты</div>'
-      +'<a class="sn" href="'+(LINKS.salescrm||'https://crm.m5miami.com/')+'" target="_blank" rel="noopener"><i>📇</i>CRM</a>'
-      +'<a class="sn" href="'+(LINKS.files||'https://crm.m5miami.com/files')+'" target="_blank" rel="noopener"><i>📁</i>Файлы</a>'
+      +'<a class="sn" href="'+(LINKS.salescrm||CRM)+'" target="_blank" rel="noopener"><i>📇</i>CRM</a>'
+      +'<a class="sn" href="'+(LINKS.files||CRM+'/files')+'" target="_blank" rel="noopener"><i>📁</i>Файлы</a>'
       +'<a class="sn" href="'+(LINKS.jobtread||'#')+'" target="_blank" rel="noopener"><i>🛠</i>JobTread</a>'
       +'<div class="side-foot"><a href="/">m5miami.com</a><span onclick="signout()">Sign out</span></div>';
     var aside=document.createElement('aside');
     aside.className='side'; aside.id='m5side'; aside.innerHTML=h;
     document.body.appendChild(aside);
     document.body.className+=' has-side';
-    aside.addEventListener('click',function(e){
-      var a=e.target.closest('a.sn[data-t]'); if(!a) return;
-      e.preventDefault();
-      var t=a.getAttribute('data-t');
-      if(t==='#app'){ window.scrollTo({top:0,behavior:'smooth'}); }
-      else{ var el2=document.querySelector(t); if(el2) el2.scrollIntoView({behavior:'smooth',block:'start'}); }
-    });
-    var links=aside.querySelectorAll('a.sn[data-t]');
-    var secs=[];
-    for(var k=1;k<items.length;k++){ var se=document.querySelector(items[k][0]); if(se) secs.push([se,items[k][0]]); }
-    function spy(){
-      var cur='#app', y=window.scrollY+140;
-      for(var m=0;m<secs.length;m++){ if(secs[m][0].offsetTop<=y) cur=secs[m][1]; }
-      for(var n=0;n<links.length;n++){ links[n].className='sn'+(links[n].getAttribute('data-t')===cur?' on':''); }
+    /* роутер */
+    function cur(){ var m=location.hash.match(/^#\/([a-z-]+)/); return (m&&m[1])||'home'; }
+    function route(){
+      var r=cur(), ok=false;
+      for(var v=0;v<live.length;v++) if(live[v].r===r) ok=true;
+      if(!ok) r='home';
+      document.body.setAttribute('data-r',r);
+      var links=aside.querySelectorAll('a.sn[data-r]');
+      for(var l=0;l<links.length;l++){ links[l].className='sn'+(links[l].getAttribute('data-r')===r?' on':''); }
+      window.scrollTo(0,0);
     }
-    window.addEventListener('scroll',spy,{passive:true}); spy();
+    window.addEventListener('hashchange',route); route();
   }catch(eSide){}
 })();
 
@@ -453,34 +516,7 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
   }catch(eClk){}
 })();
 
-/* ── Секции в два столбца (принцип AVG Spaces): две независимые колонки —
-   без дыр между блоками; открытая карточка растит только свою колонку.
-   Заголовки секций чистим от эмодзи — спокойнее, ближе к AVG. */
-(function(){
-  try{
-    var ids=['#contSec','#expSec','#companySec','#ideasSec','#hireSec','#guideSec',
-             '#clientsSec','#planSec','#lessonSec','#kpiSec','#stackSec'];
-    var els=[];
-    var at=document.querySelector('.wrap > details.stackbox');   // «All tools»
-    if(at) els.push(at);
-    for(var i=0;i<ids.length;i++){ var e=document.querySelector(ids[i]); if(e) els.push(e); }
-    if(els.length<3) return;
-    var g=document.createElement('div'); g.className='secgrid';
-    var c1=document.createElement('div'); c1.className='seccol';
-    var c2=document.createElement('div'); c2.className='seccol';
-    g.appendChild(c1); g.appendChild(c2);
-    els[0].parentNode.insertBefore(g,els[0]);
-    for(var j=0;j<els.length;j++) (j%2?c2:c1).appendChild(els[j]);
-    /* эмодзи из заголовков секций — долой (пестрит). Секции дорисовываются
-       синхронно ПОСЛЕ этого кода, поэтому чистим в конце очереди (setTimeout 0). */
-    setTimeout(function(){
-      var sums=document.querySelectorAll('.secgrid summary > span:first-child');
-      for(var k=0;k<sums.length;k++){
-        sums[k].textContent=sums[k].textContent.replace(/^[^A-Za-zА-Яа-яЁё0-9«"]+/,'');
-      }
-    },0);
-  }catch(eGrid){}
-})();
+
 
 } catch(e) {
   document.getElementById('app').innerHTML =
