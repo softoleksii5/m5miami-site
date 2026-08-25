@@ -441,6 +441,23 @@ if(role==='founder'||role==='director') setTimeout(loadPulse,50);
   }catch(eSide){}
 })();
 
+/* ── Секции в два столбца (принцип AVG Spaces): вместо одной длинной колонки —
+   компактная сетка карточек; открытая карточка растёт только в своей ячейке. */
+(function(){
+  try{
+    var ids=['#contSec','#expSec','#companySec','#ideasSec','#hireSec','#guideSec',
+             '#clientsSec','#planSec','#lessonSec','#kpiSec','#stackSec'];
+    var els=[];
+    var at=document.querySelector('.wrap > details.stackbox');   // «All tools»
+    if(at) els.push(at);
+    for(var i=0;i<ids.length;i++){ var e=document.querySelector(ids[i]); if(e) els.push(e); }
+    if(els.length<3) return;
+    var g=document.createElement('div'); g.className='secgrid';
+    els[0].parentNode.insertBefore(g,els[0]);
+    for(var j=0;j<els.length;j++) g.appendChild(els[j]);
+  }catch(eGrid){}
+})();
+
 } catch(e) {
   document.getElementById('app').innerHTML =
     '<div style="max-width:420px;margin:120px auto;padding:24px;background:#fff;border-radius:14px;'+
@@ -769,7 +786,7 @@ var ROADMAP=[
       }
       var tdDone=0,tdAll=0,tdNextFound=false;
       for(var q=0;q<ALEXTODO.length;q++){ if(ALEXTODO[q][0]!=='soon'){tdAll++; if(ALEXTODO[q][0]==='done')tdDone++;} }
-      var td='<details class="stackbox" open id="tdBox"><summary><span>📌 My tasks · run by Claude</span><span class="stk-hint">'+tdDone+' из '+tdAll+' · обновлено '+ALEXTODO_UPD+'</span></summary><div class="stack">';
+      var td='<details class="stackbox" id="tdBox"><summary><span>📌 My tasks · run by Claude</span><span class="stk-hint">'+tdDone+' из '+tdAll+' · обновлено '+ALEXTODO_UPD+'</span></summary><div class="stack">';
       td+='<div class="tdbar"><i style="width:'+(tdAll?Math.round(tdDone/tdAll*100):0)+'%"></i></div>';
       td+='<div class="lsn" style="margin:4px 0 8px;color:#8A8272">Напиши Клоду в чат кодовое слово <b style="color:#96703B">«ПОГНАЛИ»</b> — он вспомнит этот список и поведёт тебя по шагам, по одному.</div>';
       var tdRow=function(t,ic,cls){ return '<details class="pl'+cls+'"><summary>'+ic+' '+ALEXTODO[t][1]+(cls===' tdnext'?' <span class="tdgo">следующий шаг</span>':'')+'</summary><div class="lsn" style="padding:4px 10px 8px 34px">'+ALEXTODO[t][2]+'</div></details>'; };
