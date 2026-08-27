@@ -206,7 +206,7 @@ function quickHtml(){
 function nowHtml(){
   if(NEWBIE) return obHtml();
   var n;
-  if(role==='founder') n={txt:'<b>Фокус недели:</b> запустить соцсети — Meta Business, Google Business Profile, TikTok/YT. Детали — в спейсах «Контент» и «Задачи».'};
+  if(role==='founder') return '';   // фаундеру Now-карточка не нужна (реш. 27.08) — фокус живёт в Задачах и спринте
   else if(role==='director') n=(new Date().getHours()>=17)
     ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — туда же, Джин сам разложит по объекту.',btn:'Отправить',url:LINKS.telegram}
     : {txt:'<b>Сегодня:</b> фото и видео с объекта — Джину в Telegram, он разложит. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
