@@ -187,7 +187,11 @@ var member=null; try{member=JSON.parse(localStorage.getItem('m5_member')||'null'
    Показываем кабинет ровно так, как его увидит будущий сотрудник:
    без имени фаундера и без его личных блоков, с баннером сверху. */
 var preview=false;
-try{ if(member&&member.role==='founder'&&ROLES[member.role]&&role!==member.role) preview=true; }catch(e){}
+/* Админ = фаундер по почте (вход /welcomehero/): свой кабинет + предпросмотр любого другого. */
+var ADMIN_EMAILS=['alex@m5miami.com','soft.oleksii@gmail.com'];
+var isAdmin=false;
+try{ if(member&&(member.role==='founder'||ADMIN_EMAILS.indexOf(String(member.email||'').toLowerCase())>-1)){ isAdmin=true; if(member.role!=='founder') member.role='founder'; } }catch(e){}
+try{ if(isAdmin&&role!=='founder') preview=true; }catch(e){}
 
 /* Персональные аватарки (Pixar-стиль, серия для всей команды).
    Матчим по префиксу рабочей почты, запасной вариант — по имени. */
@@ -606,8 +610,14 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     /* панель слева: роуты + инструменты */
     var h='<a class="side-logo" href="/champion'+role+'">M<b>5</b><small>START</small></a>'
       +'<div class="side-role"><b>'+esc(cfg.label)+'</b>'
-      +((member&&member.name&&!preview)?esc(member.name):'Private workspace')+'</div>'
+      +((member&&member.name&&!preview)?esc(member.name):(preview&&member&&member.name?'Admin preview · '+esc(member.name):'Private workspace'))+'</div>'
       +'<div class="side-langs">'+['en','es','ru','uk'].map(function(l){return '<span class="lg'+(l===LANG?' on':'')+'" onclick="m5Lang(\''+l+'\')">'+l.toUpperCase()+'</span>';}).join('')+'</div>';
+    /* Админ-переключатель кабинетов: свой + любой другой одним кликом */
+    if(isAdmin){
+      var CABS=[['founder','Мой кабинет'],['director','Директор'],['partner','Совладелец'],['smm','SMM'],['supervisor','Технадзор'],['sales','Продажи']];
+      h+='<div class="side-sep">'+TT('sp_cabinets','Кабинеты')+'</div>';
+      for(var cb=0;cb<CABS.length;cb++){ h+='<a class="sn'+(CABS[cb][0]===role?' on-cab':'')+'" href="/champion'+CABS[cb][0]+'"><i>'+(CABS[cb][0]==='founder'?'🏠':'👤')+'</i>'+CABS[cb][1]+'</a>'; }
+    }
     for(var n=0;n<live.length;n++){
       h+='<a class="sn" href="#/'+live[n].r+'" data-r="'+live[n].r+'"><i>'+live[n].ic+'</i>'+esc(live[n].t)+'</a>';
     }
