@@ -248,8 +248,8 @@ function nowHtml(){
   var n;
   if(role==='founder') return '';   // фаундеру Now-карточка не нужна (реш. 27.08) — фокус живёт в Задачах и спринте
   else if(role==='director'||role==='supervisor') n=(new Date().getHours()>=17)
-    ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — туда же, Джин сам разложит по объекту.',btn:'Отправить',url:LINKS.telegram}
-    : {txt:'<b>Сегодня:</b> фото и видео с объекта — Джину в Telegram, он разложит. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
+    ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Telegram-бот M5, они лягут в папку объекта.',btn:'Отправить',url:LINKS.telegram}
+    : {txt:'<b>Сегодня:</b> фото и видео с объекта — в Telegram-бот M5, они лягут в папку объекта. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
   else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM-кабинет и в Telegram → Лиды.',btn:'Открыть CRM',url:LINKS.salescrm};
   else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть файлы',url:LINKS.content};
   else if(role==='partner') n={txt:'<b>Пульс компании:</b> лиды, воронка и расходы — в плитках выше; общий план на США — в спринте.',btn:'Открыть спринт',url:'https://m5miami.com/sprint/'};
@@ -641,7 +641,24 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       for(var l=0;l<links.length;l++){ links[l].className='sn'+(links[l].getAttribute('data-r')===r?' on':''); }
       window.scrollTo(0,0);
     }
+    function pruneEmpty(){
+      try{
+        for(var pe=1;pe<live.length;pe++){
+          var PR=live[pe]; if(PR.r==='cabinets'||PR.r==='settings')continue;
+          var pg2=document.getElementById('sp-'+PR.r); if(!pg2)continue;
+          var pb=pg2.querySelector('.sp-body');
+          var isEmpty=!pb||pb.textContent.replace(/\s+/g,'')==='';
+          var sn2=aside.querySelector('a.sn[data-r="'+PR.r+'"]');
+          var tile2=idx.querySelector('a[href="#/'+PR.r+'"]');
+          if(sn2) sn2.style.display=isEmpty?'none':'';
+          if(tile2) tile2.style.display=isEmpty?'none':'';
+          if(isEmpty&&cur()===PR.r) location.hash='#/home';
+        }
+      }catch(ePr){}
+    }
     window.addEventListener('hashchange',route); route();
+    /* пустышки прячем после того, как асинхронные филлеры (E-2 и др.) отработали */
+    setTimeout(pruneEmpty,900); setTimeout(pruneEmpty,2500);
   }catch(eSide){}
 })();
 

@@ -428,3 +428,7 @@ body:not([data-r="home"]) .sp-index.home-el{display:none}
 .tgrow.off .tgl{background:#D8CFBC}
 .tgrow.off .tgl::after{left:2px}
 @media(max-width:640px){.set-grid{grid-template-columns:1fr}}
+
+/* Фикс 28.08: home-el ставит display:block и ломал flex Now-карточки (кнопка
+   наезжала на текст). Возвращаем карточке её раскладку. */
+body[data-r="home"] .nowcard.home-el{display:flex}
