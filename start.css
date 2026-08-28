@@ -393,3 +393,38 @@ body[data-r="playbook"] #sp-playbook{display:block}
 .side-langs .lg{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:3px 7px;border:1px solid var(--line);border-radius:7px;color:var(--soft);cursor:pointer;background:#fff;user-select:none}
 .side-langs .lg.on{color:var(--gold-d);border-color:#C8A96A;font-weight:700}
 .side-langs .lg:hover{border-color:#C8A96A}
+
+/* ── Редизайн главной 28.08 (принцип AVG OS) ─────────────────────────────── */
+/* Пространства: горизонтальные карточки — иконка-плитка слева, смысл справа */
+.sp-index a{flex-direction:row;align-items:center;gap:12px;padding:13px 16px}
+.sp-index i{width:38px;height:38px;min-width:38px;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin:0;background:#FBFAF8}
+.sp-index .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sp-index .tx span{overflow:hidden;text-overflow:ellipsis}
+/* показ страниц новых спейсов + фикс: домашняя сетка не просвечивает на страницах */
+body[data-r="cabinets"] #sp-cabinets{display:block}
+body[data-r="settings"] #sp-settings{display:block}
+body:not([data-r="home"]) .sp-index.home-el{display:none}
+/* Виджет задач на главной */
+.twidget{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 14px 0;margin-top:10px}
+.tw-row{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid #F0EADD;text-decoration:none;color:#20242E}
+.tw-row:hover .tw-t{color:#96703B}
+.tw-dot{width:8px;height:8px;min-width:8px;border-radius:50%;background:#D8CFBC}
+.tw-dot.doing{background:#C8A96A}
+.tw-t{font-size:13.5px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tw-who{font-size:11px;color:var(--soft);background:#F6F1E7;border-radius:6px;padding:2px 7px;white-space:nowrap}
+.tw-due{font-family:var(--mono);font-size:10.5px;color:var(--soft)}
+.tw-empty{font-size:12.5px;color:var(--soft);padding:12px 2px}
+.tw-all{display:block;text-align:right;font-size:11.5px;color:#96703B;text-decoration:none;padding:9px 2px 11px}
+/* Настройки: тумблеры видимости (принцип AVG «Настройки системы») */
+.set-note{font-size:12.5px;color:var(--soft);margin:2px 0 14px;line-height:1.5}
+.set-block{margin-bottom:20px}
+.set-block>b{display:block;font-size:13.5px;margin-bottom:8px}
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tgrow{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer;user-select:none}
+.tgrow span{font-size:13px}
+.tgrow.off span{color:var(--soft);text-decoration:line-through}
+.tgl{width:34px;height:19px;min-width:34px;border-radius:12px;background:#2E7D4F;position:relative;transition:background .15s}
+.tgl::after{content:'';position:absolute;top:2px;left:17px;width:15px;height:15px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.tgrow.off .tgl{background:#D8CFBC}
+.tgrow.off .tgl::after{left:2px}
+@media(max-width:640px){.set-grid{grid-template-columns:1fr}}

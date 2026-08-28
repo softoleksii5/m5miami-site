@@ -200,6 +200,23 @@ try{
     avaUrl=AVATARS[akey]||'';
   }
 }catch(e){}
+/* ── Языки кабинета (28.08): EN — основной для новых ролей, ES/RU/UK.
+   Переводит хром интерфейса: панель, названия и подписи спейсов. Контент
+   разделов (плейбуки, гайды) — следующая волна. Выбор живёт в m5_lang. ── */
+var LANG=(function(){ try{ var l=localStorage.getItem('m5_lang'); if(['en','es','ru','uk'].indexOf(l)>-1) return l; }catch(e){}
+  return (role==='founder'||role==='partner'||role==='director')?'ru':'en'; })();
+window.m5Lang=function(l){ try{ localStorage.setItem('m5_lang',l); }catch(e){} location.reload(); };
+var L10N={
+ ru:{},
+ en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',tools:'Tools',files:'Files',settings:'Settings',spaces:'Spaces',tw_all:'Full task board · CRM',sub_settings:'Visibility toggles: what each function sees',
+  sub_tasks:'Task board — in CRM; stack & plans here',sub_clients:'Client hubs & upsells',sub_projects:'How to run a project · JobTread training',sub_content:'Shooting, socials, where to drop files',sub_expenses:'Expenses & receipts',sub_company:'Back office, ideas, partnership',sub_people:'Hiring & join portal',sub_plan:'Visa roadmap',sub_playbook:'Your role and who does what',sub_cabinets:'A cabinet belongs to a function, not a person'},
+ es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
+  sub_tasks:'Tablero de tareas — en CRM; stack y planes aquí',sub_clients:'Portales de clientes y ventas extra',sub_projects:'Cómo llevar un proyecto · formación JobTread',sub_content:'Rodaje, redes, dónde subir archivos',sub_expenses:'Gastos y recibos',sub_company:'Back office, ideas, sociedad',sub_people:'Contratación y portal join',sub_plan:'Hoja de ruta de la visa',sub_playbook:'Tu rol y quién hace qué',sub_cabinets:'El gabinete pertenece a la función, no a la persona'},
+ uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
+  sub_tasks:'Дошка задач — у CRM; тут стек і плани',sub_clients:'Кабінети клієнтів і допродажі',sub_projects:"Як вести об'єкт · навчання JobTread",sub_content:'Зйомка, соцмережі, куди скидати',sub_expenses:'Витрати та чеки',sub_company:'Бек-офіс, ідеї, партнерство',sub_people:'Найм і портал join',sub_plan:'Дорожня карта візи',sub_playbook:'Твоя роль і хто що робить',sub_cabinets:'Кабінет належить функції, а не людині'}
+};
+function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
+
 /* ── Первый экран v3 (01.08): «Now»-карточка · Company pulse · режим новичка ──
    «Now» — одна карточка-целеуказатель: одно честное действие по роли (без фейк-данных).
    Pulse — полоса цифр только для co-founder/director; лиды подтягиваются живьём
@@ -236,17 +253,48 @@ function nowHtml(){
   else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM-кабинет и в Telegram → Лиды.',btn:'Открыть CRM',url:LINKS.salescrm};
   else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть файлы',url:LINKS.content};
   else if(role==='partner') n={txt:'<b>Пульс компании:</b> лиды, воронка и расходы — в плитках выше; общий план на США — в спринте.',btn:'Открыть спринт',url:'https://m5miami.com/sprint/'};
-  else n={txt:'Задачи дня — в Telegram · M5 Team. Не знаешь, с чего начать — спроси Jin сверху.',btn:'Открыть чат',url:LINKS.telegram};
+  else n={txt:'Задачи дня — в разделе «Задачи». Не знаешь, с чего начать — открой Playbook: там твоя роль по шагам.',btn:''};
   var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
   return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div>'+(n.btn?'<a class="now-btn" '+open+'>'+n.btn+' →</a>':'')+'</div>';
 }
 window.nowTasks=function(){ try{ var b=document.getElementById('tdBox')||document.getElementById('planSec'); if(b){ if(b.tagName==='DETAILS')b.open=true; b.scrollIntoView({behavior:'smooth',block:'start'}); } }catch(e){} };
+/* Виджет задач на главной (28.08): фаундеру — последние поручения с доски CRM,
+   сотруднику с доской — его живые задачи. Данные отдаёт M5 Hub (?tasks=1) из
+   Supabase. Нет данных — честная ссылка на доску, без фейка. */
+var TASKFUNC={founder:'alex',partner:'vlad',director:'vadim',sales:'sales'}[role]||'';
+function twHtml(){
+  if(!TASKFUNC||NEWBIE) return '';
+  return '<div class="sec">'+TT('sp_tasks','Задачи')+(role==='founder'?' · поручено':'')+'</div>'
+    +'<div class="twidget" id="twBox"><div class="tw-empty">Загружаю доску…</div>'
+    +'<a class="tw-all" href="https://crm.m5miami.com/tasks" target="_blank" rel="noopener">'+TT('tw_all','Вся доска задач · CRM')+' →</a></div>';
+}
+function loadTasks(){
+  try{
+    var box=document.getElementById('twBox'); if(!box||!window.fetch) return;
+    fetch(JIN_HOOK+'?tasks=1&f='+TASKFUNC+'&k=m5p-4471',{credentials:'omit'}).then(function(r){return r.text();}).then(function(t){
+      var d=null; try{d=JSON.parse(t);}catch(e){}
+      var list=(d&&d.tasks)||[], empty=box.querySelector('.tw-empty');
+      if(!empty) return;
+      if(!list.length){ empty.textContent=(role==='founder')?'Живых поручений нет — поставь задачу на доске.':'Живых задач нет — загляни в доску.'; return; }
+      var h='';
+      for(var i=0;i<Math.min(list.length,3);i++){
+        var tk=list[i];
+        h+='<a class="tw-row" href="https://crm.m5miami.com/tasks" target="_blank" rel="noopener">'
+          +'<i class="tw-dot'+(tk.status==='doing'?' doing':'')+'"></i>'
+          +'<span class="tw-t">'+esc(tk.title||'')+'</span>'
+          +(tk.func_label?'<span class="tw-who">'+esc(tk.func_label)+'</span>':'')
+          +(tk.due?'<span class="tw-due">'+esc(tk.due)+'</span>':'')+'</a>';
+      }
+      empty.outerHTML=h;
+    }).catch(function(){});
+  }catch(e){}
+}
 /* Онбординг-чеклист первого дня: 2 шага уже отмечены (endowed progress),
    галочки живут в localStorage, «всё готово» ставит m5_onb_done. */
 var OB_STEPS=[
   {t:'Аккаунт создан',fixed:1},
-  {t:'Jin уже знает твою роль и правила M5',fixed:1},
-  {t:'Задай Jin первый вопрос — строка сверху'},
+  {t:'Кабинет настроен под твою роль',fixed:1},
+  {t:'Открой раздел «Задачи» — там твоя доска'},
   {t:'Посмотри видео «Как устроена система» · 2 мин',url:'/media/tutorial_system_ru.mp4'},
   {t:'Прочитай свой плейбук — блок «Your playbook» ниже'},
   {t:'Напиши «Привет, я на месте» в чат команды',url:''},
@@ -293,17 +341,26 @@ function pulseHtml(){
 /* Живые лиды с M5 Hub (тот же endpoint, что Jin; credentials:'omit' — см. askAgent) */
 function loadPulse(){
   try{
-    if(!window.fetch||!document.getElementById('plLeads'))return;
+    if(!window.fetch)return;
     fetch(JIN_HOOK+'?pulse=1&k=m5p-4471&cb=cb',{credentials:'omit'}).then(function(r){return r.text();}).then(function(t){
       var m=t.match(/^\s*cb\(([\s\S]*)\)\s*;?\s*$/); var d=null; try{d=JSON.parse(m?m[1]:t);}catch(e){}
       if(!d||typeof d.leads7!=='number'){pulseFallback_();return;}
+      /* живые цифры в карточках пространств (грид пульса убран 28.08) */
+      try{
+        var sx=document.querySelector('.sp-index a[href="#/expenses"] .tx span');
+        if(sx&&d.exp) sx.textContent='Всего $'+Number(d.exp).toLocaleString('en-US')+' · категории и чеки';
+        var sl=document.querySelector('.sp-index a[href="#/clients"] .tx span');
+        if(sl) sl.textContent='Лиды за 7 дней: '+d.leads7+' · кабинеты клиентов';
+      }catch(eSx){}
       var L=document.getElementById('plLeads');
+      if(L){
       var delta=(typeof d.leadsPrev==='number')?(d.leads7-d.leadsPrev):null;
       L.querySelector('b').textContent=d.leads7;
       var pd=L.querySelector('.pdelta');
       if(d.leads7===0){ pd.textContent='до запуска рекламы'; }
       else { pd.textContent=(delta===null)?'за 7 дней':((delta>=0?'+':'')+delta+' vs прошлая неделя'); if(delta!==null&&delta>0)pd.className='pdelta up'; }
       if(typeof d.site7==='number')L.querySelector('small').textContent='с сайта — '+d.site7;
+      }
       /* Виза: пока Вадим ничего не загрузил — ведём его туда прямо из карточки «Now».
          Фаундерам в блоке E-2 показываем, сколько файлов уже лежит. */
       try{
@@ -367,29 +424,12 @@ document.getElementById('app').innerHTML=
     '</div>'+
   '</div>'+
   nowHtml()+
-  quickHtml()+
-  pulseHtml()+
-  '<div class="sec">Daily work</div>'+
-  '<div class="grid">'+TILES.slice(0,4).map(function(t){
-    var icon=t.b?'<div class="ic brand">'+LOGOS[t.b]+'</div>':'<div class="ic">'+(t.ic||'•')+'</div>';
-    var col=t.b?BC[t.b]:'#E6DECB';
-    var url=t.link?LINKS[t.link]:'';
-    if(t.k==='My growth') url='/growth/?role='+role;
-    var ext=url&&url.charAt(0)!=='/';
-    var open=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
-    return '<a class="tile" style="--bc:'+col+'" '+open+'>'+icon+
-      '<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b></a>';
-  }).join('')+'</div>'+
-  (TILES.length>4?('<details class="stackbox alltools"><summary><span>🧰 All tools</span><span class="stk-hint">'+(TILES.length-4)+' more</span></summary><div class="grid" style="padding:12px 14px 14px">'+TILES.slice(4).map(function(t){
-    var icon=t.b?'<div class="ic brand">'+LOGOS[t.b]+'</div>':'<div class="ic">'+(t.ic||'•')+'</div>';
-    var col=t.b?BC[t.b]:'#E6DECB';
-    var url=t.link?LINKS[t.link]:'';
-    if(t.k==='My growth') url='/growth/?role='+role;
-    var ext=url&&url.charAt(0)!=='/';
-    var open2=url?('href="'+url+'"'+(ext?' target="_blank" rel="noopener"':'')):'href="#" onclick="return soon()"';
-    return '<a class="tile" style="--bc:'+col+'" '+open2+'>'+icon+'<div class="k2">'+t.k+'</div><b>'+t.t+' <i>→</i></b></a>';
-  }).join('')+'</div></details>'):'')+
+  twHtml()+
+  /* Грид инструментов убран 28.08: инструменты роли живут в левой панели,
+     главная — задачи + пространства (принцип AVG OS). */
+
   '<div id="cabSec"></div>'+
+  '<div id="setSec"></div>'+
   '<div id="contSec"></div>'+
   '<div id="expSec"></div>'+
   '<div id="companySec"></div>'+
@@ -412,23 +452,8 @@ document.getElementById('app').innerHTML=
   '</div>'+
 '</div>';
 if(role==='founder'||role==='director'||role==='partner') setTimeout(loadPulse,50);
+if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
 
-/* ── Языки кабинета (28.08): EN — основной для новых ролей, ES/RU/UK.
-   Переводит хром интерфейса: панель, названия и подписи спейсов. Контент
-   разделов (плейбуки, гайды) — следующая волна. Выбор живёт в m5_lang. ── */
-var LANG=(function(){ try{ var l=localStorage.getItem('m5_lang'); if(['en','es','ru','uk'].indexOf(l)>-1) return l; }catch(e){}
-  return (role==='founder'||role==='partner'||role==='director')?'ru':'en'; })();
-window.m5Lang=function(l){ try{ localStorage.setItem('m5_lang',l); }catch(e){} location.reload(); };
-var L10N={
- ru:{},
- en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',tools:'Tools',files:'Files',settings:'Settings',
-  sub_tasks:'Task board — in CRM; stack & plans here',sub_clients:'Client hubs & upsells',sub_projects:'How to run a project · JobTread training',sub_content:'Shooting, socials, where to drop files',sub_expenses:'Expenses & receipts',sub_company:'Back office, ideas, partnership',sub_people:'Hiring & join portal',sub_plan:'Visa roadmap',sub_playbook:'Your role and who does what',sub_cabinets:'A cabinet belongs to a function, not a person'},
- es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',tools:'Herramientas',files:'Archivos',settings:'Ajustes',
-  sub_tasks:'Tablero de tareas — en CRM; stack y planes aquí',sub_clients:'Portales de clientes y ventas extra',sub_projects:'Cómo llevar un proyecto · formación JobTread',sub_content:'Rodaje, redes, dónde subir archivos',sub_expenses:'Gastos y recibos',sub_company:'Back office, ideas, sociedad',sub_people:'Contratación y portal join',sub_plan:'Hoja de ruta de la visa',sub_playbook:'Tu rol y quién hace qué',sub_cabinets:'El gabinete pertenece a la función, no a la persona'},
- uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',tools:'Інструменти',files:'Файли',settings:'Налаштування',
-  sub_tasks:'Дошка задач — у CRM; тут стек і плани',sub_clients:'Кабінети клієнтів і допродажі',sub_projects:"Як вести об'єкт · навчання JobTread",sub_content:'Зйомка, соцмережі, куди скидати',sub_expenses:'Витрати та чеки',sub_company:'Бек-офіс, ідеї, партнерство',sub_people:'Найм і портал join',sub_plan:'Дорожня карта візи',sub_playbook:'Твоя роль і хто що робить',sub_cabinets:'Кабінет належить функції, а не людині'}
-};
-function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
 
 /* «Кабинеты» — витрина функций (принцип AVG, 28.08): кабинет принадлежит
    функции, не человеку. Видит только фаундер; клик открывает предпросмотр. */
@@ -444,9 +469,44 @@ function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
       ['📇','Менеджер продаж','вакансия','/championsales']
     ];
     var h='<div class="sp-index">';
-    for(var i=0;i<C.length;i++){ h+='<a href="'+C[i][3]+'"><i>'+C[i][0]+'</i><b>'+C[i][1]+'</b><span>'+C[i][2]+'</span></a>'; }
+    for(var i=0;i<C.length;i++){ h+='<a href="'+C[i][3]+'"><i>'+C[i][0]+'</i><span class="tx"><b>'+C[i][1]+'</b><span>'+C[i][2]+'</span></span></a>'; }
     el.innerHTML=h+'</div>';
   }catch(eCab){}
+})();
+
+/* «Настройки» (фаундер): тумблеры видимости спейсов по функциям — принцип AVG
+   «Настройки системы». Клик пишет через M5 Hub в Supabase (cabinet_visibility);
+   кабинеты читают crm.m5miami.com/api/cabinet-config при загрузке. */
+(function(){
+  try{
+    if(role!=='founder')return;
+    var el=document.getElementById('setSec'); if(!el)return;
+    var FN=[['director','Директор','Вадим Штемпель'],['partner','Совладелец','Влад Дыденко'],['smm','SMM-специалист','вакансия'],['supervisor','Технадзор','вакансия'],['sales','Менеджер продаж','вакансия']];
+    var SP=[['tasks','Задачи'],['clients','Клиенты'],['projects','Проекты'],['content','Контент'],['expenses','Финансы'],['company','Компания'],['people','Кандидаты'],['plan','План E-2'],['playbook','Playbook']];
+    var cfgV={}; try{cfgV=JSON.parse(localStorage.getItem('m5_cabcfg')||'{}')||{};}catch(e){}
+    function hid(f,sp){ return !!(cfgV[f]&&cfgV[f].indexOf(sp)>-1); }
+    function draw(){
+      var h='<p class="set-note">Выключенный спейс исчезает из меню и с главной кабинета этой функции (после обновления страницы у сотрудника). Доступ к данным это не расширяет — только сужает видимое.</p>';
+      for(var i=0;i<FN.length;i++){
+        h+='<div class="set-block"><b>'+FN[i][1]+' · '+FN[i][2]+'</b><div class="set-grid">';
+        for(var j=0;j<SP.length;j++){
+          var off=hid(FN[i][0],SP[j][0]);
+          h+='<div class="tgrow'+(off?' off':'')+'" onclick="cabToggle(\''+FN[i][0]+'\',\''+SP[j][0]+'\')"><span>'+SP[j][1]+'</span><i class="tgl"></i></div>';
+        }
+        h+='</div></div>';
+      }
+      el.innerHTML=h;
+    }
+    window.cabToggle=function(f,sp){
+      var arr=cfgV[f]||(cfgV[f]=[]), ix=arr.indexOf(sp), hidden;
+      if(ix>-1){arr.splice(ix,1);hidden=false;}else{arr.push(sp);hidden=true;}
+      try{localStorage.setItem('m5_cabcfg',JSON.stringify(cfgV));}catch(e){}
+      draw();
+      try{ fetch(JIN_HOOK,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({type:'cabcfg',func:f,space:sp,hidden:hidden})}).catch(function(){}); }catch(e){}
+    };
+    draw();
+    try{ fetch('https://crm.m5miami.com/api/cabinet-config').then(function(r){return r.json();}).then(function(j){ if(j){cfgV=j; try{localStorage.setItem('m5_cabcfg',JSON.stringify(j));}catch(e){} draw();} }).catch(function(){}); }catch(e){}
+  }catch(eSet){}
 })();
 
 /* ── Спейсы-страницы (25.08, принцип Notion): каждый раздел — отдельная страница,
@@ -483,7 +543,9 @@ function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
       {r:'playbook',t:TT('sp_playbook','Playbook'),  ic:'📘', secs:['#guideSec'], sub:TT('sub_playbook','Твоя роль и кто что делает'),
         rel:[['Онбординг','/onboarding/']]},
       {r:'cabinets',t:TT('sp_cabinets','Кабинеты'),  ic:'🗂', secs:['#cabSec'], founderOnly:1, sub:TT('sub_cabinets','Кабинет принадлежит функции, не человеку'),
-        rel:[[TT('settings','Настройки')+' · CRM',CRM+'/settings']]}
+        rel:[[TT('settings','Настройки'),'#/settings']]},
+      {r:'settings',t:TT('settings','Настройки'),  ic:'⚙️', secs:['#setSec'], founderOnly:1, sub:TT('sub_settings','Тумблеры видимости: что видит каждая функция'),
+        rel:[['Кабинеты','#/cabinets'],['CRM · прайс и фактуры',CRM+'/settings']]}
     ];
     /* страницы: переносим секции внутрь и раскрываем аккордеоны в плоские блоки */
     var wrap=document.querySelector('.wrap:not(.hbar)'); if(!wrap) return;
@@ -529,15 +591,16 @@ function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
     },0);
     /* главная: элементы верхнего уровня + плитки спейсов для мобилы */
     var homeEls=[];
-    ['.hero2','.nowcard','.quick','.pulsegrid','.grid'].forEach(function(sel){
+    ['.hero2','.nowcard','.twidget'].forEach(function(sel){
       var e2=wrap.querySelector(sel); if(e2){ e2.classList.add('home-el'); homeEls.push(e2);
         if(e2.previousElementSibling&&e2.previousElementSibling.className==='sec'){ e2.previousElementSibling.classList.add('home-el'); } }
     });
     var at=wrap.querySelector(':scope > details.stackbox'); if(at) at.classList.add('home-el');
+    var sh=document.createElement('div'); sh.className='sec home-el'; sh.textContent=TT('spaces','Пространства'); wrap.appendChild(sh);
     var idx=document.createElement('div'); idx.className='sp-index home-el';
     var ih='';
     for(var q=1;q<live.length;q++){
-      ih+='<a href="#/'+live[q].r+'"><i>'+live[q].ic+'</i><b>'+esc(live[q].t)+'</b><span>'+esc(live[q].sub||'')+'</span></a>';
+      ih+='<a href="#/'+live[q].r+'"><i>'+live[q].ic+'</i><span class="tx"><b>'+esc(live[q].t)+'</b><span>'+esc(live[q].sub||'')+'</span></span></a>';
     }
     idx.innerHTML=ih; wrap.appendChild(idx);
     /* панель слева: роуты + инструменты */
@@ -550,10 +613,19 @@ function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
     }
     h+='<div class="side-sep">'+TT('tools','Инструменты')+'</div>'
       +'<a class="sn" href="'+(LINKS.salescrm||CRM)+'" target="_blank" rel="noopener"><i>📇</i>CRM</a>'
-      +'<a class="sn" href="'+(LINKS.files||CRM+'/files')+'" target="_blank" rel="noopener"><i>📁</i>'+TT('files','Файлы')+'</a>'
-      +'<a class="sn" href="'+(LINKS.jobtread||'#')+'" target="_blank" rel="noopener"><i>🛠</i>JobTread</a>'
-      +(role==='founder'?'<a class="sn" href="'+CRM+'/settings" target="_blank" rel="noopener"><i>⚙️</i>'+TT('settings','Настройки')+'</a>':'')
-      +'<div class="side-foot"><a href="/">m5miami.com</a><span onclick="signout()">Sign out</span></div>';
+      +'<a class="sn" href="'+(LINKS.files||CRM+'/files')+'" target="_blank" rel="noopener"><i>📁</i>'+TT('files','Файлы')+'</a>';
+    /* инструменты роли — из её плиток; дублирующий грид с главной убран 28.08 */
+    var TICON={jobtread:'🛠',telegram:'✈️',whatsapp:'💬',gcal:'📅',ga4:'📊',clarity:'🎥',permits:'📄',houzz:'🏠',heygen:'🎬',org:'👥'};
+    var TNAME={jobtread:'JobTread',telegram:'Telegram',whatsapp:'WhatsApp',gcal:'Calendar',ga4:'Analytics',clarity:'Clarity',permits:'Permits',houzz:'Houzz',heygen:'HeyGen',org:'People'};
+    var TSKIP={onb:1,files:1,salescrm:1,saleskit:1,legal:1,visaVadim:1,tutorial:1,playbook:1};
+    var TSEEN={};
+    for(var tn=0;tn<cfg.tiles.length;tn++){
+      var tl=cfg.tiles[tn], lk=tl.link;
+      if(!lk||TSKIP[lk]||TSEEN[lk]||!LINKS[lk])continue;
+      TSEEN[lk]=1;
+      h+='<a class="sn" href="'+LINKS[lk]+'" target="_blank" rel="noopener"><i>'+(TICON[lk]||tl.ic||'•')+'</i>'+(TNAME[lk]||esc(tl.k))+'</a>';
+    }
+    h+='<div class="side-foot"><a href="/">m5miami.com</a><span onclick="signout()">Sign out</span></div>';
     var aside=document.createElement('aside');
     aside.className='side'; aside.id='m5side'; aside.innerHTML=h;
     document.body.appendChild(aside);
@@ -1129,10 +1201,10 @@ function candStat(row,val,btn){
     var el=document.getElementById('expSec'); if(!el)return;
     var op=false; try{op=localStorage.getItem('m5_exp_open')==='1';}catch(e){}
     var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>💸 Расходы · куда сдавать</span><span class="stk-hint">правило одно для всех</span></summary><div class="stack">';
-    h+='<div class="lsn"><b>1 · Потратил — сразу напиши боту.</b> Открой <b>@m5miami_bot</b> в Telegram и отправь одним сообщением: <b>«расход 40 шпаклёвка Home Depot»</b>. Можно голосовым. Сумма в долларах, что купил, где — этого достаточно.</div>';
-    h+='<div class="lsn"><b>2 · Сфоткай чек и приложи.</b> Фото чека — следующим сообщением боту, он сам положит его в раздел <b>Чеки</b> (ссылка ниже). Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
-    h+='<div class="lsn"><b>3 · Дальше не твоя забота.</b> Клод заносит трату в общую таблицу, складывает чек в CRM · Файлы → Чеки и обновляет цифру «Расходы» в пульте кабинета. Таблицу руками не заполняет никто.</div>';
-    h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Журнал расходов (живой)</b><span>сюда пишет бот: дата, кто, сумма, что, объект · траты до бота — в архивном реестре ($4,424 уже в счётчике)</span></a>';
+    h+='<div class="lsn"><b>1 · Потратил — внеси в Финансы.</b> Открой <b>CRM → Финансы</b> (ссылка ниже): сумма, что купил, категория тегом — 20 секунд. Либо отправь в Telegram-бот M5 (@m5miami_bot) сообщение «расход 40 шпаклёвка Home Depot» — попадёт туда же.</div>';
+    h+='<div class="lsn"><b>2 · Сфоткай чек.</b> Фото чека — в Telegram-бот M5, он положит его в <b>Файлы → Чеки</b>. Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
+    h+='<div class="lsn"><b>3 · Готово.</b> Трата сразу видна в разделе Финансы: категории, месяц, вся история. Таблицу руками не заполняет никто.</div>';
+    h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Финансы · реестр расходов</b><span>категории, месяц, вся история · пишут форма CRM и Telegram-бот</span></a>';
     h+='<a class="stk" href="'+LINKS.receipts+'" target="_blank" rel="noopener"><b>🧾 Раздел «Чеки»</b><span>CRM · Файлы → Чеки: фото и PDF всех чеков</span></a>';
     h+='<div class="lsn" style="color:#8A8272">Почему так: пока компания не зарегистрирована, все траты идут с личных карт — и если их не собрать, при регистрации LLC и подаче налогов мы просто потеряем эти деньги как расходы бизнеса. Одно сообщение боту в момент покупки решает вопрос.</div>';
     el.innerHTML=h+'</div></details>';
