@@ -212,12 +212,12 @@ var LANG=(function(){ try{ var l=localStorage.getItem('m5_lang'); if(['en','es',
 window.m5Lang=function(l){ try{ localStorage.setItem('m5_lang',l); }catch(e){} location.reload(); };
 var L10N={
  ru:{},
- en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',tools:'Tools',files:'Files',settings:'Settings',spaces:'Spaces',tw_all:'Full task board · CRM',sub_settings:'Visibility toggles: what each function sees',
-  sub_tasks:'Task board — in CRM; stack & plans here',sub_clients:'Client hubs & upsells',sub_projects:'How to run a project · JobTread training',sub_content:'Shooting, socials, where to drop files',sub_expenses:'Expenses & receipts',sub_company:'Back office, ideas, partnership',sub_people:'Hiring & join portal',sub_plan:'Visa roadmap',sub_playbook:'Your role and who does what',sub_cabinets:'A cabinet belongs to a function, not a person'},
- es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
-  sub_tasks:'Tablero de tareas — en CRM; stack y planes aquí',sub_clients:'Portales de clientes y ventas extra',sub_projects:'Cómo llevar un proyecto · formación JobTread',sub_content:'Rodaje, redes, dónde subir archivos',sub_expenses:'Gastos y recibos',sub_company:'Back office, ideas, sociedad',sub_people:'Contratación y portal join',sub_plan:'Hoja de ruta de la visa',sub_playbook:'Tu rol y quién hace qué',sub_cabinets:'El gabinete pertenece a la función, no a la persona'},
- uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
-  sub_tasks:'Дошка задач — у CRM; тут стек і плани',sub_clients:'Кабінети клієнтів і допродажі',sub_projects:"Як вести об'єкт · навчання JobTread",sub_content:'Зйомка, соцмережі, куди скидати',sub_expenses:'Витрати та чеки',sub_company:'Бек-офіс, ідеї, партнерство',sub_people:'Найм і портал join',sub_plan:'Дорожня карта візи',sub_playbook:'Твоя роль і хто що робить',sub_cabinets:'Кабінет належить функції, а не людині'}
+ en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',tools:'Tools',files:'Files',settings:'Settings',spaces:'Spaces',tw_all:'Full task board · CRM',sub_settings:'Visibility toggles: what each function sees',
+  sub_tasks:'Company services and the system roadmap',sub_clients:'Client hubs & upsells',sub_projects:'How to run a project · JobTread training',sub_content:'Shooting, socials, where to drop files',sub_expenses:'Expenses & receipts',sub_company:'Back office, ideas, partnership',sub_people:'Hiring & join portal',sub_plan:'Visa roadmap',sub_playbook:'Your role and who does what',sub_cabinets:'A cabinet belongs to a function, not a person'},
+ es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',sp_stack:'Stack y planes',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
+  sub_tasks:'Servicios de la empresa y hoja de ruta del sistema',sub_clients:'Portales de clientes y ventas extra',sub_projects:'Cómo llevar un proyecto · formación JobTread',sub_content:'Rodaje, redes, dónde subir archivos',sub_expenses:'Gastos y recibos',sub_company:'Back office, ideas, sociedad',sub_people:'Contratación y portal join',sub_plan:'Hoja de ruta de la visa',sub_playbook:'Tu rol y quién hace qué',sub_cabinets:'El gabinete pertenece a la función, no a la persona'},
+ uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',sp_stack:'Стек і плани',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
+  sub_tasks:'Сервіси компанії та план розвитку системи',sub_clients:'Кабінети клієнтів і допродажі',sub_projects:"Як вести об'єкт · навчання JobTread",sub_content:'Зйомка, соцмережі, куди скидати',sub_expenses:'Витрати та чеки',sub_company:'Бек-офіс, ідеї, партнерство',sub_people:'Найм і портал join',sub_plan:'Дорожня карта візи',sub_playbook:'Твоя роль і хто що робить',sub_cabinets:'Кабінет належить функції, а не людині'}
 };
 function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
 
@@ -486,7 +486,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     if(role!=='founder')return;
     var el=document.getElementById('setSec'); if(!el)return;
     var FN=[['director','Директор','Вадим Штемпель'],['partner','Совладелец','Влад Дыденко'],['smm','SMM-специалист','вакансия'],['supervisor','Технадзор','вакансия'],['sales','Менеджер продаж','вакансия']];
-    var SP=[['tasks','Задачи'],['clients','Клиенты'],['projects','Проекты'],['content','Контент'],['expenses','Финансы'],['company','Компания'],['people','Кандидаты'],['plan','План E-2'],['playbook','Playbook']];
+    var SP=[['tasks','Стек и планы'],['clients','Клиенты'],['projects','Проекты'],['content','Контент'],['expenses','Финансы'],['company','Компания'],['people','Кандидаты'],['plan','План E-2'],['playbook','Playbook']];
     var cfgV={}; try{cfgV=JSON.parse(localStorage.getItem('m5_cabcfg')||'{}')||{};}catch(e){}
     function hid(f,sp){ return !!(cfgV[f]&&cfgV[f].indexOf(sp)>-1); }
     function draw(){
@@ -523,12 +523,24 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     /* Видимость спейсов: фаундер сужает в CRM → Settings (Кабинеты — что кому
        видно). Конфиг кэшируется в m5_cabcfg и обновляется в фоне — правка
        применяется со следующей загрузки. Фаундер видит всё. */
+    /* Карта «функция → её пространства» (28.08, дедупликация): фаундерские разделы
+       (стек, кандидаты, back office) сотрудникам не показываем вовсе. */
+    var ROLE_SPACES={
+      partner:['clients','projects','content','expenses','company','people','plan','playbook'],
+      director:['clients','projects','content','expenses','people','plan','playbook'],
+      sales:['clients','content','expenses','playbook'],
+      smm:['content','expenses','playbook'],
+      supervisor:['projects','content','expenses','playbook'],
+      designer:['projects','content','expenses','playbook'],
+      pm:['projects','content','expenses','playbook'],
+      team:['projects','content','expenses','playbook']
+    };
     var HIDDEN=[];
     if(role!=='founder'){ try{ var vc=JSON.parse(localStorage.getItem('m5_cabcfg')||'{}'); if(vc&&vc[role]&&vc[role].length) HIDDEN=vc[role]; }catch(eVc){} }
     try{ fetch(CRM+'/api/cabinet-config').then(function(r){return r.json()}).then(function(j){ if(j) localStorage.setItem('m5_cabcfg',JSON.stringify(j)); }).catch(function(){}); }catch(eVf){}
     var ROUTES=[
       {r:'home',    t:TT('sp_home','Главная'),   ic:'🏠', secs:[]},
-      {r:'tasks',   t:TT('sp_tasks','Задачи'),    ic:'📌', secs:['#stackSec'], sub:TT('sub_tasks','Доска задач — в CRM; здесь стек и планы'),
+      {r:'tasks',   t:TT('sp_stack','Стек и планы'),    ic:'🧩', secs:['#stackSec'], sub:TT('sub_tasks','Сервисы компании и план развития системы'),
         rel:[['Доска задач',CRM+'/tasks'],['Спринт команды','https://m5miami.com/sprint/']]},
       {r:'clients', t:TT('sp_clients','Клиенты'),   ic:'👥', secs:['#clientsSec'], sub:TT('sub_clients','Кабинеты клиентов и допродажи'),
         rel:[['CRM · сделки',CRM+'/proposals'],['Файлы · договоры',CRM+'/files?b=deals'],['Демо-кабинет','/client/?p=brickell-demo']]},
@@ -558,6 +570,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       var R=ROUTES[i], els=[];
       if(R.founderOnly&&role!=='founder') continue;
       if(HIDDEN.indexOf(R.r)>-1) continue;
+      if(ROLE_SPACES[role]&&ROLE_SPACES[role].indexOf(R.r)<0) continue;
       for(var j=0;j<R.secs.length;j++){ var e=document.querySelector(R.secs[j]); if(e) els.push(e); }
       if(!els.length) continue;
       live.push(R);

@@ -17,15 +17,15 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:var(--sans);color:var(--ink);min-height:100vh;
-    background:#F6F0E5 url('/img/vice_bg.webp') top center/100% auto no-repeat}
+    background:#FAF6EE}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:980px;margin:0 auto;padding:0 26px;position:relative;z-index:2}
 
   .hbar{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
-  .logo{font-family:var(--serif);font-weight:800;font-size:24px;color:var(--ink);text-shadow:0 1px 12px rgba(246,240,229,.85)}
+  .logo{font-family:var(--serif);font-weight:800;font-size:24px;color:var(--ink)}
   .logo b{color:var(--gold)}
   .logo small{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--soft);margin-left:8px}
-  .back{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;text-shadow:0 1px 10px rgba(246,240,229,.85)}
+  .back{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--soft);text-transform:uppercase}
   .back:hover{color:var(--ink)}
 
   .hero{padding:30px 0 8px;text-align:center}
@@ -153,12 +153,12 @@
 <div class="wrap">
   <div class="hbar">
     <a class="logo" href="/champion">M<b>5</b><small>TEAM</small></a>
-    <a class="back" href="/">m5miami.com →</a>
+    <a class="back" href="/champion">← My workspace</a>
   </div>
 
   <div class="hero">
-    <h1>How M5 works.</h1>
-    <div class="k">Org structure · Click a card for details</div>
+    <h1>Team</h1>
+    <div class="k">Who does what · click a card</div>
     <p class="creed">Small team on purpose. The routine runs on AI — people are here for judgment, taste and relationships. We add a person when something specific breaks, never because the calendar says so.</p>
   </div>
 
@@ -177,25 +177,13 @@
 
   <div class="down"></div>
 
-  <div class="lvl" style="margin-top:0">The layer underneath everyone</div>
-  <div class="jinlayer" onclick="openP('jin')">
-    <div class="jl-head"><span class="jl-dot"></span>JIN — infrastructure, not a colleague</div>
-    <p>Jin sits <b>under</b> the whole company, not next to anyone in it. It carries the routine for every person here: catches leads, answers every teammate right in their workspace (the ✦ Jin bar on top of each cabinet and the client hub), chases follow-ups, keeps JobTread and the company files clean, reports the numbers.</p>
-    <p class="jl-never">It never touches what people are here for: <b>the license and everything signed under it, judgment on money and scope, taste, and real relationships.</b> Those do not get automated — they get protected by taking the paperwork off the people who own them.</p>
-    <span class="jl-more">What Jin runs — and what it never touches →</span>
-  </div>
-
-  <div class="jbrule">Before any new hire, one question first: <b>can Jin do this?</b> A person is added only when the honest answer is no.</div>
-
-  <div class="rail"></div>
-
-  <div class="lvl" style="margin-top:0">People — we hire only on a trigger</div>
+  <div class="down"></div>
+  <div class="lvl" style="margin-top:0">Functions — each has its own workspace</div>
   <div class="row team">
     <div class="card mini" style="--bc:#E6DECB">
-      <span class="hire">Hiring</span>
+      <span class="hire">Hiring · Sept</span>
       <div class="who"><div class="ava">S</div><div><b>SMM</b></div></div>
       <p>Content, social growth, reels &amp; community.</p>
-      <span class="trg">Trigger: content is the top of the funnel — hiring now</span>
       <span class="br br-g">Demand side</span>
       <a class="go" href="/championsmm">Workspace →</a>
     </div>
@@ -203,37 +191,18 @@
       <span class="hire">Hiring</span>
       <div class="who"><div class="ava">S</div><div><b>Sales</b></div></div>
       <p>Leads to contracts: calls, consults, follow-ups.</p>
-      <span class="trg">Trigger: more consultations than founders can run</span>
       <span class="br br-g">Demand side</span>
       <a class="go" href="/championsales">Workspace →</a>
     </div>
     <div class="card mini" style="--bc:#E6DECB">
       <span class="hire">Hiring</span>
-      <div class="who"><div class="ava">D</div><div><b>Designer</b></div></div>
-      <p>Interiors, 3D &amp; material selections.</p>
-      <span class="trg">Trigger: design becomes the bottleneck on parallel projects</span>
+      <div class="who"><div class="ava">T</div><div><b>Site Supervisor</b></div></div>
+      <p>Site execution, quality &amp; daily reports.</p>
       <span class="br br-d">Delivery</span>
-      <a class="go" href="/championdesigner">Workspace →</a>
-    </div>
-    <div class="card mini" style="--bc:#E6DECB">
-      <span class="hire">Hiring</span>
-      <div class="who"><div class="ava">P</div><div><b>Project Manager</b></div></div>
-      <p>Site execution, schedules &amp; supervision.</p>
-      <span class="trg">Trigger: 3+ sites running at once</span>
-      <span class="br br-d">Delivery</span>
-      <a class="go" href="/championpm">Workspace →</a>
-    </div>
-    <div class="card mini" style="--bc:#E6DECB">
-      <span class="hire">Hiring</span>
-      <div class="who"><div class="ava">AI</div><div><b>AI Engineer</b></div></div>
-      <p>Runs &amp; scales the system that powers M5.</p>
-      <span class="trg">Trigger: Jin's backlog outgrows founder evenings</span>
-      <span class="br br-c">Company-wide</span>
-      <a class="go" href="/champion">Workspace →</a>
+      <a class="go" href="/championsupervisor">Workspace →</a>
     </div>
   </div>
 </div>
-
 <div class="pm-ov" id="pmOv" onclick="closeP()"></div>
 <div class="pm" id="pmBox" role="dialog" aria-modal="true"></div>
 
@@ -254,7 +223,7 @@ var TEAM=[
   value:'The face and the voice of M5: clients, partners, content. Closes deals, raises capital and sets the design taste level the brand is known for.',
   ask:['Clients & deals','Partners (realtors, brokers)','Content & socials','Investment questions'],
   email:'vlad@m5miami.com',tg:'DidCo5',dob:'5 August',start:'July 2026',end:'',contract:''},
- {slug:'vadim',name:'Vadym Shtempel',role:'Director · Licensed Qualifier',ava:'V',avaClass:'',img:'/img/ava_vadim.webp',bc:'#B0894F',
+ {slug:'vadim',name:'Vadym Shtempel',role:'Director · Production',ava:'V',avaClass:'',img:'/img/ava_vadim.webp',bc:'#B0894F',
   duty:['Operations & production','Permits & compliance — Miami-Dade','Crews, subcontractors & quality','Production strategy & scaling'],
   value:'Runs the build: crews, sites, permits, quality. The licensed qualifier who makes every project legal and every handover clean.',
   ask:['Production & schedules','Permits & inspections','Subcontractors & crews','Hiring & team questions'],
