@@ -387,3 +387,9 @@ body[data-r="playbook"] #sp-playbook{display:block}
 
 /* шапка-плашка без Jin — компактнее */
 .h2-top{margin-bottom:0}
+
+/* Переключатель языка в панели (28.08): EN основной, ES/RU/UK */
+.side-langs{display:flex;gap:4px;padding:0 6px 10px}
+.side-langs .lg{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:3px 7px;border:1px solid var(--line);border-radius:7px;color:var(--soft);cursor:pointer;background:#fff;user-select:none}
+.side-langs .lg.on{color:var(--gold-d);border-color:#C8A96A;font-weight:700}
+.side-langs .lg:hover{border-color:#C8A96A}
