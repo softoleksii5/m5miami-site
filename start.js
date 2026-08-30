@@ -212,11 +212,21 @@ var LANG=(function(){ try{ var l=localStorage.getItem('m5_lang'); if(['en','es',
 window.m5Lang=function(l){ try{ localStorage.setItem('m5_lang',l); }catch(e){} location.reload(); };
 var L10N={
  ru:{},
- en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',tools:'Tools',files:'Files',settings:'Settings',spaces:'Spaces',tw_all:'Full task board · CRM',sub_settings:'Visibility toggles: what each function sees',
+ en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',ob_head:'Your first day at M5',sec_content:'Content · where to upload',sec_exp:'Expenses · how to submit',sec_play:'Your playbook',sec_team:'Team · who does what',
+  now_dir_pm:'<b>Evening report</b> — two minutes: a voice note or a couple of lines in Telegram → Projects. Photos of the day — to the M5 Telegram bot, they land in the project folder.',
+  now_dir_am:'<b>Today:</b> photos and video from the site — to the M5 Telegram bot, they land in the project folder. In the evening — the report in Projects (2 minutes).',
+  now_sales:'<b>First-touch rule:</b> every new lead gets an answer within 15 minutes. Leads arrive in the CRM and in Telegram → Leads.',
+  now_smm:'<b>Content rhythm:</b> raw material comes only from CRM Files (Content and project folders); on a new project we shoot "before" within the first 3 days.',
+  now_team:'<b>Today&#8217;s tasks</b> are in the "Tasks" block below. Not sure where to start — message the director on Telegram.',
+  btn_send:'Send',btn_files:'Project files',btn_crm:'Open CRM',btn_openfiles:'Open files',btn_board:'Open the board',
+  exp1:'<b>1 · Spent something — log it in Finance.</b> Open <b>CRM → Finance</b> (link below): amount, what you bought, category tag — 20 seconds. Or send the M5 Telegram bot (@m5miami_bot) a message like "expense 40 plaster Home Depot" — it lands in the same place.',
+  exp2:'<b>2 · Photograph the receipt.</b> Send the photo to the M5 Telegram bot — it files it under <b>Files → Receipts</b>. The expense is recorded without a receipt, but the accountant and the IRS need one — do not throw it away.',
+  exp3:'<b>3 · Done.</b> The expense shows up in Finance right away: categories, month, full history. Nobody fills in a spreadsheet by hand.',
+  tools:'Tools',files:'Files',settings:'Settings',spaces:'Spaces',tw_all:'Full task board · CRM',sub_settings:'Visibility toggles: what each function sees',
   sub_tasks:'Company services and the system roadmap',sub_clients:'Client hubs & upsells',sub_projects:'How to run a project · JobTread training',sub_content:'Shooting, socials, where to drop files',sub_expenses:'Expenses & receipts',sub_company:'Back office, ideas, partnership',sub_people:'Hiring & join portal',sub_plan:'Visa roadmap',sub_playbook:'Your role and who does what',sub_cabinets:'A cabinet belongs to a function, not a person'},
- es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',sp_stack:'Stack y planes',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
+ es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',sp_stack:'Stack y planes',ob_head:'Tu primer día en M5',sec_content:'Contenido · dónde subir',sec_exp:'Gastos · cómo reportar',sec_play:'Tu playbook',sec_team:'Equipo · quién hace qué',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
   sub_tasks:'Servicios de la empresa y hoja de ruta del sistema',sub_clients:'Portales de clientes y ventas extra',sub_projects:'Cómo llevar un proyecto · formación JobTread',sub_content:'Rodaje, redes, dónde subir archivos',sub_expenses:'Gastos y recibos',sub_company:'Back office, ideas, sociedad',sub_people:'Contratación y portal join',sub_plan:'Hoja de ruta de la visa',sub_playbook:'Tu rol y quién hace qué',sub_cabinets:'El gabinete pertenece a la función, no a la persona'},
- uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',sp_stack:'Стек і плани',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
+ uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',sp_stack:'Стек і плани',ob_head:'Перший день у M5',sec_content:'Контент · куди скидати',sec_exp:'Витрати · як здавати',sec_play:'Твій плейбук',sec_team:'Команда · хто що робить',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
   sub_tasks:'Сервіси компанії та план розвитку системи',sub_clients:'Кабінети клієнтів і допродажі',sub_projects:"Як вести об'єкт · навчання JobTread",sub_content:'Зйомка, соцмережі, куди скидати',sub_expenses:'Витрати та чеки',sub_company:'Бек-офіс, ідеї, партнерство',sub_people:'Найм і портал join',sub_plan:'Дорожня карта візи',sub_playbook:'Твоя роль і хто що робить',sub_cabinets:'Кабінет належить функції, а не людині'}
 };
 function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
@@ -252,12 +262,12 @@ function nowHtml(){
   var n;
   if(role==='founder') n={txt:'<b>Фокус недели:</b> легализация троих, шоу-рум до 15.09, первые клиенты на штукатурку. Детали и отметки — в спринте команды.',btn:'Открыть спринт',url:'https://m5miami.com/sprint/'};
   else if(role==='director'||role==='supervisor') n=(new Date().getHours()>=17)
-    ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Telegram-бот M5, они лягут в папку объекта.',btn:'Отправить',url:LINKS.telegram}
-    : {txt:'<b>Сегодня:</b> фото и видео с объекта — в Telegram-бот M5, они лягут в папку объекта. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
-  else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM-кабинет и в Telegram → Лиды.',btn:'Открыть CRM',url:LINKS.salescrm};
-  else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть файлы',url:LINKS.content};
+    ? {txt:TT('now_dir_pm','<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Telegram-бот M5, они лягут в папку объекта.'),btn:TT('btn_send','Отправить'),url:LINKS.telegram}
+    : {txt:TT('now_dir_am','<b>Сегодня:</b> фото и видео с объекта — в Telegram-бот M5, они лягут в папку объекта. Вечером — отчёт в Projects (2 минуты).'),btn:TT('btn_files','Файлы объектов'),url:LINKS.projects};
+  else if(role==='sales') n={txt:TT('now_sales','<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM и в Telegram → Лиды.'),btn:TT('btn_crm','Открыть CRM'),url:LINKS.salescrm};
+  else if(role==='smm') n={txt:TT('now_smm','<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.'),btn:TT('btn_openfiles','Открыть файлы'),url:LINKS.content};
   else if(role==='partner') n={txt:'<b>Пульс компании:</b> лиды, воронка и расходы — в плитках выше; общий план на США — в спринте.',btn:'Открыть спринт',url:'https://m5miami.com/sprint/'};
-  else n={txt:'<b>Задачи дня</b> — в блоке «Задачи» ниже. Не знаешь, с чего начать — напиши директору в Telegram.',btn:'Открыть доску',url:'https://crm.m5miami.com/tasks'};
+  else n={txt:TT('now_team','<b>Задачи дня</b> — в блоке «Задачи» ниже. Не знаешь, с чего начать — напиши директору в Telegram.'),btn:TT('btn_board','Открыть доску'),url:'https://crm.m5miami.com/tasks'};
   var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
   return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div>'+(n.btn?'<a class="now-btn" '+open+'>'+n.btn+' →</a>':'')+'</div>';
 }
@@ -298,15 +308,22 @@ function loadTasks(){
 }
 /* Онбординг-чеклист первого дня: 2 шага уже отмечены (endowed progress),
    галочки живут в localStorage, «всё готово» ставит m5_onb_done. */
-var OB_STEPS=[
-  {t:'Аккаунт создан',fixed:1},
-  {t:'Кабинет настроен под твою роль',fixed:1},
-  {t:'Открой раздел «Задачи» — там твоя доска'},
-  {t:'Посмотри видео «Как устроена система» · 2 мин',url:'/media/tutorial_system_ru.mp4'},
-  {t:'Прочитай свой плейбук — блок «Your playbook» ниже'},
-  {t:'Напиши «Привет, я на месте» в чат команды',url:''},
-  {t:'Полная настройка аккаунтов — Setup checklist',url:'/onboarding/'}
-];
+var OB_I18N={
+ en:[{t:'Account created',fixed:1},{t:'Workspace tuned to your role',fixed:1},
+     {t:'Open "Tasks" — that is your board'},
+     {t:'Watch "How the system works" · 2 min',url:'/media/tutorial_system_ru.mp4'},
+     {t:'Read your playbook — the block below'},
+     {t:'Say "Hi, I am in" in the team chat',url:''},
+     {t:'Full account setup — Setup checklist',url:'/onboarding/'}],
+ ru:[{t:'Аккаунт создан',fixed:1},{t:'Кабинет настроен под твою роль',fixed:1},
+     {t:'Открой раздел «Задачи» — там твоя доска'},
+     {t:'Посмотри видео «Как устроена система» · 2 мин',url:'/media/tutorial_system_ru.mp4'},
+     {t:'Прочитай свой плейбук — блок ниже'},
+     {t:'Напиши «Привет, я на месте» в чат команды',url:''},
+     {t:'Полная настройка аккаунтов — Setup checklist',url:'/onboarding/'}]
+};
+OB_I18N.es=OB_I18N.en; OB_I18N.uk=OB_I18N.ru;
+var OB_STEPS=OB_I18N[LANG]||OB_I18N.en;
 function obState(i){ try{return localStorage.getItem('m5_ob_'+i)==='1';}catch(e){return false;} }
 window.obToggle=function(i){
   try{
@@ -319,7 +336,7 @@ window.obToggle=function(i){
 function obHtml(){
   var buddy=(role==='smm'||role==='sales')?{name:'Alex',r:'Co-founder',img:'/img/ava_alex_t.webp'}:{name:'Vadym',r:'Director',img:'/img/ava_vadim_t.webp'};
   OB_STEPS[5].url=LINKS.telegram;
-  if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t='Загляни в файлы компании — плитка «Файлы» ниже';
+  if(typeof ROLEGUIDE!=='undefined'&&!ROLEGUIDE[role]) OB_STEPS[4].t=(LANG==='ru'||LANG==='uk')?'Загляни в файлы компании — «Файлы» в панели':'Open the company files \u2014 "Files" in the sidebar';
   var done=0,total=OB_STEPS.length,rows='';
   for(var i=0;i<OB_STEPS.length;i++){
     var st=OB_STEPS[i], on=st.fixed||obState(i); if(on)done++;
@@ -328,7 +345,7 @@ function obHtml(){
   }
   var pct=Math.round(done/total*100);
   return '<div class="nowcard obcard">'+
-    '<div class="ob-head"><span class="now-tag">⚡ Your first day at M5</span><span class="ob-pct">'+pct+'%</span></div>'+
+    '<div class="ob-head"><span class="now-tag">⚡ '+TT('ob_head','Первый день в M5')+'</span><span class="ob-pct">'+pct+'%</span></div>'+
     '<div class="obbar"><i style="width:'+pct+'%"></i></div>'+rows+
     '<div class="lsn" style="color:#8A8272;font-size:11.5px;margin-top:6px">Отмечай шаги по мере выполнения — когда всё готово, кабинет переключится в рабочий режим.</div>'+
     '<div class="buddy"><img src="'+buddy.img+'" alt="" loading="lazy" decoding="async"><div><b>'+buddy.name+' · '+buddy.r+'</b><span>Твой бадди: любой вопрос — пиши напрямую, это нормально.</span></div>'+
@@ -1178,7 +1195,7 @@ var ROADMAP=[
     var el=document.getElementById('contSec'); if(!el)return;
     var op=false; try{op=localStorage.getItem('m5_cont_open')==='1';}catch(e){}
     if(/[?&]open=cont/.test(location.search)) op=true;   // прямая ссылка из закрепа/бота
-    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>📸 Контент · куда скидывать</span><span class="stk-hint">3 пути — любой годится</span></summary><div class="stack">';
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>📸 '+TT('sec_content','Контент · куда скидывать')+'</span><span class="stk-hint">3 пути — любой годится</span></summary><div class="stack">';
     h+='<div class="stk-g">Путь 1 · Тема объекта в Telegram — для объектов с договором</div>';
     h+='<div class="lsn">У каждого объекта есть тема «🏠 Имя объекта» в группе <b>M5 Team</b>. Открой её и кинь фото/видео — без подписей. Джин заберёт, разложит и поставит 👌. Не удаляй с телефона, пока нет 👌.</div>';
     h+='<div class="stk-g" style="margin-top:12px">Путь 2 · Личка бота — портфолио и всё без договора</div>';
@@ -1265,10 +1282,10 @@ function candStat(row,val,btn){
   try{
     var el=document.getElementById('expSec'); if(!el)return;
     var op=false; try{op=localStorage.getItem('m5_exp_open')==='1';}catch(e){}
-    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>💸 Расходы · куда сдавать</span><span class="stk-hint">правило одно для всех</span></summary><div class="stack">';
-    h+='<div class="lsn"><b>1 · Потратил — внеси в Финансы.</b> Открой <b>CRM → Финансы</b> (ссылка ниже): сумма, что купил, категория тегом — 20 секунд. Либо отправь в Telegram-бот M5 (@m5miami_bot) сообщение «расход 40 шпаклёвка Home Depot» — попадёт туда же.</div>';
-    h+='<div class="lsn"><b>2 · Сфоткай чек.</b> Фото чека — в Telegram-бот M5, он положит его в <b>Файлы → Чеки</b>. Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.</div>';
-    h+='<div class="lsn"><b>3 · Готово.</b> Трата сразу видна в разделе Финансы: категории, месяц, вся история. Таблицу руками не заполняет никто.</div>';
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>💸 '+TT('sec_exp','Расходы · куда сдавать')+'</span><span class="stk-hint">правило одно для всех</span></summary><div class="stack">';
+    h+='<div class="lsn">'+TT('exp1','<b>1 · Потратил — внеси в Финансы.</b> Открой <b>CRM → Финансы</b> (ссылка ниже): сумма, что купил, категория тегом — 20 секунд. Либо отправь в Telegram-бот M5 (@m5miami_bot) сообщение «расход 40 шпаклёвка Home Depot» — попадёт туда же.')+'</div>';
+    h+='<div class="lsn">'+TT('exp2','<b>2 · Сфоткай чек.</b> Фото чека — в Telegram-бот M5, он положит его в <b>Файлы → Чеки</b>. Без чека трата всё равно записывается, но для бухгалтера и налоговой чек нужен — не выбрасывай.')+'</div>';
+    h+='<div class="lsn">'+TT('exp3','<b>3 · Готово.</b> Трата сразу видна в разделе Финансы: категории, месяц, вся история. Таблицу руками не заполняет никто.')+'</div>';
     h+='<a class="stk" href="'+LINKS.expenses+'" target="_blank" rel="noopener"><b>📊 Финансы · реестр расходов</b><span>категории, месяц, вся история · пишут форма CRM и Telegram-бот</span></a>';
     h+='<a class="stk" href="'+LINKS.receipts+'" target="_blank" rel="noopener"><b>🧾 Раздел «Чеки»</b><span>CRM · Файлы → Чеки: фото и PDF всех чеков</span></a>';
     h+='<div class="lsn" style="color:#8A8272">Почему так: пока компания не зарегистрирована, все траты идут с личных карт — и если их не собрать, при регистрации LLC и подаче налогов мы просто потеряем эти деньги как расходы бизнеса. Одно сообщение боту в момент покупки решает вопрос.</div>';
@@ -1405,28 +1422,57 @@ var CLIENTHUBS=[
 /* ═══ Инструкции по ролям — прямо в кабинете (просьба Алекса 31.07: текстом, а не файлом).
    У каждого сотрудника — свои шаги; у директора и фаундеров — «вид сверху» на всю команду.
    Полный регламент: M5/4 Рабочие документы/Документооборот_клиентский_цикл.md ═══ */
-var ROLEGUIDE={
- sales:[
-  ['1 · Новый лид — ответ за 15 минут','Карточка падает в Telegram «Лиды» и в JobTread. Звони или пиши с бизнес-WhatsApp +1 786 407 4441. Цель — записать на консультацию/замер.'],
-  ['2 · Консультация → замер → КП','Лид и КП ведёшь в CRM (плитка CRM · Sales): статусы, discovery, «живая смета» с фиксацией цены. Календарь замеров — плитка Calendar. После подписания договора объект переезжает в JobTread (производство).'],
-  ['3 · Договор подписан','PDF договора — в карточку сделки в CRM (файл сам ложится в Файлы → объекты). Затем пост в «M5 Team» → Projects: «🖊 Договор подписан: имя · адрес · старт [дата]» — это сигнал всей команде.'],
-  ['4 · Ссылка клиенту','Клод заведёт кабинет клиента и даст тебе персональную ссылку — отправь её клиенту с бизнес-WhatsApp: «Ваш личный кабинет — прогресс, документы, материалы».'],
-  ['5 · Допродажи','Заявки клиента из его кабинета (услуги/кредиты) прилетают в Telegram — отвечаешь в тот же день.']],
- smm:[
-  ['1 · Фотосессия «ДО» — 3 дня после договора','Увидела в Projects «Договор подписан» → едешь на объект: фото + видео каждой комнаты → Джину в тему объекта или сразу в CRM · Файлы → объект. Стадию «до» проставит Джин. Из этого потом собираем «до/после».'],
-  ['2 · Сырьё — только из CRM · Файлы','Раздел Контент (общий) и папка объекта (Вадим грузит с объектов ежедневно). Ничего не снимаем «в никуда» — всё в файлы.'],
-  ['3 · Контент-цикл','Календарь и сценарии готовит Клод → съёмка (с Вадимом/Владом) → монтаж → постинг IG/TikTok/YT. Влад — лицо бренда: 1–2 ролика в неделю с ним.'],
-  ['4 · Финал проекта','Фотосессия «ПОСЛЕ» → в файлы объекта, стадия «после» → рилс «до/после» — главный формат продаж.']],
- pm:[
-  ['1 · Днём — фото с объекта','Фото/видео хода работ → Джину в Telegram (тема объекта) — он разложит по объекту в CRM · Файлы. Длинное видео — загрузи сам на crm.m5miami.com/files.'],
-  ['2 · Вечером — 2 минуты','Голосовое или пару строк в «M5 Team» → Projects: что сделали · что завтра · что нужно. Всё — отчёт сдан.'],
-  ['3 · Материалы на согласование','Фото образца → Джину с подписью «материал» (ляжет в файлы объекта) + строка в вечернем отчёте. Статус клиенту выставит Клод.'],
-  ['4 · Галочки — не твоя забота','Прогресс в кабинете клиента обновляет Клод/Джин по твоему отчёту.']],
- designer:[
-  ['1 · Концепт и мудборды','Ведёшь в JobTread + 3D и материалы — в CRM · Файлы → объект. Референсы стиля — Playbook.'],
-  ['2 · Образцы материалов','Фото → в файлы объекта (или Джину с подписью «материал») — Клод выставит клиенту на согласование в кабинете.'],
-  ['3 · Дизайн-надзор','Еженедельный визит на объект + фотоотчёт в файлы объекта: то, что нарисовано = то, что строится.']]
+var ROLEGUIDE_I18N={
+ en:{
+  sales:[
+   ['1 · New lead — reply within 15 minutes','The card lands in Telegram "Лиды" and in JobTread. Call or text from the business WhatsApp +1 786 407 4441. Goal — book a consultation.'],
+   ['2 · Consultation → measure → proposal','Run the lead and the proposal in CRM (CRM tile): stages, discovery, live estimate with a locked price. Site-visit calendar — Calendar tile.'],
+   ['3 · Contract signed','Upload the signed PDF to the deal card in CRM (it lands in Files → the project folder). Then post in "M5 Team" → Projects: "🖊 Contract signed: address, amount, start date".'],
+   ['4 · Client link','A personal client-portal link is created for every project — send it from the business WhatsApp: "Your private portal — progress, documents, payments."'],
+   ['5 · Upsells','Client requests from their portal (services / credits) arrive in Telegram — answer the same day.']],
+  smm:[
+   ['1 · "BEFORE" shoot — within 3 days of the contract','When Projects shows "Contract signed" — go to the site: photo + video of every room → upload to Files → project folder, stage "before".'],
+   ['2 · Raw material — only from CRM · Files','The Content section (shared) and the project folder (the site team uploads daily). We never shoot into the void — everything goes to Files.'],
+   ['3 · Content cycle','Calendar and scripts are prepared for you → shoot (with Vadym / Vlad) → edit → post to IG / TikTok / YT. Vlad is the face of the brand: 1–2 clips a week with him.'],
+   ['4 · Project finale','"AFTER" shoot → into the project folder, stage "after" → the before/after reel is our single best-selling format.']],
+  supervisor:[
+   ['1 · Daytime — photos from the site','Photos / videos of work in progress → Files → project folder. Long video — upload directly in CRM · Files.'],
+   ['2 · Evening — two minutes','A voice note or a couple of lines in "M5 Team" → Projects: what was done · what is next · what is needed. That is the whole report.'],
+   ['3 · Materials for approval','Photo of the sample → project folder, marked "material" + a line in the evening report.'],
+   ['4 · Client portal is not your job','Progress in the client portal is updated from your report — you only report.']],
+  designer:[
+   ['1 · Concept and moodboards','Run them in JobTread; 3D and materials — in CRM · Files → project. Style references — Playbook.'],
+   ['2 · Material samples','Photo → project folder (or marked "material") — it is then sent to the client for approval in their portal.'],
+   ['3 · Design supervision','Weekly site visit + photo report into the project folder: what was drawn is what gets built.']]},
+ ru:{
+  sales:[
+   ['1 · Новый лид — ответ за 15 минут','Карточка падает в Telegram «Лиды» и в JobTread. Звони или пиши с бизнес-WhatsApp +1 786 407 4441. Цель — записать на консультацию.'],
+   ['2 · Консультация → замер → КП','Лид и КП ведёшь в CRM (плитка CRM): статусы, discovery, «живая смета» с фиксацией цены. Календарь замеров — плитка Calendar.'],
+   ['3 · Договор подписан','PDF договора — в карточку сделки в CRM (файл сам ложится в Файлы → папку объекта). Затем пост в «M5 Team» → Projects: «🖊 Договор подписан: адрес, сумма, дата старта».'],
+   ['4 · Ссылка клиенту','На каждый объект заводится кабинет клиента с персональной ссылкой — отправь её с бизнес-WhatsApp: «Ваш личный кабинет — прогресс, документы, оплаты».'],
+   ['5 · Допродажи','Заявки клиента из его кабинета (услуги/кредиты) прилетают в Telegram — отвечаешь в тот же день.']],
+  smm:[
+   ['1 · Фотосессия «ДО» — 3 дня после договора','Увидел(а) в Projects «Договор подписан» → едешь на объект: фото + видео каждой комнаты → в Файлы → папку объекта, стадия «до».'],
+   ['2 · Сырьё — только из CRM · Файлы','Раздел Контент (общий) и папка объекта (команда с объектов грузит ежедневно). Ничего не снимаем «в никуда» — всё в файлы.'],
+   ['3 · Контент-цикл','Календарь и сценарии готовятся для тебя → съёмка (с Вадимом/Владом) → монтаж → постинг IG/TikTok/YT. Влад — лицо бренда: 1–2 ролика в неделю с ним.'],
+   ['4 · Финал проекта','Фотосессия «ПОСЛЕ» → в файлы объекта, стадия «после» → рилс «до/после» — главный формат продаж.']],
+  supervisor:[
+   ['1 · Днём — фото с объекта','Фото/видео хода работ → в Файлы → папку объекта. Длинное видео — загрузи сам в CRM · Файлы.'],
+   ['2 · Вечером — 2 минуты','Голосовое или пару строк в «M5 Team» → Projects: что сделали · что завтра · что нужно. Всё — отчёт сдан.'],
+   ['3 · Материалы на согласование','Фото образца → в папку объекта с пометкой «материал» + строка в вечернем отчёте.'],
+   ['4 · Кабинет клиента — не твоя забота','Прогресс в кабинете клиента обновляется по твоему отчёту — ты только отчитываешься.']],
+  designer:[
+   ['1 · Концепт и мудборды','Ведёшь в JobTread + 3D и материалы — в CRM · Файлы → объект. Референсы стиля — Playbook.'],
+   ['2 · Образцы материалов','Фото → в файлы объекта (или с пометкой «материал») — далее отправляется клиенту на согласование в его кабинет.'],
+   ['3 · Дизайн-надзор','Еженедельный визит на объект + фотоотчёт в файлы объекта: то, что нарисовано = то, что строится.']]}
 };
+/* pm — та же работа, что и у технадзора (роль-синоним) */
+ROLEGUIDE_I18N.en.pm=ROLEGUIDE_I18N.en.supervisor;
+ROLEGUIDE_I18N.ru.pm=ROLEGUIDE_I18N.ru.supervisor;
+/* es/uk пока опираются на английский — вторая волна перевода */
+ROLEGUIDE_I18N.es=ROLEGUIDE_I18N.en;
+ROLEGUIDE_I18N.uk=ROLEGUIDE_I18N.ru;
+var ROLEGUIDE=ROLEGUIDE_I18N[LANG]||ROLEGUIDE_I18N.en;
 var TEAMVIEW=[
  ['Sales','Лиды за 15 минут · КП в CRM · договор → карточка сделки в CRM + пост в Projects · ссылка на кабинет клиенту · допродажи'],
  ['SMM','Фотосессии «до/после» · контент только из CRM · Файлы · постинг IG/TikTok/YT · 1–2 ролика с Владом'],
@@ -1440,14 +1486,14 @@ var TEAMVIEW=[
     var el=document.getElementById('guideSec'); if(!el)return;
     var h='';
     if(ROLEGUIDE[role]){
-      h+='<details class="stackbox"'+(onbDone()?'':' open')+'><summary><span>📖 Your playbook · '+role+'</span><span class="stk-hint">'+ROLEGUIDE[role].length+' шагов</span></summary><div class="stack">';
+      h+='<details class="stackbox"'+(onbDone()?'':' open')+'><summary><span>📖 '+TT('sec_play','Твой плейбук')+'</span><span class="stk-hint">'+ROLEGUIDE[role].length+' шагов</span></summary><div class="stack">';
       for(var i=0;i<ROLEGUIDE[role].length;i++){
         h+='<div class="lsn"><b>'+ROLEGUIDE[role][i][0]+'.</b> '+ROLEGUIDE[role][i][1]+'</div>';
       }
       h+='<div class="lsn" style="color:#8A8272">Вопросы — Джину наверху. Что-то неудобно — кнопка «⚡ Идея / баг» справа внизу.</div></div></details>';
     }
     if(role==='director'||role==='founder'){
-      h+='<details class="stackbox"><summary><span>🧭 Team · who does what</span><span class="stk-hint">'+TEAMVIEW.length+' ролей</span></summary><div class="stack">';
+      h+='<details class="stackbox"><summary><span>🧭 '+TT('sec_team','Команда · кто что делает')+'</span><span class="stk-hint">'+TEAMVIEW.length+' ролей</span></summary><div class="stack">';
       for(var t=0;t<TEAMVIEW.length;t++){
         h+='<div class="lsn"><b>'+TEAMVIEW[t][0]+'</b> — '+TEAMVIEW[t][1]+'</div>';
       }
