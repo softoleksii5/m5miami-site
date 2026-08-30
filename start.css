@@ -433,3 +433,20 @@ body:not([data-r="home"]) .sp-index.home-el{display:none}
    наезжала на текст). Возвращаем карточке её раскладку. */
 body[data-r="home"] .nowcard.home-el{display:flex}
 .sn.on-cab{font-weight:600;color:var(--gold-d)}
+
+/* ── Мобильные табы спейсов (30.08): на телефоне левой панели нет,
+   навигация была только через хлебные крошки. Теперь — полоса внизу. */
+.mtabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.97);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);backdrop-filter:blur(8px)}
+.mtabs a{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px 7px;
+  text-decoration:none;color:var(--soft)}
+.mtabs a i{font-style:normal;font-size:16px;filter:grayscale(.4)}
+.mtabs a span{font-size:9.5px;line-height:1.1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.mtabs a.on{color:var(--gold-d);font-weight:600}
+.mtabs a.on i{filter:none}
+body{padding-bottom:62px}
+@media(min-width:900px){.mtabs{display:none}body{padding-bottom:0}}
+/* Честное пустое состояние вместо молчаливого выброса на главную */
+.sp-empty{background:#fff;border:1px dashed var(--line);border-radius:14px;padding:22px;text-align:center;
+  font-size:13.5px;color:var(--soft);line-height:1.7}
+.sp-empty a{color:#96703B}

@@ -153,7 +153,7 @@
 <div class="wrap">
   <div class="hbar">
     <a class="logo" href="/champion">M<b>5</b><small>TEAM</small></a>
-    <a class="back" href="/champion">← My workspace</a>
+    <a class="back" href="/champion" id="backCab">← My workspace</a>
   </div>
 
   <div class="hero">
@@ -209,6 +209,9 @@
 <footer>M5 Interior Design &amp; Build · Miami · Private team page</footer>
 
 <script>
+/* Возврат в СВОЙ кабинет: роль берём из m5_member, иначе общий /champion (30.08). */
+try{ var mb=JSON.parse(localStorage.getItem('m5_member')||'null');
+  if(mb&&mb.role) document.getElementById('backCab').href='/champion'+mb.role; }catch(e){}
 /* Данные команды. Чувствительное (договор) — только ссылкой в CRM · Файлы (раздел HR):
    файл лежит за входом в CRM, страница сама ничего не раскрывает.
    Источник правды по датам/договорам: M5/4 Рабочие документы/Команда_реестр.csv */

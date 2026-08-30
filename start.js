@@ -250,14 +250,14 @@ function quickHtml(){
 function nowHtml(){
   if(NEWBIE) return obHtml();
   var n;
-  if(role==='founder') return '';   // фаундеру Now-карточка не нужна (реш. 27.08) — фокус живёт в Задачах и спринте
+  if(role==='founder') n={txt:'<b>Фокус недели:</b> легализация троих, шоу-рум до 15.09, первые клиенты на штукатурку. Детали и отметки — в спринте команды.',btn:'Открыть спринт',url:'https://m5miami.com/sprint/'};
   else if(role==='director'||role==='supervisor') n=(new Date().getHours()>=17)
     ? {txt:'<b>Вечерний отчёт</b> — 2 минуты: голосовое или пара строк в Telegram → Projects. Фото дня — в Telegram-бот M5, они лягут в папку объекта.',btn:'Отправить',url:LINKS.telegram}
     : {txt:'<b>Сегодня:</b> фото и видео с объекта — в Telegram-бот M5, они лягут в папку объекта. Вечером — отчёт в Projects (2 минуты).',btn:'Файлы объектов',url:LINKS.projects};
   else if(role==='sales') n={txt:'<b>Правило первого касания:</b> новый лид получает ответ за 15 минут. Лиды падают в CRM-кабинет и в Telegram → Лиды.',btn:'Открыть CRM',url:LINKS.salescrm};
   else if(role==='smm') n={txt:'<b>Ритм контента:</b> сырьё — только из Файлов CRM (Контент и папки объектов); на новом объекте снимаем «до» в первые 3 дня.',btn:'Открыть файлы',url:LINKS.content};
   else if(role==='partner') n={txt:'<b>Пульс компании:</b> лиды, воронка и расходы — в плитках выше; общий план на США — в спринте.',btn:'Открыть спринт',url:'https://m5miami.com/sprint/'};
-  else n={txt:'Задачи дня — в разделе «Задачи». Не знаешь, с чего начать — открой Playbook: там твоя роль по шагам.',btn:''};
+  else n={txt:'<b>Задачи дня</b> — в блоке «Задачи» ниже. Не знаешь, с чего начать — напиши директору в Telegram.',btn:'Открыть доску',url:'https://crm.m5miami.com/tasks'};
   var open=n.url?('href="'+n.url+'" target="_blank" rel="noopener"'):('href="#" onclick="'+n.act+';return false"');
   return '<div class="nowcard"><span class="now-tag">⚡ Now</span><div class="now-txt">'+n.txt+'</div>'+(n.btn?'<a class="now-btn" '+open+'>'+n.btn+' →</a>':'')+'</div>';
 }
@@ -265,7 +265,7 @@ window.nowTasks=function(){ try{ var b=document.getElementById('tdBox')||documen
 /* Виджет задач на главной (28.08): фаундеру — последние поручения с доски CRM,
    сотруднику с доской — его живые задачи. Данные отдаёт M5 Hub (?tasks=1) из
    Supabase. Нет данных — честная ссылка на доску, без фейка. */
-var TASKFUNC={founder:'alex',partner:'vlad',director:'vadim',sales:'sales'}[role]||'';
+var TASKFUNC={founder:'alex',partner:'vlad',director:'vadim',sales:'sales',smm:'sales',supervisor:'vadim',pm:'vadim',designer:'vadim',team:'sales'}[role]||'sales';
 function twHtml(){
   if(!TASKFUNC||NEWBIE) return '';
   return '<div class="sec">'+TT('sp_tasks','Задачи')+(role==='founder'?' · поручено':'')+'</div>'
@@ -290,7 +290,10 @@ function loadTasks(){
           +(tk.due?'<span class="tw-due">'+esc(tk.due)+'</span>':'')+'</a>';
       }
       empty.outerHTML=h;
-    }).catch(function(){});
+    }).catch(function(){
+      try{ var b2=document.getElementById('twBox'), e2=b2&&b2.querySelector('.tw-empty');
+        if(e2) e2.innerHTML='Доска сейчас недоступна — <a href="https://crm.m5miami.com/tasks" target="_blank" rel="noopener" style="color:#96703B">открыть в CRM →</a>'; }catch(e3){}
+    });
   }catch(e){}
 }
 /* Онбординг-чеклист первого дня: 2 шага уже отмечены (endowed progress),
@@ -332,7 +335,9 @@ function obHtml(){
     '<a class="now-btn" href="'+LINKS.telegram+'" target="_blank" rel="noopener">Написать →</a></div></div>';
 }
 function pulseHtml(){
-  if(NEWBIE||(role!=='founder'&&role!=='director'&&role!=='partner')) return '';
+  return '';   // грид пульса убран 28.08 — цифры живут в подписях пространств
+  /* eslint-disable */
+  if(true) return '';
   var P=[
     {i:'plLeads',k:'Leads · 7d',v:'…',d:'считаю…',s:'все источники',url:LINKS.jobtread},
     {i:'plPipe',k:'Pipeline',v:'…',d:'считаю…',s:'JobTread',url:LINKS.jobtread},
@@ -537,7 +542,9 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     };
     var HIDDEN=[];
     if(role!=='founder'){ try{ var vc=JSON.parse(localStorage.getItem('m5_cabcfg')||'{}'); if(vc&&vc[role]&&vc[role].length) HIDDEN=vc[role]; }catch(eVc){} }
-    try{ fetch(CRM+'/api/cabinet-config').then(function(r){return r.json()}).then(function(j){ if(j) localStorage.setItem('m5_cabcfg',JSON.stringify(j)); }).catch(function(){}); }catch(eVf){}
+    /* Сотрудникам конфиг видимости обновляем в фоне (у фаундера это делает спейс
+       «Настройки», поэтому тянем только для остальных — дубль запроса убран 30.08). */
+    if(role!=='founder'){ try{ fetch(CRM+'/api/cabinet-config').then(function(r){return r.json()}).then(function(j){ if(j) localStorage.setItem('m5_cabcfg',JSON.stringify(j)); }).catch(function(){}); }catch(eVf){} }
     var ROUTES=[
       {r:'home',    t:TT('sp_home','Главная'),   ic:'🏠', secs:[]},
       {r:'tasks',   t:TT('sp_stack','Стек и планы'),    ic:'🧩', secs:['#stackSec'], sub:TT('sub_tasks','Сервисы компании и план развития системы'),
@@ -662,6 +669,8 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       document.body.setAttribute('data-r',r);
       var links=aside.querySelectorAll('a.sn[data-r]');
       for(var l=0;l<links.length;l++){ links[l].className='sn'+(links[l].getAttribute('data-r')===r?' on':''); }
+      try{ var tl=window.m5tabs?window.m5tabs.querySelectorAll('a[data-r]'):[];
+        for(var t2=0;t2<tl.length;t2++) tl[t2].className=(tl[t2].getAttribute('data-r')===r?'on':''); }catch(eT2){}
       window.scrollTo(0,0);
     }
     function pruneEmpty(){
@@ -675,10 +684,25 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
           var tile2=idx.querySelector('a[href="#/'+PR.r+'"]');
           if(sn2) sn2.style.display=isEmpty?'none':'';
           if(tile2) tile2.style.display=isEmpty?'none':'';
-          if(isEmpty&&cur()===PR.r) location.hash='#/home';
+          if(isEmpty&&cur()===PR.r){
+            var pb2=pg2.querySelector('.sp-body');
+            if(pb2) pb2.innerHTML='<div class="sp-empty">В этом разделе для твоей роли пока ничего нет.<br>'
+              +'<a href="#/home">Вернуться на главную</a> · <a href="https://crm.m5miami.com" target="_blank" rel="noopener">Открыть CRM</a></div>';
+          }
         }
       }catch(ePr){}
     }
+    /* Мобильные табы (28.08-фикс UX): на телефоне левой панели нет — внизу
+       появляется полоса с 4 главными разделами роли + «Ещё» на главную. */
+    try{
+      var tb=document.createElement('nav'); tb.className='mtabs'; var th='';
+      var mt=live.slice(0,5);
+      for(var mi=0;mi<mt.length;mi++){
+        th+='<a href="#/'+mt[mi].r+'" data-r="'+mt[mi].r+'"><i>'+mt[mi].ic+'</i><span>'+esc(mt[mi].t)+'</span></a>';
+      }
+      tb.innerHTML=th; document.body.appendChild(tb);
+      window.m5tabs=tb;
+    }catch(eTb){}
     window.addEventListener('hashchange',route); route();
     /* пустышки прячем после того, как асинхронные филлеры (E-2 и др.) отработали */
     setTimeout(pruneEmpty,900); setTimeout(pruneEmpty,2500);
@@ -689,9 +713,10 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
 (function(){
   try{
     var el=document.getElementById('h2Time'); if(!el) return;
-    function tick(){ el.textContent=new Intl.DateTimeFormat('en-US',
-      {timeZone:'America/New_York',hour:'numeric',minute:'2-digit'}).format(new Date()); }
+    var FMT=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
+    function tick(){ if(!document.hidden) el.textContent=FMT.format(new Date()); }
     tick(); setInterval(tick,30000);
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden) tick(); });
   }catch(eClk){}
 })();
 
