@@ -1195,13 +1195,10 @@ var ROADMAP=[
     var el=document.getElementById('contSec'); if(!el)return;
     var op=false; try{op=localStorage.getItem('m5_cont_open')==='1';}catch(e){}
     if(/[?&]open=cont/.test(location.search)) op=true;   // прямая ссылка из закрепа/бота
-    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>📸 '+TT('sec_content','Контент · куда скидывать')+'</span><span class="stk-hint">3 пути — любой годится</span></summary><div class="stack">';
-    h+='<div class="stk-g">Путь 1 · Тема объекта в Telegram — для объектов с договором</div>';
-    h+='<div class="lsn">У каждого объекта есть тема «🏠 Имя объекта» в группе <b>M5 Team</b>. Открой её и кинь фото/видео — без подписей. Джин заберёт, разложит и поставит 👌. Не удаляй с телефона, пока нет 👌.</div>';
-    h+='<div class="stk-g" style="margin-top:12px">Путь 2 · Личка бота — портфолио и всё без договора</div>';
-    h+='<div class="lsn">Старые работы, шоу-рум, отзывы клиентов → в личку <b>@m5miami_bot</b> + одной строкой название объекта («мой объект на Collins, венецианка»). Отзыв — с подписью «отзыв».</div>';
-    h+='<div class="stk-g" style="margin-top:12px">Путь 3 · Напрямую в CRM · Файлы — с телефона и с компьютера</div>';
-    h+='<div class="lsn">Открой <b>crm.m5miami.com/files</b> (плитка «Файлы» в кабинете) → выбери объект → кнопка загрузки. На телефоне работает так же: из галереи выбрал кадры → загрузил. Не знаешь, куда положить — грузи без раздела, я разберу. Длинное видео, которое Telegram не берёт, — только этим путём. О любой загрузке я узнаю сам.</div>';
+    var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>📸 '+TT('sec_content','Контент · куда скидывать')+'</span><span class="stk-hint">только через CRM · Файлы</span></summary><div class="stack">';
+    h+='<div class="stk-g">Один путь · CRM → Файлы — с телефона и с компьютера</div>';
+    h+='<div class="lsn">Открой <b>crm.m5miami.com/files</b> (плитка «Файлы» в кабинете) → выбери раздел или объект → кнопка загрузки. На телефоне так же: из галереи выбрал кадры → загрузил. Видео любого размера — до 5 ГБ на файл; загрузка идёт кусками и продолжается после обрыва связи, оригинал не сжимается. Не знаешь, куда положить — грузи в «Входящее», я разберу. О любой загрузке я узнаю сам.</div>';
+    h+='<div class="lsn" style="color:#8A8272">Telegram для контента больше не используем: он сжимает фото и не принимает видео больше 20 МБ. Джин в Telegram остаётся для чеков и коротких вопросов.</div>';
     h+='<a class="stk" href="'+LINKS.projects+'" target="_blank" rel="noopener"><b>🏠 Файлы объектов</b><span>объекты с договором: загрузка прямо со страницы</span></a>';
     if(role==='director'){
       h+='<a class="stk" href="'+LINKS.vadimWorks+'" target="_blank" rel="noopener"><b>🧱 Работы Вадима до M5 — твой архив</b><span>прошлые объекты: фото, процесс, видео — для сайта и рекламы</span></a>';
@@ -1210,7 +1207,7 @@ var ROADMAP=[
     h+='<a class="stk" href="'+LINKS.reviews+'" target="_blank" rel="noopener"><b>⭐ Отзывы клиентов</b><span>видео, голосовые, скрины переписок — самое ценное</span></a>';
     h+='<div class="stk-g" style="margin-top:12px">Как снимать, чтобы кадры годились</div>';
     h+='<div class="lsn">Правило <b>«4 кадра каждый визит»</b>: до · процесс · после · макро-деталь. Вертикально — для рилсов, горизонтально — для сайта. Дневной свет, без вспышки; штукатурку снимай сбоку под углом — так видно рельеф.</div>';
-    h+='<div class="lsn" style="color:#8A8272">Эти же ссылки — в закрепе группы «M5 Team» (сообщение, приколотое сверху). Стадии «до/процесс/после» никто не выбирает руками — это делаю я.</div>';
+    h+='<div class="lsn" style="color:#8A8272">Стадии «до/процесс/после» никто не выбирает руками — это делаю я.</div>';
     el.innerHTML=h+'</div></details>';
     var box=el.querySelector('details.stackbox');
     if(box)box.addEventListener('toggle',function(){ try{localStorage.setItem('m5_cont_open',box.open?'1':'0');}catch(e){} });
