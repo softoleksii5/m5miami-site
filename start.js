@@ -212,7 +212,7 @@ var LANG=(function(){ try{ var l=localStorage.getItem('m5_lang'); if(['en','es',
 window.m5Lang=function(l){ try{ localStorage.setItem('m5_lang',l); }catch(e){} location.reload(); };
 var L10N={
  ru:{},
- en:{modules:'Modules',sp_today:'Today',sub_today:'Tasks, Now and first steps',sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',ob_head:'Your first day at M5',sec_content:'Content · where to upload',sec_exp:'Expenses · how to submit',sec_play:'Your playbook',sec_team:'Team · who does what',
+ en:{tw_more:'More tasks',tw_less:'Collapse',modules:'Modules',sp_today:'Today',sub_today:'Tasks, Now and first steps',sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',ob_head:'Your first day at M5',sec_content:'Content · where to upload',sec_exp:'Expenses · how to submit',sec_play:'Your playbook',sec_team:'Team · who does what',
   now_dir_pm:'<b>Evening report</b> — two minutes: a voice note or a couple of lines in Telegram → Projects. Photos of the day — to the M5 Telegram bot, they land in the project folder.',
   now_dir_am:'<b>Today:</b> photos and video from the site — to the M5 Telegram bot, they land in the project folder. In the evening — the report in Projects (2 minutes).',
   now_sales:'<b>First-touch rule:</b> every new lead gets an answer within 15 minutes. Leads arrive in the CRM and in Telegram → Leads.',
@@ -505,10 +505,10 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
    кабинеты читают crm.m5miami.com/api/cabinet-config при загрузке. */
 (function(){
   try{
-    if(role!=='founder')return;
+    if(role!=='founder'&&!isAdmin)return;
     var el=document.getElementById('setSec'); if(!el)return;
     var FN=[['director','Директор','Вадим Штемпель'],['partner','Совладелец','Влад Дыденко'],['smm','SMM-специалист','вакансия'],['supervisor','Технадзор','вакансия'],['sales','Менеджер продаж','вакансия']];
-    var SP=[['tasks','Стек и планы'],['clients','Клиенты'],['projects','Проекты'],['content','Контент'],['expenses','Финансы'],['company','Компания'],['people','Кандидаты'],['plan','План E-2'],['playbook','Playbook']];
+    var SP=[['today','Сегодня'],['tasks','Стек и планы'],['clients','Клиенты'],['projects','Проекты'],['content','Контент'],['expenses','Финансы'],['company','Компания'],['people','Кандидаты'],['plan','План E-2'],['playbook','Playbook']];
     var cfgV={}; try{cfgV=JSON.parse(localStorage.getItem('m5_cabcfg')||'{}')||{};}catch(e){}
     function hid(f,sp){ return !!(cfgV[f]&&cfgV[f].indexOf(sp)>-1); }
     function draw(){
@@ -567,7 +567,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     var wrap0=document.querySelector('.wrap:not(.hbar)');
     var todaySec=document.createElement('div'); todaySec.id='todaySec';
     if(wrap0){
-      ['.nowcard','.twidget'].forEach(function(sel){ var e0=wrap0.querySelector(sel); if(e0){
+      ['.nowcard'].forEach(function(sel){ var e0=wrap0.querySelector(sel); if(e0){
         if(e0.previousElementSibling&&e0.previousElementSibling.className==='sec') todaySec.appendChild(e0.previousElementSibling);
         todaySec.appendChild(e0); } });
       var ob0=wrap0.querySelector(':scope > details.stackbox'); if(ob0) todaySec.appendChild(ob0);
@@ -575,7 +575,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     }
     var ROUTES=[
       {r:'home',    t:TT('sp_home','Главная'),   ic:'🏠', secs:[]},
-      {r:'today',   t:TT('sp_today','Сегодня'),  ic:'✅', secs:['#todaySec'], sub:TT('sub_today','Задачи, Now и первые шаги')},
+      {r:'today',   t:TT('sp_today','Сегодня'),  ic:'✅', secs:['#todaySec'], sub:TT('sub_today','Now и первые шаги')},
       {r:'tasks',   t:TT('sp_stack','Стек и планы'),    ic:'🧩', secs:['#stackSec'], sub:TT('sub_tasks','Сервисы компании и план развития системы'),
         rel:[['Доска задач',CRM+'/tasks'],['Спринт команды','https://m5miami.com/sprint/']]},
       {r:'clients', t:TT('sp_clients','Клиенты'),   ic:'👥', secs:['#clientsSec'], sub:TT('sub_clients','Кабинеты клиентов и допродажи'),
@@ -604,7 +604,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     var live=[ROUTES[0]];
     for(var i=1;i<ROUTES.length;i++){
       var R=ROUTES[i], els=[];
-      if(R.founderOnly&&role!=='founder') continue;
+      if(R.founderOnly&&role!=='founder'&&!(isAdmin&&R.r==='settings')) continue;
       if(HIDDEN.indexOf(R.r)>-1) continue;
       if(ROLE_SPACES[role]&&ROLE_SPACES[role].indexOf(R.r)<0) continue;
       for(var j=0;j<R.secs.length;j++){ var e=document.querySelector(R.secs[j]); if(e) els.push(e); }
@@ -679,9 +679,26 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       }catch(eLoose){}
     }
     absorbLoose();
+    /* Окно задач на главной (реш. Алекса 02.09): две задачи, остальное раскрывается по клику */
+    try{
+      var twb=document.getElementById('twBox');
+      if(twb){
+        var twOpen=false;
+        function twCompact(){
+          var rows=twb.querySelectorAll('.tw-row'); var extra=rows.length-2;
+          var more=twb.parentNode.querySelector('.tw-more');
+          if(!more){ more=document.createElement('a'); more.className='tw-more'; more.href='#';
+            more.onclick=function(e){ e.preventDefault(); twOpen=!twOpen; twCompact(); }; twb.parentNode.insertBefore(more, twb.nextSibling); }
+          for(var ri=0;ri<rows.length;ri++) rows[ri].style.display=(twOpen||ri<2)?'':'none';
+          more.style.display=extra>0?'':'none';
+          more.textContent=twOpen?(TT('tw_less','Свернуть')+' ↑'):(TT('tw_more','Ещё задач')+': '+extra+' ↓');
+        }
+        new MutationObserver(twCompact).observe(twb,{childList:true,subtree:true}); twCompact();
+      }
+    }catch(eTw){}
     /* главная: элементы верхнего уровня + плитки спейсов для мобилы */
     var homeEls=[];
-    ['.hero2'].forEach(function(sel){
+    ['.hero2','.twidget'].forEach(function(sel){
       var e2=wrap.querySelector(sel); if(e2){ e2.classList.add('home-el'); homeEls.push(e2);
         if(e2.previousElementSibling&&e2.previousElementSibling.className==='sec'){ e2.previousElementSibling.classList.add('home-el'); } }
     });
@@ -701,8 +718,9 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     /* Админ-переключатель кабинетов: свой + любой другой одним кликом */
     if(isAdmin){
       var CABS=[['founder','Мой кабинет'],['director','Директор'],['partner','Совладелец'],['smm','SMM'],['supervisor','Технадзор'],['sales','Продажи']];
-      h+='<div class="side-sep">'+TT('sp_cabinets','Кабинеты')+'</div>';
-      for(var cb=0;cb<CABS.length;cb++){ h+='<a class="sn'+(CABS[cb][0]===role?' on-cab':'')+'" href="/champion'+CABS[cb][0]+'"><i>'+(CABS[cb][0]==='founder'?'🏠':'👤')+'</i>'+CABS[cb][1]+'</a>'; }
+      h+='<div class="side-sep">'+TT('sp_cabinets','Кабинеты')+'</div><select class="side-cabs" onchange="location.href=\'/champion\'+this.value">';
+      for(var cb=0;cb<CABS.length;cb++){ h+='<option value="'+CABS[cb][0]+'"'+(CABS[cb][0]===role?' selected':'')+'>'+CABS[cb][1]+'</option>'; }
+      h+='</select>';
     }
     /* Odoo-режим: навигация = сетка модулей на главной; в панели только «⌂ Модули» (дубли списка и инструментов убраны 02.09) */
     h+='<a class="sn side-back" href="#/home"><i>⌂</i>'+TT('modules','Модули')+'</a>';

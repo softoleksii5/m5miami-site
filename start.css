@@ -488,3 +488,8 @@ body[data-r="home"] .side a.side-back{display:none}
 /* модуль показывается классом .on (роутер), правило одно для всех */
 body[data-r] .space.on{display:block}
 body:not([data-r="home"]) .home-el{display:none}
+
+/* окно задач на главной: 2 строки + раскрытие; переключатель кабинетов в панели */
+.tw-more{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#96703B;text-decoration:none;padding:8px 4px 0}
+.tw-more:hover{text-decoration:underline}
+.side-cabs{width:100%;margin:0 0 6px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-size:13px;color:var(--ink)}
