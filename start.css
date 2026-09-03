@@ -493,3 +493,14 @@ body:not([data-r="home"]) .home-el{display:none}
 .tw-more{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#96703B;text-decoration:none;padding:8px 4px 0}
 .tw-more:hover{text-decoration:underline}
 .side-cabs{width:100%;margin:0 0 6px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-size:13px;color:var(--ink)}
+
+/* глазик: жёлтая полоса предпросмотра, реестр функций */
+.pvw.eye{background:#F5D76E;color:#20242E;position:sticky;top:0;z-index:50;border-radius:0;text-align:left;display:flex;align-items:center;gap:8px;padding:9px 16px}
+.pvw.eye b{color:#20242E}
+.pvw-x{margin-left:auto;font-size:22px;line-height:1;text-decoration:none!important;color:#20242E!important;padding:0 6px}
+.sp-index.cabs a{position:relative}
+.sp-index.cabs a.vac{background:#FBF7EF;border-style:dashed}
+.sp-index.cabs a.vac i{background:#FFF;opacity:.7}
+.cab-focus{font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#96703B;border:1px solid #E5D3B0;border-radius:6px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.cab-eye{position:absolute;right:12px;top:12px;font-size:16px;opacity:.55}
+.sp-index.cabs a:hover .cab-eye{opacity:1}

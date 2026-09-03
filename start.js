@@ -441,7 +441,7 @@ document.getElementById('app').innerHTML=
   '<span class="signout" onclick="signout()">Sign out</span></div>'+
 '</div></header>'+
 '<div class="wrap">'+
-  (preview?'<div class="pvw">Admin preview — the <b>'+cfg.label+'</b> workspace exactly as a future hire will see it · <a href="/champion'+(member&&member.role?member.role:'')+'">Back to my workspace →</a></div>':'')+
+  (preview?'<div class="pvw eye">👁 Глазами: <b>'+cfg.label+'</b> — кабинет ровно таким, каким его видит сотрудник<a class="pvw-x" href="/champion'+(member&&member.role?member.role:'founder')+'" title="Закрыть и вернуться в свой кабинет">×</a></div>':'')+
   '<div class="hero2">'+
     '<div class="h2-top">'+
       (avaUrl?'<img class="h2-ava" src="'+avaUrl+'" alt="" decoding="async">':'')+
@@ -487,15 +487,21 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
   try{
     if(role!=='founder')return;
     var el=document.getElementById('cabSec'); if(!el)return;
+    /* Реестр функций (реш. Алекса 02.09): фокус сейчас — директор, PM GC, продажи, SMM.
+       Глазик открывает кабинет глазами сотрудника (admin preview, жёлтая полоса, × — назад). */
     var C=[
-      ['🏗','Директор','Вадим Штемпель','/championdirector'],
-      ['🤝','Совладелец','Влад Дыденко','/championpartner'],
-      ['📣','SMM-специалист','вакансия · найм в сентябре','/championsmm'],
-      ['📐','Технадзор','вакансия · из доли Вадима','/championsupervisor'],
-      ['📇','Менеджер продаж','вакансия','/championsales']
+      ['🏗','Директор','Вадим Штемпель','/championdirector',1,0],
+      ['🧱','Проджект-менеджер GC','вакансия · ещё не нашли','/championpm',1,1],
+      ['📇','Менеджер продаж','вакансия','/championsales',1,1],
+      ['📣','SMM-менеджер','вакансия · найм в сентябре','/championsmm',1,1],
+      ['📐','Технадзор','вакансия · из доли Вадима','/championsupervisor',0,1],
+      ['🎨','Архитектор-дизайнер','вакансия','/championdesigner',0,1],
+      ['📦','Укомплектовщик','вакансия · кабинет по шаблону команды','/championteam',0,1]
     ];
-    var h='<div class="sp-index">';
-    for(var i=0;i<C.length;i++){ h+='<a href="'+C[i][3]+'"><i>'+C[i][0]+'</i><span class="tx"><b>'+C[i][1]+'</b><span>'+C[i][2]+'</span></span></a>'; }
+    var h='<div class="sp-index cabs">';
+    for(var i=0;i<C.length;i++){
+      h+='<a href="'+C[i][3]+'" class="'+(C[i][5]?'vac':'')+'"><i>'+C[i][0]+'</i><span class="tx"><b>'+C[i][1]+(C[i][4]?' <em class="cab-focus">фокус</em>':'')+'</b><span>'+C[i][2]+'</span></span><span class="cab-eye" title="Посмотреть глазами сотрудника">👁</span></a>';
+    }
     el.innerHTML=h+'</div>';
   }catch(eCab){}
 })();
