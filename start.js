@@ -212,7 +212,7 @@ var LANG=(function(){ try{ var l=localStorage.getItem('m5_lang'); if(['en','es',
 window.m5Lang=function(l){ try{ localStorage.setItem('m5_lang',l); }catch(e){} location.reload(); };
 var L10N={
  ru:{},
- en:{sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',ob_head:'Your first day at M5',sec_content:'Content · where to upload',sec_exp:'Expenses · how to submit',sec_play:'Your playbook',sec_team:'Team · who does what',
+ en:{modules:'Modules',sp_today:'Today',sub_today:'Tasks, Now and first steps',sp_home:'Home',sp_tasks:'Tasks',sp_clients:'Clients',sp_projects:'Projects',sp_content:'Content',sp_expenses:'Finance',sp_company:'Company',sp_people:'Candidates',sp_plan:'E-2 Plan',sp_playbook:'Playbook',sp_cabinets:'Cabinets',sp_stack:'Stack & plans',ob_head:'Your first day at M5',sec_content:'Content · where to upload',sec_exp:'Expenses · how to submit',sec_play:'Your playbook',sec_team:'Team · who does what',
   now_dir_pm:'<b>Evening report</b> — two minutes: a voice note or a couple of lines in Telegram → Projects. Photos of the day — to the M5 Telegram bot, they land in the project folder.',
   now_dir_am:'<b>Today:</b> photos and video from the site — to the M5 Telegram bot, they land in the project folder. In the evening — the report in Projects (2 minutes).',
   now_sales:'<b>First-touch rule:</b> every new lead gets an answer within 15 minutes. Leads arrive in the CRM and in Telegram → Leads.',
@@ -224,9 +224,9 @@ var L10N={
   exp3:'<b>3 · Done.</b> The expense shows up in Finance right away: categories, month, full history. Nobody fills in a spreadsheet by hand.',
   tools:'Tools',files:'Files',settings:'Settings',spaces:'Spaces',tw_all:'Full task board · CRM',sub_settings:'Visibility toggles: what each function sees',
   sub_tasks:'Company services and the system roadmap',sub_clients:'Client hubs & upsells',sub_projects:'How to run a project · JobTread training',sub_content:'Shooting, socials, where to drop files',sub_expenses:'Expenses & receipts',sub_company:'Back office, ideas, partnership',sub_people:'Hiring & join portal',sub_plan:'Visa roadmap',sub_playbook:'Your role and who does what',sub_cabinets:'A cabinet belongs to a function, not a person'},
- es:{sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',sp_stack:'Stack y planes',ob_head:'Tu primer día en M5',sec_content:'Contenido · dónde subir',sec_exp:'Gastos · cómo reportar',sec_play:'Tu playbook',sec_team:'Equipo · quién hace qué',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
+ es:{modules:'Módulos',sp_today:'Hoy',sub_today:'Tareas, Now y primeros pasos',sp_home:'Inicio',sp_tasks:'Tareas',sp_clients:'Clientes',sp_projects:'Proyectos',sp_content:'Contenido',sp_expenses:'Finanzas',sp_company:'Compañía',sp_people:'Candidatos',sp_plan:'Plan E-2',sp_playbook:'Playbook',sp_cabinets:'Gabinetes',sp_stack:'Stack y planes',ob_head:'Tu primer día en M5',sec_content:'Contenido · dónde subir',sec_exp:'Gastos · cómo reportar',sec_play:'Tu playbook',sec_team:'Equipo · quién hace qué',tools:'Herramientas',files:'Archivos',settings:'Ajustes',spaces:'Espacios',tw_all:'Tablero de tareas · CRM',sub_settings:'Interruptores de visibilidad: qué ve cada función',
   sub_tasks:'Servicios de la empresa y hoja de ruta del sistema',sub_clients:'Portales de clientes y ventas extra',sub_projects:'Cómo llevar un proyecto · formación JobTread',sub_content:'Rodaje, redes, dónde subir archivos',sub_expenses:'Gastos y recibos',sub_company:'Back office, ideas, sociedad',sub_people:'Contratación y portal join',sub_plan:'Hoja de ruta de la visa',sub_playbook:'Tu rol y quién hace qué',sub_cabinets:'El gabinete pertenece a la función, no a la persona'},
- uk:{sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',sp_stack:'Стек і плани',ob_head:'Перший день у M5',sec_content:'Контент · куди скидати',sec_exp:'Витрати · як здавати',sec_play:'Твій плейбук',sec_team:'Команда · хто що робить',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
+ uk:{modules:'Модулі',sp_today:'Сьогодні',sub_today:'Задачі, Now і перші кроки',sp_home:'Головна',sp_tasks:'Задачі',sp_clients:'Клієнти',sp_projects:'Проєкти',sp_content:'Контент',sp_expenses:'Фінанси',sp_company:'Компанія',sp_people:'Кандидати',sp_plan:'План E-2',sp_playbook:'Playbook',sp_cabinets:'Кабінети',sp_stack:'Стек і плани',ob_head:'Перший день у M5',sec_content:'Контент · куди скидати',sec_exp:'Витрати · як здавати',sec_play:'Твій плейбук',sec_team:'Команда · хто що робить',tools:'Інструменти',files:'Файли',settings:'Налаштування',spaces:'Простори',tw_all:'Уся дошка задач · CRM',sub_settings:'Тумблери видимості: що бачить кожна функція',
   sub_tasks:'Сервіси компанії та план розвитку системи',sub_clients:'Кабінети клієнтів і допродажі',sub_projects:"Як вести об'єкт · навчання JobTread",sub_content:'Зйомка, соцмережі, куди скидати',sub_expenses:'Витрати та чеки',sub_company:'Бек-офіс, ідеї, партнерство',sub_people:'Найм і портал join',sub_plan:'Дорожня карта візи',sub_playbook:'Твоя роль і хто що робить',sub_cabinets:'Кабінет належить функції, а не людині'}
 };
 function TT(k,fb){ var d=L10N[LANG]||{}; return d[k]||fb; }
@@ -548,22 +548,34 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
     /* Карта «функция → её пространства» (28.08, дедупликация): фаундерские разделы
        (стек, кандидаты, back office) сотрудникам не показываем вовсе. */
     var ROLE_SPACES={
-      partner:['clients','projects','content','expenses','company','people','plan','playbook'],
-      director:['clients','projects','content','expenses','people','plan','playbook'],
-      sales:['clients','content','expenses','playbook'],
-      smm:['content','expenses','playbook'],
-      supervisor:['projects','content','expenses','playbook'],
-      designer:['projects','content','expenses','playbook'],
-      pm:['projects','content','expenses','playbook'],
-      team:['projects','content','expenses','playbook']
+      partner:['today','clients','projects','content','expenses','company','people','plan','playbook'],
+      director:['today','clients','projects','content','expenses','people','plan','playbook'],
+      sales:['today','clients','content','expenses','playbook'],
+      smm:['today','content','expenses','playbook'],
+      supervisor:['today','projects','content','expenses','playbook'],
+      designer:['today','projects','content','expenses','playbook'],
+      pm:['today','projects','content','expenses','playbook'],
+      team:['today','projects','content','expenses','playbook']
     };
     var HIDDEN=[];
     if(role!=='founder'){ try{ var vc=JSON.parse(localStorage.getItem('m5_cabcfg')||'{}'); if(vc&&vc[role]&&vc[role].length) HIDDEN=vc[role]; }catch(eVc){} }
     /* Сотрудникам конфиг видимости обновляем в фоне (у фаундера это делает спейс
        «Настройки», поэтому тянем только для остальных — дубль запроса убран 30.08). */
     if(role!=='founder'){ try{ fetch(CRM+'/api/cabinet-config').then(function(r){return r.json()}).then(function(j){ if(j) localStorage.setItem('m5_cabcfg',JSON.stringify(j)); }).catch(function(){}); }catch(eVf){} }
+    /* Odoo-режим (реш. Алекса 02.09): главная = только сетка модулей; Now-карточка,
+       задачи и первые шаги переезжают в модуль «Сегодня». */
+    var wrap0=document.querySelector('.wrap:not(.hbar)');
+    var todaySec=document.createElement('div'); todaySec.id='todaySec';
+    if(wrap0){
+      ['.nowcard','.twidget'].forEach(function(sel){ var e0=wrap0.querySelector(sel); if(e0){
+        if(e0.previousElementSibling&&e0.previousElementSibling.className==='sec') todaySec.appendChild(e0.previousElementSibling);
+        todaySec.appendChild(e0); } });
+      var ob0=wrap0.querySelector(':scope > details.stackbox'); if(ob0) todaySec.appendChild(ob0);
+      wrap0.appendChild(todaySec);
+    }
     var ROUTES=[
       {r:'home',    t:TT('sp_home','Главная'),   ic:'🏠', secs:[]},
+      {r:'today',   t:TT('sp_today','Сегодня'),  ic:'✅', secs:['#todaySec'], sub:TT('sub_today','Задачи, Now и первые шаги')},
       {r:'tasks',   t:TT('sp_stack','Стек и планы'),    ic:'🧩', secs:['#stackSec'], sub:TT('sub_tasks','Сервисы компании и план развития системы'),
         rel:[['Доска задач',CRM+'/tasks'],['Спринт команды','https://m5miami.com/sprint/']]},
       {r:'clients', t:TT('sp_clients','Клиенты'),   ic:'👥', secs:['#clientsSec'], sub:TT('sub_clients','Кабинеты клиентов и допродажи'),
@@ -571,7 +583,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       {r:'projects',t:TT('sp_projects','Проекты'),   ic:'📖', secs:['#kpiSec','#lessonSec'], sub:TT('sub_projects','Как вести объект · обучение JobTread'),
         rel:[['JobTread','https://app.jobtread.com'],['Файлы · объекты',CRM+'/files?b=projects']]},
       {r:'content', t:TT('sp_content','Контент'),   ic:'📸', secs:['#contSec'], sub:TT('sub_content','Съёмка, соцсети, куда скидывать'),
-        rel:[['Файлы · контент',CRM+'/files?b=content']]},
+        rel:[]},
       {r:'expenses',t:TT('sp_expenses','Финансы'),   ic:'💸', secs:['#expSec'], sub:TT('sub_expenses','Расходы и чеки'),
         rel:[['Финансы · категории',CRM+'/expenses'],['Чеки',CRM+'/files?b=receipts']]},
       {r:'company', t:TT('sp_company','Компания'),  ic:'🏢', secs:['#companySec','#ideasSec'], sub:TT('sub_company','Back office, идеи, партнёрство'),
@@ -628,22 +640,59 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       for(var sSum=0;sSum<sums.length;sSum++){
         sums[sSum].textContent=sums[sSum].textContent.replace(/^[^A-Za-zА-Яа-яЁё0-9«"]+/,'');
       }
+      absorbLoose();
       route();
     },0);
+    setTimeout(function(){ absorbLoose(); },1200);
+    /* Odoo-режим: всё, что осталось аккордеоном на верхнем уровне (Company, My stack,
+       My tasks, Partnership…), становится отдельным модулем — на главной только плитки.
+       Вызывается дважды: сразу и после того, как асинхронные филлеры дорисовали секции. */
+    var idxRef=null;
+    function absorbLoose(){
+      try{
+        var kids=wrap.children, loose=[];
+        for(var kx=0;kx<kids.length;kx++){
+          var kd=kids[kx];
+          if(kd.classList.contains('space')||kd.classList.contains('home-el')||kd.classList.contains('sp-index')) continue;
+          if(kd.tagName==='DETAILS'&&kd.classList.contains('stackbox')) loose.push(kd);
+          else if(kd.tagName==='DIV'&&kd.id&&kd.querySelector(':scope > details.stackbox')) loose.push(kd);
+        }
+        for(var lx=0;lx<loose.length;lx++){
+          var box=loose[lx], det=box.tagName==='DETAILS'?box:box.querySelector(':scope > details.stackbox');
+          var sum=det.querySelector('summary'); if(!sum) continue;
+          var sp0=sum.querySelector('span'), raw=(sp0?sp0.textContent:sum.textContent)||'';
+          var mIc=raw.match(/^\s*([^\w\sА-Яа-яЁё«"]+)\s*/); var ic0=mIc?mIc[1]:'▫️';
+          var title=raw.replace(/^[^A-Za-zА-Яа-яЁё0-9«"]+/,'').trim();
+          var hint=(sum.querySelector('.stk-hint')||{}).textContent||'';
+          var rid='m-'+(title.toLowerCase().replace(/[^a-z]+/g,'-').replace(/^-+|-+$/g,'')||('x'+lx)).slice(0,24);
+          if(document.getElementById('sp-'+rid)) rid+='-'+lx;
+          var R2={r:rid,t:title,ic:ic0,secs:[],sub:hint};
+          live.push(R2);
+          var pg3=document.createElement('section'); pg3.className='space'; pg3.id='sp-'+rid;
+          pg3.innerHTML='<div class="crumbs"><a href="#/home">M5 Start</a> / '+esc(title)+'</div>'
+            +'<div class="sp-head"><span class="sp-ic">'+ic0+'</span><div><h1>'+esc(title)+'</h1>'+(hint?'<p>'+esc(hint)+'</p>':'')+'</div></div>'
+            +'<div class="sp-body"></div>';
+          pg3.querySelector('.sp-body').appendChild(box);
+          wrap.appendChild(pg3);
+          if(idxRef){ var tA=document.createElement('a'); tA.href='#/'+rid; tA.innerHTML='<i>'+ic0+'</i><span class="tx"><b>'+esc(title)+'</b><span>'+esc(hint)+'</span></span>'; idxRef.appendChild(tA); }
+        }
+      }catch(eLoose){}
+    }
+    absorbLoose();
     /* главная: элементы верхнего уровня + плитки спейсов для мобилы */
     var homeEls=[];
-    ['.hero2','.nowcard','.twidget'].forEach(function(sel){
+    ['.hero2'].forEach(function(sel){
       var e2=wrap.querySelector(sel); if(e2){ e2.classList.add('home-el'); homeEls.push(e2);
         if(e2.previousElementSibling&&e2.previousElementSibling.className==='sec'){ e2.previousElementSibling.classList.add('home-el'); } }
     });
     var at=wrap.querySelector(':scope > details.stackbox'); if(at) at.classList.add('home-el');
-    var sh=document.createElement('div'); sh.className='sec home-el'; sh.textContent=TT('spaces','Пространства'); wrap.appendChild(sh);
+    var sh=document.createElement('div'); sh.className='sec home-el'; sh.textContent=TT('modules','Модули'); wrap.appendChild(sh);
     var idx=document.createElement('div'); idx.className='sp-index home-el';
     var ih='';
     for(var q=1;q<live.length;q++){
       ih+='<a href="#/'+live[q].r+'"><i>'+live[q].ic+'</i><span class="tx"><b>'+esc(live[q].t)+'</b><span>'+esc(live[q].sub||'')+'</span></span></a>';
     }
-    idx.innerHTML=ih; wrap.appendChild(idx);
+    idx.innerHTML=ih; wrap.appendChild(idx); idxRef=idx;
     /* панель слева: роуты + инструменты */
     var h='<a class="side-logo" href="/champion'+role+'">M<b>5</b><small>START</small></a>'
       +'<div class="side-role"><b>'+esc(cfg.label)+'</b>'
@@ -655,23 +704,8 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       h+='<div class="side-sep">'+TT('sp_cabinets','Кабинеты')+'</div>';
       for(var cb=0;cb<CABS.length;cb++){ h+='<a class="sn'+(CABS[cb][0]===role?' on-cab':'')+'" href="/champion'+CABS[cb][0]+'"><i>'+(CABS[cb][0]==='founder'?'🏠':'👤')+'</i>'+CABS[cb][1]+'</a>'; }
     }
-    for(var n=0;n<live.length;n++){
-      h+='<a class="sn" href="#/'+live[n].r+'" data-r="'+live[n].r+'"><i>'+live[n].ic+'</i>'+esc(live[n].t)+'</a>';
-    }
-    h+='<div class="side-sep">'+TT('tools','Инструменты')+'</div>'
-      +'<a class="sn" href="'+(LINKS.salescrm||CRM)+'" target="_blank" rel="noopener"><i>📇</i>CRM</a>'
-      +'<a class="sn" href="'+(LINKS.files||CRM+'/files')+'" target="_blank" rel="noopener"><i>📁</i>'+TT('files','Файлы')+'</a>';
-    /* инструменты роли — из её плиток; дублирующий грид с главной убран 28.08 */
-    var TICON={jobtread:'🛠',telegram:'✈️',whatsapp:'💬',gcal:'📅',ga4:'📊',clarity:'🎥',permits:'📄',houzz:'🏠',heygen:'🎬',org:'👥'};
-    var TNAME={jobtread:'JobTread',telegram:'Telegram',whatsapp:'WhatsApp',gcal:'Calendar',ga4:'Analytics',clarity:'Clarity',permits:'Permits',houzz:'Houzz',heygen:'HeyGen',org:'People'};
-    var TSKIP={onb:1,files:1,salescrm:1,saleskit:1,legal:1,visaVadim:1,tutorial:1,playbook:1};
-    var TSEEN={};
-    for(var tn=0;tn<cfg.tiles.length;tn++){
-      var tl=cfg.tiles[tn], lk=tl.link;
-      if(!lk||TSKIP[lk]||TSEEN[lk]||!LINKS[lk])continue;
-      TSEEN[lk]=1;
-      h+='<a class="sn" href="'+LINKS[lk]+'" target="_blank" rel="noopener"><i>'+(TICON[lk]||tl.ic||'•')+'</i>'+(TNAME[lk]||esc(tl.k))+'</a>';
-    }
+    /* Odoo-режим: навигация = сетка модулей на главной; в панели только «⌂ Модули» (дубли списка и инструментов убраны 02.09) */
+    h+='<a class="sn side-back" href="#/home"><i>⌂</i>'+TT('modules','Модули')+'</a>';
     h+='<div class="side-foot"><a href="/">m5miami.com</a><span onclick="signout()">Sign out</span></div>';
     var aside=document.createElement('aside');
     aside.className='side'; aside.id='m5side'; aside.innerHTML=h;
@@ -684,6 +718,8 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
       for(var v=0;v<live.length;v++) if(live[v].r===r) ok=true;
       if(!ok) r='home';
       document.body.setAttribute('data-r',r);
+      /* Odoo-режим: страница модуля включается классом .on — единое правило для всех модулей, включая авто */
+      try{ var sps=document.querySelectorAll('.space'); for(var si=0;si<sps.length;si++) sps[si].classList.remove('on'); var cur1=document.getElementById('sp-'+r); if(cur1) cur1.classList.add('on'); }catch(eOn){}
       var links=aside.querySelectorAll('a.sn[data-r]');
       for(var l=0;l<links.length;l++){ links[l].className='sn'+(links[l].getAttribute('data-r')===r?' on':''); }
       try{ var tl=window.m5tabs?window.m5tabs.querySelectorAll('a[data-r]'):[];
@@ -713,10 +749,7 @@ if(TASKFUNC&&!NEWBIE) setTimeout(loadTasks,60);
        появляется полоса с 4 главными разделами роли + «Ещё» на главную. */
     try{
       var tb=document.createElement('nav'); tb.className='mtabs'; var th='';
-      var mt=live.slice(0,5);
-      for(var mi=0;mi<mt.length;mi++){
-        th+='<a href="#/'+mt[mi].r+'" data-r="'+mt[mi].r+'"><i>'+mt[mi].ic+'</i><span>'+esc(mt[mi].t)+'</span></a>';
-      }
+      th+='<a href="#/home" data-r="home"><i>⌂</i><span>'+TT('modules','Модули')+'</span></a>';
       tb.innerHTML=th; document.body.appendChild(tb);
       window.m5tabs=tb;
     }catch(eTb){}
@@ -1046,6 +1079,7 @@ var ROADMAP=[
 (function(){
   try{
     if(preview)return; // в предпросмотре показываем кабинет глазами сотрудника — личные блоки Алекса скрыты
+    if(role!=='founder')return; /* приватные блоки Алекса — только в кабинете фаундера (красная линия §5), даже при OPEN_ACCESS */
     var m=JSON.parse(localStorage.getItem('m5_member')||'null');
     if(OPEN_ACCESS&&!(m&&m.email))m={email:'guest@open'};
     if(!m||!m.email||!window.crypto||!crypto.subtle)return;
@@ -1193,18 +1227,15 @@ var ROADMAP=[
 (function(){
   try{
     var el=document.getElementById('contSec'); if(!el)return;
+    var CRMF='https://crm.m5miami.com/files';
     var op=false; try{op=localStorage.getItem('m5_cont_open')==='1';}catch(e){}
     if(/[?&]open=cont/.test(location.search)) op=true;   // прямая ссылка из закрепа/бота
     var h='<details class="stackbox"'+(op?' open':'')+'><summary><span>📸 '+TT('sec_content','Контент · куда скидывать')+'</span><span class="stk-hint">только через CRM · Файлы</span></summary><div class="stack">';
     h+='<div class="stk-g">Один путь · CRM → Файлы — с телефона и с компьютера</div>';
-    h+='<div class="lsn">Открой <b>crm.m5miami.com/files</b> (плитка «Файлы» в кабинете) → выбери раздел или объект → кнопка загрузки. На телефоне так же: из галереи выбрал кадры → загрузил. Видео любого размера — до 5 ГБ на файл; загрузка идёт кусками и продолжается после обрыва связи, оригинал не сжимается. Не знаешь, куда положить — грузи в «Входящее», я разберу. О любой загрузке я узнаю сам.</div>';
+    h+='<div class="lsn">Нажми <b>«Загрузить фото и видео»</b> ниже → выбери объект → загрузи. На телефоне так же: из галереи выбрал кадры → загрузил. Видео любого размера — до 5 ГБ на файл; загрузка идёт кусками и продолжается после обрыва связи, оригинал не сжимается. Не знаешь, куда положить — грузи в «Входящее», я разберу. О любой загрузке я узнаю сам.</div>';
     h+='<div class="lsn" style="color:#8A8272">Telegram для контента больше не используем: он сжимает фото и не принимает видео больше 20 МБ. Джин в Telegram остаётся для чеков и коротких вопросов.</div>';
-    h+='<a class="stk" href="'+LINKS.projects+'" target="_blank" rel="noopener"><b>🏠 Файлы объектов</b><span>объекты с договором: загрузка прямо со страницы</span></a>';
-    if(role==='director'){
-      h+='<a class="stk" href="'+LINKS.vadimWorks+'" target="_blank" rel="noopener"><b>🧱 Работы Вадима до M5 — твой архив</b><span>прошлые объекты: фото, процесс, видео — для сайта и рекламы</span></a>';
-    }
-    h+='<a class="stk" href="'+LINKS.contentInbox+'" target="_blank" rel="noopener"><b>📥 Входящее — если некогда думать</b><span>общая приёмка: кидай что угодно, разберу</span></a>';
-    h+='<a class="stk" href="'+LINKS.reviews+'" target="_blank" rel="noopener"><b>⭐ Отзывы клиентов</b><span>видео, голосовые, скрины переписок — самое ценное</span></a>';
+    h+='<a class="stk stk-cta" href="'+CRMF+'?b=content&from=cabinet&role='+role+'"><b>📤 Загрузить фото и видео</b><span>загрузчик платформы · до 5 ГБ на файл · с телефона и компьютера · продолжается после обрыва связи</span></a>';
+    h+='<a class="stk" href="'+CRMF+'?b=projects&from=cabinet&role='+role+'"><b>🏠 Файлы объектов</b><span>кадры по объектам с договором: до · процесс · после</span></a>';
     h+='<div class="stk-g" style="margin-top:12px">Как снимать, чтобы кадры годились</div>';
     h+='<div class="lsn">Правило <b>«4 кадра каждый визит»</b>: до · процесс · после · макро-деталь. Вертикально — для рилсов, горизонтально — для сайта. Дневной свет, без вспышки; штукатурку снимай сбоку под углом — так видно рельеф.</div>';
     h+='<div class="lsn" style="color:#8A8272">Стадии «до/процесс/после» никто не выбирает руками — это делаю я.</div>';
@@ -1400,6 +1431,7 @@ var CLIENTHUBS=[
     var OWNERS=['9ee4c44ded143508a8f6b70a94f34606ac5f7f95ac32211472131b694964ef47',
                 '89f6492713f94c1bb2dca64eb38d5ff1cc9a9f4f23b67c896b1d8eb914913322'];
     if(preview)return;
+    if(role!=='founder')return; /* приватные блоки Алекса — только в кабинете фаундера (красная линия §5), даже при OPEN_ACCESS */
     var m=JSON.parse(localStorage.getItem('m5_member')||'null');
     if(OPEN_ACCESS&&!(m&&m.email))m={email:'guest@open'};
     if(!m||!m.email||!window.crypto||!crypto.subtle)return;

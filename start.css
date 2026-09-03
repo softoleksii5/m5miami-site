@@ -468,3 +468,23 @@ body{padding-bottom:62px}
   .fbx{bottom:72px !important;right:12px !important;font-size:10px !important;padding:9px 14px !important}  /* не перекрывать нижние табы */
   table{font-size:12.5px}
 }
+
+/* ── Odoo-режим 02.09 (реш. Алекса): главная = сетка модулей, клик = отдельное пространство ── */
+.sp-index{grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:900px){ .sp-index{grid-template-columns:repeat(4,1fr)} }
+.sp-index a{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 16px 14px;min-height:118px}
+.sp-index i{width:46px;height:46px;min-width:46px;font-size:22px;border-radius:12px;background:#F7F2E9;filter:none}
+.sp-index .tx b{font-size:14px}
+.sp-index .tx span{white-space:normal}
+.side a.side-back{margin-top:6px;font-weight:600;color:var(--ink);border:1px solid var(--line)}
+body[data-r="home"] .side a.side-back{display:none}
+.mtabs{display:none}
+@media(max-width:899px){ body:not([data-r="home"]) .mtabs{display:flex} }
+.stk.stk-cta{background:#20242E;border-color:#20242E;color:#F4EEE4}
+.stk.stk-cta b{color:#F4EEE4}
+.stk.stk-cta span{color:#CFC7B8}
+.stk.stk-cta:hover{background:#2C313D;border-color:#2C313D}
+
+/* модуль показывается классом .on (роутер), правило одно для всех */
+body[data-r] .space.on{display:block}
+body:not([data-r="home"]) .home-el{display:none}
