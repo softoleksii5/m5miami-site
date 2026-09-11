@@ -42,6 +42,26 @@ window.M5_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OW
 /* Реферальная метка: ?ref=<слаг клиента> с личной ссылки в Client Hub. Держим 90 дней,
    подмешиваем в каждый лид — в Telegram-карточке видно «кто привёл» → начисляем $250/$250. */
 try{var _r=(location.search.match(/[?&]ref=([A-Za-z0-9_-]{1,64})/)||[])[1];if(_r)localStorage.setItem('m5_ref',_r+'|'+Date.now())}catch(e){}
+/* Приём заявок → M5 OS (crm.m5miami.com/api/public/leads). Аудит Codex F02/F18, 10.09.2026:
+   «отправлено» показываем ТОЛЬКО после того, как CRM вернула lead_id; submission_id защищает от дублей при повторе;
+   UTM / click id / реферал / страница входа едут в карточку лида. Formsubmit остаётся почтовой копией, Hub — зеркалом. */
+window.M5_LEADS='https://crm.m5miami.com/api/public/leads';
+window.m5attr=function(){var a={};try{var q=location.search,ks=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','ttclid'],cur={},has=false;
+  ks.forEach(function(k){var m=q.match(new RegExp('[?&]'+k+'=([^&#]{1,200})'));if(m){cur[k]=decodeURIComponent(m[1]);has=true}});
+  var first=null;try{first=JSON.parse(localStorage.getItem('m5_attr')||'null')}catch(e){}
+  if(!first){first={landing_path:location.pathname+(location.search||''),first_touch_at:new Date().toISOString(),referrer:(document.referrer||'').slice(0,200)};ks.forEach(function(k){if(cur[k])first[k]=cur[k]});try{localStorage.setItem('m5_attr',JSON.stringify(first))}catch(e){}}
+  a=Object.assign({},first);
+  if(has){a.last_utm_source=cur.utm_source||'';a.last_utm_medium=cur.utm_medium||'';a.last_utm_campaign=cur.utm_campaign||'';a.last_landing_path=location.pathname}
+  var r=(localStorage.getItem('m5_ref')||'').split('|');if(r[0]&&Date.now()-(+r[1]||0)<7776e6)a.ref=r[0];
+  Object.keys(a).forEach(function(k){if(!a[k])delete a[k]});}catch(e){}return a};
+try{m5attr()}catch(e){}
+window.m5uuid=function(){try{if(crypto&&crypto.randomUUID)return crypto.randomUUID()}catch(e){}return 'x'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)+Math.random().toString(36).slice(2,6)};
+/* m5lead(payload) → Promise<{ok,lead_id,status}>. Никогда не бросает: сетевая ошибка = {ok:false}. */
+window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p.attribution=m5attr();p.page=location.pathname;
+  p.consent={text:'By submitting, you agree to be contacted about your project.',at:new Date().toISOString(),page:location.pathname};
+  return fetch(M5_LEADS,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p),keepalive:true})
+    .then(function(r){return r.json().then(function(j){return {ok:!!(j&&j.ok),lead_id:j&&j.lead_id,created:j&&j.created,status:r.status,fields:j&&j.fields}}).catch(function(){return {ok:false,status:r.status}})})
+    .catch(function(){return {ok:false,status:0}})};
 window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)return;p=p||{};try{var q=(localStorage.getItem('m5_ref')||'').split('|');if(q[0]&&Date.now()-(+q[1]||0)<7776e6){p.details=(p.details?p.details+' · ':'')+'REF:'+q[0]}}catch(e){}var s=JSON.stringify(p);if(navigator.sendBeacon){navigator.sendBeacon(M5_HOOK,s)}else{fetch(M5_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s})}}catch(e){}}</script>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
 
@@ -542,7 +562,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
         <p class="lead2" data-i18n="plaster.lead">Venetian plaster, microcement and limewash applied by our own trained team — not a random subcontractor. We keep a full sample library and our own showroom, so you see and touch the exact texture before we start.</p>
         <ul class="plaster-list">
           <li data-i18n="plaster.li1">Venetian plaster · microcement · limewash · travertine effects</li>
-          <li data-i18n="plaster.li2">Own sample library &amp; Wynwood showroom</li>
+          <li data-i18n="plaster.li2">Own sample library &amp; showroom at Miami Ironside (opening Nov 2026)</li>
           <li data-i18n="plaster.li3">Feature walls, ceilings, wet areas &amp; full interiors</li>
         </ul>
         <div class="plaster-cta">
@@ -579,7 +599,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       <a class="case" href="projects/sunny-isles-master-bath.html" data-case="3" data-bg="img/case3_bath.webp"><span class="tag" data-i18n="case3.tag">BATHROOM</span><div class="case-cap"><h4 data-i18n="case3.h4">Sunny Isles Master Bath</h4><div class="case-meta"><span>195 SQ FT</span><span data-i18n="case3.m2">6 WEEKS</span></div></div></a>
       <a class="case" href="projects/coral-gables-villa.html" data-case="4" data-bg="img/case4_villa.webp"><span class="tag" data-i18n="case4.tag">FULL VILLA</span><div class="case-cap"><h4 data-i18n="case4.h4">Coral Gables Villa</h4><div class="case-meta"><span>2,580 SQ FT</span><span data-i18n="case4.m2">16 WEEKS</span></div></div></a>
       <a class="case" href="projects/south-beach-loft.html" data-case="5" data-bg="img/case5_loft.webp"><span class="tag" data-i18n="case5.tag">FIT-OUT</span><div class="case-cap"><h4 data-i18n="case5.h4">South Beach Loft</h4><div class="case-meta"><span>1,030 SQ FT</span><span data-i18n="case5.m2">10 WEEKS</span></div></div></a>
-      <a class="case" href="projects/wynwood-showroom.html" data-case="6" data-bg="img/case6_showroom.webp"><span class="tag" data-i18n="case6.tag">OUR SHOWROOM</span><div class="case-cap"><h4 data-i18n="case6.h4">Wynwood Studio Showroom</h4><div class="case-meta"><span data-i18n="case6.m1">OUR OWN SPACE</span><span data-i18n="case6.m2">COME SEE IT</span></div></div></a>
+      <a class="case" href="projects/wynwood-showroom.html" data-case="6" data-bg="img/case6_showroom.webp"><span class="tag" data-i18n="case6.tag">OUR SHOWROOM</span><div class="case-cap"><h4 data-i18n="case6.h4">M5 Showroom · Miami Ironside</h4><div class="case-meta"><span data-i18n="case6.m1">OUR OWN SPACE</span><span data-i18n="case6.m2">COME SEE IT</span></div></div></a>
     </div>
   </div>
 </section>
@@ -736,7 +756,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
         <button class="rev-dot" data-i="2" aria-label="3"></button>
       </div>
     </div>
-    <div class="rev-score"><span data-i18n="rev.score1">EXAMPLE LAYOUT · REAL GOOGLE REVIEWS FROM LAUNCH</span><span data-i18n="rev.score2">★ 5.0 GOOGLE</span></div>
+    <div class="rev-score"><span data-i18n="rev.score1">EXAMPLE LAYOUT · REAL CLIENT REVIEWS WILL APPEAR HERE AFTER LAUNCH</span></div>
   </div>
 </section>
 
@@ -761,7 +781,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       <h2 style="margin-top:14px" data-i18n="lead.h2">Tell us about your space.</h2>
       <div class="lead-feats"><span data-i18n="lead.f1">FREE CONSULTATION</span><span data-i18n="lead.f2">SITE VISIT INCLUDED</span><span data-i18n="lead.f3">REPLY WITHIN 1 HOUR</span></div>
     </div>
-    <form class="form" id="leadForm" action="https://formsubmit.co/fa2b356d28577b1742e22a611a7e847a" method="POST" onsubmit="if(window.m5track)m5track('lead_submit');if(window.m5hook)m5hook({type:'lead',name:this.name.value,phone:this.phone.value,details:(this.neighborhood.value+' '+this.budget.value).trim(),source:'main-form'})">
+    <form class="form" id="leadForm" action="https://formsubmit.co/fa2b356d28577b1742e22a611a7e847a" method="POST" onsubmit="return mainSubmit(event)">
       <input type="hidden" name="_cc" value="vlad@m5miami.com,vadim@m5miami.com">
       <input type="hidden" name="_subject" value="New lead — m5miami.com">
       <input type="hidden" name="_template" value="table">
@@ -774,10 +794,27 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       <select name="budget"><option value="" data-i18n="form.budget">Project budget</option><option>$50–100K</option><option>$100–250K</option><option>$250–500K</option><option>$500K+</option><option data-i18n="form.b4">Not sure yet</option></select>
       <button class="btn btn-ink" type="submit" data-i18n="form.btn">Get my free estimate</button>
       <div class="qz-note" style="margin-top:10px"><span data-i18n="form.consent">By submitting, you agree to be contacted about your project.</span> <a href="/privacy/" style="color:inherit;text-decoration:underline" data-i18n="form.privacy">Privacy Policy</a></div>
+      <p id="formErr" style="display:none;font-size:14px;margin-top:14px;color:#b3261e" data-i18n="form.err">Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.</p>
       <p id="formOk" style="display:none;font-size:15px;margin-top:14px;color:#2e7d4f" data-i18n="form.ok">Thank you — we received your request and will reply within one business hour (9am–6pm ET).</p>
       <p id="formDemo" style="display:none;font-size:13.5px;margin-top:6px"><a href="/client/?p=brickell-demo" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px" onclick="if(window.m5track)m5track('demo_hub_click',{source:'thankyou'})">See how you’ll track your renovation — live demo →</a></p>
     </form>
-    <script>if(location.search.indexOf('sent=1')>-1){document.getElementById('formOk').style.display='block';document.getElementById('formDemo').style.display='block';if(window.m5track)m5track('lead_submit_confirmed');}</script>
+    <script>if(location.search.indexOf('sent=1')>-1){document.getElementById('formOk').style.display='block';document.getElementById('formDemo').style.display='block';if(window.m5track)m5track('lead_submit_confirmed');}
+    var MAIN_SID=null;
+    function mainSubmit(e){e.preventDefault();var f=e.target,btn=f.querySelector('button[type=submit]');
+      if(f._honey&&f._honey.value)return false;
+      var name=f.name.value.trim(),phone=f.phone.value.trim(),details=(f.neighborhood.value+' '+f.budget.value).trim();
+      btn.disabled=true;btn.style.opacity='.6';document.getElementById('formErr').style.display='none';
+      MAIN_SID=MAIN_SID||m5uuid();
+      m5lead({submission_id:MAIN_SID,intent:'lead',name:name,phone:phone,details:details,lang:(document.documentElement.lang||'en').slice(0,2),service:'renovation',form_source:'main-form'}).then(function(r){
+        btn.disabled=false;btn.style.opacity='';
+        if(!r.ok){document.getElementById('formErr').style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status});return;}
+        MAIN_SID=null;
+        try{fetch(f.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,phone:phone,neighborhood:f.neighborhood.value,budget:f.budget.value,source:'main-form',lead_id:r.lead_id,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com',_template:'table',_captcha:'false'})}).catch(function(){})}catch(_){}
+        if(window.m5hook)m5hook({type:'lead',name:name,phone:phone,details:details,source:'main-form',lead_id:r.lead_id});
+        if(window.m5track){m5track('lead_submit');if(r.created)m5track('lead_submit_confirmed',{lead_id:r.lead_id});}
+        f.reset();document.getElementById('formOk').style.display='block';document.getElementById('formDemo').style.display='block';
+      });
+      return false;}</script>
   </div>
 </section>
 
@@ -811,6 +848,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
     <form class="sm-form" onsubmit="return smSubmit(event)">
       <input type="text" id="smName" placeholder="" required>
       <input type="tel" id="smPhone" placeholder="" required>
+      <div id="smErr" style="display:none;font-size:13px;color:#b3261e;margin:0 0 8px"></div>
       <div class="sm-actions">
         <button class="btn btn-ink" type="submit" id="smSend"></button>
         <a class="btn btn-wa2" id="smWa" target="_blank" rel="noopener"></a>
@@ -835,7 +873,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       </div>
       <div><h5 data-i18n="foot.h1">Main pages</h5><ul><li><a href="/" data-i18n="foot.l1">Home</a></li><li><a href="#about" data-i18n="foot.l2">About us</a></li><li><a href="#projects" data-i18n="foot.l3">Portfolio</a></li><li><a href="#contact" data-i18n="foot.l4">Contact</a></li></ul></div>
       <div><h5 data-i18n="foot.h2">Services</h5><ul><li><a href="#services" data-i18n="svc1.h3">Interior Design &amp; 3D</a></li><li><a href="#services" data-i18n="svc2.h3">Turnkey Renovation</a></li><li><a href="#plaster" data-i18n="svc3.h3">Decorative Plaster</a></li><li><a href="#services" data-i18n="svc4.h3">Construction &amp; Villas</a></li><li><a href="#services" data-i18n="svc5.h3">Technical Supervision</a></li></ul></div>
-      <div><h5 data-i18n="foot.h3">Contact us</h5><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp +1 786 407 4441</a></li><li>Wynwood, Miami, FL</li><li><a href="/privacy/" data-i18n="foot.privacy">Privacy Policy</a></li></ul></div>
+      <div><h5 data-i18n="foot.h3">Contact us</h5><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp +1 786 407 4441</a></li><li>7636 NE 4th Ct #111, Miami, FL 33138 · Miami Ironside</li><li><a href="/privacy/" data-i18n="foot.privacy">Privacy Policy</a></li></ul></div>
     </div>
     <div class="f-bottom">
       <span data-i18n="foot.copy">© M5 · 2026 · Construction executed with licensed &amp; insured Florida contractor partners</span>
@@ -926,7 +964,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "hero.strip1":"FULL CYCLE STUDIO","hero.strip2":"DESIGN · BUILD · DEVELOP","hero.strip3":"ENGLISH · SPANISH · UKRAINIAN",
       "stats.label":"Who we are",
       "stats.lead":"An international studio, now building in Miami. One team stays with you from first sketch to final handover.",
-      "stats.s1":"years of experience","stats.s2":"projects delivered in the USA","stats.s3":"written warranty on every build","stats.s4":"permits pulled · insured partners","form.ok":"Thank you — we received your request and will reply within one business hour (9am–6pm ET).","rev.client":"Client","svc1.price":"from $6 / sq ft","svc2.price":"from $145 / sq ft","svc3.price":"from $18 / sq ft · projects from $10K","svc4.price":"from $390 / sq ft","svc5.price":"from 4% of budget",
+      "stats.s1":"years of experience","stats.s2":"projects delivered in the USA","stats.s3":"written warranty on every build","stats.s4":"permits pulled · insured partners","form.ok":"Thank you — we received your request and will reply within one business hour (9am–6pm ET).","form.err":"Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.","rev.client":"Client","svc1.price":"from $6 / sq ft","svc2.price":"from $145 / sq ft","svc3.price":"from $18 / sq ft · projects from $10K","svc4.price":"from $390 / sq ft","svc5.price":"from 4% of budget",
       "svc.label":"M5 Services","svc.h2":"What we do",
       "svc1.h3":"Interior Design & 3D","svc1.li1":"Concept, layouts & space planning","svc1.li2":"Photoreal 3D visualization","svc1.li3":"Materials, FF&E & documentation",
       "svc2.h3":"Turnkey Renovation","svc2.li1":"Demolition to décor — one contract","svc2.li2":"Fixed-scope pricing, no surprise costs","svc2.li3":"Weekly photo updates through handover",
@@ -937,7 +975,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "plaster.label":"Our signature","plaster.h2":"Decorative plaster, done by our own masters","plaster.flag":"M5 IN-HOUSE MASTER",
       "plaster.h2b":"Architectural surfaces,<br>not just a finish.",
       "plaster.lead":"Venetian plaster, microcement and limewash applied by our own trained team — not a random subcontractor. We keep a full sample library and our own showroom, so you see and touch the exact texture before we start.",
-      "plaster.li1":"Venetian plaster · microcement · limewash · travertine effects","plaster.li2":"Own sample library & Wynwood showroom","plaster.li3":"Feature walls, ceilings, wet areas & full interiors",
+      "plaster.li1":"Venetian plaster · microcement · limewash · travertine effects","plaster.li2":"Own sample library & showroom at Miami Ironside (opening Nov 2026)","plaster.li3":"Feature walls, ceilings, wet areas & full interiors",
       "plaster.ctab":"Free on-site measurement & estimate","plaster.ctas":"We come to you, measure the space and prepare a detailed quote — at no cost.","plaster.ctabtn":"Book a free estimate","plaster.tex":"Real textures from our sample library",
       "proj.label":"Selected work","proj.h2":"Recent Miami projects","proj.viewall":"View all projects",
       "qz.open":"Get my instant estimate","qz.title":"Instant Estimate","qz.sub":"60 seconds · no obligation",
@@ -951,7 +989,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case3.tag":"BATHROOM","case3.h4":"Sunny Isles Master Bath","case3.m2":"6 WEEKS",
       "case4.tag":"FULL VILLA","case4.h4":"Coral Gables Villa","case4.m2":"16 WEEKS",
       "case5.tag":"FIT-OUT","case5.h4":"South Beach Loft","case5.m2":"10 WEEKS",
-      "case6.tag":"OUR SHOWROOM","case6.h4":"Wynwood Studio Showroom","case6.m1":"OUR OWN SPACE","case6.m2":"COME SEE IT",
+      "case6.tag":"OUR SHOWROOM","case6.h4":"M5 Showroom · Miami Ironside","case6.m1":"OPENING NOV 2026","case6.m2":"BY APPOINTMENT",
       "cta.h2":"Get your estimate<br>in 48 hours.","cta.s1":"FREE ON-SITE CONSULTATION","cta.s2":"RESPONSE WITHIN 1 HOUR","cta.btn1":"Get a quote","cta.btn2":"WhatsApp us","cta.btn3":"Book a free visit",
       "money.label":"Transparency","money.h2":"How we protect your money",
       "money.m1":"Itemized estimate before the contract","money.m2":"Payments by milestone, no large upfront","money.m3":"Change orders signed by you first","money.m4":"Lien releases from every subcontractor","money.m5":"Contract & insurance on request","money.btn":"1-Year Written Warranty",
@@ -973,7 +1011,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "rev1.p":"The estimate we signed stayed unchanged to the very end. Everything was done beautifully, down to the smallest detail.","rev1.s":"Brickell · 2BR renovation",
       "rev2.p":"One team from design to handover. Weekly photo updates and no surprise costs — exactly what they promised.","rev2.s":"Coral Gables · full villa",
       "rev3.p":"The decorative plaster is stunning. They handled the condo board and permits so we didn't have to worry about anything.","rev3.s":"Edgewater · kitchen & living",
-      "rev.score1":"EXAMPLE LAYOUT · REAL GOOGLE REVIEWS FROM LAUNCH","rev.score2":"★ 5.0 GOOGLE",
+      "rev.score1":"EXAMPLE LAYOUT · REAL CLIENT REVIEWS WILL APPEAR HERE AFTER LAUNCH",
       "faq.label":"FAQ","faq.h2":"Questions we hear first",
       "faq1.q":"Do you subcontract the work?","faq1.a":"Design, project management and supervision are in-house. Construction runs with our licensed Florida GC partner and our own vetted crews. One team answers for the result.",
       "faq2.q":"Who handles permits and the condo board?","faq2.a":"We do. Miami-Dade permits, COI for your building, elevator bookings and noise-hour rules are part of our process — not your problem.",
@@ -996,7 +1034,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "hero.strip1":"ESTUDIO DE CICLO COMPLETO","hero.strip2":"DISEÑO · CONSTRUCCIÓN · DESARROLLO","hero.strip3":"INGLÉS · ESPAÑOL · UCRANIANO",
       "stats.label":"Quiénes somos",
       "stats.lead":"Un estudio internacional, ahora construyendo en Miami — un solo equipo responsable, del primer boceto a la entrega final.",
-      "stats.s1":"años de experiencia","stats.s2":"proyectos entregados en EE. UU.","stats.s3":"de garantía escrita en cada obra","stats.s4":"con permisos · socios asegurados","form.ok":"Gracias — recibimos su solicitud y responderemos dentro de una hora laboral (9am–6pm ET).","rev.client":"Cliente","svc1.price":"desde $6 / sq ft","svc2.price":"desde $145 / sq ft","svc3.price":"desde $18 / sq ft · proyectos desde $10K","svc4.price":"desde $390 / sq ft","svc5.price":"desde 4% del presupuesto",
+      "stats.s1":"años de experiencia","stats.s2":"proyectos entregados en EE. UU.","stats.s3":"de garantía escrita en cada obra","stats.s4":"con permisos · socios asegurados","form.ok":"Gracias — recibimos su solicitud y responderemos dentro de una hora laboral (9am–6pm ET).","form.err":"Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp: +1 786 407 4441.","rev.client":"Cliente","svc1.price":"desde $6 / sq ft","svc2.price":"desde $145 / sq ft","svc3.price":"desde $18 / sq ft · proyectos desde $10K","svc4.price":"desde $390 / sq ft","svc5.price":"desde 4% del presupuesto",
       "svc.label":"Servicios M5","svc.h2":"Qué hacemos",
       "svc1.h3":"Diseño interior y 3D","svc1.li1":"Concepto, distribución y planificación del espacio","svc1.li2":"Visualización 3D fotorrealista","svc1.li3":"Materiales, mobiliario y documentación",
       "svc2.h3":"Reforma llave en mano","svc2.li1":"De la demolición al detalle — un solo contrato","svc2.li2":"Precio cerrado, sin costes sorpresa","svc2.li3":"Fotos de avance cada semana hasta la entrega",
@@ -1007,7 +1045,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "plaster.label":"Nuestra especialidad","plaster.h2":"Estuco decorativo, aplicado por nuestros propios maestros","plaster.flag":"MAESTRO PROPIO M5",
       "plaster.h2b":"Superficies arquitectónicas,<br>no un simple acabado.",
       "plaster.lead":"Estuco veneciano, microcemento y cal aplicados por nuestro propio equipo formado — no un subcontratista cualquiera. Mantenemos un muestrario completo y showroom propio, para que vea y toque la textura exacta antes de empezar.",
-      "plaster.li1":"Estuco veneciano · microcemento · cal · efecto travertino","plaster.li2":"Muestrario propio y showroom en Wynwood","plaster.li3":"Paredes destacadas, techos, zonas húmedas e interiores completos",
+      "plaster.li1":"Estuco veneciano · microcemento · cal · efecto travertino","plaster.li2":"Muestrario propio y showroom en Miami Ironside (apertura nov 2026)","plaster.li3":"Paredes destacadas, techos, zonas húmedas e interiores completos",
       "plaster.ctab":"Medición y presupuesto gratis a domicilio","plaster.ctas":"Vamos a su espacio, tomamos medidas y preparamos un presupuesto detallado — sin coste.","plaster.ctabtn":"Reservar presupuesto gratis","plaster.tex":"Texturas reales de nuestra biblioteca de muestras",
       "proj.label":"Trabajos seleccionados","proj.h2":"Proyectos recientes en Miami","proj.viewall":"Ver todos los proyectos",
       "qz.open":"Estimación instantánea","qz.title":"Estimación instantánea","qz.sub":"60 segundos · sin compromiso",
@@ -1021,7 +1059,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case3.tag":"BAÑO","case3.h4":"Baño principal en Sunny Isles","case3.m2":"6 SEMANAS",
       "case4.tag":"VILLA COMPLETA","case4.h4":"Villa en Coral Gables","case4.m2":"16 SEMANAS",
       "case5.tag":"FIT-OUT","case5.h4":"Loft en South Beach","case5.m2":"10 SEMANAS",
-      "case6.tag":"NUESTRO SHOWROOM","case6.h4":"Showroom del estudio en Wynwood","case6.m1":"ESPACIO PROPIO","case6.m2":"VENGA A VERLO",
+      "case6.tag":"NUESTRO SHOWROOM","case6.h4":"Showroom M5 · Miami Ironside","case6.m1":"APERTURA NOV 2026","case6.m2":"CON CITA PREVIA",
       "cta.h2":"Reciba su presupuesto<br>en 48 horas.","cta.s1":"CONSULTA GRATUITA A DOMICILIO","cta.s2":"RESPUESTA EN 1 HORA","cta.btn1":"Pedir presupuesto","cta.btn2":"Escríbanos por WhatsApp","cta.btn3":"Reservar visita gratis",
       "money.label":"Transparencia","money.h2":"Cómo protegemos su dinero",
       "money.m1":"Presupuesto detallado antes del contrato","money.m2":"Pagos por hitos, sin grandes anticipos","money.m3":"Los cambios los firma usted primero","money.m4":"Renuncia de gravamen de cada subcontratista","money.m5":"Contrato y seguro a petición","money.btn":"Garantía escrita de 1 año",
@@ -1043,7 +1081,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "rev1.p":"El presupuesto que firmamos se mantuvo sin cambios hasta el final. Todo quedó precioso, hasta el más mínimo detalle.","rev1.s":"Brickell · reforma de 2 dorm.",
       "rev2.p":"Un solo equipo del diseño a la entrega. Fotos de avance cada semana y sin costes sorpresa — justo lo que prometieron.","rev2.s":"Coral Gables · villa completa",
       "rev3.p":"El estuco decorativo es espectacular. Se encargaron de la junta del condominio y de los permisos para que no tuviéramos que preocuparnos por nada.","rev3.s":"Edgewater · cocina y salón",
-      "rev.score1":"DISEÑO DE EJEMPLO · RESEÑAS REALES DE GOOGLE TRAS EL LANZAMIENTO","rev.score2":"★ 5.0 GOOGLE",
+      "rev.score1":"DISEÑO DE EJEMPLO · AQUÍ APARECERÁN RESEÑAS REALES DE CLIENTES TRAS EL LANZAMIENTO",
       "faq.label":"FAQ","faq.h2":"Preguntas que nos hacen primero",
       "faq1.q":"¿Subcontratan el trabajo?","faq1.a":"El diseño, la gestión de proyecto y la supervisión son propios. La construcción se ejecuta con nuestro GC de Florida con licencia y nuestras cuadrillas de confianza — un solo equipo responsable del resultado.",
       "faq2.q":"¿Quién se encarga de los permisos y de la junta del condominio?","faq2.a":"Nosotros. Los permisos de Miami-Dade, el COI de su edificio, las reservas de ascensor y los horarios de ruido son parte de nuestro proceso — no su problema.",
@@ -1066,7 +1104,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "hero.strip1":"СТУДІЯ ПОВНОГО ЦИКЛУ","hero.strip2":"ДИЗАЙН · БУДІВНИЦТВО · РОЗВИТОК","hero.strip3":"АНГЛІЙСЬКА · ІСПАНСЬКА · УКРАЇНСЬКА",
       "stats.label":"Хто ми",
       "stats.lead":"Міжнародна студія, яка тепер будує в Маямі — одна відповідальна команда від першого ескізу до фінальної здачі.",
-      "stats.s1":"років досвіду","stats.s2":"проєктів здано в США","stats.s3":"письмова гарантія на кожен об'єкт","stats.s4":"з дозволами · застраховані підрядники","form.ok":"Дякуємо — ми отримали вашу заявку і відповімо протягом робочої години (9:00–18:00 ET).","rev.client":"Клієнт","svc1.price":"від $6 / sq ft","svc2.price":"від $145 / sq ft","svc3.price":"від $18 / sq ft · проєкти від $10K","svc4.price":"від $390 / sq ft","svc5.price":"від 4% бюджету",
+      "stats.s1":"років досвіду","stats.s2":"проєктів здано в США","stats.s3":"письмова гарантія на кожен об'єкт","stats.s4":"з дозволами · застраховані підрядники","form.ok":"Дякуємо — ми отримали вашу заявку і відповімо протягом робочої години (9:00–18:00 ET).","form.err":"Заявку ще не підтверджено — спробуйте ще раз або напишіть у WhatsApp: +1 786 407 4441.","rev.client":"Клієнт","svc1.price":"від $6 / sq ft","svc2.price":"від $145 / sq ft","svc3.price":"від $18 / sq ft · проєкти від $10K","svc4.price":"від $390 / sq ft","svc5.price":"від 4% бюджету",
       "svc.label":"Послуги M5","svc.h2":"Що ми робимо",
       "svc1.h3":"Дизайн інтер'єру та 3D","svc1.li1":"Концепція, планування та зонування","svc1.li2":"Фотореалістична 3D-візуалізація","svc1.li3":"Матеріали, меблі, обладнання та документація",
       "svc2.h3":"Ремонт під ключ","svc2.li1":"Від демонтажу до декору — один договір","svc2.li2":"Фіксована ціна без несподіваних витрат","svc2.li3":"Щотижневі фотозвіти аж до здачі",
@@ -1077,7 +1115,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "plaster.label":"Наша фішка","plaster.h2":"Декоративна штукатурка від наших власних майстрів","plaster.flag":"ВЛАСНИЙ МАЙСТЕР M5",
       "plaster.h2b":"Архітектурні поверхні,<br>а не просто оздоблення.",
       "plaster.lead":"Венеційська штукатурка, мікроцемент і вапно наносить наша власна навчена команда — а не випадковий субпідрядник. Ми маємо повну бібліотеку зразків і власний шоурум, тож ви бачите й торкаєтеся точної текстури ще до старту.",
-      "plaster.li1":"Венеційська штукатурка · мікроцемент · вапно · ефект травертину","plaster.li2":"Власна бібліотека зразків і шоурум у Wynwood","plaster.li3":"Акцентні стіни, стелі, вологі зони та інтер'єри повністю",
+      "plaster.li1":"Венеційська штукатурка · мікроцемент · вапно · ефект травертину","plaster.li2":"Власна бібліотека зразків і шоурум у Miami Ironside (відкриття лист. 2026)","plaster.li3":"Акцентні стіни, стелі, вологі зони та інтер'єри повністю",
       "plaster.ctab":"Безкоштовний замір і кошторис на об'єкті","plaster.ctas":"Приїдемо до вас, зробимо заміри й підготуємо докладний кошторис — безкоштовно.","plaster.ctabtn":"Замовити безкоштовний кошторис","plaster.tex":"Реальні фактури з нашої бібліотеки зразків",
       "proj.label":"Вибрані роботи","proj.h2":"Нещодавні проєкти в Маямі","proj.viewall":"Усі проєкти",
       "qz.open":"Миттєвий розрахунок","qz.title":"Миттєвий розрахунок","qz.sub":"60 секунд · без зобовʼязань",
@@ -1091,7 +1129,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case3.tag":"ВАННА","case3.h4":"Ванна кімната, Sunny Isles","case3.m2":"6 ТИЖНІВ",
       "case4.tag":"ВІЛЛА ПІД КЛЮЧ","case4.h4":"Вілла, Coral Gables","case4.m2":"16 ТИЖНІВ",
       "case5.tag":"FIT-OUT","case5.h4":"Лофт, South Beach","case5.m2":"10 ТИЖНІВ",
-      "case6.tag":"НАШ ШОУРУМ","case6.h4":"Шоурум студії, Wynwood","case6.m1":"ВЛАСНИЙ ПРОСТІР","case6.m2":"ПРИХОДЬТЕ ПОДИВИТИСЬ",
+      "case6.tag":"НАШ ШОУРУМ","case6.h4":"Шоурум M5 · Miami Ironside","case6.m1":"ВІДКРИТТЯ ЛИСТ. 2026","case6.m2":"ЗА ЗАПИСОМ",
       "cta.h2":"Отримайте кошторис<br>за 48 годин.","cta.s1":"БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ НА ОБ'ЄКТІ","cta.s2":"ВІДПОВІДЬ ПРОТЯГОМ 1 ГОДИНИ","cta.btn1":"Отримати кошторис","cta.btn2":"Напишіть у WhatsApp","cta.btn3":"Записатись на візит",
       "money.label":"Прозорість","money.h2":"Як ми захищаємо ваші гроші",
       "money.m1":"Деталізований кошторис до підписання договору","money.m2":"Оплата за етапами, без великих авансів","money.m3":"Зміни спершу підписуєте ви","money.m4":"Відмова від застави від кожного субпідрядника","money.m5":"Договір і страховка на запит","money.btn":"Письмова гарантія 1 рік",
@@ -1113,7 +1151,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "rev1.p":"Кошторис, який ми підписали, лишився незмінним до самого кінця. Усе зробили красиво, до найменшої деталі.","rev1.s":"Brickell · ремонт 2 спальні",
       "rev2.p":"Одна команда від дизайну до здачі. Щотижневі фотозвіти й жодних несподіваних витрат — саме те, що обіцяли.","rev2.s":"Coral Gables · вілла під ключ",
       "rev3.p":"Декоративна штукатурка приголомшлива. Вони владнали раду кондомініуму й дозволи, тож нам не довелося ні про що хвилюватися.","rev3.s":"Edgewater · кухня та вітальня",
-      "rev.score1":"ПРИКЛАД МАКЕТА · СПРАВЖНІ GOOGLE-ВІДГУКИ ПІСЛЯ ЗАПУСКУ","rev.score2":"★ 5.0 GOOGLE",
+      "rev.score1":"ПРИКЛАД МАКЕТА · СПРАВЖНІ ВІДГУКИ КЛІЄНТІВ З'ЯВЛЯТЬСЯ ТУТ ПІСЛЯ ЗАПУСКУ",
       "faq.label":"FAQ","faq.h2":"Питання, які ставлять першими",
       "faq1.q":"Ви віддаєте роботу на субпідряд?","faq1.a":"Дизайн, проєкт-менеджмент і нагляд — власні. Будівництво веде наш ліцензований GC-партнер у Флориді та наші перевірені бригади — одна команда, відповідальна за результат.",
       "faq2.q":"Хто займається дозволами й радою кондомініуму?","faq2.a":"Ми. Дозволи Miami-Dade, COI для вашого будинку, бронювання ліфта й години тиші — частина нашого процесу, а не ваш клопіт.",
@@ -1131,14 +1169,14 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "nav.faq":"FAQ","nav.quote":"РАССЧИТАТЬ","hero.badge":"ЛИЦЕНЗИРОВАННЫЕ И ЗАСТРАХОВАННЫЕ ПАРТНЁРЫ · ПЕРМИТЫ MIAMI-DADE","hero.h1":"Проектируем, строим и ремонтируем дома в Майами.","hero.sub":"Дизайн интерьера · ремонт под ключ · декоративная штукатурка · fit-out. Одна команда проектирует, строит и отвечает за результат.",
       "hero.cta1":"Рассчитать проект","hero.cta2":"Наши работы","hero.strip1":"СТУДИЯ ПОЛНОГО ЦИКЛА","hero.strip2":"DESIGN · BUILD · DEVELOP","hero.strip3":"АНГЛИЙСКИЙ · ИСПАНСКИЙ · РУССКИЙ",
       "stats.label":"Кто мы","stats.lead":"Международная студия — теперь строим в Майами. Одна команда с вами от первого эскиза до финальной сдачи.","stats.s1":"лет опыта","stats.s2":"проектов сдано в США","stats.s3":"письменная гарантия на каждый объект",
-      "stats.s4":"пермиты · застрахованные подрядчики","form.ok":"Спасибо — мы получили вашу заявку и ответим в течение рабочего часа (9:00–18:00 ET).","rev.client":"Клиент","svc1.price":"от $6 / sq ft","svc2.price":"от $145 / sq ft",
+      "stats.s4":"пермиты · застрахованные подрядчики","form.ok":"Спасибо — мы получили вашу заявку и ответим в течение рабочего часа (9:00–18:00 ET).","form.err":"Заявка пока не подтверждена — попробуйте ещё раз или напишите в WhatsApp: +1 786 407 4441.","rev.client":"Клиент","svc1.price":"от $6 / sq ft","svc2.price":"от $145 / sq ft",
       "svc3.price":"от $18 / sq ft · проекты от $10K","svc4.price":"от $390 / sq ft","svc5.price":"от 4% бюджета","svc.label":"Услуги M5","svc.h2":"Что мы делаем",
       "svc1.h3":"Дизайн интерьера и 3D","svc1.li1":"Концепция, планировки и зонирование","svc1.li2":"Фотореалистичная 3D-визуализация","svc1.li3":"Материалы, комплектация и документация","svc2.h3":"Ремонт под ключ",
       "svc2.li1":"От демонтажа до декора — один договор","svc2.li2":"Фиксированная смета без сюрпризов","svc2.li3":"Еженедельные фотоотчёты до самой сдачи","svc.sig":"SIGNATURE","svc3.h3":"Декоративная штукатурка",
       "svc3.li1":"Венецианка · микроцемент · lime-wash","svc3.li2":"Своя библиотека образцов и шоурум","svc3.li3":"Архитектурные поверхности, а не просто отделка","svc4.h3":"Строительство и виллы","svc4.li1":"Полный цикл с лицензированным GC Флориды",
       "svc4.li2":"Пермиты и ураганные стандарты HVHZ","svc4.li3":"Дома и виллы — по мере роста","svc5.h3":"Технадзор","svc5.li1":"Контроль качества на каждом этапе","svc5.li2":"Надзор за подрядчиками и субподрядчиками",
       "svc5.li3":"Инспекции и контроль недоделок","svc.cta.label":"Не знаете, с чего начать?","svc.cta.btn":"Бесплатная консультация","plaster.label":"Наша фирменная услуга","plaster.h2":"Декоративная штукатурка руками наших мастеров",
-      "plaster.flag":"МАСТЕР M5","plaster.h2b":"Архитектурные поверхности,<br>а не просто отделка.","plaster.lead":"Венецианскую штукатурку, микроцемент и lime-wash наносит наша обученная команда — не случайный субподрядчик. У нас своя библиотека образцов и шоурум: вы увидите и потрогаете текстуру до старта работ.","plaster.li1":"Венецианка · микроцемент · lime-wash · эффект травертина","plaster.li2":"Своя библиотека образцов и шоурум в Wynwood",
+      "plaster.flag":"МАСТЕР M5","plaster.h2b":"Архитектурные поверхности,<br>а не просто отделка.","plaster.lead":"Венецианскую штукатурку, микроцемент и lime-wash наносит наша обученная команда — не случайный субподрядчик. У нас своя библиотека образцов и шоурум: вы увидите и потрогаете текстуру до старта работ.","plaster.li1":"Венецианка · микроцемент · lime-wash · эффект травертина","plaster.li2":"Своя библиотека образцов и шоурум в Miami Ironside (открытие ноябрь 2026)",
       "plaster.li3":"Акцентные стены, потолки, влажные зоны и целые интерьеры","plaster.ctab":"Бесплатный замер и смета с выездом","plaster.ctas":"Приедем к вам, замерим пространство и подготовим детальную смету — бесплатно.","plaster.ctabtn":"Записаться на замер","plaster.tex":"Реальные фактуры из нашей библиотеки образцов","proj.label":"Избранные работы",
       "proj.h2":"Свежие проекты в Майами","proj.viewall":"Все проекты","qz.open":"Мгновенный расчёт","qz.title":"Мгновенный расчёт","qz.sub":"60 секунд · ни к чему не обязывает",
       "mb.call":"Позвонить","mb.est":"Расчёт","xi.h":"Подождите — заберите гайд по ценам на ремонт в Майами 2026","xi.p":"Реальные вилки цен за sq ft, подводные камни кондо и чек-лист планирования — бесплатный PDF на почту.","xi.email":"Ваш email",
@@ -1149,7 +1187,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "case1.tag":"РЕМОНТ","case1.h4":"Резиденция 2BR в Brickell","case1.m2":"12 НЕДЕЛЬ","case2.tag":"КУХНЯ","case2.h4":"Кухня в Edgewater",
       "case2.m2":"8 НЕДЕЛЬ","case3.tag":"ВАННАЯ","case3.h4":"Мастер-ванная в Sunny Isles","case3.m2":"6 НЕДЕЛЬ","case4.tag":"ВИЛЛА ЦЕЛИКОМ",
       "case4.h4":"Вилла в Coral Gables","case4.m2":"16 НЕДЕЛЬ","case5.tag":"FIT-OUT","case5.h4":"Лофт в South Beach","case5.m2":"10 НЕДЕЛЬ",
-      "case6.tag":"НАШ ШОУРУМ","case6.h4":"Шоурум M5 в Wynwood","case6.m1":"НАШЕ ПРОСТРАНСТВО","case6.m2":"ПРИХОДИТЕ СМОТРЕТЬ","cta.h2":"Ваша смета —<br>за 48 часов.",
+      "case6.tag":"НАШ ШОУРУМ","case6.h4":"Шоурум M5 · Miami Ironside","case6.m1":"ОТКРЫТИЕ НОЯБРЬ 2026","case6.m2":"ПО ЗАПИСИ","cta.h2":"Ваша смета —<br>за 48 часов.",
       "cta.s1":"БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ С ВЫЕЗДОМ","cta.s2":"ОТВЕТ В ТЕЧЕНИЕ ЧАСА","cta.btn1":"Рассчитать проект","cta.btn2":"Написать в WhatsApp","cta.btn3":"Записаться на визит",
       "money.label":"Прозрачность","money.h2":"Как мы защищаем ваши деньги","money.m1":"Детальная смета до подписания договора","money.m2":"Оплата по этапам, без большого аванса","money.m3":"Изменения — только после вашего согласования",
       "money.m4":"Lien release от каждого субподрядчика","money.m5":"Договор и страховка по запросу","money.btn":"Письменная гарантия 1 год","proc.label":"Наш процесс","proc.h2":"Понятный процесс. Честные сроки.",
@@ -1162,7 +1200,7 @@ if(window.M5_PIXEL){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
       "team1.b":"Директор проектов","team1.s":"Стройка и контроль объекта","team2.b":"Ведущий дизайнер","team2.s":"Дизайн интерьера и 3D","team3.b":"Прораб",
       "team3.s":"Качество и сроки","team4.b":"Клиент-менеджер","team4.s":"Ваш контакт в M5","rev.label":"Истории клиентов","rev.h2":"Что говорят клиенты",
       "rev1.p":"Смета, которую мы подписали, не изменилась до самого конца. Всё сделано красиво, до мелочей.","rev1.s":"Brickell · ремонт 2BR","rev2.p":"Одна команда от дизайна до сдачи. Еженедельные фотоотчёты и никаких неожиданных расходов — ровно как обещали.","rev2.s":"Coral Gables · вилла целиком","rev3.p":"Декоративная штукатурка потрясающая. Они сами решили всё с кондо-боардом и пермитами — нам не пришлось волноваться.",
-      "rev3.s":"Edgewater · кухня и гостиная","rev.score1":"EXAMPLE LAYOUT · REAL GOOGLE REVIEWS FROM LAUNCH","rev.score2":"★ 5.0 GOOGLE","faq.label":"FAQ","faq.h2":"Вопросы, которые задают первыми",
+      "rev3.s":"Edgewater · кухня и гостиная","rev.score1":"ПРИМЕР МАКЕТА · НАСТОЯЩИЕ ОТЗЫВЫ КЛИЕНТОВ ПОЯВЯТСЯ ЗДЕСЬ ПОСЛЕ ЗАПУСКА","faq.label":"FAQ","faq.h2":"Вопросы, которые задают первыми",
       "faq1.q":"Вы отдаёте работы субподрядчикам?","faq1.a":"Дизайн, ведение проекта и надзор — своя команда. Строительство идёт с нашим лицензированным GC-партнёром во Флориде и проверенными бригадами. За результат отвечает одна команда.","faq2.q":"Кто занимается пермитами и кондо-боардом?","faq2.a":"Мы. Пермиты Miami-Dade, COI для вашего здания, бронь лифта и часы шума — часть нашего процесса, а не ваша забота.","faq3.q":"Сколько стоит проект?",
       "faq3.a":"Проекты «дизайн + ремонт под ключ» начинаются примерно от $130K. Детальную смету вы видите до подписания. Она меняется только через изменение, которое вы согласовали первым.","faq4.q":"Сколько это занимает?","faq4.a":"Типичный ремонт — до 3 месяцев. Сроки вы получаете заранее, а фотоотчёты — каждую неделю до самого конца.","faq5.q":"Есть ли гарантия?","faq5.a":"Да: письменная гарантия 1 год. Любой вопрос после сдачи решает та же команда, что строила.",
       "lead.label":"Рассчитать проект","lead.h2":"Расскажите о вашем пространстве.","lead.f1":"БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ","lead.f2":"ВЫЕЗД ВКЛЮЧЁН","lead.f3":"ОТВЕТ В ТЕЧЕНИЕ ЧАСА",
@@ -1304,9 +1342,9 @@ var CASES = {
    p2:"Designed for content production — gallery lighting, a podcast corner and a cyclorama wall. Delivered ready for the first shoot.",
    scope:["Exposed ceilings + acoustics","Microcement floors","Glass partitions","Steel & oak shelving","Gallery lighting","Podcast corner & cyc wall"],
    mat:"Microcement · blackened steel · oak · glass"},
-  {tag:"Our showroom · Wynwood", h:"Wynwood Studio Showroom", img:"img/case6_showroom.webp",
+  {tag:"Our showroom · Miami Ironside", h:"M5 Showroom · Miami Ironside (opening Nov 2026)", img:"img/case6_showroom.webp",
    facts:["<b>45+</b> plaster finishes","<b>opening soon</b>"],
-   p1:"Our own space in Wynwood: decorative plaster finishes on full-size walls — not tiny samples — plus a stone and wood library and a table to sit down and plan your project.",
+   p1:"Our own space at Miami Ironside (7636 NE 4th Ct #111), opening November 2026 — by appointment: decorative plaster finishes on full-size walls — not tiny samples — plus a stone and wood library and a table to sit down and plan your project. Until then we bring the samples to you.",
    p2:"Opening soon. Visits by appointment — leave a request and we will invite you first.",
    scope:["45+ finishes on real walls","Stone & wood library","Material consultations","Project meetings"],
    mat:""}
@@ -1342,9 +1380,9 @@ var CASES = {
    p2:"Pensado para producción de contenido: luz de galería, rincón de podcast y pared ciclorama. Entregado listo para el primer rodaje.",
    scope:["Techos vistos + acústica","Suelos de microcemento","Mamparas de vidrio","Estanterías acero y roble","Luz de galería","Podcast y ciclorama"],
    mat:"Microcemento · acero pavonado · roble · vidrio"},
-  {tag:"Nuestro showroom · Wynwood", h:"Showroom en Wynwood", img:"img/case6_showroom.webp",
+  {tag:"Nuestro showroom · Miami Ironside", h:"Showroom M5 · Miami Ironside (apertura nov 2026)", img:"img/case6_showroom.webp",
    facts:["<b>45+</b> acabados","<b>próximamente</b>"],
-   p1:"Nuestro propio espacio en Wynwood: acabados de revoco decorativo en paredes a tamaño real —no muestras pequeñas—, biblioteca de piedra y madera y una mesa para planear su proyecto.",
+   p1:"Nuestro propio espacio en Miami Ironside (7636 NE 4th Ct #111), apertura en noviembre de 2026 — con cita previa: acabados de revoco decorativo en paredes a tamaño real —no muestras pequeñas—, biblioteca de piedra y madera y una mesa para planear su proyecto. Hasta entonces llevamos las muestras a su casa.",
    p2:"Próximamente. Visitas con cita previa: deje su solicitud y le invitaremos primero.",
    scope:["45+ acabados en paredes reales","Biblioteca de piedra y madera","Consultas de materiales","Reuniones de proyecto"],
    mat:""}
@@ -1380,9 +1418,9 @@ var CASES = {
    p2:"Простір під продакшн контенту: галерейне світло, подкаст-куточок і циклорама. Здано готовим до першої зйомки.",
    scope:["Відкриті стелі + акустика","Мікроцементні підлоги","Скляні перегородки","Стелажі сталь/дуб","Галерейне світло","Подкаст і циклорама"],
    mat:"Мікроцемент · чорнена сталь · дуб · скло"},
-  {tag:"Наш шоу-рум · Wynwood", h:"Шоу-рум у Wynwood", img:"img/case6_showroom.webp",
+  {tag:"Наш шоу-рум · Miami Ironside", h:"Шоу-рум M5 · Miami Ironside (відкриття лист. 2026)", img:"img/case6_showroom.webp",
    facts:["<b>45+</b> фактур","<b>скоро відкриття</b>"],
-   p1:"Наш власний простір у Wynwood: фактури декоративної штукатурки на повнорозмірних стінах — не маленькі зразки, — бібліотека каменю й дерева та стіл для планування вашого проєкту.",
+   p1:"Наш власний простір у Miami Ironside (7636 NE 4th Ct #111), відкриття в листопаді 2026 — за записом: фактури декоративної штукатурки на повнорозмірних стінах — не маленькі зразки, — бібліотека каменю й дерева та стіл для планування вашого проєкту. До того часу привозимо зразки до вас.",
    p2:"Скоро відкриття. Візити за записом — залиште заявку, і ми запросимо вас першими.",
    scope:["45+ фактур на реальних стінах","Бібліотека каменю й дерева","Консультації з матеріалів","Зустрічі по проєкту"],
    mat:""}
@@ -1424,10 +1462,10 @@ document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){a.addEventList
 /* ===== service modal (описание + заявка + WhatsApp) ===== */
 var SM_WA='17864074441';
 var SM_L={
-  en:{tag:"M5 service",formH:"Request this service",name:"Your name",phone:"Phone / WhatsApp",send:"Send request",wa:"WhatsApp us",waText:"Hi M5! I'm interested in: ",thanks:"Thank you! We'll reply within the hour.",sig:"Signature"},
-  es:{tag:"Servicio M5",formH:"Solicitar este servicio",name:"Su nombre",phone:"Teléfono / WhatsApp",send:"Enviar solicitud",wa:"Escríbanos por WhatsApp",waText:"¡Hola M5! Me interesa: ",thanks:"¡Gracias! Le respondemos en menos de una hora.",sig:"Destacado"},
-  uk:{tag:"Послуга M5",formH:"Замовити цю послугу",name:"Ваше ім'я",phone:"Телефон / WhatsApp",send:"Надіслати запит",wa:"Написати у WhatsApp",waText:"Вітаю, M5! Мене цікавить: ",thanks:"Дякуємо! Відповімо протягом години.",sig:"Фірмове"},
-  ru:{tag:"Услуга M5",formH:"Заказать эту услугу",name:"Ваше имя",phone:"Телефон / WhatsApp",send:"Отправить заявку",wa:"Написать в WhatsApp",waText:"Здравствуйте, M5! Меня интересует: ",thanks:"Спасибо! Ответим в течение часа.",sig:"Фирменное"}
+  en:{err:"Your request has not been confirmed yet — please try again or message us on WhatsApp.",tag:"M5 service",formH:"Request this service",name:"Your name",phone:"Phone / WhatsApp",send:"Send request",wa:"WhatsApp us",waText:"Hi M5! I'm interested in: ",thanks:"Thank you! We'll reply within the hour.",sig:"Signature"},
+  es:{err:"Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp.",tag:"Servicio M5",formH:"Solicitar este servicio",name:"Su nombre",phone:"Teléfono / WhatsApp",send:"Enviar solicitud",wa:"Escríbanos por WhatsApp",waText:"¡Hola M5! Me interesa: ",thanks:"¡Gracias! Le respondemos en menos de una hora.",sig:"Destacado"},
+  uk:{err:"Заявку ще не підтверджено — спробуйте ще раз або напишіть у WhatsApp.",tag:"Послуга M5",formH:"Замовити цю послугу",name:"Ваше ім'я",phone:"Телефон / WhatsApp",send:"Надіслати запит",wa:"Написати у WhatsApp",waText:"Вітаю, M5! Мене цікавить: ",thanks:"Дякуємо! Відповімо протягом години.",sig:"Фірмове"},
+  ru:{err:"Заявка пока не подтверждена — попробуйте ещё раз или напишите в WhatsApp.",tag:"Услуга M5",formH:"Заказать эту услугу",name:"Ваше имя",phone:"Телефон / WhatsApp",send:"Отправить заявку",wa:"Написать в WhatsApp",waText:"Здравствуйте, M5! Меня интересует: ",thanks:"Спасибо! Ответим в течение часа.",sig:"Фирменное"}
 };
 var SM_DESC={
   en:["A full design concept with photoreal 3D — you see the exact result, materials and furniture before anything is built.",
@@ -1476,9 +1514,10 @@ function closeService(){
   document.getElementById('serviceModal').classList.remove('on');
   document.body.style.overflow='';
 }
+var SM_SID=null;
 function smSubmit(e){
   e.preventDefault();
-  var t=SM_L[smLang()], btn=document.getElementById('smSend');
+  var t=SM_L[smLang()], btn=document.getElementById('smSend'), err=document.getElementById('smErr');
   var payload={
     name:document.getElementById('smName').value.trim(),
     phone:document.getElementById('smPhone').value.trim(),
@@ -1488,13 +1527,19 @@ function smSubmit(e){
     _subject:'Service request — m5miami.com', _template:'table', _captcha:'false', _honey:'',
     _autoresponse:(smLang()==='ru'?'Спасибо! Получили ваш запрос и ответим в течение часа. WhatsApp: https://wa.me/17864074441 — M5 Miami':smLang()==='es'?'¡Gracias! Recibimos su solicitud de servicio y responderemos dentro de una hora. WhatsApp: https://wa.me/17864074441 — M5 Miami':smLang()==='uk'?'Дякуємо! Отримали ваш запит і відповімо протягом години. WhatsApp: https://wa.me/17864074441 — M5 Miami':'Thank you! We received your service request and will reply within the hour. WhatsApp: https://wa.me/17864074441 — M5 Miami')
   };
-  btn.disabled=true; btn.style.opacity='.6';
-  if(window.m5hook)m5hook({type:'service',name:payload.name,phone:payload.phone,service:payload.service,lang:payload.lang,source:'service-modal'});
-  fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
-    .then(function(r){return r.json();})
-    .then(function(){ if(window.m5track)m5track('service_lead',{service:payload.service}); alert(t.thanks); closeService(); })
-    .catch(function(){ alert(t.thanks); closeService(); })
-    .finally(function(){ btn.disabled=false; btn.style.opacity=''; });
+  btn.disabled=true; btn.style.opacity='.6'; if(err)err.style.display='none';
+  SM_SID=SM_SID||m5uuid();
+  /* сначала CRM: «спасибо» — только после lead_id (аудит F02) */
+  m5lead({submission_id:SM_SID,intent:'service',name:payload.name,phone:payload.phone,service:payload.service,lang:payload.lang,form_source:'service-modal'}).then(function(r){
+    btn.disabled=false; btn.style.opacity='';
+    if(!r.ok){ if(err){err.textContent=t.err;err.style.display='block';} else alert(t.err); if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:'service-modal'}); return; }
+    SM_SID=null;
+    payload.lead_id=r.lead_id;
+    fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+    if(window.m5hook)m5hook({type:'service',name:payload.name,phone:payload.phone,service:payload.service,lang:payload.lang,source:'service-modal',lead_id:r.lead_id});
+    if(window.m5track&&r.created)m5track('service_lead',{service:payload.service,lead_id:r.lead_id});
+    alert(t.thanks); closeService();
+  });
   return false;
 }
 document.querySelectorAll('#services .svc').forEach(function(card,i){
@@ -1514,7 +1559,7 @@ var QZICON={
 };
 var QZ_EP='https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a';
 var QZL={
- en:{types:[['home','Turnkey renovation','apartment or house, full scope',145],['design','Design + renovation','concept, 3D and build',151],['plaster','Decorative plaster','walls & feature surfaces',18],['build','New construction / villa','ground-up build',390]],
+ en:{err:'Your request has not been confirmed yet — please try again or message us on WhatsApp.',types:[['home','Turnkey renovation','apartment or house, full scope',145],['design','Design + renovation','concept, 3D and build',151],['plaster','Decorative plaster','walls & feature surfaces',18],['build','New construction / villa','ground-up build',390]],
   q1:'What are we pricing?',q2:'Approximate area?',q2p:'For plaster — approx. wall area',sqft:'SQ FT',
   q3:'Finish level?',levels:[['Standard','quality materials, clean design',1],['Premium','custom joinery, higher-end finishes',1.35],['Luxury','signature materials, full custom',1.7]],
   q4:'When do you want to start?',times:['As soon as possible','In 1–3 months','In 3–6 months','Just exploring'],
@@ -1523,7 +1568,7 @@ var QZL={
   resT:'Your estimated range',resSub:'Exact quote after a free on-site visit — we come to you, measure and confirm the numbers.',
   resBook:'Book my free site visit',resWa:'Discuss in WhatsApp',
   auto:'Thanks for using the M5 instant estimate! Your range is attached below. Next step — a free on-site visit: we measure and give you an exact itemized quote within 48 hours. Reply to this email or WhatsApp us: https://wa.me/17864074441 — M5 Interior Design & Build, Miami'},
- es:{types:[['home','Reforma llave en mano','apartamento o casa, alcance completo',145],['design','Diseño + reforma','concepto, 3D y obra',151],['plaster','Estuco decorativo','paredes y superficies destacadas',18],['build','Obra nueva / villa','construcción desde cero',390]],
+ es:{err:'Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp.',types:[['home','Reforma llave en mano','apartamento o casa, alcance completo',145],['design','Diseño + reforma','concepto, 3D y obra',151],['plaster','Estuco decorativo','paredes y superficies destacadas',18],['build','Obra nueva / villa','construcción desde cero',390]],
   q1:'¿Qué vamos a presupuestar?',q2:'¿Área aproximada?',q2p:'Para estuco — área aprox. de paredes',sqft:'SQ FT',
   q3:'¿Nivel de acabados?',levels:[['Estándar','materiales de calidad, diseño limpio',1],['Premium','carpintería a medida, mejores acabados',1.35],['Lujo','materiales exclusivos, todo a medida',1.7]],
   q4:'¿Cuándo quiere empezar?',times:['Lo antes posible','En 1–3 meses','En 3–6 meses','Solo explorando'],
@@ -1532,7 +1577,7 @@ var QZL={
   resT:'Su rango estimado',resSub:'Presupuesto exacto tras una visita gratuita — vamos, medimos y confirmamos los números.',
   resBook:'Reservar visita gratuita',resWa:'Hablar por WhatsApp',
   auto:'¡Gracias por usar la estimación instantánea de M5! Su rango está abajo. Siguiente paso — visita gratuita a domicilio: medimos y le damos un presupuesto exacto en 48 horas. Responda a este correo o escríbanos por WhatsApp: https://wa.me/17864074441 — M5 Interior Design & Build, Miami'},
- uk:{types:[['home','Ремонт під ключ','квартира чи будинок, повний обсяг',145],['design','Дизайн + ремонт','концепція, 3D і будівництво',151],['plaster','Декоративна штукатурка','стіни та акцентні поверхні',18],['build','Нове будівництво / вілла','з нуля',390]],
+ uk:{err:'Заявку ще не підтверджено — спробуйте ще раз або напишіть у WhatsApp.',types:[['home','Ремонт під ключ','квартира чи будинок, повний обсяг',145],['design','Дизайн + ремонт','концепція, 3D і будівництво',151],['plaster','Декоративна штукатурка','стіни та акцентні поверхні',18],['build','Нове будівництво / вілла','з нуля',390]],
   q1:'Що рахуємо?',q2:'Приблизна площа?',q2p:'Для штукатурки — приблизна площа стін',sqft:'SQ FT',
   q3:'Рівень оздоблення?',levels:[['Стандарт','якісні матеріали, чистий дизайн',1],['Преміум','меблі на замовлення, кращі матеріали',1.35],['Люкс','ексклюзивні матеріали, повний кастом',1.7]],
   q4:'Коли плануєте почати?',times:['Якнайшвидше','Через 1–3 місяці','Через 3–6 місяців','Поки що придивляюсь'],
@@ -1541,7 +1586,7 @@ var QZL={
   resT:'Ваша орієнтовна вилка',resSub:'Точний кошторис — після безкоштовного виїзду: приїдемо, заміряємо й підтвердимо цифри.',
   resBook:'Записатись на безкоштовний замір',resWa:'Обговорити у WhatsApp',
   auto:'Дякуємо за розрахунок M5! Ваша вилка нижче. Наступний крок — безкоштовний виїзд: заміряємо та дамо точний кошторис за 48 годин. Відповідайте на цей лист або пишіть у WhatsApp: https://wa.me/17864074441 — M5 Interior Design & Build, Miami'},
- ru:{types:[['home','Ремонт под ключ','квартира или дом, полный объём',145],['design','Дизайн + ремонт','концепция, 3D и стройка',151],['plaster','Декоративная штукатурка','стены и акцентные поверхности',18],['build','Новое строительство / вилла','с нуля',390]],
+ ru:{err:'Заявка пока не подтверждена — попробуйте ещё раз или напишите в WhatsApp.',types:[['home','Ремонт под ключ','квартира или дом, полный объём',145],['design','Дизайн + ремонт','концепция, 3D и стройка',151],['plaster','Декоративная штукатурка','стены и акцентные поверхности',18],['build','Новое строительство / вилла','с нуля',390]],
   q1:'Что считаем?',q2:'Примерная площадь?',q2p:'Для штукатурки — примерная площадь стен',sqft:'SQ FT',
   q3:'Уровень отделки?',levels:[['Стандарт','качественные материалы, чистый дизайн',1],['Премиум','мебель на заказ, отделка выше классом',1.35],['Люкс','эксклюзивные материалы, полный кастом',1.7]],
   q4:'Когда хотите начать?',times:['Как можно скорее','Через 1–3 месяца','Через 3–6 месяцев','Пока просто смотрю'],
@@ -1578,7 +1623,7 @@ function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h=''
   else if(qz.step===4){h='<div class="qz-q">'+t.q4+'</div><div class="qz-opts">'+t.times.map(function(x,i){
     return '<button class="qz-opt" onclick="qz.time=QZL[qzLang()].times['+i+'];qz.step=5;qzRender()"><span>'+x+'</span></button>';}).join('')+'</div>'+
     '<div class="qz-nav"><button class="qz-back" onclick="qz.step=3;qzRender()">'+t.back+'</button></div>';}
-  else if(qz.step===5){h='<div class="qz-q">'+t.q5+'</div><form class="qz-form" onsubmit="return qzSubmit(event)">'+
+  else if(qz.step===5){h='<div class="qz-q">'+t.q5+'</div><form class="qz-form" onsubmit="return qzSubmit(event)">'+'<div id="qzErr" style="display:none;font-size:13px;color:#b3261e"></div>'+
     '<input type="text" id="qzName" placeholder="'+t.name+'" required>'+
     '<input type="tel" id="qzPhone" placeholder="'+t.phone+'" required>'+
     '<input type="email" id="qzEmail" placeholder="'+t.email+'">'+
@@ -1593,20 +1638,27 @@ function qzRender(){var t=QZL[qzLang()],b=document.getElementById('qzBody'),h=''
     '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/17864074441?text='+encodeURIComponent('Hi M5! My instant estimate: '+qz.type[1]+', '+qz.sqft+' sq ft, '+qz.level[0]+' → '+qzFmt(r[0])+'–'+qzFmt(r[1])+'. Let\'s talk!')+'">'+t.resWa+'</a></div>'+
     '<div style="margin-top:14px"><a href="/client/?p=brickell-demo" target="_blank" rel="noopener" style="font-size:13px;color:inherit;opacity:.8;text-decoration:underline;text-underline-offset:3px" onclick="if(window.m5track)m5track(\'demo_hub_click\',{source:\'quiz\'})">See how you\'ll track your renovation — live demo →</a></div></div>';}
   b.innerHTML=h;}
+var QZ_SID=null;
 function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
   var go=document.getElementById('qzGo');go.disabled=true;go.style.opacity='.6';
   var email=document.getElementById('qzEmail').value.trim();
+  var errEl=document.getElementById('qzErr');if(errEl)errEl.style.display='none';
   var payload={name:document.getElementById('qzName').value.trim(),phone:document.getElementById('qzPhone').value.trim(),
     project:qz.type[1],area_sqft:qz.sqft,finish_level:qz.level[0],timeline:qz.time,
     estimate:qzFmt(r[0])+' – '+qzFmt(r[1]),source:'quiz:'+qz.src,lang:qzLang(),
     _cc:'vlad@m5miami.com,vadim@m5miami.com',
     _subject:'🔥 QUIZ LEAD '+qzFmt(r[0])+'+ — m5miami.com',_template:'table',_captcha:'false',_honey:''};
   if(email){payload.email=email;payload._autoresponse=t.auto+' | '+t.resT+': '+payload.estimate;}
-  if(window.m5hook)m5hook({type:'quiz',name:payload.name,phone:payload.phone,email:payload.email||'',service:payload.project,details:payload.area_sqft+' sqft, '+payload.finish_level+', '+payload.timeline+' → '+payload.estimate,lang:payload.lang,source:payload.source});
-  fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
-    .catch(function(){}).finally(function(){
-      if(window.m5track)m5track('quiz_lead',{value_low:r[0],project:qz.type[1]});
-      qz.step=6;qzRender();});
+  QZ_SID=QZ_SID||m5uuid();
+  m5lead({submission_id:QZ_SID,intent:'quiz',name:payload.name,phone:payload.phone,email:email||'',service:qz.type[1],area_sqft:qz.sqft,level:qz.level[0],quiz_low:r[0],quiz_high:r[1],details:qz.sqft+' sqft, '+qz.level[0]+', '+qz.time+' → '+payload.estimate,lang:qzLang(),form_source:'quiz:'+qz.src}).then(function(res){
+    go.disabled=false;go.style.opacity='';
+    if(!res.ok){ if(errEl){errEl.textContent=t.err;errEl.style.display='block';} if(window.m5track)m5track('lead_submit_failed',{status:res.status,source:'quiz'}); return; }
+    QZ_SID=null;
+    payload.lead_id=res.lead_id;
+    fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+    if(window.m5hook)m5hook({type:'quiz',name:payload.name,phone:payload.phone,email:payload.email||'',service:payload.project,details:payload.area_sqft+' sqft, '+payload.finish_level+', '+payload.timeline+' → '+payload.estimate,lang:payload.lang,source:payload.source,lead_id:res.lead_id});
+    if(window.m5track&&res.created)m5track('quiz_lead',{value_low:r[0],project:qz.type[1],lead_id:res.lead_id});
+    qz.step=6;qzRender();});
   return false;}
 
 /* ================= EXIT INTENT ================= */
@@ -1628,6 +1680,7 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
   var em=document.getElementById('xiEmail').value.trim();
   fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({email:em,lead_type:'cost-guide download',lang:l,_subject:'📗 Guide lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:t.auto})}).catch(function(){});
+  if(window.m5lead)m5lead({intent:'guide',email:em,lang:l,form_source:'exit-popup',service:'guide'});
   if(window.m5hook)m5hook({type:'guide',email:em,lang:l,source:'exit-popup'});
   if(window.m5track)m5track('guide_lead');
   xiDownload();
@@ -1638,11 +1691,11 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
 /* ===== LEAD MODAL: форма на месте клика ===== */
 var LD_BUDGETS={
   general:{en:['$50–100K','$100–250K','$250–500K','$500K+'],es:['$50–100K','$100–250K','$250–500K','$500K+'],uk:['$50–100K','$100–250K','$250–500K','$500K+'],ru:['$50–100K','$100–250K','$250–500K','$500K+']},
-  plaster:{en:['$2–10K','$10–25K','$25–50K','$50K+'],es:['$2–10K','$10–25K','$25–50K','$50K+'],uk:['$2–10K','$10–25K','$25–50K','$50K+'],ru:['$2–10K','$10–25K','$25–50K','$50K+']}
+  plaster:{en:['$10–25K','$25–50K','$50–100K','$100K+'],es:['$10–25K','$25–50K','$50–100K','$100K+'],uk:['$10–25K','$25–50K','$50–100K','$100K+'],ru:['$10–25K','$25–50K','$50–100K','$100K+']}
 };
 var LD_LBL={en:{budget:'Project budget',nsy:'Not sure yet'},es:{budget:'Presupuesto del proyecto',nsy:'Aún no lo sé'},uk:{budget:'Бюджет проєкту',nsy:'Ще не визначився'},ru:{budget:'Бюджет проекта',nsy:'Пока не определился'}};
 function ldFillBudget(mode){
-  var l=qzLang(),t=LD_LBL[l]||LD_LBL.en,sel=document.getElementById('ldBudget');
+  var l=qzLang(),t=LD_LBL[l]||LD_LBL.en,sel=document.getElementById('ldBudget');sel.setAttribute('data-mode',mode);
   var opts=['<option value="">'+t.budget+'</option>'];
   (LD_BUDGETS[mode]||LD_BUDGETS.general)[l].forEach(function(v){opts.push('<option>'+v+'</option>');});
   opts.push('<option>'+t.nsy+'</option>');
@@ -1659,6 +1712,8 @@ function closeLead(){
   document.getElementById('ldOverlay').classList.remove('on');
   document.getElementById('ldModal').classList.remove('on');
   document.body.style.overflow='';}
+var LD_SID=null;
+var LD_ERR={en:'Your request has not been confirmed yet — please try again or message us on WhatsApp.',es:'Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp.',uk:'Заявку ще не підтверджено — спробуйте ще раз або напишіть у WhatsApp.',ru:'Заявка пока не подтверждена — попробуйте ещё раз или напишите в WhatsApp.'};
 function ldSubmit(e){e.preventDefault();
   var go=document.getElementById('ldGo');go.disabled=true;go.style.opacity='.6';
   var A={en:'Thank you for contacting M5! We received your request and will reply within the hour (Mon–Sat). Faster? WhatsApp: https://wa.me/17864074441 — M5 Miami',
@@ -1666,19 +1721,21 @@ function ldSubmit(e){e.preventDefault();
     uk:'Дякуємо за звернення до M5! Відповімо протягом години (пн–сб). Швидше? WhatsApp: https://wa.me/17864074441 — M5 Miami',
     ru:'Спасибо за обращение в M5! Ответим в течение часа (пн–сб). Быстрее? WhatsApp: https://wa.me/17864074441 — M5 Miami'};
   var OK={en:'Sent! We will reply within the hour.',es:'¡Enviado! Responderemos dentro de una hora.',uk:'Надіслано! Відповімо протягом години.',ru:'Отправлено! Ответим в течение часа.'};
-  var l=qzLang();
-  if(window.m5hook)m5hook({type:'lead',name:document.getElementById('ldName').value.trim(),phone:document.getElementById('ldPhone').value.trim(),details:(document.getElementById('ldHood').value+' '+document.getElementById('ldBudget').value).trim(),lang:l,source:'lead-modal'});
-  fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({name:document.getElementById('ldName').value.trim(),
-      phone:document.getElementById('ldPhone').value.trim(),
-      neighborhood:document.getElementById('ldHood').value.trim(),
-      budget:document.getElementById('ldBudget').value,
-      source:'lead-modal',lang:l,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:A[l]||A.en})})
-    .catch(function(){}).finally(function(){
-      if(window.m5track)m5track('lead_submit',{source:'modal'});
-      var ok=document.getElementById('ldOk');ok.textContent=OK[l]||OK.en;ok.style.display='block';
-      go.disabled=false;go.style.opacity='';
-      setTimeout(closeLead,2200);});
+  var l=qzLang(),ok=document.getElementById('ldOk');
+  var name=document.getElementById('ldName').value.trim(),phone=document.getElementById('ldPhone').value.trim(),hood=document.getElementById('ldHood').value.trim(),budget=document.getElementById('ldBudget').value;
+  var mode=(document.getElementById('ldBudget').getAttribute('data-mode')||'general');
+  ok.style.display='none';ok.style.color='#1faa52';
+  LD_SID=LD_SID||m5uuid();
+  m5lead({submission_id:LD_SID,intent:'lead',name:name,phone:phone,details:(hood+' '+budget).trim(),lang:l,service:mode==='plaster'?'Decorative plaster':'renovation',form_source:'lead-modal'}).then(function(r){
+    go.disabled=false;go.style.opacity='';
+    if(!r.ok){ok.textContent=LD_ERR[l]||LD_ERR.en;ok.style.color='#b3261e';ok.style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:'lead-modal'});return;}
+    LD_SID=null;
+    fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name:name,phone:phone,neighborhood:hood,budget:budget,source:'lead-modal',lead_id:r.lead_id,lang:l,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com',_template:'table',_captcha:'false',_honey:'',_autoresponse:A[l]||A.en})}).catch(function(){});
+    if(window.m5hook)m5hook({type:'lead',name:name,phone:phone,details:(hood+' '+budget).trim(),lang:l,source:'lead-modal',lead_id:r.lead_id});
+    if(window.m5track&&r.created)m5track('lead_submit',{source:'modal',lead_id:r.lead_id});
+    ok.textContent=OK[l]||OK.en;ok.style.display='block';
+    setTimeout(closeLead,2200);});
   return false;}
 /* перехват всех ссылок на #contact → модалка на месте (нижняя форма остаётся для скролящих) */
 document.addEventListener('click',function(e){
