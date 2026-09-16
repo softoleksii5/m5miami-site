@@ -1059,7 +1059,7 @@ var ALEXTODO=[
 var SMMNET=[
  {id:'ig',n:'Instagram',c:'linear-gradient(45deg,#F58529,#DD2A7B,#8134AF)',st:'core · главный',
   ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff" stroke="none"/></svg>',
-  mock:'<div class="mkhead"><div class="mkava">M5</div><div><b>@m5miami</b><span>M5 Interior Design &amp; Build · Miami<br>Luxury renovation &amp; decorative plaster ✦ EN/ES<br>⤷ m5miami.com — instant estimate</span></div></div>'+
+  mock:'<div class="mkhead"><div class="mkava">M5</div><div><b>@m5miami</b><span>M5 Interior Design &amp; Build · Miami<br>Venetian plaster &amp; design-build ✦ EN/ES<br>⤷ m5miami.com — instant estimate</span></div></div>'+
    '<div class="mkhl"><i>Projects</i><i>Plaster</i><i>Before/After</i><i>Team</i><i>Reviews</i></div>'+
    '<div class="mkgrid">'+
    '<div style="background:linear-gradient(160deg,#D9B87C,#96703B)">До / После<small>каждый объект</small></div>'+
@@ -1083,7 +1083,7 @@ var SMMNET=[
  {id:'gb',n:'Google Business',c:'#188038',st:'локальные лиды',
   ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.2-6.5-10a6.5 6.5 0 0 1 13 0c0 4.8-6.5 10-6.5 10Z"/><circle cx="12" cy="10.5" r="2.3"/></svg>',
   mock:'<div class="mkgb"><b>M5 Interior Design &amp; Build</b><span>★★★★★ 5.0 (12) · Remodeler · Miami, FL</span><div class="mkgbb"><i>Call</i><i>Directions</i><i>Website</i><i>Quote</i></div></div>'+
-   '<p class="mkp">Карточка в Google Maps и поиске «decorative plaster miami». Фото работ + отзывы после каждого проекта (движок отзывов в roadmap). Бесплатные горячие локальные лиды. Телефон — только US: +1 786 407 4441 (WhatsApp Business).</p>'},
+   '<p class="mkp">Карточка в Google Maps и поиске «venetian plaster miami». Фото работ + отзывы после каждого проекта (движок отзывов в roadmap). Бесплатные горячие локальные лиды. Телефон — только US: +1 786 407 4441 (WhatsApp Business).</p>'},
  {id:'hz',n:'Houzz',c:'#4DBC15',st:'портфолио · ниша',
   ic:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M4 21V10.5L12 4l8 6.5V21h-6v-6h-4v6H4Z"/></svg>',
   mock:'<p class="mkp" style="margin-top:6px">Профиль-портфолио: каждый сданный проект — фотокейс, отзывы клиентов. Тут владельцы домов Майами ищут, с кем строить — аудитория с деньгами и намерением.</p><p class="mkp">Наполняет Алекс. Платную рекламу Houzz (~$499/мес) не берём, пока не нужен доп. поток.</p>'}

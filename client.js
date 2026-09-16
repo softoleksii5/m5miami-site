@@ -43,7 +43,7 @@ var CLIENTS={
 
 /* Продающий каталог: что клиент может добавить к проекту. Заявка в 1 клик. */
 var SERVICES=[
- {img:'/img/svc3_plaster.webp', ttl:'Decorative Plaster & Art-Concrete', sub:'Venetian, microcement, limewash — the signature M5 finish clients photograph most', from:'from $18 / sq ft',
+ {img:'/img/svc3_plaster.webp', ttl:'Venetian Plaster & Mineral Finishes', sub:'Venetian, Marmorino, travertine, concrete effect — the signature M5 finish clients photograph most', from:'from $18 / sq ft',
   time:'3–7 days per room',
   what:'A hand-applied mineral finish that turns a flat wall into the centerpiece of the room — the same finish we build our showroom around.',
   steps:['Sample session — we bring 3–5 physical samples to your home and match them to your light','Surface prep & protection of floors and furniture','2–3 coats applied by our master (each needs to cure)','Sealing & final polish, walkthrough together'],
