@@ -139,9 +139,17 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .hero-strip .wrap{display:flex;gap:44px;padding-top:22px;padding-bottom:26px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:#B9AE9A;flex-wrap:wrap}
 
   /* stats */
-  .stats{background:transparent;text-align:center}
+  .stats.sec-light{text-align:center;background:linear-gradient(rgba(252,250,244,.80),rgba(252,250,244,.56) 40%,rgba(252,250,244,.70)),url('img/who_bg.webp') center 55%/cover no-repeat}
+  .why-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8F6D3A;margin:56px 0 14px}
+  .why{display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px;text-align:left;background:rgba(252,250,244,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:6px 26px 2px;border-radius:16px;border:1px solid rgba(176,137,79,.18)}
+  .why>div{border-top:1px solid rgba(176,137,79,.55);padding:16px 0 22px}
+  .why .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:#B0894F}
+  .why .t{font-family:var(--serif);font-weight:500;font-size:19px;line-height:1.18;margin-top:6px;letter-spacing:-.01em}
+  .why .b{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-top:7px;line-height:1.5}
+  @media(max-width:900px){.why{grid-template-columns:1fr 1fr;gap:0 18px}}
+  @media(max-width:560px){.why{grid-template-columns:1fr}.why>div{padding:12px 0 14px}}
   .stats .lead{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:500;max-width:30ch;margin:18px auto 64px;line-height:1.35}
-  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(252,250,244,.42)}
   .stat{padding:44px 20px;border-right:1px solid var(--line)}
   .stat:last-child{border-right:none}
   .stat b{font-family:var(--serif);font-weight:800;letter-spacing:-.03em;font-size:64px;line-height:1;display:block}
@@ -506,6 +514,17 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
       <div class="stat"><b>15</b><span data-i18n="stats.s2">projects delivered in the USA</span></div>
       <div class="stat"><b>1<i>yr</i></b><span data-i18n="stats.s3">written warranty on every build</span></div>
       <div class="stat"><b>100<i>%</i></b><span data-i18n="stats.s4">permits pulled · insured partners</span></div>
+    </div>
+    <div class="why-h" data-i18n="why.h">Why clients and designers choose M5 · eight reasons from our lookbook</div>
+    <div class="why">
+      <div><div class="k">01</div><div class="t" data-i18n="why.t1">European school</div><div class="b" data-i18n="why.b1">Italian-grade finish on every wall</div></div>
+      <div><div class="k">02</div><div class="t" data-i18n="why.t2">13 own materials</div><div class="b" data-i18n="why.b2">50+ finishes · any color · no supplier delays</div></div>
+      <div><div class="k">03</div><div class="t" data-i18n="why.t3">Matte · pearl · metallic · mirror</div><div class="b" data-i18n="why.b3">One palette, every mood</div></div>
+      <div><div class="k">04</div><div class="t" data-i18n="why.t4">Walls, ceilings, furniture, doors</div><div class="b" data-i18n="why.b4">One finish across the whole room</div></div>
+      <div><div class="k">05</div><div class="t" data-i18n="why.t5">Straight onto drywall</div><div class="b" data-i18n="why.b5">No skim coat · a week of prep saved</div></div>
+      <div><div class="k">06</div><div class="t" data-i18n="why.t6">Washable. Repairable. Warranty.</div><div class="b" data-i18n="why.b6">No callbacks</div></div>
+      <div><div class="k">07</div><div class="t" data-i18n="why.t7">Free visit, sample &amp; quote</div><div class="b" data-i18n="why.b7">Zero risk to start</div></div>
+      <div><div class="k">08</div><div class="t" data-i18n="why.t8">Fast. Clean. Condo-ready.</div><div class="b" data-i18n="why.b8">Your schedule holds</div></div>
     </div>
   </div>
 </section>
@@ -962,7 +981,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
       "hero.sub":"Interior design · turnkey renovation · Venetian plaster · fit-out. One team designs it, builds it and answers for it.",
       "hero.cta1":"Get a quote","hero.cta2":"See our works",
       "hero.strip1":"FULL CYCLE STUDIO","hero.strip2":"DESIGN · BUILD · DEVELOP","hero.strip3":"ENGLISH · SPANISH · UKRAINIAN",
-      "stats.label":"Who we are",
+      "why.h":"Why clients and designers choose M5 · eight reasons from our lookbook","why.t1":"European school","why.b1":"Italian-grade finish on every wall","why.t2":"13 own materials","why.b2":"50+ finishes · any color · no supplier delays","why.t3":"Matte · pearl · metallic · mirror","why.b3":"One palette, every mood","why.t4":"Walls, ceilings, furniture, doors","why.b4":"One finish across the whole room","why.t5":"Straight onto drywall","why.b5":"No skim coat · a week of prep saved","why.t6":"Washable. Repairable. Warranty.","why.b6":"No callbacks","why.t7":"Free visit, sample & quote","why.b7":"Zero risk to start","why.t8":"Fast. Clean. Condo-ready.","why.b8":"Your schedule holds","stats.label":"Who we are",
       "stats.lead":"An international studio, now building in Miami. One team stays with you from first sketch to final handover.",
       "stats.s1":"years of experience","stats.s2":"projects delivered in the USA","stats.s3":"written warranty on every build","stats.s4":"permits pulled · insured partners","form.ok":"Thank you — we received your request and will reply within one business hour (9am–6pm ET).","form.err":"Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.","rev.client":"Client","svc1.price":"from $6 / sq ft","svc2.price":"from $145 / sq ft","svc3.price":"from $18 / sq ft · projects from $10K","svc4.price":"from $390 / sq ft","svc5.price":"from 4% of budget",
       "svc.label":"M5 Services","svc.h2":"What we do",
@@ -1032,7 +1051,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
       "hero.sub":"Diseño interior · reforma llave en mano · estuco veneciano · fit-out — diseñado y construido por un solo equipo responsable.",
       "hero.cta1":"Pedir presupuesto","hero.cta2":"Ver nuestros trabajos",
       "hero.strip1":"ESTUDIO DE CICLO COMPLETO","hero.strip2":"DISEÑO · CONSTRUCCIÓN · DESARROLLO","hero.strip3":"INGLÉS · ESPAÑOL · UCRANIANO",
-      "stats.label":"Quiénes somos",
+      "why.h":"Por qué clientes y diseñadores eligen M5 · ocho razones de nuestro lookbook","why.t1":"Escuela europea","why.b1":"Acabado de nivel italiano en cada pared","why.t2":"13 materiales propios","why.b2":"50+ acabados · cualquier color · sin esperas de proveedor","why.t3":"Mate · perla · metálico · espejo","why.b3":"Una paleta, cada ambiente","why.t4":"Paredes, techos, muebles, puertas","why.b4":"Un solo acabado en toda la estancia","why.t5":"Directo sobre drywall","why.b5":"Sin capa de nivelación · una semana de preparación ahorrada","why.t6":"Lavable. Reparable. Con garantía.","why.b6":"Sin llamadas de vuelta","why.t7":"Visita, muestra y presupuesto gratis","why.b7":"Cero riesgo para empezar","why.t8":"Rápido. Limpio. Listo para condominios.","why.b8":"Su calendario se cumple","stats.label":"Quiénes somos",
       "stats.lead":"Un estudio internacional, ahora construyendo en Miami — un solo equipo responsable, del primer boceto a la entrega final.",
       "stats.s1":"años de experiencia","stats.s2":"proyectos entregados en EE. UU.","stats.s3":"de garantía escrita en cada obra","stats.s4":"con permisos · socios asegurados","form.ok":"Gracias — recibimos su solicitud y responderemos dentro de una hora laboral (9am–6pm ET).","form.err":"Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp: +1 786 407 4441.","rev.client":"Cliente","svc1.price":"desde $6 / sq ft","svc2.price":"desde $145 / sq ft","svc3.price":"desde $18 / sq ft · proyectos desde $10K","svc4.price":"desde $390 / sq ft","svc5.price":"desde 4% del presupuesto",
       "svc.label":"Servicios M5","svc.h2":"Qué hacemos",
@@ -1102,7 +1121,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
       "hero.sub":"Дизайн інтер'єру · ремонт під ключ · венеційська штукатурка · fit-out — спроєктовано й збудовано однією командою, що відповідає за результат.",
       "hero.cta1":"Отримати кошторис","hero.cta2":"Наші роботи",
       "hero.strip1":"СТУДІЯ ПОВНОГО ЦИКЛУ","hero.strip2":"ДИЗАЙН · БУДІВНИЦТВО · РОЗВИТОК","hero.strip3":"АНГЛІЙСЬКА · ІСПАНСЬКА · УКРАЇНСЬКА",
-      "stats.label":"Хто ми",
+      "why.h":"Чому клієнти й дизайнери обирають M5 · вісім причин із нашого лукбука","why.t1":"Європейська школа","why.b1":"Італійський рівень оздоблення на кожній стіні","why.t2":"13 власних матеріалів","why.b2":"50+ фактур · будь-який колір · без затримок постачальника","why.t3":"Матове · перламутр · метал · дзеркало","why.b3":"Одна палітра, будь-який настрій","why.t4":"Стіни, стелі, меблі, двері","why.b4":"Одне покриття на всю кімнату","why.t5":"Одразу на гіпсокартон","why.b5":"Без шпаклювання · тиждень підготовки заощаджено","why.t6":"Миється. Ремонтується. Гарантія.","why.b6":"Без повторних викликів","why.t7":"Безкоштовний виїзд, зразок і кошторис","why.b7":"Нуль ризику на старті","why.t8":"Швидко. Чисто. Підходить для кондо.","why.b8":"Ваш графік витримано","stats.label":"Хто ми",
       "stats.lead":"Міжнародна студія, яка тепер будує в Маямі — одна відповідальна команда від першого ескізу до фінальної здачі.",
       "stats.s1":"років досвіду","stats.s2":"проєктів здано в США","stats.s3":"письмова гарантія на кожен об'єкт","stats.s4":"з дозволами · застраховані підрядники","form.ok":"Дякуємо — ми отримали вашу заявку і відповімо протягом робочої години (9:00–18:00 ET).","form.err":"Заявку ще не підтверджено — спробуйте ще раз або напишіть у WhatsApp: +1 786 407 4441.","rev.client":"Клієнт","svc1.price":"від $6 / sq ft","svc2.price":"від $145 / sq ft","svc3.price":"від $18 / sq ft · проєкти від $10K","svc4.price":"від $390 / sq ft","svc5.price":"від 4% бюджету",
       "svc.label":"Послуги M5","svc.h2":"Що ми робимо",
@@ -1168,7 +1187,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
       "meta.title":"M5 — студия дизайна интерьеров, ремонта и строительства в Майами","nav.services":"УСЛУГИ","nav.portfolio":"ПОРТФОЛИО","nav.plaster":"ШТУКАТУРКА","nav.about":"О НАС",
       "nav.faq":"FAQ","nav.quote":"РАССЧИТАТЬ","hero.badge":"ЛИЦЕНЗИРОВАННЫЕ И ЗАСТРАХОВАННЫЕ ПАРТНЁРЫ · ПЕРМИТЫ MIAMI-DADE","hero.h1":"Проектируем, строим и ремонтируем дома в Майами.","hero.sub":"Дизайн интерьера · ремонт под ключ · венецианская штукатурка · fit-out. Одна команда проектирует, строит и отвечает за результат.",
       "hero.cta1":"Рассчитать проект","hero.cta2":"Наши работы","hero.strip1":"СТУДИЯ ПОЛНОГО ЦИКЛА","hero.strip2":"DESIGN · BUILD · DEVELOP","hero.strip3":"АНГЛИЙСКИЙ · ИСПАНСКИЙ · РУССКИЙ",
-      "stats.label":"Кто мы","stats.lead":"Международная студия — теперь строим в Майами. Одна команда с вами от первого эскиза до финальной сдачи.","stats.s1":"лет опыта","stats.s2":"проектов сдано в США","stats.s3":"письменная гарантия на каждый объект",
+      "why.h":"Почему клиенты и дизайнеры выбирают M5 · восемь причин из нашего лукбука","why.t1":"Европейская школа","why.b1":"Итальянский уровень отделки на каждой стене","why.t2":"13 собственных материалов","why.b2":"50+ фактур · любой цвет · без задержек поставщика","why.t3":"Матовое · перламутр · металлик · зеркало","why.b3":"Одна палитра, любое настроение","why.t4":"Стены, потолки, мебель, двери","why.b4":"Одно покрытие на всю комнату","why.t5":"Сразу на гипсокартон","why.b5":"Без шпаклёвки · неделя подготовки сэкономлена","why.t6":"Моется. Ремонтируется. Гарантия.","why.b6":"Без повторных вызовов","why.t7":"Бесплатный выезд, образец и смета","why.b7":"Ноль риска на старте","why.t8":"Быстро. Чисто. Подходит для кондо.","why.b8":"Ваш график соблюдён","stats.label":"Кто мы","stats.lead":"Международная студия — теперь строим в Майами. Одна команда с вами от первого эскиза до финальной сдачи.","stats.s1":"лет опыта","stats.s2":"проектов сдано в США","stats.s3":"письменная гарантия на каждый объект",
       "stats.s4":"пермиты · застрахованные подрядчики","form.ok":"Спасибо — мы получили вашу заявку и ответим в течение рабочего часа (9:00–18:00 ET).","form.err":"Заявка пока не подтверждена — попробуйте ещё раз или напишите в WhatsApp: +1 786 407 4441.","rev.client":"Клиент","svc1.price":"от $6 / sq ft","svc2.price":"от $145 / sq ft",
       "svc3.price":"от $18 / sq ft · проекты от $10K","svc4.price":"от $390 / sq ft","svc5.price":"от 4% бюджета","svc.label":"Услуги M5","svc.h2":"Что мы делаем",
       "svc1.h3":"Дизайн интерьера и 3D","svc1.li1":"Концепция, планировки и зонирование","svc1.li2":"Фотореалистичная 3D-визуализация","svc1.li3":"Материалы, комплектация и документация","svc2.h3":"Ремонт под ключ",
@@ -1239,7 +1258,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   /* ===== scroll-reveal (появление секций при скролле, как у ) ===== */
   (function(){
     if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var sel='.hero-badge,.hero h1,.hero-sub,.hero-ctas,.label,h2,.stats .lead,.stat,.svc,.plaster-txt,.plaster-img,.gal-item,.case,.m-item,.money-note,.p-row,.t-card,.tm,.rev-card,.rev-score,.faq details,.lead-box>div,.form';
+    var sel='.hero-badge,.hero h1,.hero-sub,.hero-ctas,.label,h2,.stats .lead,.stat,.why>div,.svc,.plaster-txt,.plaster-img,.gal-item,.case,.m-item,.money-note,.p-row,.t-card,.tm,.rev-card,.rev-score,.faq details,.lead-box>div,.form';
     var els=[].slice.call(document.querySelectorAll(sel));
     els.forEach(function(el){ el.classList.add('reveal'); });
     document.querySelectorAll('.svc-grid,.ba-grid,.gal-grid,.money-grid,.team-grid,.rev-grid,.trust-grid').forEach(function(g){
