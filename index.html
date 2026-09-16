@@ -20,7 +20,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HomeAndConstructionBusiness",
 "name":"M5 Interior Design & Build","url":"https://m5miami.com/",
-"email":"hello@m5miami.com","image":"https://m5miami.com/img/hero_plaster.webp",
+"email":"hello@m5miami.com","image":"https://m5miami.com/img/hero.webp",
 "description":"Interior design, turnkey renovation, Venetian plaster and fit-out studio in Miami. One accountable team, transparent budgets, written warranty.",
 "areaServed":["Miami","Miami Beach","Brickell","Edgewater","Coral Gables","Sunny Isles Beach","Wynwood"],
 "priceRange":"$$$","knowsLanguage":["en","es","uk","ru"]}
@@ -120,14 +120,14 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
     background:
       linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
       linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%),
-      url('img/hero_plaster.webp') center/cover no-repeat;
+      url('img/hero.webp') center/cover no-repeat;
     opacity:1}
   .hero .wrap{position:relative;z-index:2;padding-bottom:90px}
   @media(max-width:680px){
     .hero-img{background:
       linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
       linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%),
-      url('img/hero_plaster_m.webp') center 40%/cover no-repeat}
+      url('img/m/hero.webp') center/cover no-repeat}
   }
 
   .hero-badge{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#D9B87C;margin-bottom:26px}
@@ -1116,7 +1116,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 
 <script>
   /* hero preload */
-  (function(){var i=new Image();i.onload=function(){document.getElementById('heroImg').classList.add('loaded')};i.src=window.innerWidth<=680?'img/hero_plaster_m.webp':'img/hero_plaster.webp'})();
+  (function(){var i=new Image();i.onload=function(){document.getElementById('heroImg').classList.add('loaded')};i.src='img/hero.webp'})();
 
   /* ===== i18n · EN / ES / UK =====
      Добавляешь текст на сайт → заводишь ключ здесь во всех трёх языках и вешаешь data-i18n="ключ"
