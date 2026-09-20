@@ -1,0 +1,8 @@
+# Claude memory stays local, never in git
+claude-memory/
+
+# Standard excludes
+.env
+.env.*
+node_modules/
+.DS_Store
