@@ -570,7 +570,8 @@ body.menu-open .mbar,body.menu-open .wa-float{display:none}
   .case-meta{display:none}
 }
 /* Alex 21.10: team = two people */
-.team-2{grid-template-columns:repeat(2,minmax(0,300px));justify-content:start}
+.team-2{grid-template-columns:repeat(2,minmax(0,360px));justify-content:center;gap:24px}
+.team-c{text-align:center}
 .team-2 .tm-photo{aspect-ratio:1/1}
 @media(max-width:560px){.team-2{grid-template-columns:1fr 1fr}}
 /* five cards after T8: 3 on top, 2 wide below, no empty slot */
@@ -870,8 +871,8 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
       <div class="t-card"><div class="mono" data-i18n="trust2.mono">Licensed &amp; insured partners</div><h4 data-i18n="trust2.h4">Built with licensed &amp; insured Florida contractor partners</h4><p data-i18n="trust2.p">Miami-Dade permits pulled by our contractor partners · HVHZ impact standards on every build. Certificates on request.</p></div>
       <div class="t-card"><div class="mono" data-i18n="trust3.mono">Local</div><h4 data-i18n="trust3.h4">A team that speaks your language</h4><p data-i18n="trust3.p">Condo-board experience: COI, elevator bookings, noise hours.</p></div>
     </div>
-    <div class="label" style="margin-top:80px" data-i18n="about.plabel">The people behind M5</div>
-    <h2 data-i18n="about.ph2">The team behind every project</h2>
+    <div class="label team-c" style="margin-top:80px" data-i18n="about.plabel">The people behind M5</div>
+    <h2 class="team-c" data-i18n="about.ph2">The team behind every project</h2>
     <div class="team-grid team-2">
       <div class="tm"><div class="tm-photo" data-bg="img/team_vlad.webp"></div><div class="tm-info"><b data-i18n="team1.b">Vlad</b><span data-i18n="team1.s">Co-founder</span></div></div>
       <div class="tm"><div class="tm-photo" data-bg="img/team_vadim.webp"></div><div class="tm-info"><b data-i18n="team2.b">Vadim</b><span data-i18n="team2.s">Director of production</span></div></div>
