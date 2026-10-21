@@ -85,7 +85,7 @@
   /* Type scale: 8 steps replace the 32 sizes currently on the home page.
      Values are fluid between a 390px phone and a 1440px desktop.          */
   --fs-display: clamp(44px, 1.6rem + 4.6vw, 72px);  /* hero h1              */
-  --fs-h2:      clamp(36px, 1.4rem + 3.2vw, 64px);  /* section titles       */
+  --fs-h2:      clamp(32px, 1.2rem + 2.6vw, 52px);  /* section titles       */
   --fs-h3:      clamp(26px, 1.2rem + 1.0vw, 32px);  /* card titles, FAQ q   */
   --fs-lead:    clamp(19px, 1rem + .5vw, 22px);     /* intro paragraphs     */
   --fs-body:    17px;                               /* all running text     */
