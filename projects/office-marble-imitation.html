@@ -17,17 +17,16 @@
 <meta property="og:url" content="https://m5miami.com/projects/office-marble-imitation.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/tokens.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://m5miami.com/"}, {"@type": "ListItem", "position": 2, "name": "Works", "item": "https://m5miami.com/portfolio/"}, {"@type": "ListItem", "position": 3, "name": "Law office · dark marble-effect Venetian plaster", "item": "https://m5miami.com/projects/office-marble-imitation.html"}]}, {"@type": "InteriorDesigner", "@id": "https://m5miami.com/#business", "name": "M5 Studio Miami", "url": "https://m5miami.com/", "email": "hello@m5miami.com", "telephone": "+1-786-407-4441", "image": "https://m5miami.com/img/hero_plaster.webp", "address": {"@type": "PostalAddress", "addressLocality": "Miami", "addressRegion": "FL", "addressCountry": "US"}, "areaServed": {"@type": "City", "name": "Miami"}, "description": "Venetian plaster, Marmorino and travertine hand-applied in Miami. 13 own mineral materials, sample in 48 h, free site visit. Design and renovation built with licensed & insured Florida contractor partners.", "priceRange": "$$$"}, {"@type": "WebPage", "name": "Law office · dark marble-effect Venetian plaster", "url": "https://m5miami.com/projects/office-marble-imitation.html", "description": "Law office · dark marble-effect Venetian plaster. Venetian plaster · dark marble effect, hand-applied by the M5 master. Real photos, master's work, USA · in progress. The same finish in Miami: sample in 48 hours, free site visit, fixed price.", "primaryImageOfPage": "https://m5miami.com/img/case_office-marble-imitation_1.webp"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Venetian plaster suitable for offices?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is hard, washable and repairable, and it goes on existing drywall without structural work. We work around office hours."}}, {"@type": "Question", "name": "How long does a wall like this take?", "acceptedAnswer": {"@type": "Answer", "text": "An accent wall usually takes two to three days on site, including drying between coats and the final polish."}}, {"@type": "Question", "name": "Can I have this in Miami?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The same master now works in Miami. A hand-made sample of the marble-effect Venetian reaches you within 48 hours, free."}}]}]}</script>
 <style>
-  :root{--ink:#14120F;--ink2:#1E1B16;--bone:#F4EEE4;--bone2:#ECE4D4;--white:#fff;--gold:#B0894F;--gold-d:#96703B;--soft:#5A5142;--line:#E0D6C2;--line-d:rgba(244,238,228,.16);
-    --serif:'Geist',-apple-system,sans-serif;--sans:'Geist',sans-serif;--mono:'Space Mono',monospace}
   *{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
   body{font-family:var(--sans);background:var(--bone);color:var(--ink);line-height:1.6}
   a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
   :focus-visible{outline:2px solid #D9B87C;outline-offset:3px}
   .btn,button,a{touch-action:manipulation}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
   .label{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d)}
   h1,h2,h3{font-family:var(--serif);letter-spacing:-.02em;text-wrap:balance}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:16px 30px;cursor:pointer;transition:.25s;border:1px solid transparent}
@@ -102,6 +101,38 @@
   .f-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:36px}
   .f-top a:hover{color:var(--bone)} .f-bot{border-top:1px solid var(--line-d);padding-top:22px;font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .wa{position:fixed;right:24px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.phero .wrap{width:100%}
+  /* SPEC M1-T14 · same header, logo, menu and grid as the home page */
+header{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:90;width:min(960px,94vw);
+  background:rgba(20,18,15,.82);backdrop-filter:blur(14px);color:var(--color-text-on-dark);border-radius:var(--radius-1);
+  padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.logo svg{display:block}
+.h-nav{display:flex;gap:24px}
+.h-nav a{opacity:.75;white-space:nowrap}.h-nav a:hover{opacity:1;color:var(--color-gold-on-dark)}
+.h-right{display:flex;align-items:center;gap:14px}
+.h-cta{background:var(--color-bone);color:var(--color-ink);padding:10px 16px;border-radius:var(--radius-1);white-space:nowrap}
+.h-nav,.h-cta{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label)}
+.menu-btn{display:none;position:relative;width:var(--tap-min);height:var(--tap-min);background:none;border:0;cursor:pointer}
+.menu-btn span{position:absolute;left:12px;right:12px;height:1.5px;background:var(--color-text-on-dark);transition:transform var(--dur-base) var(--ease-out)}
+.menu-btn span:first-child{top:17px}.menu-btn span:last-child{top:25px}
+.menu-btn[aria-expanded="true"] span:first-child{transform:translateY(4px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:last-child{transform:translateY(-4px) rotate(-45deg)}
+.mnav{position:fixed;inset:0;z-index:var(--z-menu);background:var(--color-ink);color:var(--color-text-on-dark);
+  padding:calc(var(--header-h) + 56px) var(--gutter) 40px;display:flex;flex-direction:column;gap:var(--space-7);overflow-y:auto}
+.mnav[hidden]{display:none}
+.mnav-links{display:flex;flex-direction:column}
+.mnav-links a{font:400 34px/1.2 var(--font-display);padding:12px 0;border-bottom:1px solid var(--color-line-on-dark)}
+.mnav-cta{width:100%}
+.mnav-wa{font:500 var(--fs-button)/1 var(--font-label);letter-spacing:var(--ls-button);text-transform:uppercase;color:var(--color-text-on-dark-muted);padding:14px 0}
+body.menu-open header{z-index:calc(var(--z-menu) + 1)}
+@media(max-width:900px){.h-nav{display:none}.menu-btn{display:block}header{width:calc(100vw - 24px)}.h-right{margin-left:auto}}
+@media(max-width:760px){.wa{display:none}}
+.phero h1,.lead-box h2,h2{font-family:var(--font-display);font-weight:400;letter-spacing:var(--ls-heading)}
+.story h2,.spec h3,.ncard h3,.faq summary,.mat p{font-family:var(--font-display);font-weight:500;letter-spacing:0;text-transform:none}
+.spec h3{font-size:var(--fs-h3);color:var(--color-text)}
+.pmeta b{font-weight:500;font-variant-numeric:lining-nums}
+.crumb,.ptag,.pmeta,.label,.honest,.g-item figcaption,.ncard .k{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label)}
+.btn{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-button);letter-spacing:var(--ls-button)}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');window.m5track=function(n,p){try{if(window.gtag)gtag('event',n,p||{})}catch(e){}};</script>
@@ -135,10 +166,21 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 </head>
 <body>
 <header>
-  <a class="logo" href="/" aria-label="M5"><svg width="42" height="35" viewBox="0 0 46 38" fill="none"><path d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/><text x="23" y="26" text-anchor="middle" font-family="Geist,-apple-system,sans-serif" font-weight="800" font-size="20" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text></svg></a>
-  <nav class="h-nav" aria-label="Main"><a href="/#materials">MATERIALS</a><a href="/portfolio/">WORKS</a><a href="/#process">PROCESS</a><a href="/#plaster">SAMPLES</a><a href="/#services">DESIGN STUDIO</a></nav>
-  <a class="h-cta" href="#quote">GET A SAMPLE</a>
+  <a class="logo" href="/" aria-label="M5">
+    <svg width="46" height="38" viewBox="0 0 46 38" fill="none">
+      <path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
+      <text x="23" y="26" text-anchor="middle" font-family="Geist,-apple-system,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
+    </svg>
+  </a>
+  <nav class="h-nav" aria-label="Main"><a href="/#services">SERVICES</a><a href="/#projects">PORTFOLIO</a><a href="/#plaster">PLASTER</a><a href="/#about">ABOUT</a><a href="/#faq">FAQ</a></nav>
+  <div class="h-right"><a class="h-cta" href="#quote">BOOK A VISIT</a></div>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
 </header>
+<div class="mnav" id="mnav" hidden>
+  <nav class="mnav-links" aria-label="Main"><a href="/#services">SERVICES</a><a href="/#projects">PORTFOLIO</a><a href="/#plaster">PLASTER</a><a href="/#about">ABOUT</a><a href="/#faq">FAQ</a></nav>
+  <a class="btn btn-bone mnav-cta" href="#quote">BOOK A VISIT</a>
+  <a class="mnav-wa" href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a>
+</div>
 
 <section class="phero">
   <img src="../img/case_office-marble-imitation_1.webp" alt="Law office · dark marble-effect Venetian plaster, master’s work, in progress" width="1350" height="1800" fetchpriority="high" decoding="async">
@@ -203,7 +245,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 <section class="faq">
   <div class="wrap">
     <div class="label">Good to know</div>
-    <h2 style="font-size:clamp(28px,4vw,44px);font-weight:700;margin:12px 0 40px">Questions about this work</h2>
+    <h2 style="font-size:clamp(28px,4vw,44px);margin:12px 0 40px">Questions about this work</h2>
     <details open><summary>Is Venetian plaster suitable for offices?</summary><p>Yes. It is hard, washable and repairable, and it goes on existing drywall without structural work. We work around office hours.</p></details>
     <details><summary>How long does a wall like this take?</summary><p>An accent wall usually takes two to three days on site, including drying between coats and the final polish.</p></details>
     <details><summary>Can I have this in Miami?</summary><p>Yes. The same master now works in Miami. A hand-made sample of the marble-effect Venetian reaches you within 48 hours, free.</p></details>
@@ -236,7 +278,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 <section>
   <div class="wrap">
     <div class="label">Keep exploring</div>
-    <h2 style="font-size:clamp(28px,4vw,44px);font-weight:700;margin:12px 0 0">More works</h2>
+    <h2 style="font-size:clamp(28px,4vw,44px);margin:12px 0 0">More works</h2>
     <div class="next">
       <a class="ncard" href="powder-room-black-marmorino.html"><img src="../img/case_powder-room-black-marmorino_1_t.webp" alt="" loading="lazy" decoding="async"><div><div class="k">&#8592; Previous</div><h3>Black Marmorino powder room</h3></div></a>
       <a class="ncard" href="black-marble-fireplace.html"><img src="../img/case_black-marble-fireplace_1_t.webp" alt="" loading="lazy" decoding="async"><div><div class="k">Next &#8594;</div><h3>Black marble-effect Venetian plaster fireplace</h3></div></a>
@@ -283,7 +325,7 @@ function pjSubmit(f){var go=f.querySelector('button[type=submit]'),ok=f.querySel
     go.disabled=false;go.style.opacity='';
     if(!r.ok){err.style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:'work-page'});return;}
     PJ_SID=null;
-    fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,phone:phone,email:email,neighborhood:hood,budget:budget,project:document.title,source:'work-page',page:location.pathname,lead_id:r.lead_id,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com (work page)',_template:'table',_captcha:'false',_honey:'',_autoresponse:'Thank you for contacting M5! We received your request and will reply within the hour (Mon\u2013Sat). Faster? WhatsApp: https://wa.me/17864074441 \u2014 M5 Studio Miami'})}).catch(function(){});
+    fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,phone:phone,email:email,neighborhood:hood,budget:budget,project:document.title,source:'work-page',page:location.pathname,lead_id:r.lead_id,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com (work page)',_template:'table',_captcha:'false',_honey:'',_autoresponse:'Thank you for contacting M5! We received your request and will reply within one business hour (Mon\u2013Sat). Faster? WhatsApp: https://wa.me/17864074441 \u2014 M5 Studio Miami'})}).catch(function(){});
     if(window.m5hook)m5hook({type:'lead',name:name,phone:phone,email:email,details:details,source:'work-page',lead_id:r.lead_id});
     if(window.m5track){m5track('lead_submit',{source:'work-page'});if(r.created)m5track('lead_submit_confirmed',{lead_id:r.lead_id});}
     f.reset();ok.style.display='block';
@@ -307,6 +349,23 @@ document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){a.addEventList
   dlg.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft'){e.preventDefault();show(idx-1);} else if(e.key==='ArrowRight'){e.preventDefault();show(idx+1);} });
   var sx=0; dlg.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
   dlg.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50) show(dx<0?idx+1:idx-1); },{passive:true});
+})();
+</script>
+<script>
+/* мобильное меню (SPEC M1-T10/T14) */
+(function(){
+  var btn=document.querySelector('.menu-btn'), nav=document.getElementById('mnav');
+  if(!btn||!nav) return;
+  function set(open){
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    nav.hidden=!open;
+    document.body.classList.toggle('menu-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  btn.addEventListener('click', function(){ set(nav.hidden); });
+  nav.addEventListener('click', function(e){ if(e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !nav.hidden) set(false); });
+  matchMedia('(min-width:901px)').addEventListener('change', function(m){ if(m.matches && !nav.hidden) set(false); });
 })();
 </script>
 </body>

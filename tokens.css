@@ -1,0 +1,251 @@
+/* ==========================================================================
+   M5 Studio Miami · design tokens
+   Milestone 1 · v1.2 · prepared by Hammad
+
+   How to use
+   1. Save this file at the site root as /tokens.css.
+   2. Link it in <head> of every page, BEFORE the inline <style> block:
+        <link rel="stylesheet" href="/tokens.css">
+   3. The "Bridge" block at the bottom maps the variable names your pages
+      already use (--ink, --bone, --gold-d, --serif, --mono ...) onto these
+      tokens, so existing CSS picks up the new values without a rewrite.
+      Delete each page's own :root{...} block after linking this file,
+      otherwise the old values win. Exception: venetian-plaster/index.html
+      keeps its own :root, because it defines variables the bridge does
+      not have (see SPEC T5).
+
+   Fonts (one request, both families include Cyrillic for UK and RU):
+   https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600;800&display=swap
+   (Geist 800 is only for the M5 monogram inside the logo SVG.)
+   ========================================================================== */
+
+:root {
+
+  /* ------------------------------------------------------------------------
+     1. Colour
+     Brand palette kept (ink, bone, gold). Changes: a darker gold for small
+     text so it passes WCAG AA, one warm "paper" for raised cards instead of
+     pure white, and fewer beige tones overall.
+     Contrast ratios are measured against --color-bone (#F4EEE4).
+     ------------------------------------------------------------------------ */
+
+  /* Surfaces */
+  --color-ink:            #14120F;  /* dark sections, footer, primary button   */
+  --color-ink-2:          #1E1B16;  /* raised panel on dark                    */
+  --color-bone:           #F4EEE4;  /* default page background                 */
+  --color-sand:           #ECE4D4;  /* alternate light section                 */
+  --color-paper:          #FBF8F2;  /* cards, inputs, modals on light (was #FFF)*/
+
+  /* Text */
+  --color-text:           #14120F;  /* 16.2:1 on bone                          */
+  --color-text-muted:     #5A5142;  /* 6.8:1 on bone, 6.2:1 on sand            */
+  --color-text-on-dark:   #F4EEE4;  /* 16.2:1 on ink                           */
+  --color-text-on-dark-muted: #B9AE9A; /* 8.5:1 on ink                         */
+
+  /* Gold */
+  --color-gold:           #B0894F;  /* accent only: rules, icons, large numerals
+                                       on dark. 2.8:1 on bone, never for text on
+                                       light backgrounds                       */
+  --color-gold-text:      #7A5A2C;  /* labels and small gold text on light.
+                                       5.5:1 on bone, 5.0:1 on sand            */
+  --color-gold-on-dark:   #D9B87C;  /* gold text on ink. 9.9:1                 */
+  --color-gold-hover:     #96703B;  /* hover fill for dark buttons             */
+
+  /* Lines */
+  --color-line:           #E0D6C2;  /* hairlines on light                      */
+  --color-line-strong:    #CDBFA6;  /* input borders, focus-adjacent rules     */
+  --color-line-on-dark:   rgba(244, 238, 228, .16);
+
+  /* Functional */
+  --color-whatsapp:       #25D366;  /* WhatsApp icon only, never a button frame */
+  --color-error:          #B3261E;
+  --color-success:        #2E7D4F;
+  --color-focus:          #7A5A2C;  /* focus ring                              */
+
+  /* Photo overlays (use on images with text on top, nowhere else) */
+  --overlay-hero:   linear-gradient(180deg, rgba(20,18,15,.35) 0%, rgba(20,18,15,.10) 35%, rgba(20,18,15,.55) 72%, rgba(20,18,15,.88) 100%);
+  --overlay-card:   linear-gradient(180deg, rgba(20,18,15,0) 45%, rgba(20,18,15,.72) 100%);
+  --overlay-band:   linear-gradient(rgba(20,18,15,.78), rgba(20,18,15,.86));
+
+
+  /* ------------------------------------------------------------------------
+     2. Typography
+     Display: Cormorant Garamond (400/500, italic 400) for headings only,
+              never below 22px.
+     Body/UI: Geist (400/500/600) for body copy, buttons, labels, nav;
+              800 is loaded for the logo monogram only.
+     Space Mono is retired: it has no Cyrillic, so UK and RU fall back to
+     a system Courier today.
+     ------------------------------------------------------------------------ */
+
+  --font-display: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-label:   var(--font-body);
+
+  /* Type scale: 8 steps replace the 32 sizes currently on the home page.
+     Values are fluid between a 390px phone and a 1440px desktop.          */
+  --fs-display: clamp(44px, 1.6rem + 4.6vw, 72px);  /* hero h1              */
+  --fs-h2:      clamp(36px, 1.4rem + 3.2vw, 64px);  /* section titles       */
+  --fs-h3:      clamp(26px, 1.2rem + 1.0vw, 32px);  /* card titles, FAQ q   */
+  --fs-lead:    clamp(19px, 1rem + .5vw, 22px);     /* intro paragraphs     */
+  --fs-body:    17px;                               /* all running text     */
+  --fs-small:   15px;                               /* card lists, captions */
+  --fs-label:   12px;                               /* eyebrows, nav, tags  */
+  --fs-button:  13px;                               /* buttons              */
+
+  /* Big numerals (stats, process steps) */
+  --fs-numeral: clamp(48px, 2rem + 3vw, 72px);
+
+  /* Cormorant Garamond defaults to old-style figures ("13" reads like "I3").
+     Apply this to every heading and numeral set in the display face.      */
+  --numeric-display: lining-nums;
+
+  /* Weights */
+  --fw-display:        400;  /* Cormorant headings                          */
+  --fw-display-strong: 500;  /* Cormorant on photos or small headings       */
+  --fw-body:           400;
+  --fw-medium:         500;  /* labels, buttons, nav                        */
+  --fw-semibold:       600;  /* rare emphasis in body                       */
+
+  /* Line heights */
+  --lh-display: 1.04;
+  --lh-heading: 1.10;
+  --lh-snug:    1.30;
+  --lh-body:    1.65;
+  --lh-label:   1.40;
+
+  /* Letter spacing */
+  --ls-display: -0.01em;
+  --ls-heading: -0.005em;
+  --ls-body:    0;
+  --ls-label:   0.16em;   /* uppercase eyebrows and tags                   */
+  --ls-button:  0.12em;   /* uppercase buttons                             */
+  --ls-nav:     0.14em;
+
+  /* Reading width */
+  --measure:        62ch;  /* paragraphs                                    */
+  --measure-narrow: 44ch;  /* lead text beside images                       */
+  --measure-title:  18ch;  /* h1 / h2 line length                           */
+
+
+  /* ------------------------------------------------------------------------
+     3. Spacing (8px base)
+     ------------------------------------------------------------------------ */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+
+  /* Section rhythm: one value for every section, no inline overrides     */
+  --section-y:        clamp(80px, 3rem + 6vw, 144px);
+  --section-y-tight:  clamp(56px, 2rem + 4vw, 96px);   /* bands, FAQ        */
+  --heading-gap:      var(--space-7);   /* eyebrow+title block to content    */
+  --eyebrow-gap:      var(--space-4);   /* eyebrow to title                  */
+
+
+  /* ------------------------------------------------------------------------
+     4. Layout
+     ------------------------------------------------------------------------ */
+  --container:     1240px;   /* every page (project pages use 1180 today)  */
+  --container-text: 760px;   /* long-form blocks on project pages          */
+  --gutter:        clamp(20px, 4vw, 40px);  /* side padding               */
+  --grid-gap:      clamp(16px, 2vw, 24px);
+  --header-h:      64px;
+
+
+  /* ------------------------------------------------------------------------
+     5. Radii
+     Architectural and square. Today the site mixes 0, 3, 6, 8, 10, 12 and
+     16px. Three values only from now on.
+     ------------------------------------------------------------------------ */
+  --radius-0:    0;       /* photos, cards, buttons, sections             */
+  --radius-1:    2px;     /* inputs, header bar, small tags               */
+  --radius-pill: 999px;   /* dots, toggles, the WhatsApp circle           */
+
+
+  /* ------------------------------------------------------------------------
+     6. Shadows (warm, soft, used sparingly)
+     ------------------------------------------------------------------------ */
+  --shadow-0: none;
+  --shadow-1: 0 1px 2px rgba(20, 18, 15, .06), 0 6px 18px rgba(20, 18, 15, .06);   /* card hover   */
+  --shadow-2: 0 2px 6px rgba(20, 18, 15, .08), 0 18px 48px rgba(20, 18, 15, .14);  /* header, menu */
+  --shadow-3: 0 30px 80px rgba(20, 18, 15, .28);                                     /* modals       */
+
+
+  /* ------------------------------------------------------------------------
+     7. Motion
+     ------------------------------------------------------------------------ */
+  --ease-out:   cubic-bezier(.22, .61, .36, 1);
+  --dur-fast:   .18s;
+  --dur-base:   .30s;
+  --dur-slow:   .70s;
+
+
+  /* ------------------------------------------------------------------------
+     8. Layers
+     ------------------------------------------------------------------------ */
+  --z-header:  90;
+  --z-mbar:    94;
+  --z-float:   95;
+  --z-menu:    96;
+  --z-modal:   98;
+
+
+  /* ------------------------------------------------------------------------
+     9. Components (built from the tokens above)
+     ------------------------------------------------------------------------ */
+  --btn-pad-y:   17px;
+  --btn-pad-x:   32px;
+  --btn-height:  52px;
+  --input-height: 52px;
+  --tap-min:     44px;   /* minimum touch target on mobile               */
+
+
+  /* ------------------------------------------------------------------------
+     Bridge: old names used across index.html, projects/*.html and
+     portfolio/index.html. Keeps existing rules working on the new values.
+     Remove once every rule references the tokens directly.
+     ------------------------------------------------------------------------ */
+  --ink:     var(--color-ink);
+  --ink2:    var(--color-ink-2);
+  --bone:    var(--color-bone);
+  --bone2:   var(--color-sand);
+  --white:   var(--color-paper);
+  --gold:    var(--color-gold);
+  --gold-d:  var(--color-gold-text);
+  --soft:    var(--color-text-muted);
+  --soft-l:  var(--color-text-on-dark-muted);
+  --line:    var(--color-line);
+  --line-d:  var(--color-line-on-dark);
+  --serif:   var(--font-display);
+  --sans:    var(--font-body);
+  --mono:    var(--font-label);
+}
+
+/* Visible keyboard focus everywhere (currently none is defined) */
+:where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+/* ...and a light ring on dark surfaces */
+:where(header, footer, .hero, .plaster, .cta, .mnav, .mbar) :where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline-color: var(--color-gold-on-dark);
+}
+
+/* Lining figures wherever the display face is used */
+:where(h1, h2, h3, h4, summary) { font-variant-numeric: var(--numeric-display); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
