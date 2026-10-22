@@ -52,9 +52,6 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600;800&display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="/tokens.css">
 <style>
-  /* Лендинг v3 (26.09.2026): структура 1:1 с pebblelife.com — анонс-полоса, скруглённые карточки-кадры,
-     «meet …» на видео, фраза на песочном фоне, сравнение до/после шторкой, фасад на весь кадр, карусель работ,
-     закреплённый блок с вкладками, финал с формой на фото, песочный подвал. Цель — контакт: все кнопки открывают форму. */
   :root{
     --ink:#171512;--ink2:#221F1A;--sand:#D9D0C1;--sand2:#CFC4B2;--card:#F3EEE6;--bone:#F6F2EB;
     --gold:#B0894F;--gold-d:#8F6D3A;--gold-l:#D9B87C;--mute:#8A7F6E;--soft:#5E5446;--line:rgba(23,21,18,.12);
@@ -78,7 +75,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
 
   /* announcement + header */
   .ann{position:relative;z-index:31;background:var(--gold);color:#fff;text-align:center;font-size:12.5px;padding:8px 12px}
-  .ann button{background:none;border:0;color:#fff;text-decoration:underline;cursor:pointer;font-weight:600}
+  .ann button,.ann a{background:none;border:0;color:#fff;text-decoration:underline;cursor:pointer;font-weight:600;font-size:inherit}
   .hdr{position:fixed;left:0;right:0;top:34px;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:0 22px;pointer-events:none;transition:top .3s}
   .hdr.up{top:14px}
   .hdr>*{pointer-events:auto}
@@ -86,6 +83,8 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
   .hdr-r{display:flex;gap:6px;background:var(--card);padding:4px;border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
   .hdr-r .pill{min-height:40px;padding:0 14px}
   .chat{position:fixed;right:22px;bottom:22px;z-index:30;display:flex;align-items:center;gap:10px;background:var(--ink);color:var(--bone);border-radius:99px;padding:10px 12px 10px 18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  .chat{opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .3s,transform .3s}
+  .chat.show{opacity:1;pointer-events:auto;transform:none}
   .chat i{width:26px;height:26px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:14px}
 
   /* frames */
@@ -93,45 +92,116 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
   .frame video,.frame>img{width:100%;height:100%;object-fit:cover}
 
   /* 1 hero */
-  .hero{height:calc(100vh - 44px);height:calc(100svh - 44px);min-height:560px;margin-top:10px}
-  .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 35%,rgba(0,0,0,.35))}
-  .hero h1{position:absolute;z-index:2;left:0;right:0;top:9%;text-align:center;color:#fff;font-size:clamp(64px,11vw,176px);line-height:.84;font-weight:600;letter-spacing:-.06em}
-  .hero .under{position:absolute;z-index:2;left:24px;right:24px;bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;color:#fff;gap:16px}
-  .hero .under p{max-width:30ch;font-size:15px;opacity:.9}
+  .hero{height:calc(100vh - 44px);height:calc(100svh - 44px);min-height:600px;margin-top:10px}
+  .hs{position:absolute;inset:0}
+  .hs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.02);transition:opacity 1.8s ease}
+  .hs img.on{opacity:1;animation:hk 11s ease-out forwards}
+  @keyframes hk{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+  .hero:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,9,8,.55),rgba(10,9,8,.08) 34%,rgba(10,9,8,.12) 52%,rgba(10,9,8,.72))}
+  .hero-top{position:absolute;z-index:2;left:0;right:0;top:8%;text-align:center;color:#fff;padding:0 16px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:7px 12px;border-radius:99px}
+  .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--gold-l);font-style:normal}
+  .hero h1{margin-top:18px;font-size:clamp(60px,9.6vw,156px);line-height:.86;font-weight:600;letter-spacing:-.055em;text-shadow:0 2px 30px rgba(0,0,0,.25)}
+  .hero-b{position:absolute;z-index:2;left:28px;right:28px;bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;color:#fff}
+  .hero-b .lede{max-width:44ch;font-size:16px;line-height:1.5;opacity:.95}
+  .perks{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;max-width:560px}
+  .perks li{font-size:12.5px;padding:7px 11px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .hero-cta{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:250px}
+  .pill-glass{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.32);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .pill-glass:hover{background:rgba(255,255,255,.24)}
+  .hero-note{position:absolute;z-index:2;right:16px;top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
 
-  /* 2 statement */
-  .stmt{padding:22vh 20px;text-align:center}
-  .stmt h2{font-size:clamp(40px,6vw,92px);line-height:1;font-weight:600;letter-spacing:-.05em;color:var(--ink)}
+  /* scroll cues */
+  .prog{position:fixed;left:0;top:0;right:0;height:3px;z-index:35;background:var(--gold);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+  .cue{position:absolute;z-index:2;left:50%;bottom:30px;transform:translateX(-50%);display:none;flex-direction:column;align-items:center;gap:10px;color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.9}
+  .cue i{position:relative;width:1px;height:42px;background:rgba(255,255,255,.3);overflow:hidden}
+  .cue i:after{content:"";position:absolute;left:0;top:0;width:1px;height:16px;background:#fff;animation:cue 1.9s cubic-bezier(.6,0,.3,1) infinite}
+  @keyframes cue{from{transform:translateY(-16px)}to{transform:translateY(42px)}}
+  @media(min-width:1100px){.cue{display:flex}}
+
+  /* 2 statement + master at work */
+  .stmt{display:grid;grid-template-columns:1fr minmax(0,440px);gap:clamp(32px,6vw,96px);align-items:center;max-width:1240px;margin:0 auto;padding:13vh 40px 7vh}
+  .stmt h2{font-size:clamp(44px,5.6vw,88px);line-height:1;font-weight:600;letter-spacing:-.05em;color:var(--ink)}
   .stmt h2 .ch{opacity:.12}
-  .stmt p{font-size:clamp(20px,2.2vw,30px);color:var(--mute);margin-top:22px;letter-spacing:-.02em}
+  .stmt .sp{font-size:clamp(20px,2.1vw,30px);color:var(--mute);margin-top:18px;letter-spacing:-.02em;line-height:1.25}
+  .stmt .sd{margin-top:24px;max-width:44ch;font-size:16px;line-height:1.55;color:var(--soft)}
+  .mv{position:relative;margin:0;border-radius:var(--r);overflow:hidden;background:var(--ink);aspect-ratio:4/5;box-shadow:0 34px 70px -34px rgba(23,21,18,.5)}
+  .mv video{width:100%;height:100%;object-fit:cover}
+  .mv figcaption{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 12px;border-radius:12px}
+  .mv figcaption i{width:7px;height:7px;border-radius:50%;background:var(--gold-l);flex:none}
+
+  /* what's below */
+  .toc{max-width:1240px;margin:0 auto;padding:0 40px}
+  .toc-in{display:flex;align-items:center;gap:22px;border-top:1px solid var(--line);padding:18px 0 0}
+  .toc-l{display:inline-flex;align-items:center;gap:10px;flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+  .toc-l i{width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bone);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+  .toc ol{list-style:none;display:flex;gap:6px;flex-wrap:wrap}
+  .toc a{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:99px;background:var(--card);font-size:13px;color:var(--ink);transition:background .2s}
+  .toc a:hover{background:#fff}
+  .toc a b{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.1em;color:var(--gold-d)}
 
   /* 3 before/after */
-  .ba{height:92vh;min-height:520px}
+  .bax{display:grid;grid-template-columns:1fr auto;gap:clamp(32px,6vw,96px);align-items:center;max-width:1240px;margin:0 auto;padding:9vh 40px 12vh}
+  .bax h2{font-size:clamp(40px,4.8vw,72px);line-height:1;font-weight:600;letter-spacing:-.05em;margin-top:14px}
+  .bax-t>p{margin-top:18px;max-width:40ch;font-size:16.5px;line-height:1.55;color:var(--soft)}
+  .bax-n{font-size:13px!important;color:var(--mute)!important;max-width:44ch;padding-left:12px;border-left:2px solid var(--gold)}
+  .bax .pill{margin-top:26px}
+  .ba{height:min(84vh,800px);aspect-ratio:3/4;margin:0;cursor:ew-resize;box-shadow:0 34px 70px -34px rgba(23,21,18,.5)}
+  .ba .bb,.ba .aa{position:absolute;inset:0}
   .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .ba .after{clip-path:inset(0 0 0 50%)}
-  .ba .line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.9);z-index:2}
-  .ba .knob{position:absolute;top:50%;left:50%;z-index:3;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);box-shadow:0 4px 18px rgba(0,0,0,.25);cursor:ew-resize;touch-action:none}
-  .ba .lb{position:absolute;z-index:2;top:50%;transform:translateY(-50%);color:#fff;font-size:clamp(36px,5vw,72px);font-weight:600;letter-spacing:-.04em;text-shadow:0 2px 20px rgba(0,0,0,.35)}
-  .ba .lb.l{left:6%}.ba .lb.r{right:6%}
-  .capcard{position:absolute;z-index:3;right:16px;bottom:16px;max-width:280px;background:rgba(217,208,193,.92);backdrop-filter:blur(8px);border-radius:14px;padding:14px 16px;font-size:13.5px;color:var(--ink);line-height:1.45}
+  .ba .aa{clip-path:inset(0 0 0 50%)}
+  .ba .viz{left:12px;right:auto}
+  .ba .line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.9);z-index:4}
+  .ba .knob{position:absolute;top:50%;left:50%;z-index:5;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);box-shadow:0 4px 18px rgba(0,0,0,.25);cursor:ew-resize;touch-action:none}
+  .ba .lb{position:absolute;z-index:2;bottom:16px;color:#fff;font-size:clamp(22px,2.2vw,32px);font-weight:600;letter-spacing:-.03em;text-shadow:0 2px 16px rgba(0,0,0,.45)}
+  .ba .lb.l{left:18px}.ba .lb.r{right:18px}
 
-  /* 4 facade */
-  .fac{height:92vh;min-height:520px;margin-top:10px}
-  .fac:after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.18)}
-  .fac h2{position:absolute;z-index:2;left:0;right:0;top:44%;text-align:center;color:#fff;font-size:clamp(44px,6vw,96px);font-weight:600;letter-spacing:-.05em;line-height:1}
+  /* lookbook band */
+  .lbb{margin:10px 10px 0;border-radius:var(--r);background:var(--ink);color:var(--bone);display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;padding:56px 56px 56px 60px;overflow:hidden}
+  .lbb .mono{color:var(--gold-l)}
+  .lbb h2{font-size:clamp(34px,4vw,60px);line-height:1;font-weight:600;letter-spacing:-.045em;margin-top:14px}
+  .lbb p{color:rgba(246,242,235,.72);font-size:16px;max-width:46ch;margin-top:16px}
+  .lbb .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .lbb .pill-light{background:var(--bone)}
+  .lbb .pill-ghost{background:transparent;color:var(--bone);border:1px solid rgba(246,242,235,.3)}
+  .lbb .pill-ghost:hover{background:rgba(246,242,235,.08)}
+  .lbb small{display:block;margin-top:14px;font-size:12.5px;color:rgba(246,242,235,.5)}
+  .lbb-r{position:relative;height:420px;display:block}
+  .lbb-r img{position:absolute;top:50%;left:50%;border-radius:8px;box-shadow:0 24px 60px rgba(0,0,0,.5);transition:transform .5s ease}
+  .lbb-r .c{width:250px;transform:translate(-50%,-50%) rotate(-2deg);z-index:4}
+  .lbb-r .p1{width:200px;transform:translate(-118%,-46%) rotate(-9deg);z-index:2;opacity:.92}
+  .lbb-r .p2{width:200px;transform:translate(18%,-52%) rotate(7deg);z-index:3;opacity:.92}
+  .lbb-r .p3{width:190px;transform:translate(-30%,-34%) rotate(12deg);z-index:1;opacity:.8}
+  .lbb-r:hover .c{transform:translate(-50%,-53%) rotate(-1deg)}
+  .lbb-r:hover .p1{transform:translate(-128%,-46%) rotate(-11deg)}
+  .lbb-r:hover .p2{transform:translate(28%,-52%) rotate(9deg)}
+
+  /* 4 inside / out */
+  .fac{height:92vh;min-height:560px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .fac figure{position:relative;overflow:hidden;margin:0}
+  .fac figure img{width:100%;height:100%;object-fit:cover}
+  .fac figure+figure{border-left:2px solid var(--sand)}
+  .fac:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.66),rgba(0,0,0,.3) 30%,rgba(0,0,0,0) 52%,rgba(0,0,0,0) 72%,rgba(0,0,0,.35))}
+  .fac .tag{position:absolute;z-index:2;left:16px;bottom:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:7px 11px;border-radius:99px}
+  .fac-t{position:absolute;z-index:2;left:0;right:0;top:7%;text-align:center;color:#fff;padding:0 20px;pointer-events:none}
+  .fac-t h2{font-size:clamp(40px,5.4vw,88px);font-weight:600;letter-spacing:-.05em;line-height:.98}
+  .fac-t p{max-width:52ch;margin:14px auto 0;font-size:16px;line-height:1.5;opacity:.95;text-shadow:0 1px 14px rgba(0,0,0,.35)}
 
   /* 5 stories */
   .stories{padding:18vh 0 80px}
   .stories h2{text-align:center;font-size:clamp(36px,4.6vw,68px);line-height:1.02;font-weight:600;letter-spacing:-.045em;padding:0 20px}
   .stories .sub{text-align:center;color:var(--mute);margin-top:14px;padding:0 20px}
-  .rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:48px 22px 10px;scrollbar-width:none}
+  .rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:48px 22px 10px;scrollbar-width:none;scroll-padding-left:22px}
   .rail::-webkit-scrollbar{display:none}
-  .sc{flex:0 0 min(360px,78vw);scroll-snap-align:start}
-  .sc .ph{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:var(--ink)}
-  .sc .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
-  .sc:hover .ph img{transform:scale(1.05)}
+  .sc{flex:0 0 min(320px,74vw);scroll-snap-align:start;display:block}
+  .sc .ph{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--ink)}
+  .sc .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+  .sc:hover .ph img{transform:scale(1.04)}
+  .sc .ph em{position:absolute;left:12px;top:12px;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.38);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:5px 9px;border-radius:99px}
   .sc b{display:block;font-size:17px;font-weight:500;margin-top:14px;letter-spacing:-.01em}
   .sc span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--mute);text-transform:uppercase;display:block;margin-top:6px}
+  .sc span u{text-decoration:none;color:var(--gold-d)}
   .rail-nav{display:flex;justify-content:flex-end;gap:8px;padding:0 22px}
   .rail-nav button{width:44px;height:44px;border-radius:12px;border:0;background:var(--card);cursor:pointer;font-size:16px}
 
@@ -155,6 +225,10 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
   .kb{animation:kb 14s ease-in-out infinite alternate}
   @keyframes kb{from{transform:scale(1)}to{transform:scale(1.1)}}
   .feat-m{display:none}
+  .det{position:absolute;z-index:3;left:16px;bottom:16px;width:min(30%,210px);margin:0;border-radius:14px;overflow:hidden;border:3px solid rgba(246,242,235,.95);box-shadow:0 12px 36px rgba(0,0,0,.35);background:var(--ink)}
+  .det img{display:block;width:100%;aspect-ratio:1/1;height:auto!important;object-fit:cover}
+  .det figcaption{position:absolute;left:8px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);padding:4px 7px;border-radius:99px}
+  .real{position:absolute;right:12px;top:12px;z-index:3;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#fff;background:rgba(0,0,0,.35);padding:4px 8px;border-radius:99px;backdrop-filter:blur(4px)}
 
   /* 7 final */
   .join{height:100vh;min-height:620px;margin-top:10px}
@@ -218,6 +292,11 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
   .no-motion .reveal{opacity:1;transform:none}
 
   @media(max-width:900px){
+    .stmt{grid-template-columns:1fr;padding:12vh 26px 6vh;gap:30px}
+    .mv{width:100%;max-width:460px}
+    .toc{padding:0 26px}
+    .bax{grid-template-columns:1fr;padding:9vh 26px 10vh;gap:28px}
+    .ba{height:auto;width:100%;max-width:560px}
     .feat-d{display:none}
     .feat-m{display:block;padding:12vh 10px 0}
     .feat-m h2{text-align:center;font-size:clamp(34px,8vw,52px);line-height:1;font-weight:600;letter-spacing:-.045em;margin-bottom:28px}
@@ -229,18 +308,57 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
     .fm span{display:block;color:var(--soft);font-size:15px;margin-top:10px}
     .faq,.foot-top{grid-template-columns:1fr}
     .qf{grid-template-columns:1fr}
+    .hero-b{flex-direction:column;align-items:stretch;gap:16px}
+    .hero-cta{flex-direction:row;min-width:0}
+    .hero-cta .pill{flex:1}
+    .lbb{grid-template-columns:1fr;padding:40px 26px 30px;gap:6px}
+    .lbb-r{height:330px;order:-1}
+    .lbb-r .c{width:200px}.lbb-r .p1,.lbb-r .p2{width:160px}.lbb-r .p3{width:150px}
+    .det{width:34%;left:12px;bottom:12px}
   }
   @media(max-width:560px){
     .ann{font-size:11.5px}
+    .ann .ann-x{display:none}
     .hdr{padding:0 12px}
-    .hdr-r .wa{display:none}
+    .hdr-r .wa,.hdr-r .lb{display:none}
     .mark{width:44px;height:44px}
-    .hero h1{top:12%}
-    .hero .under{bottom:18px;left:16px;right:16px}
-    .hero .under .mono{display:none}
-    .ba,.fac{height:72vh}
-    .ba .lb{font-size:34px;top:14%;transform:none}
-    .capcard{left:12px;right:12px;bottom:12px;max-width:none;font-size:13px}
+    .hero{min-height:640px}
+    .hero-top{top:11%}
+    .eyebrow{font-size:10px;padding:6px 10px}
+    .hero h1{font-size:clamp(54px,16vw,72px);margin-top:14px}
+    .hero-b{left:14px;right:14px;bottom:96px;gap:12px}
+    .hero-cta .pill-gold{display:none}
+    .hero-b .lede{font-size:14.5px}
+    .perks{gap:5px;margin-top:10px}
+    .perks li{font-size:11.5px;padding:6px 9px}
+    .hero-cta{flex-direction:column}
+    .hero-cta .pill{min-height:48px}
+    .hero-note{top:auto;bottom:auto;right:12px;top:12px}
+    .fac{height:auto;min-height:0;grid-template-columns:1fr;grid-template-rows:auto auto}
+    .fac figure{aspect-ratio:4/5}
+    .fac figure:first-of-type{aspect-ratio:3/4}
+    .fac figure+figure{border-left:0;border-top:2px solid var(--sand)}
+    .fac-t{top:24px}
+    .fac-t p{font-size:14px}
+    .fac:after{background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 30%)}
+    .lbb h2{font-size:34px}
+    .lbb .acts .pill{flex:1}
+    .stmt{padding:64px 16px 30px;gap:24px}
+    .stmt h2{font-size:clamp(40px,11.5vw,54px)}
+    .stmt .sd{font-size:15px;margin-top:16px}
+    .toc{padding:0}
+    .toc-in{flex-direction:column;align-items:flex-start;gap:12px;margin:0 16px;padding-top:16px}
+    .toc ol{flex-wrap:nowrap;overflow-x:auto;width:calc(100% + 32px);margin:0 -16px;padding:0 16px 4px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
+    .toc ol::-webkit-scrollbar{display:none}
+    .toc li{flex:none}
+    .bax{display:flex;flex-direction:column;align-items:stretch;padding:56px 16px 64px;gap:0}
+    .bax-t{display:contents}
+    .bax h2{font-size:clamp(36px,10vw,48px)}
+    .bax-t>p{font-size:15px}
+    .bax .ba{order:1;margin-top:22px}
+    .bax .bax-n{order:2;margin-top:18px}
+    .bax .pill{order:3;width:100%;margin-top:18px}
+    .ba .lb{font-size:22px;bottom:12px}
     .join-in{padding-top:12vh}
     .chat{display:none}
     .foot{padding-bottom:110px}
@@ -248,16 +366,18 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
     .mbar .pill{min-height:50px}
     .mbar .wa{background:#1F7A4D;color:#fff}
   }
-  @media(prefers-reduced-motion:reduce){.kb{animation:none}.reveal{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.kb,.hs img.on,.cue i:after,.toc-l i{animation:none}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<div class="ann">Now booking free site visits in Miami · <button type="button" data-open>See it. Touch it. On your wall.</button></div>
+<div class="prog" id="prog" aria-hidden="true"></div>
+<div class="ann">Free site visits with real samples<span class="ann-x"> in Miami-Dade &amp; Broward</span> · <a href="/lookbook/M5_Lookbook_2026.pdf" download data-track="lookbook_download">Get the 2026 lookbook</a></div>
 
 <header class="hdr" id="hdr">
   <a class="mark" href="/venetian-plaster/" aria-label="M5 Studio Miami">M5</a>
   <div class="hdr-r">
+    <a class="pill pill-light lb" href="#lookbook" data-track="lookbook_nav">Lookbook</a>
     <a class="pill pill-light wa" href="https://wa.me/17864074441?text=Hi%20M5%2C%20I%27m%20interested%20in%20Venetian%20plaster" target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp</a>
     <button class="pill pill-gold" type="button" data-open data-track="cta_header">Book a visit</button>
   </div>
@@ -265,50 +385,119 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
 
 
 <section class="frame hero" id="top">
-  <video id="heroV" autoplay muted loop playsinline preload="auto" poster="/media/lp/hero.webp" aria-label="Polished Venetian plaster wall catching the light"><source src="/media/lp/hero.mp4" type="video/mp4"></video>
-  <h1 id="heroH">meet<br>venetian</h1>
-  <div class="under"><p>Real stone, laid by hand. Venetian plaster and Marmorino for Miami homes.</p><span class="mono">Scroll</span></div>
+  <div class="hs" id="heroS">
+    <img class="on" src="/media/lp/hero_1.webp" style="object-position:50% 52%" alt="Polished black Venetian plaster wall beside a glass door, our masters' work" fetchpriority="high" decoding="async">
+    <img src="/media/lp/hero_2.webp" style="object-position:50% 46%" alt="Black Venetian plaster fireplace wall, our masters' work" loading="lazy" decoding="async">
+    <img src="/media/lp/hero_3.webp" style="object-position:50% 42%" alt="Fireplace column in dark Venetian plaster with fine trowel lines, our masters' work" loading="lazy" decoding="async">
+  </div>
+  <div class="hero-top">
+    <span class="eyebrow"><i></i>Miami's wall trend for 2026–2027</span>
+    <h1 id="heroH">Venetian<br>plaster</h1>
+  </div>
+  <div class="hero-b">
+    <div>
+      <p class="lede">Real mineral stone, laid by hand by our masters. A wall with depth that changes with the light all day and lasts for decades. Projects from $10,000.</p>
+      <ul class="perks"><li>Seamless, no grout lines</li><li>Washable &amp; repairable</li><li>Won't peel like paint</li><li>Any color, 50+ finishes</li></ul>
+    </div>
+    <div class="hero-cta">
+      <button class="pill pill-gold" type="button" data-open data-track="cta_hero">Book a free site visit</button>
+      <a class="pill pill-glass" href="#lookbook" data-track="lookbook_hero">See the 2026 lookbook</a>
+    </div>
+  </div>
+  <a class="cue" href="#real" aria-label="Scroll down to see more">Scroll<i></i></a>
 </section>
 
 
-<section class="stmt">
-  <h2 id="stmt">This is not paint.</h2>
-  <p class="reveal">It's stone, laid by hand, coat after coat.</p>
+<section class="stmt" id="real">
+  <div>
+    <h2 id="stmt">This is not paint.</h2>
+    <p class="sp">It's stone, laid by hand, coat after coat.</p>
+    <p class="sd reveal">Every wall is trowelled on site by our own masters: thin coats of mineral plaster, each one pressed and polished by hand until the stone shows depth. No panels, no wallpaper, no print.</p>
+  </div>
+  <figure class="mv">
+    <video class="lazyv" muted loop playsinline preload="none" poster="/media/lp/master.webp" data-src="/media/lp/master.mp4" aria-label="Our master applying Velvet plaster to a bedroom wall with a trowel"></video>
+    <figcaption><i></i>Our master at work · real project</figcaption>
+  </figure>
+</section>
+
+<nav class="toc" aria-label="Further down this page">
+  <div class="toc-in">
+    <span class="toc-l"><i>↓</i>Keep scrolling</span>
+    <ol>
+      <li><a href="#ba"><b>01</b>Before &amp; after</a></li>
+      <li><a href="#lookbook"><b>02</b>2026 lookbook</a></li>
+      <li><a href="#inout"><b>03</b>Inside &amp; out</a></li>
+      <li><a href="#work"><b>04</b>Real projects</a></li>
+      <li><a href="#how"><b>05</b>Finishes &amp; process</a></li>
+      <li><a href="#estimate"><b>06</b>Free site visit</a></li>
+    </ol>
+  </div>
+</nav>
+
+
+<section class="bax" id="ba">
+  <div class="bax-t">
+    <span class="mono">Before &amp; after · concrete-look plaster</span>
+    <h2>Same hallway.<br>Now it's stone.</h2>
+    <p>A calm grey concrete look, seamless from wall to ceiling. No panels, no grout lines, nothing to peel.</p>
+    <p class="bax-n"><b>After</b> is a real photo of our masters' work. <b>Before</b> is a visualization of the same frame in plain paint, so you can see the difference.</p>
+    <button class="pill pill-gold" type="button" data-open data-track="cta_ba">Get this look · free site visit</button>
+  </div>
+  <div class="frame ba" id="baBox">
+    <div class="bb"><img src="/media/lp/ba_hall_before.webp" alt="Visualization: the same hallway with plain white painted walls, ceiling and cabinet fronts" loading="lazy" decoding="async"><span class="viz">VISUALIZATION</span><span class="lb l">Before</span></div>
+    <div class="aa" id="baAfter"><img src="/media/lp/ba_hall_after.webp" alt="Real photo: hallway finished in grey concrete-look mineral plaster by our masters, with LED cove lighting" loading="lazy" decoding="async"><span class="real">REAL PHOTO</span><span class="lb r">After</span></div>
+    <div class="line" id="baLine"></div>
+    <div class="knob" id="baKnob" role="slider" aria-label="Compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">⟷</div>
+  </div>
 </section>
 
 
-<section class="frame ba" id="ba">
-  <img src="/img/ba_fireplace_before.webp" alt="Fireplace wall before, plain drywall" loading="lazy" decoding="async">
-  <img class="after" id="baAfter" src="/img/ba_fireplace_after.webp" alt="Same fireplace wall after, black Venetian plaster" loading="lazy" decoding="async">
-  <div class="line" id="baLine"></div>
-  <div class="knob" id="baKnob" role="slider" aria-label="Compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">⟷</div>
-  <span class="lb l">Before</span><span class="lb r">After</span>
-  <div class="capcard">A real fireplace wall by our masters. Plain drywall turned into black Venetian stone in a few days.</div>
+<section class="lbb" id="lookbook">
+  <div>
+    <span class="mono">Free download · PDF · 19 pages</span>
+    <h2>The 2026 finishes lookbook</h2>
+    <p>12 finishes from glossy Venetian to Marmorino and Travertine, 70+ shades, where each one works best in a Florida home, and how a project runs from sample to sign-off.</p>
+    <div class="acts">
+      <a class="pill pill-light" href="/lookbook/M5_Lookbook_2026.pdf" download data-track="lookbook_download">Download the lookbook</a>
+      <button class="pill pill-ghost" type="button" data-open data-track="cta_lookbook">See samples on your wall</button>
+    </div>
+    <small>For homeowners, designers and builders. No sign-up needed.</small>
+  </div>
+  <a class="lbb-r" href="/lookbook/M5_Lookbook_2026.pdf" download data-track="lookbook_download" aria-label="Download the 2026 finishes lookbook (PDF)">
+    <img class="p3" src="/media/lp/lookbook_p3.webp" alt="" loading="lazy">
+    <img class="p1" src="/media/lp/lookbook_p1.webp" alt="" loading="lazy">
+    <img class="p2" src="/media/lp/lookbook_p2.webp" alt="" loading="lazy">
+    <img class="c" src="/media/lp/lookbook_cover.webp" alt="Cover of the M5 2026 finishes lookbook" loading="lazy">
+  </a>
 </section>
 
 
-<section class="frame fac">
-  <video muted loop playsinline preload="none" poster="/media/lp/marmorino.webp" data-src="/media/lp/marmorino.mp4" class="lazyv" aria-label="Marmorino facade on a waterfront villa"></video>
-  <h2>Inside. And out.</h2>
-  <div class="capcard">Marmorino takes the Florida sun, salt and rain on facades, and stays calm and matte inside.</div>
+<section class="frame fac" id="inout">
+  <figure><img src="/media/lp/fac_out.webp" style="object-position:30% 20%" alt="Modern house with a fluted Marmorino facade, our masters' work" loading="lazy" decoding="async"><figcaption class="tag">Outside · Marmorino facade</figcaption></figure>
+  <figure><img src="/media/lp/fac_in_velvet.webp" style="object-position:50% 40%" alt="Freestanding feature wall in grey Velvet mineral plaster in a bright living space, our masters' work" loading="lazy" decoding="async"><figcaption class="tag">Inside · Velvet feature wall</figcaption></figure>
+  <div class="fac-t">
+    <h2>Walls inside.<br>Facades outside.</h2>
+    <p>Mineral plaster isn't only for one feature wall. Inside, it gives hallways and living rooms a calm stone matte. Outside, Marmorino covers whole facades and takes Florida sun, salt air and rain without peeling like paint.</p>
+  </div>
 </section>
 
 
 <section class="stories" id="work">
   <h2 class="reveal">Walls our masters<br>have finished</h2>
-  <p class="sub reveal">Real projects by our team. No renders.</p>
+  <p class="sub reveal">Real projects by our own masters. Real photos, only light and color corrected.</p>
   <div class="rail" id="rail">
-    <a class="sc" href="/projects/black-fireplace-wall.html"><div class="ph"><img src="/img/case_black-fireplace-wall_1.webp" alt="Black Venetian fireplace wall" loading="lazy"></div><b>Black Venetian fireplace wall</b><span>Real project</span></a>
-    <a class="sc" href="/projects/powder-room-black-marmorino.html"><div class="ph"><img src="/img/case_powder-room-black-marmorino_2.webp" alt="Black Marmorino powder room" loading="lazy"></div><b>Black Marmorino powder room</b><span>Real project</span></a>
-    <a class="sc" href="/projects/hidden-door-wall.html"><div class="ph"><img src="/img/case_hidden-door-wall_1.webp" alt="Wall with a hidden door" loading="lazy"></div><b>A wall with a hidden door</b><span>Real project</span></a>
-    <a class="sc" href="/projects/office-marble-imitation.html"><div class="ph"><img src="/img/case_office-marble-imitation_1.webp" alt="Marble-look plaster in an office" loading="lazy"></div><b>Marble look, no slabs</b><span>Real project</span></a>
-    <a class="sc" href="/projects/fireplace-1000-lines.html"><div class="ph"><img src="/img/case_fireplace-1000-lines_1.webp" alt="Fireplace with 1000 lines under Venetian" loading="lazy"></div><b>1,000 lines under Venetian</b><span>Real project</span></a>
-    <a class="sc" href="/projects/black-marble-fireplace.html"><div class="ph"><img src="/img/case_black-marble-fireplace_1.webp" alt="Black marble-effect fireplace" loading="lazy"></div><b>Black marble-effect fireplace</b><span>Real project</span></a>
+    <a class="sc" href="/projects/black-fireplace-wall.html"><div class="ph"><img src="/media/lp/w_fireplace.webp" alt="Black Venetian plaster fireplace wall" loading="lazy"><em>Real project</em></div><b>Black Venetian fireplace wall</b><span>Venetian plaster · <u>see the project</u></span></a>
+    <div class="sc"><div class="ph"><img src="/media/lp/w_venetian.webp" alt="Floor-to-ceiling polished Venetian plaster wall by a glass door" loading="lazy"><em>Real project</em></div><b>Floor-to-ceiling polished Venetian</b><span>High-gloss Venetian plaster</span></div>
+    <a class="sc" href="/projects/fireplace-1000-lines.html"><div class="ph"><img src="/media/lp/w_column.webp" alt="Fireplace column in dark Venetian plaster with fine trowel lines" loading="lazy"><em>Real project</em></div><b>1,000 trowel lines on a fireplace column</b><span>Venetian plaster · <u>see the project</u></span></a>
+    <div class="sc"><div class="ph"><img src="/media/lp/w_island.webp" alt="Kitchen island finished in marble-effect plaster" loading="lazy"><em>Real project</em></div><b>Kitchen island, marble look without slabs</b><span>Marble-effect plaster</span></div>
+    <div class="sc"><div class="ph"><img src="/media/lp/w_door.webp" alt="Flush hidden door in a smoky grey mineral plaster wall" loading="lazy"><em>Real project</em></div><b>A hidden door that disappears into the wall</b><span>Smoky mineral plaster</span></div>
+    <div class="sc"><div class="ph"><img src="/media/lp/w_stair.webp" alt="Staircase wall in pearl Crystal Shine plaster" loading="lazy"><em>Real project</em></div><b>Staircase in pearl plaster</b><span>Crystal Shine finish</span></div>
   </div>
   <div class="rail-nav"><button type="button" aria-label="Previous" data-rail="-1">←</button><button type="button" aria-label="Next" data-rail="1">→</button></div>
 </section>
 
 
+<div id="how"></div>
 <section class="feat feat-d" id="finishes">
   <div class="feat-pin" id="featPin">
     <div class="feat-l">
@@ -361,7 +550,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
   <div class="foot-top">
     <h3>Where stone<br>meets the wall.</h3>
     <nav aria-label="Footer">
-      <a href="#finishes">finishes</a><a href="#work">work</a><a href="#ba">before &amp; after</a><a href="#faq">faq</a><a href="#" data-open>book a visit</a><a href="https://instagram.com/m5miami" target="_blank" rel="noopener">instagram</a>
+      <a href="#finishes">finishes</a><a href="#work">work</a><a href="#ba">before &amp; after</a><a href="#lookbook">lookbook</a><a href="#faq">faq</a><a href="#" data-open>book a visit</a><a href="https://instagram.com/m5miami" target="_blank" rel="noopener">instagram</a>
     </nav>
     <div class="lbk">
       <b>Get the 2026 finishes lookbook</b>
@@ -414,16 +603,16 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
 <script>
 var FEAT=[
   {k:'Samples on your wall',d:'A master comes with real panels and holds them on your wall, in your light. You pick with your own eyes.',i:'/media/lp/p_samples.webp',viz:1},
-  {k:'Venetian',d:'Polished to a deep, marble-like shine that moves with the light all day.',v:'/media/lp/venetian.mp4',p:'/media/lp/venetian.webp'},
-  {k:'Marmorino',d:'Fine stone grain, soft satin look. Calm and architectural, from bedrooms to facades.',i:'/img/case_powder-room-black-marmorino_3.webp'},
-  {k:'By hand',d:'Coat after coat, trowel by trowel. Floors and furniture protected, room left clean.',v:'/media/lp/velvet.mp4',p:'/media/lp/velvet.webp'},
-  {k:'Travertine',d:'Layered stone with natural veins, without the weight or grout lines of real slabs.',i:'/img/tex_travertine.webp',kb:1},
-  {k:'Live with it',d:'One fixed price in writing, and a wall that changes with the light, every single day.',i:'/media/lp/p_living.webp',viz:1}
+  {k:'Venetian',d:'Polished to a deep, marble-like shine. Watch the light glide across it: this is a real wall by our masters.',v:'/media/lp/venetian2.mp4',p:'/media/lp/venetian2.webp',real:1},
+  {k:'Marmorino',d:'Fine stone grain with a soft satin glow. Calm and architectural, from bedrooms to whole facades. Inset: the real finish up close.',i:'/media/lp/marmorino_room.webp',viz:1,det:'/media/lp/marmorino_detail.webp'},
+  {k:'By hand',d:'Our own masters, trained in the European school and led by a craftsman with 15+ years on high-end walls. Every coat goes on by hand with a steel trowel. Floors and furniture covered, room left clean.',v:'/media/lp/velvet.mp4',p:'/media/lp/velvet.webp',real:1},
+  {k:'Travertine',d:'Layered stone with open pores and soft veins: the look of travertine across a whole wall, without the weight, seams or grout lines of slabs. Inset: the real finish up close.',i:'/media/lp/travertine_room.webp',viz:1,det:'/media/lp/travertine_detail.webp'},
+  {k:'Easy to live with',d:'Washable and breathable. Scuffs buff out, a chip is patched without a trace, and it never peels like paint. It ages into a patina, not into chips.',i:'/media/lp/live.webp',real:1}
 ];
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,desktop=matchMedia('(min-width: 901px)').matches;
   if(reduce)document.documentElement.classList.add('no-motion');
-  function mediaHTML(f){return (f.v?'<video muted loop playsinline preload="none" poster="'+f.p+'" data-src="'+f.v+'"></video>':'<img class="'+(f.kb?'kb':'')+'" src="'+f.i+'" alt="'+f.k+'" loading="lazy">')+(f.viz?'<span class="viz">VISUALIZATION</span>':'')}
+  function mediaHTML(f){return (f.v?'<video muted loop playsinline preload="none" poster="'+f.p+'" data-src="'+f.v+'"></video>':'<img class="'+(f.kb?'kb':'')+'" src="'+f.i+'" alt="'+f.k+'" loading="lazy">')+(f.viz?'<span class="viz">VISUALIZATION</span>':'')+(f.real?'<span class="real">OUR MASTERS\' WORK</span>':'')+(f.det?'<figure class="det"><img src="'+f.det+'" alt="'+f.k+' finish, close-up of a real wall" loading="lazy"><figcaption>Real finish</figcaption></figure>':'')}
   var fM=document.getElementById('fMedia'),fTabs=document.getElementById('fTabs'),fCards=document.getElementById('fCards');
   FEAT.forEach(function(f,i){
     var m=document.createElement('div');m.className='m'+(i?'':' on');m.innerHTML=mediaHTML(f);fM.appendChild(m);
@@ -440,18 +629,22 @@ var FEAT=[
     if(jump&&st){var y=st.start+(st.end-st.start)*(i+.5)/FEAT.length;lenis?lenis.scrollTo(y):scrollTo(0,y)}}
   go(0);
 
+  /* hero: slow crossfade between real works */
+  var heroImgs=[].slice.call(document.querySelectorAll('#heroS img')),hi=0;
+  if(!reduce&&heroImgs.length>1)setInterval(function(){if(document.hidden)return;var n=(hi+1)%heroImgs.length;heroImgs[n].loading='eager';heroImgs[hi].classList.remove('on');heroImgs[n].classList.add('on');hi=n},5600);
+
   /* lazy videos */
   var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){if(!v.src&&v.dataset.src)v.src=v.dataset.src;var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{rootMargin:'250px'});
   document.querySelectorAll('.lazyv,.feat-m video').forEach(function(v){io.observe(v)});
 
   /* header */
-  var hdr=document.getElementById('hdr');function hs(){hdr.classList.toggle('up',scrollY>40)}addEventListener('scroll',hs,{passive:true});hs();
+  var hdr=document.getElementById('hdr'),chat=document.querySelector('.chat');var prog=document.getElementById('prog');function hs(){hdr.classList.toggle('up',scrollY>40);if(chat)chat.classList.toggle('show',scrollY>innerHeight*.7);var m=document.documentElement.scrollHeight-innerHeight;prog.style.transform='scaleX('+(m>0?Math.min(1,scrollY/m):0)+')'}addEventListener('scroll',hs,{passive:true});hs();
 
   /* rail arrows */
   var rail=document.getElementById('rail');document.querySelectorAll('[data-rail]').forEach(function(b){b.onclick=function(){rail.scrollBy({left:(+b.dataset.rail)*rail.clientWidth*.8,behavior:'smooth'})}});
 
   /* before/after: drag + scroll */
-  var ba=document.getElementById('ba'),aft=document.getElementById('baAfter'),line=document.getElementById('baLine'),knob=document.getElementById('baKnob');
+  var ba=document.getElementById('baBox'),aft=document.getElementById('baAfter'),line=document.getElementById('baLine'),knob=document.getElementById('baKnob');
   function setBA(p){p=Math.max(2,Math.min(98,p));aft.style.clipPath='inset(0 0 0 '+p+'%)';line.style.left=p+'%';knob.style.left=p+'%';knob.setAttribute('aria-valuenow',Math.round(p))}
   var drag=false;function bx(e){var r=ba.getBoundingClientRect();setBA(((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*100)}
   knob.addEventListener('pointerdown',function(e){drag=true;knob.setPointerCapture(e.pointerId)});
