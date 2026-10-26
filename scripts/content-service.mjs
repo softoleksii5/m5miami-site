@@ -43,7 +43,7 @@ export const condoEn = {
       <li><strong>Joinery and stone.</strong> Cabinetry, counters and islands, from light oak to black stone.</li>
       <li><strong>Lighting and appliances.</strong> Planned together with ventilation, so nothing is added as an afterthought.</li>
       </ul>
-      <p>Browse kitchens in the <a href="#interiors">apartment projects below</a>.</p>` },
+      <p>Browse kitchens in the <a href="#interiors">apartment projects below</a>. Typical kitchen and bathroom prices are in our <a href="/guides/renovation-cost-miami/">Miami renovation cost guide</a>.</p>` },
     { id: 'bathrooms', label: 'Bathrooms', h2: 'Bathrooms and powder rooms', html: `
       <p>Primary baths, guest baths, powder rooms and showers: layout, stone or tile, fixtures and lighting, planned as one design. Venetian plaster and marmorino are common in bathrooms and powder rooms, and wet zones get a protective sealer. Read more about <a href="/venetian-plaster/marmorino/">marmorino plaster</a>.</p>` },
     { id: 'building', alt: true, label: 'Building rules', h2: 'Building rules, board approval and work hours', html: `
@@ -99,7 +99,8 @@ export const homeEn = {
       <ul>
       <li><strong>Layout and flow.</strong> Islands, pantries and indoor-outdoor connections.</li>
       <li><strong>Joinery, stone and lighting.</strong> Designed as one composition with the living spaces.</li>
-      </ul>` },
+      </ul>
+      <p>Typical kitchen and bathroom prices are in our <a href="/guides/renovation-cost-miami/">Miami renovation cost guide</a>.</p>` },
     { id: 'bathrooms', label: 'Bathrooms', h2: 'Bathrooms and powder rooms', html: `
       <p>Primary suites, guest baths and powder rooms, designed with the bedrooms they serve. Natural stone, tile and <a href="/venetian-plaster/marmorino/">marmorino plaster</a> work well here: wet zones get a protective sealer.</p>` },
     { id: 'florida', alt: true, label: 'South Florida houses', h2: 'Houses in South Florida: what the climate asks of a renovation', html: `

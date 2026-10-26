@@ -1,5 +1,5 @@
 // Guides and the report page (page plan 3.12–3.14). English only.
-// The cost guide (guide2) has no price ranges from the owner yet, so it is built noindex and kept out of the sitemap and the menus.
+// The cost guide carries typical Miami 2026 ranges (market sources + M5 OS estimate rates), approved by the owner 26.10.2026.
 import { ORIGIN } from './pages-lib.mjs';
 
 export const guideCondoEn = {
@@ -63,12 +63,12 @@ export const guideCondoEn = {
 };
 
 export const guideCostEn = {
-  lang: 'en', slug: '/guides/renovation-cost-miami/', track: 'guide-cost', noindex: true,
+  lang: 'en', slug: '/guides/renovation-cost-miami/', track: 'guide-cost',
   title: 'What a Renovation Costs in Miami | M5 Studio Miami',
-  desc: 'What drives the cost of a condo, kitchen, bathroom or full home renovation in Miami, and how an itemized budget keeps the price fixed. Free site visit.',
+  desc: 'Miami renovation prices for 2026: kitchens $15–200K, bathrooms $8–70K, interior design $8–25 per sq ft, full projects $200–250K. What moves the number.',
   label: 'Guide · renovation cost',
   h1: 'What a condo, kitchen, bathroom or full renovation costs in Miami',
-  lede: 'No two renovations are the same, so we do not quote a price per square foot. This page explains what moves the number, and the one figure we stand behind: a typical full renovation project with M5 is $200–250K.',
+  lede: 'Typical Miami prices for 2026, by kitchen, bathroom, design and full project, and what moves the number. A typical full renovation project with M5 is $200–250K.',
   crumbs: [['Renovation cost', null]],
   ctas: [['Book a free site visit', '/#contact', 'btn-ink'], ['Ask for the full cost guide', 'https://wa.me/17864074441?text=Hi%20M5%2C%20please%20send%20me%20the%202026%20renovation%20cost%20guide', 'btn-line']],
   meta: 'Typical full renovation project: $200–250K',
@@ -76,7 +76,7 @@ export const guideCostEn = {
   article: { date: '2026-10-26' },
   sections: [
     { id: 'read', label: 'How to read this', h2: 'How to read these numbers', html: `
-      <p>A price per square foot hides almost everything that matters: the building, the layout, the finish level and the condition of what is behind the walls. We price every project after visiting the space, so there is no guessing over the phone. You get an itemized estimate 48 hours after the visit.</p>` },
+      <p>The ranges below are typical for Miami in 2026, based on market data and our own estimates. They help you plan. Your project gets an itemized, fixed estimate 48 hours after a free site visit, because the building, the layout, the finish level and what is behind the walls all move the number.</p>` },
     { id: 'full', alt: true, label: 'Full renovation', h2: 'Full condo and full house renovation', html: `
       <p>A typical full renovation project with M5 is $200–250K. What moves a project within and beyond that figure:</p>
       <ul>
@@ -86,10 +86,24 @@ export const guideCostEn = {
       <li><strong>Condition.</strong> Wiring, plumbing and moisture behind the walls can change the plan once opened.</li>
       </ul>` },
     { id: 'kitchens', label: 'Kitchens', h2: 'Kitchens', html: `
+      <div class="tblw"><table class="cmp"><thead><tr><th>Kitchen</th><th>Typical price, Miami 2026</th></tr></thead><tbody>
+      <tr><td>Refresh: new fronts, counters, backsplash, lighting</td><td>$15–25K</td></tr>
+      <tr><td>Full kitchen remodel: cabinetry, stone, appliances</td><td>$40–80K</td></tr>
+      <tr><td>High-end custom kitchen with island and joinery</td><td>$100–200K</td></tr>
+      </tbody></table></div>
       <p>The cost of a kitchen follows how much of it moves. A new layout with relocated plumbing and ventilation costs more than the same footprint with new cabinets. Other drivers are the cabinetry and joinery, stone counters and islands, appliances and lighting. Read about <a href="/condo-renovation/#kitchens">condo kitchens</a> and <a href="/home-renovation/#kitchens">house kitchens</a>.</p>` },
     { id: 'bathrooms', alt: true, label: 'Bathrooms', h2: 'Bathrooms', html: `
+      <div class="tblw"><table class="cmp"><thead><tr><th>Bathroom</th><th>Typical price, Miami 2026</th></tr></thead><tbody>
+      <tr><td>Powder room or bathroom refresh</td><td>$8–14K</td></tr>
+      <tr><td>Full bathroom remodel</td><td>$18–35K</td></tr>
+      <tr><td>Luxury primary bathroom</td><td>$38–70K</td></tr>
+      </tbody></table></div>
       <p>Bathrooms are small rooms with a lot of detail: layout, waterproofing, stone or tile, fixtures and lighting. Plaster is an option too, since Venetian plaster and marmorino work in wet areas with a protective sealer. See <a href="/condo-renovation/#bathrooms">condo bathrooms</a> and <a href="/home-renovation/#bathrooms">house bathrooms</a>.</p>` },
     { id: 'design', label: 'Design fees', h2: 'Design fees', html: `
+      <div class="tblw"><table class="cmp"><thead><tr><th>Interior design</th><th>Typical fee, Miami 2026</th></tr></thead><tbody>
+      <tr><td>Full interior design: layouts, finishes, lighting, drawings</td><td>$8–12 per sq ft</td></tr>
+      <tr><td>High-end design with custom joinery and furnishing</td><td>$15–25 per sq ft</td></tr>
+      </tbody></table></div>
       <p>Design can be bought on its own or as part of a full renovation. The fee depends on the size of the home and the scope, and we state it in writing after the site visit. See <a href="/interior-design/">interior design with M5</a>.</p>` },
     { id: 'protect', alt: true, label: 'Your budget', h2: 'How M5 protects the budget', html: `
       <ul>
@@ -103,8 +117,8 @@ export const guideCostEn = {
   ],
   faq: [
     { q: 'How much does it cost to renovate a condo in Miami?', a: 'A typical full renovation project with M5 is $200–250K. The exact price depends on the size, the scope, the finish level and the building. We price every project after visiting the space.' },
-    { q: 'What does a kitchen remodel cost in Miami?', a: 'It depends on how much of the kitchen moves, on the cabinetry and stone, and on the appliances. We give an itemized price after seeing the space.' },
-    { q: 'What does a bathroom remodel cost in Miami?', a: 'It depends on the layout, the waterproofing, the stone or tile and the fixtures. We give an itemized price after seeing the space.' },
+    { q: 'What does a kitchen remodel cost in Miami?', a: 'Typically $15–25K for a refresh, $40–80K for a full remodel and $100–200K for a high-end custom kitchen in 2026. It depends on how much of the kitchen moves, on the cabinetry and stone, and on the appliances. We give an itemized price after seeing the space.' },
+    { q: 'What does a bathroom remodel cost in Miami?', a: 'Typically $8–14K for a powder room or refresh, $18–35K for a full bathroom and $38–70K for a luxury primary bathroom in 2026. It depends on the layout, the waterproofing, the stone or tile and the fixtures. We give an itemized price after seeing the space.' },
     { q: 'Why do renovation quotes differ so much?', a: 'Often the scope is not the same: one quote leaves out work another includes, or uses allowances instead of real prices. An itemized budget that changes only through a change order you sign first makes quotes comparable.' },
   ],
 };

@@ -7,20 +7,27 @@ const fig = (src, w, h, alt, cap, href) =>
 export const costEn = {
   lang: 'en', slug: '/venetian-plaster/cost/', track: 'plaster-cost',
   title: 'What Venetian Plaster Costs in Miami | M5 Studio Miami',
-  desc: 'What moves Venetian plaster prices in Miami: finish, surface, ceilings and wet areas. Projects from $10,000, with a fixed written price after a free visit.',
+  desc: 'Venetian plaster prices in Miami for 2026: $15–30 per sq ft by finish, projects from $10,000, and a fixed written price after a free site visit.',
   label: 'Venetian plaster · price',
   h1: 'What Venetian plaster costs in Miami',
-  lede: 'Venetian plaster projects with M5 start at $10,000. Above that, the price follows the finish, the wall and the surface underneath, and you get one fixed number in writing after a free site visit.',
+  lede: 'Typical Venetian plaster prices in Miami run $15–30 per square foot of wall, depending on the finish. Projects with M5 start at $10,000, and you get one fixed number in writing after a free site visit.',
   crumbs: [['Venetian plaster', '/venetian-plaster/'], ['Cost', null]],
   ctas: [['Book a free site visit', '/#contact', 'btn-ink'], ['Venetian plaster with M5', '/venetian-plaster/', 'btn-line']],
-  meta: 'From $10,000 · fixed price in writing · free site visit',
+  meta: '$15–30 per sq ft · from $10,000 · fixed price in writing',
   ctaH: 'Get a fixed price for your wall',
   ogImage: ORIGIN + '/media/lp/og.jpg',
   article: { date: '2026-10-26' },
   sections: [
     { id: 'short', label: 'The short answer', h2: 'Projects start at $10,000', html: `
       <div class="facts"><div><b>From $10,000</b><span>The starting point for a Venetian plaster, marmorino or mineral plaster project with M5.</span></div><div><b>Free site visit</b><span>A master brings real samples and holds them against your wall, in your light.</span></div><div><b>One fixed price</b><span>Written, for the whole project, with the schedule. No surprises after we start.</span></div></div>
-      <p>We do not publish a price per square foot. Two walls of the same size can need very different work: another finish, another surface underneath, another ceiling height. A number given over the phone would be a guess, so we look at your wall first.</p>
+      <h3>Typical prices per square foot of wall, Miami 2026</h3>
+      <div class="tblw"><table class="cmp"><thead><tr><th>Finish</th><th>Typical price</th></tr></thead><tbody>
+      <tr><td>Mineral plaster, concrete effect</td><td>$15–20 per sq ft</td></tr>
+      <tr><td>Marmorino</td><td>$15–25 per sq ft</td></tr>
+      <tr><td>Polished Venetian plaster</td><td>$20–30 per sq ft</td></tr>
+      <tr><td>Special finishes: metallic, gold leaf, combed relief</td><td>from $30 per sq ft</td></tr>
+      </tbody></table></div>
+      <p>Prices include surface preparation, materials, hand application and the protective sealer. They are typical ranges for Miami in 2026, and the minimum project is $10,000. Two walls of the same size can still need different work, so your exact price is fixed in writing after we see the wall.</p>
       <p>Everything below explains what moves the price, so you know what to expect before the visit. For the finish itself, see <a href="/venetian-plaster/">Venetian plaster with M5</a>.</p>` },
     { id: 'drivers', alt: true, label: 'What moves the price', h2: 'Seven things that decide the number', html: `
       <ul>
@@ -59,11 +66,11 @@ export const costEn = {
       </ol>
       <p>Browse finished walls first in <a href="/portfolio/">our plaster work</a>.</p>
       <h3>Part of a full renovation?</h3>
-      <p>A typical full renovation project with M5 is $200–250K, and plaster is one line of the itemized estimate. See <a href="/condo-renovation/">condo and apartment renovation</a> and <a href="/home-renovation/">full home renovation</a>.</p>` },
+      <p>A typical full renovation project with M5 is $200–250K, and plaster is one line of the itemized estimate. Typical kitchen, bathroom and design prices are in our <a href="/guides/renovation-cost-miami/">renovation cost guide</a>. See <a href="/condo-renovation/">condo and apartment renovation</a> and <a href="/home-renovation/">full home renovation</a>.</p>` },
   ],
   faq: [
     { q: 'Why is Venetian plaster more expensive than paint?', a: 'Paint is a thin film rolled on in an afternoon. Venetian plaster is mineral plaster applied in thin coats by hand and burnished, which takes skilled labour and drying time between coats. You pay for the craft, and for a wall that does not peel and can be repaired.' },
-    { q: 'Is the price per square foot or per project?', a: 'Per project. We measure and check the surface during the free site visit and give a fixed written price for the whole project. Projects start at $10,000.' },
+    { q: 'How much does Venetian plaster cost per square foot in Miami?', a: 'Typically $15–30 per square foot of wall in 2026: mineral plaster $15–20, marmorino $15–25, polished Venetian plaster $20–30, and special finishes from $30. Projects with M5 start at $10,000, and you get a fixed written price for the whole project after a free site visit.' },
     { q: 'Does a bathroom cost more than a living room wall?', a: 'Not automatically. The price follows the area, the surface, the finish and the details. Wet zones get a protective sealer, and a small room with many corners can take as long as a larger plain wall. We confirm the exact price after seeing the space.' },
     { q: 'How long does an accent wall take?', a: 'A feature wall or a powder room usually takes several days, including drying between coats. You get the schedule in writing with the price.' },
   ],
