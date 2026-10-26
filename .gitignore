@@ -6,3 +6,4 @@ claude-memory/
 .env.*
 node_modules/
 .DS_Store
+gate/

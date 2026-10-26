@@ -3,11 +3,11 @@
    продающий каталог услуг (заявка → m5hook → Telegram «Лиды» мгновенно + WhatsApp),
    кредиты 3%, реферал $500/$500 (ref-код ≠ slug доступа!), фидбек с kudos.
    Google-отзыв просим БЕЗ оплаты (политика Google запрещает платные отзывы).
-   Доступ: /client/?p=<slug>. Демо: ?p=brickell-demo. Данные позже — из JobTread API. */
+   Доступ: /client/?p=<slug>. Демо: ?p=demo. Данные позже — из JobTread API. */
 
 var CLIENTS={
- 'brickell-demo':{
-   name:'David', project:'Brickell Residence — Full Renovation', status:'Active',
+ 'demo':{
+   name:'David', project:'Condo Residence — Full Renovation', status:'Active',
    pm:'Vadym', pmPhone:'17864074441', started:'Sep 2026', eta:'Dec 2026', updated:'Sep 20',
    refCode:'dv7k2f', /* реф-код ВСЕГДА отдельный от slug — slug это ключ доступа к кабинету */
    phase:2, phases:['Contract','Design','Materials','Build','Styling','Handover'],
@@ -45,7 +45,7 @@ var CLIENTS={
 var SERVICES=[
  {img:'/img/svc3_plaster.webp', ttl:'Venetian Plaster & Mineral Finishes', sub:'Venetian, Marmorino, travertine, concrete effect — the signature M5 finish clients photograph most', from:'from $18 / sq ft',
   time:'3–7 days per room',
-  what:'A hand-applied mineral finish that turns a flat wall into the centerpiece of the room — the same finish we build our showroom around.',
+  what:'A hand-applied mineral finish that turns a flat wall into the centerpiece of the room — the same finish at the heart of our sample library.',
   steps:['Sample session — we bring 3–5 physical samples to your home and match them to your light','Surface prep & protection of floors and furniture','2–3 coats applied by our master (each needs to cure)','Sealing & final polish, walkthrough together'],
   incl:'Materials, protection, application, sealing and a touch-up kit. Dust-free process.'},
  {img:'/img/svc1_interior.webp', ttl:'Interior Design Package', sub:'Concept, 3D visuals, materials list — a home that feels curated, not furnished', from:'from $6,500',
@@ -125,7 +125,7 @@ var HUB_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEm
 var TOK=(location.search.match(/[?&]t=([^&]*)/)||[])[1]||'';
 /* Демо-кабинет: показываем весь флоу, но НИЧЕГО не шлём в боевой Telegram/CRM
    (инцидент 31.07: клики Request с демо падали лид-карточками в «Лиды»). */
-var DEMO=(slug==='brickell-demo');
+var DEMO=(slug==='demo');
 function hub(p){ if(DEMO) return; if(window.m5hook) m5hook(p); }
 
 var TSTYLE='<style>'+
@@ -313,8 +313,8 @@ function renderGate_(){
   '<span style="font-size:14px;color:#6E6656">Every M5 client receives a personal link from their project manager. '+
   'Lost yours? Message us on WhatsApp and we’ll resend it.</span><br><br>'+
   '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17864074441">WhatsApp M5</a>'+
-  '<div style="margin-top:14px"><a href="/client/?p=brickell-demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#96703B;text-decoration:underline">SEE A DEMO PROJECT HUB →</a></div></div>'+
-  '<footer>M5 Interior Design &amp; Build · Miami</footer>';
+  '<div style="margin-top:14px"><a href="/client/?p=demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#96703B;text-decoration:underline">SEE A DEMO PROJECT HUB →</a></div></div>'+
+  '<footer>M5 Interior Design · Miami</footer>';
 }
 function renderHub_(){
   var ph=C.phases.map(function(p,i){
@@ -426,10 +426,10 @@ function renderHub_(){
       '<div class="okmsg" id="fbOk">'+(DEMO?'Demo mode — in your real hub this lands on the founders’ desk instantly.':'Thank you! Your feedback just landed on the founders’ desk. We read every word.')+'</div>'+
       gRev, false)+
     acc('talk','📞','Talk to us directly','Vlad (co-founder) · '+esc(C.pm)+' (Director)',
-      '<div class="fdrs"><img src="/img/ava_vlad_t.webp" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
-      '<div class="fdrs"><img src="/img/ava_vadim_t.webp" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
+      '<div class="fdrs"><img src="/img/portrait-1_t.webp" alt=""><div><b>Vlad</b><span>Co-founder · M5</span></div><a href="mailto:hello@m5miami.com">Email</a></div>'+
+      '<div class="fdrs"><img src="/img/portrait-2_t.webp" alt=""><div><b>Vadym</b><span>Director · runs your project</span></div><a target="_blank" rel="noopener" href="https://wa.me/'+C.pmPhone+'">WhatsApp</a></div>', false)+
   '</div>'+
-  '<footer>M5 · Interior Design &amp; Build · Miami</footer>'+
+  '<footer>M5 · Interior Design · Miami</footer>'+
   '<div class="svm" id="svm" onclick="if(event.target===this)svcClose()"><div class="svm-box" id="svmBox"></div></div>';
   lazyBands_();
 }

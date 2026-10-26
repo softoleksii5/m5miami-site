@@ -1,1 +1,0 @@
-window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');window.m5track=function(n,p){try{if(window.gtag)gtag('event',n,p||{})}catch(e){}};
