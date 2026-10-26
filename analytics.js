@@ -59,3 +59,16 @@
   var left = false; var onHide = function () { if (document.visibilityState !== 'hidden' || left) return; left = true; push('scroll', undefined, maxScroll); push('leave', undefined, Math.round((Date.now() - start) / 1000)); flush(true); };
   document.addEventListener('visibilitychange', onHide); addEventListener('pagehide', onHide);
 })();
+
+/* Ссылки на другие страницы и сайты — в новой вкладке (решение Алекса 26.10.2026).
+   Не трогаем: якоря на этой же странице, tel:/mailto:, javascript:, переключатель языка (data-l). */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+    if(!a||a.hasAttribute('data-l')||a.target==='_self')return;
+    var h=a.getAttribute('href')||'';
+    if(!h||h.charAt(0)==='#'||/^(tel:|mailto:|sms:|javascript:)/i.test(h))return;
+    try{var u=new URL(a.href,location.href);if(u.origin===location.origin&&u.pathname===location.pathname&&u.hash)return;}catch(_){}
+    a.target='_blank';a.rel='noopener';
+  },true);
+})();

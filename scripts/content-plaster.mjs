@@ -46,7 +46,7 @@ export const costEn = {
       <p>Venetian plaster and marmorino are common in bathrooms and powder rooms. Wet zones get a protective sealer. A small room with many corners and details can take as long as a larger plain wall.</p>
       <h3>Fireplaces</h3>
       <p>A fireplace wall or column is a feature that people look at up close, so the finish and the detail work matter. We show the finish on a real panel first.</p>
-      <div class="figs">${fig('/media/lp/w_fireplace.jpg', 900, 1125, 'Black Venetian plaster fireplace wall', 'Black Venetian fireplace wall · master&#x27;s work', '/projects/black-fireplace-wall.html')}${fig('/img/case_powder-room-black-marmorino_2_t.jpg', 844, 900, 'Black Marmorino powder room', 'Black Marmorino powder room · master&#x27;s work', '/projects/powder-room-black-marmorino.html')}</div>` },
+      <div class="figs">${fig('/img/cost_ivory.jpg', 900, 1125, 'Warm ivory polished Venetian plaster wall with a linear fireplace in a sunlit living room', 'Warm ivory polished Venetian plaster · visualization', '/venetian-plaster/')}${fig('/img/cost_grey.jpg', 900, 1125, 'Powder room in warm grey mineral plaster with a concrete effect and a walnut vanity', 'Grey mineral plaster, concrete effect · visualization', '/venetian-plaster/')}</div>` },
     { id: 'compare', alt: true, label: 'Compared', h2: 'Venetian plaster, microcement and paint', html: `
       <p>An honest comparison of three ways to finish a wall. Prices vary by project, so the table compares what you get, not a number.</p>
       <div class="tblw"><table class="cmp"><thead><tr><th></th><th>Venetian plaster</th><th>Microcement</th><th>Paint</th></tr></thead><tbody>
