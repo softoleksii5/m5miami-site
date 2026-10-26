@@ -62,11 +62,9 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
     .then(function(r){return r.json().then(function(j){return {ok:!!(j&&j.ok),lead_id:j&&j.lead_id,created:j&&j.created,status:r.status,fields:j&&j.fields}}).catch(function(){return {ok:false,status:r.status}})})
     .catch(function(){return {ok:false,status:0}})};
 window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)return;p=p||{};try{var q=(localStorage.getItem('m5_ref')||'').split('|');if(q[0]&&Date.now()-(+q[1]||0)<7776e6){p.details=(p.details?p.details+' · ':'')+'REF:'+q[0]}}catch(e){}var s=JSON.stringify(p);if(navigator.sendBeacon){navigator.sendBeacon(M5_HOOK,s)}else{fetch(M5_HOOK,{method:'POST',mode:'no-cors',keepalive:true,body:s})}}catch(e){}}</script>
-<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");</script>
+<script type="text/javascript">window.addEventListener('load',function(){setTimeout(function(){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpd5kfm31r");},3000)});</script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Geist:wght@400;500;600;800&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-cyrillic.woff2" crossorigin>
 <link rel="stylesheet" href="/tokens.css">
 <link rel="preload" as="image" href="/img/hero.webp" media="(min-width:681px)">
 <link rel="preload" as="image" href="/img/m/hero-portrait.webp" media="(max-width:680px)">
@@ -127,7 +125,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   }
 
   .hero-badge{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--color-gold-on-dark);margin-bottom:var(--space-5)}
-  .hero h1{font-family:var(--font-display);font-weight:400;letter-spacing:var(--ls-display);font-size:var(--fs-display);line-height:var(--lh-display);max-width:16ch;text-wrap:balance}
+  .hero h1{font-family:var(--font-display);font-weight:400;letter-spacing:var(--ls-display);font-size:var(--fs-display);line-height:var(--lh-display);max-width:7.6em;text-wrap:balance}
   .hero-sub{color:#E4DCCB;margin:var(--space-5) 0 var(--space-7)}
   .hero-ctas{display:flex;align-items:center;gap:var(--space-6);flex-wrap:wrap}
   .hero-strip{position:relative;z-index:2;border-top:1px solid var(--line-d);margin-top:70px}
@@ -135,7 +133,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 
   /* stats */
   .stats.sec-light{text-align:center;background:var(--color-bone)}
-  .why-h{font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.2;letter-spacing:0;color:#1A1712;margin:42px auto 14px;max-width:26ch;text-align:center}
+  .why-h{font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.2;letter-spacing:0;color:#1A1712;margin:42px auto 14px;max-width:12.4em;text-align:center}
   .why-h b{font-weight:600;color:#8F6D3A;white-space:nowrap}
   .why-h::after{content:"";display:block;width:46px;height:2px;background:#B0894F;margin:13px auto 0;border-radius:2px}
   .why{text-align:left;background:rgba(252,250,244,.70);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:3px 24px 14px;border-radius:16px;border:1px solid rgba(176,137,79,.18)}
@@ -149,14 +147,14 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .why-rest i{font-style:normal;font-size:9.5px;letter-spacing:.18em;color:#B0894F;flex:none}
   @media(max-width:900px){.why-top{grid-template-columns:1fr 1fr;gap:0 18px}.why-rest{grid-template-columns:1fr 1fr;gap:0 18px}}
   @media(max-width:560px){.why{padding:2px 18px 13px}.why-top{grid-template-columns:1fr 1fr;gap:0 14px}.why-top>div{padding:10px 0 11px}.why .t{font-size:14.5px}.why .b{display:none}.why-rest{grid-template-columns:1fr;gap:5px 0;padding-top:10px}}
-  .stats .lead{font-family:var(--font-display);font-size:clamp(28px,1.2rem + 1.6vw,40px);font-weight:400;max-width:30ch;margin:18px auto 64px;line-height:1.25;letter-spacing:0}
+  .stats .lead{font-family:var(--font-display);font-size:clamp(28px,1.2rem + 1.6vw,40px);font-weight:400;max-width:14.3em;margin:18px auto 64px;line-height:1.25;letter-spacing:0}
   .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(252,250,244,.42)}
   .stat{padding:40px 20px;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
   .stat:last-child{border-right:none}
   .stat b{font-family:var(--font-display);font-weight:400;letter-spacing:-0.01em;font-size:var(--fs-numeral);line-height:1;display:block}
   .stat b i{font-size:.5em;letter-spacing:0;margin-left:2px}
   .stat b i{font-style:normal;color:var(--color-gold-text)}
-  .stat span{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);display:block;margin-top:13px;max-width:26ch}
+  .stat span{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);display:block;margin-top:13px;max-width:17.2em}
   @media(max-width:900px){.stat-row{grid-template-columns:1fr 1fr}.stat{border-bottom:1px solid var(--line)}.stat:nth-child(2n){border-right:none}}
   @media(max-width:520px){.stat-row{grid-template-columns:1fr 1fr}.stat{padding:28px 12px}.stat:nth-child(2n){border-right:none}}
 
@@ -165,7 +163,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .svc{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column;min-height:520px;position:relative}
   .svc-top{padding:30px 30px 0;flex:1}
   .svc-num{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bone);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;margin-bottom:26px}
-  .svc h3{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h3);line-height:1.1;letter-spacing:0;max-width:12ch}
+  .svc h3{font-family:var(--font-display);font-weight:500;font-size:var(--fs-h3);line-height:1.1;letter-spacing:0;max-width:5.7em}
   .svc-photo{height:150px;margin:26px -1px 0;background:linear-gradient(160deg,#D8CBB2,#B9A98C)}
   .svc ul{list-style:none}
   .svc li{border-top:1px solid var(--line);padding:15px 30px;font-size:14.5px;color:var(--soft)}
@@ -187,7 +185,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .tag{position:absolute;top:16px;left:16px;z-index:3;background:var(--ink);color:var(--bone);font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;padding:7px 12px}
   .case:hover .tag{background:var(--gold-d)}
   .case-cap{position:absolute;left:22px;right:22px;bottom:20px;z-index:3;color:#fff}
-  .case-cap h4{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:500;line-height:1.1;letter-spacing:0}
+  .case-cap h3{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:500;line-height:1.1;letter-spacing:0}
   .case-meta{display:flex;gap:18px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#D8CBB2;margin-top:8px}
   @media(max-width:900px){.ba-grid{grid-template-columns:1fr 1fr}}
   @media(max-width:620px){.ba-grid{grid-template-columns:1fr}}
@@ -221,7 +219,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   /* trust */
   .trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:60px}
   .t-card{background:var(--white);border:1px solid var(--line);padding:40px 34px}
-  .t-card h4{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:500;line-height:1.15;letter-spacing:0;margin-bottom:12px}
+  .t-card h3{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:500;line-height:1.15;letter-spacing:0;margin-bottom:12px}
   .t-card .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d)}
   .t-card p{font-size:14.5px;color:var(--soft);margin-top:14px}
   @media(max-width:900px){.trust-grid{grid-template-columns:1fr}}
@@ -242,7 +240,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .cm-facts{display:flex;flex-wrap:wrap;gap:10px 26px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:24px}
   .cm-facts b{color:var(--ink)}
   .cm p{font-size:16px;line-height:1.7;color:var(--soft);margin-bottom:16px}
-  .cm h5{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);margin:26px 0 12px}
+  .cm h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);margin:26px 0 12px}
   .cm ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}
   @media(max-width:640px){.cm ul{grid-template-columns:1fr}}
   .cm ul li{font-size:15px;color:var(--ink2);padding-left:18px;position:relative}
@@ -264,7 +262,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   /* reviews */
   .rev{background:var(--color-ink);color:var(--bone)}
   .rev .label{color:#D9B87C}
-  .rev-q{font-family:var(--serif);font-weight:600;font-size:clamp(24px,2.8vw,34px);line-height:1.45;letter-spacing:-.01em;max-width:34ch;margin:44px 0 34px}
+  .rev-q{font-family:var(--serif);font-weight:600;font-size:clamp(24px,2.8vw,34px);line-height:1.45;letter-spacing:-.01em;max-width:16.2em;margin:44px 0 34px}
   .rev-a{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:#B9AE9A}
   .rev-score{margin-top:56px;padding-top:26px;border-top:1px solid var(--line-d);font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:#D9B87C;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
   .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:44px 0 40px}
@@ -278,7 +276,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   /* reviews rotator (как у ) */
   .rev-rotator{position:relative;margin:44px 0 10px;min-height:300px}
   @media(max-width:600px){.rev-rotator{min-height:400px}}
-  .rev-slide{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;max-width:62ch}
+  .rev-slide{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;max-width:41.1em}
   .rev-slide.on{opacity:1;transform:none;pointer-events:auto}
   .rev-quote{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,1.2rem + 1.2vw,36px);line-height:1.3;letter-spacing:0;color:var(--bone);margin:18px 0 28px}
   .rev-nav{display:flex;align-items:center;gap:22px;margin-top:6px}
@@ -294,7 +292,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .plaster-flag{position:absolute;top:26px;left:26px;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:#0f0d0a;background:var(--gold);padding:8px 14px}
   .plaster-txt{padding:64px 58px;display:flex;flex-direction:column;justify-content:center}
   .plaster-txt h2{color:var(--bone)}
-  .plaster-txt .lead2{font-size:17px;color:#CFC5B2;line-height:1.7;margin:22px 0 30px;max-width:46ch}
+  .plaster-txt .lead2{font-size:17px;color:#CFC5B2;line-height:1.7;margin:22px 0 30px;max-width:30.5em}
   .plaster-list{list-style:none;margin-bottom:34px}
   .plaster-list li{font-size:15px;color:#CFC5B2;padding:12px 0;border-top:1px solid var(--line-d);display:flex;gap:12px}
   .plaster-list li::before{content:'—';color:var(--gold)}
@@ -305,7 +303,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .texhead{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#D9B87C;margin:46px 0 16px}
   .texrow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
   .tex{margin:0;position:relative;border-radius:12px;overflow:hidden}
-  .tex img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .tex img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;display:block;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
   .tex:hover img{transform:scale(1.06)}
   .tex figcaption{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#F4EEE4;text-shadow:0 1px 8px rgba(20,18,15,.65)}
   @media(max-width:760px){.texrow{grid-template-columns:repeat(3,1fr);gap:8px}}
@@ -327,12 +325,12 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .faq summary{font-family:var(--font-display);font-size:var(--fs-h3);font-weight:500;line-height:1.2;letter-spacing:0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
   .faq summary::after{content:'+';font-family:var(--mono);color:var(--gold);font-size:24px}
   .faq details[open] summary::after{content:'–'}
-  .faq p{margin-top:16px;color:var(--soft);font-size:15.5px;max-width:75ch}
+  .faq p{margin-top:16px;color:var(--soft);font-size:15.5px;max-width:49.7em}
 
   /* form */
   .lead-sec{background:transparent}
   .lead-box{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
-  .lead-box h2{max-width:14ch}
+  .lead-box h2{max-width:6.7em}
   .lead-feats{display:flex;gap:30px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-d);margin-top:26px;flex-wrap:wrap}
   .form{display:grid;gap:14px}
   .form input,.form select{background:var(--white);border:1px solid var(--line);padding:17px 18px;font-size:15px;font-family:var(--sans);color:var(--ink)}
@@ -342,10 +340,10 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   /* footer */
   footer{background:var(--ink);color:#B9AE9A;padding:80px 0 40px;font-size:14px}
   .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:44px;margin-bottom:60px}
-  .f-grid h5{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:#D9B87C;text-transform:uppercase;margin-bottom:18px}
+  .f-grid .f-h{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:#D9B87C;text-transform:uppercase;margin-bottom:18px}
   .f-grid ul{list-style:none;display:grid;gap:10px}
   .f-grid a:hover{color:var(--bone)}
-  .f-about{max-width:30ch;line-height:1.7;margin-top:16px}
+  .f-about{max-width:19.9em;line-height:1.7;margin-top:16px}
   .f-bottom{border-top:1px solid var(--line-d);padding-top:26px;display:flex;justify-content:space-between;gap:16px;font-size:12.5px;flex-wrap:wrap}
   .team-link{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A8272;transition:.2s}
   .team-link:hover{color:#D9B87C}
@@ -394,7 +392,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .qz-result{text-align:center;padding:8px 0 4px}
   .qz-result .label2{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d)}
   .qz-price{font-family:var(--font-display);font-weight:500;font-size:clamp(34px,7vw,46px);line-height:1.2;letter-spacing:0;margin:10px 0 6px}
-  .qz-sub{color:var(--soft);font-size:14.5px;max-width:38ch;margin:0 auto 18px}
+  .qz-sub{color:var(--soft);font-size:14.5px;max-width:25.2em;margin:0 auto 18px}
   .qz-cta{display:grid;gap:10px}
 
   /* ===== sticky mobile bar ===== */
@@ -413,7 +411,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .xi-img{height:118px;background:linear-gradient(rgba(18,16,13,.35),rgba(18,16,13,.55)),url('/img/xi_band.webp') center/cover;position:relative}
   .xi-x{position:absolute;top:10px;right:10px;width:32px;height:32px;border:none;border-radius:50%;background:rgba(15,13,10,.6);color:#fff;font-size:15px;cursor:pointer}
   .xi-body{padding:20px 22px 24px;text-align:center}
-  .xi-body h4{font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.2;letter-spacing:0;margin-bottom:7px}
+  .xi-body h3{font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.2;letter-spacing:0;margin-bottom:7px}
   .xi-body p{color:var(--soft);font-size:13px;margin-bottom:14px}
   .xi-form{display:grid;gap:9px}
   .xi-form input{background:var(--white);border:1px solid var(--line);padding:12px 14px;font-size:14px;border-radius:8px;font-family:var(--sans)}
@@ -437,7 +435,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 
   /* editorial gallery — «весь дом, один стандарт»: фото с подписями-пространствами */
   .gallery{background:transparent}
-  .gal-sub{max-width:60ch;color:var(--soft);margin-top:20px;font-size:16.5px}
+  .gal-sub{max-width:39.8em;color:var(--soft);margin-top:20px;font-size:16.5px}
   .gal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--grid-gap);margin-top:var(--heading-gap)}
   .gal-item{position:relative;aspect-ratio:3/4;margin-top:0;background:center/cover no-repeat;overflow:hidden}
   .gal-item::after{content:"";position:absolute;inset:0;background:var(--overlay-card)}
@@ -472,8 +470,8 @@ body{font-size:var(--fs-body);line-height:var(--lh-body)}
 .p-foot{text-align:center;margin-top:var(--space-7);color:var(--color-text-muted)}
 .label,.hero-badge,.h-nav,.lang-sw,.h-cta,.hero-strip .wrap,.why .k,.why .b,.why-rest>div,.why-rest i,
 .tex figcaption,.gal-cap,.case-meta,.tag,.ba-badge,.sig-flag,.plaster-flag,.svc-price,.p-side,.stat span,.p-foot,
-.t-card .mono,.tm-info span,.rev-a,.rev-count,.cm-tag,.cm-facts,.cm h5,.lead-feats,.cta .sub,
-.texhead,.f-grid h5,.team-link,.qz-head .mono,.qz-result .label2,.mbar a{
+.t-card .mono,.tm-info span,.rev-a,.rev-count,.cm-tag,.cm-facts,.cm h4,.lead-feats,.cta .sub,
+.texhead,.f-grid .f-h,.team-link,.qz-head .mono,.qz-result .label2,.mbar a{
   font-family:var(--font-label);font-weight:var(--fw-medium);
   font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label)}
 .btn,.qz-back{font-family:var(--font-label);font-weight:var(--fw-medium);
@@ -537,15 +535,15 @@ body.menu-open .mbar,body.menu-open .wa-float{display:none}
 /* centred, compact hero */
 .hero{justify-content:center}
 .hero > .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:calc(var(--header-h,64px) + 40px);padding-bottom:var(--space-8)}
-.hero h1{font-size:clamp(36px,1.1rem + 2.8vw,54px);font-weight:500;line-height:1.04;letter-spacing:-0.018em;word-spacing:-0.06em;max-width:18ch;margin:0 auto;text-shadow:0 2px 24px rgba(0,0,0,.35)}
-.hero-sub{font-size:clamp(15px,.85rem + .25vw,17px);line-height:1.5;max-width:48ch;margin:var(--space-4) auto var(--space-6)}
+.hero h1{font-size:clamp(36px,1.1rem + 2.8vw,54px);font-weight:500;line-height:1.04;letter-spacing:-0.018em;word-spacing:-0.06em;max-width:8.6em;margin:0 auto;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero-sub{font-size:clamp(15px,.85rem + .25vw,17px);line-height:1.5;max-width:31.8em;margin:var(--space-4) auto var(--space-6)}
 .hero-ctas{justify-content:center}
 .hero-strip{margin-top:0}
 .hero-strip .wrap{justify-content:center;gap:28px}
 @media(max-width:680px){.hero > .wrap{padding-top:calc(var(--header-h,64px) + 24px)}.hero-ctas{flex-direction:column;gap:var(--space-4)}}
 /* "who we are" ~30% more compact */
 .stats.sec-light{padding:var(--section-y-tight) 0}
-.stats .lead{font-size:clamp(21px,1rem + .9vw,28px);max-width:36ch;margin:12px auto 36px}
+.stats .lead{font-size:clamp(21px,1rem + .9vw,28px);max-width:17.2em;margin:12px auto 36px}
 .stat{padding:24px 16px}
 .stat b{font-size:clamp(36px,1.4rem + 1.6vw,48px)}
 .stat span{margin-top:10px}
@@ -566,7 +564,7 @@ body.menu-open .mbar,body.menu-open .wa-float{display:none}
   .case{aspect-ratio:3/4}
   .case .tag{top:8px;left:8px;padding:5px 7px;font-size:12px;letter-spacing:.05em}
   .case-cap{left:12px;right:12px;bottom:12px}
-  .case-cap h4{font-size:18px;line-height:1.15}
+  .case-cap h3{font-size:18px;line-height:1.15}
   .case-meta{display:none}
 }
 /* team = two people */
@@ -691,20 +689,20 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
       <a class="btn btn-line" href="/work/" data-i18n="proj.viewall">Усі роботи</a>
     </div>
     <div class="ba-grid">
-      <a class="case" href="/projects/villa-double-height-rooftop-pool.html" data-bg="/img/w_villa-pool.webp"><span class="tag" data-i18n="w1.tag">ВІЛЛА</span><div class="case-cap"><h4 data-i18n="w1.h4">Сучасна вілла</h4><div class="case-meta"><span data-i18n="w1.m">ФАСАД · ІНТЕР’ЄРИ · БАСЕЙН</span></div></div></a>
-      <a class="case" href="/projects/villa-grey-marble-walnut.html" data-bg="/img/w_villa-living.webp"><span class="tag" data-i18n="w2.tag">ІНТЕР’ЄР ВІЛЛИ</span><div class="case-cap"><h4 data-i18n="w2.h4">Вітальня у два світла</h4><div class="case-meta"><span data-i18n="w2.m">МАРМУРОВІ СХОДИ · МЕБЛІ НА ЗАМОВЛЕННЯ</span></div></div></a>
-      <a class="case" href="/projects/apartment-light-oak-three-bedroom.html" data-bg="/img/w_apt-kitchen.webp"><span class="tag" data-i18n="w3.tag">АПАРТАМЕНТИ</span><div class="case-cap"><h4 data-i18n="w3.h4">Дубова кухня-їдальня</h4><div class="case-meta"><span data-i18n="w3.m">ПОВНИЙ РЕМОНТ</span></div></div></a>
-      <a class="case" href="/projects/apartment-oak-stone-open-plan.html" data-bg="/img/w_apt-living.webp"><span class="tag" data-i18n="w4.tag">АПАРТАМЕНТИ</span><div class="case-cap"><h4 data-i18n="w4.h4">Відкрита вітальня</h4><div class="case-meta"><span data-i18n="w4.m">ПОВНИЙ РЕМОНТ</span></div></div></a>
-      <a class="case" href="/venetian-plaster/" data-bg="/img/w_plaster-hallway.webp"><span class="tag" data-i18n="w5.tag">ШТУКАТУРКА</span><div class="case-cap"><h4 data-i18n="w5.h4">Передпокій під бетон</h4><div class="case-meta"><span data-i18n="w5.m">ВРУЧНУ · НАШІ МАЙСТРИ</span></div></div></a>
-      <a class="case" href="/venetian-plaster/" data-bg="/img/w_plaster-venetian.webp"><span class="tag" data-i18n="w6.tag">ШТУКАТУРКА</span><div class="case-cap"><h4 data-i18n="w6.h4">Венеціанка під мармур</h4><div class="case-meta"><span data-i18n="w6.m">ГЛЯНЕЦЬ · ВРУЧНУ</span></div></div></a>
+      <a class="case" href="/projects/villa-double-height-rooftop-pool.html" data-bg="/img/w_villa-pool.webp"><span class="tag" data-i18n="w1.tag">ВІЛЛА</span><div class="case-cap"><h3 data-i18n="w1.h4">Сучасна вілла</h3><div class="case-meta"><span data-i18n="w1.m">ФАСАД · ІНТЕР’ЄРИ · БАСЕЙН</span></div></div></a>
+      <a class="case" href="/projects/villa-grey-marble-walnut.html" data-bg="/img/w_villa-living.webp"><span class="tag" data-i18n="w2.tag">ІНТЕР’ЄР ВІЛЛИ</span><div class="case-cap"><h3 data-i18n="w2.h4">Вітальня у два світла</h3><div class="case-meta"><span data-i18n="w2.m">МАРМУРОВІ СХОДИ · МЕБЛІ НА ЗАМОВЛЕННЯ</span></div></div></a>
+      <a class="case" href="/projects/apartment-light-oak-three-bedroom.html" data-bg="/img/w_apt-kitchen.webp"><span class="tag" data-i18n="w3.tag">АПАРТАМЕНТИ</span><div class="case-cap"><h3 data-i18n="w3.h4">Дубова кухня-їдальня</h3><div class="case-meta"><span data-i18n="w3.m">ПОВНИЙ РЕМОНТ</span></div></div></a>
+      <a class="case" href="/projects/apartment-oak-stone-open-plan.html" data-bg="/img/w_apt-living.webp"><span class="tag" data-i18n="w4.tag">АПАРТАМЕНТИ</span><div class="case-cap"><h3 data-i18n="w4.h4">Відкрита вітальня</h3><div class="case-meta"><span data-i18n="w4.m">ПОВНИЙ РЕМОНТ</span></div></div></a>
+      <a class="case" href="/venetian-plaster/" data-bg="/img/w_plaster-hallway.webp"><span class="tag" data-i18n="w5.tag">ШТУКАТУРКА</span><div class="case-cap"><h3 data-i18n="w5.h4">Передпокій під бетон</h3><div class="case-meta"><span data-i18n="w5.m">ВРУЧНУ · НАШІ МАЙСТРИ</span></div></div></a>
+      <a class="case" href="/venetian-plaster/" data-bg="/img/w_plaster-venetian.webp"><span class="tag" data-i18n="w6.tag">ШТУКАТУРКА</span><div class="case-cap"><h3 data-i18n="w6.h4">Венеціанка під мармур</h3><div class="case-meta"><span data-i18n="w6.m">ГЛЯНЕЦЬ · ВРУЧНУ</span></div></div></a>
     </div>
     <div class="label" data-i18n="ba.label">Трансформації</div>
     <h2 class="sub-h" data-i18n="ba.h2">До та після</h2>
     <div class="ba2-grid">
       <div>
         <div class="ba-slider" data-ba>
-          <img loading="lazy" class="ba-after" src="/img/ba_kitchen_after.webp" sizes="(max-width:680px) 100vw, 50vw" alt="Kitchen after full renovation">
-          <img loading="lazy" class="ba-before" src="/img/ba_kitchen_before.webp" sizes="(max-width:680px) 100vw, 50vw" alt="Kitchen during renovation, before">
+          <img loading="lazy" class="ba-after" src="/img/ba_kitchen_after.webp" width="2000" height="1333" sizes="(max-width:680px) 100vw, 50vw" alt="Kitchen after full renovation">
+          <img loading="lazy" class="ba-before" src="/img/ba_kitchen_before.webp" width="1086" height="724" sizes="(max-width:680px) 100vw, 50vw" alt="Kitchen during renovation, before">
           <span class="ba-badge b" data-i18n="ba.before">ДО</span>
           <span class="ba-badge a" data-i18n="ba.after">ПІСЛЯ</span>
           <div class="ba-line"></div>
@@ -714,8 +712,8 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
       </div>
       <div>
         <div class="ba-slider" data-ba>
-          <img loading="lazy" class="ba-after" src="/img/ba_bathroom_after.webp" sizes="(max-width:680px) 100vw, 50vw" alt="Bathroom after full renovation">
-          <img loading="lazy" class="ba-before" src="/img/ba_bathroom_before.webp" sizes="(max-width:680px) 100vw, 50vw" alt="Bathroom during renovation, before">
+          <img loading="lazy" class="ba-after" src="/img/ba_bathroom_after.webp" width="2000" height="1333" sizes="(max-width:680px) 100vw, 50vw" alt="Bathroom after full renovation">
+          <img loading="lazy" class="ba-before" src="/img/ba_bathroom_before.webp" width="1086" height="724" sizes="(max-width:680px) 100vw, 50vw" alt="Bathroom during renovation, before">
           <span class="ba-badge b" data-i18n="ba.before">ДО</span>
           <span class="ba-badge a" data-i18n="ba.after">ПІСЛЯ</span>
           <div class="ba-line"></div>
@@ -801,12 +799,12 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
     </div>
     <div class="texhead" data-i18n="plaster.tex">Реальні фактури з нашої бібліотеки зразків</div>
     <div class="texrow">
-      <figure class="tex"><img src="/img/tex_crystalshine.webp" alt="Crystal Shine Venetian plaster texture — turquoise pearl" loading="lazy" decoding="async"><figcaption>Crystal Shine</figcaption></figure>
-      <figure class="tex"><img src="/img/tex_travertine.webp" alt="Travertine Venetian plaster texture" loading="lazy" decoding="async"><figcaption>Travertine</figcaption></figure>
-      <figure class="tex"><img src="/img/tex_exotic.webp" alt="Exotic silver pearl Venetian plaster texture" loading="lazy" decoding="async"><figcaption>Exotic</figcaption></figure>
-      <figure class="tex"><img src="/img/tex_crystal.webp" alt="Crystal champagne Venetian plaster texture" loading="lazy" decoding="async"><figcaption>Crystal</figcaption></figure>
-      <figure class="tex"><img src="/img/tex_marmorino.webp" alt="Marmorino relief plaster texture" loading="lazy" decoding="async"><figcaption>Marmorino</figcaption></figure>
-      <figure class="tex"><img src="/img/tex_venetian.webp" alt="Hand-painted venetian marble plaster" loading="lazy" decoding="async"><figcaption>Venetian</figcaption></figure>
+      <figure class="tex"><img src="/img/tex_crystalshine.webp" width="900" height="900" alt="Crystal Shine Venetian plaster texture — turquoise pearl" loading="lazy" decoding="async"><figcaption>Crystal Shine</figcaption></figure>
+      <figure class="tex"><img src="/img/tex_travertine.webp" width="1200" height="1500" alt="Travertine Venetian plaster texture" loading="lazy" decoding="async"><figcaption>Travertine</figcaption></figure>
+      <figure class="tex"><img src="/img/tex_exotic.webp" width="850" height="1063" alt="Exotic silver pearl Venetian plaster texture" loading="lazy" decoding="async"><figcaption>Exotic</figcaption></figure>
+      <figure class="tex"><img src="/img/tex_crystal.webp" width="1200" height="1500" alt="Crystal champagne Venetian plaster texture" loading="lazy" decoding="async"><figcaption>Crystal</figcaption></figure>
+      <figure class="tex"><img src="/img/tex_marmorino.webp" width="1200" height="1500" alt="Marmorino relief plaster texture" loading="lazy" decoding="async"><figcaption>Marmorino</figcaption></figure>
+      <figure class="tex"><img src="/img/tex_venetian.webp" width="1200" height="1500" alt="Hand-painted venetian marble plaster" loading="lazy" decoding="async"><figcaption>Venetian</figcaption></figure>
     </div>
     <p class="texfoot"><span data-i18n="plaster.lb">Фактури венеційської штукатурки в нашій бібліотеці зразків, з кодами та відтінками:</span> <a href="/lookbook/M5_Lookbook_2026.pdf" download data-i18n="plaster.lbbtn" onclick="try{m5track('lookbook_download')}catch(e){}">Завантажити M5 Lookbook 2026 (PDF, 2 МБ)</a></p>
   </div>
@@ -868,10 +866,10 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
   <div class="wrap">
     <div class="label" data-i18n="about.label">Про нас</div>
     <h2 data-i18n="about.h2">Чому клієнти довіряють M5</h2>
-    <p style="max-width:66ch;color:var(--soft);margin-top:24px" data-i18n="about.p">За M5 стоїть одна власна команда — дизайнери, проєкт-менеджери та технагляд на об'єкті, а не ланцюг анонімних субпідрядників. Ми відповідаємо за кожен проєкт, від першого ескізу до фінальної здачі.</p>
+    <p style="max-width:43.8em;color:var(--soft);margin-top:24px" data-i18n="about.p">За M5 стоїть одна власна команда — дизайнери, проєкт-менеджери та технагляд на об'єкті, а не ланцюг анонімних субпідрядників. Ми відповідаємо за кожен проєкт, від першого ескізу до фінальної здачі.</p>
     <div class="trust-grid">
-      <div class="t-card"><div class="mono" data-i18n="trust2.mono">Ліцензовані та застраховані партнери</div><h4 data-i18n="trust2.h4">Будують ліцензовані та застраховані підрядники-партнери Флориди</h4><p data-i18n="trust2.p">Дозволи Miami-Dade отримують наші підрядники-партнери · стандарти HVHZ на кожному об'єкті. Сертифікати на запит.</p></div>
-      <div class="t-card"><div class="mono" data-i18n="trust3.mono">Локальні</div><h4 data-i18n="trust3.h4">Команда, що говорить вашою мовою</h4><p data-i18n="trust3.p">Досвід із радами кондомініумів: COI, бронювання ліфта, години тиші.</p></div>
+      <div class="t-card"><div class="mono" data-i18n="trust2.mono">Ліцензовані та застраховані партнери</div><h3 data-i18n="trust2.h4">Будують ліцензовані та застраховані підрядники-партнери Флориди</h3><p data-i18n="trust2.p">Дозволи Miami-Dade отримують наші підрядники-партнери · стандарти HVHZ на кожному об'єкті. Сертифікати на запит.</p></div>
+      <div class="t-card"><div class="mono" data-i18n="trust3.mono">Локальні</div><h3 data-i18n="trust3.h4">Команда, що говорить вашою мовою</h3><p data-i18n="trust3.p">Досвід із радами кондомініумів: COI, бронювання ліфта, години тиші.</p></div>
     </div>
     <div class="label team-c" style="margin-top:80px" data-i18n="about.plabel">Люди за M5</div>
     <h2 class="team-c" data-i18n="about.ph2">Команда за кожним проєктом</h2>
@@ -947,7 +945,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
 
 
 <div class="cm-overlay" id="svcOverlay" onclick="closeService()"></div>
-<div class="cm" id="serviceModal" role="dialog" aria-modal="true">
+<div class="cm" id="serviceModal" role="dialog" aria-modal="true" aria-labelledby="smH">
   <div class="cm-hero" id="smHero"><button class="cm-close" onclick="closeService()" aria-label="Close">✕</button></div>
   <div class="cm-body">
     <div class="cm-tag" id="smTag"></div>
@@ -955,13 +953,13 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
     <p class="sm-desc" id="smDesc"></p>
     <ul class="sm-list" id="smList"></ul>
     <div class="sm-price" id="smPrice"></div>
-    <h5 id="smFormH"></h5>
+    <h4 id="smFormH"></h4>
     <form class="sm-form" onsubmit="return smSubmit(event)">
-      <input type="text" id="smName" placeholder="" required>
-      <input type="tel" id="smPhone" placeholder="" required>
+      <input type="text" id="smName" placeholder="" aria-label="Your name" required>
+      <input type="tel" id="smPhone" placeholder="" aria-label="Phone / WhatsApp" required>
       <div id="smErr" style="display:none;font-size:13px;color:#b3261e;margin:0 0 8px"></div>
       <div class="sm-actions">
-        <button class="btn btn-ink" type="submit" id="smSend"></button>
+        <button class="btn btn-ink" type="submit" id="smSend">Send request</button>
         <a class="btn btn-wa2" id="smWa" target="_blank" rel="noopener"></a>
       </div>
     </form>
@@ -973,7 +971,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <a class="logo" href="#" aria-label="M5" style="display:inline-flex;align-items:center;gap:14px;color:var(--bone)">
+        <a class="logo" href="#" aria-label="M5 Interior Design Studio, Miami" style="display:inline-flex;align-items:center;gap:14px;color:var(--bone)">
           <svg width="52" height="43" viewBox="0 0 46 38" fill="none">
             <path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/>
             <text x="23" y="26" text-anchor="middle" font-family="Geist,-apple-system,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text>
@@ -982,9 +980,9 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
         </a>
         <p class="f-about" data-i18n="foot.about">Студія дизайну інтер'єру — дизайн, координація ремонту та венеційська штукатурка. Одна відповідальна команда, від першого ескізу до фінальної здачі. Маямі, Флорида.</p>
       </div>
-      <div><h5 data-i18n="foot.h1">Головні сторінки</h5><ul><li><a href="/" data-i18n="foot.l1">Головна</a></li><li><a href="#about" data-i18n="foot.l2">Про нас</a></li><li><a href="#projects" data-i18n="foot.l3">Портфоліо</a></li><li><a href="#contact" data-i18n="foot.l4">Контакти</a></li></ul></div>
-      <div><h5 data-i18n="foot.h2">Послуги</h5><ul><li><a href="#services" data-i18n="svc1.h3">Дизайн інтер'єру та 3D</a></li><li><a href="#services" data-i18n="svc2.h3">Ремонт: від старту до здачі</a></li><li><a href="/venetian-plaster/" data-i18n="svc3.h3">Венеційська штукатурка</a></li><li><a href="#services" data-i18n="svc4.h3">Нові будинки та вілли</a></li><li><a href="#services" data-i18n="svc5.h3">Технічний нагляд</a></li></ul></div>
-      <div><h5 data-i18n="foot.h3">Зв'язатися з нами</h5><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp +1 786 407 4441</a></li><li>Miami-Dade · Broward · Palm Beach</li><li><a href="/privacy/" data-i18n="foot.privacy">Політика конфіденційності</a></li></ul></div>
+      <div><p class="f-h" data-i18n="foot.h1">Головні сторінки</p><ul><li><a href="/" data-i18n="foot.l1">Головна</a></li><li><a href="#about" data-i18n="foot.l2">Про нас</a></li><li><a href="#projects" data-i18n="foot.l3">Портфоліо</a></li><li><a href="#contact" data-i18n="foot.l4">Контакти</a></li></ul></div>
+      <div><p class="f-h" data-i18n="foot.h2">Послуги</p><ul><li><a href="#services" data-i18n="svc1.h3">Дизайн інтер'єру та 3D</a></li><li><a href="#services" data-i18n="svc2.h3">Ремонт: від старту до здачі</a></li><li><a href="/venetian-plaster/" data-i18n="svc3.h3">Венеційська штукатурка</a></li><li><a href="#services" data-i18n="svc4.h3">Нові будинки та вілли</a></li><li><a href="#services" data-i18n="svc5.h3">Технічний нагляд</a></li></ul></div>
+      <div><p class="f-h" data-i18n="foot.h3">Зв'язатися з нами</p><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp +1 786 407 4441</a></li><li>Miami-Dade · Broward · Palm Beach</li><li><a href="/privacy/" data-i18n="foot.privacy">Політика конфіденційності</a></li></ul></div>
     </div>
     <div class="f-bottom">
       <span data-i18n="foot.copy">© M5 · 2026 · Будівництво виконують ліцензовані та застраховані підрядники Флориди</span>
@@ -997,9 +995,9 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
 
 
 <div class="qz-overlay" id="qzOverlay" onclick="closeQuiz()"></div>
-<div class="qz" id="qzModal" role="dialog" aria-modal="true">
+<div class="qz" id="qzModal" role="dialog" aria-modal="true" aria-labelledby="qzTitle">
   <div class="qz-head">
-    <div><b data-i18n="qz.title">Ваша вилка цін</b><span class="mono" data-i18n="qz.sub">60 секунд · без зобовʼязань</span></div>
+    <div><b id="qzTitle" data-i18n="qz.title">Ваша вилка цін</b><span class="mono" data-i18n="qz.sub">60 секунд · без зобовʼязань</span></div>
     <button class="qz-x" onclick="closeQuiz()" aria-label="Close">✕</button>
   </div>
   <div class="qz-track"><div class="qz-fill" id="qzFill"></div></div>
@@ -1008,9 +1006,9 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
 
 
 <div class="qz-overlay" id="ldOverlay" onclick="closeLead()"></div>
-<div class="qz" id="ldModal" role="dialog" aria-modal="true" style="width:min(480px,94vw)">
+<div class="qz" id="ldModal" role="dialog" aria-modal="true" aria-labelledby="ldTitle" style="width:min(480px,94vw)">
   <div class="qz-head">
-    <div><b data-i18n="lead.label">Записатися на візит</b><span class="mono" data-i18n="lead.f3">ВІДПОВІДЬ ПРОТЯГОМ РОБОЧОЇ ГОДИНИ</span></div>
+    <div><b id="ldTitle" data-i18n="lead.label">Записатися на візит</b><span class="mono" data-i18n="lead.f3">ВІДПОВІДЬ ПРОТЯГОМ РОБОЧОЇ ГОДИНИ</span></div>
     <button class="qz-x" onclick="closeLead()" aria-label="Close">✕</button>
   </div>
   <div class="qz-body">
@@ -1042,10 +1040,10 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
 
 
 <div class="xi-overlay" id="xiOverlay" onclick="closeXi()"></div>
-<div class="xi" id="xiModal" role="dialog" aria-modal="true">
+<div class="xi" id="xiModal" role="dialog" aria-modal="true" aria-labelledby="xiTitle">
   <div class="xi-img"><button class="xi-x" onclick="closeXi()" aria-label="Close">✕</button></div>
   <div class="xi-body">
-    <h4 data-i18n="xi.h">Зачекайте — заберіть Гайд цін на ремонт у Маямі 2026</h4>
+    <h3 id="xiTitle" data-i18n="xi.h">Зачекайте — заберіть Гайд цін на ремонт у Маямі 2026</h3>
     <p data-i18n="xi.p">Реальні вилки цін за sq ft, підводні камені кондо та чек-лист — безкоштовний PDF на пошту.</p>
     <form class="xi-form" onsubmit="return xiSubmit(event)">
       <input type="email" id="xiEmail" placeholder="Ваш email" data-i18n-ph="xi.email" required>
@@ -1446,7 +1444,7 @@ function openService(n){
   document.getElementById('smPrice').textContent=price;
   document.getElementById('smFormH').textContent=t.formH;
   var nm=document.getElementById('smName'), phn=document.getElementById('smPhone');
-  nm.placeholder=t.name; phn.placeholder=t.phone; nm.value=''; phn.value='';
+  nm.placeholder=t.name; phn.placeholder=t.phone; nm.setAttribute('aria-label',t.name); phn.setAttribute('aria-label',t.phone); nm.value=''; phn.value='';
   document.getElementById('smSend').textContent=t.send;
   var wa=document.getElementById('smWa'); wa.textContent=t.wa;
   wa.href='https://wa.me/'+SM_WA+'?text='+encodeURIComponent(t.waText+h);
@@ -1635,7 +1633,7 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
   if(window.m5hook)m5hook({type:'guide',email:em,lang:l,source:'exit-popup'});
   if(window.m5track)m5track('guide_lead');
   xiDownload();
-  document.querySelector('#xiModal .xi-body').innerHTML='<h4 style="margin:14px 0 6px">'+t.ok+'</h4><p style="font-size:13px;color:#8a8272;margin-bottom:14px">'+t.dl+'</p><a href="'+XI_PDF+'" target="_blank" rel="noopener" download onclick="xiDownload();return false;" class="btn btn-ink" style="display:inline-flex;margin-top:2px">'+t.lk+' ↓</a>';
+  document.querySelector('#xiModal .xi-body').innerHTML='<h3 style="margin:14px 0 6px">'+t.ok+'</h3><p style="font-size:13px;color:#8a8272;margin-bottom:14px">'+t.dl+'</p><a href="'+XI_PDF+'" target="_blank" rel="noopener" download onclick="xiDownload();return false;" class="btn btn-ink" style="display:inline-flex;margin-top:2px">'+t.lk+' ↓</a>';
   setTimeout(closeXi,6000);
   return false;}
 

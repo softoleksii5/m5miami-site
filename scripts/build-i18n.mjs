@@ -125,6 +125,8 @@ function buildPage(lang) {
   html = html.replace(/<meta property="og:url" content="[^"]*">/, '<meta property="og:url" content="' + url + '">');
   html = html.replace(/<meta property="og:locale" content="[^"]*">/, '<meta property="og:locale" content="' + LOCALE[lang] + '">');
   html = html.replace(/<link rel="canonical" href="[^"]*">/, '<link rel="canonical" href="' + url + '">');
+  // Cyrillic pages preload the Cyrillic cut of the display font instead of the Latin one.
+  if (lang === 'uk' || lang === 'ru') html = html.replace('/fonts/cormorant-garamond-latin.woff2', '/fonts/cormorant-garamond-cyrillic.woff2');
   html = html.replace(/(<script type="application\/ld\+json">)\s*\{"@context":"https:\/\/schema\.org","@type":"FAQPage"[\s\S]*?(<\/script>)/, (m, a, b) => a + '\n' + faqJsonLd(dict) + '\n' + b);
   html = html.split(ORIGIN + '/?sent=1#contact').join(url + '?sent=1#contact');
   html = setSwitcher(html, lang);
