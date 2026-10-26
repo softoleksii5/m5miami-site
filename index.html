@@ -925,8 +925,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
       <input id="f-name" type="text" name="name" placeholder="Your name" data-i18n-ph="form.name" required>
       <label class="sr-only" for="f-phone" data-i18n="form.phone">Phone / WhatsApp</label>
       <input id="f-phone" type="tel" name="phone" placeholder="Phone / WhatsApp" data-i18n-ph="form.phone" required>
-      <label class="sr-only" for="f-hood" data-i18n="form.hood">Neighborhood / building</label>
-      <input id="f-hood" type="text" name="neighborhood" placeholder="Neighborhood / building" data-i18n-ph="form.hood">
+      <input id="f-hood" type="hidden" name="neighborhood" value="">
       <label class="sr-only" for="f-budget" data-i18n="form.budget">Project budget</label>
       <select id="f-budget" name="budget"><option value="" data-i18n="form.budget">Project budget</option><option>$1–5K</option><option>$5–10K</option><option>$10–50K</option><option>$50–100K</option><option>$100–250K</option><option>$250–500K</option><option>$500K+</option><option data-i18n="form.b4">Not sure yet</option></select>
       <button class="btn btn-ink" type="submit" data-i18n="form.btn">Request a free site visit</button>
@@ -1031,8 +1030,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
       <input type="text" id="ldName" placeholder="Your name" data-i18n-ph="form.name" required>
       <label class="sr-only" for="ldPhone" data-i18n="form.phone">Phone / WhatsApp</label>
       <input type="tel" id="ldPhone" placeholder="Phone / WhatsApp" data-i18n-ph="form.phone" required>
-      <label class="sr-only" for="ldHood" data-i18n="form.hood">Neighborhood / building</label>
-      <input type="text" id="ldHood" placeholder="Neighborhood / building" data-i18n-ph="form.hood">
+      <input type="hidden" id="ldHood" value="">
       <label class="sr-only" for="ldBudget" data-i18n="form.budget">Project budget</label>
       <select id="ldBudget" style="background:var(--white);border:1px solid var(--line);padding:15px 16px;font-size:15px;font-family:var(--sans);color:var(--ink)"></select>
       <button class="btn btn-ink" type="submit" id="ldGo" data-i18n="form.btn">Request a free site visit</button>
