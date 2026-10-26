@@ -66,8 +66,8 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/tokens.css">
-<link rel="preload" as="image" href="/img/hero.webp" media="(min-width:681px)">
-<link rel="preload" as="image" href="/img/m/hero-portrait.webp" media="(max-width:680px)">
+<link rel="preload" as="image" href="/img/hero_wall.webp" media="(min-width:681px)">
+<link rel="preload" as="image" href="/img/m/hero_wall_portrait.webp" media="(max-width:680px)">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -114,13 +114,21 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
     background:
       linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
       linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%),
-      url('/img/hero.webp') center/cover no-repeat;
+      url('/img/hero_wall.webp') center/cover no-repeat;
     opacity:1}
+  .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1.2s ease}
+  .hero-vid.on{opacity:1}
+  .hero-shade{opacity:0;transition:opacity 1.2s ease}
+  .hero-vid.on+.hero-shade{opacity:1}
+  .hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+      linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
+      linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%)}
   .hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:var(--space-9)}
   @media(max-width:680px){
     .hero-img{background:
       linear-gradient(180deg,rgba(20,18,15,.45) 0%,rgba(20,18,15,.60) 45%,rgba(20,18,15,.90) 100%),
-      url('/img/m/hero-portrait.webp') center/cover no-repeat}
+      url('/img/m/hero_wall_portrait.webp') center/cover no-repeat}
+    .hero-vid,.hero-shade{display:none}
     .hero-strip{display:none}
   }
 
@@ -654,17 +662,19 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
 
 <section class="hero">
   <div class="hero-img" id="heroImg"></div>
+  <video class="hero-vid" id="heroVid" muted loop playsinline preload="none" aria-hidden="true" poster="/img/hero_wall.webp"></video>
+  <div class="hero-shade"></div>
   <div class="wrap">
-    <div class="hero-badge" data-i18n="hero.badge">SOCIOS LICENCIADOS Y ASEGURADOS · PERMISOS MIAMI&#8209;DADE</div>
-    <h1 data-i18n="hero.h1">Diseñamos hogares en Miami y coordinamos cada paso hasta la entrega.</h1>
-    <p class="hero-sub" data-i18n="hero.sub">Diseño interior · diseño y coordinación de reformas · estuco veneciano · fit-out — diseñado y coordinado por un solo equipo responsable.</p>
+    <div class="hero-badge" data-i18n="hero.badge">ESTUCO VENECIANO Y MARMORINO APLICADOS A MANO</div>
+    <h1 data-i18n="hero.h1">Paredes que cambian con la luz.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Estuco veneciano para hogares en Miami, aplicado a mano por nuestros maestros. Además, diseño interior y reformas con socios licenciados y asegurados.</p>
     <div class="hero-ctas">
-      <a class="btn btn-bone" href="#" onclick="return openQuiz('hero')" data-i18n="qz.open">Ver su rango de precios</a>
-      <a class="hero-link" href="#projects" data-i18n="hero.cta2">Ver nuestros proyectos</a>
+      <a class="btn btn-bone" href="#contact" data-i18n="hero.sample">Visita gratis con muestras</a>
+      <a class="hero-link" href="/es/venetian-plaster/" data-i18n="hero.cta2">Ver los acabados</a>
     </div>
   </div>
   <div class="hero-strip">
-    <div class="wrap"><span data-i18n="hero.strip1">ESTUDIO DE DISEÑO INTERIOR</span><span data-i18n="hero.strip3">INGLÉS · ESPAÑOL · UCRANIANO · RUSO</span></div>
+    <div class="wrap"><span data-i18n="hero.strip1">ESTUCO VENECIANO · ESTUDIO DE DISEÑO INTERIOR</span><span data-i18n="hero.strip3">INGLÉS · ESPAÑOL · UCRANIANO · RUSO</span></div>
   </div>
 </section>
 
@@ -1062,7 +1072,9 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
 
 <script>
   /* hero preload */
-  (function(){var i=new Image();i.onload=function(){document.getElementById('heroImg').classList.add('loaded')};i.src=matchMedia('(max-width:680px)').matches?'/img/m/hero-portrait.webp':'/img/hero.webp'})();
+  (function(){var i=new Image();i.onload=function(){document.getElementById('heroImg').classList.add('loaded')};i.src=matchMedia('(max-width:680px)').matches?'/img/m/hero_wall_portrait.webp':'/img/hero_wall.webp'})();
+  /* hero video: desktop only, after load, not for reduced motion */
+  window.addEventListener('load',function(){var v=document.getElementById('heroVid');if(!v||matchMedia('(max-width:680px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;v.src='/media/hero_wall.mp4';v.addEventListener('playing',function(){v.classList.add('on')});var p=v.play();if(p&&p.catch)p.catch(function(){})});
 
   /* ===== i18n · EN / ES / UK =====
      Добавляешь текст на сайт → заводишь ключ здесь во всех трёх языках и вешаешь data-i18n="ключ"
@@ -1071,11 +1083,11 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
     en: {
       "meta.title":"Interior Design & Renovation in Miami | M5 Studio Miami","meta.desc":"Miami interior design studio: renovation coordination, hand-applied Venetian plaster and design. Itemized budget, 1-year written warranty, free site visit.",
       "nav.services":"SERVICES","nav.portfolio":"PORTFOLIO","nav.plaster":"PLASTER","nav.about":"ABOUT","nav.faq":"FAQ","nav.quote":"BOOK A VISIT",
-      "hero.badge":"LICENSED & INSURED PARTNERS · MIAMI&#8209;DADE PERMITS",
-      "hero.h1":"We design homes in Miami and coordinate every step to handover.",
-      "hero.sub":"Interior design · renovation design & coordination · Venetian plaster · fit-out. One team designs it, coordinates it and answers for it.",
-      "hero.cta1":"Get a quote","hero.cta2":"View our projects",
-      "hero.strip1":"INTERIOR DESIGN STUDIO","hero.strip3":"ENGLISH · SPANISH · UKRAINIAN · RUSSIAN",
+      "hero.badge":"HAND-APPLIED VENETIAN PLASTER &amp; MARMORINO",
+      "hero.h1":"Walls that change with the light.","hero.sample":"Book a free sample visit",
+      "hero.sub":"Venetian plaster for Miami homes, applied by hand by our masters. Plus interior design and renovation with licensed &amp; insured partners.",
+      "hero.cta1":"Get a quote","hero.cta2":"See the finishes",
+      "hero.strip1":"VENETIAN PLASTER · INTERIOR DESIGN STUDIO","hero.strip3":"ENGLISH · SPANISH · UKRAINIAN · RUSSIAN",
       "why.h":"Why designers specify our <b>Venetian plaster</b>","why.t1":"European school","why.b1":"Italian-grade finish on every wall","why.t2":"Own Venetian plaster finishes","why.b2":"50+ finishes · any color · no supplier delays","why.t3":"Matte · pearl · metallic · mirror","why.b3":"One palette, every mood","why.t4":"Walls, ceilings, furniture, doors","why.b4":"One finish across the whole room","why.t5":"Straight onto drywall","why.b5":"No skim coat · a week of prep saved","why.t6":"Washable. Repairable. Warranty.","why.b6":"No callbacks","why.t7":"Free visit, sample & quote","why.b7":"Zero risk to start","why.t8":"Fast. Clean. Condo-ready.","why.b8":"Your schedule holds","stats.label":"Who we are",
       "stats.lead":"200+ villas and homes delivered worldwide. Now in Miami — the same team and the same system, with our own Venetian plaster studio.",
       "stats.u1":"yrs","stats.u2":"yr","stats.s1":"villas &amp; homes delivered worldwide","stats.s2":"sq ft of hand-finished walls","stats.s3":"international property awards","stats.s4":"to an itemized estimate after our visit","stats.u4":"h","form.ok":"Thank you — we received your request and will reply within one business hour (9am–6pm ET).","form.err":"Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.","svc1.price":"from $6 / sq ft","svc2.price":"from $145 / sq ft","svc3.price":"from $18 / sq ft · projects from $10K","svc4.price":"from $390 / sq ft","svc5.price":"from 4% of budget",
@@ -1141,11 +1153,11 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
     es: {
       "meta.title":"Diseño interior y renovación en Miami | M5 Studio Miami","meta.desc":"Estudio de diseño interior en Miami: coordinación de renovaciones, estuco veneciano a mano y diseño. Presupuesto detallado, garantía escrita de 1 año.",
       "nav.services":"SERVICIOS","nav.portfolio":"PROYECTOS","nav.plaster":"ESTUCO","nav.about":"NOSOTROS","nav.faq":"FAQ","nav.quote":"RESERVAR VISITA",
-      "hero.badge":"SOCIOS LICENCIADOS Y ASEGURADOS · PERMISOS MIAMI&#8209;DADE",
-      "hero.h1":"Diseñamos hogares en Miami y coordinamos cada paso hasta la entrega.",
-      "hero.sub":"Diseño interior · diseño y coordinación de reformas · estuco veneciano · fit-out — diseñado y coordinado por un solo equipo responsable.",
-      "hero.cta1":"Pedir presupuesto","hero.cta2":"Ver nuestros proyectos",
-      "hero.strip1":"ESTUDIO DE DISEÑO INTERIOR","hero.strip3":"INGLÉS · ESPAÑOL · UCRANIANO · RUSO",
+      "hero.badge":"ESTUCO VENECIANO Y MARMORINO APLICADOS A MANO",
+      "hero.h1":"Paredes que cambian con la luz.","hero.sample":"Visita gratis con muestras",
+      "hero.sub":"Estuco veneciano para hogares en Miami, aplicado a mano por nuestros maestros. Además, diseño interior y reformas con socios licenciados y asegurados.",
+      "hero.cta1":"Pedir presupuesto","hero.cta2":"Ver los acabados",
+      "hero.strip1":"ESTUCO VENECIANO · ESTUDIO DE DISEÑO INTERIOR","hero.strip3":"INGLÉS · ESPAÑOL · UCRANIANO · RUSO",
       "why.h":"Por qué los diseñadores eligen nuestro <b>estuco veneciano</b>","why.t1":"Escuela europea","why.b1":"Acabado de nivel italiano en cada pared","why.t2":"Acabados de estuco veneciano propios","why.b2":"50+ acabados · cualquier color · sin esperas de proveedor","why.t3":"Mate · perla · metálico · espejo","why.b3":"Una paleta, cada ambiente","why.t4":"Paredes, techos, muebles, puertas","why.b4":"Un solo acabado en toda la estancia","why.t5":"Directo sobre drywall","why.b5":"Sin capa de nivelación · una semana de preparación ahorrada","why.t6":"Lavable. Reparable. Con garantía.","why.b6":"Sin llamadas de vuelta","why.t7":"Visita, muestra y presupuesto gratis","why.b7":"Cero riesgo para empezar","why.t8":"Rápido. Limpio. Listo para condominios.","why.b8":"Su calendario se cumple","stats.label":"Quiénes somos",
       "stats.lead":"Más de 200 villas y casas entregadas en todo el mundo. Ahora en Miami: el mismo equipo y el mismo sistema, con nuestro propio estudio de estuco veneciano.",
       "stats.u1":"años","stats.u2":"año","stats.s1":"villas y casas entregadas en el mundo","stats.s2":"sq ft de muros acabados a mano","stats.s3":"premios inmobiliarios internacionales","stats.s4":"hasta el presupuesto detallado tras la visita","stats.u4":"h","form.ok":"Gracias — recibimos su solicitud y responderemos dentro de una hora laboral (9am–6pm ET).","form.err":"Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp: +1 786 407 4441.","svc1.price":"desde $6 / sq ft","svc2.price":"desde $145 / sq ft","svc3.price":"desde $18 / sq ft · proyectos desde $10K","svc4.price":"desde $390 / sq ft","svc5.price":"desde 4% del presupuesto",
@@ -1211,11 +1223,11 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
     uk: {
       "meta.title":"Дизайн інтер'єру та ремонт у Маямі | M5 Studio Miami","meta.desc":"Студія дизайну інтер'єру в Маямі: координація ремонту, венеціанська штукатурка ручної роботи та дизайн. Детальний кошторис, письмова гарантія 1 рік.",
       "nav.services":"ПОСЛУГИ","nav.portfolio":"ПОРТФОЛІО","nav.plaster":"ШТУКАТУРКА","nav.about":"ПРО НАС","nav.faq":"FAQ","nav.quote":"ЗАПИСАТИСЯ",
-      "hero.badge":"ЛІЦЕНЗОВАНІ ТА ЗАСТРАХОВАНІ ПАРТНЕРИ · ДОЗВОЛИ MIAMI&#8209;DADE",
-      "hero.h1":"Проєктуємо оселі в Маямі й координуємо кожен крок до здачі.",
-      "hero.sub":"Дизайн інтер'єру · проєкт і координація ремонту · венеційська штукатурка · fit-out — спроєктовано й скоординовано однією командою, що відповідає за результат.",
-      "hero.cta1":"Отримати кошторис","hero.cta2":"Переглянути проєкти",
-      "hero.strip1":"СТУДІЯ ІНТЕР’ЄРНОГО ДИЗАЙНУ","hero.strip3":"АНГЛІЙСЬКА · ІСПАНСЬКА · УКРАЇНСЬКА · РОСІЙСЬКА",
+      "hero.badge":"ВЕНЕЦІЙСЬКА ШТУКАТУРКА Й МАРМОРИНО ВРУЧНУ",
+      "hero.h1":"Стіни, що змінюються разом зі світлом.","hero.sample":"Безкоштовний виїзд зі зразками",
+      "hero.sub":"Венеційська штукатурка для осель у Маямі — наносять вручну наші майстри. А також дизайн інтер'єру й ремонт з ліцензованими та застрахованими партнерами.",
+      "hero.cta1":"Отримати кошторис","hero.cta2":"Дивитися фактури",
+      "hero.strip1":"ВЕНЕЦІЙСЬКА ШТУКАТУРКА · СТУДІЯ ДИЗАЙНУ","hero.strip3":"АНГЛІЙСЬКА · ІСПАНСЬКА · УКРАЇНСЬКА · РОСІЙСЬКА",
       "why.h":"Чому дизайнери обирають нашу <b>венеційську штукатурку</b>","why.t1":"Європейська школа","why.b1":"Італійський рівень оздоблення на кожній стіні","why.t2":"Власні фактури венеційської штукатурки","why.b2":"50+ фактур · будь-який колір · без затримок постачальника","why.t3":"Матове · перламутр · метал · дзеркало","why.b3":"Одна палітра, будь-який настрій","why.t4":"Стіни, стелі, меблі, двері","why.b4":"Одне покриття на всю кімнату","why.t5":"Одразу на гіпсокартон","why.b5":"Без шпаклювання · тиждень підготовки заощаджено","why.t6":"Миється. Ремонтується. Гарантія.","why.b6":"Без повторних викликів","why.t7":"Безкоштовний виїзд, зразок і кошторис","why.b7":"Нуль ризику на старті","why.t8":"Швидко. Чисто. Підходить для кондо.","why.b8":"Ваш графік витримано","stats.label":"Хто ми",
       "stats.lead":"Понад 200 вілл і будинків, зданих по всьому світу. Тепер у Маямі — та сама команда й та сама система, із власною студією венеціанської штукатурки.",
       "stats.u1":"роки","stats.u2":"рік","stats.s1":"вілл і будинків по всьому світу","stats.s2":"sq ft стін, зроблених вручну","stats.s3":"міжнародні нагороди в нерухомості","stats.s4":"до детального кошторису після виїзду","stats.u4":"год","form.ok":"Дякуємо — ми отримали вашу заявку і відповімо протягом робочої години (9:00–18:00 ET).","form.err":"Заявку ще не підтверджено — спробуйте ще раз або напишіть у WhatsApp: +1 786 407 4441.","svc1.price":"від $6 / sq ft","svc2.price":"від $145 / sq ft","svc3.price":"від $18 / sq ft · проєкти від $10K","svc4.price":"від $390 / sq ft","svc5.price":"від 4% бюджету",
@@ -1280,8 +1292,8 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
     },
     "ru": {
       "meta.title":"Дизайн интерьера и ремонт в Майами | M5 Studio Miami","meta.desc":"Студия дизайна интерьеров в Майами: координация ремонта, венецианская штукатурка ручной работы и дизайн. Детальная смета, письменная гарантия 1 год.","nav.services":"УСЛУГИ","nav.portfolio":"ПОРТФОЛИО","nav.plaster":"ШТУКАТУРКА","nav.about":"О НАС",
-      "nav.faq":"FAQ","nav.quote":"ЗАПИСАТЬСЯ","hero.badge":"ЛИЦЕНЗИРОВАННЫЕ И ЗАСТРАХОВАННЫЕ ПАРТНЁРЫ · ПЕРМИТЫ MIAMI&#8209;DADE","hero.h1":"Проектируем дома в Майами и координируем каждый шаг до сдачи.","hero.sub":"Дизайн интерьера · проект и координация ремонта · венецианская штукатурка · fit-out. Одна команда проектирует, координирует и отвечает за результат.",
-      "hero.cta1":"Рассчитать проект","hero.cta2":"Смотреть проекты","hero.strip1":"СТУДИЯ ИНТЕРЬЕРНОГО ДИЗАЙНА","hero.strip3":"АНГЛИЙСКИЙ · ИСПАНСКИЙ · УКРАИНСКИЙ · РУССКИЙ",
+      "nav.faq":"FAQ","nav.quote":"ЗАПИСАТЬСЯ","hero.badge":"ВЕНЕЦИАНСКАЯ ШТУКАТУРКА И МАРМОРИНО ВРУЧНУЮ","hero.h1":"Стены, которые меняются вместе со светом.","hero.sample":"Бесплатный выезд с образцами","hero.sub":"Венецианская штукатурка для домов в Майами — наносят вручную наши мастера. А также дизайн интерьера и ремонт с лицензированными и застрахованными партнёрами.",
+      "hero.cta1":"Рассчитать проект","hero.cta2":"Смотреть фактуры","hero.strip1":"ВЕНЕЦИАНСКАЯ ШТУКАТУРКА · СТУДИЯ ДИЗАЙНА","hero.strip3":"АНГЛИЙСКИЙ · ИСПАНСКИЙ · УКРАИНСКИЙ · РУССКИЙ",
       "why.h":"Почему дизайнеры выбирают нашу <b>венецианскую штукатурку</b>","why.t1":"Европейская школа","why.b1":"Итальянский уровень отделки на каждой стене","why.t2":"Собственные фактуры венецианской штукатурки","why.b2":"50+ фактур · любой цвет · без задержек поставщика","why.t3":"Матовое · перламутр · металлик · зеркало","why.b3":"Одна палитра, любое настроение","why.t4":"Стены, потолки, мебель, двери","why.b4":"Одно покрытие на всю комнату","why.t5":"Сразу на гипсокартон","why.b5":"Без шпаклёвки · неделя подготовки сэкономлена","why.t6":"Моется. Ремонтируется. Гарантия.","why.b6":"Без повторных вызовов","why.t7":"Бесплатный выезд, образец и смета","why.b7":"Ноль риска на старте","why.t8":"Быстро. Чисто. Подходит для кондо.","why.b8":"Ваш график соблюдён","stats.label":"Кто мы","stats.lead":"Более 200 вилл и домов, сданных по всему миру. Теперь в Майами — та же команда и та же система, с собственной студией венецианской штукатурки.","stats.u1":"года","stats.u2":"год","stats.s1":"вилл и домов по всему миру","stats.s2":"sq ft стен, сделанных вручную",
       "stats.s3":"международные награды в недвижимости","stats.s4":"до подробной сметы после выезда","stats.u4":"ч","form.ok":"Спасибо — мы получили вашу заявку и ответим в течение рабочего часа (9:00–18:00 ET).","form.err":"Заявка пока не подтверждена — попробуйте ещё раз или напишите в WhatsApp: +1 786 407 4441.","svc1.price":"от $6 / sq ft","svc2.price":"от $145 / sq ft",
       "svc3.price":"от $18 / sq ft · проекты от $10K","svc4.price":"от $390 / sq ft","svc5.price":"от 4% бюджета","svc.label":"Услуги M5","svc.h2":"Что мы делаем",
