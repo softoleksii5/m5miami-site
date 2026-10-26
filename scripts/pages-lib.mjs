@@ -24,11 +24,11 @@ export const UI = {
     footNav: 'Services and areas', updated: 'Last reviewed',
   },
   es: {
-    nav: [['SERVICIOS', '/es/#services'], ['PORTAFOLIO', '/work/'], ['ESTUCO', '/es/venetian-plaster/'], ['NOSOTROS', '/es/#about'], ['FAQ', '/es/#faq']],
+    nav: [['SERVICIOS', '/es/#services'], ['PROYECTOS', '/work/'], ['ESTUCO', '/es/venetian-plaster/'], ['NOSOTROS', '/es/#about'], ['PREGUNTAS', '/es/#faq']],
     book: 'AGENDAR VISITA', bookHref: '/es/#contact', home: 'Inicio', homeHref: '/es/', faq: 'Preguntas frecuentes',
     ctaLabel: 'Visita gratuita', ctaSub: 'Presupuesto detallado 48 horas después de la visita',
     btnBook: 'Agendar visita', btnCal: 'Agendar visita gratuita', btnWa: 'Escríbanos por WhatsApp', waAria: 'WhatsApp', menu: 'Menú',
-    foot: '© 2026 M5 Studio Miami LLC · Diseño de interiores y estuco veneciano · Obra con contratistas asociados de Florida licenciados y asegurados · ',
+    foot: '© 2026 M5 Studio Miami LLC · Diseño de interiores y estuco veneciano · Obra con contratistas asociados de Florida con licencia y seguro · ',
     privacy: 'Política de privacidad', privacyHref: '/privacy/',
     links: [['Remodelación de condominios y apartamentos', '/es/condo-renovation/'], ['Remodelación de casas', '/es/home-renovation/'], ['Estuco veneciano', '/es/venetian-plaster/'], ['Diseño de interiores (EN)', '/interior-design/', 'en'], ['Zonas de servicio (EN)', '/south-florida/', 'en'], ['Nuestros trabajos (EN)', '/work/', 'en']],
     footNav: 'Servicios y zonas', updated: 'Última revisión',

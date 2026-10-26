@@ -63,7 +63,7 @@ export const guideCondoEn = {
 };
 
 export const guideCostEn = {
-  lang: 'en', slug: '/guides/renovation-cost-miami/', track: 'guide-cost',
+  lang: 'en', slug: '/guides/renovation-cost-miami/', track: 'guide-cost', noindex: true,
   title: 'What a Renovation Costs in Miami | M5 Studio Miami',
   desc: 'Miami renovation prices for 2026: kitchens $15–200K, bathrooms $8–70K, interior design $8–25 per sq ft, full projects $200–250K. What moves the number.',
   label: 'Guide · renovation cost',

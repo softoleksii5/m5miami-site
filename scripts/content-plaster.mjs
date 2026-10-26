@@ -66,7 +66,7 @@ export const costEn = {
       </ol>
       <p>Browse finished walls first in <a href="/portfolio/">our plaster work</a>.</p>
       <h3>Part of a full renovation?</h3>
-      <p>A typical full renovation project with M5 is $200–250K, and plaster is one line of the itemized estimate. Typical kitchen, bathroom and design prices are in our <a href="/guides/renovation-cost-miami/">renovation cost guide</a>. See <a href="/condo-renovation/">condo and apartment renovation</a> and <a href="/home-renovation/">full home renovation</a>.</p>` },
+      <p>A typical full renovation project with M5 is $200–250K, and plaster is one line of the itemized estimate. Typical kitchen, bathroom and design prices are in our free <a href="/?guide=1">renovation cost guide</a>. See <a href="/condo-renovation/">condo and apartment renovation</a> and <a href="/home-renovation/">full home renovation</a>.</p>` },
   ],
   faq: [
     { q: 'Why is Venetian plaster more expensive than paint?', a: 'Paint is a thin film rolled on in an afternoon. Venetian plaster is mineral plaster applied in thin coats by hand and burnished, which takes skilled labour and drying time between coats. You pay for the craft, and for a wall that does not peel and can be repaired.' },

@@ -43,7 +43,7 @@ export const condoEn = {
       <li><strong>Joinery and stone.</strong> Cabinetry, counters and islands, from light oak to black stone.</li>
       <li><strong>Lighting and appliances.</strong> Planned together with ventilation, so nothing is added as an afterthought.</li>
       </ul>
-      <p>Browse kitchens in the <a href="#interiors">apartment projects below</a>. Typical kitchen and bathroom prices are in our <a href="/guides/renovation-cost-miami/">Miami renovation cost guide</a>.</p>` },
+      <p>Browse kitchens in the <a href="#interiors">apartment projects below</a>. Typical kitchen and bathroom prices are in our free <a href="/?guide=1">Miami renovation cost guide</a>.</p>` },
     { id: 'bathrooms', label: 'Bathrooms', h2: 'Bathrooms and powder rooms', html: `
       <p>Primary baths, guest baths, powder rooms and showers: layout, stone or tile, fixtures and lighting, planned as one design. Venetian plaster and marmorino are common in bathrooms and powder rooms, and wet zones get a protective sealer. Read more about <a href="/venetian-plaster/marmorino/">marmorino plaster</a>.</p>` },
     { id: 'building', alt: true, label: 'Building rules', h2: 'Building rules, board approval and work hours', html: `
@@ -61,7 +61,8 @@ export const condoEn = {
       </ol>` },
     { id: 'interiors', alt: true, label: 'Interiors by M5', h2: 'Interiors by M5', html: `
       <p>Real, completed apartment and penthouse projects by the M5 team, photographed after handover.</p>
-      ${apartmentCards('en')}` },
+      ${apartmentCards('en')}
+      <div class="figs">${fig('/img/svc/condo_kitchen_1.jpg', 1600, 1066, 'Apartment kitchen with oak cabinetry and a travertine-look stone island', 'Interiors by M5 · kitchen')}${fig('/img/svc/condo_kitchen_2.jpg', 1600, 1067, 'Dark apartment kitchen with a black veined stone island and dark oak joinery', 'Interiors by M5 · kitchen')}${fig('/img/svc/condo_bath_1.jpg', 1600, 1066, 'Apartment bathroom with a stone washbasin, lit shelving and fluted oak', 'Interiors by M5 · bathroom')}${fig('/img/svc/condo_bath_2.jpg', 1600, 1066, 'Apartment bathroom with a glass-and-black-steel shower and a stone vanity', 'Interiors by M5 · bathroom')}</div>` },
     { id: 'where', label: 'Where we work', h2: 'Where we work', html: `
       <p>We work across South Florida: Miami-Dade first, plus Broward and Palm Beach. See <a href="/south-florida/">areas we serve</a>. Looking at a house instead? Read about <a href="/home-renovation/">full home renovation</a>.</p>` },
   ],
@@ -100,7 +101,7 @@ export const homeEn = {
       <li><strong>Layout and flow.</strong> Islands, pantries and indoor-outdoor connections.</li>
       <li><strong>Joinery, stone and lighting.</strong> Designed as one composition with the living spaces.</li>
       </ul>
-      <p>Typical kitchen and bathroom prices are in our <a href="/guides/renovation-cost-miami/">Miami renovation cost guide</a>.</p>` },
+      <p>Typical kitchen and bathroom prices are in our free <a href="/?guide=1">Miami renovation cost guide</a>.</p>` },
     { id: 'bathrooms', label: 'Bathrooms', h2: 'Bathrooms and powder rooms', html: `
       <p>Primary suites, guest baths and powder rooms, designed with the bedrooms they serve. Natural stone, tile and <a href="/venetian-plaster/marmorino/">marmorino plaster</a> work well here: wet zones get a protective sealer.</p>` },
     { id: 'florida', alt: true, label: 'South Florida houses', h2: 'Houses in South Florida: what the climate asks of a renovation', html: `
@@ -129,7 +130,8 @@ export const homeEn = {
       </ul>` },
     { id: 'interiors', label: 'Interiors by M5', h2: 'Interiors by M5', html: `
       <p>Real, completed villa projects by the M5 team, photographed after handover.</p>
-      ${villaCards('en')}` },
+      ${villaCards('en')}
+      <div class="figs">${fig('/img/svc/home_kitchen_1.jpg', 1600, 1067, 'Open white kitchen with a floating stair and large glass doors', 'Interiors by M5 · kitchen')}${fig('/img/svc/home_bath_1.jpg', 1600, 1067, 'Bathroom with a freestanding tub behind a glass partition', 'Interiors by M5 · bathroom')}${fig('/img/svc/home_living_1.jpg', 1600, 1067, 'Living room with oak panelling, a white sofa and a long dining area', 'Interiors by M5 · living room')}${fig('/img/svc/home_living_2.jpg', 1600, 1067, 'Double-height living room with a plastered spiral stair and a black sofa', 'Interiors by M5 · living room')}</div>` },
     { id: 'where', alt: true, label: 'Where we work', h2: 'Where we work', html: `
       <p>We design and coordinate house renovations across Miami-Dade, Broward and Palm Beach, including areas such as Coral Gables, Pinecrest, Coconut Grove, Fort Lauderdale and Boca Raton. See <a href="/south-florida/">areas we serve</a>. Living in a condo? Read about <a href="/condo-renovation/">condo and apartment renovation</a>.</p>` },
   ],
@@ -176,6 +178,7 @@ export const interiorEn = {
     { id: 'interiors', alt: true, label: 'Interiors by M5', h2: 'Interiors by M5', html: `
       <p>Real, completed villas and apartments designed by the M5 team, photographed after handover.</p>
       ${cardsHtml(pick('villa-white-courtyard-spiral-stair', 'villa-grey-marble-walnut', 'apartment-oak-stone-open-plan'), 'en')}
+      <div class="figs">${fig('/img/svc/design_living_1.jpg', 1600, 1066, 'Open-plan living room with a stone-fronted kitchen and a round stone table', 'Interiors by M5 · living room')}${fig('/img/svc/design_bedroom_1.jpg', 1600, 1066, 'Bedroom with a plastered feature wall, oak panelling and an upholstered bed', 'Interiors by M5 · bedroom')}${fig('/img/svc/design_living_2.jpg', 1600, 1067, 'Living room with a pale sofa, two organic stone coffee tables and oak storage', 'Interiors by M5 · living room')}${fig('/img/svc/design_dining_1.jpg', 1600, 1066, 'Dining nook with a built-in bench, a walnut table and an abstract painting', 'Interiors by M5 · dining')}</div>
       <div class="rel"><a class="btn btn-line" href="/work/">See all our work</a></div>` },
     { id: 'record', label: 'Track record', h2: 'The team\'s track record', html: `
       <p>200+ villas and homes delivered worldwide. Now in Miami, the same team and the same system, with our own Venetian plaster studio.</p>
@@ -224,7 +227,7 @@ export const southFloridaEn = {
       <li><a href="/venetian-plaster/">Venetian plaster</a>, marmorino and mineral plaster, applied by our own masters</li>
       <li><a href="/interior-design/">Interior design</a></li>
       </ul>
-      <div class="figs">${fig('/media/lp/w_venetian.jpg', 900, 1125, 'Floor-to-ceiling polished Venetian plaster wall by a glass door', 'Venetian plaster · our masters&#x27; work')}${fig('/media/lp/w_door.jpg', 900, 1125, 'Flush hidden door in a smoky grey mineral plaster wall', 'Mineral plaster · our masters&#x27; work')}</div>
+      <div class="figs">${fig('/media/lp/w_venetian.jpg', 900, 1125, 'Floor-to-ceiling polished Venetian plaster wall by a glass door', 'Venetian plaster · our masters&#x27; work')}${fig('/media/lp/w_door.jpg', 900, 1125, 'Flush hidden door in a smoky grey mineral plaster wall', 'Mineral plaster · our masters&#x27; work')}${fig('/img/samples/m5-02_marmorino.jpg', 1200, 1500, 'Marmorino finish with a rough, stone-like trowelled relief', 'Marmorino · hand-applied sample')}${fig('/img/samples/m5-03_travertine.jpg', 1200, 1501, 'Travertine-effect plaster with layered horizontal trowel marks', 'Travertine finish · hand-applied sample')}</div>
       <p>Want to see finishes first? The <a href="/sample-library/">sample library</a> shows full-size panels, and a master brings them to your home.</p>` },
   ],
   faq: [
