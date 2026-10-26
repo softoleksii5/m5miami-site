@@ -129,7 +129,13 @@ function buildPage(lang) {
   if (lang === 'uk' || lang === 'ru') html = html.replace('/fonts/cormorant-garamond-latin.woff2', '/fonts/cormorant-garamond-cyrillic.woff2');
   html = html.replace(/(<script type="application\/ld\+json">)\s*\{"@context":"https:\/\/schema\.org","@type":"FAQPage"[\s\S]*?(<\/script>)/, (m, a, b) => a + '\n' + faqJsonLd(dict) + '\n' + b);
   html = html.split(ORIGIN + '/?sent=1#contact').join(url + '?sent=1#contact');
+  // Pages that exist in Spanish or Russian (build-pages.mjs) are linked in that language; everything else keeps the English page.
+  const localized = lang === 'es' ? ['venetian-plaster', 'condo-renovation', 'home-renovation'] : lang === 'ru' ? ['venetian-plaster'] : [];
+  for (const slug of localized.filter((x) => fs.existsSync(path.join(ROOT, lang, x, 'index.html')))) html = html.replace(new RegExp('href=([\'"])/' + slug + '/\\1', 'g'), 'href=$1/' + lang + '/' + slug + '/$1');
   html = setSwitcher(html, lang);
+  // Language version of the home page: say which language it is in (audit S19 item 4).
+  const wp = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': url + '#webpage', url, name: plain(dict['meta.title']), inLanguage: lang, isPartOf: { '@id': ORIGIN + '/#website' } };
+  html = html.replace('</head>', '<script type="application/ld+json">' + JSON.stringify(wp) + '</script>\n</head>');
   return html;
 }
 
@@ -159,14 +165,28 @@ function lastmod(file) {
 }
 
 const oldMap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-const locs = [...oldMap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).filter((l) => !LANGS.some((x) => l === ORIGIN + '/' + x + '/'));
-const homeAlt = ['en', ...LANGS].map((l) => '    <xhtml:link rel="alternate" hreflang="' + l + '" href="' + ORIGIN + (l === 'en' ? '/' : '/' + l + '/') + '"/>').join('\n')
-  + '\n    <xhtml:link rel="alternate" hreflang="x-default" href="' + ORIGIN + '/"/>';
-const entry = (loc, file, alt) => '  <url>\n    <loc>' + loc + '</loc>\n    <lastmod>' + lastmod(file) + '</lastmod>\n' + (alt ? homeAlt + '\n' : '') + '  </url>';
+// English URLs only: the language versions are re-added below from the files that exist.
+const locs = [...oldMap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).filter((l) => !LANGS.some((x) => l.startsWith(ORIGIN + '/' + x + '/')));
+// A page belongs to a language cluster when /es/, /uk/ or /ru/ holds the same path as an indexable page.
+function counterpart(loc, lang) {
+  const rel = loc.replace(ORIGIN, '');
+  const loc2 = ORIGIN + (lang === 'en' ? '' : '/' + lang) + rel;
+  const file = fileFor(loc2);
+  const abs = path.join(ROOT, file);
+  if (!fs.existsSync(abs)) return null;
+  const head = fs.readFileSync(abs, 'utf8').slice(0, 4000);
+  if (/http-equiv="refresh"/i.test(head) || /name="robots"[^>]*noindex/i.test(head)) return null;
+  return { loc: loc2, file };
+}
+const altBlock = (cluster) => cluster.map((c) => '    <xhtml:link rel="alternate" hreflang="' + c.lang + '" href="' + c.loc + '"/>').join('\n')
+  + '\n    <xhtml:link rel="alternate" hreflang="x-default" href="' + cluster[0].loc + '"/>';
+const entry = (loc, file, cluster) => '  <url>\n    <loc>' + loc + '</loc>\n    <lastmod>' + lastmod(file) + '</lastmod>\n' + (cluster ? altBlock(cluster) + '\n' : '') + '  </url>';
 const urls = [];
 for (const loc of locs) {
-  urls.push(entry(loc, fileFor(loc), loc === ORIGIN + '/'));
-  if (loc === ORIGIN + '/') for (const l of LANGS) urls.push(entry(ORIGIN + '/' + l + '/', 'index.html', true));
+  const cluster = [{ lang: 'en', loc, file: fileFor(loc) }];
+  for (const l of ['es', 'uk', 'ru']) { const c = counterpart(loc, l); if (c) cluster.push({ lang: l, ...c }); }
+  const multi = cluster.length > 1 ? cluster : null;
+  for (const c of cluster) urls.push(entry(c.loc, c.file, multi));
 }
 fs.writeFileSync(
   path.join(ROOT, 'sitemap.xml'),

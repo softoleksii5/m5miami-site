@@ -47,6 +47,26 @@
   <url>
     <loc>https://m5miami.com/venetian-plaster/</loc>
     <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://m5miami.com/ru/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/venetian-plaster/"/>
+  </url>
+  <url>
+    <loc>https://m5miami.com/es/venetian-plaster/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://m5miami.com/ru/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/venetian-plaster/"/>
+  </url>
+  <url>
+    <loc>https://m5miami.com/ru/venetian-plaster/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://m5miami.com/ru/venetian-plaster/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/venetian-plaster/"/>
   </url>
   <url>
     <loc>https://m5miami.com/projects/black-fireplace-wall.html</loc>
@@ -106,6 +126,58 @@
   </url>
   <url>
     <loc>https://m5miami.com/projects/apartment-classic-moulding-two-bedroom.html</loc>
+    <lastmod>2026-10-26</lastmod>
+  </url>
+  <url>
+    <loc>https://m5miami.com/venetian-plaster/cost/</loc>
+    <lastmod>2026-10-26</lastmod>
+  </url>
+  <url>
+    <loc>https://m5miami.com/venetian-plaster/marmorino/</loc>
+    <lastmod>2026-10-26</lastmod>
+  </url>
+  <url>
+    <loc>https://m5miami.com/condo-renovation/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/condo-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/condo-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/condo-renovation/"/>
+  </url>
+  <url>
+    <loc>https://m5miami.com/es/condo-renovation/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/condo-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/condo-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/condo-renovation/"/>
+  </url>
+  <url>
+    <loc>https://m5miami.com/home-renovation/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/home-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/home-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/home-renovation/"/>
+  </url>
+  <url>
+    <loc>https://m5miami.com/es/home-renovation/</loc>
+    <lastmod>2026-10-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/home-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://m5miami.com/es/home-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/home-renovation/"/>
+  </url>
+  <url>
+    <loc>https://m5miami.com/interior-design/</loc>
+    <lastmod>2026-10-26</lastmod>
+  </url>
+  <url>
+    <loc>https://m5miami.com/south-florida/</loc>
+    <lastmod>2026-10-26</lastmod>
+  </url>
+  <url>
+    <loc>https://m5miami.com/guides/miami-condo-renovation/</loc>
+    <lastmod>2026-10-26</lastmod>
+  </url>
+  <url>
+    <loc>https://m5miami.com/miami-home-design-report-2026/</loc>
     <lastmod>2026-10-26</lastmod>
   </url>
 </urlset>
