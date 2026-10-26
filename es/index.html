@@ -928,7 +928,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldBudge
       <label class="sr-only" for="f-hood" data-i18n="form.hood">Zona / edificio</label>
       <input id="f-hood" type="text" name="neighborhood" placeholder="Zona / edificio" data-i18n-ph="form.hood">
       <label class="sr-only" for="f-budget" data-i18n="form.budget">Presupuesto del proyecto</label>
-      <select id="f-budget" name="budget"><option value="" data-i18n="form.budget">Presupuesto del proyecto</option><option>$50–100K</option><option>$100–250K</option><option>$250–500K</option><option>$500K+</option><option data-i18n="form.b4">Aún no lo sé</option></select>
+      <select id="f-budget" name="budget"><option value="" data-i18n="form.budget">Presupuesto del proyecto</option><option>$1–5K</option><option>$5–10K</option><option>$10–50K</option><option>$50–100K</option><option>$100–250K</option><option>$250–500K</option><option>$500K+</option><option data-i18n="form.b4">Aún no lo sé</option></select>
       <button class="btn btn-ink" type="submit" data-i18n="form.btn">Solicitar visita gratuita</button>
       <div class="qz-note" style="margin-top:10px"><span data-i18n="form.consent">Al enviar, acepta que le contactemos sobre su proyecto.</span> <a href="/privacy/" style="color:inherit;text-decoration:underline" data-i18n="form.privacy">Política de privacidad</a></div>
       <p id="formErr" style="display:none;font-size:14px;margin-top:14px;color:#b3261e" data-i18n="form.err">Su solicitud aún no se ha confirmado — inténtelo de nuevo o escríbanos por WhatsApp: +1 786 407 4441.</p>
@@ -1662,8 +1662,8 @@ function xiSubmit(e){e.preventDefault();var l=qzLang(),t=XIL[l]||XIL.en;
 
 /* ===== LEAD MODAL: форма на месте клика ===== */
 var LD_BUDGETS={
-  general:{en:['$50–100K','$100–250K','$250–500K','$500K+'],es:['$50–100K','$100–250K','$250–500K','$500K+'],uk:['$50–100K','$100–250K','$250–500K','$500K+'],ru:['$50–100K','$100–250K','$250–500K','$500K+']},
-  plaster:{en:['$10–25K','$25–50K','$50–100K','$100K+'],es:['$10–25K','$25–50K','$50–100K','$100K+'],uk:['$10–25K','$25–50K','$50–100K','$100K+'],ru:['$10–25K','$25–50K','$50–100K','$100K+']}
+  general:{en:['$1–5K','$5–10K','$10–50K','$50–100K','$100–250K','$250–500K','$500K+'],es:['$1–5K','$5–10K','$10–50K','$50–100K','$100–250K','$250–500K','$500K+'],uk:['$1–5K','$5–10K','$10–50K','$50–100K','$100–250K','$250–500K','$500K+'],ru:['$1–5K','$5–10K','$10–50K','$50–100K','$100–250K','$250–500K','$500K+']},
+  plaster:{en:['$1–5K','$5–10K','$10–25K','$25–50K','$50–100K','$100K+'],es:['$1–5K','$5–10K','$10–25K','$25–50K','$50–100K','$100K+'],uk:['$1–5K','$5–10K','$10–25K','$25–50K','$50–100K','$100K+'],ru:['$1–5K','$5–10K','$10–25K','$25–50K','$50–100K','$100K+']}
 };
 var LD_LBL={en:{budget:'Project budget',nsy:'Not sure yet'},es:{budget:'Presupuesto del proyecto',nsy:'Aún no lo sé'},uk:{budget:'Бюджет проєкту',nsy:'Ще не визначився'},ru:{budget:'Бюджет проекта',nsy:'Пока не определился'}};
 function ldFillBudget(mode){
