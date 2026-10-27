@@ -19,6 +19,14 @@ for (const mod of ['./content-plaster.mjs', './content-service.mjs', './content-
   const m = await import(mod);
   for (const v of Object.values(m)) if (v && v.slug && v.lang) pages.push(v);
 }
+// Weekly SEO articles (M5/scripts/seo/): one file per article in scripts/weekly/, exporting `en` and `es`.
+const weeklyDir = path.join(ROOT, 'scripts/weekly');
+if (fs.existsSync(weeklyDir)) {
+  for (const f of fs.readdirSync(weeklyDir).filter((x) => x.endsWith('.mjs')).sort()) {
+    const m = await import('./weekly/' + f);
+    for (const v of Object.values(m)) if (v && v.slug && v.lang) pages.push(v);
+  }
+}
 
 // Every page lists the language versions that exist (same slug, other language) for hreflang.
 const PL_SLUG = '/venetian-plaster/';

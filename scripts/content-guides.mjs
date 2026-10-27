@@ -221,7 +221,7 @@ export const guideHumidityEn = {
       <ul>
       <li><strong>Cleaning.</strong> A soft, damp cloth and a little mild soap. No abrasive pads, and no acidic or bleach-based cleaners.</li>
       <li><strong>Wet rooms.</strong> The protective layer wears slowly where water hits it most. Ask us how often to refresh it for your room.</li>
-      <li><strong>Scratches and scuffs.</strong> Light marks buff out. A deeper scratch or a chip is patched by the master and blended into the surrounding finish. A repaired spot does not show the way a touched-up painted wall does.</li>
+      <li><strong>Scratches and scuffs.</strong> Light marks buff out. A deeper scratch or a chip is patched by the master and blended into the surrounding finish. A repaired spot does not show the way a touched-up painted wall does. More on that trade-off in <a href="/guides/venetian-plaster-vs-paint-miami/">Venetian plaster vs paint</a>.</li>
       <li><strong>Hairline cracks.</strong> They are filled and refinished the same way, a small job rather than a repaint of the whole wall.</li>
       </ul>` },
     { id: 'price', alt: true, label: '06', h2: 'What it costs', html: `
