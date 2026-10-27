@@ -129,3 +129,63 @@ export const homeEs = {
     { q: '¿Remodelan cocinas y baños dentro de un proyecto más grande?', a: 'Sí. Las cocinas y los baños forman parte de la remodelación integral, planificados junto con el resto de la casa. Vea las secciones de cocinas y baños en esta página.' },
   ],
 };
+
+// ---- Artículo semanal 1 (27.10.2026): estuco veneciano y humedad de Miami. Twin of guideHumidityEn in content-guides.mjs; needs a native read. ----
+const gfigEs = (src, w, h, alt, cap) => `<figure><img src="${src}" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"><figcaption>${cap}</figcaption></figure>`;
+
+export const guideHumidityEs = {
+  lang: 'es', slug: '/guides/venetian-plaster-humidity-miami/', track: 'guide-humidity-es',
+  title: 'Estuco veneciano y humedad en Miami | M5 Studio Miami',
+  desc: 'Cómo resiste el estuco veneciano la humedad de Miami: baños, aire salino, aire acondicionado, moho, cuidado y reparación, con precios claros.',
+  label: 'Guía · estuco veneciano',
+  h1: 'Estuco veneciano y humedad en Miami: baños, aire salino y cómo resiste',
+  lede: 'El aire de Miami es cálido, húmedo y salino, y la mayoría de los acabados de pared no se hicieron para eso. El estuco veneciano es un acabado mineral, y eso cambia su comportamiento en un baño, en una torre frente al mar o en una casa con el aire acondicionado encendido todo el año. Aquí vemos qué resiste bien, dónde necesita una capa protectora y qué no prometemos. El acabado en sí está en nuestra <a href="/es/venetian-plaster/">página de estuco veneciano</a>.',
+  crumbs: [['Estuco veneciano y humedad', null]],
+  ctas: [['Agendar visita gratuita', '/es/#contact', 'btn-ink'], ['Cuánto cuesta (EN)', '/venetian-plaster/cost/', 'btn-line']],
+  meta: 'Última revisión: octubre de 2026',
+  ctaH: '¿Quiere ver cómo se siente en su propia pared?',
+  article: { date: '2026-10-27' },
+  sections: [
+    { id: 'breathes', label: '01', h2: 'Por qué el estuco mineral &ldquo;respira&rdquo;', html: `
+      <p>El estuco veneciano, el marmorino y el estuco mineral se hacen con minerales naturales: polvo de piedra unido con aglutinantes minerales, aplicado con llana en capas finas y bruñido a mano. La superficie es porosa a escala microscópica, así que el vapor de agua la atraviesa en lugar de quedar atrapado detrás.</p>
+      <p>La pintura y el papel tapiz de vinilo funcionan al revés: son una película. Cuando se acumula humedad detrás de una película, esta se ampolla, hace burbujas y se despega. Una superficie mineral absorbe un poco de humedad cuando el aire está húmedo y la devuelve cuando el aire se seca, y no hay película que levantar.</p>
+      <p>Una aclaración honesta: respirar no es lo mismo que ser impermeable. El estuco maneja muy bien la humedad del aire. El agua directa es otro trabajo, y para eso sirve la capa protectora de la sección siguiente.</p>` },
+    { id: 'bathrooms', alt: true, label: '02', h2: 'Baños y baños de visitas: dónde funciona el estuco y dónde necesita protección', html: `
+      <ul>
+      <li><strong>Baños de visitas.</strong> El caso más sencillo: no hay ducha, solo lavamanos. El estuco en paredes e incluso en el techo funciona muy bien, y es uno de los lugares más elegidos.</li>
+      <li><strong>Paredes del baño fuera de la ducha.</strong> Sin problema, con sellador protector o acabado con cera y un extractor que funcione.</li>
+      <li><strong>Dentro de la ducha y justo en el chorro.</strong> Aquí somos cuidadosos. Las paredes que reciben agua directa a diario suelen quedar mejor en azulejo o piedra. Si quiere estuco en una zona húmeda, lleva una capa protectora repelente al agua, y acordamos los detalles en la visita.</li>
+      <li><strong>El techo.</strong> El vapor sube. Un techo sellado sobre una ducha con buen extractor está bien; sin ventilación, ningún acabado aguanta.</li>
+      </ul>
+      <p>En cualquier cuarto la regla es la misma: estuco con capa protectora en zonas húmedas, más ventilación. Las zonas húmedas siempre llevan un sellador protector aplicado por nuestros maestros.</p>
+      <div class="figs">${gfigEs('/img/case_powder-room-black-marmorino_2_t.jpg', 844, 900, 'Baño de visitas en marmorino negro con nichos iluminados y una línea de luz en el techo, trabajo de nuestro maestro en curso', 'Baño de visitas en marmorino negro · trabajo del maestro, en curso')}${gfigEs('/media/lp/marmorino_detail.jpg', 520, 520, 'Primer plano de un acabado real de marmorino con grano fino de piedra', 'Marmorino de cerca · el acabado real')}</div>
+      <p>Vea el proyecto completo (en inglés): <a href="/projects/powder-room-black-marmorino.html" hreflang="en" lang="en">black marmorino powder room</a>.</p>` },
+    { id: 'salt', label: '03', h2: 'Aire salino y aire acondicionado en torres frente al mar', html: `
+      <p>La sal en el aire es dura con el metal, que se oxida, y con los recubrimientos orgánicos, que envejecen más rápido con sol fuerte y sal. El estuco mineral es inorgánico: no se oxida y no tiene una película que se calcine o se despegue, por eso el marmorino se emplea también en fachadas.</p>
+      <div class="figs">${gfigEs('/media/lp/fac_out.jpg', 1400, 1750, 'Casa moderna con fachada acanalada de marmorino, trabajo de nuestros maestros', 'Fachada de marmorino · trabajo de nuestros maestros')}</div>
+      <p>En el interior, el mayor cambio en un condominio de Miami es el aire acondicionado. Un equipo que funciona todo el día mantiene el aire seco y el estuco estable. El problema empieza cuando los dueños viajan y apagan el aire por semanas: sube la humedad y todo acabado sufre. Deje el aire en modo deshumidificador cuando se ausente. El estuco mineral tolera ese vaivén mucho mejor que la pintura o el papel tapiz, pero a ningún acabado le gusta un apartamento cerrado y húmedo.</p>
+      <p>Si el edificio se mueve o el soporte cede, cualquier estuco puede mostrar una fisura fina. Es una reparación estética, descrita más abajo. Las reglas del edificio para la obra están en nuestra <a href="/guides/miami-condo-renovation/" hreflang="en" lang="en">guía de remodelación de condominios (EN)</a>.</p>` },
+    { id: 'mold', alt: true, label: '04', h2: 'Moho: por qué al estuco mineral le cuesta más que a la pintura', html: `
+      <p>El moho necesita humedad y algo de qué alimentarse. Los aglutinantes de la pintura, el engrudo del papel tapiz y la cara de papel del panel de yeso son alimento. Una superficie mineral es inorgánica y naturalmente alcalina, así que hay mucho menos de qué alimentarse.</p>
+      <p>Es una ventaja, no una garantía. La suciedad, la película de jabón y la condensación constante pueden hacer crecer algo en cualquier superficie. Si una pared se mantiene mojada, la causa es una fuga, un extractor ausente o condensación sobre una superficie fría, y hay que resolverla en el origen. Si vemos un problema de humedad en la visita, se lo diremos antes de aplicar el estuco.</p>` },
+    { id: 'care', label: '05', h2: 'Cuidado y reparación', html: `
+      <ul>
+      <li><strong>Limpieza.</strong> Un paño suave y húmedo con un poco de jabón neutro. Sin esponjas abrasivas ni limpiadores ácidos o con cloro.</li>
+      <li><strong>Cuartos húmedos.</strong> La capa protectora se desgasta despacio donde más cae el agua. Pregúntenos cada cuánto renovarla en su caso.</li>
+      <li><strong>Rayones y marcas.</strong> Las marcas leves se pulen. Un rayón profundo o un golpe lo repara el maestro y lo integra con el acabado de alrededor. La zona reparada no se nota como un retoque de pintura.</li>
+      <li><strong>Fisuras finas.</strong> Se rellenan y se reacaban igual: un trabajo pequeño, no repintar toda la pared.</li>
+      </ul>` },
+    { id: 'price', alt: true, label: '06', h2: 'Cuánto cuesta', html: `
+      <p>Precios típicos en Miami para 2026, por pie cuadrado de pared: estuco mineral $15–20, marmorino $15–25, estuco veneciano pulido $20–30, acabados especiales desde $30. Incluyen preparación de la superficie, materiales, aplicación a mano y el sellador protector, así que una zona húmeda no agrega una línea sorpresa. Los proyectos con M5 parten de $10,000, y recibe un precio fijo por escrito después de una visita gratuita.</p>
+      <p>Todo lo que mueve la cifra está en <a href="/venetian-plaster/cost/" hreflang="en" lang="en">What Venetian plaster costs in Miami (EN)</a>. Sobre la diferencia entre los dos acabados más comunes, vea <a href="/venetian-plaster/marmorino/" hreflang="en" lang="en">marmorino plaster (EN)</a>.</p>` },
+    { id: 'sample', label: '07', h2: 'Véalo antes de decidir', html: `
+      <p>La humedad se juzga mejor con una muestra en la mano. Envíenos una foto de su pared por WhatsApp y hacemos una muestra real hecha a mano en 48 horas. Luego un maestro la visita sin costo, sostiene las muestras contra su pared con su propia luz y revisa la superficie y la situación de humedad. Vea paredes terminadas en <a href="/portfolio/" hreflang="en" lang="en">nuestros trabajos en estuco (EN)</a> o en la <a href="/sample-library/" hreflang="en" lang="en">biblioteca de muestras (EN)</a>.</p>` },
+  ],
+  faq: [
+    { q: '¿Se puede usar estuco veneciano en un baño en Miami?', a: 'Sí. El estuco veneciano y el marmorino son habituales en baños y baños de visitas. Las paredes fuera del chorro directo llevan sellador protector o cera y necesitan un extractor que funcione. Dentro de la ducha suele ser mejor el azulejo o la piedra, y lo decidimos en la visita.' },
+    { q: '¿Se despega o se ampolla el estuco veneciano con la humedad?', a: 'No como la pintura o el papel tapiz. El estuco mineral no tiene película encima y deja pasar el vapor de agua. El agua constante detrás de la pared, por ejemplo una fuga, puede dañar cualquier acabado, así que primero hay que resolver el origen.' },
+    { q: '¿El aire salino daña el estuco veneciano?', a: 'El estuco mineral es inorgánico, así que no se oxida ni se calcina como pueden hacerlo los recubrimientos y los metales. El marmorino se emplea en fachadas expuestas al sol, la sal y la lluvia. En interiores, la sal rara vez es un problema.' },
+    { q: '¿Le sale moho al estuco veneciano?', a: 'Al moho le cuesta mucho más crecer en el estuco mineral que en la pintura o el papel tapiz, porque no hay nada orgánico que le sirva de alimento. No es a prueba de moho: una pared siempre mojada necesita que se resuelva su problema de humedad, sea cual sea el acabado.' },
+    { q: '¿Cómo se repara un rayón en el estuco veneciano?', a: 'Las marcas leves se pulen. Un rayón profundo o un golpe lo repara el maestro y lo integra con el acabado de alrededor, así que no hace falta repintar toda la pared.' },
+  ],
+};

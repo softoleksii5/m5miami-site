@@ -43,7 +43,7 @@ export const costEn = {
       <h3>Ceilings</h3>
       <p>Plaster can run from the wall onto the ceiling without a break, which gives a seamless room. A ceiling is also a large surface worked overhead, so it adds time to the project.</p>
       <h3>Bathrooms and powder rooms</h3>
-      <p>Venetian plaster and marmorino are common in bathrooms and powder rooms. Wet zones get a protective sealer. A small room with many corners and details can take as long as a larger plain wall.</p>
+      <p>Venetian plaster and marmorino are common in bathrooms and powder rooms. Wet zones get a protective sealer. A small room with many corners and details can take as long as a larger plain wall. How it holds up: <a href="/guides/venetian-plaster-humidity-miami/">Venetian plaster in Miami humidity</a>.</p>
       <h3>Fireplaces</h3>
       <p>A fireplace wall or column is a feature that people look at up close, so the finish and the detail work matter. We show the finish on a real panel first.</p>
       <div class="figs">${fig('/img/cost_ivory.jpg', 900, 1125, 'Warm ivory polished Venetian plaster wall with a linear fireplace in a sunlit living room', 'Warm ivory polished Venetian plaster · visualization', '/venetian-plaster/')}${fig('/img/cost_grey.jpg', 900, 1125, 'Powder room in warm grey mineral plaster with a concrete effect and a walnut vanity', 'Grey mineral plaster, concrete effect · visualization', '/venetian-plaster/')}</div>` },
@@ -104,7 +104,7 @@ export const marmorinoEn = {
       <p>Not sure which you want? We bring both to the site visit so you can hold them against your wall. More on Venetian plaster in <a href="/venetian-plaster/">our main plaster guide</a>.</p>` },
     { id: 'where', label: 'Where it works', h2: 'Powder rooms, fireplaces and feature walls', html: `
       <ul>
-      <li><strong>Powder rooms and bathrooms.</strong> Marmorino is common here. Wet zones get a protective sealer.</li>
+      <li><strong>Powder rooms and bathrooms.</strong> Marmorino is common here. Wet zones get a protective sealer. More in <a href="/guides/venetian-plaster-humidity-miami/">Venetian plaster in Miami humidity</a>.</li>
       <li><strong>Fireplaces.</strong> A marmorino fireplace wall is seamless, with no joints or grout lines.</li>
       <li><strong>Feature walls and bedrooms.</strong> A calm surface that changes softly with the light through the day.</li>
       <li><strong>Facades.</strong> Outside, marmorino covers whole facades and takes sun, salt air and rain without peeling like paint.</li>

@@ -177,3 +177,64 @@ export const reportEn = {
   ],
   faq: [],
 };
+
+// ---- Weekly SEO article 1 (27.10.2026): Venetian plaster and Miami humidity. English source; Spanish twin in content-es.mjs. ----
+// Prices come only from /venetian-plaster/cost/. Photos are real work only (no AI visualizations); captions name no place.
+const gfig = (src, w, h, alt, cap) => `<figure><img src="${src}" width="${w}" height="${h}" alt="${alt}" loading="lazy" decoding="async"><figcaption>${cap}</figcaption></figure>`;
+
+export const guideHumidityEn = {
+  lang: 'en', slug: '/guides/venetian-plaster-humidity-miami/', track: 'guide-humidity',
+  title: 'Venetian Plaster in Miami Humidity | M5 Studio Miami',
+  desc: 'How Venetian plaster holds up in Miami humidity: bathrooms and powder rooms, salt air, air conditioning, mold, care, repairs and honest prices.',
+  label: 'Guide · Venetian plaster',
+  h1: 'Venetian plaster in Miami humidity: bathrooms, salt air and how it holds up',
+  lede: 'Miami air is warm, wet and salty, and most wall finishes were not made for it. Venetian plaster is a mineral finish, and that changes how it behaves in a bathroom, a coastal tower or a house with the air conditioning on all year. Here is what it handles well, where it needs a protective layer, and what we would not promise. The finish itself is on our <a href="/venetian-plaster/">Venetian plaster page</a>.',
+  crumbs: [['Venetian plaster and humidity', null]],
+  ctas: [['Book a free site visit', '/#contact', 'btn-ink'], ['What it costs', '/venetian-plaster/cost/', 'btn-line']],
+  meta: 'Last reviewed: October 2026',
+  ctaH: 'Want to see how it looks and feels on your own wall?',
+  article: { date: '2026-10-27' },
+  sections: [
+    { id: 'breathes', label: '01', h2: 'Why mineral plaster &ldquo;breathes&rdquo;', html: `
+      <p>Venetian plaster, marmorino and mineral plaster are made from natural minerals: stone dust bound with mineral binders, troweled on in thin coats and burnished by hand. The surface is open at a microscopic level, so water vapor passes through it instead of being trapped behind it.</p>
+      <p>Paint and vinyl wallpaper work the other way. They are a film. When moisture builds up behind a film, the film blisters, bubbles and peels. A mineral surface takes up a little moisture when the air is wet and gives it back when the air dries, and there is no film to lift.</p>
+      <p>One honest caveat: breathable does not mean waterproof. The plaster handles humidity in the air very well. Direct water is a different job, and that is what the protective layer in the next section is for.</p>` },
+    { id: 'bathrooms', alt: true, label: '02', h2: 'Bathrooms and powder rooms: where plaster works and where it needs protection', html: `
+      <ul>
+      <li><strong>Powder rooms.</strong> The easiest case. No shower, only hand-washing. Plaster on walls and even the ceiling works well, and a powder room is one of the most popular places for it.</li>
+      <li><strong>Bathroom walls outside the shower.</strong> Fine, with a protective sealer or wax finish, and a working exhaust fan.</li>
+      <li><strong>Inside the shower and right at the spray.</strong> This is where we are careful. Walls that get direct, daily water are usually better in tile or stone. If you want plaster in a wet zone, it gets a water-repellent protective layer, and we agree on the details at the site visit.</li>
+      <li><strong>The ceiling.</strong> Steam goes up. A sealed ceiling over a shower with a good fan is fine; without ventilation, no finish will be happy.</li>
+      </ul>
+      <p>Whatever the room, the rule is the same: plaster plus a protective layer in wet zones, plus ventilation. Wet zones always get a protective sealer from our masters.</p>
+      <div class="figs">${gfig('/img/case_powder-room-black-marmorino_2_t.jpg', 844, 900, 'Black Marmorino powder room with lit niches and a ceiling light line, master&#x27;s work in progress', 'Black marmorino powder room · master&#x27;s work, in progress')}${gfig('/media/lp/marmorino_detail.jpg', 520, 520, 'Close-up of a real Marmorino finish with a fine stone grain', 'Marmorino up close · the real finish')}</div>
+      <p>See the full project: <a href="/projects/powder-room-black-marmorino.html">black marmorino powder room</a>.</p>` },
+    { id: 'salt', label: '03', h2: 'Salt air and air conditioning in coastal towers', html: `
+      <p>Salt in the air is hard on metal, which rusts, and on organic coatings, which age faster in strong sun and salt. Mineral plaster is inorganic. It does not rust and does not have a film to chalk or peel, which is why marmorino is used on exterior walls as well as inside.</p>
+      <div class="figs">${gfig('/media/lp/fac_out.jpg', 1400, 1750, 'Modern house with a fluted Marmorino facade, our masters&#x27; work', 'Marmorino facade · our masters&#x27; work')}</div>
+      <p>Indoors, the bigger swing in a Miami condo is the air conditioning. A unit that runs all day keeps the air dry and the plaster stable. The problem starts when owners travel and switch the A/C off for weeks: humidity climbs, and every finish suffers. Leave the air conditioning on a dehumidifying setting when you are away. Mineral plaster tolerates that swing far better than paint or wallpaper, but no wall finish likes a closed, wet apartment.</p>
+      <p>If the building shifts or the substrate moves, any plaster can show a hairline crack. It is a cosmetic repair, covered below. Building rules for the work itself are in our <a href="/guides/miami-condo-renovation/">condo renovation guide</a>.</p>` },
+    { id: 'mold', alt: true, label: '04', h2: 'Mold: why mineral plaster is harder to grow on than paint', html: `
+      <p>Mold needs moisture and something to eat. Paint binders, wallpaper paste and the paper face of drywall are all food. A mineral surface is inorganic and naturally alkaline, so there is much less for mold to feed on.</p>
+      <p>That is an advantage, not a guarantee. Dirt, soap film and constant condensation can still grow something on any surface. If a wall stays wet, the cause is a leak, a missing fan or a cold-surface condensation problem, and it has to be fixed at the source. We will tell you if we see a moisture problem at the site visit, before any plaster goes on.</p>` },
+    { id: 'care', label: '05', h2: 'Care and repair', html: `
+      <ul>
+      <li><strong>Cleaning.</strong> A soft, damp cloth and a little mild soap. No abrasive pads, and no acidic or bleach-based cleaners.</li>
+      <li><strong>Wet rooms.</strong> The protective layer wears slowly where water hits it most. Ask us how often to refresh it for your room.</li>
+      <li><strong>Scratches and scuffs.</strong> Light marks buff out. A deeper scratch or a chip is patched by the master and blended into the surrounding finish. A repaired spot does not show the way a touched-up painted wall does.</li>
+      <li><strong>Hairline cracks.</strong> They are filled and refinished the same way, a small job rather than a repaint of the whole wall.</li>
+      </ul>` },
+    { id: 'price', alt: true, label: '06', h2: 'What it costs', html: `
+      <p>Typical prices in Miami for 2026, per square foot of wall: mineral plaster $15–20, marmorino $15–25, polished Venetian plaster $20–30, special finishes from $30. These include surface preparation, materials, hand application and the protective sealer, so a wet zone does not add a surprise line. Projects with M5 start at $10,000, and you get one fixed price in writing after a free site visit.</p>
+      <p>Everything that moves the number is in <a href="/venetian-plaster/cost/">What Venetian plaster costs in Miami</a>. For the difference between the two most common finishes, see <a href="/venetian-plaster/marmorino/">marmorino plaster</a>.</p>` },
+    { id: 'sample', label: '07', h2: 'See it before you decide', html: `
+      <p>Humidity is easier to judge with a sample in your hand. Send us a photo of your wall on WhatsApp, and we make a real hand-made sample within 48 hours. A master then visits for free, holds the samples against your wall in your own light and checks the surface and the moisture situation. Browse finished walls in <a href="/portfolio/">our plaster work</a> or the <a href="/sample-library/">sample library</a>.</p>` },
+  ],
+  faq: [
+    { q: 'Can Venetian plaster go in a bathroom in Miami?', a: 'Yes. Venetian plaster and marmorino are common in bathrooms and powder rooms. Walls outside the direct spray get a protective sealer or wax and need a working exhaust fan. Inside the shower, tile or stone is often the better choice, and we decide on site.' },
+    { q: 'Will Venetian plaster peel or bubble in humid air?', a: 'Not the way paint or wallpaper does. Mineral plaster has no film on top, and it lets water vapor pass through. Persistent water behind the wall, from a leak for example, can damage any finish, so the source has to be fixed first.' },
+    { q: 'Does salt air damage Venetian plaster?', a: 'Mineral plaster is inorganic, so it does not rust or chalk the way coatings and metals can. Marmorino is used on exterior walls that face sun, salt air and rain. Indoors, salt is rarely a problem.' },
+    { q: 'Does Venetian plaster grow mold?', a: 'It is much harder for mold to grow on mineral plaster than on paint or wallpaper, because there is nothing organic to feed on. It is not mold-proof: a constantly wet wall needs its moisture problem solved, whatever the finish.' },
+    { q: 'How do I repair a scratch in Venetian plaster?', a: 'Light scuffs buff out. A deeper scratch or a chip is patched by the master and blended into the surrounding finish, so you do not repaint the whole wall.' },
+  ],
+};
