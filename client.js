@@ -6,7 +6,7 @@
    Доступ: /client/?p=<slug>. Демо: ?p=demo. Данные позже — из JobTread API. */
 
 var CLIENTS={
- 'demo':{
+ '__demo_off':{
    name:'David', project:'Condo Residence — Full Renovation', status:'Active',
    pm:'Vadym', pmPhone:'17864074441', started:'Sep 2026', eta:'Dec 2026', updated:'Sep 20',
    refCode:'dv7k2f', /* реф-код ВСЕГДА отдельный от slug — slug это ключ доступа к кабинету */
@@ -313,7 +313,7 @@ function renderGate_(){
   '<span style="font-size:14px;color:#6E6656">Every M5 client receives a personal link from their project manager. '+
   'Lost yours? Message us on WhatsApp and we’ll resend it.</span><br><br>'+
   '<a class="cbtn" style="text-decoration:none" href="https://wa.me/17864074441">WhatsApp M5</a>'+
-  '<div style="margin-top:14px"><a href="/client/?p=demo" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#96703B;text-decoration:underline">SEE A DEMO PROJECT HUB →</a></div></div>'+
+  '</div>'+
   '<footer>M5 Interior Design · Miami</footer>';
 }
 function renderHub_(){
