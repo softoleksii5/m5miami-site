@@ -304,7 +304,7 @@ ${faq}
 <footer>
   <div class="wrap">
     <nav class="f-nav" aria-label="${t.footNav}">${footLinks}</nav>
-    <div class="f-bot"><span>${t.foot}<a href="${t.privacyHref}" style="color:inherit">${t.privacy}</a></span><span><a href="mailto:hello@m5miami.com">hello@m5miami.com</a> · Miami-Dade · Broward · Palm Beach</span></div>
+    <div class="f-bot"><span>${t.foot}<a href="${t.privacyHref}" style="color:inherit">${t.privacy}</a></span><span><a href="mailto:hello@m5miami.com">hello@m5miami.com</a> · <a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram</a> · Miami-Dade · Broward · Palm Beach</span></div>
   </div>
 </footer>
 <a class="wa" href="https://wa.me/17864074441" aria-label="${t.waAria}" onclick="if(window.m5track)m5track('whatsapp_click')">${WA_ICON}</a>
