@@ -120,20 +120,32 @@
   .f-nav a:hover{color:#D9B87C}
   .f-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px}
   .wa{position:fixed;right:24px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+  /* 03.11.2026: короткая форма заявки на странице (бриф SEO недели 1) */
+  .lf .lf-form{display:grid;gap:12px;max-width:560px;margin-top:22px}
+  .lf-form input{background:var(--color-paper);border:1px solid var(--color-line-strong);border-radius:var(--radius-1);padding:14px 18px;font:inherit;font-size:16px;color:var(--ink);min-height:var(--input-height)}
+  .lf-form input::placeholder{color:var(--color-text-muted)}
+  .lf-sub{color:var(--soft);font-size:17px;max-width:41em;margin:14px 0 0}
+  .lf-note{font-size:13px;color:var(--soft);margin:2px 0 0} .lf-note a{color:inherit;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+  .lf-err{color:#b3261e;font-size:14px;margin:4px 0 0} .lf-ok{color:#2e7d4f;font-size:15px;margin:4px 0 0}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .h-tel{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label);color:var(--color-text-on-dark-muted);white-space:nowrap} .h-tel:hover{color:var(--bone)}
+  @media(max-width:900px){.h-tel{display:none}}
 </style>
 <script defer src="/analytics.js"></script>
+<script defer src="/lead.js"></script>
 </head>
 <body>
 <header>
   <a class="logo" href="/" aria-label="M5"><svg width="46" height="38" viewBox="0 0 46 38" fill="none"><path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/><text x="23" y="26" text-anchor="middle" font-family="Geist,-apple-system,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text></svg></a>
   <nav class="h-nav" aria-label="Main"><a href="/#services">SERVICES</a><a href="/work/">PORTFOLIO</a><a href="/venetian-plaster/">PLASTER</a><a href="/#about">ABOUT</a><a href="/#faq">FAQ</a></nav>
-  <div class="h-right"><a class="h-cta" href="/#contact">BOOK A VISIT</a></div>
+  <div class="h-right"><a class="h-tel" href="tel:+17864074441" onclick="if(window.m5track)m5track('phone_click',{source:'header'})">+1 786 407 4441</a><a class="h-cta" href="/#contact">BOOK A VISIT</a></div>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
 </header>
 <div class="mnav" id="mnav" hidden>
   <nav class="mnav-links" aria-label="Main"><a href="/#services">SERVICES</a><a href="/work/">PORTFOLIO</a><a href="/venetian-plaster/">PLASTER</a><a href="/#about">ABOUT</a><a href="/#faq">FAQ</a></nav>
   <a class="btn btn-bone mnav-cta" href="/#contact">BOOK A VISIT</a>
   <a class="mnav-wa" href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="mnav-wa" href="tel:+17864074441" onclick="if(window.m5track)m5track('phone_click',{source:'menu'})">Call +1 786 407 4441</a>
 </div>
 
 <main>
@@ -174,6 +186,17 @@
 <section class="sec" id="record"><div class="wrap"><div class="label">Track record</div><h2>The team's track record</h2><div class="prose">
       <p>200+ villas and homes delivered worldwide. Now in Miami, the same team and the same system, with our own Venetian plaster studio.</p>
       <p>Looking for ideas first? Read the <a href="/miami-home-design-report-2026/">Miami home design report 2026</a>.</p></div></div></section>
+<section class="sec lf" id="request"><div class="wrap"><div class="label">Free site visit</div><h2>Tell us about your space</h2><p class="lf-sub">Name, phone and a line about the project. We reply within one business hour (9am–6pm ET).</p>
+  <form class="lf-form" data-service="design" data-source="page:/interior-design/" data-lang="en" onsubmit="return m5InlineSubmit(event)">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="sr-only" for="lf-name">Your name</label><input id="lf-name" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+    <label class="sr-only" for="lf-phone">Phone / WhatsApp</label><input id="lf-phone" type="tel" name="phone" inputmode="tel" placeholder="Phone / WhatsApp" autocomplete="tel" required>
+    <label class="sr-only" for="lf-plan">What are you planning? e.g. condo renovation</label><input id="lf-plan" type="text" name="plan" placeholder="What are you planning? e.g. condo renovation" autocomplete="off">
+    <button class="btn btn-ink" type="submit">Request a free site visit</button>
+    <p class="lf-note">By submitting, you agree to be contacted about your project. <a href="/privacy/">Privacy Policy</a> · or <a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a> · <a href="tel:+17864074441" onclick="if(window.m5track)m5track('phone_click',{source:'form'})">+1 786 407 4441</a></p>
+    <p class="lf-err" hidden>Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.</p>
+    <p class="lf-ok" hidden>Thank you — we received your request and will reply within one business hour (9am–6pm ET).</p>
+  </form></div></section>
 <section class="sec alt" id="faq"><div class="wrap"><div class="label">FAQ</div><h2>Questions</h2><div class="faq"><details><summary>How much does an interior designer cost in Miami?</summary><p>Fees depend on the size of the home and the scope: design only, or design with renovation coordination. We price every project after visiting the space, with no guessing over the phone, and you get an itemized estimate 48 hours after the visit.</p></details><details><summary>Can I hire M5 for design only?</summary><p>Yes. Design can be a stand-alone service, for a full home or a single room. If you later want us to coordinate the work as well, we can.</p></details><details><summary>Do you work with owners who live abroad part of the year?</summary><p>Yes. You get weekly photo updates through handover and can reach us on WhatsApp, so you can follow the project from anywhere. Our team speaks English, Spanish, Ukrainian and Russian.</p></details><details><summary>How long does the design stage take?</summary><p>Roughly 4–6 weeks from the first consultation to the design, 3D and itemized budget: about a week for the consultation, 1–2 weeks for the concept and 2–3 weeks for design and 3D.</p></details></div></div></section>
 </main>
 
@@ -193,7 +216,7 @@
 <footer>
   <div class="wrap">
     <nav class="f-nav" aria-label="Services and areas"><a href="/condo-renovation/">Condo &amp; apartment renovation</a><a href="/home-renovation/">Full home renovation</a><a href="/venetian-plaster/">Venetian plaster</a><a href="/interior-design/">Interior design</a><a href="/south-florida/">Areas we serve</a><a href="/work/">Our work</a></nav>
-    <div class="f-bot"><span>© 2026 M5 Studio Miami LLC · Miami, FL · Interior design &amp; Venetian plaster · Build work with licensed &amp; insured Florida contractor partners · <a href="/privacy/" style="color:inherit">Privacy Policy</a></span><span><a href="mailto:hello@m5miami.com">hello@m5miami.com</a> · <a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram</a> · Miami-Dade · Broward · Palm Beach</span></div>
+    <div class="f-bot"><span>© 2026 M5 Studio Miami LLC · Miami, FL · Interior design &amp; Venetian plaster · Build work with licensed &amp; insured Florida contractor partners · <a href="/privacy/" style="color:inherit">Privacy Policy</a> · <a href="tel:+17864074441" style="color:inherit" onclick="if(window.m5track)m5track('phone_click',{source:'footer'})">+1 786 407 4441</a></span><span><a href="mailto:hello@m5miami.com">hello@m5miami.com</a> · <a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram</a> · Miami-Dade · Broward · Palm Beach</span></div>
   </div>
 </footer>
 <a class="wa" href="https://wa.me/17864074441" aria-label="WhatsApp" onclick="if(window.m5track)m5track('whatsapp_click')"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.9.8 2 .1.1.1.3 0 .5s-.2.3-.3.5l-.5.6c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1l2 .9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg></a>
