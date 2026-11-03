@@ -318,7 +318,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
     .ann{font-size:11.5px}
     .ann .ann-x{display:none}
     .hdr{padding:0 12px}
-    .hdr-r .wa,.hdr-r .lb{display:none}
+    .hdr-r .wa,.hdr-r .lb,.hdr-r .tel{display:none}
     .mark{width:44px;height:44px}
     .hero{min-height:640px}
     .hero-top{top:11%}
@@ -360,7 +360,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
     .join-in{padding-top:12vh}
     .chat{display:none}
     .foot{padding-bottom:110px}
-    .mbar{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(23,21,18,.92);backdrop-filter:blur(12px);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+    .mbar{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(23,21,18,.92);backdrop-filter:blur(12px);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
     .mbar .pill{min-height:50px}
     .mbar .wa{background:#1F7A4D;color:#fff}
   }
@@ -377,6 +377,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
   <div class="hdr-r">
     <a class="pill pill-light lb" href="#lookbook" data-track="lookbook_nav">Lookbook</a>
     <a class="pill pill-light wa" href="https://wa.me/17864074441?text=Hola%20M5%2C%20me%20interesa%20el%20estuco%20veneciano" target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp</a>
+    <a class="pill pill-light tel" href="tel:+17864074441" data-track="phone_click">Llamar</a>
     <button class="pill pill-gold" type="button" data-open data-track="cta_header">Agendar visita</button>
   </div>
 </header>
@@ -564,6 +565,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
 <a class="chat" href="https://wa.me/17864074441?text=Hola%20M5%2C%20me%20interesa%20el%20estuco%20veneciano" target="_blank" rel="noopener" data-track="whatsapp_click">Escríbanos <i>✆</i></a>
 <div class="mbar">
   <a class="pill wa" href="https://wa.me/17864074441?text=Hola%20M5%2C%20me%20interesa%20el%20estuco%20veneciano" target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp</a>
+  <a class="pill pill-light tel" href="tel:+17864074441" data-track="phone_click">Llamar</a>
   <button class="pill pill-gold" type="button" data-open data-track="cta_mbar">Visita gratuita</button>
 </div>
 

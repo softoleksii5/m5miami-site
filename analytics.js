@@ -96,7 +96,7 @@
     addEventListener('scroll', onScroll, { passive: true }); setInterval(maybeEngage, 5000);
     // секции: один раз за сессию каждая
     if ('IntersectionObserver' in window) {
-      var seen = {}; var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var id = e.target.id; if (e.isIntersecting && id && !seen[id]) { seen[id] = 1; push('section', id); } }); }, { threshold: 0.35 });
+      var seen = {}; var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var id = e.target.id; if (e.isIntersecting && id && !seen[id]) { seen[id] = 1; push('section', id); if (window.m5track) m5track('section_view', { section: id }); } }); }, { threshold: 0.35 });
       document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
     }
     // переходы: классифицируем по ссылке
