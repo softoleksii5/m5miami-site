@@ -66,8 +66,8 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
 
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/tokens.css">
-<link rel="preload" as="image" href="/img/hero_wall.webp" media="(min-width:681px)">
-<link rel="preload" as="image" type="image/avif" imagesrcset="/img/m/hero_plaster_828.avif 828w, /img/m/hero_plaster_1170.avif 1170w" imagesizes="100vw" media="(max-width:680px)" fetchpriority="high">
+<link rel="preload" as="image" href="/img/hs_d1_raw.webp" media="(min-width:681px)">
+<link rel="preload" as="image" href="/img/hs_m1_raw.webp" media="(max-width:680px)" fetchpriority="high">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -647,6 +647,50 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
 .plaster .why .t{color:var(--color-text-on-dark)}
 .plaster .why .b,.plaster .why-rest>div{color:var(--color-text-on-dark-muted)}
 .plaster .why-top>div{border-top-color:rgba(217,184,124,.5)}
+
+  /* hero scroll sequence (вариант -style) */
+  .hero-seq{height:400vh;position:relative}
+  .hero-seq .hero{position:sticky;top:0;height:100vh;min-height:100vh;overflow:hidden}
+  .hs-layer{display:block;position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:0;will-change:opacity}
+  .hs-layer.l0{background-image:url('/img/hs_d1_raw.webp');opacity:1}
+  .hero-seq .hero-img{z-index:1}
+  .hs-cap{display:none}
+  .hs-rail{display:none}
+  @media(max-width:680px){
+    .hero-seq{height:320vh}
+    .hero-seq .hero{height:100svh;min-height:100svh}
+    .hero-seq .hero-pic{display:none}
+    .hs-layer{background-position:50% 20%}
+    .hs-layer.l0{background-image:url('/img/hs_m1_raw.webp')}
+    .hs-cap{display:block;position:relative;width:100%;min-height:3.1em;margin:0 0 var(--space-2);font-family:var(--sans);font-size:12.5px;line-height:1.35;letter-spacing:.01em;color:#F4EEE4}
+    .hs-cap span{position:absolute;left:50%;top:0;transform:translateX(-50%);width:max-content;max-width:92%;padding:6px 12px;border-radius:10px;background:rgba(20,18,15,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-align:center;opacity:0;transition:opacity .45s ease}
+    .hs-cap span.on{opacity:1}
+    .hs-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;list-style:none;margin:var(--space-5) auto 0;padding:0;max-width:360px}
+    .hs-rail li{position:relative;padding-top:8px;color:rgba(244,238,228,.45)}
+    .hs-rail li i{display:none}
+    .hs-rail li span{font-family:var(--sans);font-size:8px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .hs-rail li b{position:absolute;left:0;top:0;height:1px;width:100%;background:rgba(244,238,228,.18)}
+    .hs-rail li b::after{content:"";position:absolute;left:0;top:0;height:100%;width:var(--w,0%);background:#D9B87C}
+    .hs-rail li.on{color:#F4EEE4}
+  }
+  @media(min-width:681px){
+    .hero-seq .hero-img{background:
+      linear-gradient(90deg,rgba(15,13,10,.72) 0%,rgba(15,13,10,.35) 42%,rgba(15,13,10,.12) 100%),
+      linear-gradient(180deg,rgba(15,13,10,.30) 0%,rgba(15,13,10,.05) 38%,rgba(15,13,10,.55) 74%,rgba(15,13,10,.94) 100%)}
+    .hs-cap{display:block;position:relative;width:100%;max-width:720px;margin-left:auto;margin-right:auto;min-height:1.6em;margin:0 0 var(--space-4);font-family:var(--sans);font-size:14px;letter-spacing:.02em;color:rgba(244,238,228,.82)}
+    .hs-cap span{position:absolute;left:0;right:0;top:0;text-align:center;opacity:0;transition:opacity .45s ease}
+    .hs-rail{margin-left:auto;margin-right:auto}
+    .hs-cap span.on{opacity:1}
+    .hs-rail{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;list-style:none;margin:var(--space-7) 0 0;padding:0;max-width:760px}
+    .hs-rail li{position:relative;padding-top:10px;color:rgba(244,238,228,.45);transition:color .3s}
+    .hs-rail li i{font:500 10px/1 var(--font-label,var(--sans));font-style:normal;letter-spacing:.16em;margin-right:8px;color:var(--color-gold-on-dark,#D9B87C);opacity:.7}
+    .hs-rail li span{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+    .hs-rail li b{position:absolute;left:0;top:0;height:1px;width:100%;background:rgba(244,238,228,.18)}
+    .hs-rail li b::after{content:"";position:absolute;left:0;top:0;height:100%;width:var(--w,0%);background:#D9B87C;transition:width .12s linear}
+    .hs-rail li.on{color:#F4EEE4}
+    .hero-seq .hero-strip{position:absolute;left:0;right:0;bottom:0}
+  }
+  @media(prefers-reduced-motion:reduce){.hero-seq{height:auto}.hero-seq .hero{position:relative;height:auto;min-height:100vh}.hs-layer:not(.l4){display:none}.hs-layer.l4{opacity:1}.hs-rail,.hs-cap span:not(.on){display:none}}
 </style>
 <script defer src="/analytics.js"></script>
 </head>
@@ -693,12 +737,17 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
 </div>
 
 
+<div class="hero-seq" id="heroSeq">
 <section class="hero">
+  <div class="hs-layer l0" aria-hidden="true"></div>
+  <div class="hs-layer l1" aria-hidden="true" data-bg="/img/hs_d2_coat.webp" data-bgm="/img/hs_m2_coat.webp"></div>
+  <div class="hs-layer l2" aria-hidden="true" data-bg="/img/hs_d3_polish.webp" data-bgm="/img/hs_m3_polish.webp"></div>
+  <div class="hs-layer l3" aria-hidden="true" data-bg="/img/hs_d4_day.webp" data-bgm="/img/hs_m4_day.webp"></div>
+  <div class="hs-layer l4" aria-hidden="true" data-bg="/img/hero_wall.webp" data-bgm="/img/m/hero_plaster_1170.webp"></div>
   <div class="hero-img" id="heroImg"><picture class="hero-pic"><source media="(min-width:681px)" srcset="/img/px.gif"><source type="image/avif" srcset="/img/m/hero_plaster_828.avif 828w, /img/m/hero_plaster_1170.avif 1170w" sizes="100vw"><img src="/img/m/hero_plaster_828.webp" srcset="/img/m/hero_plaster_828.webp 828w, /img/m/hero_plaster_1170.webp 1170w" sizes="100vw" width="828" height="1484" alt="Hand-applied ivory Venetian plaster wall in a Miami living room at golden hour" fetchpriority="high" decoding="async"></picture></div>
-  <video class="hero-vid" id="heroVid" muted loop playsinline preload="none" aria-hidden="true"></video>
-  <div class="hero-shade"></div>
   <div class="wrap">
     <div class="hero-badge" data-i18n="hero.badge">HAND-APPLIED VENETIAN PLASTER &amp; MARMORINO</div>
+    <div class="hs-cap" id="hsCap"><span class="on">01 · Before. Raw drywall, no plaster. Scroll to watch it change.</span><span>02 · First coat. Our master lays the lime plaster by hand.</span><span>03 · Burnishing. The trowel brings out the marble sheen.</span><span>04 · Finished. Venetian plaster by day.</span><span>05 · The same wall at golden hour.</span></div>
     <a class="hero-tag" href="/venetian-plaster/" target="_blank" rel="noopener"><b data-i18n="hero.tag1">Venetian plaster</b><i data-i18n="hero.tag2">Applied by hand</i><svg class="ht-arr" viewBox="0 0 64 70" fill="none" stroke="#F4EEE4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M58 68 C 54 40, 36 18, 8 9"/><path d="M19 3 L 7 8.5 L 15 18"/></svg></a>
     <h1 data-i18n="hero.h1">Walls that change with the light.</h1>
     <p class="hero-sub" data-i18n="hero.sub">Venetian plaster for Miami homes, applied by hand by our masters. Plus interior design and renovation with licensed &amp; insured partners.</p>
@@ -706,11 +755,13 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
       <a class="btn btn-bone" href="#contact" data-i18n="hero.sample">Book a free sample visit</a>
       <a class="hero-link" href="/venetian-plaster/" target="_blank" rel="noopener" data-i18n="hero.cta2">See the finishes</a>
     </div>
+    <ol class="hs-rail" id="hsRail" aria-hidden="true"><li class="on"><i>01</i><span>Before</span><b></b></li><li><i>02</i><span>First coat</span><b></b></li><li><i>03</i><span>Polish</span><b></b></li><li><i>04</i><span>By day</span><b></b></li><li><i>05</i><span>Golden hour</span><b></b></li></ol>
   </div>
   <div class="hero-strip">
     <div class="wrap"><span data-i18n="hero.strip1">VENETIAN PLASTER · INTERIOR DESIGN STUDIO</span><span data-i18n="hero.strip3">ENGLISH · SPANISH · UKRAINIAN · RUSSIAN</span></div>
   </div>
 </section>
+</div>
 
 
 <section class="stats sec-light">
@@ -1784,6 +1835,42 @@ document.addEventListener('click',function(e){
   nav.addEventListener('click', function(e){ if(e.target.closest('a')) set(false); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !nav.hidden) set(false); });
   matchMedia('(min-width:901px)').addEventListener('change', function(m){ if(m.matches && !nav.hidden) set(false); });
+})();
+</script>
+<script>
+(function(){
+  var seq=document.getElementById('heroSeq');
+  if(!seq||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var layers=[].slice.call(seq.querySelectorAll('.hs-layer'));
+  var caps=[].slice.call(seq.querySelectorAll('.hs-cap span'));
+  var rail=[].slice.call(seq.querySelectorAll('.hs-rail li'));
+  var n=layers.length,cur=-1,ticking=false,done=false;
+  var mob=matchMedia('(max-width:680px)').matches;
+  function loadRest(){layers.forEach(function(l){var u=mob?l.getAttribute('data-bgm'):l.getAttribute('data-bg');if(u)l.style.backgroundImage='url("'+u+'")'})}
+  if(document.readyState==='complete')loadRest();else window.addEventListener('load',loadRest);
+  function clamp(v){return v<0?0:v>1?1:v}
+  function upd(){
+    ticking=false;
+    var total=seq.offsetHeight-window.innerHeight; if(total<=0)return;
+    var p=clamp(-seq.getBoundingClientRect().top/total);
+    if(p>=0.985)done=true;
+    var t=done?(n-1):p*(n-1);
+    for(var i=0;i<n;i++){
+      var d=Math.abs(t-i);
+      layers[i].style.opacity=clamp(1-(d-0.34)/0.32);
+      var seg=clamp(t-i); if(i===n-1)seg=t>=n-1?1:0;
+      rail[i].style.setProperty('--w',(i<n-1?seg*100:(t>=n-1?100:0))+'%');
+    }
+    var idx=Math.round(t);
+    if(idx!==cur){cur=idx;
+      caps.forEach(function(c,i){c.classList.toggle('on',i===idx)});
+      rail.forEach(function(r,i){r.classList.toggle('on',i===idx)});
+    }
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  upd();
 })();
 </script>
 </body>
