@@ -12,7 +12,7 @@ if(!window.m5attr)window.m5attr=function(){var a={};try{var q=location.search,ks
   var r=(localStorage.getItem('m5_ref')||'').split('|');if(r[0]&&Date.now()-(+r[1]||0)<7776e6)a.ref=r[0];
   try{if(window.m5ctx){var x=m5ctx();if(x.touch)a.touch=x.touch;if(x.sid)a.sid=x.sid;if(x.vid)a.vid=x.vid}if(window.m5flags&&m5flags().denied)a=a.ref?{ref:a.ref}:{}}catch(e){}Object.keys(a).forEach(function(k){if(!a[k])delete a[k]});}catch(e){}return a};
 if(!window.m5lead)window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p.attribution=m5attr();p.page=location.pathname;
-  p.consent={text:'By submitting, you agree to be contacted about your project.',at:new Date().toISOString(),page:location.pathname};
+  p.consent={text:'By submitting you agree to receive texts from M5 Studio Miami about your request. Msg & data rates may apply. Reply STOP to opt out.',at:new Date().toISOString(),page:location.pathname};
   return fetch(M5_LEADS,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p),keepalive:true})
     .then(function(r){return r.json().then(function(j){return {ok:!!(j&&j.ok),lead_id:j&&j.lead_id,created:j&&j.created,status:r.status,fields:j&&j.fields}}).catch(function(){return {ok:false,status:r.status}})})
     .catch(function(){return {ok:false,status:0}})};

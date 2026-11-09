@@ -38,7 +38,7 @@ window.m5attr=function(){var a={};try{var q=location.search,ks=['utm_source','ut
 try{m5attr()}catch(e){}
 window.m5uuid=function(){try{if(crypto&&crypto.randomUUID)return crypto.randomUUID()}catch(e){}return 'x'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)};
 window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p.attribution=m5attr();p.page=location.pathname;
-  p.consent={text:'Al enviar, acepta que nos pongamos en contacto con usted sobre su proyecto.',at:new Date().toISOString(),page:location.pathname};
+  p.consent={text:'Al enviar, acepta recibir mensajes de texto de M5 Studio Miami sobre su solicitud. Pueden aplicarse tarifas de mensajes y datos. Responda STOP para cancelar.',at:new Date().toISOString(),page:location.pathname};
   return fetch(M5_LEADS,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p),keepalive:true})
     .then(function(r){return r.json().then(function(j){return {ok:!!(j&&j.ok),lead_id:j&&j.lead_id,created:j&&j.created,status:r.status}}).catch(function(){return {ok:false,status:r.status}})})
     .catch(function(){return {ok:false,status:0}})};
@@ -559,8 +559,8 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
       <div class="ok" id="lbkOk">Aquí está: <a href="/lookbook/M5_Lookbook_2026.pdf" download style="text-decoration:underline">descargar el lookbook (PDF, en inglés)</a>.</div>
     </div>
   </div>
-  <div class="foot-bot"><b>M5</b><span>© 2026 M5 Studio Miami · <a href="/es/">m5miami.com</a> · <a href="/privacy/">Privacidad</a> · hello@m5miami.com · Miami-Dade · Broward · Palm Beach</span><span>Las imágenes marcadas como “Visualización” son ilustraciones.</span></div>
-<div class="m5-legal" style="font-size:11px;letter-spacing:.06em;opacity:.6;text-align:center;padding:14px 16px 4px">M5 STUDIO MIAMI LLC · Miami, FL · <a href="/privacy/" style="color:inherit;text-decoration:underline">Privacidad</a></div></footer>
+  <div class="foot-bot"><b>M5</b><span>© 2026 M5 Studio Miami · <a href="/es/">m5miami.com</a> · <a href="/privacy/">Privacidad</a> · <a href="/terms/">Condiciones</a> · hello@m5miami.com · Miami-Dade · Broward · Palm Beach</span><span>Las imágenes marcadas como “Visualización” son ilustraciones.</span></div>
+<div class="m5-legal" style="font-size:11px;letter-spacing:.06em;opacity:.6;text-align:center;padding:14px 16px 4px">M5 STUDIO MIAMI LLC · Miami, FL · <a href="/privacy/" style="color:inherit;text-decoration:underline">Privacidad</a> · <a href="/terms/" style="color:inherit;text-decoration:underline">Condiciones</a></div></footer>
 
 <a class="chat" href="https://wa.me/17864074441?text=Hola%20M5%2C%20me%20interesa%20el%20estuco%20veneciano" target="_blank" rel="noopener" data-track="whatsapp_click">Escríbanos <i>✆</i></a>
 <div class="mbar">
@@ -588,7 +588,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
         <p class="err" id="mErr" role="alert">Indique su nombre y un número de teléfono.</p>
         <button class="pill pill-gold" id="mBtn" type="submit">Agendar mi visita</button>
         <p class="fail" id="mFail" role="alert">Algo salió mal y la solicitud no se guardó. Escríbanos por <a href="https://wa.me/17864074441" style="text-decoration:underline">WhatsApp</a>.</p>
-        <p class="note">Al enviar, acepta que nos pongamos en contacto con usted sobre su proyecto.</p>
+        <p class="note">Al enviar, acepta recibir mensajes de texto de M5 Studio Miami sobre su solicitud. Pueden aplicarse tarifas de mensajes y datos. Responda STOP para cancelar. <a href="/privacy/">Política de privacidad</a> · <a href="/terms/">Condiciones</a></p>
       </form>
     </div>
     <div class="m-ok" id="mOk" role="status">

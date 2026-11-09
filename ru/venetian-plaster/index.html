@@ -38,7 +38,7 @@ window.m5attr=function(){var a={};try{var q=location.search,ks=['utm_source','ut
 try{m5attr()}catch(e){}
 window.m5uuid=function(){try{if(crypto&&crypto.randomUUID)return crypto.randomUUID()}catch(e){}return 'x'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10)};
 window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p.attribution=m5attr();p.page=location.pathname;
-  p.consent={text:'Отправляя форму, вы соглашаетесь на связь по вашему проекту.',at:new Date().toISOString(),page:location.pathname};
+  p.consent={text:'Отправляя форму, вы соглашаетесь получать SMS от M5 Studio Miami по вашему запросу. Возможна плата за сообщения и данные по тарифу оператора. Ответьте STOP, чтобы отписаться.',at:new Date().toISOString(),page:location.pathname};
   return fetch(M5_LEADS,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p),keepalive:true})
     .then(function(r){return r.json().then(function(j){return {ok:!!(j&&j.ok),lead_id:j&&j.lead_id,created:j&&j.created,status:r.status}}).catch(function(){return {ok:false,status:r.status}})})
     .catch(function(){return {ok:false,status:0}})};
@@ -560,8 +560,8 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
       <div class="ok" id="lbkOk">Вот он: <a href="/lookbook/M5_Lookbook_2026.pdf" download style="text-decoration:underline">скачать лукбук (PDF, на английском)</a>.</div>
     </div>
   </div>
-  <div class="foot-bot"><b>M5</b><span>© 2026 M5 Studio Miami · <a href="/ru/">m5miami.com</a> · <a href="/privacy/">Конфиденциальность</a> · hello@m5miami.com · Miami-Dade · Broward · Palm Beach</span><span>Изображения с пометкой «Визуализация» — иллюстрации.</span></div>
-<div class="m5-legal" style="font-size:11px;letter-spacing:.06em;opacity:.6;text-align:center;padding:14px 16px 4px">M5 STUDIO MIAMI LLC · Miami, FL · <a href="/privacy/" style="color:inherit;text-decoration:underline">Конфиденциальность</a></div></footer>
+  <div class="foot-bot"><b>M5</b><span>© 2026 M5 Studio Miami · <a href="/ru/">m5miami.com</a> · <a href="/privacy/">Конфиденциальность</a> · <a href="/terms/">Условия</a> · hello@m5miami.com · Miami-Dade · Broward · Palm Beach</span><span>Изображения с пометкой «Визуализация» — иллюстрации.</span></div>
+<div class="m5-legal" style="font-size:11px;letter-spacing:.06em;opacity:.6;text-align:center;padding:14px 16px 4px">M5 STUDIO MIAMI LLC · Miami, FL · <a href="/privacy/" style="color:inherit;text-decoration:underline">Конфиденциальность</a> · <a href="/terms/" style="color:inherit;text-decoration:underline">Условия</a></div></footer>
 
 <a class="chat" href="https://wa.me/17864074441?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20M5!%20%D0%9C%D0%B5%D0%BD%D1%8F%20%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%B2%D0%B5%D0%BD%D0%B5%D1%86%D0%B8%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%88%D1%82%D1%83%D0%BA%D0%B0%D1%82%D1%83%D1%80%D0%BA%D0%B0" target="_blank" rel="noopener" data-track="whatsapp_click">Написать нам <i>✆</i></a>
 <div class="mbar">
@@ -589,7 +589,7 @@ window.m5lead=function(p){p=p||{};if(!p.submission_id)p.submission_id=m5uuid();p
         <p class="err" id="mErr" role="alert">Укажите имя и номер телефона.</p>
         <button class="pill pill-gold" id="mBtn" type="submit">Записаться на выезд</button>
         <p class="fail" id="mFail" role="alert">Что-то пошло не так, и заявка не сохранилась. Напишите нам в <a href="https://wa.me/17864074441" style="text-decoration:underline">WhatsApp</a>.</p>
-        <p class="note">Отправляя форму, вы соглашаетесь на связь по вашему проекту.</p>
+        <p class="note">Отправляя форму, вы соглашаетесь получать SMS от M5 Studio Miami по вашему запросу. Возможна плата за сообщения и данные по тарифу оператора. Ответьте STOP, чтобы отписаться. <a href="/privacy/">Политика конфиденциальности</a> · <a href="/terms/">Условия</a></p>
       </form>
     </div>
     <div class="m-ok" id="mOk" role="status">
