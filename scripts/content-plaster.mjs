@@ -6,7 +6,7 @@ const fig = (src, w, h, alt, cap, href) =>
 
 export const costEn = {
   lang: 'en', slug: '/venetian-plaster/cost/', track: 'plaster-cost',
-  title: 'What Venetian Plaster Costs in Miami | M5 Studio Miami',
+  title: 'Venetian Plaster Cost in Miami (2026): $15–30 per sq ft',
   desc: 'Venetian plaster prices in Miami for 2026: $15–30 per sq ft by finish, projects from $10,000, and a fixed written price after a free site visit.',
   label: 'Venetian plaster · price',
   h1: 'What Venetian plaster costs in Miami',

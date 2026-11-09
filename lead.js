@@ -25,10 +25,10 @@ window.m5InlineSubmit=function(e){e.preventDefault();var f=e.target,btn=f.queryS
   var src=f.getAttribute('data-source')||('page:'+location.pathname);
   m5lead({submission_id:f._sid,intent:'lead',name:name,phone:phone,details:plan,lang:f.getAttribute('data-lang')||'en',service:f.getAttribute('data-service')||'renovation',form_source:src}).then(function(r){
     btn.disabled=false;btn.style.opacity='';
-    if(!r.ok){err.hidden=false;if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:src});return;}
+    if(!r.ok){err.hidden=false;if(window.m5track)m5track('lead_submit_failed',{status:r.status,placement:src});return;}
     f._sid=null;
     try{fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,phone:phone,plan:plan,source:src,lead_id:r.lead_id,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com',_template:'table',_captcha:'false'})}).catch(function(){})}catch(_){}
-    if(window.m5track){m5track('lead_submit',{source:src});if(r.created)m5track('lead_submit_confirmed',{lead_id:r.lead_id,source:src});}
+    if(window.m5track){m5track('lead_submit',{placement:src});if(r.created)m5track('lead_submit_confirmed',{lead_id:r.lead_id,placement:src});}
     f.reset();ok.hidden=false;});
   return false;};
 })();

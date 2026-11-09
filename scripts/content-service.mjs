@@ -60,7 +60,7 @@ export const condoEn = {
       <li><strong>Handover.</strong> Final cleaning, a walkthrough and a 1-year written warranty.</li>
       </ol>` },
     { id: 'interiors', alt: true, label: 'Interiors by M5', h2: 'Interiors by M5', html: `
-      <p>Real, completed apartment and penthouse projects by the M5 team, photographed after handover.</p>
+      <p>Real, completed apartment projects and a <a href="/projects/penthouse-raised-ceilings-renovation.html">penthouse renovation with raised ceilings</a> by the M5 team, photographed after handover.</p>
       ${apartmentCards('en')}
       <div class="figs">${fig('/img/svc/condo_kitchen_1.jpg', 1600, 1066, 'Apartment kitchen with oak cabinetry and a travertine-look stone island', 'Interiors by M5 · kitchen')}${fig('/img/svc/condo_kitchen_2.jpg', 1600, 1067, 'Dark apartment kitchen with a black veined stone island and dark oak joinery', 'Interiors by M5 · kitchen')}${fig('/img/svc/condo_bath_1.jpg', 1600, 1066, 'Apartment bathroom with a stone washbasin, lit shelving and fluted oak', 'Interiors by M5 · bathroom')}${fig('/img/svc/condo_bath_2.jpg', 1600, 1066, 'Apartment bathroom with a glass-and-black-steel shower and a stone vanity', 'Interiors by M5 · bathroom')}</div>` },
     { id: 'where', label: 'Where we work', h2: 'Where we work', html: `
@@ -129,7 +129,7 @@ export const homeEn = {
       <li>A 1-year written warranty on every project.</li>
       </ul>` },
     { id: 'interiors', label: 'Interiors by M5', h2: 'Interiors by M5', html: `
-      <p>Real, completed villa projects by the M5 team, photographed after handover.</p>
+      <p>Real, completed villa projects by the M5 team, photographed after handover. Looking at an apartment instead? See our <a href="/projects/penthouse-raised-ceilings-renovation.html">penthouse renovation with raised ceilings</a>.</p>
       ${villaCards('en')}
       <div class="figs">${fig('/img/svc/home_kitchen_1.jpg', 1600, 1067, 'Open white kitchen with a floating stair and large glass doors', 'Interiors by M5 · kitchen')}${fig('/img/svc/home_bath_1.jpg', 1600, 1067, 'Bathroom with a freestanding tub behind a glass partition', 'Interiors by M5 · bathroom')}${fig('/img/svc/home_living_1.jpg', 1600, 1067, 'Living room with oak panelling, a white sofa and a long dining area', 'Interiors by M5 · living room')}${fig('/img/svc/home_living_2.jpg', 1600, 1067, 'Double-height living room with a plastered spiral stair and a black sofa', 'Interiors by M5 · living room')}</div>` },
     { id: 'where', alt: true, label: 'Where we work', h2: 'Where we work', html: `

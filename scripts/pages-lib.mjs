@@ -295,7 +295,7 @@ ${faq}
     <div class="sub">${t.ctaSub}</div>
     <div class="btns">
       <a class="btn btn-bone" href="${t.bookHref}">${t.btnBook}</a>
-      <a class="btn btn-line" style="border-color:rgba(244,238,228,.55);color:var(--bone)" target="_blank" rel="noopener" href="${CAL}" onclick="if(window.m5track)m5track('booking_click',{source:'${page.track || 'page'}'})">${t.btnCal}</a>
+      <a class="btn btn-line" style="border-color:rgba(244,238,228,.55);color:var(--bone)" target="_blank" rel="noopener" href="${CAL}" onclick="if(window.m5track)m5track('booking_click',{placement:'${page.track || 'page'}'})">${t.btnCal}</a>
       <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/17864074441" onclick="if(window.m5track)m5track('whatsapp_click')">${t.btnWa}</a>
     </div>
   </div>

@@ -175,14 +175,14 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
     </svg>
   </a>
   <nav class="h-nav" aria-label="Main"><a href="/#services">SERVICES</a><a href="/work/">PORTFOLIO</a><a href="/venetian-plaster/">PLASTER</a><a href="/#about">ABOUT</a><a href="/#faq">FAQ</a></nav>
-  <div class="h-right"><a class="h-tel" href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{source:'header'})">(786) 833-7401</a><a class="h-cta" href="#quote">BOOK A VISIT</a></div>
+  <div class="h-right"><a class="h-tel" href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'header'})">(786) 833-7401</a><a class="h-cta" href="#quote">BOOK A VISIT</a></div>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
 </header>
 <div class="mnav" id="mnav" hidden>
   <nav class="mnav-links" aria-label="Main"><a href="/#services">SERVICES</a><a href="/work/">PORTFOLIO</a><a href="/venetian-plaster/">PLASTER</a><a href="/#about">ABOUT</a><a href="/#faq">FAQ</a></nav>
   <a class="btn btn-bone mnav-cta" href="#quote">BOOK A VISIT</a>
   <a class="mnav-wa" href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a>
-  <a class="mnav-wa" href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{source:'menu'})">Call (786) 833-7401</a>
+  <a class="mnav-wa" href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'menu'})">Call (786) 833-7401</a>
 </div>
 
 <section class="phero">
@@ -279,7 +279,7 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
       <div class="ok" role="status" aria-live="polite">Thank you. We reply within one business hour (9am–6pm ET).</div>
       <div class="err" role="alert">Your request has not been confirmed yet. Please try again or message us on WhatsApp: +1 786 407 4441.</div>
     </form>
-    <a class="btn btn-line" style="margin-top:12px;border-color:rgba(244,238,228,.5);color:var(--bone)" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'work-page'})">Or book a free site visit</a>
+    <a class="btn btn-line" style="margin-top:12px;border-color:rgba(244,238,228,.5);color:var(--bone)" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{placement:'work-page'})">Or book a free site visit</a>
   </div>
 </section>
 
@@ -331,11 +331,11 @@ function pjSubmit(f){var go=f.querySelector('button[type=submit]'),ok=f.querySel
   PJ_SID=PJ_SID||m5uuid();
   m5lead({submission_id:PJ_SID,intent:'lead',name:name,phone:phone,email:email,details:details,lang:'en',service:'plaster',form_source:'work-page'}).then(function(r){
     go.disabled=false;go.style.opacity='';
-    if(!r.ok){err.style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:'work-page'});return;}
+    if(!r.ok){err.style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status,placement:'work-page'});return;}
     PJ_SID=null;
     fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,phone:phone,email:email,neighborhood:hood,budget:budget,project:document.title,source:'work-page',page:location.pathname,lead_id:r.lead_id,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com (work page)',_template:'table',_captcha:'false',_honey:'',_autoresponse:'Thank you for contacting M5! We received your request and will reply within one business hour (Mon\u2013Sat). Faster? WhatsApp: https://wa.me/17864074441 \u2014 M5 Studio Miami'})}).catch(function(){});
     if(window.m5hook)m5hook({type:'lead',name:name,phone:phone,email:email,details:details,source:'work-page',lead_id:r.lead_id});
-    if(window.m5track){m5track('lead_submit',{source:'work-page'});if(r.created)m5track('lead_submit_confirmed',{lead_id:r.lead_id});}
+    if(window.m5track){m5track('lead_submit',{placement:'work-page'});if(r.created)m5track('lead_submit_confirmed',{lead_id:r.lead_id});}
     f.reset();ok.style.display='block';
   });
   return false;}

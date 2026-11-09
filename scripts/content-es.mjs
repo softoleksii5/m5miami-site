@@ -49,7 +49,7 @@ export const condoEs = {
       <li><strong>Entrega.</strong> Limpieza final, recorrido y una garantía escrita de 1 año.</li>
       </ol>` },
     { id: 'interiors', alt: true, label: 'Interiors by M5', h2: 'Interiors by M5', html: `
-      <p>Proyectos reales y terminados de apartamentos y penthouse del equipo de M5, fotografiados después de la entrega.</p>
+      <p>Proyectos reales y terminados de apartamentos y una <a href="/projects/penthouse-raised-ceilings-renovation.html">remodelación de penthouse con techos elevados</a> del equipo de M5, fotografiados después de la entrega.</p>
       ${apartmentCards('es')}` },
     { id: 'where', label: 'Dónde trabajamos', h2: 'Dónde trabajamos', html: `
       <p>Trabajamos en todo el sur de Florida: primero Miami-Dade, además de Broward y Palm Beach. Vea las <a href="/south-florida/" hreflang="en" lang="en">zonas de servicio (EN)</a>. ¿Busca remodelar una casa? Lea sobre la <a href="/es/home-renovation/">remodelación de casas</a>.</p>` },
@@ -116,7 +116,7 @@ export const homeEs = {
       <li>Garantía escrita de 1 año en cada proyecto.</li>
       </ul>` },
     { id: 'interiors', label: 'Interiors by M5', h2: 'Interiors by M5', html: `
-      <p>Proyectos reales y terminados de villas del equipo de M5, fotografiados después de la entrega.</p>
+      <p>Proyectos reales y terminados de villas del equipo de M5, fotografiados después de la entrega. ¿Busca un apartamento? Vea nuestra <a href="/projects/penthouse-raised-ceilings-renovation.html">remodelación de penthouse con techos elevados</a>.</p>
       ${villaCards('es')}` },
     { id: 'where', alt: true, label: 'Dónde trabajamos', h2: 'Dónde trabajamos', html: `
       <p>Remodelamos casas en Miami-Dade, Broward y Palm Beach, incluidas zonas como Coral Gables, Pinecrest, Coconut Grove, Fort Lauderdale y Boca Raton. Vea las <a href="/south-florida/" hreflang="en" lang="en">zonas de servicio (EN)</a>. ¿Vive en un condominio? Lea sobre la <a href="/es/condo-renovation/">remodelación de condominios y apartamentos</a>.</p>` },

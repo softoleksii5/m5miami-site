@@ -36,7 +36,7 @@
 
 <script>/* 28.10.2026: GA4 грузим только посетителям — не сотрудникам (cookie m5_staff от crm.m5miami.com) и не при отказе (m5consent) */window.m5flags=function(){var c='',d=false;try{c=document.cookie||''}catch(e){}try{d=localStorage.getItem('m5_consent')==='denied'}catch(e){}return{staff:/(?:^|;\s*)m5_staff=1(?:;|$)/.test(c),denied:d||/(?:^|;\s*)m5_consent=denied(?:;|$)/.test(c)}};window.m5noTrack=function(){var f=m5flags();return f.staff||f.denied};(function(){var f=m5flags();if(f.staff||f.denied){document.documentElement.setAttribute('data-m5-notrack',f.staff?'staff':'consent');return}var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-CYE5Y3L9FN';document.head.appendChild(s)})();</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CYE5Y3L9FN');</script>
-<script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.source)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}
+<script>window.m5track=function(n,p){p=p||{};try{if(window.gtag)gtag('event',n,p)}catch(e){}try{if(window.fbq){var S={lead_submit_confirmed:'Lead',service_lead:'Lead',quiz_lead:'Lead',booking_click:'Schedule',whatsapp_click:'Contact'};if(n==='lead_submit'){if(p.placement)fbq('track','Lead',p)}else if(n==='guide_lead'){fbq('trackCustom','GuideDownload',p)}else if(S[n]){fbq('track',S[n],p)}else{fbq('trackCustom',n,p)}}}catch(e){}}
 window.M5_HOOK='https://script.google.com/macros/s/AKfycbw_Hwj1am3WSzgrTZTdnH_OWEmzUuC0r2MDouOWvd_Jv-DiawgG1BvpMM3QwO0XeM54yw/exec';/* вебхук Apps Script «M5 Hub» (лиды → Telegram + Sheet) */
 /* Реферальная метка: ?ref=<слаг клиента> с личной ссылки в Client Hub. Держим 90 дней,
    подмешиваем в каждый лид — в Telegram-карточке видно «кто привёл» → начисляем $250/$250. */
@@ -354,19 +354,19 @@ window.m5hook=function(p){try{if(!window.M5_HOOK||M5_HOOK.indexOf('http')!==0)re
   .texcta .btn{margin-bottom:0}
   .texsub{margin:12px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,238,228,.62)}
   /* attention CTA (plaster block): icons, shine sweep, soft pulse, periodic nudge */
-  .btn-cta{position:relative;overflow:hidden;isolation:isolate;gap:12px;padding:19px 30px;border-color:rgba(217,184,124,.55);box-shadow:0 0 0 0 rgba(217,184,124,.5);animation:ctaPulse 2.8s ease-out infinite,ctaNudge 7s ease-in-out 3s infinite}
+  .btn-cta{position:relative;overflow:hidden;isolation:isolate;gap:12px;padding:19px 30px;border-color:rgba(217,184,124,.55);box-shadow:0 0 0 0 rgba(217,184,124,.5);animation:ctaPulse 2.8s ease-out 2,ctaNudge 7s ease-in-out 3s infinite}
   .btn-cta svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .btn-cta .ar{width:16px;height:16px;transition:transform .25s}
   .btn-cta:hover .ar{transform:translateX(5px)}
-  .btn-cta::after{content:'';position:absolute;top:-40%;bottom:-40%;left:-70%;width:45%;background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);transform:skewX(-18deg);animation:ctaShine 5.5s ease-in-out 1.2s infinite;pointer-events:none;z-index:-1}
+  .btn-cta::after{content:'';position:absolute;top:-40%;bottom:-40%;left:-70%;width:45%;will-change:transform;background:linear-gradient(105deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);transform:skewX(-18deg);animation:ctaShine 5.5s ease-in-out 1.2s infinite;pointer-events:none;z-index:-1}
   .btn-cta:hover{animation:none;transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.32),0 0 0 4px rgba(217,184,124,.28)}
   .btn-cta:hover::after{animation:ctaShine .9s ease-out 1}
   .plaster .btn-line{border-color:var(--gold,#D9B87C);color:#F4EEE4;background:rgba(217,184,124,.1)}
   .plaster .btn-line:hover{background:#D9B87C;border-color:#D9B87C;color:var(--ink)}
-  .plaster .btn-line.btn-cta{animation:ctaPulse 2.8s ease-out .9s infinite}
+  .plaster .btn-line.btn-cta{animation:ctaPulse 2.8s ease-out .9s 2}
   .plaster .btn-line.btn-cta::after{background:linear-gradient(105deg,rgba(217,184,124,0) 0%,rgba(217,184,124,.35) 50%,rgba(217,184,124,0) 100%)}
   @keyframes ctaPulse{0%{box-shadow:0 0 0 0 rgba(217,184,124,.55)}70%{box-shadow:0 0 0 12px rgba(217,184,124,0)}100%{box-shadow:0 0 0 0 rgba(217,184,124,0)}}
-  @keyframes ctaShine{0%{left:-70%}60%,100%{left:130%}}
+  @keyframes ctaShine{0%{transform:translateX(0) skewX(-18deg)}60%,100%{transform:translateX(444%) skewX(-18deg)}}
   @keyframes ctaNudge{0%,86%,100%{transform:translateX(0) rotate(0)}88%{transform:translateX(-3px) rotate(-1.2deg)}90%{transform:translateX(4px) rotate(1.2deg)}92%{transform:translateX(-3px) rotate(-.8deg)}94%{transform:translateX(2px) rotate(.5deg)}96%{transform:translateX(0) rotate(0)}}
   @media(prefers-reduced-motion:reduce){.btn-cta,.btn-cta::after{animation:none!important}}
   @media(max-width:680px){.texcta .btn{width:100%;padding-left:16px;padding-right:16px;font-size:12px;letter-spacing:.1em}}
@@ -904,7 +904,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
             <span data-i18n="plaster.ctas">We come to you, measure the space and prepare a detailed quote — at no cost.</span>
           </div>
           <a class="text-link" href="#contact" data-i18n="plaster.ctabtn">Book a free measurement</a>
-          <a class="btn btn-line btn-cta" href="/venetian-plaster/" onclick="try{m5track('see_finishes_click',{source:'home-plaster-box'})}catch(e){}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg><span data-i18n="plaster.lpbtn">Venetian plaster in Miami</span><svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-line btn-cta" href="/venetian-plaster/" onclick="try{m5track('see_finishes_click',{placement:'home-plaster-box'})}catch(e){}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg><span data-i18n="plaster.lpbtn">Venetian plaster in Miami</span><svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
     </div>
@@ -930,7 +930,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
       <figure class="tex"><img src="/img/tex_marmorino.webp" width="1200" height="1500" alt="Marmorino relief plaster texture" loading="lazy" decoding="async"><figcaption>Marmorino</figcaption></figure>
       <figure class="tex"><img src="/img/tex_venetian.webp" width="1200" height="1500" alt="Hand-painted venetian marble plaster" loading="lazy" decoding="async"><figcaption>Venetian</figcaption></figure>
     </div>
-    <div class="texcta"><a class="btn btn-bone btn-cta" href="/venetian-plaster/" onclick="try{m5track('see_finishes_click',{source:'home-plaster'})}catch(e){}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><path d="M13 17h8M17 13v8"/></svg><span data-i18n="plaster.seeall">See the finishes, prices &amp; how it works</span><svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><div class="texsub" data-i18n="plaster.seesub">12 finishes · real wall prices · free sample visit</div></div>
+    <div class="texcta"><a class="btn btn-bone btn-cta" href="/venetian-plaster/" onclick="try{m5track('see_finishes_click',{placement:'home-plaster'})}catch(e){}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><path d="M13 17h8M17 13v8"/></svg><span data-i18n="plaster.seeall">See the finishes, prices &amp; how it works</span><svg class="ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><div class="texsub" data-i18n="plaster.seesub">12 finishes · real wall prices · free sample visit</div></div>
     <p class="texfoot"><span data-i18n="plaster.lb">Venetian plaster finishes in our sample library, with codes and shades:</span> <a href="/lookbook/M5_Lookbook_2026.pdf" download data-i18n="plaster.lbbtn" onclick="try{m5track('lookbook_download')}catch(e){}">Download the M5 Lookbook 2026 (PDF, 2 MB)</a></p>
   </div>
 </section>
@@ -957,7 +957,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
     <h2 data-i18n="cta.h2">Itemized estimate<br>48 hours after our visit.</h2>
     <div class="sub"><span data-i18n="cta.s1">FREE ON-SITE CONSULTATION</span><span data-i18n="cta.s2">REPLY WITHIN 15 MINUTES · BUSINESS HOURS</span></div>
     <div class="btns">
-      <a class="btn btn-bone" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'cta-banner'})" data-i18n="cta.btn3">Book a free site visit</a>
+      <a class="btn btn-bone" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{placement:'cta-banner'})" data-i18n="cta.btn3">Book a free site visit</a>
       <a class="text-link text-link--dark" href="https://wa.me/17864074441" target="_blank" rel="noopener" data-i18n="cta.wa">or message us on WhatsApp</a>
     </div>
   </div>
@@ -1107,7 +1107,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
       </div>
       <div><p class="f-h" data-i18n="foot.h1">Main pages</p><ul><li><a href="/" data-i18n="foot.l1">Home</a></li><li><a href="#about" data-i18n="foot.l2">About us</a></li><li><a href="#projects" data-i18n="foot.l3">Portfolio</a></li><li><a href="#contact" data-i18n="foot.l4">Contact</a></li><li><a href="/miami-home-design-report-2026/" data-i18n="foot.report">Home design report 2026</a></li></ul></div>
       <div><p class="f-h" data-i18n="foot.h2">Services</p><ul><li><a href="/interior-design/" data-i18n="svc1.h3">Interior Design &amp; 3D</a></li><li><a href="/condo-renovation/" data-i18n="svc2.h3">Renovation, Start to Handover</a></li><li><a href="/home-renovation/" data-i18n="foot.home">Full home renovation</a></li><li><a href="/venetian-plaster/" data-i18n="svc3.h3">Venetian Plaster</a></li><li><a href="#services" data-i18n="svc4.h3">New Homes &amp; Villas</a></li><li><a href="#services" data-i18n="svc5.h3">Technical Supervision</a></li><li><a href="/south-florida/" data-i18n="foot.areas">Areas we serve</a></li></ul></div>
-      <div><p class="f-h" data-i18n="foot.h3">Contact us</p><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{source:'footer'})"><span data-i18n="mb.call">Call</span> (786) 833-7401</a></li><li><a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp +1 786 407 4441</a></li><li><a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram @m5miami</a></li><li><a href="/south-florida/">Miami-Dade · Broward · Palm Beach</a></li><li><a href="/privacy/" data-i18n="foot.privacy">Privacy Policy</a></li><li><a href="/terms/" data-i18n="foot.terms">Terms</a></li></ul></div>
+      <div><p class="f-h" data-i18n="foot.h3">Contact us</p><ul><li><a href="mailto:hello@m5miami.com">hello@m5miami.com</a></li><li><a href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'footer'})"><span data-i18n="mb.call">Call</span> (786) 833-7401</a></li><li><a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp +1 786 407 4441</a></li><li><a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram @m5miami</a></li><li><a href="/south-florida/">Miami-Dade · Broward · Palm Beach</a></li><li><a href="/privacy/" data-i18n="foot.privacy">Privacy Policy</a></li><li><a href="/terms/" data-i18n="foot.terms">Terms</a></li></ul></div>
     </div>
     <div class="f-bottom">
       <span data-i18n="foot.copy">© M5 · 2026 · Construction executed with licensed &amp; insured Florida contractor partners</span>
@@ -1151,7 +1151,7 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
       <a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/17864074441" style="text-align:center">WhatsApp</a>
     </form>
     <div class="qz-note" id="ldOk" style="display:none;color:#1faa52;font-size:14px"></div>
-    <a class="btn btn-line" id="ldBook" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{source:'lead-modal'})" style="display:flex;margin-top:14px;border-color:var(--gold);color:var(--gold-d)" data-i18n="lead.book">Or book a time — free site visit</a>
+    <a class="btn btn-line" id="ldBook" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo" onclick="if(window.m5track)m5track('booking_click',{placement:'lead-modal'})" style="display:flex;margin-top:14px;border-color:var(--gold);color:var(--gold-d)" data-i18n="lead.book">Or book a time — free site visit</a>
   </div>
 </div>
 
@@ -1523,7 +1523,10 @@ header,.h-cta,.qz,.xi,.qz-opt,.qz-opt .ic,.qz-form input,.xi-form input,#ldPlan,
   (function(){
     var h=document.querySelector('header'); if(!h) return;
     function onScroll(){ h.classList.toggle('scrolled', (window.scrollY||window.pageYOffset)>24); }
-    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+    window.addEventListener('scroll',onScroll,{passive:true});
+    /* первое чтение scrollY — в rAF после load: во время разбора оно заставляет телефон раскладывать всю страницу */
+    function first(){ requestAnimationFrame(onScroll); }
+    if(document.readyState==='complete') first(); else window.addEventListener('load',first,{once:true});
   })();
 
 </script>
@@ -1611,7 +1614,7 @@ function smSubmit(e){
   /* сначала CRM: «спасибо» — только после lead_id (аудит F02) */
   m5lead({submission_id:SM_SID,intent:'service',name:payload.name,phone:payload.phone,service:payload.service,lang:payload.lang,form_source:'service-modal'}).then(function(r){
     btn.disabled=false; btn.style.opacity='';
-    if(!r.ok){ if(err){err.textContent=t.err;err.style.display='block';} else alert(t.err); if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:'service-modal'}); return; }
+    if(!r.ok){ if(err){err.textContent=t.err;err.style.display='block';} else alert(t.err); if(window.m5track)m5track('lead_submit_failed',{status:r.status,placement:'service-modal'}); return; }
     SM_SID=null;
     payload.lead_id=r.lead_id;
     fetch('https://formsubmit.co/ajax/fa2b356d28577b1742e22a611a7e847a',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
@@ -1680,7 +1683,7 @@ var qz={step:1,type:null,sqft:900,level:null,time:null,src:''};
 function openQuiz(src){qz={step:1,type:null,sqft:900,level:null,time:null,src:src||''};
   document.getElementById('qzOverlay').classList.add('on');document.getElementById('qzModal').classList.add('on');
   document.body.style.overflow='hidden';qzRender();
-  if(window.m5track)m5track('quiz_open',{source:src||''});return false;}
+  if(window.m5track)m5track('quiz_open',{placement:src||''});return false;}
 function closeQuiz(){document.getElementById('qzOverlay').classList.remove('on');document.getElementById('qzModal').classList.remove('on');document.body.style.overflow='';}
 function qzCalc(){var t=QZL[qzLang()],rate=qz.type[3],mult=qz.level[2];
   var base=rate*qz.sqft*mult, lo=Math.round(base*0.9/1000)*1000, hi=Math.round(base*1.15/1000)*1000;
@@ -1731,7 +1734,7 @@ function qzSubmit(e){e.preventDefault();var t=QZL[qzLang()],r=qzCalc();
   QZ_SID=QZ_SID||m5uuid();
   m5lead({submission_id:QZ_SID,intent:'quiz',name:payload.name,phone:payload.phone,email:email||'',service:qz.type[1],area_sqft:qz.sqft,level:qz.level[0],quiz_low:r[0],quiz_high:r[1],details:qz.sqft+' sqft, '+qz.level[0]+', '+qz.time+' → '+payload.estimate,lang:qzLang(),form_source:'quiz:'+qz.src}).then(function(res){
     go.disabled=false;go.style.opacity='';
-    if(!res.ok){ if(errEl){errEl.textContent=t.err;errEl.style.display='block';} if(window.m5track)m5track('lead_submit_failed',{status:res.status,source:'quiz'}); return; }
+    if(!res.ok){ if(errEl){errEl.textContent=t.err;errEl.style.display='block';} if(window.m5track)m5track('lead_submit_failed',{status:res.status,placement:'quiz'}); return; }
     QZ_SID=null;
     payload.lead_id=res.lead_id;
     fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
@@ -1787,7 +1790,7 @@ function openLead(src,mode){
   document.getElementById('ldOverlay').classList.add('on');
   document.getElementById('ldModal').classList.add('on');
   document.body.style.overflow='hidden';
-  if(window.m5track)m5track('lead_modal_open',{source:src||'',mode:mode||'general'});
+  if(window.m5track)m5track('lead_modal_open',{placement:src||'',mode:mode||'general'});
   return false;}
 function closeLead(){
   document.getElementById('ldOverlay').classList.remove('on');
@@ -1805,12 +1808,12 @@ function ldSubmit(e){e.preventDefault();
   LD_SID=LD_SID||m5uuid();
   m5lead({submission_id:LD_SID,intent:'lead',name:name,phone:phone,details:(hood+' '+budget).trim(),lang:l,service:mode==='plaster'?'Venetian plaster':'renovation',form_source:'lead-modal'}).then(function(r){
     go.disabled=false;go.style.opacity='';
-    if(!r.ok){ok.textContent=LD_ERR[l]||LD_ERR.en;ok.style.color='#b3261e';ok.style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status,source:'lead-modal'});return;}
+    if(!r.ok){ok.textContent=LD_ERR[l]||LD_ERR.en;ok.style.color='#b3261e';ok.style.display='block';if(window.m5track)m5track('lead_submit_failed',{status:r.status,placement:'lead-modal'});return;}
     LD_SID=null;
     fetch(QZ_EP,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name:name,phone:phone,neighborhood:hood,plan:budget,source:'lead-modal',lead_id:r.lead_id,lang:l,_cc:'vlad@m5miami.com,vadim@m5miami.com',_subject:'New lead — m5miami.com',_template:'table',_captcha:'false',_honey:''})}).catch(function(){});
     if(window.m5hook)m5hook({type:'lead',name:name,phone:phone,details:(hood+' '+budget).trim(),lang:l,source:'lead-modal',lead_id:r.lead_id});
-    if(window.m5track&&r.created)m5track('lead_submit',{source:'modal',lead_id:r.lead_id});
+    if(window.m5track&&r.created)m5track('lead_submit',{placement:'modal',lead_id:r.lead_id});
     ok.textContent=OK[l]||OK.en;ok.style.display='block';
     setTimeout(closeLead,2200);});
   return false;}
@@ -1866,9 +1869,13 @@ document.addEventListener('click',function(e){
   function loadRest(){layers.forEach(function(l){var u=mob?l.getAttribute('data-bgm'):l.getAttribute('data-bg');if(u)l.style.backgroundImage='url("'+u+'")'})}
   if(document.readyState==='complete')loadRest();else window.addEventListener('load',loadRest);
   function clamp(v){return v<0?0:v>1?1:v}
+  /* высота секции — один раз и на resize/load, а не на каждом кадре скролла */
+  var total=-1;
+  function measure(){total=seq.offsetHeight-window.innerHeight}
   function upd(){
     ticking=false;
-    var total=seq.offsetHeight-window.innerHeight; if(total<=0)return;
+    if(total<0)measure();
+    if(total<=0)return;
     var p=clamp(-seq.getBoundingClientRect().top/total);
     if(p>=0.985)done=true;
     var t=done?(n-1):p*(n-1);
@@ -1886,8 +1893,9 @@ document.addEventListener('click',function(e){
   }
   function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(upd)}}
   window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',onScroll);
-  upd();
+  window.addEventListener('resize',function(){measure();onScroll()});
+  window.addEventListener('load',function(){measure();onScroll()});
+  requestAnimationFrame(upd);
 })();
 </script>
 </body>
