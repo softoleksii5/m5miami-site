@@ -158,6 +158,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/home-renovation/"/>
   </url>
   <url>
+    <loc>https://m5miami.com/kitchen-renovation/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/kitchen-renovation/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://m5miami.com/kitchen-renovation/"/>
+  </url>
+  <url>
     <loc>https://m5miami.com/es/home-renovation/</loc>
     <lastmod>2026-10-26</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://m5miami.com/home-renovation/"/>
