@@ -122,8 +122,20 @@
   .wa{position:fixed;right:24px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
   .h-tel{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label);color:var(--color-text-on-dark-muted);white-space:nowrap} .h-tel:hover{color:var(--bone)}
   @media(max-width:900px){.h-tel{display:none}}
+  .lf .lf-form,.lf-card .lf-form{display:grid;gap:12px;max-width:560px;margin-top:18px}
+  .lf-form input{background:var(--color-paper);border:1px solid var(--color-line-strong);border-radius:var(--radius-1);padding:14px 18px;font:inherit;font-size:16px;color:var(--ink);min-height:var(--input-height)}
+  .lf-form input::placeholder{color:var(--color-text-muted)}
+  .lf-sub{color:var(--soft);font-size:17px;max-width:41em;margin:14px 0 0}
+  .lf-note{font-size:13px;color:var(--soft);margin:2px 0 0} .lf-note a{color:inherit;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+  .lf-err{color:#b3261e;font-size:14px;margin:4px 0 0} .lf-ok{color:#2e7d4f;font-size:15px;margin:4px 0 0}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .lf-card{border:1px solid var(--color-line-strong);border-radius:var(--radius-1);padding:24px 22px;margin:8px 0 30px;max-width:41.1em}
+  .lf-card .lf-h{font-family:var(--font-display,inherit);font-size:24px;line-height:1.2;color:var(--ink);margin:8px 0 0}
+  .prose .lf-sub{font-size:16px;margin:8px 0 0}
+  .prose .lf-note{font-size:13px;margin:2px 0 0;max-width:none} .prose .lf-err{font-size:14px;margin:4px 0 0;color:#b3261e} .prose .lf-ok{font-size:15px;margin:4px 0 0;color:#2e7d4f}
 </style>
 <script defer src="/analytics.js"></script>
+<script defer src="/lead.js"></script>
 </head>
 <body>
 <header>
@@ -156,6 +168,17 @@
       <p>Clay, sand, terracotta, olive and warm off-white are replacing cool white and icy grey. Miami light is hard and blue, and cool palettes go sterile by noon. Pick three tones, not eight, and test samples on the actual wall in the morning, at noon and in the evening.</p>
       <h3>2. Textured walls</h3>
       <p>Venetian plaster, stone and handmade tile give walls depth, not just colour. Flat painted drywall shows every flaw in strong sun. Use one textured hero wall per room, or a whole room in plaster, never a single accent patch. See <a href="/venetian-plaster/">Venetian plaster</a>.</p>
+      <div class="lf-card" id="visit"><div class="label">Free site visit</div><div class="lf-h">See these finishes on your own wall</div><p class="lf-sub">We bring real plaster and stone samples to your home. Leave a name and a phone number.</p>
+  <form class="lf-form" data-service="renovation" data-source="page:/miami-home-design-report-2026/#trend" data-lang="en" onsubmit="return m5InlineSubmit(event)">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="sr-only" for="lfa-name">Your name</label><input id="lfa-name" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+    <label class="sr-only" for="lfa-phone">Phone / WhatsApp</label><input id="lfa-phone" type="tel" name="phone" inputmode="tel" placeholder="Phone / WhatsApp" autocomplete="tel" required>
+    <label class="sr-only" for="lfa-plan">Which room or wall? e.g. living room wall</label><input id="lfa-plan" type="text" name="plan" placeholder="Which room or wall? e.g. living room wall" autocomplete="off">
+    <button class="btn btn-ink" type="submit">Request a free site visit</button>
+    <p class="lf-note">By submitting you agree to receive texts from M5 Studio Miami about your request. Msg &amp; data rates may apply. Reply STOP to opt out. <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms</a> · or <a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a> · <a href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'form'})">(786) 833-7401</a></p>
+    <p class="lf-err" hidden>Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.</p>
+    <p class="lf-ok" hidden>Thank you — we received your request and will reply within one business hour (9am–6pm ET).</p>
+  </form></div>
       <h3>3. Medium and warm wood</h3>
       <p>Walnut, smoked oak and teak tones are replacing pale Scandinavian oak, which yellows unevenly in strong UV. Match the wood across cabinetry, doors and flooring, or contrast two species on purpose.</p>
       <h3>4. Natural stone, used as architecture</h3>
@@ -190,6 +213,17 @@
       <p>The full report is a free PDF with more detail on every trend. If you are planning work, see <a href="/condo-renovation/">condo and apartment renovation</a>, <a href="/home-renovation/">full home renovation</a> or <a href="/interior-design/">interior design</a>.</p>
       <div class="rel"><a class="btn btn-ink" href="/report/">Download the full report</a></div></div></div></section>
 
+<section class="sec alt lf" id="request"><div class="wrap"><div class="label">Free site visit</div><h2>Planning a renovation this year?</h2><p class="lf-sub">Name, phone and a line about the project. We reply within one business hour (9am–6pm ET).</p>
+  <form class="lf-form" data-service="renovation" data-source="page:/miami-home-design-report-2026/#end" data-lang="en" onsubmit="return m5InlineSubmit(event)">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="sr-only" for="lfb-name">Your name</label><input id="lfb-name" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+    <label class="sr-only" for="lfb-phone">Phone / WhatsApp</label><input id="lfb-phone" type="tel" name="phone" inputmode="tel" placeholder="Phone / WhatsApp" autocomplete="tel" required>
+    <label class="sr-only" for="lfb-plan">What are you planning? e.g. kitchen and two bathrooms</label><input id="lfb-plan" type="text" name="plan" placeholder="What are you planning? e.g. kitchen and two bathrooms" autocomplete="off">
+    <button class="btn btn-ink" type="submit">Request a free site visit</button>
+    <p class="lf-note">By submitting you agree to receive texts from M5 Studio Miami about your request. Msg &amp; data rates may apply. Reply STOP to opt out. <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms</a> · or <a href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a> · <a href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'form'})">(786) 833-7401</a></p>
+    <p class="lf-err" hidden>Your request has not been confirmed yet — please try again or message us on WhatsApp: +1 786 407 4441.</p>
+    <p class="lf-ok" hidden>Thank you — we received your request and will reply within one business hour (9am–6pm ET).</p>
+  </form></div></section>
 </main>
 
 <section class="cta">
@@ -212,6 +246,9 @@
   </div>
 </footer>
 <a class="wa" href="https://wa.me/17864074441" aria-label="WhatsApp" onclick="if(window.m5track)m5track('whatsapp_click')"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.9.8 2 .1.1.1.3 0 .5s-.2.3-.3.5l-.5.6c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1l2 .9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg></a>
+<script>
+(function(){try{var q=new URLSearchParams(location.search),m=q.get('utm_medium')||'',c=q.get('utm_content')||'';if(m==='dm'){try{sessionStorage.setItem('m5_rep_src',c==='direct'?'ig-dm':'ig-comment')}catch(e){}}var src='';try{src=sessionStorage.getItem('m5_rep_src')||''}catch(e){}if(m==='dm'&&!src)src=c==='direct'?'ig-dm':'ig-comment';var as=document.querySelectorAll('a[href="/report/"]');for(var i=0;i<as.length;i++){(function(a,n){if(src)a.setAttribute('href','https://crm.m5miami.com/report?src='+src);a.addEventListener('click',function(){if(window.m5track)m5track('report_click',{placement:'report-page-'+(n?'end':'top'),src:src||'site'})})})(as[i],i)}}catch(e){}})();
+</script>
 <script>
 (function(){var btn=document.querySelector('.menu-btn'),nav=document.getElementById('mnav');if(!btn||!nav)return;function set(open){btn.setAttribute('aria-expanded',open?'true':'false');nav.hidden=!open;document.body.classList.toggle('menu-open',open);document.body.style.overflow=open?'hidden':''}btn.addEventListener('click',function(){set(nav.hidden)});nav.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!nav.hidden)set(false)});matchMedia('(min-width:901px)').addEventListener('change',function(m){if(m.matches&&!nav.hidden)set(false)})})();
 </script>
