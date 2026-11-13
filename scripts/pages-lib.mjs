@@ -18,8 +18,8 @@ export const UI = {
     book: 'BOOK A VISIT', bookHref: '/#contact', home: 'Home', homeHref: '/', faq: 'Questions',
     ctaLabel: 'Free site visit', ctaSub: 'Itemized estimate 48 hours after our visit',
     btnBook: 'Book a visit', btnCal: 'Book a free visit', btnWa: 'WhatsApp us', waAria: 'WhatsApp', menu: 'Menu',
-    foot: '© 2026 M5 Studio Miami LLC · Interior design &amp; Venetian plaster · Build work with licensed &amp; insured Florida contractor partners · ',
-    privacy: 'Privacy Policy', privacyHref: '/privacy/',
+    foot: '© 2026 M5 Studio Miami LLC · Miami, FL · Interior design &amp; Venetian plaster · Build work with licensed &amp; insured Florida contractor partners · ',
+    privacy: 'Privacy Policy', terms: 'Terms', call: 'Call', privacyHref: '/privacy/',
     links: [['Condo &amp; apartment renovation', '/condo-renovation/'], ['Full home renovation', '/home-renovation/'], ['Venetian plaster', '/venetian-plaster/'], ['Interior design', '/interior-design/'], ['Areas we serve', '/south-florida/'], ['Our work', '/work/']],
     footNav: 'Services and areas', updated: 'Last reviewed',
   },
@@ -28,8 +28,8 @@ export const UI = {
     book: 'AGENDAR VISITA', bookHref: '/es/#contact', home: 'Inicio', homeHref: '/es/', faq: 'Preguntas frecuentes',
     ctaLabel: 'Visita gratuita', ctaSub: 'Presupuesto detallado 48 horas después de la visita',
     btnBook: 'Agendar visita', btnCal: 'Agendar visita gratuita', btnWa: 'Escríbanos por WhatsApp', waAria: 'WhatsApp', menu: 'Menú',
-    foot: '© 2026 M5 Studio Miami LLC · Diseño de interiores y estuco veneciano · Obra con contratistas asociados de Florida con licencia y seguro · ',
-    privacy: 'Política de privacidad', privacyHref: '/privacy/',
+    foot: '© 2026 M5 Studio Miami LLC · Miami, FL · Diseño de interiores y estuco veneciano · Obra con contratistas asociados de Florida con licencia y seguro · ',
+    privacy: 'Política de privacidad', terms: 'Condiciones', call: 'Llamar', privacyHref: '/privacy/',
     links: [['Remodelación de condominios y apartamentos', '/es/condo-renovation/'], ['Remodelación de casas', '/es/home-renovation/'], ['Estuco veneciano', '/es/venetian-plaster/'], ['Diseño de interiores (EN)', '/interior-design/', 'en'], ['Zonas de servicio (EN)', '/south-florida/', 'en'], ['Nuestros trabajos (EN)', '/work/', 'en']],
     footNav: 'Servicios y zonas', updated: 'Última revisión',
   },
@@ -38,8 +38,8 @@ export const UI = {
     book: 'ЗАПИСАТЬСЯ', bookHref: '/ru/#contact', home: 'Главная', homeHref: '/ru/', faq: 'Вопросы и ответы',
     ctaLabel: 'Бесплатный выезд', ctaSub: 'Детальная смета через 48 часов после выезда',
     btnBook: 'Записаться на выезд', btnCal: 'Бесплатный выезд', btnWa: 'Написать в WhatsApp', waAria: 'WhatsApp', menu: 'Меню',
-    foot: '© 2026 M5 Studio Miami LLC · Дизайн интерьеров и венецианская штукатурка · Строительство выполняют лицензированные и застрахованные подрядчики-партнёры Флориды · ',
-    privacy: 'Политика конфиденциальности', privacyHref: '/privacy/',
+    foot: '© 2026 M5 Studio Miami LLC · Miami, FL · Дизайн интерьеров и венецианская штукатурка · Строительство выполняют лицензированные и застрахованные подрядчики-партнёры Флориды · ',
+    privacy: 'Политика конфиденциальности', terms: 'Условия', call: 'Позвонить', privacyHref: '/privacy/',
     links: [['Ремонт квартир (EN)', '/condo-renovation/', 'en'], ['Ремонт домов (EN)', '/home-renovation/', 'en'], ['Венецианская штукатурка', '/ru/venetian-plaster/'], ['Дизайн интерьеров (EN)', '/interior-design/', 'en'], ['Где мы работаем (EN)', '/south-florida/', 'en'], ['Наши работы (EN)', '/work/', 'en']],
     footNav: 'Услуги и районы', updated: 'Проверено',
   },
@@ -50,7 +50,7 @@ const read = (rel) => fs.readFileSync(path.join(process.cwd(), rel), 'utf8');
 // Analytics snippets: copied from /work/ so every page loads the same tags.
 export function trackingHead() {
   const w = read('work/index.html').split('\n');
-  return w.filter((l) => l.startsWith('<script async src="https://www.googletagmanager.com') || l.startsWith("<script>window.dataLayer") || l.startsWith('<script type="text/javascript">window.addEventListener(\'load\'')).join('\n');
+  return w.filter((l) => l.startsWith('<script async src="https://www.googletagmanager.com') || (l.startsWith('<script>') && l.includes('googletagmanager.com/gtag/js')) || l.startsWith("<script>window.dataLayer") || l.startsWith('<script type="text/javascript">window.addEventListener(\'load\'')).join('\n');
 }
 
 // Cards from /work/ (image, alt, title, facts), so alt texts and sizes stay identical to the source page.
@@ -129,6 +129,14 @@ const CSS = `
   .top p.lede{max-width:40em;margin:0 auto;color:var(--soft);font-size:17px}
   .top .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
   .top .meta{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);margin-top:18px}
+  .top.has-hero{padding-top:0}
+  .hero-img{position:relative;margin:0 0 46px;background:var(--color-ink)}
+  .hero-img img{display:block;width:100%;height:min(78vh,820px);min-height:340px;object-fit:cover}
+  .hero-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:54px 24px 14px;text-align:left;font-size:13px;color:#EDE6D8;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.62))}
+  @media(max-width:700px){.hero-img{margin-bottom:34px}.hero-img img{height:auto;min-height:0;aspect-ratio:4/5}.hero-img figcaption{padding:40px 16px 12px;font-size:12px}}
+  .top.has-hero h1{font-size:clamp(46px,8vw,100px);line-height:1;margin:8px auto 22px;max-width:13em}
+  .top.has-hero p.lede{font-size:clamp(19px,1.75vw,23px);line-height:1.5;color:var(--ink);max-width:36em}
+  .top.has-hero~.sec h2{font-size:clamp(36px,1.2rem + 3.4vw,64px)}
   .sec{padding:var(--section-y-tight) 0}
   .sec.alt{background:var(--color-sand)}
   .sec h2{font-size:var(--fs-h2);line-height:1.1;margin:8px 0 22px;max-width:16em}
@@ -168,6 +176,9 @@ const CSS = `
   .figs figure{background:var(--color-ink);color:var(--bone)}
   .figs img{width:100%;height:auto}
   .figs figcaption{padding:12px 16px;font-size:13px;color:var(--color-text-on-dark-muted)}
+  .figs.one{grid-template-columns:1fr}
+  .figs figure{break-inside:avoid}
+  @media print{.hero-img img{height:auto;aspect-ratio:3/2}header{position:absolute}.wa{display:none!important}h2,h3{break-after:avoid}}
   .rel{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
   .faq details{border-top:1px solid var(--color-line-strong);padding:18px 0}
   .faq details:last-child{border-bottom:1px solid var(--color-line-strong)}
@@ -185,6 +196,8 @@ const CSS = `
   .f-nav a:hover{color:#D9B87C}
   .f-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px}
   .wa{position:fixed;right:24px;bottom:24px;z-index:95;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+  .h-tel{font-family:var(--font-label);font-weight:var(--fw-medium);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:var(--lh-label);color:var(--color-text-on-dark-muted);white-space:nowrap} .h-tel:hover{color:var(--bone)}
+  @media(max-width:900px){.h-tel{display:none}}
 `;
 
 const LOGO = `<svg width="46" height="38" viewBox="0 0 46 38" fill="none"><path class="lg-stroke" d="M2 2h42v25.5L35.5 36H2z" stroke="#B0894F" stroke-width="2.4"/><text x="23" y="26" text-anchor="middle" font-family="Geist,-apple-system,sans-serif" font-weight="800" font-size="20" letter-spacing="-0.5" fill="#F4EEE4">M<tspan fill="#D9B87C">5</tspan></text></svg>`;
@@ -193,13 +206,13 @@ const CAL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3
 const MENU_JS = `(function(){var btn=document.querySelector('.menu-btn'),nav=document.getElementById('mnav');if(!btn||!nav)return;function set(open){btn.setAttribute('aria-expanded',open?'true':'false');nav.hidden=!open;document.body.classList.toggle('menu-open',open);document.body.style.overflow=open?'hidden':''}btn.addEventListener('click',function(){set(nav.hidden)});nav.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!nav.hidden)set(false)});matchMedia('(min-width:901px)').addEventListener('change',function(m){if(m.matches&&!nav.hidden)set(false)})})();`;
 
 // page: { lang, slug, title, desc, h1, label, lede, crumbs:[[name,url]], meta, ctas:[[label,href,cls]], sections:[{id,h2,label,html,alt}],
-//         faq:[{q,a}], ctaH, ld:[extra @graph nodes], ogImage, ogAlt, noindex, langs:['en','es'], type:'Service'|'Article'|'WebPage', ldService }
+//         faq:[{q,a}], ctaH, hero:{src,w,h,alt,cap,pos} (photo above the heading; pos = object-position for the phone crop), ld:[extra @graph nodes], ogImage, ogAlt, noindex, langs:['en','es'], type:'Service'|'Article'|'WebPage', ldService }
 export function render(page) {
   const lang = page.lang;
   const t = UI[lang];
   const url = ORIGIN + (lang === 'en' ? '' : '/' + lang) + page.slug;
   const title = page.title;
-  const ogImage = page.ogImage || ORIGIN + '/media/lp/og.jpg';
+  const ogImage = page.ogImage || (page.hero ? ORIGIN + page.hero.src : ORIGIN + '/media/lp/og.jpg');
   const graph = [];
   const crumbs = [[t.home, ORIGIN + t.homeHref], ...page.crumbs.map(([n, u]) => [n, u ? ORIGIN + u : url])];
   graph.push({ '@type': 'BreadcrumbList', itemListElement: crumbs.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: plain(n), item: u })) });
@@ -251,7 +264,7 @@ ${alt}<meta property="og:type" content="${page.article ? 'article' : 'website'}"
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="${url}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/cormorant-garamond-${cyr ? 'cyrillic' : 'latin'}.woff2" crossorigin>
 <link rel="stylesheet" href="/tokens.css">
 ${trackingHead()}
@@ -263,17 +276,19 @@ ${trackingHead()}
 <header>
   <a class="logo" href="${t.homeHref}" aria-label="M5">${LOGO}</a>
   <nav class="h-nav" aria-label="Main">${nav}</nav>
-  <div class="h-right"><a class="h-cta" href="${t.bookHref}">${t.book}</a></div>
+  <div class="h-right"><a class="h-tel" href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'header'})">(786) 833-7401</a><a class="h-cta" href="${t.bookHref}">${t.book}</a></div>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="${t.menu}"><span></span><span></span></button>
 </header>
 <div class="mnav" id="mnav" hidden>
   <nav class="mnav-links" aria-label="Main">${nav}</nav>
   <a class="btn btn-bone mnav-cta" href="${t.bookHref}">${t.book}</a>
   <a class="mnav-wa" href="https://wa.me/17864074441" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="mnav-wa" href="tel:+17868337401" onclick="if(window.m5track)m5track('phone_click',{placement:'menu'})">${t.call} (786) 833-7401</a>
 </div>
 
 <main>
-<section class="top">
+<section class="top${page.hero ? ' has-hero' : ''}">${page.hero ? `
+  <figure class="hero-img"><img src="${page.hero.src}" width="${page.hero.w}" height="${page.hero.h}" alt="${page.hero.alt}"${page.hero.pos ? ` style="object-position:${page.hero.pos}"` : ''} fetchpriority="high" decoding="async">${page.hero.cap ? `<figcaption>${page.hero.cap}</figcaption>` : ''}</figure>` : ''}
   <div class="wrap">
     <div class="crumb">${crumbHtml}</div>
     <div class="label">${page.label}</div>
@@ -304,7 +319,7 @@ ${faq}
 <footer>
   <div class="wrap">
     <nav class="f-nav" aria-label="${t.footNav}">${footLinks}</nav>
-    <div class="f-bot"><span>${t.foot}<a href="${t.privacyHref}" style="color:inherit">${t.privacy}</a></span><span><a href="mailto:hello@m5miami.com">hello@m5miami.com</a> · <a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram</a> · Miami-Dade · Broward · Palm Beach</span></div>
+    <div class="f-bot"><span>${t.foot}<a href="${t.privacyHref}" style="color:inherit">${t.privacy}</a> · <a href="/terms/" style="color:inherit">${t.terms}</a> · <a href="tel:+17868337401" style="color:inherit" onclick="if(window.m5track)m5track('phone_click',{placement:'footer'})">(786) 833-7401</a></span><span><a href="mailto:hello@m5miami.com">hello@m5miami.com</a> · <a href="https://instagram.com/m5miami" target="_blank" rel="noopener">Instagram</a> · Miami-Dade · Broward · Palm Beach</span></div>
   </div>
 </footer>
 <a class="wa" href="https://wa.me/17864074441" aria-label="${t.waAria}" onclick="if(window.m5track)m5track('whatsapp_click')">${WA_ICON}</a>

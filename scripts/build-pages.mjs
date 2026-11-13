@@ -13,6 +13,11 @@ import { PLASTER } from './i18n-plaster.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 process.chdir(ROOT);
 
+// --only=/guides/<slug>/ writes just that page (all its languages) and its sitemap entries, and touches nothing else.
+// The weekly article publish (M5/scripts/seo/seo_publish_apply.mjs) uses it: several other generated pages carry hand edits
+// (lead forms, titles, plaster copy) that are not in the sources yet, so a full rebuild would wipe them.
+const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7) || null;
+
 const pages = [];
 for (const mod of ['./content-plaster.mjs', './content-service.mjs', './content-guides.mjs', './content-es.mjs']) {
   if (!fs.existsSync(path.join(ROOT, 'scripts', mod.slice(2)))) continue;
@@ -52,6 +57,7 @@ function stripDead(html, slug) {
 
 const len = (s) => [...String(s).replace(/&amp;/g, '&').replace(/&#x27;/g, "'")].length;
 for (const p of pages) {
+  if (ONLY && p.slug !== ONLY) continue;
   if (len(p.title) > 60) errors.push(p.slug + ' title ' + len(p.title));
   if (len(p.desc) < 120 || len(p.desc) > 155) errors.push(p.slug + ' (' + p.lang + ') description ' + len(p.desc));
   const dir = path.join(ROOT, p.lang === 'en' ? '' : p.lang, p.slug);
@@ -100,7 +106,7 @@ function buildPlaster(lang) {
   }
   return '<!-- Generated from /venetian-plaster/ by scripts/build-pages.mjs. Do not edit by hand. -->\n' + html;
 }
-for (const l of PL_LANGS) {
+for (const l of ONLY ? [] : PL_LANGS) {
   const out = path.join(ROOT, l === 'en' ? '' : l, 'venetian-plaster/index.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });
   const built = buildPlaster(l);
@@ -113,7 +119,18 @@ for (const [file, slug] of written) fs.writeFileSync(file, stripDead(fs.readFile
 // Add the new English URLs to sitemap.xml (build-i18n.mjs then rewrites it with the language alternates).
 const smPath = path.join(ROOT, 'sitemap.xml');
 let sm = fs.readFileSync(smPath, 'utf8');
-for (const p of pages.filter((x) => x.lang === 'en' && !x.noindex)) {
+if (ONLY) {
+  // build-i18n.mjs is not run in this mode, so the entries are written complete: lastmod and the language alternates.
+  const mine = pages.filter((x) => x.slug === ONLY && !x.noindex);
+  const href = (l) => 'https://m5miami.com' + (l === 'en' ? '' : '/' + l) + ONLY;
+  const alts = mine.length > 1 ? mine.map((x) => '    <xhtml:link rel="alternate" hreflang="' + x.lang + '" href="' + href(x.lang) + '"/>\n').join('') + '    <xhtml:link rel="alternate" hreflang="x-default" href="' + href('en') + '"/>\n' : '';
+  for (const x of mine) {
+    if (sm.includes('<loc>' + href(x.lang) + '</loc>')) continue;
+    const day = (x.article && x.article.date) || new Date().toISOString().slice(0, 10);
+    sm = sm.replace('</urlset>', '  <url>\n    <loc>' + href(x.lang) + '</loc>\n    <lastmod>' + day + '</lastmod>\n' + alts + '  </url>\n</urlset>');
+  }
+  if (!written.length) { console.error('--only: no page with slug ' + ONLY); process.exitCode = 1; }
+} else for (const p of pages.filter((x) => x.lang === 'en' && !x.noindex)) {
   const loc = 'https://m5miami.com' + p.slug;
   if (!sm.includes('<loc>' + loc + '</loc>')) sm = sm.replace('</urlset>', '  <url>\n    <loc>' + loc + '</loc>\n  </url>\n</urlset>');
 }
