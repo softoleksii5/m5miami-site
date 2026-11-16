@@ -76,7 +76,7 @@ padding:14px 22px;font-size:15px;font-weight:600;text-decoration:none;transition
 .fact b .abm{font-family:var(--mono);font-size:16px;color:var(--gold-d);letter-spacing:.05em}
 .fact span{color:var(--soft);font-size:13.5px;line-height:1.5;display:block}
 /* roles */
-.roles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
 .role{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;cursor:pointer;transition:.2s;position:relative;text-decoration:none;display:block}
 .role:hover{border-color:#D8C9A8;transform:translateY(-2px)}
 .role h3{display:flex;align-items:center;gap:10px;font-size:20px;margin:0 0 8px;letter-spacing:-.01em}
@@ -225,7 +225,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 
 <div class="sec" id="roles"><div class="wrap">
 <div class="k" data-i="rk">Open roles</div>
-<h2 data-i="rh2">Two ways in.</h2>
+<h2 data-i="rh2">Three ways in.</h2>
 <div class="roles">
 <a class="role" href="#apply">
 <h3><svg class="ic-l" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg><span data-i="r1n">SMM Creator</span></h3>
@@ -241,8 +241,15 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 <div class="pillrow"><span data-i="r2l1">Remote OK</span><span data-i="r2l2">Any editor</span><span data-i="r2l3">No watermarks</span></div>
 <span class="go" data-i="go2">Apply →</span>
 </a>
+<a class="role" href="#apply" data-role="director">
+<h3><svg class="ic-l" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.5 14.2c3 0 5.5 2 5.5 5.3"/></svg><span data-i="r3n">Client &amp; Partnerships Director</span></h3>
+<p data-i="r3p">Lead homeowner inquiries from the first call to a paid project. Build a network of designers, architects, builders and brokers. Visit clients and attend industry events.</p>
+<div class="pay" data-i="r3pay"><b>W-2</b> · base <b>$54,000/year</b> + commission on every paid project</div>
+<div class="pillrow"><span data-i="r3l1">Miami</span><span data-i="r3l2">English</span><span data-i="r3l3">Car</span></div>
+<span class="go" data-i="go3">Apply →</span>
+</a>
 </div>
-<div class="other" data-i="other">Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> — we keep a talent pool.</div>
+<div class="other" data-i="other">Different craft — plaster artisan, designer? <a href="#apply">Apply anyway</a> — we keep a talent pool.</div>
 </div></div>
 
 <div class="sec" id="taste"><div class="wrap">
@@ -324,7 +331,7 @@ footer{border-top:1px solid var(--line);padding:30px 0 44px;color:var(--soft);fo
 <form id="jf" onsubmit="return sendApp(event)">
 <div class="frow">
 <div class="fld"><label for="f_role" data-i="lrole">Role</label>
-<select id="f_role"><option value="smm" data-i="osmm">SMM Creator</option><option value="editor" data-i="oed">Video Editor</option><option value="general" data-i="ooth">Other — talent pool</option></select></div>
+<select id="f_role"><option value="smm" data-i="osmm">SMM Creator</option><option value="editor" data-i="oed">Video Editor</option><option value="director" data-i="odir">Client &amp; Partnerships Director</option><option value="general" data-i="ooth">Other — talent pool</option></select></div>
 <div class="fld"><label for="f_name" data-i="lname">Full name</label><input id="f_name" required placeholder="Ana García"></div>
 </div>
 <div class="frow">
@@ -453,13 +460,14 @@ en:{jtitle:"Join M5 — Miami's AI-operated design studio",cta:'Apply →',hk:'H
 sub:"Creative, sharp-eyed and in love with making things? <b>M5</b> — Miami's AI-operated design studio — is hiring to build our feed from post #1. If that sounds like you, we can't wait to work together.",
 hint:"Move your cursor — he's watching",rc1:'SMM Creator',rc2:'Video Editor',pk:'The company',
 plead:"An interior design &amp; Venetian plaster studio crafting <b>luxury homes</b> — run day-to-day with AI. We're here to make the world a little more beautiful, one home at a time.",
-pc1:'Luxury renovations',pc2:'AI-operated',pc3:'Style-obsessed',rk:'Open roles',rh2:'Two ways in.',
+pc1:'Luxury renovations',pc2:'AI-operated',pc3:'Style-obsessed',rk:'Open roles',rh2:'Three ways in.',
 r1n:'SMM Creator',r1p:'Own Instagram, TikTok &amp; YouTube from post #1. Shoot on real job sites and put the <b>whole team in frame</b> — founders, artisans, lives.',
 r1pay:'<b>Official employment</b> · fixed base up to <b>$3,000/mo</b> · earnings <b>unlimited</b> — they follow your results',
 r1l1:'Miami',r1l2:'English',r1l3:'AI tools daily',go1:'Apply →',go2:'Apply →',
 r2n:'Video Editor',r2p:'Turn raw job-site footage into reels that stop the scroll. Clean cuts, text, sound, magazine-grade color.',
 r2pay:'<b>Paid per reel</b> · you name your rate',r2l1:'Remote OK',r2l2:'Any editor',r2l3:'No watermarks',
-other:'Different craft — plaster artisan, designer, sales? <a href="#apply">Apply anyway</a> — we keep a talent pool.',
+r3n:'Client &amp; Partnerships Director',r3p:'Lead homeowner inquiries from the first call to a paid project. Build a network of designers, architects, builders and brokers. Visit clients and attend industry events.',r3pay:'<b>W-2</b> · base <b>$54,000/year</b> + commission on every paid project',r3l1:'Miami',r3l2:'English',r3l3:'Car',go3:'Apply →',
+other:'Different craft — plaster artisan, designer? <a href="#apply">Apply anyway</a> — we keep a talent pool.',
 tk:'Taste check',th2:'Feeds we love.',tlead:'This is the bar. Real accounts, real numbers — open them, feel the rhythm.',
 f1:"Netflix's «Owning Manhattan» · personality sells",f2:'a grid that reads like a magazine',f3:'art direction, texture, nerve',f4:'every house = a season',f5:'luxury home tours that hook millions',f6:'serialized shows, not clips',
 fnote:'Screenshots © their authors · not affiliated — just feeds we admire',plk:'The playbook',plh2:"What you'll create.",
@@ -477,7 +485,7 @@ ak:'Apply',ah2:'Show us you.',alead:'Your Instagram, your best work, a few words
 chb:'Optional challenge — want to stand out?',
 chp:'<b>1</b> — Grab real footage from a real M5 job site (button below).<br><b>2</b> — Cut one reel or one story <b>your way</b>. AI tools welcome, no deadline.<br><b>3</b> — Apply below → your <b>personal upload link</b> arrives by email instantly. Drop your cut there — it lands straight in the M5 CRM, and Vlad &amp; Vadym watch it.',
 mat:'Get the raw materials',lrole:'Role',lname:'Full name',lemail:'Email',lphone:'Phone / WhatsApp',llinks:'Your Instagram + best work',lwhy:'Why M5?',
-osmm:'SMM Creator',oed:'Video Editor',ooth:'Other — talent pool',
+osmm:'SMM Creator',oed:'Video Editor',odir:'Client &amp; Partnerships Director',ooth:'Other — talent pool',
 phlinks:"@you · TikTok, YouTube, Vimeo — anything you're proud of",phwhy:'A few honest sentences. What pulls you here, what would you make first?',
 sbm:'Apply → get your upload link by email',okh:'Application received.',
 okp:'Check your inbox — your personal upload link is on its way (look in spam too). No email within 10 minutes? Write us: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
@@ -486,13 +494,14 @@ es:{jtitle:'Únete a M5 — estudio de diseño de Miami operado con IA',cta:'Pos
 sub:'¿Creatividad, buen ojo y amor por crear? <b>M5</b> — el estudio de diseño de Miami operado con IA — busca equipo para construir nuestro feed desde el post #1. Si te suena a ti, ya queremos trabajar contigo.',
 hint:'Mueve el cursor — te está mirando',rc1:'Creador SMM',rc2:'Editor de video',pk:'La empresa',
 plead:'Estudio de diseño interior y estuco veneciano que crea <b>hogares de lujo</b> — operado día a día con IA. Estamos aquí para hacer el mundo un poco más bello, un hogar a la vez.',
-pc1:'Interiores de lujo',pc2:'Operado con IA',pc3:'Obsesionados con el estilo',rk:'Vacantes',rh2:'Dos caminos.',
+pc1:'Interiores de lujo',pc2:'Operado con IA',pc3:'Obsesionados con el estilo',rk:'Vacantes',rh2:'Tres caminos.',
 r1n:'Creador SMM',r1p:'Lleva Instagram, TikTok y YouTube desde el post #1. Graba en obras reales y pon a <b>todo el equipo en cámara</b> — fundadores, artesanos, en vivo.',
 r1pay:'<b>Empleo formal</b> · base fija hasta <b>$3,000/mes</b> · ingresos <b>sin techo</b> — siguen tus resultados',
 r1l1:'Miami',r1l2:'Inglés',r1l3:'IA a diario',go1:'Postúlate →',go2:'Postúlate →',
 r2n:'Editor de video',r2p:'Convierte material crudo de obra en reels que detienen el scroll. Cortes limpios, texto, sonido, color de revista.',
 r2pay:'<b>Pago por reel</b> · tú pones tu tarifa',r2l1:'Remoto OK',r2l2:'Cualquier editor',r2l3:'Sin marcas de agua',
-other:'¿Otro oficio — artesano del estuco, diseño, ventas? <a href="#apply">Postúlate igual</a> — guardamos un banco de talento.',
+r3n:'Director de Clientes y Alianzas',r3p:'Lleva las solicitudes de propietarios desde la primera llamada hasta un proyecto pagado. Construye una red de diseñadores, arquitectos, constructores y corredores. Visitas a clientes y eventos del sector.',r3pay:'<b>W-2</b> · base <b>$54,000/año</b> + comisión por cada proyecto pagado',r3l1:'Miami',r3l2:'Inglés',r3l3:'Auto',go3:'Postúlate →',
+other:'¿Otro oficio — artesano del estuco, diseño? <a href="#apply">Postúlate igual</a> — guardamos un banco de talento.',
 tk:'Prueba de gusto',th2:'Feeds que amamos.',tlead:'Este es el nivel. Cuentas reales, números reales — ábrelas y siente el ritmo.',
 f1:'«Owning Manhattan» de Netflix · la personalidad vende',f2:'un grid que se lee como revista',f3:'dirección de arte, textura, carácter',f4:'cada casa = una temporada',f5:'tours de casas de lujo que enganchan a millones',f6:'series, no clips sueltos',
 fnote:'Capturas © sus autores · sin afiliación — solo feeds que admiramos',plk:'El playbook',plh2:'Lo que vas a crear.',
@@ -510,7 +519,7 @@ ak:'Postúlate',ah2:'Muéstranos quién eres.',alead:'Tu Instagram, tu mejor tra
 chb:'Reto opcional — ¿quieres destacar?',
 chp:'<b>1</b> — Toma material real de una obra real de M5 (botón abajo).<br><b>2</b> — Monta un reel o una story <b>a tu manera</b>. IA bienvenida, sin fecha límite.<br><b>3</b> — Postúlate abajo → tu <b>enlace personal de subida</b> llega al correo al instante. Sube tu corte ahí — cae directo en el CRM de M5 y lo ven Vlad y Vadym.',
 mat:'Descargar el material crudo',lrole:'Rol',lname:'Nombre completo',lemail:'Email',lphone:'Teléfono / WhatsApp',llinks:'Tu Instagram + mejor trabajo',lwhy:'¿Por qué M5?',
-osmm:'Creador SMM',oed:'Editor de video',ooth:'Otro — banco de talento',
+osmm:'Creador SMM',oed:'Editor de video',odir:'Director de Clientes y Alianzas',ooth:'Otro — banco de talento',
 phlinks:'@tú · TikTok, YouTube, Vimeo — lo que te enorgullezca',phwhy:'Unas frases honestas. ¿Qué te atrae, qué harías primero?',
 sbm:'Postúlate → recibe tu enlace por email',okh:'Solicitud recibida.',
 okp:'Revisa tu correo — tu enlace personal va en camino (mira también en spam). ¿Nada en 10 minutos? Escríbenos: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
@@ -519,13 +528,14 @@ uk:{jtitle:'Приєднуйся до M5 — студія дизайну та б
 sub:'Креативність, гостре око й любов до створення? <b>M5</b> — студія дизайну та будівництва в Маямі, якою щодня керує ШІ, — шукає команду, щоб будувати стрічку з поста №1. Якщо це про тебе — вже хочемо працювати разом.',
 hint:'Поворуши курсором — він стежить',rc1:'SMM-креатор',rc2:'Відеомонтажер',pk:'Компанія',
 plead:'Студія інтер’єрного дизайну та венеціанської штукатурки, що створює <b>люксові домівки</b> — щоденні процеси веде ШІ. Ми тут, щоб робити світ трохи красивішим — по одному дому за раз.',
-pc1:'Люксові інтер’єри',pc2:'Керується ШІ',pc3:'Одержимі стилем',rk:'Відкриті ролі',rh2:'Два шляхи.',
+pc1:'Люксові інтер’єри',pc2:'Керується ШІ',pc3:'Одержимі стилем',rk:'Відкриті ролі',rh2:'Три шляхи.',
 r1n:'SMM-креатор',r1p:'Веди Instagram, TikTok і YouTube з поста №1. Знімай на реальних об’єктах і став у кадр <b>усю команду</b> — засновники, майстри, лайви.',
 r1pay:'<b>Офіційне працевлаштування</b> · фікс до <b>$3,000/міс</b> · заробіток <b>без стелі</b> — росте за результатами',
 r1l1:'Маямі',r1l2:'Англійська',r1l3:'ШІ щодня',go1:'Подати заявку →',go2:'Подати заявку →',
 r2n:'Відеомонтажер',r2p:'Перетворюй сире відео з об’єктів на рілси, що зупиняють скрол. Чистий монтаж, текст, звук, колір як у журналі.',
 r2pay:'<b>Оплата за рілс</b> · ставку називаєш ти',r2l1:'Можна віддалено',r2l2:'Будь-який редактор',r2l3:'Без вотермарків',
-other:'Інший фах — майстер штукатурки, дизайнер, продажі? <a href="#apply">Однаково подавайся</a> — ведемо пул талантів.',
+r3n:'Директор із клієнтів і партнерств',r3p:'Веди заявки власників будинків від першого дзвінка до оплаченого проєкту. Будуй мережу дизайнерів, архітекторів, будівельників і брокерів. Виїзди до клієнтів і на галузеві події.',r3pay:'<b>W-2</b> · база <b>$54,000/рік</b> + комісія з кожного оплаченого проєкту',r3l1:'Маямі',r3l2:'Англійська',r3l3:'Авто',go3:'Подати заявку →',
+other:'Інший фах — майстер штукатурки, дизайнер? <a href="#apply">Однаково подавайся</a> — ведемо пул талантів.',
 tk:'Перевірка смаку',th2:'Стрічки, які ми любимо.',tlead:'Це — планка. Реальні акаунти, реальні цифри: відкрий і відчуй ритм.',
 f1:'«Owning Manhattan» на Netflix · особистість продає',f2:'стрічка, що читається як журнал',f3:'арт-дирекшн, фактура, характер',f4:'кожен будинок = сезон',f5:'тури люкс-домами, що чіпляють мільйони',f6:'серіали, а не окремі кліпи',
 fnote:'Скриншоти © їхні автори · без афіліації — просто стрічки, якими захоплюємось',plk:'Плейбук',plh2:'Що ти створюватимеш.',
@@ -543,7 +553,7 @@ ak:'Заявка',ah2:'Покажи себе.',alead:'Твій Instagram, най
 chb:'Необов’язковий челендж — хочеш вирізнитися?',
 chp:'<b>1</b> — Візьми реальні кадри з реального об’єкта M5 (кнопка нижче).<br><b>2</b> — Змонтуй один рілс чи сторіз <b>по-своєму</b>. ШІ вітається, дедлайну немає.<br><b>3</b> — Подай заявку нижче → <b>особисте посилання для завантаження</b> миттєво прийде на пошту. Кинь туди свій монтаж — він одразу в CRM M5, і його дивляться Влад і Вадим.',
 mat:'Забрати сирий матеріал',lrole:'Роль',lname:'Повне ім’я',lemail:'Email',lphone:'Телефон / WhatsApp',llinks:'Твій Instagram + найкращі роботи',lwhy:'Чому M5?',
-osmm:'SMM-креатор',oed:'Відеомонтажер',ooth:'Інше — пул талантів',
+osmm:'SMM-креатор',oed:'Відеомонтажер',odir:'Директор із клієнтів і партнерств',ooth:'Інше — пул талантів',
 phlinks:'@ти · TikTok, YouTube, Vimeo — усе, чим пишаєшся',phwhy:'Кілька чесних речень. Що тебе тягне сюди, що зробив би першим?',
 sbm:'Подати заявку → посилання прийде на пошту',okh:'Заявку отримано.',
 okp:'Перевір пошту — особисте посилання вже летить (глянь і в спам). Немає листа за 10 хвилин? Напиши нам: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
@@ -552,13 +562,14 @@ ru:{jtitle:'Присоединяйся к M5 — студия дизайна и 
 sub:'Креативность, острый глаз и любовь к созданию? <b>M5</b> — студия дизайна и строительства в Майами, которой ежедневно управляет ИИ, — ищет команду, чтобы строить ленту с поста №1. Если это про тебя — уже хотим работать вместе.',
 hint:'Подвигай курсором — он следит',rc1:'SMM-креатор',rc2:'Видеомонтажёр',pk:'Компания',
 plead:'Студия интерьерного дизайна и венецианской штукатурки, создающая <b>люксовые дома</b> — ежедневные процессы ведёт ИИ. Мы здесь, чтобы делать мир немного красивее — по одному дому за раз.',
-pc1:'Люксовые интерьеры',pc2:'Управляется ИИ',pc3:'Одержимы стилем',rk:'Открытые роли',rh2:'Два пути.',
+pc1:'Люксовые интерьеры',pc2:'Управляется ИИ',pc3:'Одержимы стилем',rk:'Открытые роли',rh2:'Три пути.',
 r1n:'SMM-креатор',r1p:'Веди Instagram, TikTok и YouTube с поста №1. Снимай на реальных объектах и ставь в кадр <b>всю команду</b> — основатели, мастера, лайвы.',
 r1pay:'<b>Официальное трудоустройство</b> · фикс до <b>$3,000/мес</b> · заработок <b>без потолка</b> — растёт за результатами',
 r1l1:'Майами',r1l2:'Английский',r1l3:'ИИ каждый день',go1:'Откликнуться →',go2:'Откликнуться →',
 r2n:'Видеомонтажёр',r2p:'Превращай сырое видео с объектов в рилсы, останавливающие скролл. Чистый монтаж, текст, звук, цвет как в журнале.',
 r2pay:'<b>Оплата за рилс</b> · ставку называешь ты',r2l1:'Можно удалённо',r2l2:'Любой редактор',r2l3:'Без вотермарок',
-other:'Другое ремесло — мастер штукатурки, дизайнер, продажи? <a href="#apply">Всё равно откликайся</a> — ведём пул талантов.',
+r3n:'Директор по клиентам и партнёрствам',r3p:'Веди заявки владельцев домов от первого звонка до оплаченного проекта. Строй сеть дизайнеров, архитекторов, строителей и брокеров. Выезды к клиентам и на отраслевые события.',r3pay:'<b>W-2</b> · база <b>$54,000/год</b> + комиссия с каждого оплаченного проекта',r3l1:'Майами',r3l2:'Английский',r3l3:'Авто',go3:'Откликнуться →',
+other:'Другое ремесло — мастер штукатурки, дизайнер? <a href="#apply">Всё равно откликайся</a> — ведём пул талантов.',
 tk:'Проверка вкуса',th2:'Ленты, которые мы любим.',tlead:'Это — планка. Реальные аккаунты, реальные цифры: открой и почувствуй ритм.',
 f1:'«Owning Manhattan» на Netflix · личность продаёт',f2:'лента, которая читается как журнал',f3:'арт-дирекшн, фактура, характер',f4:'каждый дом = сезон',f5:'туры по люкс-домам, цепляющие миллионы',f6:'сериалы, а не отдельные клипы',
 fnote:'Скриншоты © их авторы · без аффилиации — просто ленты, которыми восхищаемся',plk:'Плейбук',plh2:'Что ты будешь создавать.',
@@ -576,7 +587,7 @@ ak:'Заявка',ah2:'Покажи себя.',alead:'Твой Instagram, луч
 chb:'Необязательный челлендж — хочешь выделиться?',
 chp:'<b>1</b> — Возьми реальные кадры с реального объекта M5 (кнопка ниже).<br><b>2</b> — Смонтируй один рилс или сторис <b>по-своему</b>. ИИ приветствуется, дедлайна нет.<br><b>3</b> — Откликнись ниже → <b>личная ссылка для загрузки</b> мгновенно придёт на почту. Кинь туда свой монтаж — он сразу в CRM M5, и его смотрят Влад и Вадим.',
 mat:'Забрать сырой материал',lrole:'Роль',lname:'Полное имя',lemail:'Email',lphone:'Телефон / WhatsApp',llinks:'Твой Instagram + лучшие работы',lwhy:'Почему M5?',
-osmm:'SMM-креатор',oed:'Видеомонтажёр',ooth:'Другое — пул талантов',
+osmm:'SMM-креатор',oed:'Видеомонтажёр',odir:'Директор по клиентам и партнёрствам',ooth:'Другое — пул талантов',
 phlinks:'@ты · TikTok, YouTube, Vimeo — всё, чем гордишься',phwhy:'Несколько честных фраз. Что тянет сюда, что сделал бы первым?',
 sbm:'Откликнуться → ссылка придёт на почту',okh:'Заявка получена.',
 okp:'Проверь почту — личная ссылка уже летит (загляни и в спам). Нет письма за 10 минут? Напиши нам: <a href="mailto:hello@m5miami.com">hello@m5miami.com</a>.',
