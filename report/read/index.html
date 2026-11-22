@@ -57,6 +57,10 @@
   .geo p{margin:0 0 9px;font-size:15px;color:#F4EEE4;font-weight:500}
   .geo .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .geo .btn{min-height:48px;padding:10px 8px;font-size:13px}
+  .geo .btn[data-geo-btn]{width:100%}
+  html[data-geo="no"] [data-geo-btn="yes"]{background:transparent;color:#F4EEE4;border-color:rgba(244,238,228,.5)}
+  html[data-geo="no"] [data-geo-btn="no"]{background:#D9B87C;color:#14120F;border-color:#D9B87C}
+  .sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .more{display:block;text-align:center;margin-top:10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#B9AE9A;text-decoration:none;min-height:24px}
 
   /* ---------- local panel (shown after "Yes") ---------- */
@@ -99,6 +103,12 @@
   .next{background:#14120F;color:#F4EEE4;padding:40px 0 34px}
   .next .eyebrow{color:#D9B87C}
   .next p{color:#D8CFBE;margin:10px 0 18px}
+  .grow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .grow .btn{min-height:48px;padding:10px 8px;font-size:13px;width:100%}
+  .next [data-geo-yes],.next [data-geo-no]{display:none}
+  html[data-geo="yes"] .next [data-geo-yes],html[data-geo="no"] .next [data-geo-no]{display:block}
+  html[data-geo="yes"] .next [data-geo-ask],html[data-geo="no"] .next [data-geo-ask]{display:none}
+  .next h2:focus{outline:none}
   .next hr{border:0;border-top:1px solid rgba(244,238,228,.16);margin:26px 0}
   .legal{font-size:12px;line-height:1.6;color:#9b917e;margin-top:26px}
   .legal a{color:#B9AE9A}
@@ -128,11 +138,12 @@
       <div class="geo" id="geo">
         <p>Is your home in Miami-Dade or Broward?</p>
         <div class="row">
-          <a class="btn btn-gold" href="#local" id="geo-yes">Yes</a>
-          <a class="btn btn-line" href="#mistakes" id="geo-no">No, just reading</a>
+          <button type="button" class="btn btn-gold" data-geo-btn="yes" data-place="hero" aria-pressed="false">Yes</button>
+          <button type="button" class="btn btn-line" data-geo-btn="no" data-place="hero" aria-pressed="false">No, just reading</button>
         </div>
       </div>
       <a class="more" href="#mistakes">Keep reading ↓ · 2 min</a>
+      <p class="sr" id="geo-status" role="status" aria-live="polite"></p>
     </div>
   </div>
 </section>
@@ -216,12 +227,32 @@
 
 <section class="next" id="next">
   <div class="wrap">
-    <div class="eyebrow">Next step</div>
-    <h2 style="margin-top:8px">Home in South Florida?</h2>
-    <p>Send us a photo of the room, or book a free site visit. A designer looks at your space and tells you what to fix first.</p>
-    <div class="stack">
-      <a class="btn btn-gold" data-place="end" href="https://wa.me/17864074441?text=Hi%20M5!%20I%20read%20the%20design%20report.%20My%20home%20is%20in%20">WhatsApp a photo</a>
-      <a class="btn btn-line" data-place="end" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo">Book a free site visit</a>
+    <div data-geo-ask>
+      <div class="eyebrow">Next step</div>
+      <h2 style="margin-top:8px">Is your home in Miami-Dade or Broward?</h2>
+      <p>We work in South Florida. Tell us where your home is and we'll show you the next step.</p>
+      <div class="grow">
+        <button type="button" class="btn btn-gold" data-geo-btn="yes" data-place="end" aria-pressed="false">Yes</button>
+        <button type="button" class="btn btn-line" data-geo-btn="no" data-place="end" aria-pressed="false">No, just reading</button>
+      </div>
+    </div>
+    <div data-geo-yes>
+      <div class="eyebrow">Next step</div>
+      <h2 style="margin-top:8px" tabindex="-1">Home in South Florida?</h2>
+      <p>Send us a photo of the room, or book a free site visit. A designer looks at your space and tells you what to fix first.</p>
+      <div class="stack">
+        <a class="btn btn-gold" data-place="end" href="https://wa.me/17864074441?text=Hi%20M5!%20I%20read%20the%20design%20report.%20My%20home%20is%20in%20">WhatsApp a photo</a>
+        <a class="btn btn-line" data-place="end" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3DpeDHSLKXlPG81Q2u2y4Rpirxr2uix3SFKnOh4h7EQvW0V8PwK5oIGP_tlVksozw2PXdw7uUo">Book a free site visit</a>
+      </div>
+    </div>
+    <div data-geo-no>
+      <div class="eyebrow">The report is yours</div>
+      <h2 style="margin-top:8px" tabindex="-1">Keep it, share it.</h2>
+      <p>M5 Studio works in South Florida. If you like tips like these, Marco shares more on Instagram.</p>
+      <div class="stack">
+        <a class="btn btn-gold" data-place="end-no" target="_blank" rel="noopener" href="https://instagram.com/marcosaysno">Follow @marcosaysno</a>
+        <button type="button" class="btn btn-line" data-geo-btn="yes" data-place="end" aria-pressed="false">My home is in Miami-Dade or Broward</button>
+      </div>
     </div>
     <hr>
     <div class="eyebrow">The full report</div>
@@ -247,16 +278,35 @@
     pdf.addEventListener('click', function () { ev('report_click', { placement: 'report-read-end', src: src || 'site' }); });
   }
 
-  var local = document.getElementById('local'), geo = document.getElementById('geo');
-  var yes = document.getElementById('geo-yes'), no = document.getElementById('geo-no');
-  if (yes && local) yes.addEventListener('click', function (e) {
-    e.preventDefault();
-    local.hidden = false;
-    ev('report_geo', { answer: 'local' });
-    try { local.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) { location.hash = 'local'; }
-    var h = local.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); try { h.focus({ preventScroll: true }); } catch (err) {} }
-  });
-  if (no) no.addEventListener('click', function () { ev('report_geo', { answer: 'other' }); });
+  var local = document.getElementById('local'), status = document.getElementById('geo-status');
+  var geo = '';
+  try { var saved = localStorage.getItem('m5_geo'); if (saved === 'yes' || saved === 'no') geo = saved; } catch (e) {}
+  var gbtns = document.querySelectorAll('[data-geo-btn]');
+  var apply = function () {
+    var root = document.documentElement;
+    if (geo) root.setAttribute('data-geo', geo); else root.removeAttribute('data-geo');
+    if (local) local.hidden = geo !== 'yes';
+    for (var i = 0; i < gbtns.length; i++) gbtns[i].setAttribute('aria-pressed', gbtns[i].getAttribute('data-geo-btn') === geo ? 'true' : 'false');
+  };
+  apply();
+  var answer = function (v, place) {
+    var changed = v !== geo;
+    geo = v;
+    try { localStorage.setItem('m5_geo', v); } catch (e) {}
+    apply();
+    if (changed) ev('report_geo', { answer: v === 'yes' ? 'local' : 'other', place: place });
+    if (status) status.textContent = v === 'yes' ? 'Noted: your home is in Miami-Dade or Broward.' : 'Noted. Enjoy the report.';
+    var t = null;
+    if (v === 'yes') t = place === 'hero' ? local : document.querySelector('.next [data-geo-yes]');
+    else t = place === 'hero' ? document.getElementById('mistakes') : document.querySelector('.next [data-geo-no]');
+    if (!t) return;
+    try { t.scrollIntoView({ block: 'start' }); } catch (err) {}
+    var h = t.querySelector('h2');
+    if (h && t !== document.getElementById('mistakes')) { h.setAttribute('tabindex', '-1'); try { h.focus({ preventScroll: true }); } catch (err) {} }
+  };
+  for (var j = 0; j < gbtns.length; j++) (function (b) {
+    b.addEventListener('click', function () { answer(b.getAttribute('data-geo-btn'), b.getAttribute('data-place')); });
+  })(gbtns[j]);
   var places = document.querySelectorAll('a[data-place]');
   for (var i = 0; i < places.length; i++) (function (a) {
     a.addEventListener('click', function () { ev('report_cta', { placement: a.getAttribute('data-place'), href: (a.getAttribute('href') || '').slice(0, 24) }); });

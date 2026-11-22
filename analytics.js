@@ -166,6 +166,7 @@
       else if (n === 'booking_click') { push('click', 'booking'); flush(true); }
       // whatsapp_click: клик по ссылке wa.me уже посчитан слушателем переходов выше — второй 'click' не пишем
       else if (n === 'phone_click') { push('click', 'phone'); flush(true); }
+      else if (n === 'report_geo') { push('click', 'geo:' + (p.answer === 'local' ? 'yes' : 'no')); flush(true); }   // страница отчёта: «дом в Miami-Dade/Broward?»
       else if (n === 'exit_intent_shown') push('exit');
     } catch (e) {}
   };
