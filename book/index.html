@@ -194,7 +194,7 @@ window.addEventListener('load',function(){setTimeout(function(){(function(c,l,a,
       <div class="status" id="hero-status">PDF edition out now</div>
       <div class="buy" id="hero-buy"><a class="btn btn-ink" id="pdf-btn" href="#" rel="noopener" onclick="if(window.m5track)m5track('book_pdf_click',{placement:'hero'})">Get the PDF edition · $24.99</a>
         <p class="fine">356 pages, told by Marco himself, with 65 room rules for an ordinary American house. Instant download from his store, every updated edition included.</p></div>
-      <p class="paper" id="paper-line">Paperback on Amazon in January 2027</p>
+      <p class="paper" id="paper-line">Kindle edition on Amazon soon</p>
       <div id="hero-action">
         <form class="wl f" id="wl-form" novalidate>
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -202,11 +202,11 @@ window.addEventListener('load',function(){setTimeout(function(){(function(c,l,a,
           <input id="wl-email" type="email" name="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="Your email" required>
           <button class="btn btn-ink" type="submit">Join the waiting list</button>
           <p class="lf-err" hidden style="flex-basis:100%">That did not go through. Please check the address and try again.</p>
-          <p class="lf-ok" hidden style="flex-basis:100%">You are on the list. We will write once, when the paperback is out.</p>
+          <p class="lf-ok" hidden style="flex-basis:100%">You are on the list. We will write once, when the Kindle edition is out.</p>
           <p class="lf-mock" hidden style="flex-basis:100%"></p>
           <pre class="lf-test" hidden style="flex-basis:100%"></pre>
         </form>
-        <p class="fine">Email only. We will write once, when the paperback is out. <a href="/privacy/">Privacy Policy</a></p>
+        <p class="fine">Email only. We will write once, when the Kindle edition is out. <a href="/privacy/">Privacy Policy</a></p>
       </div>
       <p class="fine">Marco Says No is a designer character from the short videos of the same name. The measurements in the book are real.</p>
     </div>
@@ -374,10 +374,10 @@ wire(document.getElementById('lead-form'),function(f){
   if(isMail)p.email=c;else p.phone=c;return p},'lead_submit');
 
 /* Hero switch: ON_SALE + AMAZON_URL replaces the waiting list with the Amazon button. */
-if(PDF_URL){document.getElementById('pdf-btn').href=PDF_URL}else{document.getElementById('hero-buy').hidden=true;document.getElementById('hero-status').textContent='On Amazon in January 2027';document.getElementById('paper-line').hidden=true}
+if(PDF_URL){document.getElementById('pdf-btn').href=PDF_URL}else{document.getElementById('hero-buy').hidden=true;document.getElementById('hero-status').textContent='On Amazon soon';document.getElementById('paper-line').hidden=true}
 if(ON_SALE&&AMAZON_URL){
-  document.getElementById('hero-status').textContent=PDF_URL?'PDF and paperback out now':'Now on Amazon';
-  document.getElementById('paper-line').textContent='Paperback';
+  document.getElementById('hero-status').textContent=PDF_URL?'PDF and Kindle edition out now':'Now on Amazon';
+  document.getElementById('paper-line').textContent='Kindle edition';
   document.getElementById('hero-action').innerHTML='<a class="btn btn-ink" href="'+AMAZON_URL+'" rel="noopener" onclick="if(window.m5track)m5track(\'book_amazon_click\',{placement:\'hero\'})">Get it on Amazon</a>';
 }
 </script>
