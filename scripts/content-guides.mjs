@@ -33,7 +33,7 @@ export const guideCondoEn = {
       <li><strong>Contractor requirements.</strong> Some buildings require a contractor with a Florida license and insurance, or keep a list of approved ones.</li>
       </ul>` },
     { id: 'permits', label: '03', h2: 'Permits: when they apply and who pulls them', html: `
-      <p>Purely cosmetic work, such as paint and surface finishes, generally does not need a permit. Moving plumbing, changing electrical circuits, opening or moving walls, replacing windows or changing air conditioning generally does, and the contractor, who holds the Florida license, pulls the permit. Ask the local building department if you are unsure.</p>
+      <p>Purely cosmetic work, such as paint and surface finishes, generally does not need a permit. For a wall finish in a tower, see <a href="/guides/venetian-plaster-condo-miami/">Venetian plaster in a Miami condo</a>. Moving plumbing, changing electrical circuits, opening or moving walls, replacing windows or changing air conditioning generally does, and the contractor, who holds the Florida license, pulls the permit. Ask the local building department if you are unsure.</p>
       <p>In an M5 project the permits are pulled by our licensed &amp; insured Florida contractor partners, who work under their own permit and contract. We coordinate the process, including the COI for your building, elevator bookings and noise-hour rules.</p>` },
     { id: 'timeline', alt: true, label: '04', h2: 'A realistic timeline', html: `
       <ol>
