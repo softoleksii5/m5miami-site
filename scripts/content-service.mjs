@@ -51,7 +51,7 @@ export const condoEn = {
       <div class="facts"><div><b>M5 prepares</b><span>The board paperwork, the COI for your building, elevator bookings and the plan for noise-hour rules.</span></div><div><b>Contractor partners pull permits</b><span>Permits are pulled by our licensed &amp; insured Florida contractor partners, who carry the insurance.</span></div><div><b>You decide</b><span>You approve the design and the itemized estimate, and sign changes before they are made.</span></div></div>
       <p>The full checklist is in our guide to <a href="/guides/miami-condo-renovation/">condo renovation rules in Miami</a>.</p>` },
     { id: 'budget', label: 'Timeline and budget', h2: 'Timeline and budget', html: `
-      <p>A typical full renovation project with M5 is $200–250K. We price every project after visiting the space, so there is no guessing over the phone: you get an itemized estimate 48 hours after the visit, and it changes only through a change order you approve first.</p>
+      <p>A typical full renovation project with M5 is $200–250K. We price every project after visiting the space, so there is no guessing over the phone: you get an itemized estimate 48 hours after the visit, and it changes only through a change order you approve first. Comparing companies? Take our <a href="/guides/choose-renovation-company-miami/">ten questions to ask before you sign</a> to every meeting.</p>
       <ol>
       <li><strong>Consultation and needs</strong> (about a week). We meet at your space and agree what success looks like.</li>
       <li><strong>Concept</strong> (about 1–2 weeks). Several directions for style and layout.</li>
